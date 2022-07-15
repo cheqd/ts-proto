@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/cheqd/cheqd-ts-proto/compare/1.0.0...1.0.1) (2022-07-15)
+
+
+### Bug Fixes
+
+* **release:** Added loosely type checked build ([36e4edc](https://github.com/cheqd/cheqd-ts-proto/commit/36e4edc9fd7bd819b1495e2a8e5583e7219b8da9))
+
 ## 1.0.0 (2022-07-11)
 
 
