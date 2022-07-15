@@ -32,6 +32,9 @@ jobs:
         env:
           NPM_GITHUB_PAT: ${{ secrets.NPM_GITHUB_PAT }}
 
+      - name: "Run npm build"
+        run: npm run build
+
       - name: "Execute Semantic Release"
         run: npx semantic-release
         env:
