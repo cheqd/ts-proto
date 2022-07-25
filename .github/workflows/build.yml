@@ -11,5 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v3
+
       - name: "Check that works"
         run: "uname -a"
+
+      - name: "Submodule update"
+        run: "git submodule update"
