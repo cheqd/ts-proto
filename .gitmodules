@@ -1,0 +1,3 @@
+[submodule "cheqd-node"]
+	path = cheqd-node
+	url = https://github.com/cheqd/cheqd-node.git
