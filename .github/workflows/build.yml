@@ -1,0 +1,15 @@
+name: "Build"
+on:
+  workflow_call:
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    name: "Build"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Check that works"
+        run: "uname -a"
