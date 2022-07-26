@@ -1,6 +1,6 @@
 {
   "name": "@cheqd/ts-proto",
-  "version": "1.0.2",
+  "version": "1.0.1",
   "description": "A TS package for all transpiled cheqd proto definitions.",
   "main": "index.js",
   "type": "module",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cheqd/cheqd-ts-proto.git"
+    "url": "git+https://github.com/cheqd/ts-proto.git"
   },
   "keywords": [
     "cheqd",
@@ -22,13 +22,13 @@
   "author": "Tasos Derisiotis <tasos@cheqd.io>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/cheqd/cheqd-ts-proto/issues"
+    "url": "https://github.com/cheqd/ts-proto/issues"
   },
   "dependencies": {
     "long": "^4.0.0",
     "protobufjs": "~6.11.2"
   },
-  "homepage": "https://github.com/cheqd/cheqd-ts-proto#readme",
+  "homepage": "https://github.com/cheqd/ts-proto#readme",
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
