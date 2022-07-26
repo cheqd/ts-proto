@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/cheqd/cheqd-ts-proto/compare/1.0.1...1.0.2) (2022-07-26)
+
+
+### Bug Fixes
+
+* Build options in package.json and tsconfig ([097590b](https://github.com/cheqd/cheqd-ts-proto/commit/097590b7d1a137f048c9921615d199379432680b))
+
 ## [1.0.1](https://github.com/cheqd/cheqd-ts-proto/compare/1.0.0...1.0.1) (2022-07-15)
 
 
