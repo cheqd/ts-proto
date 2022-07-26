@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/cheqd/ts-proto/compare/1.0.3...1.0.4) (2022-07-26)
+
+
+### Bug Fixes
+
+* **release:** Added separate output build dir ([7e1da0b](https://github.com/cheqd/ts-proto/commit/7e1da0b702cdd356ddb5b04876edaba44e4efb8a))
+
 ## [1.0.3](https://github.com/cheqd/ts-proto/compare/1.0.2...1.0.3) (2022-07-26)
 
 
