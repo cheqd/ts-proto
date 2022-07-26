@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.6](https://github.com/cheqd/ts-proto/compare/1.0.5...1.0.6) (2022-07-26)
+
+
+### Bug Fixes
+
+* **release:** Including pre-built `js` files ([40fd636](https://github.com/cheqd/ts-proto/commit/40fd636ada1273d155088ea16fd09f4ac9ce05d6))
+
 ## [1.0.5](https://github.com/cheqd/ts-proto/compare/1.0.4...1.0.5) (2022-07-26)
 
 
