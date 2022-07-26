@@ -1,6 +1,6 @@
 {
   "name": "@cheqd/ts-proto",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "A TS package for all transpiled cheqd proto definitions.",
   "main": "index.js",
   "scripts": {
