@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Long from "long";
-import { Resource } from "./resource.js";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
+import { Resource } from "./resource";
 
 export const protobufPackage = "cheqdid.cheqdnode.resource.v1";
 
@@ -10,9 +10,7 @@ export interface GenesisState {
   resourceList: Resource[];
 }
 
-function createBaseGenesisState(): GenesisState {
-  return { resourceList: [] };
-}
+const baseGenesisState: object = {};
 
 export const GenesisState = {
   encode(
@@ -28,7 +26,8 @@ export const GenesisState = {
   decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseGenesisState();
+    const message = { ...baseGenesisState } as GenesisState;
+    message.resourceList = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -44,11 +43,14 @@ export const GenesisState = {
   },
 
   fromJSON(object: any): GenesisState {
-    return {
-      resourceList: Array.isArray(object?.resourceList)
-        ? object.resourceList.map((e: any) => Resource.fromJSON(e))
-        : [],
-    };
+    const message = { ...baseGenesisState } as GenesisState;
+    message.resourceList = [];
+    if (object.resourceList !== undefined && object.resourceList !== null) {
+      for (const e of object.resourceList) {
+        message.resourceList.push(Resource.fromJSON(e));
+      }
+    }
+    return message;
   },
 
   toJSON(message: GenesisState): unknown {
@@ -63,12 +65,14 @@ export const GenesisState = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
-    object: I
-  ): GenesisState {
-    const message = createBaseGenesisState();
-    message.resourceList =
-      object.resourceList?.map((e) => Resource.fromPartial(e)) || [];
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
+    const message = { ...baseGenesisState } as GenesisState;
+    message.resourceList = [];
+    if (object.resourceList !== undefined && object.resourceList !== null) {
+      for (const e of object.resourceList) {
+        message.resourceList.push(Resource.fromPartial(e));
+      }
+    }
     return message;
   },
 };
@@ -80,12 +84,10 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined;
-
+  | undefined
+  | Long;
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Long
-  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -93,14 +95,6 @@ export type DeepPartial<T> = T extends Builtin
   : T extends {}
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

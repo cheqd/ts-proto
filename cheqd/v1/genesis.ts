@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Long from "long";
-import { StateValue } from "./stateValue.js";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
+import { StateValue } from "./stateValue";
 
 export const protobufPackage = "cheqdid.cheqdnode.cheqd.v1";
 
@@ -11,9 +11,7 @@ export interface GenesisState {
   didList: StateValue[];
 }
 
-function createBaseGenesisState(): GenesisState {
-  return { didNamespace: "", didList: [] };
-}
+const baseGenesisState: object = { didNamespace: "" };
 
 export const GenesisState = {
   encode(
@@ -32,7 +30,8 @@ export const GenesisState = {
   decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseGenesisState();
+    const message = { ...baseGenesisState } as GenesisState;
+    message.didList = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -51,14 +50,19 @@ export const GenesisState = {
   },
 
   fromJSON(object: any): GenesisState {
-    return {
-      didNamespace: isSet(object.didNamespace)
-        ? String(object.didNamespace)
-        : "",
-      didList: Array.isArray(object?.didList)
-        ? object.didList.map((e: any) => StateValue.fromJSON(e))
-        : [],
-    };
+    const message = { ...baseGenesisState } as GenesisState;
+    message.didList = [];
+    if (object.didNamespace !== undefined && object.didNamespace !== null) {
+      message.didNamespace = String(object.didNamespace);
+    } else {
+      message.didNamespace = "";
+    }
+    if (object.didList !== undefined && object.didList !== null) {
+      for (const e of object.didList) {
+        message.didList.push(StateValue.fromJSON(e));
+      }
+    }
+    return message;
   },
 
   toJSON(message: GenesisState): unknown {
@@ -75,13 +79,15 @@ export const GenesisState = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
-    object: I
-  ): GenesisState {
-    const message = createBaseGenesisState();
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
+    const message = { ...baseGenesisState } as GenesisState;
     message.didNamespace = object.didNamespace ?? "";
-    message.didList =
-      object.didList?.map((e) => StateValue.fromPartial(e)) || [];
+    message.didList = [];
+    if (object.didList !== undefined && object.didList !== null) {
+      for (const e of object.didList) {
+        message.didList.push(StateValue.fromPartial(e));
+      }
+    }
     return message;
   },
 };
@@ -93,12 +99,10 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined;
-
+  | undefined
+  | Long;
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Long
-  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -107,19 +111,7 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
-
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
 }

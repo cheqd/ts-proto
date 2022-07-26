@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "cheqdid.cheqdnode.resource.v1";
 
@@ -21,9 +21,7 @@ export interface ResourceHeader {
   nextVersionId: string;
 }
 
-function createBaseResource(): Resource {
-  return { header: undefined, data: new Uint8Array() };
-}
+const baseResource: object = {};
 
 export const Resource = {
   encode(
@@ -42,7 +40,8 @@ export const Resource = {
   decode(input: _m0.Reader | Uint8Array, length?: number): Resource {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseResource();
+    const message = { ...baseResource } as Resource;
+    message.data = new Uint8Array();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -61,14 +60,17 @@ export const Resource = {
   },
 
   fromJSON(object: any): Resource {
-    return {
-      header: isSet(object.header)
-        ? ResourceHeader.fromJSON(object.header)
-        : undefined,
-      data: isSet(object.data)
-        ? bytesFromBase64(object.data)
-        : new Uint8Array(),
-    };
+    const message = { ...baseResource } as Resource;
+    message.data = new Uint8Array();
+    if (object.header !== undefined && object.header !== null) {
+      message.header = ResourceHeader.fromJSON(object.header);
+    } else {
+      message.header = undefined;
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = bytesFromBase64(object.data);
+    }
+    return message;
   },
 
   toJSON(message: Resource): unknown {
@@ -84,30 +86,28 @@ export const Resource = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Resource>, I>>(object: I): Resource {
-    const message = createBaseResource();
-    message.header =
-      object.header !== undefined && object.header !== null
-        ? ResourceHeader.fromPartial(object.header)
-        : undefined;
+  fromPartial(object: DeepPartial<Resource>): Resource {
+    const message = { ...baseResource } as Resource;
+    if (object.header !== undefined && object.header !== null) {
+      message.header = ResourceHeader.fromPartial(object.header);
+    } else {
+      message.header = undefined;
+    }
     message.data = object.data ?? new Uint8Array();
     return message;
   },
 };
 
-function createBaseResourceHeader(): ResourceHeader {
-  return {
-    collectionId: "",
-    id: "",
-    name: "",
-    resourceType: "",
-    mediaType: "",
-    created: "",
-    checksum: new Uint8Array(),
-    previousVersionId: "",
-    nextVersionId: "",
-  };
-}
+const baseResourceHeader: object = {
+  collectionId: "",
+  id: "",
+  name: "",
+  resourceType: "",
+  mediaType: "",
+  created: "",
+  previousVersionId: "",
+  nextVersionId: "",
+};
 
 export const ResourceHeader = {
   encode(
@@ -147,7 +147,8 @@ export const ResourceHeader = {
   decode(input: _m0.Reader | Uint8Array, length?: number): ResourceHeader {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseResourceHeader();
+    const message = { ...baseResourceHeader } as ResourceHeader;
+    message.checksum = new Uint8Array();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -187,27 +188,55 @@ export const ResourceHeader = {
   },
 
   fromJSON(object: any): ResourceHeader {
-    return {
-      collectionId: isSet(object.collectionId)
-        ? String(object.collectionId)
-        : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      name: isSet(object.name) ? String(object.name) : "",
-      resourceType: isSet(object.resourceType)
-        ? String(object.resourceType)
-        : "",
-      mediaType: isSet(object.mediaType) ? String(object.mediaType) : "",
-      created: isSet(object.created) ? String(object.created) : "",
-      checksum: isSet(object.checksum)
-        ? bytesFromBase64(object.checksum)
-        : new Uint8Array(),
-      previousVersionId: isSet(object.previousVersionId)
-        ? String(object.previousVersionId)
-        : "",
-      nextVersionId: isSet(object.nextVersionId)
-        ? String(object.nextVersionId)
-        : "",
-    };
+    const message = { ...baseResourceHeader } as ResourceHeader;
+    message.checksum = new Uint8Array();
+    if (object.collectionId !== undefined && object.collectionId !== null) {
+      message.collectionId = String(object.collectionId);
+    } else {
+      message.collectionId = "";
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = String(object.id);
+    } else {
+      message.id = "";
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = String(object.name);
+    } else {
+      message.name = "";
+    }
+    if (object.resourceType !== undefined && object.resourceType !== null) {
+      message.resourceType = String(object.resourceType);
+    } else {
+      message.resourceType = "";
+    }
+    if (object.mediaType !== undefined && object.mediaType !== null) {
+      message.mediaType = String(object.mediaType);
+    } else {
+      message.mediaType = "";
+    }
+    if (object.created !== undefined && object.created !== null) {
+      message.created = String(object.created);
+    } else {
+      message.created = "";
+    }
+    if (object.checksum !== undefined && object.checksum !== null) {
+      message.checksum = bytesFromBase64(object.checksum);
+    }
+    if (
+      object.previousVersionId !== undefined &&
+      object.previousVersionId !== null
+    ) {
+      message.previousVersionId = String(object.previousVersionId);
+    } else {
+      message.previousVersionId = "";
+    }
+    if (object.nextVersionId !== undefined && object.nextVersionId !== null) {
+      message.nextVersionId = String(object.nextVersionId);
+    } else {
+      message.nextVersionId = "";
+    }
+    return message;
   },
 
   toJSON(message: ResourceHeader): unknown {
@@ -231,10 +260,8 @@ export const ResourceHeader = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ResourceHeader>, I>>(
-    object: I
-  ): ResourceHeader {
-    const message = createBaseResourceHeader();
+  fromPartial(object: DeepPartial<ResourceHeader>): ResourceHeader {
+    const message = { ...baseResourceHeader } as ResourceHeader;
     message.collectionId = object.collectionId ?? "";
     message.id = object.id ?? "";
     message.name = object.name ?? "";
@@ -276,9 +303,9 @@ const btoa: (bin: string) => string =
   ((bin) => globalThis.Buffer.from(bin, "binary").toString("base64"));
 function base64FromBytes(arr: Uint8Array): string {
   const bin: string[] = [];
-  arr.forEach((byte) => {
+  for (const byte of arr) {
     bin.push(String.fromCharCode(byte));
-  });
+  }
   return btoa(bin.join(""));
 }
 
@@ -289,12 +316,10 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined;
-
+  | undefined
+  | Long;
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Long
-  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -303,19 +328,7 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
-
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
 }

@@ -1,7 +1,7 @@
 /* eslint-disable */
-import { Any } from "../../google/protobuf/any.js";
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
+import { Any } from "../../google/protobuf/any";
 
 export const protobufPackage = "cheqdid.cheqdnode.cheqd.v1";
 
@@ -20,9 +20,7 @@ export interface Metadata {
   resources: string[];
 }
 
-function createBaseStateValue(): StateValue {
-  return { data: undefined, metadata: undefined };
-}
+const baseStateValue: object = {};
 
 export const StateValue = {
   encode(
@@ -41,7 +39,7 @@ export const StateValue = {
   decode(input: _m0.Reader | Uint8Array, length?: number): StateValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseStateValue();
+    const message = { ...baseStateValue } as StateValue;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -60,12 +58,18 @@ export const StateValue = {
   },
 
   fromJSON(object: any): StateValue {
-    return {
-      data: isSet(object.data) ? Any.fromJSON(object.data) : undefined,
-      metadata: isSet(object.metadata)
-        ? Metadata.fromJSON(object.metadata)
-        : undefined,
-    };
+    const message = { ...baseStateValue } as StateValue;
+    if (object.data !== undefined && object.data !== null) {
+      message.data = Any.fromJSON(object.data);
+    } else {
+      message.data = undefined;
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = Metadata.fromJSON(object.metadata);
+    } else {
+      message.metadata = undefined;
+    }
+    return message;
   },
 
   toJSON(message: StateValue): unknown {
@@ -79,31 +83,29 @@ export const StateValue = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<StateValue>, I>>(
-    object: I
-  ): StateValue {
-    const message = createBaseStateValue();
-    message.data =
-      object.data !== undefined && object.data !== null
-        ? Any.fromPartial(object.data)
-        : undefined;
-    message.metadata =
-      object.metadata !== undefined && object.metadata !== null
-        ? Metadata.fromPartial(object.metadata)
-        : undefined;
+  fromPartial(object: DeepPartial<StateValue>): StateValue {
+    const message = { ...baseStateValue } as StateValue;
+    if (object.data !== undefined && object.data !== null) {
+      message.data = Any.fromPartial(object.data);
+    } else {
+      message.data = undefined;
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = Metadata.fromPartial(object.metadata);
+    } else {
+      message.metadata = undefined;
+    }
     return message;
   },
 };
 
-function createBaseMetadata(): Metadata {
-  return {
-    created: "",
-    updated: "",
-    deactivated: false,
-    versionId: "",
-    resources: [],
-  };
-}
+const baseMetadata: object = {
+  created: "",
+  updated: "",
+  deactivated: false,
+  versionId: "",
+  resources: "",
+};
 
 export const Metadata = {
   encode(
@@ -131,7 +133,8 @@ export const Metadata = {
   decode(input: _m0.Reader | Uint8Array, length?: number): Metadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMetadata();
+    const message = { ...baseMetadata } as Metadata;
+    message.resources = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -159,17 +162,34 @@ export const Metadata = {
   },
 
   fromJSON(object: any): Metadata {
-    return {
-      created: isSet(object.created) ? String(object.created) : "",
-      updated: isSet(object.updated) ? String(object.updated) : "",
-      deactivated: isSet(object.deactivated)
-        ? Boolean(object.deactivated)
-        : false,
-      versionId: isSet(object.versionId) ? String(object.versionId) : "",
-      resources: Array.isArray(object?.resources)
-        ? object.resources.map((e: any) => String(e))
-        : [],
-    };
+    const message = { ...baseMetadata } as Metadata;
+    message.resources = [];
+    if (object.created !== undefined && object.created !== null) {
+      message.created = String(object.created);
+    } else {
+      message.created = "";
+    }
+    if (object.updated !== undefined && object.updated !== null) {
+      message.updated = String(object.updated);
+    } else {
+      message.updated = "";
+    }
+    if (object.deactivated !== undefined && object.deactivated !== null) {
+      message.deactivated = Boolean(object.deactivated);
+    } else {
+      message.deactivated = false;
+    }
+    if (object.versionId !== undefined && object.versionId !== null) {
+      message.versionId = String(object.versionId);
+    } else {
+      message.versionId = "";
+    }
+    if (object.resources !== undefined && object.resources !== null) {
+      for (const e of object.resources) {
+        message.resources.push(String(e));
+      }
+    }
+    return message;
   },
 
   toJSON(message: Metadata): unknown {
@@ -187,13 +207,18 @@ export const Metadata = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Metadata>, I>>(object: I): Metadata {
-    const message = createBaseMetadata();
+  fromPartial(object: DeepPartial<Metadata>): Metadata {
+    const message = { ...baseMetadata } as Metadata;
     message.created = object.created ?? "";
     message.updated = object.updated ?? "";
     message.deactivated = object.deactivated ?? false;
     message.versionId = object.versionId ?? "";
-    message.resources = object.resources?.map((e) => e) || [];
+    message.resources = [];
+    if (object.resources !== undefined && object.resources !== null) {
+      for (const e of object.resources) {
+        message.resources.push(e);
+      }
+    }
     return message;
   },
 };
@@ -205,12 +230,10 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined;
-
+  | undefined
+  | Long;
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Long
-  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -219,19 +242,7 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
-
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
 }
