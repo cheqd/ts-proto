@@ -1,8 +1,10 @@
 {
   "name": "@cheqd/ts-proto",
   "version": "1.0.6",
-  "description": "A TS package for all transpiled cheqd proto definitions.",
+  "description": "A TypeScript package for all transpiled cheqd ProtoBuf definitions.",
   "main": "index.js",
+  "licence": "Apache-2.0",
+  "author": "Cheqd Foundation Limited (https://github.com/cheqd)",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
@@ -21,8 +23,6 @@
     "typescript",
     "sdk"
   ],
-  "author": "Tasos Derisiotis <tasos@cheqd.io>",
-  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/cheqd/ts-proto/issues"
   },
@@ -44,5 +44,8 @@
     "typescript": "^4.7.4",
     "@types/long": "^4.0.1",
     "@types/node": "^15.6.2"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }
