@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.7](https://github.com/cheqd/ts-proto/compare/1.0.6...1.0.7) (2022-07-27)
+
+
+### Bug Fixes
+
+* Regenerate protobufs ([e36a1b9](https://github.com/cheqd/ts-proto/commit/e36a1b9963f686d92ef872ebc25dfe3ac42c1fbf))
+* Regenerate protobufs ([9ea84fe](https://github.com/cheqd/ts-proto/commit/9ea84fe75fea6da75680081675b2841fd4877534))
+
 ## [1.0.6](https://github.com/cheqd/ts-proto/compare/1.0.5...1.0.6) (2022-07-26)
 
 
