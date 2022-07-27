@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.8](https://github.com/cheqd/ts-proto/compare/1.0.7...1.0.8) (2022-07-27)
+
+
+### Bug Fixes
+
+* Bump dependencies ([4ebe43b](https://github.com/cheqd/ts-proto/commit/4ebe43b826044e98f96ee0d2b88f0a1640e14772))
+
 ## [1.0.7](https://github.com/cheqd/ts-proto/compare/1.0.6...1.0.7) (2022-07-27)
 
 
