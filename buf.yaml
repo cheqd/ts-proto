@@ -1,5 +1,5 @@
 version: v1
-name: buf.build/cheqd/cheqd-protos
+name: buf.build/jsdp/cheqd-protos
 deps:
   - buf.build/cosmos/cosmos-sdk
   - buf.build/cosmos/gogo-proto

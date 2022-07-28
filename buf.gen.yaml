@@ -1,6 +1,6 @@
 version: v1
 plugins:
   - name: ts
-    path: /home/anikitin/.config/yarn/global/node_modules/ts-proto/protoc-gen-ts_proto
+    path: /home/runner/.config/yarn/global/node_modules/ts-proto/protoc-gen-ts_proto
     out: .
     opt: esModuleInterop=true,forceLong=long,useOptionals=messages,useDate=false 

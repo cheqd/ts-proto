@@ -21,6 +21,19 @@ jobs:
           node-version: 16
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
+
+      - name: Install yarn
+        run: npm install --global yarn
+
+      - name: Install ts-proto version 1.85.0
+        run: yarn global add ts-proto@1.85.0
+
+      - uses: bufbuild/buf-setup-action@v1
+        with:
+          version: '1.6.0'
+
+      - name: Generate typescript code
+        run: buf generate buf.build/jsdp/cheqd-protos
       
       - name: "Obtain Github App token"
         id: app-token
