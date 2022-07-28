@@ -21,7 +21,7 @@ jobs:
       
       - uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: 16
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
       
@@ -40,6 +40,6 @@ jobs:
 
       - name: "Execute Semantic Release"
         run: npx semantic-release
-        # env:
-        #   GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
-        #   NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
