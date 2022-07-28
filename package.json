@@ -1,6 +1,6 @@
 {
-  "name": "@cheqd/typescript-proto",
-  "version": "1.0.10",
+  "name": "@cheqd/ts-proto",
+  "version": "1.0.9",
   "description": "A TypeScript package for all transpiled cheqd ProtoBuf definitions.",
   "main": "index.js",
   "licence": "Apache-2.0",
@@ -46,7 +46,7 @@
     "typescript": "^4.7.4"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com",
+    "registry": "https://registry.npmjs.org/",
     "access": "public"
   }
 }
