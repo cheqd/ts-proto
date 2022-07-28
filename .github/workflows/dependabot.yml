@@ -1,4 +1,7 @@
-# Automated version bumps using Dependabot
+---
+#################################
+# GitHub Dependabot Config info #
+#################################
 
 version: 2
 updates:
@@ -9,7 +12,7 @@ updates:
     schedule:
       interval: "weekly"
 
-  # Maintain dependencies for npm
+  # Maintain dependencies for NPM
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
