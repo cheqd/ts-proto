@@ -15,7 +15,7 @@ jobs:
     name: "Build"
     # needs: call-lint
     uses: ./.github/workflows/build.yml
-    secure: inherit
+    secrets: inherit
   
   # call-test:
   #   name: "Test"
