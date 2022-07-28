@@ -1,8 +1,8 @@
 /* eslint-disable */
-import { Did } from "./did.js";
-import { Metadata } from "./stateValue.js";
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
+import { Did } from "./did";
+import { Metadata } from "./stateValue";
 
 export const protobufPackage = "cheqdid.cheqdnode.cheqd.v1";
 
@@ -15,9 +15,7 @@ export interface QueryGetDidResponse {
   metadata?: Metadata;
 }
 
-function createBaseQueryGetDidRequest(): QueryGetDidRequest {
-  return { id: "" };
-}
+const baseQueryGetDidRequest: object = { id: "" };
 
 export const QueryGetDidRequest = {
   encode(
@@ -33,7 +31,7 @@ export const QueryGetDidRequest = {
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetDidRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryGetDidRequest();
+    const message = { ...baseQueryGetDidRequest } as QueryGetDidRequest;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -49,9 +47,13 @@ export const QueryGetDidRequest = {
   },
 
   fromJSON(object: any): QueryGetDidRequest {
-    return {
-      id: isSet(object.id) ? String(object.id) : "",
-    };
+    const message = { ...baseQueryGetDidRequest } as QueryGetDidRequest;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = String(object.id);
+    } else {
+      message.id = "";
+    }
+    return message;
   },
 
   toJSON(message: QueryGetDidRequest): unknown {
@@ -60,18 +62,14 @@ export const QueryGetDidRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGetDidRequest>, I>>(
-    object: I
-  ): QueryGetDidRequest {
-    const message = createBaseQueryGetDidRequest();
+  fromPartial(object: DeepPartial<QueryGetDidRequest>): QueryGetDidRequest {
+    const message = { ...baseQueryGetDidRequest } as QueryGetDidRequest;
     message.id = object.id ?? "";
     return message;
   },
 };
 
-function createBaseQueryGetDidResponse(): QueryGetDidResponse {
-  return { did: undefined, metadata: undefined };
-}
+const baseQueryGetDidResponse: object = {};
 
 export const QueryGetDidResponse = {
   encode(
@@ -90,7 +88,7 @@ export const QueryGetDidResponse = {
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetDidResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryGetDidResponse();
+    const message = { ...baseQueryGetDidResponse } as QueryGetDidResponse;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -109,12 +107,18 @@ export const QueryGetDidResponse = {
   },
 
   fromJSON(object: any): QueryGetDidResponse {
-    return {
-      did: isSet(object.did) ? Did.fromJSON(object.did) : undefined,
-      metadata: isSet(object.metadata)
-        ? Metadata.fromJSON(object.metadata)
-        : undefined,
-    };
+    const message = { ...baseQueryGetDidResponse } as QueryGetDidResponse;
+    if (object.did !== undefined && object.did !== null) {
+      message.did = Did.fromJSON(object.did);
+    } else {
+      message.did = undefined;
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = Metadata.fromJSON(object.metadata);
+    } else {
+      message.metadata = undefined;
+    }
+    return message;
   },
 
   toJSON(message: QueryGetDidResponse): unknown {
@@ -128,18 +132,18 @@ export const QueryGetDidResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGetDidResponse>, I>>(
-    object: I
-  ): QueryGetDidResponse {
-    const message = createBaseQueryGetDidResponse();
-    message.did =
-      object.did !== undefined && object.did !== null
-        ? Did.fromPartial(object.did)
-        : undefined;
-    message.metadata =
-      object.metadata !== undefined && object.metadata !== null
-        ? Metadata.fromPartial(object.metadata)
-        : undefined;
+  fromPartial(object: DeepPartial<QueryGetDidResponse>): QueryGetDidResponse {
+    const message = { ...baseQueryGetDidResponse } as QueryGetDidResponse;
+    if (object.did !== undefined && object.did !== null) {
+      message.did = Did.fromPartial(object.did);
+    } else {
+      message.did = undefined;
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = Metadata.fromPartial(object.metadata);
+    } else {
+      message.metadata = undefined;
+    }
     return message;
   },
 };
@@ -183,12 +187,10 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined;
-
+  | undefined
+  | Long;
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Long
-  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -197,19 +199,7 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
-
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
 }

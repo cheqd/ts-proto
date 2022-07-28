@@ -1,8 +1,8 @@
 /* eslint-disable */
-import { Resource } from "./resource.js";
 import Long from "long";
-import { SignInfo } from "../../cheqd/v1/tx.js";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
+import { Resource } from "./resource";
+import { SignInfo } from "../../cheqd/v1/tx";
 
 export const protobufPackage = "cheqdid.cheqdnode.resource.v1";
 
@@ -25,9 +25,7 @@ export interface MsgCreateResourceResponse {
   resource?: Resource;
 }
 
-function createBaseMsgCreateResource(): MsgCreateResource {
-  return { payload: undefined, signatures: [] };
-}
+const baseMsgCreateResource: object = {};
 
 export const MsgCreateResource = {
   encode(
@@ -49,7 +47,8 @@ export const MsgCreateResource = {
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateResource {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgCreateResource();
+    const message = { ...baseMsgCreateResource } as MsgCreateResource;
+    message.signatures = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -71,14 +70,19 @@ export const MsgCreateResource = {
   },
 
   fromJSON(object: any): MsgCreateResource {
-    return {
-      payload: isSet(object.payload)
-        ? MsgCreateResourcePayload.fromJSON(object.payload)
-        : undefined,
-      signatures: Array.isArray(object?.signatures)
-        ? object.signatures.map((e: any) => SignInfo.fromJSON(e))
-        : [],
-    };
+    const message = { ...baseMsgCreateResource } as MsgCreateResource;
+    message.signatures = [];
+    if (object.payload !== undefined && object.payload !== null) {
+      message.payload = MsgCreateResourcePayload.fromJSON(object.payload);
+    } else {
+      message.payload = undefined;
+    }
+    if (object.signatures !== undefined && object.signatures !== null) {
+      for (const e of object.signatures) {
+        message.signatures.push(SignInfo.fromJSON(e));
+      }
+    }
+    return message;
   },
 
   toJSON(message: MsgCreateResource): unknown {
@@ -97,29 +101,29 @@ export const MsgCreateResource = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateResource>, I>>(
-    object: I
-  ): MsgCreateResource {
-    const message = createBaseMsgCreateResource();
-    message.payload =
-      object.payload !== undefined && object.payload !== null
-        ? MsgCreateResourcePayload.fromPartial(object.payload)
-        : undefined;
-    message.signatures =
-      object.signatures?.map((e) => SignInfo.fromPartial(e)) || [];
+  fromPartial(object: DeepPartial<MsgCreateResource>): MsgCreateResource {
+    const message = { ...baseMsgCreateResource } as MsgCreateResource;
+    if (object.payload !== undefined && object.payload !== null) {
+      message.payload = MsgCreateResourcePayload.fromPartial(object.payload);
+    } else {
+      message.payload = undefined;
+    }
+    message.signatures = [];
+    if (object.signatures !== undefined && object.signatures !== null) {
+      for (const e of object.signatures) {
+        message.signatures.push(SignInfo.fromPartial(e));
+      }
+    }
     return message;
   },
 };
 
-function createBaseMsgCreateResourcePayload(): MsgCreateResourcePayload {
-  return {
-    collectionId: "",
-    id: "",
-    name: "",
-    resourceType: "",
-    data: new Uint8Array(),
-  };
-}
+const baseMsgCreateResourcePayload: object = {
+  collectionId: "",
+  id: "",
+  name: "",
+  resourceType: "",
+};
 
 export const MsgCreateResourcePayload = {
   encode(
@@ -150,7 +154,10 @@ export const MsgCreateResourcePayload = {
   ): MsgCreateResourcePayload {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgCreateResourcePayload();
+    const message = {
+      ...baseMsgCreateResourcePayload,
+    } as MsgCreateResourcePayload;
+    message.data = new Uint8Array();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -178,19 +185,34 @@ export const MsgCreateResourcePayload = {
   },
 
   fromJSON(object: any): MsgCreateResourcePayload {
-    return {
-      collectionId: isSet(object.collectionId)
-        ? String(object.collectionId)
-        : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      name: isSet(object.name) ? String(object.name) : "",
-      resourceType: isSet(object.resourceType)
-        ? String(object.resourceType)
-        : "",
-      data: isSet(object.data)
-        ? bytesFromBase64(object.data)
-        : new Uint8Array(),
-    };
+    const message = {
+      ...baseMsgCreateResourcePayload,
+    } as MsgCreateResourcePayload;
+    message.data = new Uint8Array();
+    if (object.collectionId !== undefined && object.collectionId !== null) {
+      message.collectionId = String(object.collectionId);
+    } else {
+      message.collectionId = "";
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = String(object.id);
+    } else {
+      message.id = "";
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = String(object.name);
+    } else {
+      message.name = "";
+    }
+    if (object.resourceType !== undefined && object.resourceType !== null) {
+      message.resourceType = String(object.resourceType);
+    } else {
+      message.resourceType = "";
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = bytesFromBase64(object.data);
+    }
+    return message;
   },
 
   toJSON(message: MsgCreateResourcePayload): unknown {
@@ -208,10 +230,12 @@ export const MsgCreateResourcePayload = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateResourcePayload>, I>>(
-    object: I
+  fromPartial(
+    object: DeepPartial<MsgCreateResourcePayload>
   ): MsgCreateResourcePayload {
-    const message = createBaseMsgCreateResourcePayload();
+    const message = {
+      ...baseMsgCreateResourcePayload,
+    } as MsgCreateResourcePayload;
     message.collectionId = object.collectionId ?? "";
     message.id = object.id ?? "";
     message.name = object.name ?? "";
@@ -221,9 +245,7 @@ export const MsgCreateResourcePayload = {
   },
 };
 
-function createBaseMsgCreateResourceResponse(): MsgCreateResourceResponse {
-  return { resource: undefined };
-}
+const baseMsgCreateResourceResponse: object = {};
 
 export const MsgCreateResourceResponse = {
   encode(
@@ -242,7 +264,9 @@ export const MsgCreateResourceResponse = {
   ): MsgCreateResourceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgCreateResourceResponse();
+    const message = {
+      ...baseMsgCreateResourceResponse,
+    } as MsgCreateResourceResponse;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -258,11 +282,15 @@ export const MsgCreateResourceResponse = {
   },
 
   fromJSON(object: any): MsgCreateResourceResponse {
-    return {
-      resource: isSet(object.resource)
-        ? Resource.fromJSON(object.resource)
-        : undefined,
-    };
+    const message = {
+      ...baseMsgCreateResourceResponse,
+    } as MsgCreateResourceResponse;
+    if (object.resource !== undefined && object.resource !== null) {
+      message.resource = Resource.fromJSON(object.resource);
+    } else {
+      message.resource = undefined;
+    }
+    return message;
   },
 
   toJSON(message: MsgCreateResourceResponse): unknown {
@@ -274,14 +302,17 @@ export const MsgCreateResourceResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateResourceResponse>, I>>(
-    object: I
+  fromPartial(
+    object: DeepPartial<MsgCreateResourceResponse>
   ): MsgCreateResourceResponse {
-    const message = createBaseMsgCreateResourceResponse();
-    message.resource =
-      object.resource !== undefined && object.resource !== null
-        ? Resource.fromPartial(object.resource)
-        : undefined;
+    const message = {
+      ...baseMsgCreateResourceResponse,
+    } as MsgCreateResourceResponse;
+    if (object.resource !== undefined && object.resource !== null) {
+      message.resource = Resource.fromPartial(object.resource);
+    } else {
+      message.resource = undefined;
+    }
     return message;
   },
 };
@@ -350,9 +381,9 @@ const btoa: (bin: string) => string =
   ((bin) => globalThis.Buffer.from(bin, "binary").toString("base64"));
 function base64FromBytes(arr: Uint8Array): string {
   const bin: string[] = [];
-  arr.forEach((byte) => {
+  for (const byte of arr) {
     bin.push(String.fromCharCode(byte));
-  });
+  }
   return btoa(bin.join(""));
 }
 
@@ -363,12 +394,10 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined;
-
+  | undefined
+  | Long;
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Long
-  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -377,19 +406,7 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
-
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
 }

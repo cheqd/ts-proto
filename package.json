@@ -1,15 +1,20 @@
 {
   "name": "@cheqd/ts-proto",
-  "version": "1.0.0",
-  "description": "A TS package for all transpiled cheqd proto definitions.",
+  "version": "1.0.11",
+  "description": "A TypeScript package for all transpiled cheqd ProtoBuf definitions.",
   "main": "index.js",
+  "licence": "Apache-2.0",
+  "author": "Cheqd Foundation Limited (https://github.com/cheqd)",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc --noEmit | npx loose-ts-check --auto-update"
+    "build": "tsc",
+    "loosely-check": "npx loose-ts-check --auto-update",
+    "loosely-check-fix": "npx loose-ts-check --auto-fix",
+    "loosely-build": "tsc --noEmit | npx loose-ts-check --auto-update"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cheqd/cheqd-ts-proto.git"
+    "url": "git+https://github.com/cheqd/ts-proto.git"
   },
   "keywords": [
     "cheqd",
@@ -18,12 +23,14 @@
     "typescript",
     "sdk"
   ],
-  "author": "Tasos Derisiotis <tasos@cheqd.io>",
-  "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/cheqd/cheqd-ts-proto/issues"
+    "url": "https://github.com/cheqd/ts-proto/issues"
   },
-  "homepage": "https://github.com/cheqd/cheqd-ts-proto#readme",
+  "dependencies": {
+    "long": "^5.2.0",
+    "protobufjs": "~7.0.0"
+  },
+  "homepage": "https://github.com/cheqd/ts-proto#readme",
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
@@ -31,9 +38,15 @@
     "@semantic-release/github": "^8.0.5",
     "@semantic-release/npm": "^9.0.1",
     "@semantic-release/release-notes-generator": "^10.0.3",
+    "@types/long": "^4.0.2",
+    "@types/node": "^18.6.2",
     "conventional-changelog-conventionalcommits": "^5.0.0",
     "loose-ts-check": "^1.2.0",
     "semantic-release": "^19.0.3",
     "typescript": "^4.7.4"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   }
 }

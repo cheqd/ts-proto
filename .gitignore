@@ -1,6 +1,6 @@
 ### APP-SPECIFIC EXCLUSIONS ###
-**/*.js
-**/**/*.js
+# **/*.js
+# **/**/*.js
 
 ### GENERAL EXCLUSIONS ###
 

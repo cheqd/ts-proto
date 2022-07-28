@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "cheqdid.cheqdnode.cheqd.v1";
 
@@ -9,9 +9,7 @@ export interface KeyValuePair {
   value: string;
 }
 
-function createBaseKeyValuePair(): KeyValuePair {
-  return { key: "", value: "" };
-}
+const baseKeyValuePair: object = { key: "", value: "" };
 
 export const KeyValuePair = {
   encode(
@@ -30,7 +28,7 @@ export const KeyValuePair = {
   decode(input: _m0.Reader | Uint8Array, length?: number): KeyValuePair {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseKeyValuePair();
+    const message = { ...baseKeyValuePair } as KeyValuePair;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -49,10 +47,18 @@ export const KeyValuePair = {
   },
 
   fromJSON(object: any): KeyValuePair {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : "",
-    };
+    const message = { ...baseKeyValuePair } as KeyValuePair;
+    if (object.key !== undefined && object.key !== null) {
+      message.key = String(object.key);
+    } else {
+      message.key = "";
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = String(object.value);
+    } else {
+      message.value = "";
+    }
+    return message;
   },
 
   toJSON(message: KeyValuePair): unknown {
@@ -62,10 +68,8 @@ export const KeyValuePair = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<KeyValuePair>, I>>(
-    object: I
-  ): KeyValuePair {
-    const message = createBaseKeyValuePair();
+  fromPartial(object: DeepPartial<KeyValuePair>): KeyValuePair {
+    const message = { ...baseKeyValuePair } as KeyValuePair;
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
@@ -79,12 +83,10 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined;
-
+  | undefined
+  | Long;
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Long
-  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -93,19 +95,7 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
-
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
 }
