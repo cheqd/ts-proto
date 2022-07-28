@@ -30,7 +30,7 @@ jobs:
       # - name: "Run npm test"
       #   run: npm run test
 
-  buf.build:
+  buf-build:
     name: "Buf Build"
     runs-on: ubuntu-latest
 
