@@ -27,7 +27,7 @@
     "url": "https://github.com/cheqd/ts-proto/issues"
   },
   "dependencies": {
-    "long": "^4.0.0",
+    "long": "^5.2.0",
     "protobufjs": "~7.0.0"
   },
   "homepage": "https://github.com/cheqd/ts-proto#readme",
