@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.9](https://github.com/cheqd/ts-proto/compare/1.0.8...1.0.9) (2022-07-28)
+
+
+### Bug Fixes
+
+* **ci:** Restore cheqd-bot token ([d90cbf8](https://github.com/cheqd/ts-proto/commit/d90cbf85a5cf7b41bc0552d3e84d9a3cfcaac873))
+* Move Dependabot to correct location ([0e629cf](https://github.com/cheqd/ts-proto/commit/0e629cf00827beea030731da6b3dc2a1e48e717a))
+
 ## [1.0.8](https://github.com/cheqd/ts-proto/compare/1.0.7...1.0.8) (2022-07-27)
 
 
