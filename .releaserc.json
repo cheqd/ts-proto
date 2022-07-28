@@ -29,7 +29,7 @@
                     { "type": "style", "release": false },
                     { "type": "test", "release": false },
                     { "scope": "no-release", "release": false },
-                    { "scope": "release", "release": "patch" }
+                    { "scope": "release", "release": true }
                 ],
                 "presetConfig": true
             }
