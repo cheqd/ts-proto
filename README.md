@@ -1,12 +1,10 @@
 # TypeScript Protobuf for cheqd identity
 
-[![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/cheqd/ts-proto/Workflow%20Dispatch/main?label=Lint%2C%20Build%2C%20Test&style=flat-square)](https://github.com/cheqd/ts-proto/actions/workflows/dispatch.yml) [![npm (scoped)](https://img.shields.io/npm/v/@cheqd/ts-proto?style=flat-square)](https://www.npmjs.com/package/@cheqd/ts-proto)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/cheqd/ts-proto?color=green&label=stable%20release&style=flat-square)](https://github.com/cheqd/ts-proto/releases/latest) ![GitHub Release Date](https://img.shields.io/github/release-date/cheqd/ts-proto?color=green&style=flat-square) [![GitHub license](https://img.shields.io/github/license/cheqd/ts-proto?color=blue&style=flat-square)](https://github.com/cheqd/ts-proto/blob/main/LICENSE)
 
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/cheqd/ts-proto?color=green&label=stable&sort=semver&style=flat-square)](https://github.com/cheqd/ts-proto/releases/latest) ![GitHub Release Date](https://img.shields.io/github/release-date/cheqd/ts-proto?style=flat-square)
+[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/cheqd/ts-proto?include_prereleases&label=dev%20release&style=flat-square)](https://github.com/cheqd/ts-proto/releases/) ![GitHub commits since latest release (by date)](https://img.shields.io/github/commits-since/cheqd/ts-proto/latest?style=flat-square) [![GitHub contributors](https://img.shields.io/github/contributors/cheqd/ts-proto?label=contributors%20%E2%9D%A4%EF%B8%8F&style=flat-square)](https://github.com/cheqd/ts-proto/graphs/contributors)
 
-[![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/cheqd/ts-proto?include_prereleases&label=latest%20%28incl.%20pre-release%29&sort=semver&style=flat-square)](https://github.com/cheqd/ts-proto/releases/) ![GitHub commits since latest release (by date)](https://img.shields.io/github/commits-since/cheqd/ts-proto/latest?style=flat-square)
-
-[![GitHub contributors](https://img.shields.io/github/contributors/cheqd/ts-proto?style=flat-square)](https://github.com/cheqd/ts-proto/graphs/contributors) ![GitHub repo size](https://img.shields.io/github/repo-size/cheqd/ts-proto?style=flat-square)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/cheqd/ts-proto/Workflow%20Dispatch?label=workflows&style=flat-square)](https://github.com/cheqd/ts-proto/actions/workflows/dispatch.yml) [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/cheqd/ts-proto/CodeQL?label=CodeQL&style=flat-square)](https://github.com/cheqd/ts-proto/actions/workflows/codeql.yml) ![GitHub repo size](https://img.shields.io/github/repo-size/cheqd/ts-proto?style=flat-square)
 
 ## ℹ️ Overview
 
