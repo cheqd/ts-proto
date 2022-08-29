@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "long": "^5.2.0",
-    "protobufjs": "~7.0.0"
+    "protobufjs": "~7.1.0"
   },
   "homepage": "https://github.com/cheqd/ts-proto#readme",
   "devDependencies": {
