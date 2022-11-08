@@ -1,6 +1,6 @@
 ### APP-SPECIFIC EXCLUSIONS ###
-# **/*.js
-# **/**/*.js
+ignored-error-codes.json
+loosely-typed-checked-files.json
 
 ### GENERAL EXCLUSIONS ###
 
