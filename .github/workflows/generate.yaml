@@ -13,8 +13,8 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.PAT }}
 
-      - name: Setup buf.build
-        uses: setup/buf.build
+      # Setup for pushing to Buf.build later
+      - uses: bufbuild/buf-setup-action@v1.9.0
 
       - name: Generate TS code for protobufs
         run: buf generate buf.build/cheqd/cheqd-proto
