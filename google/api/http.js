@@ -1,16 +1,37 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CustomHttpPattern = exports.HttpRule = exports.Http = exports.protobufPackage = void 0;
 /* eslint-disable */
-const long_1 = __importDefault(require("long"));
-const minimal_1 = __importDefault(require("protobufjs/minimal"));
+const _m0 = __importStar(require("protobufjs/minimal"));
 exports.protobufPackage = "google.api";
-const baseHttp = { fullyDecodeReservedExpansion: false };
+function createBaseHttp() {
+    return { rules: [], fullyDecodeReservedExpansion: false };
+}
 exports.Http = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = _m0.Writer.create()) {
         for (const v of message.rules) {
             exports.HttpRule.encode(v, writer.uint32(10).fork()).ldelim();
         }
@@ -20,10 +41,9 @@ exports.Http = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
-        const message = { ...baseHttp };
-        message.rules = [];
+        const message = createBaseHttp();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
@@ -41,21 +61,12 @@ exports.Http = {
         return message;
     },
     fromJSON(object) {
-        const message = { ...baseHttp };
-        message.rules = [];
-        if (object.rules !== undefined && object.rules !== null) {
-            for (const e of object.rules) {
-                message.rules.push(exports.HttpRule.fromJSON(e));
-            }
-        }
-        if (object.fullyDecodeReservedExpansion !== undefined &&
-            object.fullyDecodeReservedExpansion !== null) {
-            message.fullyDecodeReservedExpansion = Boolean(object.fullyDecodeReservedExpansion);
-        }
-        else {
-            message.fullyDecodeReservedExpansion = false;
-        }
-        return message;
+        return {
+            rules: Array.isArray(object === null || object === void 0 ? void 0 : object.rules) ? object.rules.map((e) => exports.HttpRule.fromJSON(e)) : [],
+            fullyDecodeReservedExpansion: isSet(object.fullyDecodeReservedExpansion)
+                ? Boolean(object.fullyDecodeReservedExpansion)
+                : false,
+        };
     },
     toJSON(message) {
         const obj = {};
@@ -70,22 +81,29 @@ exports.Http = {
         return obj;
     },
     fromPartial(object) {
-        var _a;
-        const message = { ...baseHttp };
-        message.rules = [];
-        if (object.rules !== undefined && object.rules !== null) {
-            for (const e of object.rules) {
-                message.rules.push(exports.HttpRule.fromPartial(e));
-            }
-        }
-        message.fullyDecodeReservedExpansion =
-            (_a = object.fullyDecodeReservedExpansion) !== null && _a !== void 0 ? _a : false;
+        var _a, _b;
+        const message = createBaseHttp();
+        message.rules = ((_a = object.rules) === null || _a === void 0 ? void 0 : _a.map((e) => exports.HttpRule.fromPartial(e))) || [];
+        message.fullyDecodeReservedExpansion = (_b = object.fullyDecodeReservedExpansion) !== null && _b !== void 0 ? _b : false;
         return message;
     },
 };
-const baseHttpRule = { selector: "", body: "", responseBody: "" };
+function createBaseHttpRule() {
+    return {
+        selector: "",
+        get: undefined,
+        put: undefined,
+        post: undefined,
+        delete: undefined,
+        patch: undefined,
+        custom: undefined,
+        body: "",
+        responseBody: "",
+        additionalBindings: [],
+    };
+}
 exports.HttpRule = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.selector !== "") {
             writer.uint32(10).string(message.selector);
         }
@@ -119,10 +137,9 @@ exports.HttpRule = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
-        const message = { ...baseHttpRule };
-        message.additionalBindings = [];
+        const message = createBaseHttpRule();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
@@ -164,69 +181,20 @@ exports.HttpRule = {
         return message;
     },
     fromJSON(object) {
-        const message = { ...baseHttpRule };
-        message.additionalBindings = [];
-        if (object.selector !== undefined && object.selector !== null) {
-            message.selector = String(object.selector);
-        }
-        else {
-            message.selector = "";
-        }
-        if (object.get !== undefined && object.get !== null) {
-            message.get = String(object.get);
-        }
-        else {
-            message.get = undefined;
-        }
-        if (object.put !== undefined && object.put !== null) {
-            message.put = String(object.put);
-        }
-        else {
-            message.put = undefined;
-        }
-        if (object.post !== undefined && object.post !== null) {
-            message.post = String(object.post);
-        }
-        else {
-            message.post = undefined;
-        }
-        if (object.delete !== undefined && object.delete !== null) {
-            message.delete = String(object.delete);
-        }
-        else {
-            message.delete = undefined;
-        }
-        if (object.patch !== undefined && object.patch !== null) {
-            message.patch = String(object.patch);
-        }
-        else {
-            message.patch = undefined;
-        }
-        if (object.custom !== undefined && object.custom !== null) {
-            message.custom = exports.CustomHttpPattern.fromJSON(object.custom);
-        }
-        else {
-            message.custom = undefined;
-        }
-        if (object.body !== undefined && object.body !== null) {
-            message.body = String(object.body);
-        }
-        else {
-            message.body = "";
-        }
-        if (object.responseBody !== undefined && object.responseBody !== null) {
-            message.responseBody = String(object.responseBody);
-        }
-        else {
-            message.responseBody = "";
-        }
-        if (object.additionalBindings !== undefined &&
-            object.additionalBindings !== null) {
-            for (const e of object.additionalBindings) {
-                message.additionalBindings.push(exports.HttpRule.fromJSON(e));
-            }
-        }
-        return message;
+        return {
+            selector: isSet(object.selector) ? String(object.selector) : "",
+            get: isSet(object.get) ? String(object.get) : undefined,
+            put: isSet(object.put) ? String(object.put) : undefined,
+            post: isSet(object.post) ? String(object.post) : undefined,
+            delete: isSet(object.delete) ? String(object.delete) : undefined,
+            patch: isSet(object.patch) ? String(object.patch) : undefined,
+            custom: isSet(object.custom) ? exports.CustomHttpPattern.fromJSON(object.custom) : undefined,
+            body: isSet(object.body) ? String(object.body) : "",
+            responseBody: isSet(object.responseBody) ? String(object.responseBody) : "",
+            additionalBindings: Array.isArray(object === null || object === void 0 ? void 0 : object.additionalBindings)
+                ? object.additionalBindings.map((e) => exports.HttpRule.fromJSON(e))
+                : [],
+        };
     },
     toJSON(message) {
         const obj = {};
@@ -237,12 +205,9 @@ exports.HttpRule = {
         message.delete !== undefined && (obj.delete = message.delete);
         message.patch !== undefined && (obj.patch = message.patch);
         message.custom !== undefined &&
-            (obj.custom = message.custom
-                ? exports.CustomHttpPattern.toJSON(message.custom)
-                : undefined);
+            (obj.custom = message.custom ? exports.CustomHttpPattern.toJSON(message.custom) : undefined);
         message.body !== undefined && (obj.body = message.body);
-        message.responseBody !== undefined &&
-            (obj.responseBody = message.responseBody);
+        message.responseBody !== undefined && (obj.responseBody = message.responseBody);
         if (message.additionalBindings) {
             obj.additionalBindings = message.additionalBindings.map((e) => e ? exports.HttpRule.toJSON(e) : undefined);
         }
@@ -252,35 +217,28 @@ exports.HttpRule = {
         return obj;
     },
     fromPartial(object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h;
-        const message = { ...baseHttpRule };
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+        const message = createBaseHttpRule();
         message.selector = (_a = object.selector) !== null && _a !== void 0 ? _a : "";
         message.get = (_b = object.get) !== null && _b !== void 0 ? _b : undefined;
         message.put = (_c = object.put) !== null && _c !== void 0 ? _c : undefined;
         message.post = (_d = object.post) !== null && _d !== void 0 ? _d : undefined;
         message.delete = (_e = object.delete) !== null && _e !== void 0 ? _e : undefined;
         message.patch = (_f = object.patch) !== null && _f !== void 0 ? _f : undefined;
-        if (object.custom !== undefined && object.custom !== null) {
-            message.custom = exports.CustomHttpPattern.fromPartial(object.custom);
-        }
-        else {
-            message.custom = undefined;
-        }
+        message.custom = (object.custom !== undefined && object.custom !== null)
+            ? exports.CustomHttpPattern.fromPartial(object.custom)
+            : undefined;
         message.body = (_g = object.body) !== null && _g !== void 0 ? _g : "";
         message.responseBody = (_h = object.responseBody) !== null && _h !== void 0 ? _h : "";
-        message.additionalBindings = [];
-        if (object.additionalBindings !== undefined &&
-            object.additionalBindings !== null) {
-            for (const e of object.additionalBindings) {
-                message.additionalBindings.push(exports.HttpRule.fromPartial(e));
-            }
-        }
+        message.additionalBindings = ((_j = object.additionalBindings) === null || _j === void 0 ? void 0 : _j.map((e) => exports.HttpRule.fromPartial(e))) || [];
         return message;
     },
 };
-const baseCustomHttpPattern = { kind: "", path: "" };
+function createBaseCustomHttpPattern() {
+    return { kind: "", path: "" };
+}
 exports.CustomHttpPattern = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.kind !== "") {
             writer.uint32(10).string(message.kind);
         }
@@ -290,9 +248,9 @@ exports.CustomHttpPattern = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
-        const message = { ...baseCustomHttpPattern };
+        const message = createBaseCustomHttpPattern();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
@@ -310,20 +268,7 @@ exports.CustomHttpPattern = {
         return message;
     },
     fromJSON(object) {
-        const message = { ...baseCustomHttpPattern };
-        if (object.kind !== undefined && object.kind !== null) {
-            message.kind = String(object.kind);
-        }
-        else {
-            message.kind = "";
-        }
-        if (object.path !== undefined && object.path !== null) {
-            message.path = String(object.path);
-        }
-        else {
-            message.path = "";
-        }
-        return message;
+        return { kind: isSet(object.kind) ? String(object.kind) : "", path: isSet(object.path) ? String(object.path) : "" };
     },
     toJSON(message) {
         const obj = {};
@@ -333,13 +278,12 @@ exports.CustomHttpPattern = {
     },
     fromPartial(object) {
         var _a, _b;
-        const message = { ...baseCustomHttpPattern };
+        const message = createBaseCustomHttpPattern();
         message.kind = (_a = object.kind) !== null && _a !== void 0 ? _a : "";
         message.path = (_b = object.path) !== null && _b !== void 0 ? _b : "";
         return message;
     },
 };
-if (minimal_1.default.util.Long !== long_1.default) {
-    minimal_1.default.util.Long = long_1.default;
-    minimal_1.default.configure();
+function isSet(value) {
+    return value !== null && value !== undefined;
 }

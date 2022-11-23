@@ -1,16 +1,37 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Any = exports.protobufPackage = void 0;
 /* eslint-disable */
-const long_1 = __importDefault(require("long"));
-const minimal_1 = __importDefault(require("protobufjs/minimal"));
+const _m0 = __importStar(require("protobufjs/minimal"));
 exports.protobufPackage = "google.protobuf";
-const baseAny = { typeUrl: "" };
+function createBaseAny() {
+    return { typeUrl: "", value: new Uint8Array() };
+}
 exports.Any = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.typeUrl !== "") {
             writer.uint32(10).string(message.typeUrl);
         }
@@ -20,10 +41,9 @@ exports.Any = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
-        const message = { ...baseAny };
-        message.value = new Uint8Array();
+        const message = createBaseAny();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
@@ -41,18 +61,10 @@ exports.Any = {
         return message;
     },
     fromJSON(object) {
-        const message = { ...baseAny };
-        message.value = new Uint8Array();
-        if (object.typeUrl !== undefined && object.typeUrl !== null) {
-            message.typeUrl = String(object.typeUrl);
-        }
-        else {
-            message.typeUrl = "";
-        }
-        if (object.value !== undefined && object.value !== null) {
-            message.value = bytesFromBase64(object.value);
-        }
-        return message;
+        return {
+            typeUrl: isSet(object.typeUrl) ? String(object.typeUrl) : "",
+            value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
+        };
     },
     toJSON(message) {
         const obj = {};
@@ -63,43 +75,52 @@ exports.Any = {
     },
     fromPartial(object) {
         var _a, _b;
-        const message = { ...baseAny };
+        const message = createBaseAny();
         message.typeUrl = (_a = object.typeUrl) !== null && _a !== void 0 ? _a : "";
         message.value = (_b = object.value) !== null && _b !== void 0 ? _b : new Uint8Array();
         return message;
     },
 };
 var globalThis = (() => {
-    if (typeof globalThis !== "undefined")
+    if (typeof globalThis !== "undefined") {
         return globalThis;
-    if (typeof self !== "undefined")
+    }
+    if (typeof self !== "undefined") {
         return self;
-    if (typeof window !== "undefined")
+    }
+    if (typeof window !== "undefined") {
         return window;
-    if (typeof global !== "undefined")
+    }
+    if (typeof global !== "undefined") {
         return global;
+    }
     throw "Unable to locate global object";
 })();
-const atob = globalThis.atob ||
-    ((b64) => globalThis.Buffer.from(b64, "base64").toString("binary"));
 function bytesFromBase64(b64) {
-    const bin = atob(b64);
-    const arr = new Uint8Array(bin.length);
-    for (let i = 0; i < bin.length; ++i) {
-        arr[i] = bin.charCodeAt(i);
+    if (globalThis.Buffer) {
+        return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
     }
-    return arr;
+    else {
+        const bin = globalThis.atob(b64);
+        const arr = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; ++i) {
+            arr[i] = bin.charCodeAt(i);
+        }
+        return arr;
+    }
 }
-const btoa = globalThis.btoa ||
-    ((bin) => globalThis.Buffer.from(bin, "binary").toString("base64"));
 function base64FromBytes(arr) {
-    const bin = [];
-    for (const byte of arr) {
-        bin.push(String.fromCharCode(byte));
+    if (globalThis.Buffer) {
+        return globalThis.Buffer.from(arr).toString("base64");
     }
-    return btoa(bin.join(""));
+    else {
+        const bin = [];
+        arr.forEach((byte) => {
+            bin.push(String.fromCharCode(byte));
+        });
+        return globalThis.btoa(bin.join(""));
+    }
 }
-if (minimal_1.default.util.Long !== long_1.default) {
-    minimal_1.default.util.Long = long_1.default;
-    minimal_1.default.configure();
+function isSet(value) {
+    return value !== null && value !== undefined;
 }
