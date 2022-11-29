@@ -8,6 +8,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
+    "protogen": "protoc --ts_proto_out=. ./cheqd-node/proto/*/*/*.proto --ts_proto_opt=esModuleInterop=true",
     "loosely-check": "npx loose-ts-check --auto-update",
     "loosely-check-fix": "npx loose-ts-check --auto-fix",
     "loosely-build": "tsc --noEmit | npx loose-ts-check --auto-update"
@@ -28,7 +29,8 @@
   },
   "dependencies": {
     "long": "^5.2.1",
-    "protobufjs": "~7.1.1"
+    "protobufjs": "~7.1.1",
+    "ts-proto": "^1.135.0"
   },
   "homepage": "https://github.com/cheqd/ts-proto#readme",
   "devDependencies": {

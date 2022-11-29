@@ -24,7 +24,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.QueryClientImpl = exports.QueryGetDidResponse = exports.QueryGetDidRequest = exports.protobufPackage = void 0;
-/* eslint-disable */
 const _m0 = __importStar(require("protobufjs/minimal"));
 const did_1 = require("./did");
 const stateValue_1 = require("./stateValue");

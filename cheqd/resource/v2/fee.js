@@ -152,6 +152,21 @@ exports.FeeParams_MediaTypesEntry = {
         return message;
     },
 };
+var globalThis = (() => {
+    if (typeof globalThis !== "undefined") {
+        return globalThis;
+    }
+    if (typeof self !== "undefined") {
+        return self;
+    }
+    if (typeof window !== "undefined") {
+        return window;
+    }
+    if (typeof global !== "undefined") {
+        return global;
+    }
+    throw "Unable to locate global object";
+})();
 function isObject(value) {
     return typeof value === "object" && value !== null;
 }

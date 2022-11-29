@@ -1,31 +1,42 @@
 name: Update ts-proto library
 on:
-  repository_dispatch:
-    types: [protobuf_changes]
+  workflow_dispatch:
+defaults:
+  run:
+    shell: bash
+    
 jobs:
   update-ts-proto:
+    name: Update ts-proto library with the latest protobuf definitions
     runs-on: ubuntu-latest
     env:
-      BRANCH: ${{ github.event.client_payload.taskID }}
+      BRANCH: generate-brotobufs
     steps:
+      - name: "Obtain Github App token"
+        id: app-token
+        uses: getsentry/action-github-app-token@v2.0.0
+        with:
+          app_id: ${{ secrets.BOT_APP_ID }}
+          private_key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
+
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          token: ${{ secrets.PAT }}
+          token: ${{ steps.app-token.outputs.token }}
 
-      # Setup for pushing to Buf.build later
+      # Setup buf CLI
       - uses: bufbuild/buf-setup-action@v1.9.0
 
       - name: Generate TS code for protobufs
-        run: buf generate buf.build/cheqd/cheqd-proto
+        run: buf generate buf.build/cheqd/proto
       
       - name: Push to origin
         run: |
           git checkout -B ${{ env.BRANCH }}
           git add .
-          git config --global user.name 'AutomationUser'
-          git config --global user.email 'AutomationUser@users.noreply.github.com'
-          git commit -am "chore(deps): Update protobufs"
+          git config --global user.name 'cheqd-bot'
+          git config --global user.email 'cheqd-bot@users.noreply.github.com'
+          git commit -am "feat: Generate protobuf stups to support the latest proto definitions"
           git push --force origin ${{ env.BRANCH }}
 
       - name: Create Pull Request
