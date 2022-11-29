@@ -30,6 +30,12 @@ jobs:
       - name: Generate TS code for protobufs
         run: buf generate buf.build/cheqd/proto
       
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build
+        run: npm run build
+      
       - name: Push to origin
         run: |
           git checkout -B ${{ env.BRANCH }}
