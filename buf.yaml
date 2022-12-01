@@ -1,0 +1,8 @@
+# Buf Build config for cheqd ts-proto library
+
+version: v1
+
+name: buf.build/cheqd/ts-proto
+
+deps:
+  - buf.build/cheqd/proto
