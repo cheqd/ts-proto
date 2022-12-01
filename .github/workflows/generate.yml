@@ -4,13 +4,17 @@ on:
 defaults:
   run:
     shell: bash
+
+permissions:
+  contents: write
+  pull-requests: write 
     
 jobs:
   update-ts-proto:
     name: Update ts-proto library with the latest protobuf definitions
     runs-on: ubuntu-latest
     env:
-      BRANCH: generate-brotobufs
+      BRANCH: sync-with-latest-protobufs
     steps:
       - name: "Obtain Github App token"
         id: app-token
@@ -38,14 +42,14 @@ jobs:
       
       - name: Push to origin
         run: |
-          git checkout -B ${{ env.BRANCH }}
+          git checkout -b ${{ env.BRANCH }}
           git add .
-          git config --global user.name 'cheqd-bot'
-          git config --global user.email 'cheqd-bot@users.noreply.github.com'
           git commit -am "feat: Generate protobuf stups to support the latest proto definitions"
           git push --force origin ${{ env.BRANCH }}
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
 
       - name: Create Pull Request
-        run: gh pr create -B main -H ${{ ENV.BRANCH }} --title 'chore(deps)':' Update protobufs' --body 'Created by Github action' || true
+        run: gh pr create -B main -H ${{ ENV.BRANCH }} --title 'feature':' Update protobufs' --body 'Created by Github action'
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
