@@ -40,3 +40,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      
+      # Push Protobufs to Buf.build registry - To be updated
+      # - uses: bufbuild/buf-push-action@v1
+      #   with:
+      #     input: proto
+      #     buf_token: ${{ secrets.BUF_TOKEN }}

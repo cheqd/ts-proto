@@ -8,7 +8,23 @@ exports.protobufPackage = void 0;
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
 exports.protobufPackage = "google.api";
+var globalThis = (() => {
+    if (typeof globalThis !== "undefined") {
+        return globalThis;
+    }
+    if (typeof self !== "undefined") {
+        return self;
+    }
+    if (typeof window !== "undefined") {
+        return window;
+    }
+    if (typeof global !== "undefined") {
+        return global;
+    }
+    throw "Unable to locate global object";
+})();
 if (minimal_1.default.util.Long !== long_1.default) {
     minimal_1.default.util.Long = long_1.default;
     minimal_1.default.configure();
 }
+//# sourceMappingURL=annotations.js.map
