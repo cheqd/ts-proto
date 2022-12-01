@@ -1,21 +1,39 @@
-name: Update ts-proto library
+name: "Generate Protobufs"
 on:
   workflow_dispatch:
+    inputs:
+      base-branch:
+        description: "Base branch"
+        required: true
+        type: choice
+        default: main
+        options:
+          - main
+          - develop
 defaults:
   run:
     shell: bash
-
 permissions:
   contents: write
   pull-requests: write 
+
     
 jobs:
-  update-ts-proto:
-    name: Update ts-proto library with the latest protobuf definitions
+
+  generate-proto:
+    name: "Update with upstream Protobufs"
     runs-on: ubuntu-latest
     env:
-      BRANCH: sync-with-latest-protobufs
+      BASE_BRANCH: ${{ github.event.inputs.base-branch }}
+      PR_BRANCH: "update-proto"
+    
     steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ env.BASE_BRANCH }}
+
       - name: "Obtain Github App token"
         id: app-token
         uses: getsentry/action-github-app-token@v2.0.0
@@ -23,15 +41,10 @@ jobs:
           app_id: ${{ secrets.BOT_APP_ID }}
           private_key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
 
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          token: ${{ steps.app-token.outputs.token }}
+      - name: "Install buf CLI"
+        uses: bufbuild/buf-setup-action@v1.9.0
 
-      # Setup buf CLI
-      - uses: bufbuild/buf-setup-action@v1.9.0
-
-      - name: Generate TS code for protobufs
+      - name: Generate TypeScript code for Protobufs
         run: buf generate buf.build/cheqd/proto
       
       - name: Install dependencies
@@ -39,17 +52,15 @@ jobs:
       
       - name: Build
         run: npm run build
-      
-      - name: Push to origin
-        run: |
-          git checkout -b ${{ env.BRANCH }}
-          git add .
-          git commit -am "feat: Generate protobuf stups to support the latest proto definitions"
-          git push --force origin ${{ env.BRANCH }}
-        env:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
 
       - name: Create Pull Request
-        run: gh pr create -B main -H ${{ ENV.BRANCH }} --title 'feature':' Update protobufs' --body 'Created by Github action'
-        env:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        uses: peter-evans/create-pull-request@v4.2.3
+        with:
+          base: ${{ env.BASE_BRANCH }}
+          branch: ${{ env.PR_BRANCH }}
+          branch-suffix: short-commit-hash
+          delete-branch: true
+          title: "feat(protobufs): Update with upstream Protobufs $(date +'%Y-%m-%d')"
+          body: "Updated protobufs from cheqd-node ledger protos"
+          token: ${{ secrets.GITHUB_TOKEN }}
+
