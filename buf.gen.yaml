@@ -2,7 +2,7 @@ version: v1
 
 plugins:
   - remote: buf.build/stephenh/plugins/ts-proto
-    out: ./
+    out: ./src
     opt:
       - forceLong=long
       - esModuleInterop=true
