@@ -6,4 +6,3 @@ plugins:
     opt:
       - forceLong=long
       - esModuleInterop=true
-
