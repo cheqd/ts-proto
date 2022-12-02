@@ -2,6 +2,10 @@
 
 # Directories to exclude from NPM package
 .github/**
+cheqd/**
+cosmos/**
+google/**
+gogoproto/**
 
 # Files to exclude from NPM package
 .gitignore

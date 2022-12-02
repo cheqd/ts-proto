@@ -2,10 +2,8 @@ version: v1
 
 plugins:
   - remote: buf.build/stephenh/plugins/ts-proto
-    out: ./src
+    out: ./
     opt:
       - forceLong=long
       - esModuleInterop=true
       - emitImportedFiles=true
-      - outputTypeRegistry=true
-      - useMapType=false
