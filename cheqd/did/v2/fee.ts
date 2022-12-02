@@ -10,7 +10,7 @@ export const protobufPackage = "cheqd.did.v2";
 export interface FeeParams {
   $type: "cheqd.did.v2.FeeParams";
   /** Tx types define the fixed fee each for the `did` module. */
-  txTypes: { [key: string]: Coin };
+  txTypes: Map<string, Coin>;
   burnFactor: string;
 }
 
@@ -21,14 +21,14 @@ export interface FeeParams_TxTypesEntry {
 }
 
 function createBaseFeeParams(): FeeParams {
-  return { $type: "cheqd.did.v2.FeeParams", txTypes: {}, burnFactor: "" };
+  return { $type: "cheqd.did.v2.FeeParams", txTypes: new Map(), burnFactor: "" };
 }
 
 export const FeeParams = {
   $type: "cheqd.did.v2.FeeParams" as const,
 
   encode(message: FeeParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    Object.entries(message.txTypes).forEach(([key, value]) => {
+    message.txTypes.forEach((value, key) => {
       FeeParams_TxTypesEntry.encode(
         { $type: "cheqd.did.v2.FeeParams.TxTypesEntry", key: key as any, value },
         writer.uint32(10).fork(),
@@ -50,7 +50,7 @@ export const FeeParams = {
         case 1:
           const entry1 = FeeParams_TxTypesEntry.decode(reader, reader.uint32());
           if (entry1.value !== undefined) {
-            message.txTypes[entry1.key] = entry1.value;
+            message.txTypes.set(entry1.key, entry1.value);
           }
           break;
         case 2:
@@ -68,11 +68,11 @@ export const FeeParams = {
     return {
       $type: FeeParams.$type,
       txTypes: isObject(object.txTypes)
-        ? Object.entries(object.txTypes).reduce<{ [key: string]: Coin }>((acc, [key, value]) => {
-          acc[key] = Coin.fromJSON(value);
+        ? Object.entries(object.txTypes).reduce<Map<string, Coin>>((acc, [key, value]) => {
+          acc.set(key, Coin.fromJSON(value));
           return acc;
-        }, {})
-        : {},
+        }, new Map())
+        : new Map(),
       burnFactor: isSet(object.burnFactor) ? String(object.burnFactor) : "",
     };
   },
@@ -81,7 +81,7 @@ export const FeeParams = {
     const obj: any = {};
     obj.txTypes = {};
     if (message.txTypes) {
-      Object.entries(message.txTypes).forEach(([k, v]) => {
+      message.txTypes.forEach((v, k) => {
         obj.txTypes[k] = Coin.toJSON(v);
       });
     }
@@ -91,12 +91,15 @@ export const FeeParams = {
 
   fromPartial<I extends Exact<DeepPartial<FeeParams>, I>>(object: I): FeeParams {
     const message = createBaseFeeParams();
-    message.txTypes = Object.entries(object.txTypes ?? {}).reduce<{ [key: string]: Coin }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = Coin.fromPartial(value);
-      }
-      return acc;
-    }, {});
+    message.txTypes = (() => {
+      const m = new Map();
+      (object.txTypes as Map<string, Coin> ?? new Map()).forEach((value, key) => {
+        if (value !== undefined) {
+          m.set(key, Coin.fromPartial(value));
+        }
+      });
+      return m;
+    })();
     message.burnFactor = object.burnFactor ?? "";
     return message;
   },
