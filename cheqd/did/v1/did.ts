@@ -1,11 +1,13 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
 import { KeyValuePair } from "./common";
 
 export const protobufPackage = "cheqdid.cheqdnode.cheqd.v1";
 
 export interface Did {
+  $type: "cheqdid.cheqdnode.cheqd.v1.Did";
   /** optional */
   context: string[];
   id: string;
@@ -30,6 +32,7 @@ export interface Did {
 }
 
 export interface VerificationMethod {
+  $type: "cheqdid.cheqdnode.cheqd.v1.VerificationMethod";
   id: string;
   type: string;
   controller: string;
@@ -40,6 +43,7 @@ export interface VerificationMethod {
 }
 
 export interface Service {
+  $type: "cheqdid.cheqdnode.cheqd.v1.Service";
   id: string;
   type: string;
   serviceEndpoint: string;
@@ -47,6 +51,7 @@ export interface Service {
 
 function createBaseDid(): Did {
   return {
+    $type: "cheqdid.cheqdnode.cheqd.v1.Did",
     context: [],
     id: "",
     controller: [],
@@ -62,6 +67,8 @@ function createBaseDid(): Did {
 }
 
 export const Did = {
+  $type: "cheqdid.cheqdnode.cheqd.v1.Did" as const,
+
   encode(message: Did, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.context) {
       writer.uint32(10).string(v!);
@@ -149,6 +156,7 @@ export const Did = {
 
   fromJSON(object: any): Did {
     return {
+      $type: Did.$type,
       context: Array.isArray(object?.context) ? object.context.map((e: any) => String(e)) : [],
       id: isSet(object.id) ? String(object.id) : "",
       controller: Array.isArray(object?.controller) ? object.controller.map((e: any) => String(e)) : [],
@@ -242,11 +250,22 @@ export const Did = {
   },
 };
 
+messageTypeRegistry.set(Did.$type, Did);
+
 function createBaseVerificationMethod(): VerificationMethod {
-  return { id: "", type: "", controller: "", publicKeyJwk: [], publicKeyMultibase: "" };
+  return {
+    $type: "cheqdid.cheqdnode.cheqd.v1.VerificationMethod",
+    id: "",
+    type: "",
+    controller: "",
+    publicKeyJwk: [],
+    publicKeyMultibase: "",
+  };
 }
 
 export const VerificationMethod = {
+  $type: "cheqdid.cheqdnode.cheqd.v1.VerificationMethod" as const,
+
   encode(message: VerificationMethod, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -298,6 +317,7 @@ export const VerificationMethod = {
 
   fromJSON(object: any): VerificationMethod {
     return {
+      $type: VerificationMethod.$type,
       id: isSet(object.id) ? String(object.id) : "",
       type: isSet(object.type) ? String(object.type) : "",
       controller: isSet(object.controller) ? String(object.controller) : "",
@@ -333,11 +353,15 @@ export const VerificationMethod = {
   },
 };
 
+messageTypeRegistry.set(VerificationMethod.$type, VerificationMethod);
+
 function createBaseService(): Service {
-  return { id: "", type: "", serviceEndpoint: "" };
+  return { $type: "cheqdid.cheqdnode.cheqd.v1.Service", id: "", type: "", serviceEndpoint: "" };
 }
 
 export const Service = {
+  $type: "cheqdid.cheqdnode.cheqd.v1.Service" as const,
+
   encode(message: Service, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -377,6 +401,7 @@ export const Service = {
 
   fromJSON(object: any): Service {
     return {
+      $type: Service.$type,
       id: isSet(object.id) ? String(object.id) : "",
       type: isSet(object.type) ? String(object.type) : "",
       serviceEndpoint: isSet(object.serviceEndpoint) ? String(object.serviceEndpoint) : "",
@@ -400,17 +425,19 @@ export const Service = {
   },
 };
 
+messageTypeRegistry.set(Service.$type, Service);
+
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin ? T
   : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P> | "$type">]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

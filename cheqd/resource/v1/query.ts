@@ -1,42 +1,51 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
 import { Resource, ResourceHeader } from "./resource";
 
 export const protobufPackage = "cheqdid.cheqdnode.resource.v1";
 
 export interface QueryGetResourceRequest {
+  $type: "cheqdid.cheqdnode.resource.v1.QueryGetResourceRequest";
   collectionId: string;
   id: string;
 }
 
 export interface QueryGetResourceResponse {
+  $type: "cheqdid.cheqdnode.resource.v1.QueryGetResourceResponse";
   resource: Resource | undefined;
 }
 
 export interface QueryGetCollectionResourcesRequest {
+  $type: "cheqdid.cheqdnode.resource.v1.QueryGetCollectionResourcesRequest";
   collectionId: string;
 }
 
 export interface QueryGetCollectionResourcesResponse {
+  $type: "cheqdid.cheqdnode.resource.v1.QueryGetCollectionResourcesResponse";
   resources: ResourceHeader[];
 }
 
 export interface QueryGetAllResourceVersionsRequest {
+  $type: "cheqdid.cheqdnode.resource.v1.QueryGetAllResourceVersionsRequest";
   collectionId: string;
   name: string;
   resourceType: string;
 }
 
 export interface QueryGetAllResourceVersionsResponse {
+  $type: "cheqdid.cheqdnode.resource.v1.QueryGetAllResourceVersionsResponse";
   resources: ResourceHeader[];
 }
 
 function createBaseQueryGetResourceRequest(): QueryGetResourceRequest {
-  return { collectionId: "", id: "" };
+  return { $type: "cheqdid.cheqdnode.resource.v1.QueryGetResourceRequest", collectionId: "", id: "" };
 }
 
 export const QueryGetResourceRequest = {
+  $type: "cheqdid.cheqdnode.resource.v1.QueryGetResourceRequest" as const,
+
   encode(message: QueryGetResourceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.collectionId !== "") {
       writer.uint32(10).string(message.collectionId);
@@ -70,6 +79,7 @@ export const QueryGetResourceRequest = {
 
   fromJSON(object: any): QueryGetResourceRequest {
     return {
+      $type: QueryGetResourceRequest.$type,
       collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
       id: isSet(object.id) ? String(object.id) : "",
     };
@@ -90,11 +100,15 @@ export const QueryGetResourceRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryGetResourceRequest.$type, QueryGetResourceRequest);
+
 function createBaseQueryGetResourceResponse(): QueryGetResourceResponse {
-  return { resource: undefined };
+  return { $type: "cheqdid.cheqdnode.resource.v1.QueryGetResourceResponse", resource: undefined };
 }
 
 export const QueryGetResourceResponse = {
+  $type: "cheqdid.cheqdnode.resource.v1.QueryGetResourceResponse" as const,
+
   encode(message: QueryGetResourceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.resource !== undefined) {
       Resource.encode(message.resource, writer.uint32(10).fork()).ldelim();
@@ -121,7 +135,10 @@ export const QueryGetResourceResponse = {
   },
 
   fromJSON(object: any): QueryGetResourceResponse {
-    return { resource: isSet(object.resource) ? Resource.fromJSON(object.resource) : undefined };
+    return {
+      $type: QueryGetResourceResponse.$type,
+      resource: isSet(object.resource) ? Resource.fromJSON(object.resource) : undefined,
+    };
   },
 
   toJSON(message: QueryGetResourceResponse): unknown {
@@ -139,11 +156,15 @@ export const QueryGetResourceResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryGetResourceResponse.$type, QueryGetResourceResponse);
+
 function createBaseQueryGetCollectionResourcesRequest(): QueryGetCollectionResourcesRequest {
-  return { collectionId: "" };
+  return { $type: "cheqdid.cheqdnode.resource.v1.QueryGetCollectionResourcesRequest", collectionId: "" };
 }
 
 export const QueryGetCollectionResourcesRequest = {
+  $type: "cheqdid.cheqdnode.resource.v1.QueryGetCollectionResourcesRequest" as const,
+
   encode(message: QueryGetCollectionResourcesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.collectionId !== "") {
       writer.uint32(10).string(message.collectionId);
@@ -170,7 +191,10 @@ export const QueryGetCollectionResourcesRequest = {
   },
 
   fromJSON(object: any): QueryGetCollectionResourcesRequest {
-    return { collectionId: isSet(object.collectionId) ? String(object.collectionId) : "" };
+    return {
+      $type: QueryGetCollectionResourcesRequest.$type,
+      collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
+    };
   },
 
   toJSON(message: QueryGetCollectionResourcesRequest): unknown {
@@ -188,11 +212,15 @@ export const QueryGetCollectionResourcesRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryGetCollectionResourcesRequest.$type, QueryGetCollectionResourcesRequest);
+
 function createBaseQueryGetCollectionResourcesResponse(): QueryGetCollectionResourcesResponse {
-  return { resources: [] };
+  return { $type: "cheqdid.cheqdnode.resource.v1.QueryGetCollectionResourcesResponse", resources: [] };
 }
 
 export const QueryGetCollectionResourcesResponse = {
+  $type: "cheqdid.cheqdnode.resource.v1.QueryGetCollectionResourcesResponse" as const,
+
   encode(message: QueryGetCollectionResourcesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resources) {
       ResourceHeader.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -220,6 +248,7 @@ export const QueryGetCollectionResourcesResponse = {
 
   fromJSON(object: any): QueryGetCollectionResourcesResponse {
     return {
+      $type: QueryGetCollectionResourcesResponse.$type,
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceHeader.fromJSON(e)) : [],
     };
   },
@@ -243,11 +272,20 @@ export const QueryGetCollectionResourcesResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryGetCollectionResourcesResponse.$type, QueryGetCollectionResourcesResponse);
+
 function createBaseQueryGetAllResourceVersionsRequest(): QueryGetAllResourceVersionsRequest {
-  return { collectionId: "", name: "", resourceType: "" };
+  return {
+    $type: "cheqdid.cheqdnode.resource.v1.QueryGetAllResourceVersionsRequest",
+    collectionId: "",
+    name: "",
+    resourceType: "",
+  };
 }
 
 export const QueryGetAllResourceVersionsRequest = {
+  $type: "cheqdid.cheqdnode.resource.v1.QueryGetAllResourceVersionsRequest" as const,
+
   encode(message: QueryGetAllResourceVersionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.collectionId !== "") {
       writer.uint32(10).string(message.collectionId);
@@ -287,6 +325,7 @@ export const QueryGetAllResourceVersionsRequest = {
 
   fromJSON(object: any): QueryGetAllResourceVersionsRequest {
     return {
+      $type: QueryGetAllResourceVersionsRequest.$type,
       collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
       name: isSet(object.name) ? String(object.name) : "",
       resourceType: isSet(object.resourceType) ? String(object.resourceType) : "",
@@ -312,11 +351,15 @@ export const QueryGetAllResourceVersionsRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryGetAllResourceVersionsRequest.$type, QueryGetAllResourceVersionsRequest);
+
 function createBaseQueryGetAllResourceVersionsResponse(): QueryGetAllResourceVersionsResponse {
-  return { resources: [] };
+  return { $type: "cheqdid.cheqdnode.resource.v1.QueryGetAllResourceVersionsResponse", resources: [] };
 }
 
 export const QueryGetAllResourceVersionsResponse = {
+  $type: "cheqdid.cheqdnode.resource.v1.QueryGetAllResourceVersionsResponse" as const,
+
   encode(message: QueryGetAllResourceVersionsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resources) {
       ResourceHeader.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -344,6 +387,7 @@ export const QueryGetAllResourceVersionsResponse = {
 
   fromJSON(object: any): QueryGetAllResourceVersionsResponse {
     return {
+      $type: QueryGetAllResourceVersionsResponse.$type,
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceHeader.fromJSON(e)) : [],
     };
   },
@@ -366,6 +410,8 @@ export const QueryGetAllResourceVersionsResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(QueryGetAllResourceVersionsResponse.$type, QueryGetAllResourceVersionsResponse);
 
 /** Query defines the gRPC querier service. */
 export interface Query {
@@ -412,12 +458,12 @@ type Builtin = Date | Function | Uint8Array | string | number | boolean | undefi
 export type DeepPartial<T> = T extends Builtin ? T
   : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P> | "$type">]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

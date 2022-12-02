@@ -1,31 +1,37 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
 import { DidDocWithMetadata, Service, VerificationMethod } from "./diddoc";
 
 export const protobufPackage = "cheqd.did.v2";
 
 export interface MsgCreateDidDoc {
+  $type: "cheqd.did.v2.MsgCreateDidDoc";
   payload: MsgCreateDidDocPayload | undefined;
   signatures: SignInfo[];
 }
 
 export interface MsgUpdateDidDoc {
+  $type: "cheqd.did.v2.MsgUpdateDidDoc";
   payload: MsgUpdateDidDocPayload | undefined;
   signatures: SignInfo[];
 }
 
 export interface MsgDeactivateDidDoc {
+  $type: "cheqd.did.v2.MsgDeactivateDidDoc";
   payload: MsgDeactivateDidDocPayload | undefined;
   signatures: SignInfo[];
 }
 
 export interface SignInfo {
+  $type: "cheqd.did.v2.SignInfo";
   verificationMethodId: string;
   signature: Uint8Array;
 }
 
 export interface MsgCreateDidDocPayload {
+  $type: "cheqd.did.v2.MsgCreateDidDocPayload";
   context: string[];
   id: string;
   controller: string[];
@@ -41,10 +47,12 @@ export interface MsgCreateDidDocPayload {
 }
 
 export interface MsgCreateDidDocResponse {
+  $type: "cheqd.did.v2.MsgCreateDidDocResponse";
   value: DidDocWithMetadata | undefined;
 }
 
 export interface MsgUpdateDidDocPayload {
+  $type: "cheqd.did.v2.MsgUpdateDidDocPayload";
   context: string[];
   id: string;
   controller: string[];
@@ -60,23 +68,28 @@ export interface MsgUpdateDidDocPayload {
 }
 
 export interface MsgUpdateDidDocResponse {
+  $type: "cheqd.did.v2.MsgUpdateDidDocResponse";
   value: DidDocWithMetadata | undefined;
 }
 
 export interface MsgDeactivateDidDocPayload {
+  $type: "cheqd.did.v2.MsgDeactivateDidDocPayload";
   id: string;
   versionId: string;
 }
 
 export interface MsgDeactivateDidDocResponse {
+  $type: "cheqd.did.v2.MsgDeactivateDidDocResponse";
   value: DidDocWithMetadata | undefined;
 }
 
 function createBaseMsgCreateDidDoc(): MsgCreateDidDoc {
-  return { payload: undefined, signatures: [] };
+  return { $type: "cheqd.did.v2.MsgCreateDidDoc", payload: undefined, signatures: [] };
 }
 
 export const MsgCreateDidDoc = {
+  $type: "cheqd.did.v2.MsgCreateDidDoc" as const,
+
   encode(message: MsgCreateDidDoc, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.payload !== undefined) {
       MsgCreateDidDocPayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
@@ -110,6 +123,7 @@ export const MsgCreateDidDoc = {
 
   fromJSON(object: any): MsgCreateDidDoc {
     return {
+      $type: MsgCreateDidDoc.$type,
       payload: isSet(object.payload) ? MsgCreateDidDocPayload.fromJSON(object.payload) : undefined,
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignInfo.fromJSON(e)) : [],
     };
@@ -137,11 +151,15 @@ export const MsgCreateDidDoc = {
   },
 };
 
+messageTypeRegistry.set(MsgCreateDidDoc.$type, MsgCreateDidDoc);
+
 function createBaseMsgUpdateDidDoc(): MsgUpdateDidDoc {
-  return { payload: undefined, signatures: [] };
+  return { $type: "cheqd.did.v2.MsgUpdateDidDoc", payload: undefined, signatures: [] };
 }
 
 export const MsgUpdateDidDoc = {
+  $type: "cheqd.did.v2.MsgUpdateDidDoc" as const,
+
   encode(message: MsgUpdateDidDoc, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.payload !== undefined) {
       MsgUpdateDidDocPayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
@@ -175,6 +193,7 @@ export const MsgUpdateDidDoc = {
 
   fromJSON(object: any): MsgUpdateDidDoc {
     return {
+      $type: MsgUpdateDidDoc.$type,
       payload: isSet(object.payload) ? MsgUpdateDidDocPayload.fromJSON(object.payload) : undefined,
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignInfo.fromJSON(e)) : [],
     };
@@ -202,11 +221,15 @@ export const MsgUpdateDidDoc = {
   },
 };
 
+messageTypeRegistry.set(MsgUpdateDidDoc.$type, MsgUpdateDidDoc);
+
 function createBaseMsgDeactivateDidDoc(): MsgDeactivateDidDoc {
-  return { payload: undefined, signatures: [] };
+  return { $type: "cheqd.did.v2.MsgDeactivateDidDoc", payload: undefined, signatures: [] };
 }
 
 export const MsgDeactivateDidDoc = {
+  $type: "cheqd.did.v2.MsgDeactivateDidDoc" as const,
+
   encode(message: MsgDeactivateDidDoc, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.payload !== undefined) {
       MsgDeactivateDidDocPayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
@@ -240,6 +263,7 @@ export const MsgDeactivateDidDoc = {
 
   fromJSON(object: any): MsgDeactivateDidDoc {
     return {
+      $type: MsgDeactivateDidDoc.$type,
       payload: isSet(object.payload) ? MsgDeactivateDidDocPayload.fromJSON(object.payload) : undefined,
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignInfo.fromJSON(e)) : [],
     };
@@ -267,11 +291,15 @@ export const MsgDeactivateDidDoc = {
   },
 };
 
+messageTypeRegistry.set(MsgDeactivateDidDoc.$type, MsgDeactivateDidDoc);
+
 function createBaseSignInfo(): SignInfo {
-  return { verificationMethodId: "", signature: new Uint8Array() };
+  return { $type: "cheqd.did.v2.SignInfo", verificationMethodId: "", signature: new Uint8Array() };
 }
 
 export const SignInfo = {
+  $type: "cheqd.did.v2.SignInfo" as const,
+
   encode(message: SignInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.verificationMethodId !== "") {
       writer.uint32(10).string(message.verificationMethodId);
@@ -305,6 +333,7 @@ export const SignInfo = {
 
   fromJSON(object: any): SignInfo {
     return {
+      $type: SignInfo.$type,
       verificationMethodId: isSet(object.verificationMethodId) ? String(object.verificationMethodId) : "",
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(),
     };
@@ -326,8 +355,11 @@ export const SignInfo = {
   },
 };
 
+messageTypeRegistry.set(SignInfo.$type, SignInfo);
+
 function createBaseMsgCreateDidDocPayload(): MsgCreateDidDocPayload {
   return {
+    $type: "cheqd.did.v2.MsgCreateDidDocPayload",
     context: [],
     id: "",
     controller: [],
@@ -344,6 +376,8 @@ function createBaseMsgCreateDidDocPayload(): MsgCreateDidDocPayload {
 }
 
 export const MsgCreateDidDocPayload = {
+  $type: "cheqd.did.v2.MsgCreateDidDocPayload" as const,
+
   encode(message: MsgCreateDidDocPayload, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.context) {
       writer.uint32(10).string(v!);
@@ -437,6 +471,7 @@ export const MsgCreateDidDocPayload = {
 
   fromJSON(object: any): MsgCreateDidDocPayload {
     return {
+      $type: MsgCreateDidDocPayload.$type,
       context: Array.isArray(object?.context) ? object.context.map((e: any) => String(e)) : [],
       id: isSet(object.id) ? String(object.id) : "",
       controller: Array.isArray(object?.controller) ? object.controller.map((e: any) => String(e)) : [],
@@ -533,11 +568,15 @@ export const MsgCreateDidDocPayload = {
   },
 };
 
+messageTypeRegistry.set(MsgCreateDidDocPayload.$type, MsgCreateDidDocPayload);
+
 function createBaseMsgCreateDidDocResponse(): MsgCreateDidDocResponse {
-  return { value: undefined };
+  return { $type: "cheqd.did.v2.MsgCreateDidDocResponse", value: undefined };
 }
 
 export const MsgCreateDidDocResponse = {
+  $type: "cheqd.did.v2.MsgCreateDidDocResponse" as const,
+
   encode(message: MsgCreateDidDocResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== undefined) {
       DidDocWithMetadata.encode(message.value, writer.uint32(10).fork()).ldelim();
@@ -564,7 +603,10 @@ export const MsgCreateDidDocResponse = {
   },
 
   fromJSON(object: any): MsgCreateDidDocResponse {
-    return { value: isSet(object.value) ? DidDocWithMetadata.fromJSON(object.value) : undefined };
+    return {
+      $type: MsgCreateDidDocResponse.$type,
+      value: isSet(object.value) ? DidDocWithMetadata.fromJSON(object.value) : undefined,
+    };
   },
 
   toJSON(message: MsgCreateDidDocResponse): unknown {
@@ -582,8 +624,11 @@ export const MsgCreateDidDocResponse = {
   },
 };
 
+messageTypeRegistry.set(MsgCreateDidDocResponse.$type, MsgCreateDidDocResponse);
+
 function createBaseMsgUpdateDidDocPayload(): MsgUpdateDidDocPayload {
   return {
+    $type: "cheqd.did.v2.MsgUpdateDidDocPayload",
     context: [],
     id: "",
     controller: [],
@@ -600,6 +645,8 @@ function createBaseMsgUpdateDidDocPayload(): MsgUpdateDidDocPayload {
 }
 
 export const MsgUpdateDidDocPayload = {
+  $type: "cheqd.did.v2.MsgUpdateDidDocPayload" as const,
+
   encode(message: MsgUpdateDidDocPayload, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.context) {
       writer.uint32(10).string(v!);
@@ -693,6 +740,7 @@ export const MsgUpdateDidDocPayload = {
 
   fromJSON(object: any): MsgUpdateDidDocPayload {
     return {
+      $type: MsgUpdateDidDocPayload.$type,
       context: Array.isArray(object?.context) ? object.context.map((e: any) => String(e)) : [],
       id: isSet(object.id) ? String(object.id) : "",
       controller: Array.isArray(object?.controller) ? object.controller.map((e: any) => String(e)) : [],
@@ -789,11 +837,15 @@ export const MsgUpdateDidDocPayload = {
   },
 };
 
+messageTypeRegistry.set(MsgUpdateDidDocPayload.$type, MsgUpdateDidDocPayload);
+
 function createBaseMsgUpdateDidDocResponse(): MsgUpdateDidDocResponse {
-  return { value: undefined };
+  return { $type: "cheqd.did.v2.MsgUpdateDidDocResponse", value: undefined };
 }
 
 export const MsgUpdateDidDocResponse = {
+  $type: "cheqd.did.v2.MsgUpdateDidDocResponse" as const,
+
   encode(message: MsgUpdateDidDocResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== undefined) {
       DidDocWithMetadata.encode(message.value, writer.uint32(10).fork()).ldelim();
@@ -820,7 +872,10 @@ export const MsgUpdateDidDocResponse = {
   },
 
   fromJSON(object: any): MsgUpdateDidDocResponse {
-    return { value: isSet(object.value) ? DidDocWithMetadata.fromJSON(object.value) : undefined };
+    return {
+      $type: MsgUpdateDidDocResponse.$type,
+      value: isSet(object.value) ? DidDocWithMetadata.fromJSON(object.value) : undefined,
+    };
   },
 
   toJSON(message: MsgUpdateDidDocResponse): unknown {
@@ -838,11 +893,15 @@ export const MsgUpdateDidDocResponse = {
   },
 };
 
+messageTypeRegistry.set(MsgUpdateDidDocResponse.$type, MsgUpdateDidDocResponse);
+
 function createBaseMsgDeactivateDidDocPayload(): MsgDeactivateDidDocPayload {
-  return { id: "", versionId: "" };
+  return { $type: "cheqd.did.v2.MsgDeactivateDidDocPayload", id: "", versionId: "" };
 }
 
 export const MsgDeactivateDidDocPayload = {
+  $type: "cheqd.did.v2.MsgDeactivateDidDocPayload" as const,
+
   encode(message: MsgDeactivateDidDocPayload, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -876,6 +935,7 @@ export const MsgDeactivateDidDocPayload = {
 
   fromJSON(object: any): MsgDeactivateDidDocPayload {
     return {
+      $type: MsgDeactivateDidDocPayload.$type,
       id: isSet(object.id) ? String(object.id) : "",
       versionId: isSet(object.versionId) ? String(object.versionId) : "",
     };
@@ -896,11 +956,15 @@ export const MsgDeactivateDidDocPayload = {
   },
 };
 
+messageTypeRegistry.set(MsgDeactivateDidDocPayload.$type, MsgDeactivateDidDocPayload);
+
 function createBaseMsgDeactivateDidDocResponse(): MsgDeactivateDidDocResponse {
-  return { value: undefined };
+  return { $type: "cheqd.did.v2.MsgDeactivateDidDocResponse", value: undefined };
 }
 
 export const MsgDeactivateDidDocResponse = {
+  $type: "cheqd.did.v2.MsgDeactivateDidDocResponse" as const,
+
   encode(message: MsgDeactivateDidDocResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== undefined) {
       DidDocWithMetadata.encode(message.value, writer.uint32(10).fork()).ldelim();
@@ -927,7 +991,10 @@ export const MsgDeactivateDidDocResponse = {
   },
 
   fromJSON(object: any): MsgDeactivateDidDocResponse {
-    return { value: isSet(object.value) ? DidDocWithMetadata.fromJSON(object.value) : undefined };
+    return {
+      $type: MsgDeactivateDidDocResponse.$type,
+      value: isSet(object.value) ? DidDocWithMetadata.fromJSON(object.value) : undefined,
+    };
   },
 
   toJSON(message: MsgDeactivateDidDocResponse): unknown {
@@ -944,6 +1011,8 @@ export const MsgDeactivateDidDocResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(MsgDeactivateDidDocResponse.$type, MsgDeactivateDidDocResponse);
 
 export interface Msg {
   CreateDidDoc(request: MsgCreateDidDoc): Promise<MsgCreateDidDocResponse>;
@@ -1033,12 +1102,12 @@ type Builtin = Date | Function | Uint8Array | string | number | boolean | undefi
 export type DeepPartial<T> = T extends Builtin ? T
   : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P> | "$type">]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

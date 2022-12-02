@@ -1,25 +1,30 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
 import { Did } from "./did";
 import { Metadata } from "./stateValue";
 
 export const protobufPackage = "cheqdid.cheqdnode.cheqd.v1";
 
 export interface QueryGetDidRequest {
+  $type: "cheqdid.cheqdnode.cheqd.v1.QueryGetDidRequest";
   id: string;
 }
 
 export interface QueryGetDidResponse {
+  $type: "cheqdid.cheqdnode.cheqd.v1.QueryGetDidResponse";
   did: Did | undefined;
   metadata: Metadata | undefined;
 }
 
 function createBaseQueryGetDidRequest(): QueryGetDidRequest {
-  return { id: "" };
+  return { $type: "cheqdid.cheqdnode.cheqd.v1.QueryGetDidRequest", id: "" };
 }
 
 export const QueryGetDidRequest = {
+  $type: "cheqdid.cheqdnode.cheqd.v1.QueryGetDidRequest" as const,
+
   encode(message: QueryGetDidRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -46,7 +51,7 @@ export const QueryGetDidRequest = {
   },
 
   fromJSON(object: any): QueryGetDidRequest {
-    return { id: isSet(object.id) ? String(object.id) : "" };
+    return { $type: QueryGetDidRequest.$type, id: isSet(object.id) ? String(object.id) : "" };
   },
 
   toJSON(message: QueryGetDidRequest): unknown {
@@ -62,11 +67,15 @@ export const QueryGetDidRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryGetDidRequest.$type, QueryGetDidRequest);
+
 function createBaseQueryGetDidResponse(): QueryGetDidResponse {
-  return { did: undefined, metadata: undefined };
+  return { $type: "cheqdid.cheqdnode.cheqd.v1.QueryGetDidResponse", did: undefined, metadata: undefined };
 }
 
 export const QueryGetDidResponse = {
+  $type: "cheqdid.cheqdnode.cheqd.v1.QueryGetDidResponse" as const,
+
   encode(message: QueryGetDidResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.did !== undefined) {
       Did.encode(message.did, writer.uint32(10).fork()).ldelim();
@@ -100,6 +109,7 @@ export const QueryGetDidResponse = {
 
   fromJSON(object: any): QueryGetDidResponse {
     return {
+      $type: QueryGetDidResponse.$type,
       did: isSet(object.did) ? Did.fromJSON(object.did) : undefined,
       metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined,
     };
@@ -121,6 +131,8 @@ export const QueryGetDidResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(QueryGetDidResponse.$type, QueryGetDidResponse);
 
 /** Query defines the gRPC querier service. */
 export interface Query {
@@ -151,12 +163,12 @@ type Builtin = Date | Function | Uint8Array | string | number | boolean | undefi
 export type DeepPartial<T> = T extends Builtin ? T
   : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P> | "$type">]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

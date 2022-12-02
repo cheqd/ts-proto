@@ -1,24 +1,29 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
 
 export const protobufPackage = "cheqd.resource.v2";
 
 export interface Resource {
+  $type: "cheqd.resource.v2.Resource";
   data: Uint8Array;
 }
 
 export interface ResourceWithMetadata {
+  $type: "cheqd.resource.v2.ResourceWithMetadata";
   resource: Resource | undefined;
   metadata: Metadata | undefined;
 }
 
 export interface AlternativeUri {
+  $type: "cheqd.resource.v2.AlternativeUri";
   uri: string;
   description: string;
 }
 
 export interface Metadata {
+  $type: "cheqd.resource.v2.Metadata";
   collectionId: string;
   id: string;
   name: string;
@@ -33,10 +38,12 @@ export interface Metadata {
 }
 
 function createBaseResource(): Resource {
-  return { data: new Uint8Array() };
+  return { $type: "cheqd.resource.v2.Resource", data: new Uint8Array() };
 }
 
 export const Resource = {
+  $type: "cheqd.resource.v2.Resource" as const,
+
   encode(message: Resource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
@@ -63,7 +70,7 @@ export const Resource = {
   },
 
   fromJSON(object: any): Resource {
-    return { data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array() };
+    return { $type: Resource.$type, data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array() };
   },
 
   toJSON(message: Resource): unknown {
@@ -80,11 +87,15 @@ export const Resource = {
   },
 };
 
+messageTypeRegistry.set(Resource.$type, Resource);
+
 function createBaseResourceWithMetadata(): ResourceWithMetadata {
-  return { resource: undefined, metadata: undefined };
+  return { $type: "cheqd.resource.v2.ResourceWithMetadata", resource: undefined, metadata: undefined };
 }
 
 export const ResourceWithMetadata = {
+  $type: "cheqd.resource.v2.ResourceWithMetadata" as const,
+
   encode(message: ResourceWithMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.resource !== undefined) {
       Resource.encode(message.resource, writer.uint32(10).fork()).ldelim();
@@ -118,6 +129,7 @@ export const ResourceWithMetadata = {
 
   fromJSON(object: any): ResourceWithMetadata {
     return {
+      $type: ResourceWithMetadata.$type,
       resource: isSet(object.resource) ? Resource.fromJSON(object.resource) : undefined,
       metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined,
     };
@@ -142,11 +154,15 @@ export const ResourceWithMetadata = {
   },
 };
 
+messageTypeRegistry.set(ResourceWithMetadata.$type, ResourceWithMetadata);
+
 function createBaseAlternativeUri(): AlternativeUri {
-  return { uri: "", description: "" };
+  return { $type: "cheqd.resource.v2.AlternativeUri", uri: "", description: "" };
 }
 
 export const AlternativeUri = {
+  $type: "cheqd.resource.v2.AlternativeUri" as const,
+
   encode(message: AlternativeUri, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.uri !== "") {
       writer.uint32(10).string(message.uri);
@@ -180,6 +196,7 @@ export const AlternativeUri = {
 
   fromJSON(object: any): AlternativeUri {
     return {
+      $type: AlternativeUri.$type,
       uri: isSet(object.uri) ? String(object.uri) : "",
       description: isSet(object.description) ? String(object.description) : "",
     };
@@ -200,8 +217,11 @@ export const AlternativeUri = {
   },
 };
 
+messageTypeRegistry.set(AlternativeUri.$type, AlternativeUri);
+
 function createBaseMetadata(): Metadata {
   return {
+    $type: "cheqd.resource.v2.Metadata",
     collectionId: "",
     id: "",
     name: "",
@@ -217,6 +237,8 @@ function createBaseMetadata(): Metadata {
 }
 
 export const Metadata = {
+  $type: "cheqd.resource.v2.Metadata" as const,
+
   encode(message: Metadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.collectionId !== "") {
       writer.uint32(10).string(message.collectionId);
@@ -304,6 +326,7 @@ export const Metadata = {
 
   fromJSON(object: any): Metadata {
     return {
+      $type: Metadata.$type,
       collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
       id: isSet(object.id) ? String(object.id) : "",
       name: isSet(object.name) ? String(object.name) : "",
@@ -358,6 +381,8 @@ export const Metadata = {
   },
 };
 
+messageTypeRegistry.set(Metadata.$type, Metadata);
+
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
@@ -407,12 +432,12 @@ type Builtin = Date | Function | Uint8Array | string | number | boolean | undefi
 export type DeepPartial<T> = T extends Builtin ? T
   : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P> | "$type">]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

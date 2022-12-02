@@ -1,6 +1,7 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
 import { SignInfo } from "../../did/v1/tx";
 import { Resource } from "./resource";
 
@@ -8,11 +9,13 @@ export const protobufPackage = "cheqdid.cheqdnode.resource.v1";
 
 /** this line is used by starport scaffolding # proto/tx/message */
 export interface MsgCreateResource {
+  $type: "cheqdid.cheqdnode.resource.v1.MsgCreateResource";
   payload: MsgCreateResourcePayload | undefined;
   signatures: SignInfo[];
 }
 
 export interface MsgCreateResourcePayload {
+  $type: "cheqdid.cheqdnode.resource.v1.MsgCreateResourcePayload";
   collectionId: string;
   id: string;
   name: string;
@@ -21,15 +24,18 @@ export interface MsgCreateResourcePayload {
 }
 
 export interface MsgCreateResourceResponse {
+  $type: "cheqdid.cheqdnode.resource.v1.MsgCreateResourceResponse";
   /** Not necessary */
   resource: Resource | undefined;
 }
 
 function createBaseMsgCreateResource(): MsgCreateResource {
-  return { payload: undefined, signatures: [] };
+  return { $type: "cheqdid.cheqdnode.resource.v1.MsgCreateResource", payload: undefined, signatures: [] };
 }
 
 export const MsgCreateResource = {
+  $type: "cheqdid.cheqdnode.resource.v1.MsgCreateResource" as const,
+
   encode(message: MsgCreateResource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.payload !== undefined) {
       MsgCreateResourcePayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
@@ -63,6 +69,7 @@ export const MsgCreateResource = {
 
   fromJSON(object: any): MsgCreateResource {
     return {
+      $type: MsgCreateResource.$type,
       payload: isSet(object.payload) ? MsgCreateResourcePayload.fromJSON(object.payload) : undefined,
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignInfo.fromJSON(e)) : [],
     };
@@ -90,11 +97,22 @@ export const MsgCreateResource = {
   },
 };
 
+messageTypeRegistry.set(MsgCreateResource.$type, MsgCreateResource);
+
 function createBaseMsgCreateResourcePayload(): MsgCreateResourcePayload {
-  return { collectionId: "", id: "", name: "", resourceType: "", data: new Uint8Array() };
+  return {
+    $type: "cheqdid.cheqdnode.resource.v1.MsgCreateResourcePayload",
+    collectionId: "",
+    id: "",
+    name: "",
+    resourceType: "",
+    data: new Uint8Array(),
+  };
 }
 
 export const MsgCreateResourcePayload = {
+  $type: "cheqdid.cheqdnode.resource.v1.MsgCreateResourcePayload" as const,
+
   encode(message: MsgCreateResourcePayload, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.collectionId !== "") {
       writer.uint32(10).string(message.collectionId);
@@ -146,6 +164,7 @@ export const MsgCreateResourcePayload = {
 
   fromJSON(object: any): MsgCreateResourcePayload {
     return {
+      $type: MsgCreateResourcePayload.$type,
       collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
       id: isSet(object.id) ? String(object.id) : "",
       name: isSet(object.name) ? String(object.name) : "",
@@ -176,11 +195,15 @@ export const MsgCreateResourcePayload = {
   },
 };
 
+messageTypeRegistry.set(MsgCreateResourcePayload.$type, MsgCreateResourcePayload);
+
 function createBaseMsgCreateResourceResponse(): MsgCreateResourceResponse {
-  return { resource: undefined };
+  return { $type: "cheqdid.cheqdnode.resource.v1.MsgCreateResourceResponse", resource: undefined };
 }
 
 export const MsgCreateResourceResponse = {
+  $type: "cheqdid.cheqdnode.resource.v1.MsgCreateResourceResponse" as const,
+
   encode(message: MsgCreateResourceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.resource !== undefined) {
       Resource.encode(message.resource, writer.uint32(10).fork()).ldelim();
@@ -207,7 +230,10 @@ export const MsgCreateResourceResponse = {
   },
 
   fromJSON(object: any): MsgCreateResourceResponse {
-    return { resource: isSet(object.resource) ? Resource.fromJSON(object.resource) : undefined };
+    return {
+      $type: MsgCreateResourceResponse.$type,
+      resource: isSet(object.resource) ? Resource.fromJSON(object.resource) : undefined,
+    };
   },
 
   toJSON(message: MsgCreateResourceResponse): unknown {
@@ -224,6 +250,8 @@ export const MsgCreateResourceResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(MsgCreateResourceResponse.$type, MsgCreateResourceResponse);
 
 /** Msg defines the Msg service. */
 export interface Msg {
@@ -298,12 +326,12 @@ type Builtin = Date | Function | Uint8Array | string | number | boolean | undefi
 export type DeepPartial<T> = T extends Builtin ? T
   : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P> | "$type">]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

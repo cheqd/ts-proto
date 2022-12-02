@@ -2,29 +2,37 @@
 import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { messageTypeRegistry } from "../../../typeRegistry";
 
 export const protobufPackage = "cheqd.resource.v2";
 
 /** FeeParams defines the parameters for the `resource` module fixed fee. */
 export interface FeeParams {
+  $type: "cheqd.resource.v2.FeeParams";
   /** Media types define the fixed fee each for the `resource` module. */
   mediaTypes: { [key: string]: Coin };
   burnFactor: string;
 }
 
 export interface FeeParams_MediaTypesEntry {
+  $type: "cheqd.resource.v2.FeeParams.MediaTypesEntry";
   key: string;
   value: Coin | undefined;
 }
 
 function createBaseFeeParams(): FeeParams {
-  return { mediaTypes: {}, burnFactor: "" };
+  return { $type: "cheqd.resource.v2.FeeParams", mediaTypes: {}, burnFactor: "" };
 }
 
 export const FeeParams = {
+  $type: "cheqd.resource.v2.FeeParams" as const,
+
   encode(message: FeeParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.mediaTypes).forEach(([key, value]) => {
-      FeeParams_MediaTypesEntry.encode({ key: key as any, value }, writer.uint32(10).fork()).ldelim();
+      FeeParams_MediaTypesEntry.encode(
+        { $type: "cheqd.resource.v2.FeeParams.MediaTypesEntry", key: key as any, value },
+        writer.uint32(10).fork(),
+      ).ldelim();
     });
     if (message.burnFactor !== "") {
       writer.uint32(18).string(message.burnFactor);
@@ -58,6 +66,7 @@ export const FeeParams = {
 
   fromJSON(object: any): FeeParams {
     return {
+      $type: FeeParams.$type,
       mediaTypes: isObject(object.mediaTypes)
         ? Object.entries(object.mediaTypes).reduce<{ [key: string]: Coin }>((acc, [key, value]) => {
           acc[key] = Coin.fromJSON(value);
@@ -96,11 +105,15 @@ export const FeeParams = {
   },
 };
 
+messageTypeRegistry.set(FeeParams.$type, FeeParams);
+
 function createBaseFeeParams_MediaTypesEntry(): FeeParams_MediaTypesEntry {
-  return { key: "", value: undefined };
+  return { $type: "cheqd.resource.v2.FeeParams.MediaTypesEntry", key: "", value: undefined };
 }
 
 export const FeeParams_MediaTypesEntry = {
+  $type: "cheqd.resource.v2.FeeParams.MediaTypesEntry" as const,
+
   encode(message: FeeParams_MediaTypesEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
@@ -134,6 +147,7 @@ export const FeeParams_MediaTypesEntry = {
 
   fromJSON(object: any): FeeParams_MediaTypesEntry {
     return {
+      $type: FeeParams_MediaTypesEntry.$type,
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? Coin.fromJSON(object.value) : undefined,
     };
@@ -153,6 +167,8 @@ export const FeeParams_MediaTypesEntry = {
     return message;
   },
 };
+
+messageTypeRegistry.set(FeeParams_MediaTypesEntry.$type, FeeParams_MediaTypesEntry);
 
 declare var self: any | undefined;
 declare var window: any | undefined;
@@ -178,12 +194,12 @@ type Builtin = Date | Function | Uint8Array | string | number | boolean | undefi
 export type DeepPartial<T> = T extends Builtin ? T
   : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P> | "$type">]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

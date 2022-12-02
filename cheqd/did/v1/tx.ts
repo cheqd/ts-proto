@@ -1,6 +1,7 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
 import { Did, Service, VerificationMethod } from "./did";
 import { Metadata } from "./stateValue";
 
@@ -8,35 +9,42 @@ export const protobufPackage = "cheqdid.cheqdnode.cheqd.v1";
 
 /** this line is used by starport scaffolding # proto/tx/message */
 export interface MsgCreateDid {
+  $type: "cheqdid.cheqdnode.cheqd.v1.MsgCreateDid";
   payload: MsgCreateDidPayload | undefined;
   signatures: SignInfo[];
 }
 
 export interface MsgUpdateDid {
+  $type: "cheqdid.cheqdnode.cheqd.v1.MsgUpdateDid";
   payload: MsgUpdateDidPayload | undefined;
   signatures: SignInfo[];
 }
 
 export interface MsgDeactivateDid {
+  $type: "cheqdid.cheqdnode.cheqd.v1.MsgDeactivateDid";
   payload: MsgDeactivateDidPayload | undefined;
   signatures: SignInfo[];
 }
 
 export interface SignInfo {
+  $type: "cheqdid.cheqdnode.cheqd.v1.SignInfo";
   verificationMethodId: string;
   signature: string;
 }
 
 export interface MsgDeactivateDidPayload {
+  $type: "cheqdid.cheqdnode.cheqd.v1.MsgDeactivateDidPayload";
   id: string;
 }
 
 export interface MsgDeactivateDidResponse {
+  $type: "cheqdid.cheqdnode.cheqd.v1.MsgDeactivateDidResponse";
   did: Did | undefined;
   metadata: Metadata | undefined;
 }
 
 export interface MsgCreateDidPayload {
+  $type: "cheqdid.cheqdnode.cheqd.v1.MsgCreateDidPayload";
   context: string[];
   id: string;
   controller: string[];
@@ -51,11 +59,13 @@ export interface MsgCreateDidPayload {
 }
 
 export interface MsgCreateDidResponse {
+  $type: "cheqdid.cheqdnode.cheqd.v1.MsgCreateDidResponse";
   /** Not necessary */
   id: string;
 }
 
 export interface MsgUpdateDidPayload {
+  $type: "cheqdid.cheqdnode.cheqd.v1.MsgUpdateDidPayload";
   context: string[];
   id: string;
   controller: string[];
@@ -71,15 +81,18 @@ export interface MsgUpdateDidPayload {
 }
 
 export interface MsgUpdateDidResponse {
+  $type: "cheqdid.cheqdnode.cheqd.v1.MsgUpdateDidResponse";
   /** Not necessary */
   id: string;
 }
 
 function createBaseMsgCreateDid(): MsgCreateDid {
-  return { payload: undefined, signatures: [] };
+  return { $type: "cheqdid.cheqdnode.cheqd.v1.MsgCreateDid", payload: undefined, signatures: [] };
 }
 
 export const MsgCreateDid = {
+  $type: "cheqdid.cheqdnode.cheqd.v1.MsgCreateDid" as const,
+
   encode(message: MsgCreateDid, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.payload !== undefined) {
       MsgCreateDidPayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
@@ -113,6 +126,7 @@ export const MsgCreateDid = {
 
   fromJSON(object: any): MsgCreateDid {
     return {
+      $type: MsgCreateDid.$type,
       payload: isSet(object.payload) ? MsgCreateDidPayload.fromJSON(object.payload) : undefined,
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignInfo.fromJSON(e)) : [],
     };
@@ -140,11 +154,15 @@ export const MsgCreateDid = {
   },
 };
 
+messageTypeRegistry.set(MsgCreateDid.$type, MsgCreateDid);
+
 function createBaseMsgUpdateDid(): MsgUpdateDid {
-  return { payload: undefined, signatures: [] };
+  return { $type: "cheqdid.cheqdnode.cheqd.v1.MsgUpdateDid", payload: undefined, signatures: [] };
 }
 
 export const MsgUpdateDid = {
+  $type: "cheqdid.cheqdnode.cheqd.v1.MsgUpdateDid" as const,
+
   encode(message: MsgUpdateDid, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.payload !== undefined) {
       MsgUpdateDidPayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
@@ -178,6 +196,7 @@ export const MsgUpdateDid = {
 
   fromJSON(object: any): MsgUpdateDid {
     return {
+      $type: MsgUpdateDid.$type,
       payload: isSet(object.payload) ? MsgUpdateDidPayload.fromJSON(object.payload) : undefined,
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignInfo.fromJSON(e)) : [],
     };
@@ -205,11 +224,15 @@ export const MsgUpdateDid = {
   },
 };
 
+messageTypeRegistry.set(MsgUpdateDid.$type, MsgUpdateDid);
+
 function createBaseMsgDeactivateDid(): MsgDeactivateDid {
-  return { payload: undefined, signatures: [] };
+  return { $type: "cheqdid.cheqdnode.cheqd.v1.MsgDeactivateDid", payload: undefined, signatures: [] };
 }
 
 export const MsgDeactivateDid = {
+  $type: "cheqdid.cheqdnode.cheqd.v1.MsgDeactivateDid" as const,
+
   encode(message: MsgDeactivateDid, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.payload !== undefined) {
       MsgDeactivateDidPayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
@@ -243,6 +266,7 @@ export const MsgDeactivateDid = {
 
   fromJSON(object: any): MsgDeactivateDid {
     return {
+      $type: MsgDeactivateDid.$type,
       payload: isSet(object.payload) ? MsgDeactivateDidPayload.fromJSON(object.payload) : undefined,
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignInfo.fromJSON(e)) : [],
     };
@@ -270,11 +294,15 @@ export const MsgDeactivateDid = {
   },
 };
 
+messageTypeRegistry.set(MsgDeactivateDid.$type, MsgDeactivateDid);
+
 function createBaseSignInfo(): SignInfo {
-  return { verificationMethodId: "", signature: "" };
+  return { $type: "cheqdid.cheqdnode.cheqd.v1.SignInfo", verificationMethodId: "", signature: "" };
 }
 
 export const SignInfo = {
+  $type: "cheqdid.cheqdnode.cheqd.v1.SignInfo" as const,
+
   encode(message: SignInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.verificationMethodId !== "") {
       writer.uint32(10).string(message.verificationMethodId);
@@ -308,6 +336,7 @@ export const SignInfo = {
 
   fromJSON(object: any): SignInfo {
     return {
+      $type: SignInfo.$type,
       verificationMethodId: isSet(object.verificationMethodId) ? String(object.verificationMethodId) : "",
       signature: isSet(object.signature) ? String(object.signature) : "",
     };
@@ -328,11 +357,15 @@ export const SignInfo = {
   },
 };
 
+messageTypeRegistry.set(SignInfo.$type, SignInfo);
+
 function createBaseMsgDeactivateDidPayload(): MsgDeactivateDidPayload {
-  return { id: "" };
+  return { $type: "cheqdid.cheqdnode.cheqd.v1.MsgDeactivateDidPayload", id: "" };
 }
 
 export const MsgDeactivateDidPayload = {
+  $type: "cheqdid.cheqdnode.cheqd.v1.MsgDeactivateDidPayload" as const,
+
   encode(message: MsgDeactivateDidPayload, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -359,7 +392,7 @@ export const MsgDeactivateDidPayload = {
   },
 
   fromJSON(object: any): MsgDeactivateDidPayload {
-    return { id: isSet(object.id) ? String(object.id) : "" };
+    return { $type: MsgDeactivateDidPayload.$type, id: isSet(object.id) ? String(object.id) : "" };
   },
 
   toJSON(message: MsgDeactivateDidPayload): unknown {
@@ -375,11 +408,15 @@ export const MsgDeactivateDidPayload = {
   },
 };
 
+messageTypeRegistry.set(MsgDeactivateDidPayload.$type, MsgDeactivateDidPayload);
+
 function createBaseMsgDeactivateDidResponse(): MsgDeactivateDidResponse {
-  return { did: undefined, metadata: undefined };
+  return { $type: "cheqdid.cheqdnode.cheqd.v1.MsgDeactivateDidResponse", did: undefined, metadata: undefined };
 }
 
 export const MsgDeactivateDidResponse = {
+  $type: "cheqdid.cheqdnode.cheqd.v1.MsgDeactivateDidResponse" as const,
+
   encode(message: MsgDeactivateDidResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.did !== undefined) {
       Did.encode(message.did, writer.uint32(10).fork()).ldelim();
@@ -413,6 +450,7 @@ export const MsgDeactivateDidResponse = {
 
   fromJSON(object: any): MsgDeactivateDidResponse {
     return {
+      $type: MsgDeactivateDidResponse.$type,
       did: isSet(object.did) ? Did.fromJSON(object.did) : undefined,
       metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined,
     };
@@ -435,8 +473,11 @@ export const MsgDeactivateDidResponse = {
   },
 };
 
+messageTypeRegistry.set(MsgDeactivateDidResponse.$type, MsgDeactivateDidResponse);
+
 function createBaseMsgCreateDidPayload(): MsgCreateDidPayload {
   return {
+    $type: "cheqdid.cheqdnode.cheqd.v1.MsgCreateDidPayload",
     context: [],
     id: "",
     controller: [],
@@ -452,6 +493,8 @@ function createBaseMsgCreateDidPayload(): MsgCreateDidPayload {
 }
 
 export const MsgCreateDidPayload = {
+  $type: "cheqdid.cheqdnode.cheqd.v1.MsgCreateDidPayload" as const,
+
   encode(message: MsgCreateDidPayload, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.context) {
       writer.uint32(10).string(v!);
@@ -539,6 +582,7 @@ export const MsgCreateDidPayload = {
 
   fromJSON(object: any): MsgCreateDidPayload {
     return {
+      $type: MsgCreateDidPayload.$type,
       context: Array.isArray(object?.context) ? object.context.map((e: any) => String(e)) : [],
       id: isSet(object.id) ? String(object.id) : "",
       controller: Array.isArray(object?.controller) ? object.controller.map((e: any) => String(e)) : [],
@@ -632,11 +676,15 @@ export const MsgCreateDidPayload = {
   },
 };
 
+messageTypeRegistry.set(MsgCreateDidPayload.$type, MsgCreateDidPayload);
+
 function createBaseMsgCreateDidResponse(): MsgCreateDidResponse {
-  return { id: "" };
+  return { $type: "cheqdid.cheqdnode.cheqd.v1.MsgCreateDidResponse", id: "" };
 }
 
 export const MsgCreateDidResponse = {
+  $type: "cheqdid.cheqdnode.cheqd.v1.MsgCreateDidResponse" as const,
+
   encode(message: MsgCreateDidResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -663,7 +711,7 @@ export const MsgCreateDidResponse = {
   },
 
   fromJSON(object: any): MsgCreateDidResponse {
-    return { id: isSet(object.id) ? String(object.id) : "" };
+    return { $type: MsgCreateDidResponse.$type, id: isSet(object.id) ? String(object.id) : "" };
   },
 
   toJSON(message: MsgCreateDidResponse): unknown {
@@ -679,8 +727,11 @@ export const MsgCreateDidResponse = {
   },
 };
 
+messageTypeRegistry.set(MsgCreateDidResponse.$type, MsgCreateDidResponse);
+
 function createBaseMsgUpdateDidPayload(): MsgUpdateDidPayload {
   return {
+    $type: "cheqdid.cheqdnode.cheqd.v1.MsgUpdateDidPayload",
     context: [],
     id: "",
     controller: [],
@@ -697,6 +748,8 @@ function createBaseMsgUpdateDidPayload(): MsgUpdateDidPayload {
 }
 
 export const MsgUpdateDidPayload = {
+  $type: "cheqdid.cheqdnode.cheqd.v1.MsgUpdateDidPayload" as const,
+
   encode(message: MsgUpdateDidPayload, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.context) {
       writer.uint32(10).string(v!);
@@ -790,6 +843,7 @@ export const MsgUpdateDidPayload = {
 
   fromJSON(object: any): MsgUpdateDidPayload {
     return {
+      $type: MsgUpdateDidPayload.$type,
       context: Array.isArray(object?.context) ? object.context.map((e: any) => String(e)) : [],
       id: isSet(object.id) ? String(object.id) : "",
       controller: Array.isArray(object?.controller) ? object.controller.map((e: any) => String(e)) : [],
@@ -886,11 +940,15 @@ export const MsgUpdateDidPayload = {
   },
 };
 
+messageTypeRegistry.set(MsgUpdateDidPayload.$type, MsgUpdateDidPayload);
+
 function createBaseMsgUpdateDidResponse(): MsgUpdateDidResponse {
-  return { id: "" };
+  return { $type: "cheqdid.cheqdnode.cheqd.v1.MsgUpdateDidResponse", id: "" };
 }
 
 export const MsgUpdateDidResponse = {
+  $type: "cheqdid.cheqdnode.cheqd.v1.MsgUpdateDidResponse" as const,
+
   encode(message: MsgUpdateDidResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -917,7 +975,7 @@ export const MsgUpdateDidResponse = {
   },
 
   fromJSON(object: any): MsgUpdateDidResponse {
-    return { id: isSet(object.id) ? String(object.id) : "" };
+    return { $type: MsgUpdateDidResponse.$type, id: isSet(object.id) ? String(object.id) : "" };
   },
 
   toJSON(message: MsgUpdateDidResponse): unknown {
@@ -932,6 +990,8 @@ export const MsgUpdateDidResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(MsgUpdateDidResponse.$type, MsgUpdateDidResponse);
 
 /** Msg defines the Msg service. */
 export interface Msg {
@@ -978,12 +1038,12 @@ type Builtin = Date | Function | Uint8Array | string | number | boolean | undefi
 export type DeepPartial<T> = T extends Builtin ? T
   : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P> | "$type">]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

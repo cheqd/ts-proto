@@ -2,10 +2,12 @@
 import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
+import { messageTypeRegistry } from "../../../typeRegistry";
 
 export const protobufPackage = "cheqdid.cheqdnode.cheqd.v1";
 
 export interface StateValue {
+  $type: "cheqdid.cheqdnode.cheqd.v1.StateValue";
   data:
     | Any
     | undefined;
@@ -15,6 +17,7 @@ export interface StateValue {
 
 /** metadata */
 export interface Metadata {
+  $type: "cheqdid.cheqdnode.cheqd.v1.Metadata";
   created: string;
   updated: string;
   deactivated: boolean;
@@ -23,10 +26,12 @@ export interface Metadata {
 }
 
 function createBaseStateValue(): StateValue {
-  return { data: undefined, metadata: undefined };
+  return { $type: "cheqdid.cheqdnode.cheqd.v1.StateValue", data: undefined, metadata: undefined };
 }
 
 export const StateValue = {
+  $type: "cheqdid.cheqdnode.cheqd.v1.StateValue" as const,
+
   encode(message: StateValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data !== undefined) {
       Any.encode(message.data, writer.uint32(10).fork()).ldelim();
@@ -60,6 +65,7 @@ export const StateValue = {
 
   fromJSON(object: any): StateValue {
     return {
+      $type: StateValue.$type,
       data: isSet(object.data) ? Any.fromJSON(object.data) : undefined,
       metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined,
     };
@@ -82,11 +88,22 @@ export const StateValue = {
   },
 };
 
+messageTypeRegistry.set(StateValue.$type, StateValue);
+
 function createBaseMetadata(): Metadata {
-  return { created: "", updated: "", deactivated: false, versionId: "", resources: [] };
+  return {
+    $type: "cheqdid.cheqdnode.cheqd.v1.Metadata",
+    created: "",
+    updated: "",
+    deactivated: false,
+    versionId: "",
+    resources: [],
+  };
 }
 
 export const Metadata = {
+  $type: "cheqdid.cheqdnode.cheqd.v1.Metadata" as const,
+
   encode(message: Metadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.created !== "") {
       writer.uint32(10).string(message.created);
@@ -138,6 +155,7 @@ export const Metadata = {
 
   fromJSON(object: any): Metadata {
     return {
+      $type: Metadata.$type,
       created: isSet(object.created) ? String(object.created) : "",
       updated: isSet(object.updated) ? String(object.updated) : "",
       deactivated: isSet(object.deactivated) ? Boolean(object.deactivated) : false,
@@ -171,17 +189,19 @@ export const Metadata = {
   },
 };
 
+messageTypeRegistry.set(Metadata.$type, Metadata);
+
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin ? T
   : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P> | "$type">]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

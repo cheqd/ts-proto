@@ -1,10 +1,12 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
 
 export const protobufPackage = "cheqd.did.v2";
 
 export interface DidDoc {
+  $type: "cheqd.did.v2.DidDoc";
   context: string[];
   id: string;
   controller: string[];
@@ -19,6 +21,7 @@ export interface DidDoc {
 }
 
 export interface VerificationMethod {
+  $type: "cheqd.did.v2.VerificationMethod";
   id: string;
   type: string;
   controller: string;
@@ -26,17 +29,20 @@ export interface VerificationMethod {
 }
 
 export interface Service {
+  $type: "cheqd.did.v2.Service";
   id: string;
   type: string;
   serviceEndpoint: string[];
 }
 
 export interface DidDocWithMetadata {
+  $type: "cheqd.did.v2.DidDocWithMetadata";
   didDoc: DidDoc | undefined;
   metadata: Metadata | undefined;
 }
 
 export interface Metadata {
+  $type: "cheqd.did.v2.Metadata";
   created: string;
   updated: string;
   deactivated: boolean;
@@ -47,6 +53,7 @@ export interface Metadata {
 
 function createBaseDidDoc(): DidDoc {
   return {
+    $type: "cheqd.did.v2.DidDoc",
     context: [],
     id: "",
     controller: [],
@@ -62,6 +69,8 @@ function createBaseDidDoc(): DidDoc {
 }
 
 export const DidDoc = {
+  $type: "cheqd.did.v2.DidDoc" as const,
+
   encode(message: DidDoc, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.context) {
       writer.uint32(10).string(v!);
@@ -149,6 +158,7 @@ export const DidDoc = {
 
   fromJSON(object: any): DidDoc {
     return {
+      $type: DidDoc.$type,
       context: Array.isArray(object?.context) ? object.context.map((e: any) => String(e)) : [],
       id: isSet(object.id) ? String(object.id) : "",
       controller: Array.isArray(object?.controller) ? object.controller.map((e: any) => String(e)) : [],
@@ -242,11 +252,15 @@ export const DidDoc = {
   },
 };
 
+messageTypeRegistry.set(DidDoc.$type, DidDoc);
+
 function createBaseVerificationMethod(): VerificationMethod {
-  return { id: "", type: "", controller: "", verificationMaterial: "" };
+  return { $type: "cheqd.did.v2.VerificationMethod", id: "", type: "", controller: "", verificationMaterial: "" };
 }
 
 export const VerificationMethod = {
+  $type: "cheqd.did.v2.VerificationMethod" as const,
+
   encode(message: VerificationMethod, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -292,6 +306,7 @@ export const VerificationMethod = {
 
   fromJSON(object: any): VerificationMethod {
     return {
+      $type: VerificationMethod.$type,
       id: isSet(object.id) ? String(object.id) : "",
       type: isSet(object.type) ? String(object.type) : "",
       controller: isSet(object.controller) ? String(object.controller) : "",
@@ -318,11 +333,15 @@ export const VerificationMethod = {
   },
 };
 
+messageTypeRegistry.set(VerificationMethod.$type, VerificationMethod);
+
 function createBaseService(): Service {
-  return { id: "", type: "", serviceEndpoint: [] };
+  return { $type: "cheqd.did.v2.Service", id: "", type: "", serviceEndpoint: [] };
 }
 
 export const Service = {
+  $type: "cheqd.did.v2.Service" as const,
+
   encode(message: Service, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -362,6 +381,7 @@ export const Service = {
 
   fromJSON(object: any): Service {
     return {
+      $type: Service.$type,
       id: isSet(object.id) ? String(object.id) : "",
       type: isSet(object.type) ? String(object.type) : "",
       serviceEndpoint: Array.isArray(object?.serviceEndpoint) ? object.serviceEndpoint.map((e: any) => String(e)) : [],
@@ -389,11 +409,15 @@ export const Service = {
   },
 };
 
+messageTypeRegistry.set(Service.$type, Service);
+
 function createBaseDidDocWithMetadata(): DidDocWithMetadata {
-  return { didDoc: undefined, metadata: undefined };
+  return { $type: "cheqd.did.v2.DidDocWithMetadata", didDoc: undefined, metadata: undefined };
 }
 
 export const DidDocWithMetadata = {
+  $type: "cheqd.did.v2.DidDocWithMetadata" as const,
+
   encode(message: DidDocWithMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.didDoc !== undefined) {
       DidDoc.encode(message.didDoc, writer.uint32(10).fork()).ldelim();
@@ -427,6 +451,7 @@ export const DidDocWithMetadata = {
 
   fromJSON(object: any): DidDocWithMetadata {
     return {
+      $type: DidDocWithMetadata.$type,
       didDoc: isSet(object.didDoc) ? DidDoc.fromJSON(object.didDoc) : undefined,
       metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined,
     };
@@ -451,11 +476,23 @@ export const DidDocWithMetadata = {
   },
 };
 
+messageTypeRegistry.set(DidDocWithMetadata.$type, DidDocWithMetadata);
+
 function createBaseMetadata(): Metadata {
-  return { created: "", updated: "", deactivated: false, versionId: "", nextVersionId: "", previousVersionId: "" };
+  return {
+    $type: "cheqd.did.v2.Metadata",
+    created: "",
+    updated: "",
+    deactivated: false,
+    versionId: "",
+    nextVersionId: "",
+    previousVersionId: "",
+  };
 }
 
 export const Metadata = {
+  $type: "cheqd.did.v2.Metadata" as const,
+
   encode(message: Metadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.created !== "") {
       writer.uint32(10).string(message.created);
@@ -513,6 +550,7 @@ export const Metadata = {
 
   fromJSON(object: any): Metadata {
     return {
+      $type: Metadata.$type,
       created: isSet(object.created) ? String(object.created) : "",
       updated: isSet(object.updated) ? String(object.updated) : "",
       deactivated: isSet(object.deactivated) ? Boolean(object.deactivated) : false,
@@ -545,17 +583,19 @@ export const Metadata = {
   },
 };
 
+messageTypeRegistry.set(Metadata.$type, Metadata);
+
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin ? T
   : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P> | "$type">]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

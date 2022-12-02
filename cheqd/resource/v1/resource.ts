@@ -1,15 +1,18 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
 
 export const protobufPackage = "cheqdid.cheqdnode.resource.v1";
 
 export interface Resource {
+  $type: "cheqdid.cheqdnode.resource.v1.Resource";
   header: ResourceHeader | undefined;
   data: Uint8Array;
 }
 
 export interface ResourceHeader {
+  $type: "cheqdid.cheqdnode.resource.v1.ResourceHeader";
   collectionId: string;
   id: string;
   name: string;
@@ -22,10 +25,12 @@ export interface ResourceHeader {
 }
 
 function createBaseResource(): Resource {
-  return { header: undefined, data: new Uint8Array() };
+  return { $type: "cheqdid.cheqdnode.resource.v1.Resource", header: undefined, data: new Uint8Array() };
 }
 
 export const Resource = {
+  $type: "cheqdid.cheqdnode.resource.v1.Resource" as const,
+
   encode(message: Resource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.header !== undefined) {
       ResourceHeader.encode(message.header, writer.uint32(10).fork()).ldelim();
@@ -59,6 +64,7 @@ export const Resource = {
 
   fromJSON(object: any): Resource {
     return {
+      $type: Resource.$type,
       header: isSet(object.header) ? ResourceHeader.fromJSON(object.header) : undefined,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
     };
@@ -82,8 +88,11 @@ export const Resource = {
   },
 };
 
+messageTypeRegistry.set(Resource.$type, Resource);
+
 function createBaseResourceHeader(): ResourceHeader {
   return {
+    $type: "cheqdid.cheqdnode.resource.v1.ResourceHeader",
     collectionId: "",
     id: "",
     name: "",
@@ -97,6 +106,8 @@ function createBaseResourceHeader(): ResourceHeader {
 }
 
 export const ResourceHeader = {
+  $type: "cheqdid.cheqdnode.resource.v1.ResourceHeader" as const,
+
   encode(message: ResourceHeader, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.collectionId !== "") {
       writer.uint32(10).string(message.collectionId);
@@ -172,6 +183,7 @@ export const ResourceHeader = {
 
   fromJSON(object: any): ResourceHeader {
     return {
+      $type: ResourceHeader.$type,
       collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
       id: isSet(object.id) ? String(object.id) : "",
       name: isSet(object.name) ? String(object.name) : "",
@@ -213,6 +225,8 @@ export const ResourceHeader = {
     return message;
   },
 };
+
+messageTypeRegistry.set(ResourceHeader.$type, ResourceHeader);
 
 declare var self: any | undefined;
 declare var window: any | undefined;
@@ -263,12 +277,12 @@ type Builtin = Date | Function | Uint8Array | string | number | boolean | undefi
 export type DeepPartial<T> = T extends Builtin ? T
   : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P> | "$type">]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

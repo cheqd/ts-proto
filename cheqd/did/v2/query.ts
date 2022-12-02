@@ -1,40 +1,49 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
 import { DidDocWithMetadata, Metadata } from "./diddoc";
 
 export const protobufPackage = "cheqd.did.v2";
 
 export interface QueryGetDidDocRequest {
+  $type: "cheqd.did.v2.QueryGetDidDocRequest";
   id: string;
 }
 
 export interface QueryGetDidDocResponse {
+  $type: "cheqd.did.v2.QueryGetDidDocResponse";
   value: DidDocWithMetadata | undefined;
 }
 
 export interface QueryGetDidDocVersionRequest {
+  $type: "cheqd.did.v2.QueryGetDidDocVersionRequest";
   id: string;
   version: string;
 }
 
 export interface QueryGetDidDocVersionResponse {
+  $type: "cheqd.did.v2.QueryGetDidDocVersionResponse";
   value: DidDocWithMetadata | undefined;
 }
 
 export interface QueryGetAllDidDocVersionsMetadataRequest {
+  $type: "cheqd.did.v2.QueryGetAllDidDocVersionsMetadataRequest";
   id: string;
 }
 
 export interface QueryGetAllDidDocVersionsMetadataResponse {
+  $type: "cheqd.did.v2.QueryGetAllDidDocVersionsMetadataResponse";
   versions: Metadata[];
 }
 
 function createBaseQueryGetDidDocRequest(): QueryGetDidDocRequest {
-  return { id: "" };
+  return { $type: "cheqd.did.v2.QueryGetDidDocRequest", id: "" };
 }
 
 export const QueryGetDidDocRequest = {
+  $type: "cheqd.did.v2.QueryGetDidDocRequest" as const,
+
   encode(message: QueryGetDidDocRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -61,7 +70,7 @@ export const QueryGetDidDocRequest = {
   },
 
   fromJSON(object: any): QueryGetDidDocRequest {
-    return { id: isSet(object.id) ? String(object.id) : "" };
+    return { $type: QueryGetDidDocRequest.$type, id: isSet(object.id) ? String(object.id) : "" };
   },
 
   toJSON(message: QueryGetDidDocRequest): unknown {
@@ -77,11 +86,15 @@ export const QueryGetDidDocRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryGetDidDocRequest.$type, QueryGetDidDocRequest);
+
 function createBaseQueryGetDidDocResponse(): QueryGetDidDocResponse {
-  return { value: undefined };
+  return { $type: "cheqd.did.v2.QueryGetDidDocResponse", value: undefined };
 }
 
 export const QueryGetDidDocResponse = {
+  $type: "cheqd.did.v2.QueryGetDidDocResponse" as const,
+
   encode(message: QueryGetDidDocResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== undefined) {
       DidDocWithMetadata.encode(message.value, writer.uint32(10).fork()).ldelim();
@@ -108,7 +121,10 @@ export const QueryGetDidDocResponse = {
   },
 
   fromJSON(object: any): QueryGetDidDocResponse {
-    return { value: isSet(object.value) ? DidDocWithMetadata.fromJSON(object.value) : undefined };
+    return {
+      $type: QueryGetDidDocResponse.$type,
+      value: isSet(object.value) ? DidDocWithMetadata.fromJSON(object.value) : undefined,
+    };
   },
 
   toJSON(message: QueryGetDidDocResponse): unknown {
@@ -126,11 +142,15 @@ export const QueryGetDidDocResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryGetDidDocResponse.$type, QueryGetDidDocResponse);
+
 function createBaseQueryGetDidDocVersionRequest(): QueryGetDidDocVersionRequest {
-  return { id: "", version: "" };
+  return { $type: "cheqd.did.v2.QueryGetDidDocVersionRequest", id: "", version: "" };
 }
 
 export const QueryGetDidDocVersionRequest = {
+  $type: "cheqd.did.v2.QueryGetDidDocVersionRequest" as const,
+
   encode(message: QueryGetDidDocVersionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -164,6 +184,7 @@ export const QueryGetDidDocVersionRequest = {
 
   fromJSON(object: any): QueryGetDidDocVersionRequest {
     return {
+      $type: QueryGetDidDocVersionRequest.$type,
       id: isSet(object.id) ? String(object.id) : "",
       version: isSet(object.version) ? String(object.version) : "",
     };
@@ -184,11 +205,15 @@ export const QueryGetDidDocVersionRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryGetDidDocVersionRequest.$type, QueryGetDidDocVersionRequest);
+
 function createBaseQueryGetDidDocVersionResponse(): QueryGetDidDocVersionResponse {
-  return { value: undefined };
+  return { $type: "cheqd.did.v2.QueryGetDidDocVersionResponse", value: undefined };
 }
 
 export const QueryGetDidDocVersionResponse = {
+  $type: "cheqd.did.v2.QueryGetDidDocVersionResponse" as const,
+
   encode(message: QueryGetDidDocVersionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== undefined) {
       DidDocWithMetadata.encode(message.value, writer.uint32(10).fork()).ldelim();
@@ -215,7 +240,10 @@ export const QueryGetDidDocVersionResponse = {
   },
 
   fromJSON(object: any): QueryGetDidDocVersionResponse {
-    return { value: isSet(object.value) ? DidDocWithMetadata.fromJSON(object.value) : undefined };
+    return {
+      $type: QueryGetDidDocVersionResponse.$type,
+      value: isSet(object.value) ? DidDocWithMetadata.fromJSON(object.value) : undefined,
+    };
   },
 
   toJSON(message: QueryGetDidDocVersionResponse): unknown {
@@ -235,11 +263,15 @@ export const QueryGetDidDocVersionResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryGetDidDocVersionResponse.$type, QueryGetDidDocVersionResponse);
+
 function createBaseQueryGetAllDidDocVersionsMetadataRequest(): QueryGetAllDidDocVersionsMetadataRequest {
-  return { id: "" };
+  return { $type: "cheqd.did.v2.QueryGetAllDidDocVersionsMetadataRequest", id: "" };
 }
 
 export const QueryGetAllDidDocVersionsMetadataRequest = {
+  $type: "cheqd.did.v2.QueryGetAllDidDocVersionsMetadataRequest" as const,
+
   encode(message: QueryGetAllDidDocVersionsMetadataRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -266,7 +298,7 @@ export const QueryGetAllDidDocVersionsMetadataRequest = {
   },
 
   fromJSON(object: any): QueryGetAllDidDocVersionsMetadataRequest {
-    return { id: isSet(object.id) ? String(object.id) : "" };
+    return { $type: QueryGetAllDidDocVersionsMetadataRequest.$type, id: isSet(object.id) ? String(object.id) : "" };
   },
 
   toJSON(message: QueryGetAllDidDocVersionsMetadataRequest): unknown {
@@ -284,11 +316,15 @@ export const QueryGetAllDidDocVersionsMetadataRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryGetAllDidDocVersionsMetadataRequest.$type, QueryGetAllDidDocVersionsMetadataRequest);
+
 function createBaseQueryGetAllDidDocVersionsMetadataResponse(): QueryGetAllDidDocVersionsMetadataResponse {
-  return { versions: [] };
+  return { $type: "cheqd.did.v2.QueryGetAllDidDocVersionsMetadataResponse", versions: [] };
 }
 
 export const QueryGetAllDidDocVersionsMetadataResponse = {
+  $type: "cheqd.did.v2.QueryGetAllDidDocVersionsMetadataResponse" as const,
+
   encode(message: QueryGetAllDidDocVersionsMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.versions) {
       Metadata.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -315,7 +351,10 @@ export const QueryGetAllDidDocVersionsMetadataResponse = {
   },
 
   fromJSON(object: any): QueryGetAllDidDocVersionsMetadataResponse {
-    return { versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Metadata.fromJSON(e)) : [] };
+    return {
+      $type: QueryGetAllDidDocVersionsMetadataResponse.$type,
+      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Metadata.fromJSON(e)) : [],
+    };
   },
 
   toJSON(message: QueryGetAllDidDocVersionsMetadataResponse): unknown {
@@ -336,6 +375,8 @@ export const QueryGetAllDidDocVersionsMetadataResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(QueryGetAllDidDocVersionsMetadataResponse.$type, QueryGetAllDidDocVersionsMetadataResponse);
 
 export interface Query {
   DidDoc(request: QueryGetDidDocRequest): Promise<QueryGetDidDocResponse>;
@@ -385,12 +426,12 @@ type Builtin = Date | Function | Uint8Array | string | number | boolean | undefi
 export type DeepPartial<T> = T extends Builtin ? T
   : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P> | "$type">]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
