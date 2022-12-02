@@ -30,10 +30,10 @@ export declare const MsgCreateResource: {
     toJSON(message: MsgCreateResource): unknown;
     fromPartial<I extends {
         payload?: {
-            name?: string | undefined;
+            id?: string | undefined;
             data?: Uint8Array | undefined;
             collectionId?: string | undefined;
-            id?: string | undefined;
+            name?: string | undefined;
             resourceType?: string | undefined;
         } | undefined;
         signatures?: {
@@ -42,18 +42,18 @@ export declare const MsgCreateResource: {
         }[] | undefined;
     } & {
         payload?: ({
-            name?: string | undefined;
+            id?: string | undefined;
             data?: Uint8Array | undefined;
             collectionId?: string | undefined;
-            id?: string | undefined;
+            name?: string | undefined;
             resourceType?: string | undefined;
         } & {
-            name?: string | undefined;
+            id?: string | undefined;
             data?: Uint8Array | undefined;
             collectionId?: string | undefined;
-            id?: string | undefined;
+            name?: string | undefined;
             resourceType?: string | undefined;
-        } & { [K in Exclude<keyof I["payload"], "$type" | "name" | "data" | "collectionId" | "id" | "resourceType">]: never; }) | undefined;
+        } & { [K in Exclude<keyof I["payload"], "$type" | "id" | "data" | "collectionId" | "name" | "resourceType">]: never; }) | undefined;
         signatures?: ({
             verificationMethodId?: string | undefined;
             signature?: string | undefined;
@@ -76,18 +76,18 @@ export declare const MsgCreateResourcePayload: {
     fromJSON(object: any): MsgCreateResourcePayload;
     toJSON(message: MsgCreateResourcePayload): unknown;
     fromPartial<I extends {
-        name?: string | undefined;
+        id?: string | undefined;
         data?: Uint8Array | undefined;
         collectionId?: string | undefined;
-        id?: string | undefined;
+        name?: string | undefined;
         resourceType?: string | undefined;
     } & {
-        name?: string | undefined;
+        id?: string | undefined;
         data?: Uint8Array | undefined;
         collectionId?: string | undefined;
-        id?: string | undefined;
+        name?: string | undefined;
         resourceType?: string | undefined;
-    } & { [K in Exclude<keyof I, "$type" | "name" | "data" | "collectionId" | "id" | "resourceType">]: never; }>(object: I): MsgCreateResourcePayload;
+    } & { [K in Exclude<keyof I, "$type" | "id" | "data" | "collectionId" | "name" | "resourceType">]: never; }>(object: I): MsgCreateResourcePayload;
 };
 export declare const MsgCreateResourceResponse: {
     $type: "cheqdid.cheqdnode.resource.v1.MsgCreateResourceResponse";
@@ -99,54 +99,54 @@ export declare const MsgCreateResourceResponse: {
         resource?: {
             data?: Uint8Array | undefined;
             header?: {
-                name?: string | undefined;
-                collectionId?: string | undefined;
                 id?: string | undefined;
+                created?: string | undefined;
+                nextVersionId?: string | undefined;
+                previousVersionId?: string | undefined;
+                collectionId?: string | undefined;
+                name?: string | undefined;
                 resourceType?: string | undefined;
                 mediaType?: string | undefined;
-                created?: string | undefined;
                 checksum?: Uint8Array | undefined;
-                previousVersionId?: string | undefined;
-                nextVersionId?: string | undefined;
             } | undefined;
         } | undefined;
     } & {
         resource?: ({
             data?: Uint8Array | undefined;
             header?: {
-                name?: string | undefined;
-                collectionId?: string | undefined;
                 id?: string | undefined;
+                created?: string | undefined;
+                nextVersionId?: string | undefined;
+                previousVersionId?: string | undefined;
+                collectionId?: string | undefined;
+                name?: string | undefined;
                 resourceType?: string | undefined;
                 mediaType?: string | undefined;
-                created?: string | undefined;
                 checksum?: Uint8Array | undefined;
-                previousVersionId?: string | undefined;
-                nextVersionId?: string | undefined;
             } | undefined;
         } & {
             data?: Uint8Array | undefined;
             header?: ({
-                name?: string | undefined;
-                collectionId?: string | undefined;
                 id?: string | undefined;
+                created?: string | undefined;
+                nextVersionId?: string | undefined;
+                previousVersionId?: string | undefined;
+                collectionId?: string | undefined;
+                name?: string | undefined;
                 resourceType?: string | undefined;
                 mediaType?: string | undefined;
-                created?: string | undefined;
                 checksum?: Uint8Array | undefined;
-                previousVersionId?: string | undefined;
-                nextVersionId?: string | undefined;
             } & {
-                name?: string | undefined;
-                collectionId?: string | undefined;
                 id?: string | undefined;
+                created?: string | undefined;
+                nextVersionId?: string | undefined;
+                previousVersionId?: string | undefined;
+                collectionId?: string | undefined;
+                name?: string | undefined;
                 resourceType?: string | undefined;
                 mediaType?: string | undefined;
-                created?: string | undefined;
                 checksum?: Uint8Array | undefined;
-                previousVersionId?: string | undefined;
-                nextVersionId?: string | undefined;
-            } & { [K in Exclude<keyof I["resource"]["header"], "$type" | "name" | "collectionId" | "id" | "resourceType" | "mediaType" | "created" | "checksum" | "previousVersionId" | "nextVersionId">]: never; }) | undefined;
+            } & { [K in Exclude<keyof I["resource"]["header"], "$type" | "id" | "created" | "nextVersionId" | "previousVersionId" | "collectionId" | "name" | "resourceType" | "mediaType" | "checksum">]: never; }) | undefined;
         } & { [K_1 in Exclude<keyof I["resource"], "$type" | "data" | "header">]: never; }) | undefined;
     } & { [K_2 in Exclude<keyof I, "$type" | "resource">]: never; }>(object: I): MsgCreateResourceResponse;
 };

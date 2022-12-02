@@ -27,39 +27,39 @@ export declare const Resource: {
     fromPartial<I extends {
         data?: Uint8Array | undefined;
         header?: {
-            name?: string | undefined;
-            collectionId?: string | undefined;
             id?: string | undefined;
+            created?: string | undefined;
+            nextVersionId?: string | undefined;
+            previousVersionId?: string | undefined;
+            collectionId?: string | undefined;
+            name?: string | undefined;
             resourceType?: string | undefined;
             mediaType?: string | undefined;
-            created?: string | undefined;
             checksum?: Uint8Array | undefined;
-            previousVersionId?: string | undefined;
-            nextVersionId?: string | undefined;
         } | undefined;
     } & {
         data?: Uint8Array | undefined;
         header?: ({
-            name?: string | undefined;
-            collectionId?: string | undefined;
             id?: string | undefined;
+            created?: string | undefined;
+            nextVersionId?: string | undefined;
+            previousVersionId?: string | undefined;
+            collectionId?: string | undefined;
+            name?: string | undefined;
             resourceType?: string | undefined;
             mediaType?: string | undefined;
-            created?: string | undefined;
             checksum?: Uint8Array | undefined;
-            previousVersionId?: string | undefined;
-            nextVersionId?: string | undefined;
         } & {
-            name?: string | undefined;
-            collectionId?: string | undefined;
             id?: string | undefined;
+            created?: string | undefined;
+            nextVersionId?: string | undefined;
+            previousVersionId?: string | undefined;
+            collectionId?: string | undefined;
+            name?: string | undefined;
             resourceType?: string | undefined;
             mediaType?: string | undefined;
-            created?: string | undefined;
             checksum?: Uint8Array | undefined;
-            previousVersionId?: string | undefined;
-            nextVersionId?: string | undefined;
-        } & { [K in Exclude<keyof I["header"], "$type" | "name" | "collectionId" | "id" | "resourceType" | "mediaType" | "created" | "checksum" | "previousVersionId" | "nextVersionId">]: never; }) | undefined;
+        } & { [K in Exclude<keyof I["header"], "$type" | "id" | "created" | "nextVersionId" | "previousVersionId" | "collectionId" | "name" | "resourceType" | "mediaType" | "checksum">]: never; }) | undefined;
     } & { [K_1 in Exclude<keyof I, "$type" | "data" | "header">]: never; }>(object: I): Resource;
 };
 export declare const ResourceHeader: {
@@ -69,26 +69,26 @@ export declare const ResourceHeader: {
     fromJSON(object: any): ResourceHeader;
     toJSON(message: ResourceHeader): unknown;
     fromPartial<I extends {
-        name?: string | undefined;
-        collectionId?: string | undefined;
         id?: string | undefined;
+        created?: string | undefined;
+        nextVersionId?: string | undefined;
+        previousVersionId?: string | undefined;
+        collectionId?: string | undefined;
+        name?: string | undefined;
         resourceType?: string | undefined;
         mediaType?: string | undefined;
-        created?: string | undefined;
         checksum?: Uint8Array | undefined;
-        previousVersionId?: string | undefined;
-        nextVersionId?: string | undefined;
     } & {
-        name?: string | undefined;
-        collectionId?: string | undefined;
         id?: string | undefined;
+        created?: string | undefined;
+        nextVersionId?: string | undefined;
+        previousVersionId?: string | undefined;
+        collectionId?: string | undefined;
+        name?: string | undefined;
         resourceType?: string | undefined;
         mediaType?: string | undefined;
-        created?: string | undefined;
         checksum?: Uint8Array | undefined;
-        previousVersionId?: string | undefined;
-        nextVersionId?: string | undefined;
-    } & { [K in Exclude<keyof I, "$type" | "name" | "collectionId" | "id" | "resourceType" | "mediaType" | "created" | "checksum" | "previousVersionId" | "nextVersionId">]: never; }>(object: I): ResourceHeader;
+    } & { [K in Exclude<keyof I, "$type" | "id" | "created" | "nextVersionId" | "previousVersionId" | "collectionId" | "name" | "resourceType" | "mediaType" | "checksum">]: never; }>(object: I): ResourceHeader;
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {

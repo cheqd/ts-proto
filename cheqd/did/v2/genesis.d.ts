@@ -23,6 +23,14 @@ export declare const DidDocVersionSet: {
     fromPartial<I extends {
         latestVersion?: string | undefined;
         didDocs?: {
+            metadata?: {
+                created?: string | undefined;
+                updated?: string | undefined;
+                deactivated?: boolean | undefined;
+                versionId?: string | undefined;
+                nextVersionId?: string | undefined;
+                previousVersionId?: string | undefined;
+            } | undefined;
             didDoc?: {
                 context?: string[] | undefined;
                 id?: string | undefined;
@@ -44,19 +52,19 @@ export declare const DidDocVersionSet: {
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
-            } | undefined;
-            metadata?: {
-                created?: string | undefined;
-                updated?: string | undefined;
-                deactivated?: boolean | undefined;
-                versionId?: string | undefined;
-                nextVersionId?: string | undefined;
-                previousVersionId?: string | undefined;
             } | undefined;
         }[] | undefined;
     } & {
         latestVersion?: string | undefined;
         didDocs?: ({
+            metadata?: {
+                created?: string | undefined;
+                updated?: string | undefined;
+                deactivated?: boolean | undefined;
+                versionId?: string | undefined;
+                nextVersionId?: string | undefined;
+                previousVersionId?: string | undefined;
+            } | undefined;
             didDoc?: {
                 context?: string[] | undefined;
                 id?: string | undefined;
@@ -78,16 +86,16 @@ export declare const DidDocVersionSet: {
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
-            } | undefined;
-            metadata?: {
-                created?: string | undefined;
-                updated?: string | undefined;
-                deactivated?: boolean | undefined;
-                versionId?: string | undefined;
-                nextVersionId?: string | undefined;
-                previousVersionId?: string | undefined;
             } | undefined;
         }[] & ({
+            metadata?: {
+                created?: string | undefined;
+                updated?: string | undefined;
+                deactivated?: boolean | undefined;
+                versionId?: string | undefined;
+                nextVersionId?: string | undefined;
+                previousVersionId?: string | undefined;
+            } | undefined;
             didDoc?: {
                 context?: string[] | undefined;
                 id?: string | undefined;
@@ -110,15 +118,22 @@ export declare const DidDocVersionSet: {
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
             } | undefined;
-            metadata?: {
+        } & {
+            metadata?: ({
                 created?: string | undefined;
                 updated?: string | undefined;
                 deactivated?: boolean | undefined;
                 versionId?: string | undefined;
                 nextVersionId?: string | undefined;
                 previousVersionId?: string | undefined;
-            } | undefined;
-        } & {
+            } & {
+                created?: string | undefined;
+                updated?: string | undefined;
+                deactivated?: boolean | undefined;
+                versionId?: string | undefined;
+                nextVersionId?: string | undefined;
+                previousVersionId?: string | undefined;
+            } & { [K in Exclude<keyof I["didDocs"][number]["metadata"], "$type" | "created" | "updated" | "deactivated" | "versionId" | "nextVersionId" | "previousVersionId">]: never; }) | undefined;
             didDoc?: ({
                 context?: string[] | undefined;
                 id?: string | undefined;
@@ -141,9 +156,9 @@ export declare const DidDocVersionSet: {
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
             } & {
-                context?: (string[] & string[] & { [K in Exclude<keyof I["didDocs"][number]["didDoc"]["context"], "$type" | keyof string[]>]: never; }) | undefined;
+                context?: (string[] & string[] & { [K_1 in Exclude<keyof I["didDocs"][number]["didDoc"]["context"], "$type" | keyof string[]>]: never; }) | undefined;
                 id?: string | undefined;
-                controller?: (string[] & string[] & { [K_1 in Exclude<keyof I["didDocs"][number]["didDoc"]["controller"], "$type" | keyof string[]>]: never; }) | undefined;
+                controller?: (string[] & string[] & { [K_2 in Exclude<keyof I["didDocs"][number]["didDoc"]["controller"], "$type" | keyof string[]>]: never; }) | undefined;
                 verificationMethod?: ({
                     id?: string | undefined;
                     controller?: string | undefined;
@@ -159,17 +174,17 @@ export declare const DidDocVersionSet: {
                     controller?: string | undefined;
                     type?: string | undefined;
                     verificationMaterial?: string | undefined;
-                } & { [K_2 in Exclude<keyof I["didDocs"][number]["didDoc"]["verificationMethod"][number], "$type" | "id" | "controller" | "type" | "verificationMaterial">]: never; })[] & { [K_3 in Exclude<keyof I["didDocs"][number]["didDoc"]["verificationMethod"], "$type" | keyof {
+                } & { [K_3 in Exclude<keyof I["didDocs"][number]["didDoc"]["verificationMethod"][number], "$type" | "id" | "controller" | "type" | "verificationMaterial">]: never; })[] & { [K_4 in Exclude<keyof I["didDocs"][number]["didDoc"]["verificationMethod"], "$type" | keyof {
                     id?: string | undefined;
                     controller?: string | undefined;
                     type?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[]>]: never; }) | undefined;
-                authentication?: (string[] & string[] & { [K_4 in Exclude<keyof I["didDocs"][number]["didDoc"]["authentication"], "$type" | keyof string[]>]: never; }) | undefined;
-                assertionMethod?: (string[] & string[] & { [K_5 in Exclude<keyof I["didDocs"][number]["didDoc"]["assertionMethod"], "$type" | keyof string[]>]: never; }) | undefined;
-                capabilityInvocation?: (string[] & string[] & { [K_6 in Exclude<keyof I["didDocs"][number]["didDoc"]["capabilityInvocation"], "$type" | keyof string[]>]: never; }) | undefined;
-                capabilityDelegation?: (string[] & string[] & { [K_7 in Exclude<keyof I["didDocs"][number]["didDoc"]["capabilityDelegation"], "$type" | keyof string[]>]: never; }) | undefined;
-                keyAgreement?: (string[] & string[] & { [K_8 in Exclude<keyof I["didDocs"][number]["didDoc"]["keyAgreement"], "$type" | keyof string[]>]: never; }) | undefined;
+                authentication?: (string[] & string[] & { [K_5 in Exclude<keyof I["didDocs"][number]["didDoc"]["authentication"], "$type" | keyof string[]>]: never; }) | undefined;
+                assertionMethod?: (string[] & string[] & { [K_6 in Exclude<keyof I["didDocs"][number]["didDoc"]["assertionMethod"], "$type" | keyof string[]>]: never; }) | undefined;
+                capabilityInvocation?: (string[] & string[] & { [K_7 in Exclude<keyof I["didDocs"][number]["didDoc"]["capabilityInvocation"], "$type" | keyof string[]>]: never; }) | undefined;
+                capabilityDelegation?: (string[] & string[] & { [K_8 in Exclude<keyof I["didDocs"][number]["didDoc"]["capabilityDelegation"], "$type" | keyof string[]>]: never; }) | undefined;
+                keyAgreement?: (string[] & string[] & { [K_9 in Exclude<keyof I["didDocs"][number]["didDoc"]["keyAgreement"], "$type" | keyof string[]>]: never; }) | undefined;
                 service?: ({
                     id?: string | undefined;
                     type?: string | undefined;
@@ -181,30 +196,23 @@ export declare const DidDocVersionSet: {
                 } & {
                     id?: string | undefined;
                     type?: string | undefined;
-                    serviceEndpoint?: (string[] & string[] & { [K_9 in Exclude<keyof I["didDocs"][number]["didDoc"]["service"][number]["serviceEndpoint"], "$type" | keyof string[]>]: never; }) | undefined;
-                } & { [K_10 in Exclude<keyof I["didDocs"][number]["didDoc"]["service"][number], "$type" | "id" | "type" | "serviceEndpoint">]: never; })[] & { [K_11 in Exclude<keyof I["didDocs"][number]["didDoc"]["service"], "$type" | keyof {
+                    serviceEndpoint?: (string[] & string[] & { [K_10 in Exclude<keyof I["didDocs"][number]["didDoc"]["service"][number]["serviceEndpoint"], "$type" | keyof string[]>]: never; }) | undefined;
+                } & { [K_11 in Exclude<keyof I["didDocs"][number]["didDoc"]["service"][number], "$type" | "id" | "type" | "serviceEndpoint">]: never; })[] & { [K_12 in Exclude<keyof I["didDocs"][number]["didDoc"]["service"], "$type" | keyof {
                     id?: string | undefined;
                     type?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[]>]: never; }) | undefined;
-                alsoKnownAs?: (string[] & string[] & { [K_12 in Exclude<keyof I["didDocs"][number]["didDoc"]["alsoKnownAs"], "$type" | keyof string[]>]: never; }) | undefined;
-            } & { [K_13 in Exclude<keyof I["didDocs"][number]["didDoc"], "$type" | "context" | "id" | "controller" | "verificationMethod" | "authentication" | "assertionMethod" | "capabilityInvocation" | "capabilityDelegation" | "keyAgreement" | "service" | "alsoKnownAs">]: never; }) | undefined;
-            metadata?: ({
+                alsoKnownAs?: (string[] & string[] & { [K_13 in Exclude<keyof I["didDocs"][number]["didDoc"]["alsoKnownAs"], "$type" | keyof string[]>]: never; }) | undefined;
+            } & { [K_14 in Exclude<keyof I["didDocs"][number]["didDoc"], "$type" | "context" | "id" | "controller" | "verificationMethod" | "authentication" | "assertionMethod" | "capabilityInvocation" | "capabilityDelegation" | "keyAgreement" | "service" | "alsoKnownAs">]: never; }) | undefined;
+        } & { [K_15 in Exclude<keyof I["didDocs"][number], "$type" | "metadata" | "didDoc">]: never; })[] & { [K_16 in Exclude<keyof I["didDocs"], "$type" | keyof {
+            metadata?: {
                 created?: string | undefined;
                 updated?: string | undefined;
                 deactivated?: boolean | undefined;
                 versionId?: string | undefined;
                 nextVersionId?: string | undefined;
                 previousVersionId?: string | undefined;
-            } & {
-                created?: string | undefined;
-                updated?: string | undefined;
-                deactivated?: boolean | undefined;
-                versionId?: string | undefined;
-                nextVersionId?: string | undefined;
-                previousVersionId?: string | undefined;
-            } & { [K_14 in Exclude<keyof I["didDocs"][number]["metadata"], "$type" | "created" | "updated" | "deactivated" | "versionId" | "nextVersionId" | "previousVersionId">]: never; }) | undefined;
-        } & { [K_15 in Exclude<keyof I["didDocs"][number], "$type" | "didDoc" | "metadata">]: never; })[] & { [K_16 in Exclude<keyof I["didDocs"], "$type" | keyof {
+            } | undefined;
             didDoc?: {
                 context?: string[] | undefined;
                 id?: string | undefined;
@@ -227,14 +235,6 @@ export declare const DidDocVersionSet: {
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
             } | undefined;
-            metadata?: {
-                created?: string | undefined;
-                updated?: string | undefined;
-                deactivated?: boolean | undefined;
-                versionId?: string | undefined;
-                nextVersionId?: string | undefined;
-                previousVersionId?: string | undefined;
-            } | undefined;
         }[]>]: never; }) | undefined;
     } & { [K_17 in Exclude<keyof I, "$type" | "latestVersion" | "didDocs">]: never; }>(object: I): DidDocVersionSet;
 };
@@ -249,6 +249,14 @@ export declare const GenesisState: {
         versionSets?: {
             latestVersion?: string | undefined;
             didDocs?: {
+                metadata?: {
+                    created?: string | undefined;
+                    updated?: string | undefined;
+                    deactivated?: boolean | undefined;
+                    versionId?: string | undefined;
+                    nextVersionId?: string | undefined;
+                    previousVersionId?: string | undefined;
+                } | undefined;
                 didDoc?: {
                     context?: string[] | undefined;
                     id?: string | undefined;
@@ -270,14 +278,6 @@ export declare const GenesisState: {
                         serviceEndpoint?: string[] | undefined;
                     }[] | undefined;
                     alsoKnownAs?: string[] | undefined;
-                } | undefined;
-                metadata?: {
-                    created?: string | undefined;
-                    updated?: string | undefined;
-                    deactivated?: boolean | undefined;
-                    versionId?: string | undefined;
-                    nextVersionId?: string | undefined;
-                    previousVersionId?: string | undefined;
                 } | undefined;
             }[] | undefined;
         }[] | undefined;
@@ -299,6 +299,14 @@ export declare const GenesisState: {
         versionSets?: ({
             latestVersion?: string | undefined;
             didDocs?: {
+                metadata?: {
+                    created?: string | undefined;
+                    updated?: string | undefined;
+                    deactivated?: boolean | undefined;
+                    versionId?: string | undefined;
+                    nextVersionId?: string | undefined;
+                    previousVersionId?: string | undefined;
+                } | undefined;
                 didDoc?: {
                     context?: string[] | undefined;
                     id?: string | undefined;
@@ -320,19 +328,19 @@ export declare const GenesisState: {
                         serviceEndpoint?: string[] | undefined;
                     }[] | undefined;
                     alsoKnownAs?: string[] | undefined;
-                } | undefined;
-                metadata?: {
-                    created?: string | undefined;
-                    updated?: string | undefined;
-                    deactivated?: boolean | undefined;
-                    versionId?: string | undefined;
-                    nextVersionId?: string | undefined;
-                    previousVersionId?: string | undefined;
                 } | undefined;
             }[] | undefined;
         }[] & ({
             latestVersion?: string | undefined;
             didDocs?: {
+                metadata?: {
+                    created?: string | undefined;
+                    updated?: string | undefined;
+                    deactivated?: boolean | undefined;
+                    versionId?: string | undefined;
+                    nextVersionId?: string | undefined;
+                    previousVersionId?: string | undefined;
+                } | undefined;
                 didDoc?: {
                     context?: string[] | undefined;
                     id?: string | undefined;
@@ -354,19 +362,19 @@ export declare const GenesisState: {
                         serviceEndpoint?: string[] | undefined;
                     }[] | undefined;
                     alsoKnownAs?: string[] | undefined;
-                } | undefined;
-                metadata?: {
-                    created?: string | undefined;
-                    updated?: string | undefined;
-                    deactivated?: boolean | undefined;
-                    versionId?: string | undefined;
-                    nextVersionId?: string | undefined;
-                    previousVersionId?: string | undefined;
                 } | undefined;
             }[] | undefined;
         } & {
             latestVersion?: string | undefined;
             didDocs?: ({
+                metadata?: {
+                    created?: string | undefined;
+                    updated?: string | undefined;
+                    deactivated?: boolean | undefined;
+                    versionId?: string | undefined;
+                    nextVersionId?: string | undefined;
+                    previousVersionId?: string | undefined;
+                } | undefined;
                 didDoc?: {
                     context?: string[] | undefined;
                     id?: string | undefined;
@@ -388,16 +396,16 @@ export declare const GenesisState: {
                         serviceEndpoint?: string[] | undefined;
                     }[] | undefined;
                     alsoKnownAs?: string[] | undefined;
-                } | undefined;
-                metadata?: {
-                    created?: string | undefined;
-                    updated?: string | undefined;
-                    deactivated?: boolean | undefined;
-                    versionId?: string | undefined;
-                    nextVersionId?: string | undefined;
-                    previousVersionId?: string | undefined;
                 } | undefined;
             }[] & ({
+                metadata?: {
+                    created?: string | undefined;
+                    updated?: string | undefined;
+                    deactivated?: boolean | undefined;
+                    versionId?: string | undefined;
+                    nextVersionId?: string | undefined;
+                    previousVersionId?: string | undefined;
+                } | undefined;
                 didDoc?: {
                     context?: string[] | undefined;
                     id?: string | undefined;
@@ -420,15 +428,22 @@ export declare const GenesisState: {
                     }[] | undefined;
                     alsoKnownAs?: string[] | undefined;
                 } | undefined;
-                metadata?: {
+            } & {
+                metadata?: ({
                     created?: string | undefined;
                     updated?: string | undefined;
                     deactivated?: boolean | undefined;
                     versionId?: string | undefined;
                     nextVersionId?: string | undefined;
                     previousVersionId?: string | undefined;
-                } | undefined;
-            } & {
+                } & {
+                    created?: string | undefined;
+                    updated?: string | undefined;
+                    deactivated?: boolean | undefined;
+                    versionId?: string | undefined;
+                    nextVersionId?: string | undefined;
+                    previousVersionId?: string | undefined;
+                } & { [K in Exclude<keyof I["versionSets"][number]["didDocs"][number]["metadata"], "$type" | "created" | "updated" | "deactivated" | "versionId" | "nextVersionId" | "previousVersionId">]: never; }) | undefined;
                 didDoc?: ({
                     context?: string[] | undefined;
                     id?: string | undefined;
@@ -451,9 +466,9 @@ export declare const GenesisState: {
                     }[] | undefined;
                     alsoKnownAs?: string[] | undefined;
                 } & {
-                    context?: (string[] & string[] & { [K in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["context"], "$type" | keyof string[]>]: never; }) | undefined;
+                    context?: (string[] & string[] & { [K_1 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["context"], "$type" | keyof string[]>]: never; }) | undefined;
                     id?: string | undefined;
-                    controller?: (string[] & string[] & { [K_1 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["controller"], "$type" | keyof string[]>]: never; }) | undefined;
+                    controller?: (string[] & string[] & { [K_2 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["controller"], "$type" | keyof string[]>]: never; }) | undefined;
                     verificationMethod?: ({
                         id?: string | undefined;
                         controller?: string | undefined;
@@ -469,17 +484,17 @@ export declare const GenesisState: {
                         controller?: string | undefined;
                         type?: string | undefined;
                         verificationMaterial?: string | undefined;
-                    } & { [K_2 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["verificationMethod"][number], "$type" | "id" | "controller" | "type" | "verificationMaterial">]: never; })[] & { [K_3 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["verificationMethod"], "$type" | keyof {
+                    } & { [K_3 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["verificationMethod"][number], "$type" | "id" | "controller" | "type" | "verificationMaterial">]: never; })[] & { [K_4 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["verificationMethod"], "$type" | keyof {
                         id?: string | undefined;
                         controller?: string | undefined;
                         type?: string | undefined;
                         verificationMaterial?: string | undefined;
                     }[]>]: never; }) | undefined;
-                    authentication?: (string[] & string[] & { [K_4 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["authentication"], "$type" | keyof string[]>]: never; }) | undefined;
-                    assertionMethod?: (string[] & string[] & { [K_5 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["assertionMethod"], "$type" | keyof string[]>]: never; }) | undefined;
-                    capabilityInvocation?: (string[] & string[] & { [K_6 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["capabilityInvocation"], "$type" | keyof string[]>]: never; }) | undefined;
-                    capabilityDelegation?: (string[] & string[] & { [K_7 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["capabilityDelegation"], "$type" | keyof string[]>]: never; }) | undefined;
-                    keyAgreement?: (string[] & string[] & { [K_8 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["keyAgreement"], "$type" | keyof string[]>]: never; }) | undefined;
+                    authentication?: (string[] & string[] & { [K_5 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["authentication"], "$type" | keyof string[]>]: never; }) | undefined;
+                    assertionMethod?: (string[] & string[] & { [K_6 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["assertionMethod"], "$type" | keyof string[]>]: never; }) | undefined;
+                    capabilityInvocation?: (string[] & string[] & { [K_7 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["capabilityInvocation"], "$type" | keyof string[]>]: never; }) | undefined;
+                    capabilityDelegation?: (string[] & string[] & { [K_8 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["capabilityDelegation"], "$type" | keyof string[]>]: never; }) | undefined;
+                    keyAgreement?: (string[] & string[] & { [K_9 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["keyAgreement"], "$type" | keyof string[]>]: never; }) | undefined;
                     service?: ({
                         id?: string | undefined;
                         type?: string | undefined;
@@ -491,30 +506,23 @@ export declare const GenesisState: {
                     } & {
                         id?: string | undefined;
                         type?: string | undefined;
-                        serviceEndpoint?: (string[] & string[] & { [K_9 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["service"][number]["serviceEndpoint"], "$type" | keyof string[]>]: never; }) | undefined;
-                    } & { [K_10 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["service"][number], "$type" | "id" | "type" | "serviceEndpoint">]: never; })[] & { [K_11 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["service"], "$type" | keyof {
+                        serviceEndpoint?: (string[] & string[] & { [K_10 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["service"][number]["serviceEndpoint"], "$type" | keyof string[]>]: never; }) | undefined;
+                    } & { [K_11 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["service"][number], "$type" | "id" | "type" | "serviceEndpoint">]: never; })[] & { [K_12 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["service"], "$type" | keyof {
                         id?: string | undefined;
                         type?: string | undefined;
                         serviceEndpoint?: string[] | undefined;
                     }[]>]: never; }) | undefined;
-                    alsoKnownAs?: (string[] & string[] & { [K_12 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["alsoKnownAs"], "$type" | keyof string[]>]: never; }) | undefined;
-                } & { [K_13 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"], "$type" | "context" | "id" | "controller" | "verificationMethod" | "authentication" | "assertionMethod" | "capabilityInvocation" | "capabilityDelegation" | "keyAgreement" | "service" | "alsoKnownAs">]: never; }) | undefined;
-                metadata?: ({
+                    alsoKnownAs?: (string[] & string[] & { [K_13 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["alsoKnownAs"], "$type" | keyof string[]>]: never; }) | undefined;
+                } & { [K_14 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"], "$type" | "context" | "id" | "controller" | "verificationMethod" | "authentication" | "assertionMethod" | "capabilityInvocation" | "capabilityDelegation" | "keyAgreement" | "service" | "alsoKnownAs">]: never; }) | undefined;
+            } & { [K_15 in Exclude<keyof I["versionSets"][number]["didDocs"][number], "$type" | "metadata" | "didDoc">]: never; })[] & { [K_16 in Exclude<keyof I["versionSets"][number]["didDocs"], "$type" | keyof {
+                metadata?: {
                     created?: string | undefined;
                     updated?: string | undefined;
                     deactivated?: boolean | undefined;
                     versionId?: string | undefined;
                     nextVersionId?: string | undefined;
                     previousVersionId?: string | undefined;
-                } & {
-                    created?: string | undefined;
-                    updated?: string | undefined;
-                    deactivated?: boolean | undefined;
-                    versionId?: string | undefined;
-                    nextVersionId?: string | undefined;
-                    previousVersionId?: string | undefined;
-                } & { [K_14 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["metadata"], "$type" | "created" | "updated" | "deactivated" | "versionId" | "nextVersionId" | "previousVersionId">]: never; }) | undefined;
-            } & { [K_15 in Exclude<keyof I["versionSets"][number]["didDocs"][number], "$type" | "didDoc" | "metadata">]: never; })[] & { [K_16 in Exclude<keyof I["versionSets"][number]["didDocs"], "$type" | keyof {
+                } | undefined;
                 didDoc?: {
                     context?: string[] | undefined;
                     id?: string | undefined;
@@ -536,19 +544,19 @@ export declare const GenesisState: {
                         serviceEndpoint?: string[] | undefined;
                     }[] | undefined;
                     alsoKnownAs?: string[] | undefined;
-                } | undefined;
-                metadata?: {
-                    created?: string | undefined;
-                    updated?: string | undefined;
-                    deactivated?: boolean | undefined;
-                    versionId?: string | undefined;
-                    nextVersionId?: string | undefined;
-                    previousVersionId?: string | undefined;
                 } | undefined;
             }[]>]: never; }) | undefined;
         } & { [K_17 in Exclude<keyof I["versionSets"][number], "$type" | "latestVersion" | "didDocs">]: never; })[] & { [K_18 in Exclude<keyof I["versionSets"], "$type" | keyof {
             latestVersion?: string | undefined;
             didDocs?: {
+                metadata?: {
+                    created?: string | undefined;
+                    updated?: string | undefined;
+                    deactivated?: boolean | undefined;
+                    versionId?: string | undefined;
+                    nextVersionId?: string | undefined;
+                    previousVersionId?: string | undefined;
+                } | undefined;
                 didDoc?: {
                     context?: string[] | undefined;
                     id?: string | undefined;
@@ -570,14 +578,6 @@ export declare const GenesisState: {
                         serviceEndpoint?: string[] | undefined;
                     }[] | undefined;
                     alsoKnownAs?: string[] | undefined;
-                } | undefined;
-                metadata?: {
-                    created?: string | undefined;
-                    updated?: string | undefined;
-                    deactivated?: boolean | undefined;
-                    versionId?: string | undefined;
-                    nextVersionId?: string | undefined;
-                    previousVersionId?: string | undefined;
                 } | undefined;
             }[] | undefined;
         }[]>]: never; }) | undefined;

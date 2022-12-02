@@ -23,10 +23,10 @@ export declare const GenesisState: {
             } | undefined;
             metadata?: {
                 created?: string | undefined;
-                resources?: string[] | undefined;
-                versionId?: string | undefined;
                 updated?: string | undefined;
                 deactivated?: boolean | undefined;
+                versionId?: string | undefined;
+                resources?: string[] | undefined;
             } | undefined;
         }[] | undefined;
     } & {
@@ -38,10 +38,10 @@ export declare const GenesisState: {
             } | undefined;
             metadata?: {
                 created?: string | undefined;
-                resources?: string[] | undefined;
-                versionId?: string | undefined;
                 updated?: string | undefined;
                 deactivated?: boolean | undefined;
+                versionId?: string | undefined;
+                resources?: string[] | undefined;
             } | undefined;
         }[] & ({
             data?: {
@@ -50,10 +50,10 @@ export declare const GenesisState: {
             } | undefined;
             metadata?: {
                 created?: string | undefined;
-                resources?: string[] | undefined;
-                versionId?: string | undefined;
                 updated?: string | undefined;
                 deactivated?: boolean | undefined;
+                versionId?: string | undefined;
+                resources?: string[] | undefined;
             } | undefined;
         } & {
             data?: ({
@@ -65,17 +65,17 @@ export declare const GenesisState: {
             } & { [K in Exclude<keyof I["didList"][number]["data"], "$type" | "value" | "typeUrl">]: never; }) | undefined;
             metadata?: ({
                 created?: string | undefined;
-                resources?: string[] | undefined;
-                versionId?: string | undefined;
                 updated?: string | undefined;
                 deactivated?: boolean | undefined;
+                versionId?: string | undefined;
+                resources?: string[] | undefined;
             } & {
                 created?: string | undefined;
-                resources?: (string[] & string[] & { [K_1 in Exclude<keyof I["didList"][number]["metadata"]["resources"], "$type" | keyof string[]>]: never; }) | undefined;
-                versionId?: string | undefined;
                 updated?: string | undefined;
                 deactivated?: boolean | undefined;
-            } & { [K_2 in Exclude<keyof I["didList"][number]["metadata"], "$type" | "created" | "resources" | "versionId" | "updated" | "deactivated">]: never; }) | undefined;
+                versionId?: string | undefined;
+                resources?: (string[] & string[] & { [K_1 in Exclude<keyof I["didList"][number]["metadata"]["resources"], "$type" | keyof string[]>]: never; }) | undefined;
+            } & { [K_2 in Exclude<keyof I["didList"][number]["metadata"], "$type" | "created" | "updated" | "deactivated" | "versionId" | "resources">]: never; }) | undefined;
         } & { [K_3 in Exclude<keyof I["didList"][number], "$type" | "data" | "metadata">]: never; })[] & { [K_4 in Exclude<keyof I["didList"], "$type" | keyof {
             data?: {
                 value?: Uint8Array | undefined;
@@ -83,10 +83,10 @@ export declare const GenesisState: {
             } | undefined;
             metadata?: {
                 created?: string | undefined;
-                resources?: string[] | undefined;
-                versionId?: string | undefined;
                 updated?: string | undefined;
                 deactivated?: boolean | undefined;
+                versionId?: string | undefined;
+                resources?: string[] | undefined;
             } | undefined;
         }[]>]: never; }) | undefined;
     } & { [K_5 in Exclude<keyof I, "$type" | "didNamespace" | "didList">]: never; }>(object: I): GenesisState;

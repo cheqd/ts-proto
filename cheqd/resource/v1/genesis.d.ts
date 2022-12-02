@@ -17,79 +17,79 @@ export declare const GenesisState: {
         resourceList?: {
             data?: Uint8Array | undefined;
             header?: {
-                name?: string | undefined;
-                collectionId?: string | undefined;
                 id?: string | undefined;
+                created?: string | undefined;
+                nextVersionId?: string | undefined;
+                previousVersionId?: string | undefined;
+                collectionId?: string | undefined;
+                name?: string | undefined;
                 resourceType?: string | undefined;
                 mediaType?: string | undefined;
-                created?: string | undefined;
                 checksum?: Uint8Array | undefined;
-                previousVersionId?: string | undefined;
-                nextVersionId?: string | undefined;
             } | undefined;
         }[] | undefined;
     } & {
         resourceList?: ({
             data?: Uint8Array | undefined;
             header?: {
-                name?: string | undefined;
-                collectionId?: string | undefined;
                 id?: string | undefined;
+                created?: string | undefined;
+                nextVersionId?: string | undefined;
+                previousVersionId?: string | undefined;
+                collectionId?: string | undefined;
+                name?: string | undefined;
                 resourceType?: string | undefined;
                 mediaType?: string | undefined;
-                created?: string | undefined;
                 checksum?: Uint8Array | undefined;
-                previousVersionId?: string | undefined;
-                nextVersionId?: string | undefined;
             } | undefined;
         }[] & ({
             data?: Uint8Array | undefined;
             header?: {
-                name?: string | undefined;
-                collectionId?: string | undefined;
                 id?: string | undefined;
+                created?: string | undefined;
+                nextVersionId?: string | undefined;
+                previousVersionId?: string | undefined;
+                collectionId?: string | undefined;
+                name?: string | undefined;
                 resourceType?: string | undefined;
                 mediaType?: string | undefined;
-                created?: string | undefined;
                 checksum?: Uint8Array | undefined;
-                previousVersionId?: string | undefined;
-                nextVersionId?: string | undefined;
             } | undefined;
         } & {
             data?: Uint8Array | undefined;
             header?: ({
-                name?: string | undefined;
-                collectionId?: string | undefined;
                 id?: string | undefined;
+                created?: string | undefined;
+                nextVersionId?: string | undefined;
+                previousVersionId?: string | undefined;
+                collectionId?: string | undefined;
+                name?: string | undefined;
                 resourceType?: string | undefined;
                 mediaType?: string | undefined;
-                created?: string | undefined;
                 checksum?: Uint8Array | undefined;
-                previousVersionId?: string | undefined;
-                nextVersionId?: string | undefined;
             } & {
-                name?: string | undefined;
-                collectionId?: string | undefined;
                 id?: string | undefined;
+                created?: string | undefined;
+                nextVersionId?: string | undefined;
+                previousVersionId?: string | undefined;
+                collectionId?: string | undefined;
+                name?: string | undefined;
                 resourceType?: string | undefined;
                 mediaType?: string | undefined;
-                created?: string | undefined;
                 checksum?: Uint8Array | undefined;
-                previousVersionId?: string | undefined;
-                nextVersionId?: string | undefined;
-            } & { [K in Exclude<keyof I["resourceList"][number]["header"], "$type" | "name" | "collectionId" | "id" | "resourceType" | "mediaType" | "created" | "checksum" | "previousVersionId" | "nextVersionId">]: never; }) | undefined;
+            } & { [K in Exclude<keyof I["resourceList"][number]["header"], "$type" | "id" | "created" | "nextVersionId" | "previousVersionId" | "collectionId" | "name" | "resourceType" | "mediaType" | "checksum">]: never; }) | undefined;
         } & { [K_1 in Exclude<keyof I["resourceList"][number], "$type" | "data" | "header">]: never; })[] & { [K_2 in Exclude<keyof I["resourceList"], "$type" | keyof {
             data?: Uint8Array | undefined;
             header?: {
-                name?: string | undefined;
-                collectionId?: string | undefined;
                 id?: string | undefined;
+                created?: string | undefined;
+                nextVersionId?: string | undefined;
+                previousVersionId?: string | undefined;
+                collectionId?: string | undefined;
+                name?: string | undefined;
                 resourceType?: string | undefined;
                 mediaType?: string | undefined;
-                created?: string | undefined;
                 checksum?: Uint8Array | undefined;
-                previousVersionId?: string | undefined;
-                nextVersionId?: string | undefined;
             } | undefined;
         }[]>]: never; }) | undefined;
     } & { [K_3 in Exclude<keyof I, "$type" | "resourceList">]: never; }>(object: I): GenesisState;

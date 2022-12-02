@@ -30,10 +30,10 @@ export declare const StateValue: {
         } | undefined;
         metadata?: {
             created?: string | undefined;
-            resources?: string[] | undefined;
-            versionId?: string | undefined;
             updated?: string | undefined;
             deactivated?: boolean | undefined;
+            versionId?: string | undefined;
+            resources?: string[] | undefined;
         } | undefined;
     } & {
         data?: ({
@@ -45,17 +45,17 @@ export declare const StateValue: {
         } & { [K in Exclude<keyof I["data"], "$type" | "value" | "typeUrl">]: never; }) | undefined;
         metadata?: ({
             created?: string | undefined;
-            resources?: string[] | undefined;
-            versionId?: string | undefined;
             updated?: string | undefined;
             deactivated?: boolean | undefined;
+            versionId?: string | undefined;
+            resources?: string[] | undefined;
         } & {
             created?: string | undefined;
-            resources?: (string[] & string[] & { [K_1 in Exclude<keyof I["metadata"]["resources"], "$type" | keyof string[]>]: never; }) | undefined;
-            versionId?: string | undefined;
             updated?: string | undefined;
             deactivated?: boolean | undefined;
-        } & { [K_2 in Exclude<keyof I["metadata"], "$type" | "created" | "resources" | "versionId" | "updated" | "deactivated">]: never; }) | undefined;
+            versionId?: string | undefined;
+            resources?: (string[] & string[] & { [K_1 in Exclude<keyof I["metadata"]["resources"], "$type" | keyof string[]>]: never; }) | undefined;
+        } & { [K_2 in Exclude<keyof I["metadata"], "$type" | "created" | "updated" | "deactivated" | "versionId" | "resources">]: never; }) | undefined;
     } & { [K_3 in Exclude<keyof I, "$type" | "data" | "metadata">]: never; }>(object: I): StateValue;
 };
 export declare const Metadata: {
@@ -66,17 +66,17 @@ export declare const Metadata: {
     toJSON(message: Metadata): unknown;
     fromPartial<I extends {
         created?: string | undefined;
-        resources?: string[] | undefined;
-        versionId?: string | undefined;
         updated?: string | undefined;
         deactivated?: boolean | undefined;
+        versionId?: string | undefined;
+        resources?: string[] | undefined;
     } & {
         created?: string | undefined;
-        resources?: (string[] & string[] & { [K in Exclude<keyof I["resources"], "$type" | keyof string[]>]: never; }) | undefined;
-        versionId?: string | undefined;
         updated?: string | undefined;
         deactivated?: boolean | undefined;
-    } & { [K_1 in Exclude<keyof I, "$type" | "created" | "resources" | "versionId" | "updated" | "deactivated">]: never; }>(object: I): Metadata;
+        versionId?: string | undefined;
+        resources?: (string[] & string[] & { [K in Exclude<keyof I["resources"], "$type" | keyof string[]>]: never; }) | undefined;
+    } & { [K_1 in Exclude<keyof I, "$type" | "created" | "updated" | "deactivated" | "versionId" | "resources">]: never; }>(object: I): Metadata;
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {

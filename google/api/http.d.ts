@@ -370,8 +370,8 @@ export declare const Http: {
             delete?: string | undefined;
             patch?: string | undefined;
             custom?: {
-                path?: string | undefined;
                 kind?: string | undefined;
+                path?: string | undefined;
             } | undefined;
             body?: string | undefined;
             responseBody?: string | undefined;
@@ -387,8 +387,8 @@ export declare const Http: {
             delete?: string | undefined;
             patch?: string | undefined;
             custom?: {
-                path?: string | undefined;
                 kind?: string | undefined;
+                path?: string | undefined;
             } | undefined;
             body?: string | undefined;
             responseBody?: string | undefined;
@@ -401,8 +401,8 @@ export declare const Http: {
             delete?: string | undefined;
             patch?: string | undefined;
             custom?: {
-                path?: string | undefined;
                 kind?: string | undefined;
+                path?: string | undefined;
             } | undefined;
             body?: string | undefined;
             responseBody?: string | undefined;
@@ -415,12 +415,12 @@ export declare const Http: {
             delete?: string | undefined;
             patch?: string | undefined;
             custom?: ({
-                path?: string | undefined;
                 kind?: string | undefined;
+                path?: string | undefined;
             } & {
-                path?: string | undefined;
                 kind?: string | undefined;
-            } & { [K in Exclude<keyof I["rules"][number]["custom"], "$type" | "path" | "kind">]: never; }) | undefined;
+                path?: string | undefined;
+            } & { [K in Exclude<keyof I["rules"][number]["custom"], "$type" | "kind" | "path">]: never; }) | undefined;
             body?: string | undefined;
             responseBody?: string | undefined;
             additionalBindings?: ({
@@ -431,8 +431,8 @@ export declare const Http: {
                 delete?: string | undefined;
                 patch?: string | undefined;
                 custom?: {
-                    path?: string | undefined;
                     kind?: string | undefined;
+                    path?: string | undefined;
                 } | undefined;
                 body?: string | undefined;
                 responseBody?: string | undefined;
@@ -445,8 +445,8 @@ export declare const Http: {
                 delete?: string | undefined;
                 patch?: string | undefined;
                 custom?: {
-                    path?: string | undefined;
                     kind?: string | undefined;
+                    path?: string | undefined;
                 } | undefined;
                 body?: string | undefined;
                 responseBody?: string | undefined;
@@ -459,12 +459,12 @@ export declare const Http: {
                 delete?: string | undefined;
                 patch?: string | undefined;
                 custom?: ({
-                    path?: string | undefined;
                     kind?: string | undefined;
+                    path?: string | undefined;
                 } & {
-                    path?: string | undefined;
                     kind?: string | undefined;
-                } & { [K_1 in Exclude<keyof I["rules"][number]["additionalBindings"][number]["custom"], "$type" | "path" | "kind">]: never; }) | undefined;
+                    path?: string | undefined;
+                } & { [K_1 in Exclude<keyof I["rules"][number]["additionalBindings"][number]["custom"], "$type" | "kind" | "path">]: never; }) | undefined;
                 body?: string | undefined;
                 responseBody?: string | undefined;
                 additionalBindings?: ({
@@ -475,8 +475,8 @@ export declare const Http: {
                     delete?: string | undefined;
                     patch?: string | undefined;
                     custom?: {
-                        path?: string | undefined;
                         kind?: string | undefined;
+                        path?: string | undefined;
                     } | undefined;
                     body?: string | undefined;
                     responseBody?: string | undefined;
@@ -489,8 +489,8 @@ export declare const Http: {
                     delete?: string | undefined;
                     patch?: string | undefined;
                     custom?: {
-                        path?: string | undefined;
                         kind?: string | undefined;
+                        path?: string | undefined;
                     } | undefined;
                     body?: string | undefined;
                     responseBody?: string | undefined;
@@ -503,12 +503,12 @@ export declare const Http: {
                     delete?: string | undefined;
                     patch?: string | undefined;
                     custom?: ({
-                        path?: string | undefined;
                         kind?: string | undefined;
+                        path?: string | undefined;
                     } & {
-                        path?: string | undefined;
                         kind?: string | undefined;
-                    } & { [K_2 in Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "path" | "kind">]: never; }) | undefined;
+                        path?: string | undefined;
+                    } & { [K_2 in Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "kind" | "path">]: never; }) | undefined;
                     body?: string | undefined;
                     responseBody?: string | undefined;
                     additionalBindings?: ({
@@ -519,8 +519,8 @@ export declare const Http: {
                         delete?: string | undefined;
                         patch?: string | undefined;
                         custom?: {
-                            path?: string | undefined;
                             kind?: string | undefined;
+                            path?: string | undefined;
                         } | undefined;
                         body?: string | undefined;
                         responseBody?: string | undefined;
@@ -533,8 +533,8 @@ export declare const Http: {
                         delete?: string | undefined;
                         patch?: string | undefined;
                         custom?: {
-                            path?: string | undefined;
                             kind?: string | undefined;
+                            path?: string | undefined;
                         } | undefined;
                         body?: string | undefined;
                         responseBody?: string | undefined;
@@ -547,12 +547,12 @@ export declare const Http: {
                         delete?: string | undefined;
                         patch?: string | undefined;
                         custom?: ({
-                            path?: string | undefined;
                             kind?: string | undefined;
+                            path?: string | undefined;
                         } & {
-                            path?: string | undefined;
                             kind?: string | undefined;
-                        } & { [K_3 in Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "path" | "kind">]: never; }) | undefined;
+                            path?: string | undefined;
+                        } & { [K_3 in Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "kind" | "path">]: never; }) | undefined;
                         body?: string | undefined;
                         responseBody?: string | undefined;
                         additionalBindings?: ({
@@ -563,8 +563,8 @@ export declare const Http: {
                             delete?: string | undefined;
                             patch?: string | undefined;
                             custom?: {
-                                path?: string | undefined;
                                 kind?: string | undefined;
+                                path?: string | undefined;
                             } | undefined;
                             body?: string | undefined;
                             responseBody?: string | undefined;
@@ -577,8 +577,8 @@ export declare const Http: {
                             delete?: string | undefined;
                             patch?: string | undefined;
                             custom?: {
-                                path?: string | undefined;
                                 kind?: string | undefined;
+                                path?: string | undefined;
                             } | undefined;
                             body?: string | undefined;
                             responseBody?: string | undefined;
@@ -591,12 +591,12 @@ export declare const Http: {
                             delete?: string | undefined;
                             patch?: string | undefined;
                             custom?: ({
-                                path?: string | undefined;
                                 kind?: string | undefined;
+                                path?: string | undefined;
                             } & {
-                                path?: string | undefined;
                                 kind?: string | undefined;
-                            } & { [K_4 in Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "path" | "kind">]: never; }) | undefined;
+                                path?: string | undefined;
+                            } & { [K_4 in Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "kind" | "path">]: never; }) | undefined;
                             body?: string | undefined;
                             responseBody?: string | undefined;
                             additionalBindings?: ({
@@ -607,8 +607,8 @@ export declare const Http: {
                                 delete?: string | undefined;
                                 patch?: string | undefined;
                                 custom?: {
-                                    path?: string | undefined;
                                     kind?: string | undefined;
+                                    path?: string | undefined;
                                 } | undefined;
                                 body?: string | undefined;
                                 responseBody?: string | undefined;
@@ -621,8 +621,8 @@ export declare const Http: {
                                 delete?: string | undefined;
                                 patch?: string | undefined;
                                 custom?: {
-                                    path?: string | undefined;
                                     kind?: string | undefined;
+                                    path?: string | undefined;
                                 } | undefined;
                                 body?: string | undefined;
                                 responseBody?: string | undefined;
@@ -635,12 +635,12 @@ export declare const Http: {
                                 delete?: string | undefined;
                                 patch?: string | undefined;
                                 custom?: ({
-                                    path?: string | undefined;
                                     kind?: string | undefined;
+                                    path?: string | undefined;
                                 } & {
-                                    path?: string | undefined;
                                     kind?: string | undefined;
-                                } & { [K_5 in Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "path" | "kind">]: never; }) | undefined;
+                                    path?: string | undefined;
+                                } & { [K_5 in Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "kind" | "path">]: never; }) | undefined;
                                 body?: string | undefined;
                                 responseBody?: string | undefined;
                                 additionalBindings?: ({
@@ -651,8 +651,8 @@ export declare const Http: {
                                     delete?: string | undefined;
                                     patch?: string | undefined;
                                     custom?: {
-                                        path?: string | undefined;
                                         kind?: string | undefined;
+                                        path?: string | undefined;
                                     } | undefined;
                                     body?: string | undefined;
                                     responseBody?: string | undefined;
@@ -665,8 +665,8 @@ export declare const Http: {
                                     delete?: string | undefined;
                                     patch?: string | undefined;
                                     custom?: {
-                                        path?: string | undefined;
                                         kind?: string | undefined;
+                                        path?: string | undefined;
                                     } | undefined;
                                     body?: string | undefined;
                                     responseBody?: string | undefined;
@@ -679,12 +679,12 @@ export declare const Http: {
                                     delete?: string | undefined;
                                     patch?: string | undefined;
                                     custom?: ({
-                                        path?: string | undefined;
                                         kind?: string | undefined;
+                                        path?: string | undefined;
                                     } & {
-                                        path?: string | undefined;
                                         kind?: string | undefined;
-                                    } & { [K_6 in Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "path" | "kind">]: never; }) | undefined;
+                                        path?: string | undefined;
+                                    } & { [K_6 in Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "kind" | "path">]: never; }) | undefined;
                                     body?: string | undefined;
                                     responseBody?: string | undefined;
                                     additionalBindings?: ({
@@ -695,8 +695,8 @@ export declare const Http: {
                                         delete?: string | undefined;
                                         patch?: string | undefined;
                                         custom?: {
-                                            path?: string | undefined;
                                             kind?: string | undefined;
+                                            path?: string | undefined;
                                         } | undefined;
                                         body?: string | undefined;
                                         responseBody?: string | undefined;
@@ -709,8 +709,8 @@ export declare const Http: {
                                         delete?: string | undefined;
                                         patch?: string | undefined;
                                         custom?: {
-                                            path?: string | undefined;
                                             kind?: string | undefined;
+                                            path?: string | undefined;
                                         } | undefined;
                                         body?: string | undefined;
                                         responseBody?: string | undefined;
@@ -723,12 +723,12 @@ export declare const Http: {
                                         delete?: string | undefined;
                                         patch?: string | undefined;
                                         custom?: ({
-                                            path?: string | undefined;
                                             kind?: string | undefined;
+                                            path?: string | undefined;
                                         } & {
-                                            path?: string | undefined;
                                             kind?: string | undefined;
-                                        } & { [K_7 in Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "path" | "kind">]: never; }) | undefined;
+                                            path?: string | undefined;
+                                        } & { [K_7 in Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "kind" | "path">]: never; }) | undefined;
                                         body?: string | undefined;
                                         responseBody?: string | undefined;
                                         additionalBindings?: ({
@@ -739,8 +739,8 @@ export declare const Http: {
                                             delete?: string | undefined;
                                             patch?: string | undefined;
                                             custom?: {
-                                                path?: string | undefined;
                                                 kind?: string | undefined;
+                                                path?: string | undefined;
                                             } | undefined;
                                             body?: string | undefined;
                                             responseBody?: string | undefined;
@@ -753,8 +753,8 @@ export declare const Http: {
                                             delete?: string | undefined;
                                             patch?: string | undefined;
                                             custom?: {
-                                                path?: string | undefined;
                                                 kind?: string | undefined;
+                                                path?: string | undefined;
                                             } | undefined;
                                             body?: string | undefined;
                                             responseBody?: string | undefined;
@@ -767,12 +767,12 @@ export declare const Http: {
                                             delete?: string | undefined;
                                             patch?: string | undefined;
                                             custom?: ({
-                                                path?: string | undefined;
                                                 kind?: string | undefined;
+                                                path?: string | undefined;
                                             } & {
-                                                path?: string | undefined;
                                                 kind?: string | undefined;
-                                            } & { [K_8 in Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "path" | "kind">]: never; }) | undefined;
+                                                path?: string | undefined;
+                                            } & { [K_8 in Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "kind" | "path">]: never; }) | undefined;
                                             body?: string | undefined;
                                             responseBody?: string | undefined;
                                             additionalBindings?: ({
@@ -783,8 +783,8 @@ export declare const Http: {
                                                 delete?: string | undefined;
                                                 patch?: string | undefined;
                                                 custom?: {
-                                                    path?: string | undefined;
                                                     kind?: string | undefined;
+                                                    path?: string | undefined;
                                                 } | undefined;
                                                 body?: string | undefined;
                                                 responseBody?: string | undefined;
@@ -797,8 +797,8 @@ export declare const Http: {
                                                 delete?: string | undefined;
                                                 patch?: string | undefined;
                                                 custom?: {
-                                                    path?: string | undefined;
                                                     kind?: string | undefined;
+                                                    path?: string | undefined;
                                                 } | undefined;
                                                 body?: string | undefined;
                                                 responseBody?: string | undefined;
@@ -811,9 +811,9 @@ export declare const Http: {
                                                 delete?: string | undefined;
                                                 patch?: string | undefined;
                                                 custom?: ({
-                                                    path?: string | undefined;
                                                     kind?: string | undefined;
-                                                } & any & { [K_9 in Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "path" | "kind">]: never; }) | undefined;
+                                                    path?: string | undefined;
+                                                } & any & { [K_9 in Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "kind" | "path">]: never; }) | undefined;
                                                 body?: string | undefined;
                                                 responseBody?: string | undefined;
                                                 additionalBindings?: ({
@@ -824,8 +824,8 @@ export declare const Http: {
                                                     delete?: string | undefined;
                                                     patch?: string | undefined;
                                                     custom?: {
-                                                        path?: string | undefined;
                                                         kind?: string | undefined;
+                                                        path?: string | undefined;
                                                     } | undefined;
                                                     body?: string | undefined;
                                                     responseBody?: string | undefined;
@@ -838,8 +838,8 @@ export declare const Http: {
                                                     delete?: string | undefined;
                                                     patch?: string | undefined;
                                                     custom?: {
-                                                        path?: string | undefined;
                                                         kind?: string | undefined;
+                                                        path?: string | undefined;
                                                     } | undefined;
                                                     body?: string | undefined;
                                                     responseBody?: string | undefined;
@@ -852,8 +852,8 @@ export declare const Http: {
                                                     delete?: string | undefined;
                                                     patch?: string | undefined;
                                                     custom?: {
-                                                        path?: string | undefined;
                                                         kind?: string | undefined;
+                                                        path?: string | undefined;
                                                     } | undefined;
                                                     body?: string | undefined;
                                                     responseBody?: string | undefined;
@@ -867,8 +867,8 @@ export declare const Http: {
                                                 delete?: string | undefined;
                                                 patch?: string | undefined;
                                                 custom?: {
-                                                    path?: string | undefined;
                                                     kind?: string | undefined;
+                                                    path?: string | undefined;
                                                 } | undefined;
                                                 body?: string | undefined;
                                                 responseBody?: string | undefined;
@@ -882,8 +882,8 @@ export declare const Http: {
                                             delete?: string | undefined;
                                             patch?: string | undefined;
                                             custom?: {
-                                                path?: string | undefined;
                                                 kind?: string | undefined;
+                                                path?: string | undefined;
                                             } | undefined;
                                             body?: string | undefined;
                                             responseBody?: string | undefined;
@@ -897,8 +897,8 @@ export declare const Http: {
                                         delete?: string | undefined;
                                         patch?: string | undefined;
                                         custom?: {
-                                            path?: string | undefined;
                                             kind?: string | undefined;
+                                            path?: string | undefined;
                                         } | undefined;
                                         body?: string | undefined;
                                         responseBody?: string | undefined;
@@ -912,8 +912,8 @@ export declare const Http: {
                                     delete?: string | undefined;
                                     patch?: string | undefined;
                                     custom?: {
-                                        path?: string | undefined;
                                         kind?: string | undefined;
+                                        path?: string | undefined;
                                     } | undefined;
                                     body?: string | undefined;
                                     responseBody?: string | undefined;
@@ -927,8 +927,8 @@ export declare const Http: {
                                 delete?: string | undefined;
                                 patch?: string | undefined;
                                 custom?: {
-                                    path?: string | undefined;
                                     kind?: string | undefined;
+                                    path?: string | undefined;
                                 } | undefined;
                                 body?: string | undefined;
                                 responseBody?: string | undefined;
@@ -942,8 +942,8 @@ export declare const Http: {
                             delete?: string | undefined;
                             patch?: string | undefined;
                             custom?: {
-                                path?: string | undefined;
                                 kind?: string | undefined;
+                                path?: string | undefined;
                             } | undefined;
                             body?: string | undefined;
                             responseBody?: string | undefined;
@@ -957,8 +957,8 @@ export declare const Http: {
                         delete?: string | undefined;
                         patch?: string | undefined;
                         custom?: {
-                            path?: string | undefined;
                             kind?: string | undefined;
+                            path?: string | undefined;
                         } | undefined;
                         body?: string | undefined;
                         responseBody?: string | undefined;
@@ -972,8 +972,8 @@ export declare const Http: {
                     delete?: string | undefined;
                     patch?: string | undefined;
                     custom?: {
-                        path?: string | undefined;
                         kind?: string | undefined;
+                        path?: string | undefined;
                     } | undefined;
                     body?: string | undefined;
                     responseBody?: string | undefined;
@@ -987,8 +987,8 @@ export declare const Http: {
                 delete?: string | undefined;
                 patch?: string | undefined;
                 custom?: {
-                    path?: string | undefined;
                     kind?: string | undefined;
+                    path?: string | undefined;
                 } | undefined;
                 body?: string | undefined;
                 responseBody?: string | undefined;
@@ -1002,8 +1002,8 @@ export declare const Http: {
             delete?: string | undefined;
             patch?: string | undefined;
             custom?: {
-                path?: string | undefined;
                 kind?: string | undefined;
+                path?: string | undefined;
             } | undefined;
             body?: string | undefined;
             responseBody?: string | undefined;
@@ -1026,8 +1026,8 @@ export declare const HttpRule: {
         delete?: string | undefined;
         patch?: string | undefined;
         custom?: {
-            path?: string | undefined;
             kind?: string | undefined;
+            path?: string | undefined;
         } | undefined;
         body?: string | undefined;
         responseBody?: string | undefined;
@@ -1040,12 +1040,12 @@ export declare const HttpRule: {
         delete?: string | undefined;
         patch?: string | undefined;
         custom?: ({
-            path?: string | undefined;
             kind?: string | undefined;
+            path?: string | undefined;
         } & {
-            path?: string | undefined;
             kind?: string | undefined;
-        } & { [K in Exclude<keyof I["custom"], "$type" | "path" | "kind">]: never; }) | undefined;
+            path?: string | undefined;
+        } & { [K in Exclude<keyof I["custom"], "$type" | "kind" | "path">]: never; }) | undefined;
         body?: string | undefined;
         responseBody?: string | undefined;
         additionalBindings?: ({
@@ -1056,8 +1056,8 @@ export declare const HttpRule: {
             delete?: string | undefined;
             patch?: string | undefined;
             custom?: {
-                path?: string | undefined;
                 kind?: string | undefined;
+                path?: string | undefined;
             } | undefined;
             body?: string | undefined;
             responseBody?: string | undefined;
@@ -1070,8 +1070,8 @@ export declare const HttpRule: {
             delete?: string | undefined;
             patch?: string | undefined;
             custom?: {
-                path?: string | undefined;
                 kind?: string | undefined;
+                path?: string | undefined;
             } | undefined;
             body?: string | undefined;
             responseBody?: string | undefined;
@@ -1084,12 +1084,12 @@ export declare const HttpRule: {
             delete?: string | undefined;
             patch?: string | undefined;
             custom?: ({
-                path?: string | undefined;
                 kind?: string | undefined;
+                path?: string | undefined;
             } & {
-                path?: string | undefined;
                 kind?: string | undefined;
-            } & { [K_1 in Exclude<keyof I["additionalBindings"][number]["custom"], "$type" | "path" | "kind">]: never; }) | undefined;
+                path?: string | undefined;
+            } & { [K_1 in Exclude<keyof I["additionalBindings"][number]["custom"], "$type" | "kind" | "path">]: never; }) | undefined;
             body?: string | undefined;
             responseBody?: string | undefined;
             additionalBindings?: ({
@@ -1100,8 +1100,8 @@ export declare const HttpRule: {
                 delete?: string | undefined;
                 patch?: string | undefined;
                 custom?: {
-                    path?: string | undefined;
                     kind?: string | undefined;
+                    path?: string | undefined;
                 } | undefined;
                 body?: string | undefined;
                 responseBody?: string | undefined;
@@ -1114,8 +1114,8 @@ export declare const HttpRule: {
                 delete?: string | undefined;
                 patch?: string | undefined;
                 custom?: {
-                    path?: string | undefined;
                     kind?: string | undefined;
+                    path?: string | undefined;
                 } | undefined;
                 body?: string | undefined;
                 responseBody?: string | undefined;
@@ -1128,12 +1128,12 @@ export declare const HttpRule: {
                 delete?: string | undefined;
                 patch?: string | undefined;
                 custom?: ({
-                    path?: string | undefined;
                     kind?: string | undefined;
+                    path?: string | undefined;
                 } & {
-                    path?: string | undefined;
                     kind?: string | undefined;
-                } & { [K_2 in Exclude<keyof I["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "path" | "kind">]: never; }) | undefined;
+                    path?: string | undefined;
+                } & { [K_2 in Exclude<keyof I["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "kind" | "path">]: never; }) | undefined;
                 body?: string | undefined;
                 responseBody?: string | undefined;
                 additionalBindings?: ({
@@ -1144,8 +1144,8 @@ export declare const HttpRule: {
                     delete?: string | undefined;
                     patch?: string | undefined;
                     custom?: {
-                        path?: string | undefined;
                         kind?: string | undefined;
+                        path?: string | undefined;
                     } | undefined;
                     body?: string | undefined;
                     responseBody?: string | undefined;
@@ -1158,8 +1158,8 @@ export declare const HttpRule: {
                     delete?: string | undefined;
                     patch?: string | undefined;
                     custom?: {
-                        path?: string | undefined;
                         kind?: string | undefined;
+                        path?: string | undefined;
                     } | undefined;
                     body?: string | undefined;
                     responseBody?: string | undefined;
@@ -1172,12 +1172,12 @@ export declare const HttpRule: {
                     delete?: string | undefined;
                     patch?: string | undefined;
                     custom?: ({
-                        path?: string | undefined;
                         kind?: string | undefined;
+                        path?: string | undefined;
                     } & {
-                        path?: string | undefined;
                         kind?: string | undefined;
-                    } & { [K_3 in Exclude<keyof I["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "path" | "kind">]: never; }) | undefined;
+                        path?: string | undefined;
+                    } & { [K_3 in Exclude<keyof I["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "kind" | "path">]: never; }) | undefined;
                     body?: string | undefined;
                     responseBody?: string | undefined;
                     additionalBindings?: ({
@@ -1188,8 +1188,8 @@ export declare const HttpRule: {
                         delete?: string | undefined;
                         patch?: string | undefined;
                         custom?: {
-                            path?: string | undefined;
                             kind?: string | undefined;
+                            path?: string | undefined;
                         } | undefined;
                         body?: string | undefined;
                         responseBody?: string | undefined;
@@ -1202,8 +1202,8 @@ export declare const HttpRule: {
                         delete?: string | undefined;
                         patch?: string | undefined;
                         custom?: {
-                            path?: string | undefined;
                             kind?: string | undefined;
+                            path?: string | undefined;
                         } | undefined;
                         body?: string | undefined;
                         responseBody?: string | undefined;
@@ -1216,12 +1216,12 @@ export declare const HttpRule: {
                         delete?: string | undefined;
                         patch?: string | undefined;
                         custom?: ({
-                            path?: string | undefined;
                             kind?: string | undefined;
+                            path?: string | undefined;
                         } & {
-                            path?: string | undefined;
                             kind?: string | undefined;
-                        } & { [K_4 in Exclude<keyof I["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "path" | "kind">]: never; }) | undefined;
+                            path?: string | undefined;
+                        } & { [K_4 in Exclude<keyof I["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "kind" | "path">]: never; }) | undefined;
                         body?: string | undefined;
                         responseBody?: string | undefined;
                         additionalBindings?: ({
@@ -1232,8 +1232,8 @@ export declare const HttpRule: {
                             delete?: string | undefined;
                             patch?: string | undefined;
                             custom?: {
-                                path?: string | undefined;
                                 kind?: string | undefined;
+                                path?: string | undefined;
                             } | undefined;
                             body?: string | undefined;
                             responseBody?: string | undefined;
@@ -1246,8 +1246,8 @@ export declare const HttpRule: {
                             delete?: string | undefined;
                             patch?: string | undefined;
                             custom?: {
-                                path?: string | undefined;
                                 kind?: string | undefined;
+                                path?: string | undefined;
                             } | undefined;
                             body?: string | undefined;
                             responseBody?: string | undefined;
@@ -1260,12 +1260,12 @@ export declare const HttpRule: {
                             delete?: string | undefined;
                             patch?: string | undefined;
                             custom?: ({
-                                path?: string | undefined;
                                 kind?: string | undefined;
+                                path?: string | undefined;
                             } & {
-                                path?: string | undefined;
                                 kind?: string | undefined;
-                            } & { [K_5 in Exclude<keyof I["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "path" | "kind">]: never; }) | undefined;
+                                path?: string | undefined;
+                            } & { [K_5 in Exclude<keyof I["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "kind" | "path">]: never; }) | undefined;
                             body?: string | undefined;
                             responseBody?: string | undefined;
                             additionalBindings?: ({
@@ -1276,8 +1276,8 @@ export declare const HttpRule: {
                                 delete?: string | undefined;
                                 patch?: string | undefined;
                                 custom?: {
-                                    path?: string | undefined;
                                     kind?: string | undefined;
+                                    path?: string | undefined;
                                 } | undefined;
                                 body?: string | undefined;
                                 responseBody?: string | undefined;
@@ -1290,8 +1290,8 @@ export declare const HttpRule: {
                                 delete?: string | undefined;
                                 patch?: string | undefined;
                                 custom?: {
-                                    path?: string | undefined;
                                     kind?: string | undefined;
+                                    path?: string | undefined;
                                 } | undefined;
                                 body?: string | undefined;
                                 responseBody?: string | undefined;
@@ -1304,12 +1304,12 @@ export declare const HttpRule: {
                                 delete?: string | undefined;
                                 patch?: string | undefined;
                                 custom?: ({
-                                    path?: string | undefined;
                                     kind?: string | undefined;
+                                    path?: string | undefined;
                                 } & {
-                                    path?: string | undefined;
                                     kind?: string | undefined;
-                                } & { [K_6 in Exclude<keyof I["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "path" | "kind">]: never; }) | undefined;
+                                    path?: string | undefined;
+                                } & { [K_6 in Exclude<keyof I["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "kind" | "path">]: never; }) | undefined;
                                 body?: string | undefined;
                                 responseBody?: string | undefined;
                                 additionalBindings?: ({
@@ -1320,8 +1320,8 @@ export declare const HttpRule: {
                                     delete?: string | undefined;
                                     patch?: string | undefined;
                                     custom?: {
-                                        path?: string | undefined;
                                         kind?: string | undefined;
+                                        path?: string | undefined;
                                     } | undefined;
                                     body?: string | undefined;
                                     responseBody?: string | undefined;
@@ -1334,8 +1334,8 @@ export declare const HttpRule: {
                                     delete?: string | undefined;
                                     patch?: string | undefined;
                                     custom?: {
-                                        path?: string | undefined;
                                         kind?: string | undefined;
+                                        path?: string | undefined;
                                     } | undefined;
                                     body?: string | undefined;
                                     responseBody?: string | undefined;
@@ -1348,12 +1348,12 @@ export declare const HttpRule: {
                                     delete?: string | undefined;
                                     patch?: string | undefined;
                                     custom?: ({
-                                        path?: string | undefined;
                                         kind?: string | undefined;
+                                        path?: string | undefined;
                                     } & {
-                                        path?: string | undefined;
                                         kind?: string | undefined;
-                                    } & { [K_7 in Exclude<keyof I["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "path" | "kind">]: never; }) | undefined;
+                                        path?: string | undefined;
+                                    } & { [K_7 in Exclude<keyof I["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "kind" | "path">]: never; }) | undefined;
                                     body?: string | undefined;
                                     responseBody?: string | undefined;
                                     additionalBindings?: ({
@@ -1364,8 +1364,8 @@ export declare const HttpRule: {
                                         delete?: string | undefined;
                                         patch?: string | undefined;
                                         custom?: {
-                                            path?: string | undefined;
                                             kind?: string | undefined;
+                                            path?: string | undefined;
                                         } | undefined;
                                         body?: string | undefined;
                                         responseBody?: string | undefined;
@@ -1378,8 +1378,8 @@ export declare const HttpRule: {
                                         delete?: string | undefined;
                                         patch?: string | undefined;
                                         custom?: {
-                                            path?: string | undefined;
                                             kind?: string | undefined;
+                                            path?: string | undefined;
                                         } | undefined;
                                         body?: string | undefined;
                                         responseBody?: string | undefined;
@@ -1392,12 +1392,12 @@ export declare const HttpRule: {
                                         delete?: string | undefined;
                                         patch?: string | undefined;
                                         custom?: ({
-                                            path?: string | undefined;
                                             kind?: string | undefined;
+                                            path?: string | undefined;
                                         } & {
-                                            path?: string | undefined;
                                             kind?: string | undefined;
-                                        } & { [K_8 in Exclude<keyof I["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "path" | "kind">]: never; }) | undefined;
+                                            path?: string | undefined;
+                                        } & { [K_8 in Exclude<keyof I["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "kind" | "path">]: never; }) | undefined;
                                         body?: string | undefined;
                                         responseBody?: string | undefined;
                                         additionalBindings?: ({
@@ -1408,8 +1408,8 @@ export declare const HttpRule: {
                                             delete?: string | undefined;
                                             patch?: string | undefined;
                                             custom?: {
-                                                path?: string | undefined;
                                                 kind?: string | undefined;
+                                                path?: string | undefined;
                                             } | undefined;
                                             body?: string | undefined;
                                             responseBody?: string | undefined;
@@ -1422,8 +1422,8 @@ export declare const HttpRule: {
                                             delete?: string | undefined;
                                             patch?: string | undefined;
                                             custom?: {
-                                                path?: string | undefined;
                                                 kind?: string | undefined;
+                                                path?: string | undefined;
                                             } | undefined;
                                             body?: string | undefined;
                                             responseBody?: string | undefined;
@@ -1436,12 +1436,12 @@ export declare const HttpRule: {
                                             delete?: string | undefined;
                                             patch?: string | undefined;
                                             custom?: ({
-                                                path?: string | undefined;
                                                 kind?: string | undefined;
+                                                path?: string | undefined;
                                             } & {
-                                                path?: string | undefined;
                                                 kind?: string | undefined;
-                                            } & { [K_9 in Exclude<keyof I["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "path" | "kind">]: never; }) | undefined;
+                                                path?: string | undefined;
+                                            } & { [K_9 in Exclude<keyof I["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "kind" | "path">]: never; }) | undefined;
                                             body?: string | undefined;
                                             responseBody?: string | undefined;
                                             additionalBindings?: ({
@@ -1452,8 +1452,8 @@ export declare const HttpRule: {
                                                 delete?: string | undefined;
                                                 patch?: string | undefined;
                                                 custom?: {
-                                                    path?: string | undefined;
                                                     kind?: string | undefined;
+                                                    path?: string | undefined;
                                                 } | undefined;
                                                 body?: string | undefined;
                                                 responseBody?: string | undefined;
@@ -1466,8 +1466,8 @@ export declare const HttpRule: {
                                                 delete?: string | undefined;
                                                 patch?: string | undefined;
                                                 custom?: {
-                                                    path?: string | undefined;
                                                     kind?: string | undefined;
+                                                    path?: string | undefined;
                                                 } | undefined;
                                                 body?: string | undefined;
                                                 responseBody?: string | undefined;
@@ -1480,9 +1480,9 @@ export declare const HttpRule: {
                                                 delete?: string | undefined;
                                                 patch?: string | undefined;
                                                 custom?: ({
-                                                    path?: string | undefined;
                                                     kind?: string | undefined;
-                                                } & any & { [K_10 in Exclude<keyof I["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "path" | "kind">]: never; }) | undefined;
+                                                    path?: string | undefined;
+                                                } & any & { [K_10 in Exclude<keyof I["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], "$type" | "kind" | "path">]: never; }) | undefined;
                                                 body?: string | undefined;
                                                 responseBody?: string | undefined;
                                                 additionalBindings?: ({
@@ -1493,8 +1493,8 @@ export declare const HttpRule: {
                                                     delete?: string | undefined;
                                                     patch?: string | undefined;
                                                     custom?: {
-                                                        path?: string | undefined;
                                                         kind?: string | undefined;
+                                                        path?: string | undefined;
                                                     } | undefined;
                                                     body?: string | undefined;
                                                     responseBody?: string | undefined;
@@ -1507,8 +1507,8 @@ export declare const HttpRule: {
                                                     delete?: string | undefined;
                                                     patch?: string | undefined;
                                                     custom?: {
-                                                        path?: string | undefined;
                                                         kind?: string | undefined;
+                                                        path?: string | undefined;
                                                     } | undefined;
                                                     body?: string | undefined;
                                                     responseBody?: string | undefined;
@@ -1521,8 +1521,8 @@ export declare const HttpRule: {
                                                     delete?: string | undefined;
                                                     patch?: string | undefined;
                                                     custom?: {
-                                                        path?: string | undefined;
                                                         kind?: string | undefined;
+                                                        path?: string | undefined;
                                                     } | undefined;
                                                     body?: string | undefined;
                                                     responseBody?: string | undefined;
@@ -1536,8 +1536,8 @@ export declare const HttpRule: {
                                                 delete?: string | undefined;
                                                 patch?: string | undefined;
                                                 custom?: {
-                                                    path?: string | undefined;
                                                     kind?: string | undefined;
+                                                    path?: string | undefined;
                                                 } | undefined;
                                                 body?: string | undefined;
                                                 responseBody?: string | undefined;
@@ -1551,8 +1551,8 @@ export declare const HttpRule: {
                                             delete?: string | undefined;
                                             patch?: string | undefined;
                                             custom?: {
-                                                path?: string | undefined;
                                                 kind?: string | undefined;
+                                                path?: string | undefined;
                                             } | undefined;
                                             body?: string | undefined;
                                             responseBody?: string | undefined;
@@ -1566,8 +1566,8 @@ export declare const HttpRule: {
                                         delete?: string | undefined;
                                         patch?: string | undefined;
                                         custom?: {
-                                            path?: string | undefined;
                                             kind?: string | undefined;
+                                            path?: string | undefined;
                                         } | undefined;
                                         body?: string | undefined;
                                         responseBody?: string | undefined;
@@ -1581,8 +1581,8 @@ export declare const HttpRule: {
                                     delete?: string | undefined;
                                     patch?: string | undefined;
                                     custom?: {
-                                        path?: string | undefined;
                                         kind?: string | undefined;
+                                        path?: string | undefined;
                                     } | undefined;
                                     body?: string | undefined;
                                     responseBody?: string | undefined;
@@ -1596,8 +1596,8 @@ export declare const HttpRule: {
                                 delete?: string | undefined;
                                 patch?: string | undefined;
                                 custom?: {
-                                    path?: string | undefined;
                                     kind?: string | undefined;
+                                    path?: string | undefined;
                                 } | undefined;
                                 body?: string | undefined;
                                 responseBody?: string | undefined;
@@ -1611,8 +1611,8 @@ export declare const HttpRule: {
                             delete?: string | undefined;
                             patch?: string | undefined;
                             custom?: {
-                                path?: string | undefined;
                                 kind?: string | undefined;
+                                path?: string | undefined;
                             } | undefined;
                             body?: string | undefined;
                             responseBody?: string | undefined;
@@ -1626,8 +1626,8 @@ export declare const HttpRule: {
                         delete?: string | undefined;
                         patch?: string | undefined;
                         custom?: {
-                            path?: string | undefined;
                             kind?: string | undefined;
+                            path?: string | undefined;
                         } | undefined;
                         body?: string | undefined;
                         responseBody?: string | undefined;
@@ -1641,8 +1641,8 @@ export declare const HttpRule: {
                     delete?: string | undefined;
                     patch?: string | undefined;
                     custom?: {
-                        path?: string | undefined;
                         kind?: string | undefined;
+                        path?: string | undefined;
                     } | undefined;
                     body?: string | undefined;
                     responseBody?: string | undefined;
@@ -1656,8 +1656,8 @@ export declare const HttpRule: {
                 delete?: string | undefined;
                 patch?: string | undefined;
                 custom?: {
-                    path?: string | undefined;
                     kind?: string | undefined;
+                    path?: string | undefined;
                 } | undefined;
                 body?: string | undefined;
                 responseBody?: string | undefined;
@@ -1671,8 +1671,8 @@ export declare const HttpRule: {
             delete?: string | undefined;
             patch?: string | undefined;
             custom?: {
-                path?: string | undefined;
                 kind?: string | undefined;
+                path?: string | undefined;
             } | undefined;
             body?: string | undefined;
             responseBody?: string | undefined;
@@ -1687,12 +1687,12 @@ export declare const CustomHttpPattern: {
     fromJSON(object: any): CustomHttpPattern;
     toJSON(message: CustomHttpPattern): unknown;
     fromPartial<I extends {
-        path?: string | undefined;
         kind?: string | undefined;
+        path?: string | undefined;
     } & {
-        path?: string | undefined;
         kind?: string | undefined;
-    } & { [K in Exclude<keyof I, "$type" | "path" | "kind">]: never; }>(object: I): CustomHttpPattern;
+        path?: string | undefined;
+    } & { [K in Exclude<keyof I, "$type" | "kind" | "path">]: never; }>(object: I): CustomHttpPattern;
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {

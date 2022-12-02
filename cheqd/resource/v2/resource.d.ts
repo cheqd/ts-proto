@@ -48,72 +48,72 @@ export declare const ResourceWithMetadata: {
     fromJSON(object: any): ResourceWithMetadata;
     toJSON(message: ResourceWithMetadata): unknown;
     fromPartial<I extends {
+        metadata?: {
+            id?: string | undefined;
+            alsoKnownAs?: {
+                uri?: string | undefined;
+                description?: string | undefined;
+            }[] | undefined;
+            created?: string | undefined;
+            nextVersionId?: string | undefined;
+            previousVersionId?: string | undefined;
+            version?: string | undefined;
+            collectionId?: string | undefined;
+            name?: string | undefined;
+            resourceType?: string | undefined;
+            mediaType?: string | undefined;
+            checksum?: Uint8Array | undefined;
+        } | undefined;
         resource?: {
             data?: Uint8Array | undefined;
         } | undefined;
-        metadata?: {
-            name?: string | undefined;
-            collectionId?: string | undefined;
-            id?: string | undefined;
-            version?: string | undefined;
-            resourceType?: string | undefined;
-            alsoKnownAs?: {
-                description?: string | undefined;
-                uri?: string | undefined;
-            }[] | undefined;
-            mediaType?: string | undefined;
-            created?: string | undefined;
-            checksum?: Uint8Array | undefined;
-            previousVersionId?: string | undefined;
-            nextVersionId?: string | undefined;
-        } | undefined;
     } & {
+        metadata?: ({
+            id?: string | undefined;
+            alsoKnownAs?: {
+                uri?: string | undefined;
+                description?: string | undefined;
+            }[] | undefined;
+            created?: string | undefined;
+            nextVersionId?: string | undefined;
+            previousVersionId?: string | undefined;
+            version?: string | undefined;
+            collectionId?: string | undefined;
+            name?: string | undefined;
+            resourceType?: string | undefined;
+            mediaType?: string | undefined;
+            checksum?: Uint8Array | undefined;
+        } & {
+            id?: string | undefined;
+            alsoKnownAs?: ({
+                uri?: string | undefined;
+                description?: string | undefined;
+            }[] & ({
+                uri?: string | undefined;
+                description?: string | undefined;
+            } & {
+                uri?: string | undefined;
+                description?: string | undefined;
+            } & { [K in Exclude<keyof I["metadata"]["alsoKnownAs"][number], "$type" | "uri" | "description">]: never; })[] & { [K_1 in Exclude<keyof I["metadata"]["alsoKnownAs"], "$type" | keyof {
+                uri?: string | undefined;
+                description?: string | undefined;
+            }[]>]: never; }) | undefined;
+            created?: string | undefined;
+            nextVersionId?: string | undefined;
+            previousVersionId?: string | undefined;
+            version?: string | undefined;
+            collectionId?: string | undefined;
+            name?: string | undefined;
+            resourceType?: string | undefined;
+            mediaType?: string | undefined;
+            checksum?: Uint8Array | undefined;
+        } & { [K_2 in Exclude<keyof I["metadata"], "$type" | "id" | "alsoKnownAs" | "created" | "nextVersionId" | "previousVersionId" | "version" | "collectionId" | "name" | "resourceType" | "mediaType" | "checksum">]: never; }) | undefined;
         resource?: ({
             data?: Uint8Array | undefined;
         } & {
             data?: Uint8Array | undefined;
-        } & { [K in Exclude<keyof I["resource"], "$type" | "data">]: never; }) | undefined;
-        metadata?: ({
-            name?: string | undefined;
-            collectionId?: string | undefined;
-            id?: string | undefined;
-            version?: string | undefined;
-            resourceType?: string | undefined;
-            alsoKnownAs?: {
-                description?: string | undefined;
-                uri?: string | undefined;
-            }[] | undefined;
-            mediaType?: string | undefined;
-            created?: string | undefined;
-            checksum?: Uint8Array | undefined;
-            previousVersionId?: string | undefined;
-            nextVersionId?: string | undefined;
-        } & {
-            name?: string | undefined;
-            collectionId?: string | undefined;
-            id?: string | undefined;
-            version?: string | undefined;
-            resourceType?: string | undefined;
-            alsoKnownAs?: ({
-                description?: string | undefined;
-                uri?: string | undefined;
-            }[] & ({
-                description?: string | undefined;
-                uri?: string | undefined;
-            } & {
-                description?: string | undefined;
-                uri?: string | undefined;
-            } & { [K_1 in Exclude<keyof I["metadata"]["alsoKnownAs"][number], "$type" | "description" | "uri">]: never; })[] & { [K_2 in Exclude<keyof I["metadata"]["alsoKnownAs"], "$type" | keyof {
-                description?: string | undefined;
-                uri?: string | undefined;
-            }[]>]: never; }) | undefined;
-            mediaType?: string | undefined;
-            created?: string | undefined;
-            checksum?: Uint8Array | undefined;
-            previousVersionId?: string | undefined;
-            nextVersionId?: string | undefined;
-        } & { [K_3 in Exclude<keyof I["metadata"], "$type" | "name" | "collectionId" | "id" | "version" | "resourceType" | "alsoKnownAs" | "mediaType" | "created" | "checksum" | "previousVersionId" | "nextVersionId">]: never; }) | undefined;
-    } & { [K_4 in Exclude<keyof I, "$type" | "resource" | "metadata">]: never; }>(object: I): ResourceWithMetadata;
+        } & { [K_3 in Exclude<keyof I["resource"], "$type" | "data">]: never; }) | undefined;
+    } & { [K_4 in Exclude<keyof I, "$type" | "metadata" | "resource">]: never; }>(object: I): ResourceWithMetadata;
 };
 export declare const AlternativeUri: {
     $type: "cheqd.resource.v2.AlternativeUri";
@@ -122,12 +122,12 @@ export declare const AlternativeUri: {
     fromJSON(object: any): AlternativeUri;
     toJSON(message: AlternativeUri): unknown;
     fromPartial<I extends {
-        description?: string | undefined;
         uri?: string | undefined;
+        description?: string | undefined;
     } & {
-        description?: string | undefined;
         uri?: string | undefined;
-    } & { [K in Exclude<keyof I, "$type" | "description" | "uri">]: never; }>(object: I): AlternativeUri;
+        description?: string | undefined;
+    } & { [K in Exclude<keyof I, "$type" | "uri" | "description">]: never; }>(object: I): AlternativeUri;
 };
 export declare const Metadata: {
     $type: "cheqd.resource.v2.Metadata";
@@ -136,45 +136,45 @@ export declare const Metadata: {
     fromJSON(object: any): Metadata;
     toJSON(message: Metadata): unknown;
     fromPartial<I extends {
-        name?: string | undefined;
-        collectionId?: string | undefined;
         id?: string | undefined;
-        version?: string | undefined;
-        resourceType?: string | undefined;
         alsoKnownAs?: {
-            description?: string | undefined;
             uri?: string | undefined;
+            description?: string | undefined;
         }[] | undefined;
-        mediaType?: string | undefined;
         created?: string | undefined;
-        checksum?: Uint8Array | undefined;
-        previousVersionId?: string | undefined;
         nextVersionId?: string | undefined;
-    } & {
-        name?: string | undefined;
-        collectionId?: string | undefined;
-        id?: string | undefined;
+        previousVersionId?: string | undefined;
         version?: string | undefined;
+        collectionId?: string | undefined;
+        name?: string | undefined;
         resourceType?: string | undefined;
-        alsoKnownAs?: ({
-            description?: string | undefined;
-            uri?: string | undefined;
-        }[] & ({
-            description?: string | undefined;
-            uri?: string | undefined;
-        } & {
-            description?: string | undefined;
-            uri?: string | undefined;
-        } & { [K in Exclude<keyof I["alsoKnownAs"][number], "$type" | "description" | "uri">]: never; })[] & { [K_1 in Exclude<keyof I["alsoKnownAs"], "$type" | keyof {
-            description?: string | undefined;
-            uri?: string | undefined;
-        }[]>]: never; }) | undefined;
         mediaType?: string | undefined;
-        created?: string | undefined;
         checksum?: Uint8Array | undefined;
-        previousVersionId?: string | undefined;
+    } & {
+        id?: string | undefined;
+        alsoKnownAs?: ({
+            uri?: string | undefined;
+            description?: string | undefined;
+        }[] & ({
+            uri?: string | undefined;
+            description?: string | undefined;
+        } & {
+            uri?: string | undefined;
+            description?: string | undefined;
+        } & { [K in Exclude<keyof I["alsoKnownAs"][number], "$type" | "uri" | "description">]: never; })[] & { [K_1 in Exclude<keyof I["alsoKnownAs"], "$type" | keyof {
+            uri?: string | undefined;
+            description?: string | undefined;
+        }[]>]: never; }) | undefined;
+        created?: string | undefined;
         nextVersionId?: string | undefined;
-    } & { [K_2 in Exclude<keyof I, "$type" | "name" | "collectionId" | "id" | "version" | "resourceType" | "alsoKnownAs" | "mediaType" | "created" | "checksum" | "previousVersionId" | "nextVersionId">]: never; }>(object: I): Metadata;
+        previousVersionId?: string | undefined;
+        version?: string | undefined;
+        collectionId?: string | undefined;
+        name?: string | undefined;
+        resourceType?: string | undefined;
+        mediaType?: string | undefined;
+        checksum?: Uint8Array | undefined;
+    } & { [K_2 in Exclude<keyof I, "$type" | "id" | "alsoKnownAs" | "created" | "nextVersionId" | "previousVersionId" | "version" | "collectionId" | "name" | "resourceType" | "mediaType" | "checksum">]: never; }>(object: I): Metadata;
 };
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {

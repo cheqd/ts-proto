@@ -80,22 +80,16 @@ export declare const MsgCreateDid: {
     toJSON(message: MsgCreateDid): unknown;
     fromPartial<I extends {
         payload?: {
-            service?: {
-                type?: string | undefined;
-                id?: string | undefined;
-                serviceEndpoint?: string | undefined;
-            }[] | undefined;
-            id?: string | undefined;
-            alsoKnownAs?: string[] | undefined;
             context?: string[] | undefined;
+            id?: string | undefined;
             controller?: string[] | undefined;
             verificationMethod?: {
-                type?: string | undefined;
                 id?: string | undefined;
                 controller?: string | undefined;
+                type?: string | undefined;
                 publicKeyJwk?: {
-                    value?: string | undefined;
                     key?: string | undefined;
+                    value?: string | undefined;
                 }[] | undefined;
                 publicKeyMultibase?: string | undefined;
             }[] | undefined;
@@ -104,6 +98,12 @@ export declare const MsgCreateDid: {
             capabilityInvocation?: string[] | undefined;
             capabilityDelegation?: string[] | undefined;
             keyAgreement?: string[] | undefined;
+            service?: {
+                id?: string | undefined;
+                type?: string | undefined;
+                serviceEndpoint?: string | undefined;
+            }[] | undefined;
+            alsoKnownAs?: string[] | undefined;
         } | undefined;
         signatures?: {
             verificationMethodId?: string | undefined;
@@ -111,22 +111,16 @@ export declare const MsgCreateDid: {
         }[] | undefined;
     } & {
         payload?: ({
-            service?: {
-                type?: string | undefined;
-                id?: string | undefined;
-                serviceEndpoint?: string | undefined;
-            }[] | undefined;
-            id?: string | undefined;
-            alsoKnownAs?: string[] | undefined;
             context?: string[] | undefined;
+            id?: string | undefined;
             controller?: string[] | undefined;
             verificationMethod?: {
-                type?: string | undefined;
                 id?: string | undefined;
                 controller?: string | undefined;
+                type?: string | undefined;
                 publicKeyJwk?: {
-                    value?: string | undefined;
                     key?: string | undefined;
+                    value?: string | undefined;
                 }[] | undefined;
                 publicKeyMultibase?: string | undefined;
             }[] | undefined;
@@ -135,80 +129,86 @@ export declare const MsgCreateDid: {
             capabilityInvocation?: string[] | undefined;
             capabilityDelegation?: string[] | undefined;
             keyAgreement?: string[] | undefined;
+            service?: {
+                id?: string | undefined;
+                type?: string | undefined;
+                serviceEndpoint?: string | undefined;
+            }[] | undefined;
+            alsoKnownAs?: string[] | undefined;
         } & {
-            service?: ({
-                type?: string | undefined;
-                id?: string | undefined;
-                serviceEndpoint?: string | undefined;
-            }[] & ({
-                type?: string | undefined;
-                id?: string | undefined;
-                serviceEndpoint?: string | undefined;
-            } & {
-                type?: string | undefined;
-                id?: string | undefined;
-                serviceEndpoint?: string | undefined;
-            } & { [K in Exclude<keyof I["payload"]["service"][number], "$type" | "type" | "id" | "serviceEndpoint">]: never; })[] & { [K_1 in Exclude<keyof I["payload"]["service"], "$type" | keyof {
-                type?: string | undefined;
-                id?: string | undefined;
-                serviceEndpoint?: string | undefined;
-            }[]>]: never; }) | undefined;
+            context?: (string[] & string[] & { [K in Exclude<keyof I["payload"]["context"], "$type" | keyof string[]>]: never; }) | undefined;
             id?: string | undefined;
-            alsoKnownAs?: (string[] & string[] & { [K_2 in Exclude<keyof I["payload"]["alsoKnownAs"], "$type" | keyof string[]>]: never; }) | undefined;
-            context?: (string[] & string[] & { [K_3 in Exclude<keyof I["payload"]["context"], "$type" | keyof string[]>]: never; }) | undefined;
-            controller?: (string[] & string[] & { [K_4 in Exclude<keyof I["payload"]["controller"], "$type" | keyof string[]>]: never; }) | undefined;
+            controller?: (string[] & string[] & { [K_1 in Exclude<keyof I["payload"]["controller"], "$type" | keyof string[]>]: never; }) | undefined;
             verificationMethod?: ({
-                type?: string | undefined;
                 id?: string | undefined;
                 controller?: string | undefined;
+                type?: string | undefined;
                 publicKeyJwk?: {
-                    value?: string | undefined;
                     key?: string | undefined;
+                    value?: string | undefined;
                 }[] | undefined;
                 publicKeyMultibase?: string | undefined;
             }[] & ({
-                type?: string | undefined;
                 id?: string | undefined;
                 controller?: string | undefined;
+                type?: string | undefined;
                 publicKeyJwk?: {
-                    value?: string | undefined;
                     key?: string | undefined;
+                    value?: string | undefined;
                 }[] | undefined;
                 publicKeyMultibase?: string | undefined;
             } & {
-                type?: string | undefined;
                 id?: string | undefined;
                 controller?: string | undefined;
+                type?: string | undefined;
                 publicKeyJwk?: ({
-                    value?: string | undefined;
                     key?: string | undefined;
+                    value?: string | undefined;
                 }[] & ({
-                    value?: string | undefined;
                     key?: string | undefined;
+                    value?: string | undefined;
                 } & {
-                    value?: string | undefined;
                     key?: string | undefined;
-                } & { [K_5 in Exclude<keyof I["payload"]["verificationMethod"][number]["publicKeyJwk"][number], "$type" | "value" | "key">]: never; })[] & { [K_6 in Exclude<keyof I["payload"]["verificationMethod"][number]["publicKeyJwk"], "$type" | keyof {
                     value?: string | undefined;
+                } & { [K_2 in Exclude<keyof I["payload"]["verificationMethod"][number]["publicKeyJwk"][number], "$type" | "key" | "value">]: never; })[] & { [K_3 in Exclude<keyof I["payload"]["verificationMethod"][number]["publicKeyJwk"], "$type" | keyof {
                     key?: string | undefined;
+                    value?: string | undefined;
                 }[]>]: never; }) | undefined;
                 publicKeyMultibase?: string | undefined;
-            } & { [K_7 in Exclude<keyof I["payload"]["verificationMethod"][number], "$type" | "type" | "id" | "controller" | "publicKeyJwk" | "publicKeyMultibase">]: never; })[] & { [K_8 in Exclude<keyof I["payload"]["verificationMethod"], "$type" | keyof {
-                type?: string | undefined;
+            } & { [K_4 in Exclude<keyof I["payload"]["verificationMethod"][number], "$type" | "id" | "controller" | "type" | "publicKeyJwk" | "publicKeyMultibase">]: never; })[] & { [K_5 in Exclude<keyof I["payload"]["verificationMethod"], "$type" | keyof {
                 id?: string | undefined;
                 controller?: string | undefined;
+                type?: string | undefined;
                 publicKeyJwk?: {
-                    value?: string | undefined;
                     key?: string | undefined;
+                    value?: string | undefined;
                 }[] | undefined;
                 publicKeyMultibase?: string | undefined;
             }[]>]: never; }) | undefined;
-            authentication?: (string[] & string[] & { [K_9 in Exclude<keyof I["payload"]["authentication"], "$type" | keyof string[]>]: never; }) | undefined;
-            assertionMethod?: (string[] & string[] & { [K_10 in Exclude<keyof I["payload"]["assertionMethod"], "$type" | keyof string[]>]: never; }) | undefined;
-            capabilityInvocation?: (string[] & string[] & { [K_11 in Exclude<keyof I["payload"]["capabilityInvocation"], "$type" | keyof string[]>]: never; }) | undefined;
-            capabilityDelegation?: (string[] & string[] & { [K_12 in Exclude<keyof I["payload"]["capabilityDelegation"], "$type" | keyof string[]>]: never; }) | undefined;
-            keyAgreement?: (string[] & string[] & { [K_13 in Exclude<keyof I["payload"]["keyAgreement"], "$type" | keyof string[]>]: never; }) | undefined;
-        } & { [K_14 in Exclude<keyof I["payload"], "$type" | "service" | "id" | "alsoKnownAs" | "context" | "controller" | "verificationMethod" | "authentication" | "assertionMethod" | "capabilityInvocation" | "capabilityDelegation" | "keyAgreement">]: never; }) | undefined;
+            authentication?: (string[] & string[] & { [K_6 in Exclude<keyof I["payload"]["authentication"], "$type" | keyof string[]>]: never; }) | undefined;
+            assertionMethod?: (string[] & string[] & { [K_7 in Exclude<keyof I["payload"]["assertionMethod"], "$type" | keyof string[]>]: never; }) | undefined;
+            capabilityInvocation?: (string[] & string[] & { [K_8 in Exclude<keyof I["payload"]["capabilityInvocation"], "$type" | keyof string[]>]: never; }) | undefined;
+            capabilityDelegation?: (string[] & string[] & { [K_9 in Exclude<keyof I["payload"]["capabilityDelegation"], "$type" | keyof string[]>]: never; }) | undefined;
+            keyAgreement?: (string[] & string[] & { [K_10 in Exclude<keyof I["payload"]["keyAgreement"], "$type" | keyof string[]>]: never; }) | undefined;
+            service?: ({
+                id?: string | undefined;
+                type?: string | undefined;
+                serviceEndpoint?: string | undefined;
+            }[] & ({
+                id?: string | undefined;
+                type?: string | undefined;
+                serviceEndpoint?: string | undefined;
+            } & {
+                id?: string | undefined;
+                type?: string | undefined;
+                serviceEndpoint?: string | undefined;
+            } & { [K_11 in Exclude<keyof I["payload"]["service"][number], "$type" | "id" | "type" | "serviceEndpoint">]: never; })[] & { [K_12 in Exclude<keyof I["payload"]["service"], "$type" | keyof {
+                id?: string | undefined;
+                type?: string | undefined;
+                serviceEndpoint?: string | undefined;
+            }[]>]: never; }) | undefined;
+            alsoKnownAs?: (string[] & string[] & { [K_13 in Exclude<keyof I["payload"]["alsoKnownAs"], "$type" | keyof string[]>]: never; }) | undefined;
+        } & { [K_14 in Exclude<keyof I["payload"], "$type" | "context" | "id" | "controller" | "verificationMethod" | "authentication" | "assertionMethod" | "capabilityInvocation" | "capabilityDelegation" | "keyAgreement" | "service" | "alsoKnownAs">]: never; }) | undefined;
         signatures?: ({
             verificationMethodId?: string | undefined;
             signature?: string | undefined;
@@ -232,22 +232,16 @@ export declare const MsgUpdateDid: {
     toJSON(message: MsgUpdateDid): unknown;
     fromPartial<I extends {
         payload?: {
-            service?: {
-                type?: string | undefined;
-                id?: string | undefined;
-                serviceEndpoint?: string | undefined;
-            }[] | undefined;
-            id?: string | undefined;
-            alsoKnownAs?: string[] | undefined;
             context?: string[] | undefined;
+            id?: string | undefined;
             controller?: string[] | undefined;
             verificationMethod?: {
-                type?: string | undefined;
                 id?: string | undefined;
                 controller?: string | undefined;
+                type?: string | undefined;
                 publicKeyJwk?: {
-                    value?: string | undefined;
                     key?: string | undefined;
+                    value?: string | undefined;
                 }[] | undefined;
                 publicKeyMultibase?: string | undefined;
             }[] | undefined;
@@ -256,6 +250,12 @@ export declare const MsgUpdateDid: {
             capabilityInvocation?: string[] | undefined;
             capabilityDelegation?: string[] | undefined;
             keyAgreement?: string[] | undefined;
+            service?: {
+                id?: string | undefined;
+                type?: string | undefined;
+                serviceEndpoint?: string | undefined;
+            }[] | undefined;
+            alsoKnownAs?: string[] | undefined;
             versionId?: string | undefined;
         } | undefined;
         signatures?: {
@@ -264,22 +264,16 @@ export declare const MsgUpdateDid: {
         }[] | undefined;
     } & {
         payload?: ({
-            service?: {
-                type?: string | undefined;
-                id?: string | undefined;
-                serviceEndpoint?: string | undefined;
-            }[] | undefined;
-            id?: string | undefined;
-            alsoKnownAs?: string[] | undefined;
             context?: string[] | undefined;
+            id?: string | undefined;
             controller?: string[] | undefined;
             verificationMethod?: {
-                type?: string | undefined;
                 id?: string | undefined;
                 controller?: string | undefined;
+                type?: string | undefined;
                 publicKeyJwk?: {
-                    value?: string | undefined;
                     key?: string | undefined;
+                    value?: string | undefined;
                 }[] | undefined;
                 publicKeyMultibase?: string | undefined;
             }[] | undefined;
@@ -288,82 +282,88 @@ export declare const MsgUpdateDid: {
             capabilityInvocation?: string[] | undefined;
             capabilityDelegation?: string[] | undefined;
             keyAgreement?: string[] | undefined;
+            service?: {
+                id?: string | undefined;
+                type?: string | undefined;
+                serviceEndpoint?: string | undefined;
+            }[] | undefined;
+            alsoKnownAs?: string[] | undefined;
             versionId?: string | undefined;
         } & {
-            service?: ({
-                type?: string | undefined;
-                id?: string | undefined;
-                serviceEndpoint?: string | undefined;
-            }[] & ({
-                type?: string | undefined;
-                id?: string | undefined;
-                serviceEndpoint?: string | undefined;
-            } & {
-                type?: string | undefined;
-                id?: string | undefined;
-                serviceEndpoint?: string | undefined;
-            } & { [K in Exclude<keyof I["payload"]["service"][number], "$type" | "type" | "id" | "serviceEndpoint">]: never; })[] & { [K_1 in Exclude<keyof I["payload"]["service"], "$type" | keyof {
-                type?: string | undefined;
-                id?: string | undefined;
-                serviceEndpoint?: string | undefined;
-            }[]>]: never; }) | undefined;
+            context?: (string[] & string[] & { [K in Exclude<keyof I["payload"]["context"], "$type" | keyof string[]>]: never; }) | undefined;
             id?: string | undefined;
-            alsoKnownAs?: (string[] & string[] & { [K_2 in Exclude<keyof I["payload"]["alsoKnownAs"], "$type" | keyof string[]>]: never; }) | undefined;
-            context?: (string[] & string[] & { [K_3 in Exclude<keyof I["payload"]["context"], "$type" | keyof string[]>]: never; }) | undefined;
-            controller?: (string[] & string[] & { [K_4 in Exclude<keyof I["payload"]["controller"], "$type" | keyof string[]>]: never; }) | undefined;
+            controller?: (string[] & string[] & { [K_1 in Exclude<keyof I["payload"]["controller"], "$type" | keyof string[]>]: never; }) | undefined;
             verificationMethod?: ({
-                type?: string | undefined;
                 id?: string | undefined;
                 controller?: string | undefined;
+                type?: string | undefined;
                 publicKeyJwk?: {
-                    value?: string | undefined;
                     key?: string | undefined;
+                    value?: string | undefined;
                 }[] | undefined;
                 publicKeyMultibase?: string | undefined;
             }[] & ({
-                type?: string | undefined;
                 id?: string | undefined;
                 controller?: string | undefined;
+                type?: string | undefined;
                 publicKeyJwk?: {
-                    value?: string | undefined;
                     key?: string | undefined;
+                    value?: string | undefined;
                 }[] | undefined;
                 publicKeyMultibase?: string | undefined;
             } & {
-                type?: string | undefined;
                 id?: string | undefined;
                 controller?: string | undefined;
+                type?: string | undefined;
                 publicKeyJwk?: ({
-                    value?: string | undefined;
                     key?: string | undefined;
+                    value?: string | undefined;
                 }[] & ({
-                    value?: string | undefined;
                     key?: string | undefined;
+                    value?: string | undefined;
                 } & {
-                    value?: string | undefined;
                     key?: string | undefined;
-                } & { [K_5 in Exclude<keyof I["payload"]["verificationMethod"][number]["publicKeyJwk"][number], "$type" | "value" | "key">]: never; })[] & { [K_6 in Exclude<keyof I["payload"]["verificationMethod"][number]["publicKeyJwk"], "$type" | keyof {
                     value?: string | undefined;
+                } & { [K_2 in Exclude<keyof I["payload"]["verificationMethod"][number]["publicKeyJwk"][number], "$type" | "key" | "value">]: never; })[] & { [K_3 in Exclude<keyof I["payload"]["verificationMethod"][number]["publicKeyJwk"], "$type" | keyof {
                     key?: string | undefined;
+                    value?: string | undefined;
                 }[]>]: never; }) | undefined;
                 publicKeyMultibase?: string | undefined;
-            } & { [K_7 in Exclude<keyof I["payload"]["verificationMethod"][number], "$type" | "type" | "id" | "controller" | "publicKeyJwk" | "publicKeyMultibase">]: never; })[] & { [K_8 in Exclude<keyof I["payload"]["verificationMethod"], "$type" | keyof {
-                type?: string | undefined;
+            } & { [K_4 in Exclude<keyof I["payload"]["verificationMethod"][number], "$type" | "id" | "controller" | "type" | "publicKeyJwk" | "publicKeyMultibase">]: never; })[] & { [K_5 in Exclude<keyof I["payload"]["verificationMethod"], "$type" | keyof {
                 id?: string | undefined;
                 controller?: string | undefined;
+                type?: string | undefined;
                 publicKeyJwk?: {
-                    value?: string | undefined;
                     key?: string | undefined;
+                    value?: string | undefined;
                 }[] | undefined;
                 publicKeyMultibase?: string | undefined;
             }[]>]: never; }) | undefined;
-            authentication?: (string[] & string[] & { [K_9 in Exclude<keyof I["payload"]["authentication"], "$type" | keyof string[]>]: never; }) | undefined;
-            assertionMethod?: (string[] & string[] & { [K_10 in Exclude<keyof I["payload"]["assertionMethod"], "$type" | keyof string[]>]: never; }) | undefined;
-            capabilityInvocation?: (string[] & string[] & { [K_11 in Exclude<keyof I["payload"]["capabilityInvocation"], "$type" | keyof string[]>]: never; }) | undefined;
-            capabilityDelegation?: (string[] & string[] & { [K_12 in Exclude<keyof I["payload"]["capabilityDelegation"], "$type" | keyof string[]>]: never; }) | undefined;
-            keyAgreement?: (string[] & string[] & { [K_13 in Exclude<keyof I["payload"]["keyAgreement"], "$type" | keyof string[]>]: never; }) | undefined;
+            authentication?: (string[] & string[] & { [K_6 in Exclude<keyof I["payload"]["authentication"], "$type" | keyof string[]>]: never; }) | undefined;
+            assertionMethod?: (string[] & string[] & { [K_7 in Exclude<keyof I["payload"]["assertionMethod"], "$type" | keyof string[]>]: never; }) | undefined;
+            capabilityInvocation?: (string[] & string[] & { [K_8 in Exclude<keyof I["payload"]["capabilityInvocation"], "$type" | keyof string[]>]: never; }) | undefined;
+            capabilityDelegation?: (string[] & string[] & { [K_9 in Exclude<keyof I["payload"]["capabilityDelegation"], "$type" | keyof string[]>]: never; }) | undefined;
+            keyAgreement?: (string[] & string[] & { [K_10 in Exclude<keyof I["payload"]["keyAgreement"], "$type" | keyof string[]>]: never; }) | undefined;
+            service?: ({
+                id?: string | undefined;
+                type?: string | undefined;
+                serviceEndpoint?: string | undefined;
+            }[] & ({
+                id?: string | undefined;
+                type?: string | undefined;
+                serviceEndpoint?: string | undefined;
+            } & {
+                id?: string | undefined;
+                type?: string | undefined;
+                serviceEndpoint?: string | undefined;
+            } & { [K_11 in Exclude<keyof I["payload"]["service"][number], "$type" | "id" | "type" | "serviceEndpoint">]: never; })[] & { [K_12 in Exclude<keyof I["payload"]["service"], "$type" | keyof {
+                id?: string | undefined;
+                type?: string | undefined;
+                serviceEndpoint?: string | undefined;
+            }[]>]: never; }) | undefined;
+            alsoKnownAs?: (string[] & string[] & { [K_13 in Exclude<keyof I["payload"]["alsoKnownAs"], "$type" | keyof string[]>]: never; }) | undefined;
             versionId?: string | undefined;
-        } & { [K_14 in Exclude<keyof I["payload"], "$type" | "service" | "id" | "alsoKnownAs" | "context" | "controller" | "verificationMethod" | "authentication" | "assertionMethod" | "capabilityInvocation" | "capabilityDelegation" | "keyAgreement" | "versionId">]: never; }) | undefined;
+        } & { [K_14 in Exclude<keyof I["payload"], "$type" | "context" | "id" | "controller" | "verificationMethod" | "authentication" | "assertionMethod" | "capabilityInvocation" | "capabilityDelegation" | "keyAgreement" | "service" | "alsoKnownAs" | "versionId">]: never; }) | undefined;
         signatures?: ({
             verificationMethodId?: string | undefined;
             signature?: string | undefined;
@@ -449,28 +449,22 @@ export declare const MsgDeactivateDidResponse: {
     fromPartial<I extends {
         metadata?: {
             created?: string | undefined;
-            resources?: string[] | undefined;
-            versionId?: string | undefined;
             updated?: string | undefined;
             deactivated?: boolean | undefined;
+            versionId?: string | undefined;
+            resources?: string[] | undefined;
         } | undefined;
         did?: {
-            service?: {
-                type?: string | undefined;
-                id?: string | undefined;
-                serviceEndpoint?: string | undefined;
-            }[] | undefined;
-            id?: string | undefined;
-            alsoKnownAs?: string[] | undefined;
             context?: string[] | undefined;
+            id?: string | undefined;
             controller?: string[] | undefined;
             verificationMethod?: {
-                type?: string | undefined;
                 id?: string | undefined;
                 controller?: string | undefined;
+                type?: string | undefined;
                 publicKeyJwk?: {
-                    value?: string | undefined;
                     key?: string | undefined;
+                    value?: string | undefined;
                 }[] | undefined;
                 publicKeyMultibase?: string | undefined;
             }[] | undefined;
@@ -479,38 +473,38 @@ export declare const MsgDeactivateDidResponse: {
             capabilityInvocation?: string[] | undefined;
             capabilityDelegation?: string[] | undefined;
             keyAgreement?: string[] | undefined;
+            service?: {
+                id?: string | undefined;
+                type?: string | undefined;
+                serviceEndpoint?: string | undefined;
+            }[] | undefined;
+            alsoKnownAs?: string[] | undefined;
         } | undefined;
     } & {
         metadata?: ({
             created?: string | undefined;
-            resources?: string[] | undefined;
-            versionId?: string | undefined;
             updated?: string | undefined;
             deactivated?: boolean | undefined;
+            versionId?: string | undefined;
+            resources?: string[] | undefined;
         } & {
             created?: string | undefined;
-            resources?: (string[] & string[] & { [K in Exclude<keyof I["metadata"]["resources"], "$type" | keyof string[]>]: never; }) | undefined;
-            versionId?: string | undefined;
             updated?: string | undefined;
             deactivated?: boolean | undefined;
-        } & { [K_1 in Exclude<keyof I["metadata"], "$type" | "created" | "resources" | "versionId" | "updated" | "deactivated">]: never; }) | undefined;
+            versionId?: string | undefined;
+            resources?: (string[] & string[] & { [K in Exclude<keyof I["metadata"]["resources"], "$type" | keyof string[]>]: never; }) | undefined;
+        } & { [K_1 in Exclude<keyof I["metadata"], "$type" | "created" | "updated" | "deactivated" | "versionId" | "resources">]: never; }) | undefined;
         did?: ({
-            service?: {
-                type?: string | undefined;
-                id?: string | undefined;
-                serviceEndpoint?: string | undefined;
-            }[] | undefined;
-            id?: string | undefined;
-            alsoKnownAs?: string[] | undefined;
             context?: string[] | undefined;
+            id?: string | undefined;
             controller?: string[] | undefined;
             verificationMethod?: {
-                type?: string | undefined;
                 id?: string | undefined;
                 controller?: string | undefined;
+                type?: string | undefined;
                 publicKeyJwk?: {
-                    value?: string | undefined;
                     key?: string | undefined;
+                    value?: string | undefined;
                 }[] | undefined;
                 publicKeyMultibase?: string | undefined;
             }[] | undefined;
@@ -519,80 +513,86 @@ export declare const MsgDeactivateDidResponse: {
             capabilityInvocation?: string[] | undefined;
             capabilityDelegation?: string[] | undefined;
             keyAgreement?: string[] | undefined;
+            service?: {
+                id?: string | undefined;
+                type?: string | undefined;
+                serviceEndpoint?: string | undefined;
+            }[] | undefined;
+            alsoKnownAs?: string[] | undefined;
         } & {
-            service?: ({
-                type?: string | undefined;
-                id?: string | undefined;
-                serviceEndpoint?: string | undefined;
-            }[] & ({
-                type?: string | undefined;
-                id?: string | undefined;
-                serviceEndpoint?: string | undefined;
-            } & {
-                type?: string | undefined;
-                id?: string | undefined;
-                serviceEndpoint?: string | undefined;
-            } & { [K_2 in Exclude<keyof I["did"]["service"][number], "$type" | "type" | "id" | "serviceEndpoint">]: never; })[] & { [K_3 in Exclude<keyof I["did"]["service"], "$type" | keyof {
-                type?: string | undefined;
-                id?: string | undefined;
-                serviceEndpoint?: string | undefined;
-            }[]>]: never; }) | undefined;
+            context?: (string[] & string[] & { [K_2 in Exclude<keyof I["did"]["context"], "$type" | keyof string[]>]: never; }) | undefined;
             id?: string | undefined;
-            alsoKnownAs?: (string[] & string[] & { [K_4 in Exclude<keyof I["did"]["alsoKnownAs"], "$type" | keyof string[]>]: never; }) | undefined;
-            context?: (string[] & string[] & { [K_5 in Exclude<keyof I["did"]["context"], "$type" | keyof string[]>]: never; }) | undefined;
-            controller?: (string[] & string[] & { [K_6 in Exclude<keyof I["did"]["controller"], "$type" | keyof string[]>]: never; }) | undefined;
+            controller?: (string[] & string[] & { [K_3 in Exclude<keyof I["did"]["controller"], "$type" | keyof string[]>]: never; }) | undefined;
             verificationMethod?: ({
-                type?: string | undefined;
                 id?: string | undefined;
                 controller?: string | undefined;
+                type?: string | undefined;
                 publicKeyJwk?: {
-                    value?: string | undefined;
                     key?: string | undefined;
+                    value?: string | undefined;
                 }[] | undefined;
                 publicKeyMultibase?: string | undefined;
             }[] & ({
-                type?: string | undefined;
                 id?: string | undefined;
                 controller?: string | undefined;
+                type?: string | undefined;
                 publicKeyJwk?: {
-                    value?: string | undefined;
                     key?: string | undefined;
+                    value?: string | undefined;
                 }[] | undefined;
                 publicKeyMultibase?: string | undefined;
             } & {
-                type?: string | undefined;
                 id?: string | undefined;
                 controller?: string | undefined;
+                type?: string | undefined;
                 publicKeyJwk?: ({
-                    value?: string | undefined;
                     key?: string | undefined;
+                    value?: string | undefined;
                 }[] & ({
-                    value?: string | undefined;
                     key?: string | undefined;
+                    value?: string | undefined;
                 } & {
-                    value?: string | undefined;
                     key?: string | undefined;
-                } & { [K_7 in Exclude<keyof I["did"]["verificationMethod"][number]["publicKeyJwk"][number], "$type" | "value" | "key">]: never; })[] & { [K_8 in Exclude<keyof I["did"]["verificationMethod"][number]["publicKeyJwk"], "$type" | keyof {
                     value?: string | undefined;
+                } & { [K_4 in Exclude<keyof I["did"]["verificationMethod"][number]["publicKeyJwk"][number], "$type" | "key" | "value">]: never; })[] & { [K_5 in Exclude<keyof I["did"]["verificationMethod"][number]["publicKeyJwk"], "$type" | keyof {
                     key?: string | undefined;
+                    value?: string | undefined;
                 }[]>]: never; }) | undefined;
                 publicKeyMultibase?: string | undefined;
-            } & { [K_9 in Exclude<keyof I["did"]["verificationMethod"][number], "$type" | "type" | "id" | "controller" | "publicKeyJwk" | "publicKeyMultibase">]: never; })[] & { [K_10 in Exclude<keyof I["did"]["verificationMethod"], "$type" | keyof {
-                type?: string | undefined;
+            } & { [K_6 in Exclude<keyof I["did"]["verificationMethod"][number], "$type" | "id" | "controller" | "type" | "publicKeyJwk" | "publicKeyMultibase">]: never; })[] & { [K_7 in Exclude<keyof I["did"]["verificationMethod"], "$type" | keyof {
                 id?: string | undefined;
                 controller?: string | undefined;
+                type?: string | undefined;
                 publicKeyJwk?: {
-                    value?: string | undefined;
                     key?: string | undefined;
+                    value?: string | undefined;
                 }[] | undefined;
                 publicKeyMultibase?: string | undefined;
             }[]>]: never; }) | undefined;
-            authentication?: (string[] & string[] & { [K_11 in Exclude<keyof I["did"]["authentication"], "$type" | keyof string[]>]: never; }) | undefined;
-            assertionMethod?: (string[] & string[] & { [K_12 in Exclude<keyof I["did"]["assertionMethod"], "$type" | keyof string[]>]: never; }) | undefined;
-            capabilityInvocation?: (string[] & string[] & { [K_13 in Exclude<keyof I["did"]["capabilityInvocation"], "$type" | keyof string[]>]: never; }) | undefined;
-            capabilityDelegation?: (string[] & string[] & { [K_14 in Exclude<keyof I["did"]["capabilityDelegation"], "$type" | keyof string[]>]: never; }) | undefined;
-            keyAgreement?: (string[] & string[] & { [K_15 in Exclude<keyof I["did"]["keyAgreement"], "$type" | keyof string[]>]: never; }) | undefined;
-        } & { [K_16 in Exclude<keyof I["did"], "$type" | "service" | "id" | "alsoKnownAs" | "context" | "controller" | "verificationMethod" | "authentication" | "assertionMethod" | "capabilityInvocation" | "capabilityDelegation" | "keyAgreement">]: never; }) | undefined;
+            authentication?: (string[] & string[] & { [K_8 in Exclude<keyof I["did"]["authentication"], "$type" | keyof string[]>]: never; }) | undefined;
+            assertionMethod?: (string[] & string[] & { [K_9 in Exclude<keyof I["did"]["assertionMethod"], "$type" | keyof string[]>]: never; }) | undefined;
+            capabilityInvocation?: (string[] & string[] & { [K_10 in Exclude<keyof I["did"]["capabilityInvocation"], "$type" | keyof string[]>]: never; }) | undefined;
+            capabilityDelegation?: (string[] & string[] & { [K_11 in Exclude<keyof I["did"]["capabilityDelegation"], "$type" | keyof string[]>]: never; }) | undefined;
+            keyAgreement?: (string[] & string[] & { [K_12 in Exclude<keyof I["did"]["keyAgreement"], "$type" | keyof string[]>]: never; }) | undefined;
+            service?: ({
+                id?: string | undefined;
+                type?: string | undefined;
+                serviceEndpoint?: string | undefined;
+            }[] & ({
+                id?: string | undefined;
+                type?: string | undefined;
+                serviceEndpoint?: string | undefined;
+            } & {
+                id?: string | undefined;
+                type?: string | undefined;
+                serviceEndpoint?: string | undefined;
+            } & { [K_13 in Exclude<keyof I["did"]["service"][number], "$type" | "id" | "type" | "serviceEndpoint">]: never; })[] & { [K_14 in Exclude<keyof I["did"]["service"], "$type" | keyof {
+                id?: string | undefined;
+                type?: string | undefined;
+                serviceEndpoint?: string | undefined;
+            }[]>]: never; }) | undefined;
+            alsoKnownAs?: (string[] & string[] & { [K_15 in Exclude<keyof I["did"]["alsoKnownAs"], "$type" | keyof string[]>]: never; }) | undefined;
+        } & { [K_16 in Exclude<keyof I["did"], "$type" | "context" | "id" | "controller" | "verificationMethod" | "authentication" | "assertionMethod" | "capabilityInvocation" | "capabilityDelegation" | "keyAgreement" | "service" | "alsoKnownAs">]: never; }) | undefined;
     } & { [K_17 in Exclude<keyof I, "$type" | "metadata" | "did">]: never; }>(object: I): MsgDeactivateDidResponse;
 };
 export declare const MsgCreateDidPayload: {
@@ -602,22 +602,16 @@ export declare const MsgCreateDidPayload: {
     fromJSON(object: any): MsgCreateDidPayload;
     toJSON(message: MsgCreateDidPayload): unknown;
     fromPartial<I extends {
-        service?: {
-            type?: string | undefined;
-            id?: string | undefined;
-            serviceEndpoint?: string | undefined;
-        }[] | undefined;
-        id?: string | undefined;
-        alsoKnownAs?: string[] | undefined;
         context?: string[] | undefined;
+        id?: string | undefined;
         controller?: string[] | undefined;
         verificationMethod?: {
-            type?: string | undefined;
             id?: string | undefined;
             controller?: string | undefined;
+            type?: string | undefined;
             publicKeyJwk?: {
-                value?: string | undefined;
                 key?: string | undefined;
+                value?: string | undefined;
             }[] | undefined;
             publicKeyMultibase?: string | undefined;
         }[] | undefined;
@@ -626,80 +620,86 @@ export declare const MsgCreateDidPayload: {
         capabilityInvocation?: string[] | undefined;
         capabilityDelegation?: string[] | undefined;
         keyAgreement?: string[] | undefined;
+        service?: {
+            id?: string | undefined;
+            type?: string | undefined;
+            serviceEndpoint?: string | undefined;
+        }[] | undefined;
+        alsoKnownAs?: string[] | undefined;
     } & {
-        service?: ({
-            type?: string | undefined;
-            id?: string | undefined;
-            serviceEndpoint?: string | undefined;
-        }[] & ({
-            type?: string | undefined;
-            id?: string | undefined;
-            serviceEndpoint?: string | undefined;
-        } & {
-            type?: string | undefined;
-            id?: string | undefined;
-            serviceEndpoint?: string | undefined;
-        } & { [K in Exclude<keyof I["service"][number], "$type" | "type" | "id" | "serviceEndpoint">]: never; })[] & { [K_1 in Exclude<keyof I["service"], "$type" | keyof {
-            type?: string | undefined;
-            id?: string | undefined;
-            serviceEndpoint?: string | undefined;
-        }[]>]: never; }) | undefined;
+        context?: (string[] & string[] & { [K in Exclude<keyof I["context"], "$type" | keyof string[]>]: never; }) | undefined;
         id?: string | undefined;
-        alsoKnownAs?: (string[] & string[] & { [K_2 in Exclude<keyof I["alsoKnownAs"], "$type" | keyof string[]>]: never; }) | undefined;
-        context?: (string[] & string[] & { [K_3 in Exclude<keyof I["context"], "$type" | keyof string[]>]: never; }) | undefined;
-        controller?: (string[] & string[] & { [K_4 in Exclude<keyof I["controller"], "$type" | keyof string[]>]: never; }) | undefined;
+        controller?: (string[] & string[] & { [K_1 in Exclude<keyof I["controller"], "$type" | keyof string[]>]: never; }) | undefined;
         verificationMethod?: ({
-            type?: string | undefined;
             id?: string | undefined;
             controller?: string | undefined;
+            type?: string | undefined;
             publicKeyJwk?: {
-                value?: string | undefined;
                 key?: string | undefined;
+                value?: string | undefined;
             }[] | undefined;
             publicKeyMultibase?: string | undefined;
         }[] & ({
-            type?: string | undefined;
             id?: string | undefined;
             controller?: string | undefined;
+            type?: string | undefined;
             publicKeyJwk?: {
-                value?: string | undefined;
                 key?: string | undefined;
+                value?: string | undefined;
             }[] | undefined;
             publicKeyMultibase?: string | undefined;
         } & {
-            type?: string | undefined;
             id?: string | undefined;
             controller?: string | undefined;
+            type?: string | undefined;
             publicKeyJwk?: ({
-                value?: string | undefined;
                 key?: string | undefined;
+                value?: string | undefined;
             }[] & ({
-                value?: string | undefined;
                 key?: string | undefined;
+                value?: string | undefined;
             } & {
-                value?: string | undefined;
                 key?: string | undefined;
-            } & { [K_5 in Exclude<keyof I["verificationMethod"][number]["publicKeyJwk"][number], "$type" | "value" | "key">]: never; })[] & { [K_6 in Exclude<keyof I["verificationMethod"][number]["publicKeyJwk"], "$type" | keyof {
                 value?: string | undefined;
+            } & { [K_2 in Exclude<keyof I["verificationMethod"][number]["publicKeyJwk"][number], "$type" | "key" | "value">]: never; })[] & { [K_3 in Exclude<keyof I["verificationMethod"][number]["publicKeyJwk"], "$type" | keyof {
                 key?: string | undefined;
+                value?: string | undefined;
             }[]>]: never; }) | undefined;
             publicKeyMultibase?: string | undefined;
-        } & { [K_7 in Exclude<keyof I["verificationMethod"][number], "$type" | "type" | "id" | "controller" | "publicKeyJwk" | "publicKeyMultibase">]: never; })[] & { [K_8 in Exclude<keyof I["verificationMethod"], "$type" | keyof {
-            type?: string | undefined;
+        } & { [K_4 in Exclude<keyof I["verificationMethod"][number], "$type" | "id" | "controller" | "type" | "publicKeyJwk" | "publicKeyMultibase">]: never; })[] & { [K_5 in Exclude<keyof I["verificationMethod"], "$type" | keyof {
             id?: string | undefined;
             controller?: string | undefined;
+            type?: string | undefined;
             publicKeyJwk?: {
-                value?: string | undefined;
                 key?: string | undefined;
+                value?: string | undefined;
             }[] | undefined;
             publicKeyMultibase?: string | undefined;
         }[]>]: never; }) | undefined;
-        authentication?: (string[] & string[] & { [K_9 in Exclude<keyof I["authentication"], "$type" | keyof string[]>]: never; }) | undefined;
-        assertionMethod?: (string[] & string[] & { [K_10 in Exclude<keyof I["assertionMethod"], "$type" | keyof string[]>]: never; }) | undefined;
-        capabilityInvocation?: (string[] & string[] & { [K_11 in Exclude<keyof I["capabilityInvocation"], "$type" | keyof string[]>]: never; }) | undefined;
-        capabilityDelegation?: (string[] & string[] & { [K_12 in Exclude<keyof I["capabilityDelegation"], "$type" | keyof string[]>]: never; }) | undefined;
-        keyAgreement?: (string[] & string[] & { [K_13 in Exclude<keyof I["keyAgreement"], "$type" | keyof string[]>]: never; }) | undefined;
-    } & { [K_14 in Exclude<keyof I, "$type" | "service" | "id" | "alsoKnownAs" | "context" | "controller" | "verificationMethod" | "authentication" | "assertionMethod" | "capabilityInvocation" | "capabilityDelegation" | "keyAgreement">]: never; }>(object: I): MsgCreateDidPayload;
+        authentication?: (string[] & string[] & { [K_6 in Exclude<keyof I["authentication"], "$type" | keyof string[]>]: never; }) | undefined;
+        assertionMethod?: (string[] & string[] & { [K_7 in Exclude<keyof I["assertionMethod"], "$type" | keyof string[]>]: never; }) | undefined;
+        capabilityInvocation?: (string[] & string[] & { [K_8 in Exclude<keyof I["capabilityInvocation"], "$type" | keyof string[]>]: never; }) | undefined;
+        capabilityDelegation?: (string[] & string[] & { [K_9 in Exclude<keyof I["capabilityDelegation"], "$type" | keyof string[]>]: never; }) | undefined;
+        keyAgreement?: (string[] & string[] & { [K_10 in Exclude<keyof I["keyAgreement"], "$type" | keyof string[]>]: never; }) | undefined;
+        service?: ({
+            id?: string | undefined;
+            type?: string | undefined;
+            serviceEndpoint?: string | undefined;
+        }[] & ({
+            id?: string | undefined;
+            type?: string | undefined;
+            serviceEndpoint?: string | undefined;
+        } & {
+            id?: string | undefined;
+            type?: string | undefined;
+            serviceEndpoint?: string | undefined;
+        } & { [K_11 in Exclude<keyof I["service"][number], "$type" | "id" | "type" | "serviceEndpoint">]: never; })[] & { [K_12 in Exclude<keyof I["service"], "$type" | keyof {
+            id?: string | undefined;
+            type?: string | undefined;
+            serviceEndpoint?: string | undefined;
+        }[]>]: never; }) | undefined;
+        alsoKnownAs?: (string[] & string[] & { [K_13 in Exclude<keyof I["alsoKnownAs"], "$type" | keyof string[]>]: never; }) | undefined;
+    } & { [K_14 in Exclude<keyof I, "$type" | "context" | "id" | "controller" | "verificationMethod" | "authentication" | "assertionMethod" | "capabilityInvocation" | "capabilityDelegation" | "keyAgreement" | "service" | "alsoKnownAs">]: never; }>(object: I): MsgCreateDidPayload;
 };
 export declare const MsgCreateDidResponse: {
     $type: "cheqdid.cheqdnode.cheqd.v1.MsgCreateDidResponse";
@@ -720,22 +720,16 @@ export declare const MsgUpdateDidPayload: {
     fromJSON(object: any): MsgUpdateDidPayload;
     toJSON(message: MsgUpdateDidPayload): unknown;
     fromPartial<I extends {
-        service?: {
-            type?: string | undefined;
-            id?: string | undefined;
-            serviceEndpoint?: string | undefined;
-        }[] | undefined;
-        id?: string | undefined;
-        alsoKnownAs?: string[] | undefined;
         context?: string[] | undefined;
+        id?: string | undefined;
         controller?: string[] | undefined;
         verificationMethod?: {
-            type?: string | undefined;
             id?: string | undefined;
             controller?: string | undefined;
+            type?: string | undefined;
             publicKeyJwk?: {
-                value?: string | undefined;
                 key?: string | undefined;
+                value?: string | undefined;
             }[] | undefined;
             publicKeyMultibase?: string | undefined;
         }[] | undefined;
@@ -744,82 +738,88 @@ export declare const MsgUpdateDidPayload: {
         capabilityInvocation?: string[] | undefined;
         capabilityDelegation?: string[] | undefined;
         keyAgreement?: string[] | undefined;
+        service?: {
+            id?: string | undefined;
+            type?: string | undefined;
+            serviceEndpoint?: string | undefined;
+        }[] | undefined;
+        alsoKnownAs?: string[] | undefined;
         versionId?: string | undefined;
     } & {
-        service?: ({
-            type?: string | undefined;
-            id?: string | undefined;
-            serviceEndpoint?: string | undefined;
-        }[] & ({
-            type?: string | undefined;
-            id?: string | undefined;
-            serviceEndpoint?: string | undefined;
-        } & {
-            type?: string | undefined;
-            id?: string | undefined;
-            serviceEndpoint?: string | undefined;
-        } & { [K in Exclude<keyof I["service"][number], "$type" | "type" | "id" | "serviceEndpoint">]: never; })[] & { [K_1 in Exclude<keyof I["service"], "$type" | keyof {
-            type?: string | undefined;
-            id?: string | undefined;
-            serviceEndpoint?: string | undefined;
-        }[]>]: never; }) | undefined;
+        context?: (string[] & string[] & { [K in Exclude<keyof I["context"], "$type" | keyof string[]>]: never; }) | undefined;
         id?: string | undefined;
-        alsoKnownAs?: (string[] & string[] & { [K_2 in Exclude<keyof I["alsoKnownAs"], "$type" | keyof string[]>]: never; }) | undefined;
-        context?: (string[] & string[] & { [K_3 in Exclude<keyof I["context"], "$type" | keyof string[]>]: never; }) | undefined;
-        controller?: (string[] & string[] & { [K_4 in Exclude<keyof I["controller"], "$type" | keyof string[]>]: never; }) | undefined;
+        controller?: (string[] & string[] & { [K_1 in Exclude<keyof I["controller"], "$type" | keyof string[]>]: never; }) | undefined;
         verificationMethod?: ({
-            type?: string | undefined;
             id?: string | undefined;
             controller?: string | undefined;
+            type?: string | undefined;
             publicKeyJwk?: {
-                value?: string | undefined;
                 key?: string | undefined;
+                value?: string | undefined;
             }[] | undefined;
             publicKeyMultibase?: string | undefined;
         }[] & ({
-            type?: string | undefined;
             id?: string | undefined;
             controller?: string | undefined;
+            type?: string | undefined;
             publicKeyJwk?: {
-                value?: string | undefined;
                 key?: string | undefined;
+                value?: string | undefined;
             }[] | undefined;
             publicKeyMultibase?: string | undefined;
         } & {
-            type?: string | undefined;
             id?: string | undefined;
             controller?: string | undefined;
+            type?: string | undefined;
             publicKeyJwk?: ({
-                value?: string | undefined;
                 key?: string | undefined;
+                value?: string | undefined;
             }[] & ({
-                value?: string | undefined;
                 key?: string | undefined;
+                value?: string | undefined;
             } & {
-                value?: string | undefined;
                 key?: string | undefined;
-            } & { [K_5 in Exclude<keyof I["verificationMethod"][number]["publicKeyJwk"][number], "$type" | "value" | "key">]: never; })[] & { [K_6 in Exclude<keyof I["verificationMethod"][number]["publicKeyJwk"], "$type" | keyof {
                 value?: string | undefined;
+            } & { [K_2 in Exclude<keyof I["verificationMethod"][number]["publicKeyJwk"][number], "$type" | "key" | "value">]: never; })[] & { [K_3 in Exclude<keyof I["verificationMethod"][number]["publicKeyJwk"], "$type" | keyof {
                 key?: string | undefined;
+                value?: string | undefined;
             }[]>]: never; }) | undefined;
             publicKeyMultibase?: string | undefined;
-        } & { [K_7 in Exclude<keyof I["verificationMethod"][number], "$type" | "type" | "id" | "controller" | "publicKeyJwk" | "publicKeyMultibase">]: never; })[] & { [K_8 in Exclude<keyof I["verificationMethod"], "$type" | keyof {
-            type?: string | undefined;
+        } & { [K_4 in Exclude<keyof I["verificationMethod"][number], "$type" | "id" | "controller" | "type" | "publicKeyJwk" | "publicKeyMultibase">]: never; })[] & { [K_5 in Exclude<keyof I["verificationMethod"], "$type" | keyof {
             id?: string | undefined;
             controller?: string | undefined;
+            type?: string | undefined;
             publicKeyJwk?: {
-                value?: string | undefined;
                 key?: string | undefined;
+                value?: string | undefined;
             }[] | undefined;
             publicKeyMultibase?: string | undefined;
         }[]>]: never; }) | undefined;
-        authentication?: (string[] & string[] & { [K_9 in Exclude<keyof I["authentication"], "$type" | keyof string[]>]: never; }) | undefined;
-        assertionMethod?: (string[] & string[] & { [K_10 in Exclude<keyof I["assertionMethod"], "$type" | keyof string[]>]: never; }) | undefined;
-        capabilityInvocation?: (string[] & string[] & { [K_11 in Exclude<keyof I["capabilityInvocation"], "$type" | keyof string[]>]: never; }) | undefined;
-        capabilityDelegation?: (string[] & string[] & { [K_12 in Exclude<keyof I["capabilityDelegation"], "$type" | keyof string[]>]: never; }) | undefined;
-        keyAgreement?: (string[] & string[] & { [K_13 in Exclude<keyof I["keyAgreement"], "$type" | keyof string[]>]: never; }) | undefined;
+        authentication?: (string[] & string[] & { [K_6 in Exclude<keyof I["authentication"], "$type" | keyof string[]>]: never; }) | undefined;
+        assertionMethod?: (string[] & string[] & { [K_7 in Exclude<keyof I["assertionMethod"], "$type" | keyof string[]>]: never; }) | undefined;
+        capabilityInvocation?: (string[] & string[] & { [K_8 in Exclude<keyof I["capabilityInvocation"], "$type" | keyof string[]>]: never; }) | undefined;
+        capabilityDelegation?: (string[] & string[] & { [K_9 in Exclude<keyof I["capabilityDelegation"], "$type" | keyof string[]>]: never; }) | undefined;
+        keyAgreement?: (string[] & string[] & { [K_10 in Exclude<keyof I["keyAgreement"], "$type" | keyof string[]>]: never; }) | undefined;
+        service?: ({
+            id?: string | undefined;
+            type?: string | undefined;
+            serviceEndpoint?: string | undefined;
+        }[] & ({
+            id?: string | undefined;
+            type?: string | undefined;
+            serviceEndpoint?: string | undefined;
+        } & {
+            id?: string | undefined;
+            type?: string | undefined;
+            serviceEndpoint?: string | undefined;
+        } & { [K_11 in Exclude<keyof I["service"][number], "$type" | "id" | "type" | "serviceEndpoint">]: never; })[] & { [K_12 in Exclude<keyof I["service"], "$type" | keyof {
+            id?: string | undefined;
+            type?: string | undefined;
+            serviceEndpoint?: string | undefined;
+        }[]>]: never; }) | undefined;
+        alsoKnownAs?: (string[] & string[] & { [K_13 in Exclude<keyof I["alsoKnownAs"], "$type" | keyof string[]>]: never; }) | undefined;
         versionId?: string | undefined;
-    } & { [K_14 in Exclude<keyof I, "$type" | "service" | "id" | "alsoKnownAs" | "context" | "controller" | "verificationMethod" | "authentication" | "assertionMethod" | "capabilityInvocation" | "capabilityDelegation" | "keyAgreement" | "versionId">]: never; }>(object: I): MsgUpdateDidPayload;
+    } & { [K_14 in Exclude<keyof I, "$type" | "context" | "id" | "controller" | "verificationMethod" | "authentication" | "assertionMethod" | "capabilityInvocation" | "capabilityDelegation" | "keyAgreement" | "service" | "alsoKnownAs" | "versionId">]: never; }>(object: I): MsgUpdateDidPayload;
 };
 export declare const MsgUpdateDidResponse: {
     $type: "cheqdid.cheqdnode.cheqd.v1.MsgUpdateDidResponse";

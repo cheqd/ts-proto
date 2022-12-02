@@ -36,12 +36,12 @@ export declare const QueryGetResourceRequest: {
     fromJSON(object: any): QueryGetResourceRequest;
     toJSON(message: QueryGetResourceRequest): unknown;
     fromPartial<I extends {
-        collectionId?: string | undefined;
         id?: string | undefined;
+        collectionId?: string | undefined;
     } & {
-        collectionId?: string | undefined;
         id?: string | undefined;
-    } & { [K in Exclude<keyof I, "$type" | "collectionId" | "id">]: never; }>(object: I): QueryGetResourceRequest;
+        collectionId?: string | undefined;
+    } & { [K in Exclude<keyof I, "$type" | "id" | "collectionId">]: never; }>(object: I): QueryGetResourceRequest;
 };
 export declare const QueryGetResourceResponse: {
     $type: "cheqdid.cheqdnode.resource.v1.QueryGetResourceResponse";
@@ -53,54 +53,54 @@ export declare const QueryGetResourceResponse: {
         resource?: {
             data?: Uint8Array | undefined;
             header?: {
-                name?: string | undefined;
-                collectionId?: string | undefined;
                 id?: string | undefined;
+                created?: string | undefined;
+                nextVersionId?: string | undefined;
+                previousVersionId?: string | undefined;
+                collectionId?: string | undefined;
+                name?: string | undefined;
                 resourceType?: string | undefined;
                 mediaType?: string | undefined;
-                created?: string | undefined;
                 checksum?: Uint8Array | undefined;
-                previousVersionId?: string | undefined;
-                nextVersionId?: string | undefined;
             } | undefined;
         } | undefined;
     } & {
         resource?: ({
             data?: Uint8Array | undefined;
             header?: {
-                name?: string | undefined;
-                collectionId?: string | undefined;
                 id?: string | undefined;
+                created?: string | undefined;
+                nextVersionId?: string | undefined;
+                previousVersionId?: string | undefined;
+                collectionId?: string | undefined;
+                name?: string | undefined;
                 resourceType?: string | undefined;
                 mediaType?: string | undefined;
-                created?: string | undefined;
                 checksum?: Uint8Array | undefined;
-                previousVersionId?: string | undefined;
-                nextVersionId?: string | undefined;
             } | undefined;
         } & {
             data?: Uint8Array | undefined;
             header?: ({
-                name?: string | undefined;
-                collectionId?: string | undefined;
                 id?: string | undefined;
+                created?: string | undefined;
+                nextVersionId?: string | undefined;
+                previousVersionId?: string | undefined;
+                collectionId?: string | undefined;
+                name?: string | undefined;
                 resourceType?: string | undefined;
                 mediaType?: string | undefined;
-                created?: string | undefined;
                 checksum?: Uint8Array | undefined;
-                previousVersionId?: string | undefined;
-                nextVersionId?: string | undefined;
             } & {
-                name?: string | undefined;
-                collectionId?: string | undefined;
                 id?: string | undefined;
+                created?: string | undefined;
+                nextVersionId?: string | undefined;
+                previousVersionId?: string | undefined;
+                collectionId?: string | undefined;
+                name?: string | undefined;
                 resourceType?: string | undefined;
                 mediaType?: string | undefined;
-                created?: string | undefined;
                 checksum?: Uint8Array | undefined;
-                previousVersionId?: string | undefined;
-                nextVersionId?: string | undefined;
-            } & { [K in Exclude<keyof I["resource"]["header"], "$type" | "name" | "collectionId" | "id" | "resourceType" | "mediaType" | "created" | "checksum" | "previousVersionId" | "nextVersionId">]: never; }) | undefined;
+            } & { [K in Exclude<keyof I["resource"]["header"], "$type" | "id" | "created" | "nextVersionId" | "previousVersionId" | "collectionId" | "name" | "resourceType" | "mediaType" | "checksum">]: never; }) | undefined;
         } & { [K_1 in Exclude<keyof I["resource"], "$type" | "data" | "header">]: never; }) | undefined;
     } & { [K_2 in Exclude<keyof I, "$type" | "resource">]: never; }>(object: I): QueryGetResourceResponse;
 };
@@ -124,57 +124,57 @@ export declare const QueryGetCollectionResourcesResponse: {
     toJSON(message: QueryGetCollectionResourcesResponse): unknown;
     fromPartial<I extends {
         resources?: {
-            name?: string | undefined;
-            collectionId?: string | undefined;
             id?: string | undefined;
+            created?: string | undefined;
+            nextVersionId?: string | undefined;
+            previousVersionId?: string | undefined;
+            collectionId?: string | undefined;
+            name?: string | undefined;
             resourceType?: string | undefined;
             mediaType?: string | undefined;
-            created?: string | undefined;
             checksum?: Uint8Array | undefined;
-            previousVersionId?: string | undefined;
-            nextVersionId?: string | undefined;
         }[] | undefined;
     } & {
         resources?: ({
-            name?: string | undefined;
-            collectionId?: string | undefined;
             id?: string | undefined;
+            created?: string | undefined;
+            nextVersionId?: string | undefined;
+            previousVersionId?: string | undefined;
+            collectionId?: string | undefined;
+            name?: string | undefined;
             resourceType?: string | undefined;
             mediaType?: string | undefined;
-            created?: string | undefined;
             checksum?: Uint8Array | undefined;
-            previousVersionId?: string | undefined;
-            nextVersionId?: string | undefined;
         }[] & ({
-            name?: string | undefined;
-            collectionId?: string | undefined;
             id?: string | undefined;
+            created?: string | undefined;
+            nextVersionId?: string | undefined;
+            previousVersionId?: string | undefined;
+            collectionId?: string | undefined;
+            name?: string | undefined;
             resourceType?: string | undefined;
             mediaType?: string | undefined;
-            created?: string | undefined;
             checksum?: Uint8Array | undefined;
-            previousVersionId?: string | undefined;
-            nextVersionId?: string | undefined;
         } & {
-            name?: string | undefined;
-            collectionId?: string | undefined;
             id?: string | undefined;
+            created?: string | undefined;
+            nextVersionId?: string | undefined;
+            previousVersionId?: string | undefined;
+            collectionId?: string | undefined;
+            name?: string | undefined;
             resourceType?: string | undefined;
             mediaType?: string | undefined;
-            created?: string | undefined;
             checksum?: Uint8Array | undefined;
-            previousVersionId?: string | undefined;
-            nextVersionId?: string | undefined;
-        } & { [K in Exclude<keyof I["resources"][number], "$type" | "name" | "collectionId" | "id" | "resourceType" | "mediaType" | "created" | "checksum" | "previousVersionId" | "nextVersionId">]: never; })[] & { [K_1 in Exclude<keyof I["resources"], "$type" | keyof {
-            name?: string | undefined;
-            collectionId?: string | undefined;
+        } & { [K in Exclude<keyof I["resources"][number], "$type" | "id" | "created" | "nextVersionId" | "previousVersionId" | "collectionId" | "name" | "resourceType" | "mediaType" | "checksum">]: never; })[] & { [K_1 in Exclude<keyof I["resources"], "$type" | keyof {
             id?: string | undefined;
+            created?: string | undefined;
+            nextVersionId?: string | undefined;
+            previousVersionId?: string | undefined;
+            collectionId?: string | undefined;
+            name?: string | undefined;
             resourceType?: string | undefined;
             mediaType?: string | undefined;
-            created?: string | undefined;
             checksum?: Uint8Array | undefined;
-            previousVersionId?: string | undefined;
-            nextVersionId?: string | undefined;
         }[]>]: never; }) | undefined;
     } & { [K_2 in Exclude<keyof I, "$type" | "resources">]: never; }>(object: I): QueryGetCollectionResourcesResponse;
 };
@@ -185,14 +185,14 @@ export declare const QueryGetAllResourceVersionsRequest: {
     fromJSON(object: any): QueryGetAllResourceVersionsRequest;
     toJSON(message: QueryGetAllResourceVersionsRequest): unknown;
     fromPartial<I extends {
-        name?: string | undefined;
         collectionId?: string | undefined;
+        name?: string | undefined;
         resourceType?: string | undefined;
     } & {
-        name?: string | undefined;
         collectionId?: string | undefined;
+        name?: string | undefined;
         resourceType?: string | undefined;
-    } & { [K in Exclude<keyof I, "$type" | "name" | "collectionId" | "resourceType">]: never; }>(object: I): QueryGetAllResourceVersionsRequest;
+    } & { [K in Exclude<keyof I, "$type" | "collectionId" | "name" | "resourceType">]: never; }>(object: I): QueryGetAllResourceVersionsRequest;
 };
 export declare const QueryGetAllResourceVersionsResponse: {
     $type: "cheqdid.cheqdnode.resource.v1.QueryGetAllResourceVersionsResponse";
@@ -202,57 +202,57 @@ export declare const QueryGetAllResourceVersionsResponse: {
     toJSON(message: QueryGetAllResourceVersionsResponse): unknown;
     fromPartial<I extends {
         resources?: {
-            name?: string | undefined;
-            collectionId?: string | undefined;
             id?: string | undefined;
+            created?: string | undefined;
+            nextVersionId?: string | undefined;
+            previousVersionId?: string | undefined;
+            collectionId?: string | undefined;
+            name?: string | undefined;
             resourceType?: string | undefined;
             mediaType?: string | undefined;
-            created?: string | undefined;
             checksum?: Uint8Array | undefined;
-            previousVersionId?: string | undefined;
-            nextVersionId?: string | undefined;
         }[] | undefined;
     } & {
         resources?: ({
-            name?: string | undefined;
-            collectionId?: string | undefined;
             id?: string | undefined;
+            created?: string | undefined;
+            nextVersionId?: string | undefined;
+            previousVersionId?: string | undefined;
+            collectionId?: string | undefined;
+            name?: string | undefined;
             resourceType?: string | undefined;
             mediaType?: string | undefined;
-            created?: string | undefined;
             checksum?: Uint8Array | undefined;
-            previousVersionId?: string | undefined;
-            nextVersionId?: string | undefined;
         }[] & ({
-            name?: string | undefined;
-            collectionId?: string | undefined;
             id?: string | undefined;
+            created?: string | undefined;
+            nextVersionId?: string | undefined;
+            previousVersionId?: string | undefined;
+            collectionId?: string | undefined;
+            name?: string | undefined;
             resourceType?: string | undefined;
             mediaType?: string | undefined;
-            created?: string | undefined;
             checksum?: Uint8Array | undefined;
-            previousVersionId?: string | undefined;
-            nextVersionId?: string | undefined;
         } & {
-            name?: string | undefined;
-            collectionId?: string | undefined;
             id?: string | undefined;
+            created?: string | undefined;
+            nextVersionId?: string | undefined;
+            previousVersionId?: string | undefined;
+            collectionId?: string | undefined;
+            name?: string | undefined;
             resourceType?: string | undefined;
             mediaType?: string | undefined;
-            created?: string | undefined;
             checksum?: Uint8Array | undefined;
-            previousVersionId?: string | undefined;
-            nextVersionId?: string | undefined;
-        } & { [K in Exclude<keyof I["resources"][number], "$type" | "name" | "collectionId" | "id" | "resourceType" | "mediaType" | "created" | "checksum" | "previousVersionId" | "nextVersionId">]: never; })[] & { [K_1 in Exclude<keyof I["resources"], "$type" | keyof {
-            name?: string | undefined;
-            collectionId?: string | undefined;
+        } & { [K in Exclude<keyof I["resources"][number], "$type" | "id" | "created" | "nextVersionId" | "previousVersionId" | "collectionId" | "name" | "resourceType" | "mediaType" | "checksum">]: never; })[] & { [K_1 in Exclude<keyof I["resources"], "$type" | keyof {
             id?: string | undefined;
+            created?: string | undefined;
+            nextVersionId?: string | undefined;
+            previousVersionId?: string | undefined;
+            collectionId?: string | undefined;
+            name?: string | undefined;
             resourceType?: string | undefined;
             mediaType?: string | undefined;
-            created?: string | undefined;
             checksum?: Uint8Array | undefined;
-            previousVersionId?: string | undefined;
-            nextVersionId?: string | undefined;
         }[]>]: never; }) | undefined;
     } & { [K_2 in Exclude<keyof I, "$type" | "resources">]: never; }>(object: I): QueryGetAllResourceVersionsResponse;
 };
