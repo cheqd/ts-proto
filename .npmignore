@@ -7,7 +7,7 @@
 .gitignore
 .npmrc
 .releaserc.json
-.tsconfig.json
+tsconfig.*
 buf.gen.yaml
 !README.md
 **.md
