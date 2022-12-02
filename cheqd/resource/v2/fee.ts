@@ -10,7 +10,7 @@ export const protobufPackage = "cheqd.resource.v2";
 export interface FeeParams {
   $type: "cheqd.resource.v2.FeeParams";
   /** Media types define the fixed fee each for the `resource` module. */
-  mediaTypes: Map<string, Coin>;
+  mediaTypes: { [key: string]: Coin };
   burnFactor: string;
 }
 
@@ -21,14 +21,14 @@ export interface FeeParams_MediaTypesEntry {
 }
 
 function createBaseFeeParams(): FeeParams {
-  return { $type: "cheqd.resource.v2.FeeParams", mediaTypes: new Map(), burnFactor: "" };
+  return { $type: "cheqd.resource.v2.FeeParams", mediaTypes: {}, burnFactor: "" };
 }
 
 export const FeeParams = {
   $type: "cheqd.resource.v2.FeeParams" as const,
 
   encode(message: FeeParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    message.mediaTypes.forEach((value, key) => {
+    Object.entries(message.mediaTypes).forEach(([key, value]) => {
       FeeParams_MediaTypesEntry.encode(
         { $type: "cheqd.resource.v2.FeeParams.MediaTypesEntry", key: key as any, value },
         writer.uint32(10).fork(),
@@ -50,7 +50,7 @@ export const FeeParams = {
         case 1:
           const entry1 = FeeParams_MediaTypesEntry.decode(reader, reader.uint32());
           if (entry1.value !== undefined) {
-            message.mediaTypes.set(entry1.key, entry1.value);
+            message.mediaTypes[entry1.key] = entry1.value;
           }
           break;
         case 2:
@@ -68,11 +68,11 @@ export const FeeParams = {
     return {
       $type: FeeParams.$type,
       mediaTypes: isObject(object.mediaTypes)
-        ? Object.entries(object.mediaTypes).reduce<Map<string, Coin>>((acc, [key, value]) => {
-          acc.set(key, Coin.fromJSON(value));
+        ? Object.entries(object.mediaTypes).reduce<{ [key: string]: Coin }>((acc, [key, value]) => {
+          acc[key] = Coin.fromJSON(value);
           return acc;
-        }, new Map())
-        : new Map(),
+        }, {})
+        : {},
       burnFactor: isSet(object.burnFactor) ? String(object.burnFactor) : "",
     };
   },
@@ -81,7 +81,7 @@ export const FeeParams = {
     const obj: any = {};
     obj.mediaTypes = {};
     if (message.mediaTypes) {
-      message.mediaTypes.forEach((v, k) => {
+      Object.entries(message.mediaTypes).forEach(([k, v]) => {
         obj.mediaTypes[k] = Coin.toJSON(v);
       });
     }
@@ -91,15 +91,15 @@ export const FeeParams = {
 
   fromPartial<I extends Exact<DeepPartial<FeeParams>, I>>(object: I): FeeParams {
     const message = createBaseFeeParams();
-    message.mediaTypes = (() => {
-      const m = new Map();
-      (object.mediaTypes as Map<string, Coin> ?? new Map()).forEach((value, key) => {
+    message.mediaTypes = Object.entries(object.mediaTypes ?? {}).reduce<{ [key: string]: Coin }>(
+      (acc, [key, value]) => {
         if (value !== undefined) {
-          m.set(key, Coin.fromPartial(value));
+          acc[key] = Coin.fromPartial(value);
         }
-      });
-      return m;
-    })();
+        return acc;
+      },
+      {},
+    );
     message.burnFactor = object.burnFactor ?? "";
     return message;
   },

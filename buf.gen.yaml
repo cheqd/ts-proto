@@ -8,4 +8,4 @@ plugins:
       - esModuleInterop=true
       - emitImportedFiles=true
       - outputTypeRegistry=true
-      - useMapType=true
+      - useMapType=false
