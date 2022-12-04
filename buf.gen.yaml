@@ -7,3 +7,4 @@ plugins:
       - forceLong=long
       - esModuleInterop=true
       - emitImportedFiles=true
+      - exportCommonSymbols=false
