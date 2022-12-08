@@ -30,6 +30,9 @@ jobs:
         with:
           languages: 'javascript'
           queries: security-and-quality
+      
+      - name: "Install buf CLI"
+        uses: bufbuild/buf-setup-action@v1.9.0
 
       - name: Build
         run: |
