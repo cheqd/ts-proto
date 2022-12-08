@@ -3,6 +3,16 @@
   "version": "1.0.16-develop.1",
   "description": "A TypeScript package for all transpiled cheqd ProtoBuf definitions.",
   "main": "index.js",
+  "files": [
+    "cheqd/**/*",
+    "cosmos/**/*",
+    "cosmos_proto/**/*",
+    "gogoproto/**/*",
+    "google/**/*",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
   "license": "Apache-2.0",
   "author": "Cheqd Foundation Limited (https://github.com/cheqd)",
   "scripts": {

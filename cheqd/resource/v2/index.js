@@ -14,9 +14,11 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.protobufPackage = void 0;
 __exportStar(require("./genesis"), exports);
 __exportStar(require("./query"), exports);
 __exportStar(require("./resource"), exports);
 __exportStar(require("./tx"), exports);
 __exportStar(require("./fee"), exports);
+exports.protobufPackage = "cheqd.resource.v2";
 //# sourceMappingURL=index.js.map

@@ -33,11 +33,17 @@ export declare const GenesisState: {
             } | undefined;
         }[] | undefined;
         feeParams?: {
-            mediaTypes?: {
-                [x: string]: {
-                    denom?: string | undefined;
-                    amount?: string | undefined;
-                } | undefined;
+            image?: {
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } | undefined;
+            json?: {
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } | undefined;
+            default?: {
+                denom?: string | undefined;
+                amount?: string | undefined;
             } | undefined;
             burnFactor?: string | undefined;
         } | undefined;
@@ -150,30 +156,43 @@ export declare const GenesisState: {
             } | undefined;
         }[]>]: never; }) | undefined;
         feeParams?: ({
-            mediaTypes?: {
-                [x: string]: {
-                    denom?: string | undefined;
-                    amount?: string | undefined;
-                } | undefined;
+            image?: {
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } | undefined;
+            json?: {
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } | undefined;
+            default?: {
+                denom?: string | undefined;
+                amount?: string | undefined;
             } | undefined;
             burnFactor?: string | undefined;
         } & {
-            mediaTypes?: ({
-                [x: string]: {
-                    denom?: string | undefined;
-                    amount?: string | undefined;
-                } | undefined;
+            image?: ({
+                denom?: string | undefined;
+                amount?: string | undefined;
             } & {
-                [x: string]: ({
-                    denom?: string | undefined;
-                    amount?: string | undefined;
-                } & {
-                    denom?: string | undefined;
-                    amount?: string | undefined;
-                } & { [K_6 in Exclude<keyof I["feeParams"]["mediaTypes"][string], keyof import("../../../cosmos/base/v1beta1/coin").Coin>]: never; }) | undefined;
-            } & { [K_7 in Exclude<keyof I["feeParams"]["mediaTypes"], string | number>]: never; }) | undefined;
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } & { [K_6 in Exclude<keyof I["feeParams"]["image"], keyof import("../../../cosmos/base/v1beta1/coin").Coin>]: never; }) | undefined;
+            json?: ({
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } & {
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } & { [K_7 in Exclude<keyof I["feeParams"]["json"], keyof import("../../../cosmos/base/v1beta1/coin").Coin>]: never; }) | undefined;
+            default?: ({
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } & {
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } & { [K_8 in Exclude<keyof I["feeParams"]["default"], keyof import("../../../cosmos/base/v1beta1/coin").Coin>]: never; }) | undefined;
             burnFactor?: string | undefined;
-        } & { [K_8 in Exclude<keyof I["feeParams"], keyof FeeParams>]: never; }) | undefined;
-    } & { [K_9 in Exclude<keyof I, keyof GenesisState>]: never; }>(object: I): GenesisState;
+        } & { [K_9 in Exclude<keyof I["feeParams"], keyof FeeParams>]: never; }) | undefined;
+    } & { [K_10 in Exclude<keyof I, keyof GenesisState>]: never; }>(object: I): GenesisState;
 };
 //# sourceMappingURL=genesis.d.ts.map
