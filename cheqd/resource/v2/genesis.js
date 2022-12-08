@@ -3,13 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GenesisState = exports.protobufPackage = void 0;
+exports.GenesisState = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
 const fee_1 = require("./fee");
 const resource_1 = require("./resource");
-exports.protobufPackage = "cheqd.resource.v2";
 function createBaseGenesisState() {
     return { resources: [], feeParams: undefined };
 }

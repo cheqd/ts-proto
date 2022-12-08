@@ -3,13 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MsgClientImpl = exports.MsgCreateResourceResponse = exports.MsgCreateResourcePayload = exports.MsgCreateResource = exports.protobufPackage = void 0;
+exports.MsgClientImpl = exports.MsgCreateResourceResponse = exports.MsgCreateResourcePayload = exports.MsgCreateResource = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
 const tx_1 = require("../../did/v1/tx");
 const resource_1 = require("./resource");
-exports.protobufPackage = "cheqdid.cheqdnode.resource.v1";
 function createBaseMsgCreateResource() {
     return { payload: undefined, signatures: [] };
 }

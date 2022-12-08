@@ -1,8 +1,6 @@
-import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { DidDocWithMetadata } from "./diddoc";
 import { FeeParams } from "./fee";
-export declare const protobufPackage = "cheqd.did.v2";
 export interface DidDocVersionSet {
     latestVersion: string;
     didDocs: DidDocWithMetadata[];
@@ -278,11 +276,17 @@ export declare const GenesisState: {
             }[] | undefined;
         }[] | undefined;
         feeParams?: {
-            txTypes?: {
-                [x: string]: {
-                    denom?: string | undefined;
-                    amount?: string | undefined;
-                } | undefined;
+            createDid?: {
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } | undefined;
+            updateDid?: {
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } | undefined;
+            deactivateDid?: {
+                denom?: string | undefined;
+                amount?: string | undefined;
             } | undefined;
             burnFactor?: string | undefined;
         } | undefined;
@@ -574,41 +578,43 @@ export declare const GenesisState: {
             }[] | undefined;
         }[]>]: never; }) | undefined;
         feeParams?: ({
-            txTypes?: {
-                [x: string]: {
-                    denom?: string | undefined;
-                    amount?: string | undefined;
-                } | undefined;
+            createDid?: {
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } | undefined;
+            updateDid?: {
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } | undefined;
+            deactivateDid?: {
+                denom?: string | undefined;
+                amount?: string | undefined;
             } | undefined;
             burnFactor?: string | undefined;
         } & {
-            txTypes?: ({
-                [x: string]: {
-                    denom?: string | undefined;
-                    amount?: string | undefined;
-                } | undefined;
+            createDid?: ({
+                denom?: string | undefined;
+                amount?: string | undefined;
             } & {
-                [x: string]: ({
-                    denom?: string | undefined;
-                    amount?: string | undefined;
-                } & {
-                    denom?: string | undefined;
-                    amount?: string | undefined;
-                } & { [K_19 in Exclude<keyof I["feeParams"]["txTypes"][string], keyof import("../../../cosmos/base/v1beta1/coin").Coin>]: never; }) | undefined;
-            } & { [K_20 in Exclude<keyof I["feeParams"]["txTypes"], string | number>]: never; }) | undefined;
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } & { [K_19 in Exclude<keyof I["feeParams"]["createDid"], keyof import("../../../cosmos/base/v1beta1/coin").Coin>]: never; }) | undefined;
+            updateDid?: ({
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } & {
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } & { [K_20 in Exclude<keyof I["feeParams"]["updateDid"], keyof import("../../../cosmos/base/v1beta1/coin").Coin>]: never; }) | undefined;
+            deactivateDid?: ({
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } & {
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } & { [K_21 in Exclude<keyof I["feeParams"]["deactivateDid"], keyof import("../../../cosmos/base/v1beta1/coin").Coin>]: never; }) | undefined;
             burnFactor?: string | undefined;
-        } & { [K_21 in Exclude<keyof I["feeParams"], keyof FeeParams>]: never; }) | undefined;
-    } & { [K_22 in Exclude<keyof I, keyof GenesisState>]: never; }>(object: I): GenesisState;
+        } & { [K_22 in Exclude<keyof I["feeParams"], keyof FeeParams>]: never; }) | undefined;
+    } & { [K_23 in Exclude<keyof I, keyof GenesisState>]: never; }>(object: I): GenesisState;
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & {
-    [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
-};
-export {};
 //# sourceMappingURL=genesis.d.ts.map

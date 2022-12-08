@@ -2,8 +2,6 @@
 import Long from "long";
 import _m0 from "protobufjs/minimal";
 
-export const protobufPackage = "cheqd.resource.v2";
-
 export interface Resource {
   data: Uint8Array;
 }
@@ -27,7 +25,7 @@ export interface Metadata {
   alsoKnownAs: AlternativeUri[];
   mediaType: string;
   created: string;
-  checksum: Uint8Array;
+  checksum: string;
   previousVersionId: string;
   nextVersionId: string;
 }
@@ -210,7 +208,7 @@ function createBaseMetadata(): Metadata {
     alsoKnownAs: [],
     mediaType: "",
     created: "",
-    checksum: new Uint8Array(),
+    checksum: "",
     previousVersionId: "",
     nextVersionId: "",
   };
@@ -242,8 +240,8 @@ export const Metadata = {
     if (message.created !== "") {
       writer.uint32(66).string(message.created);
     }
-    if (message.checksum.length !== 0) {
-      writer.uint32(74).bytes(message.checksum);
+    if (message.checksum !== "") {
+      writer.uint32(74).string(message.checksum);
     }
     if (message.previousVersionId !== "") {
       writer.uint32(82).string(message.previousVersionId);
@@ -286,7 +284,7 @@ export const Metadata = {
           message.created = reader.string();
           break;
         case 9:
-          message.checksum = reader.bytes();
+          message.checksum = reader.string();
           break;
         case 10:
           message.previousVersionId = reader.string();
@@ -314,7 +312,7 @@ export const Metadata = {
         : [],
       mediaType: isSet(object.mediaType) ? String(object.mediaType) : "",
       created: isSet(object.created) ? String(object.created) : "",
-      checksum: isSet(object.checksum) ? bytesFromBase64(object.checksum) : new Uint8Array(),
+      checksum: isSet(object.checksum) ? String(object.checksum) : "",
       previousVersionId: isSet(object.previousVersionId) ? String(object.previousVersionId) : "",
       nextVersionId: isSet(object.nextVersionId) ? String(object.nextVersionId) : "",
     };
@@ -334,8 +332,7 @@ export const Metadata = {
     }
     message.mediaType !== undefined && (obj.mediaType = message.mediaType);
     message.created !== undefined && (obj.created = message.created);
-    message.checksum !== undefined &&
-      (obj.checksum = base64FromBytes(message.checksum !== undefined ? message.checksum : new Uint8Array()));
+    message.checksum !== undefined && (obj.checksum = message.checksum);
     message.previousVersionId !== undefined && (obj.previousVersionId = message.previousVersionId);
     message.nextVersionId !== undefined && (obj.nextVersionId = message.nextVersionId);
     return obj;
@@ -351,7 +348,7 @@ export const Metadata = {
     message.alsoKnownAs = object.alsoKnownAs?.map((e) => AlternativeUri.fromPartial(e)) || [];
     message.mediaType = object.mediaType ?? "";
     message.created = object.created ?? "";
-    message.checksum = object.checksum ?? new Uint8Array();
+    message.checksum = object.checksum ?? "";
     message.previousVersionId = object.previousVersionId ?? "";
     message.nextVersionId = object.nextVersionId ?? "";
     return message;
@@ -404,14 +401,14 @@ function base64FromBytes(arr: Uint8Array): string {
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
+type DeepPartial<T> = T extends Builtin ? T
   : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
+type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {

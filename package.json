@@ -3,11 +3,23 @@
   "version": "1.0.16-develop.1",
   "description": "A TypeScript package for all transpiled cheqd ProtoBuf definitions.",
   "main": "index.js",
+  "files": [
+    "cheqd/**/*",
+    "cosmos/**/*",
+    "cosmos_proto/**/*",
+    "gogoproto/**/*",
+    "google/**/*",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
   "license": "Apache-2.0",
   "author": "Cheqd Foundation Limited (https://github.com/cheqd)",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
+    "build": "npm run build:proto-gen && npm run build:ts",
+    "build:proto-gen": "buf generate buf.build/cheqd/proto",
+    "build:ts": "tsc",
     "loosely-check": "npx loose-ts-check --auto-update",
     "loosely-check-fix": "npx loose-ts-check --auto-fix",
     "loosely-build": "tsc --noEmit | npx loose-ts-check --auto-update"

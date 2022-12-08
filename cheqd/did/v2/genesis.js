@@ -3,13 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GenesisState = exports.DidDocVersionSet = exports.protobufPackage = void 0;
+exports.GenesisState = exports.DidDocVersionSet = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
 const diddoc_1 = require("./diddoc");
 const fee_1 = require("./fee");
-exports.protobufPackage = "cheqd.did.v2";
 function createBaseDidDocVersionSet() {
     return { latestVersion: "", didDocs: [] };
 }

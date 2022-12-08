@@ -3,12 +3,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.QueryClientImpl = exports.QueryGetAllDidDocVersionsMetadataResponse = exports.QueryGetAllDidDocVersionsMetadataRequest = exports.QueryGetDidDocVersionResponse = exports.QueryGetDidDocVersionRequest = exports.QueryGetDidDocResponse = exports.QueryGetDidDocRequest = exports.protobufPackage = void 0;
+exports.QueryClientImpl = exports.QueryGetAllDidDocVersionsMetadataResponse = exports.QueryGetAllDidDocVersionsMetadataRequest = exports.QueryGetDidDocVersionResponse = exports.QueryGetDidDocVersionRequest = exports.QueryGetDidDocResponse = exports.QueryGetDidDocRequest = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
 const diddoc_1 = require("./diddoc");
-exports.protobufPackage = "cheqd.did.v2";
 function createBaseQueryGetDidDocRequest() {
     return { id: "" };
 }

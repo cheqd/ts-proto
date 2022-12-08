@@ -3,11 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ResourceHeader = exports.Resource = exports.protobufPackage = void 0;
+exports.ResourceHeader = exports.Resource = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
-exports.protobufPackage = "cheqdid.cheqdnode.resource.v1";
 function createBaseResource() {
     return { header: undefined, data: new Uint8Array() };
 }

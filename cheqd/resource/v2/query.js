@@ -3,12 +3,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.QueryClientImpl = exports.QueryGetCollectionResourcesResponse = exports.QueryGetCollectionResourcesRequest = exports.QueryGetResourceMetadataResponse = exports.QueryGetResourceMetadataRequest = exports.QueryGetResourceResponse = exports.QueryGetResourceRequest = exports.protobufPackage = void 0;
+exports.QueryClientImpl = exports.QueryGetCollectionResourcesResponse = exports.QueryGetCollectionResourcesRequest = exports.QueryGetResourceMetadataResponse = exports.QueryGetResourceMetadataRequest = exports.QueryGetResourceResponse = exports.QueryGetResourceRequest = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
 const resource_1 = require("./resource");
-exports.protobufPackage = "cheqd.resource.v2";
 function createBaseQueryGetResourceRequest() {
     return { collectionId: "", id: "" };
 }

@@ -1,2 +1,2 @@
-export declare const protobufPackage = "google.api";
+export {};
 //# sourceMappingURL=annotations.d.ts.map

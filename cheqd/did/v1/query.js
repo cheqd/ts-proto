@@ -3,13 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.QueryClientImpl = exports.QueryGetDidResponse = exports.QueryGetDidRequest = exports.protobufPackage = void 0;
+exports.QueryClientImpl = exports.QueryGetDidResponse = exports.QueryGetDidRequest = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
 const did_1 = require("./did");
 const stateValue_1 = require("./stateValue");
-exports.protobufPackage = "cheqdid.cheqdnode.cheqd.v1";
 function createBaseQueryGetDidRequest() {
     return { id: "" };
 }

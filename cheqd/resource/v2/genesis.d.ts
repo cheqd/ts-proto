@@ -1,8 +1,6 @@
-import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { FeeParams } from "./fee";
 import { ResourceWithMetadata } from "./resource";
-export declare const protobufPackage = "cheqd.resource.v2";
 export interface GenesisState {
     resources: ResourceWithMetadata[];
     feeParams: FeeParams | undefined;
@@ -29,17 +27,23 @@ export declare const GenesisState: {
                 }[] | undefined;
                 mediaType?: string | undefined;
                 created?: string | undefined;
-                checksum?: Uint8Array | undefined;
+                checksum?: string | undefined;
                 previousVersionId?: string | undefined;
                 nextVersionId?: string | undefined;
             } | undefined;
         }[] | undefined;
         feeParams?: {
-            mediaTypes?: {
-                [x: string]: {
-                    denom?: string | undefined;
-                    amount?: string | undefined;
-                } | undefined;
+            image?: {
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } | undefined;
+            json?: {
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } | undefined;
+            default?: {
+                denom?: string | undefined;
+                amount?: string | undefined;
             } | undefined;
             burnFactor?: string | undefined;
         } | undefined;
@@ -60,7 +64,7 @@ export declare const GenesisState: {
                 }[] | undefined;
                 mediaType?: string | undefined;
                 created?: string | undefined;
-                checksum?: Uint8Array | undefined;
+                checksum?: string | undefined;
                 previousVersionId?: string | undefined;
                 nextVersionId?: string | undefined;
             } | undefined;
@@ -80,7 +84,7 @@ export declare const GenesisState: {
                 }[] | undefined;
                 mediaType?: string | undefined;
                 created?: string | undefined;
-                checksum?: Uint8Array | undefined;
+                checksum?: string | undefined;
                 previousVersionId?: string | undefined;
                 nextVersionId?: string | undefined;
             } | undefined;
@@ -102,7 +106,7 @@ export declare const GenesisState: {
                 }[] | undefined;
                 mediaType?: string | undefined;
                 created?: string | undefined;
-                checksum?: Uint8Array | undefined;
+                checksum?: string | undefined;
                 previousVersionId?: string | undefined;
                 nextVersionId?: string | undefined;
             } & {
@@ -126,7 +130,7 @@ export declare const GenesisState: {
                 }[]>]: never; }) | undefined;
                 mediaType?: string | undefined;
                 created?: string | undefined;
-                checksum?: Uint8Array | undefined;
+                checksum?: string | undefined;
                 previousVersionId?: string | undefined;
                 nextVersionId?: string | undefined;
             } & { [K_3 in Exclude<keyof I["resources"][number]["metadata"], keyof import("./resource").Metadata>]: never; }) | undefined;
@@ -146,47 +150,49 @@ export declare const GenesisState: {
                 }[] | undefined;
                 mediaType?: string | undefined;
                 created?: string | undefined;
-                checksum?: Uint8Array | undefined;
+                checksum?: string | undefined;
                 previousVersionId?: string | undefined;
                 nextVersionId?: string | undefined;
             } | undefined;
         }[]>]: never; }) | undefined;
         feeParams?: ({
-            mediaTypes?: {
-                [x: string]: {
-                    denom?: string | undefined;
-                    amount?: string | undefined;
-                } | undefined;
+            image?: {
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } | undefined;
+            json?: {
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } | undefined;
+            default?: {
+                denom?: string | undefined;
+                amount?: string | undefined;
             } | undefined;
             burnFactor?: string | undefined;
         } & {
-            mediaTypes?: ({
-                [x: string]: {
-                    denom?: string | undefined;
-                    amount?: string | undefined;
-                } | undefined;
+            image?: ({
+                denom?: string | undefined;
+                amount?: string | undefined;
             } & {
-                [x: string]: ({
-                    denom?: string | undefined;
-                    amount?: string | undefined;
-                } & {
-                    denom?: string | undefined;
-                    amount?: string | undefined;
-                } & { [K_6 in Exclude<keyof I["feeParams"]["mediaTypes"][string], keyof import("../../../cosmos/base/v1beta1/coin").Coin>]: never; }) | undefined;
-            } & { [K_7 in Exclude<keyof I["feeParams"]["mediaTypes"], string | number>]: never; }) | undefined;
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } & { [K_6 in Exclude<keyof I["feeParams"]["image"], keyof import("../../../cosmos/base/v1beta1/coin").Coin>]: never; }) | undefined;
+            json?: ({
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } & {
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } & { [K_7 in Exclude<keyof I["feeParams"]["json"], keyof import("../../../cosmos/base/v1beta1/coin").Coin>]: never; }) | undefined;
+            default?: ({
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } & {
+                denom?: string | undefined;
+                amount?: string | undefined;
+            } & { [K_8 in Exclude<keyof I["feeParams"]["default"], keyof import("../../../cosmos/base/v1beta1/coin").Coin>]: never; }) | undefined;
             burnFactor?: string | undefined;
-        } & { [K_8 in Exclude<keyof I["feeParams"], keyof FeeParams>]: never; }) | undefined;
-    } & { [K_9 in Exclude<keyof I, keyof GenesisState>]: never; }>(object: I): GenesisState;
+        } & { [K_9 in Exclude<keyof I["feeParams"], keyof FeeParams>]: never; }) | undefined;
+    } & { [K_10 in Exclude<keyof I, keyof GenesisState>]: never; }>(object: I): GenesisState;
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & {
-    [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
-};
-export {};
 //# sourceMappingURL=genesis.d.ts.map

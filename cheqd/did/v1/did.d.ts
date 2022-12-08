@@ -1,7 +1,5 @@
-import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { KeyValuePair } from "./common";
-export declare const protobufPackage = "cheqdid.cheqdnode.cheqd.v1";
 export interface Did {
     /** optional */
     context: string[];
@@ -193,15 +191,4 @@ export declare const Service: {
         serviceEndpoint?: string | undefined;
     } & { [K in Exclude<keyof I, keyof Service>]: never; }>(object: I): Service;
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & {
-    [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
-};
-export {};
 //# sourceMappingURL=did.d.ts.map

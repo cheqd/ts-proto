@@ -1,6 +1,4 @@
-import Long from "long";
 import _m0 from "protobufjs/minimal";
-export declare const protobufPackage = "cheqd.resource.v2";
 export interface Resource {
     data: Uint8Array;
 }
@@ -21,7 +19,7 @@ export interface Metadata {
     alsoKnownAs: AlternativeUri[];
     mediaType: string;
     created: string;
-    checksum: Uint8Array;
+    checksum: string;
     previousVersionId: string;
     nextVersionId: string;
 }
@@ -57,7 +55,7 @@ export declare const ResourceWithMetadata: {
             }[] | undefined;
             mediaType?: string | undefined;
             created?: string | undefined;
-            checksum?: Uint8Array | undefined;
+            checksum?: string | undefined;
             previousVersionId?: string | undefined;
             nextVersionId?: string | undefined;
         } | undefined;
@@ -79,7 +77,7 @@ export declare const ResourceWithMetadata: {
             }[] | undefined;
             mediaType?: string | undefined;
             created?: string | undefined;
-            checksum?: Uint8Array | undefined;
+            checksum?: string | undefined;
             previousVersionId?: string | undefined;
             nextVersionId?: string | undefined;
         } & {
@@ -103,7 +101,7 @@ export declare const ResourceWithMetadata: {
             }[]>]: never; }) | undefined;
             mediaType?: string | undefined;
             created?: string | undefined;
-            checksum?: Uint8Array | undefined;
+            checksum?: string | undefined;
             previousVersionId?: string | undefined;
             nextVersionId?: string | undefined;
         } & { [K_3 in Exclude<keyof I["metadata"], keyof Metadata>]: never; }) | undefined;
@@ -139,7 +137,7 @@ export declare const Metadata: {
         }[] | undefined;
         mediaType?: string | undefined;
         created?: string | undefined;
-        checksum?: Uint8Array | undefined;
+        checksum?: string | undefined;
         previousVersionId?: string | undefined;
         nextVersionId?: string | undefined;
     } & {
@@ -163,20 +161,9 @@ export declare const Metadata: {
         }[]>]: never; }) | undefined;
         mediaType?: string | undefined;
         created?: string | undefined;
-        checksum?: Uint8Array | undefined;
+        checksum?: string | undefined;
         previousVersionId?: string | undefined;
         nextVersionId?: string | undefined;
     } & { [K_2 in Exclude<keyof I, keyof Metadata>]: never; }>(object: I): Metadata;
 };
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & {
-    [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
-};
-export {};
 //# sourceMappingURL=resource.d.ts.map

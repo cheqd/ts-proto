@@ -3,11 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.KeyValuePair = exports.protobufPackage = void 0;
+exports.KeyValuePair = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
-exports.protobufPackage = "cheqdid.cheqdnode.cheqd.v1";
 function createBaseKeyValuePair() {
     return { key: "", value: "" };
 }

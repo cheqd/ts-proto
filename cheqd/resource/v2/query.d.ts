@@ -1,7 +1,5 @@
-import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Metadata, ResourceWithMetadata } from "./resource";
-export declare const protobufPackage = "cheqd.resource.v2";
 export interface QueryGetResourceRequest {
     collectionId: string;
     id: string;
@@ -57,7 +55,7 @@ export declare const QueryGetResourceResponse: {
                 }[] | undefined;
                 mediaType?: string | undefined;
                 created?: string | undefined;
-                checksum?: Uint8Array | undefined;
+                checksum?: string | undefined;
                 previousVersionId?: string | undefined;
                 nextVersionId?: string | undefined;
             } | undefined;
@@ -79,7 +77,7 @@ export declare const QueryGetResourceResponse: {
                 }[] | undefined;
                 mediaType?: string | undefined;
                 created?: string | undefined;
-                checksum?: Uint8Array | undefined;
+                checksum?: string | undefined;
                 previousVersionId?: string | undefined;
                 nextVersionId?: string | undefined;
             } | undefined;
@@ -101,7 +99,7 @@ export declare const QueryGetResourceResponse: {
                 }[] | undefined;
                 mediaType?: string | undefined;
                 created?: string | undefined;
-                checksum?: Uint8Array | undefined;
+                checksum?: string | undefined;
                 previousVersionId?: string | undefined;
                 nextVersionId?: string | undefined;
             } & {
@@ -125,7 +123,7 @@ export declare const QueryGetResourceResponse: {
                 }[]>]: never; }) | undefined;
                 mediaType?: string | undefined;
                 created?: string | undefined;
-                checksum?: Uint8Array | undefined;
+                checksum?: string | undefined;
                 previousVersionId?: string | undefined;
                 nextVersionId?: string | undefined;
             } & { [K_3 in Exclude<keyof I["resource"]["metadata"], keyof Metadata>]: never; }) | undefined;
@@ -163,7 +161,7 @@ export declare const QueryGetResourceMetadataResponse: {
             }[] | undefined;
             mediaType?: string | undefined;
             created?: string | undefined;
-            checksum?: Uint8Array | undefined;
+            checksum?: string | undefined;
             previousVersionId?: string | undefined;
             nextVersionId?: string | undefined;
         } | undefined;
@@ -180,7 +178,7 @@ export declare const QueryGetResourceMetadataResponse: {
             }[] | undefined;
             mediaType?: string | undefined;
             created?: string | undefined;
-            checksum?: Uint8Array | undefined;
+            checksum?: string | undefined;
             previousVersionId?: string | undefined;
             nextVersionId?: string | undefined;
         } & {
@@ -204,7 +202,7 @@ export declare const QueryGetResourceMetadataResponse: {
             }[]>]: never; }) | undefined;
             mediaType?: string | undefined;
             created?: string | undefined;
-            checksum?: Uint8Array | undefined;
+            checksum?: string | undefined;
             previousVersionId?: string | undefined;
             nextVersionId?: string | undefined;
         } & { [K_2 in Exclude<keyof I["resource"], keyof Metadata>]: never; }) | undefined;
@@ -239,7 +237,7 @@ export declare const QueryGetCollectionResourcesResponse: {
             }[] | undefined;
             mediaType?: string | undefined;
             created?: string | undefined;
-            checksum?: Uint8Array | undefined;
+            checksum?: string | undefined;
             previousVersionId?: string | undefined;
             nextVersionId?: string | undefined;
         }[] | undefined;
@@ -256,7 +254,7 @@ export declare const QueryGetCollectionResourcesResponse: {
             }[] | undefined;
             mediaType?: string | undefined;
             created?: string | undefined;
-            checksum?: Uint8Array | undefined;
+            checksum?: string | undefined;
             previousVersionId?: string | undefined;
             nextVersionId?: string | undefined;
         }[] & ({
@@ -271,7 +269,7 @@ export declare const QueryGetCollectionResourcesResponse: {
             }[] | undefined;
             mediaType?: string | undefined;
             created?: string | undefined;
-            checksum?: Uint8Array | undefined;
+            checksum?: string | undefined;
             previousVersionId?: string | undefined;
             nextVersionId?: string | undefined;
         } & {
@@ -295,7 +293,7 @@ export declare const QueryGetCollectionResourcesResponse: {
             }[]>]: never; }) | undefined;
             mediaType?: string | undefined;
             created?: string | undefined;
-            checksum?: Uint8Array | undefined;
+            checksum?: string | undefined;
             previousVersionId?: string | undefined;
             nextVersionId?: string | undefined;
         } & { [K_2 in Exclude<keyof I["resources"][number], keyof Metadata>]: never; })[] & { [K_3 in Exclude<keyof I["resources"], keyof {
@@ -310,7 +308,7 @@ export declare const QueryGetCollectionResourcesResponse: {
             }[] | undefined;
             mediaType?: string | undefined;
             created?: string | undefined;
-            checksum?: Uint8Array | undefined;
+            checksum?: string | undefined;
             previousVersionId?: string | undefined;
             nextVersionId?: string | undefined;
         }[]>]: never; }) | undefined;
@@ -334,15 +332,5 @@ export declare class QueryClientImpl implements Query {
 interface Rpc {
     request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-export type DeepPartial<T> = T extends Builtin ? T : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {} ? {
-    [K in keyof T]?: DeepPartial<T[K]>;
-} : Partial<T>;
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P : P & {
-    [K in keyof P]: Exact<P[K], I[K]>;
-} & {
-    [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
-};
 export {};
 //# sourceMappingURL=query.d.ts.map

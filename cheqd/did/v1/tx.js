@@ -3,13 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MsgClientImpl = exports.MsgUpdateDidResponse = exports.MsgUpdateDidPayload = exports.MsgCreateDidResponse = exports.MsgCreateDidPayload = exports.MsgDeactivateDidResponse = exports.MsgDeactivateDidPayload = exports.SignInfo = exports.MsgDeactivateDid = exports.MsgUpdateDid = exports.MsgCreateDid = exports.protobufPackage = void 0;
+exports.MsgClientImpl = exports.MsgUpdateDidResponse = exports.MsgUpdateDidPayload = exports.MsgCreateDidResponse = exports.MsgCreateDidPayload = exports.MsgDeactivateDidResponse = exports.MsgDeactivateDidPayload = exports.SignInfo = exports.MsgDeactivateDid = exports.MsgUpdateDid = exports.MsgCreateDid = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
 const did_1 = require("./did");
 const stateValue_1 = require("./stateValue");
-exports.protobufPackage = "cheqdid.cheqdnode.cheqd.v1";
 function createBaseMsgCreateDid() {
     return { payload: undefined, signatures: [] };
 }

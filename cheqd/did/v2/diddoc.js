@@ -3,11 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Metadata = exports.DidDocWithMetadata = exports.Service = exports.VerificationMethod = exports.DidDoc = exports.protobufPackage = void 0;
+exports.Metadata = exports.DidDocWithMetadata = exports.Service = exports.VerificationMethod = exports.DidDoc = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
-exports.protobufPackage = "cheqd.did.v2";
 function createBaseDidDoc() {
     return {
         context: [],

@@ -3,11 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Metadata = exports.AlternativeUri = exports.ResourceWithMetadata = exports.Resource = exports.protobufPackage = void 0;
+exports.Metadata = exports.AlternativeUri = exports.ResourceWithMetadata = exports.Resource = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
-exports.protobufPackage = "cheqd.resource.v2";
 function createBaseResource() {
     return { data: new Uint8Array() };
 }
@@ -168,7 +167,7 @@ function createBaseMetadata() {
         alsoKnownAs: [],
         mediaType: "",
         created: "",
-        checksum: new Uint8Array(),
+        checksum: "",
         previousVersionId: "",
         nextVersionId: "",
     };
@@ -199,8 +198,8 @@ exports.Metadata = {
         if (message.created !== "") {
             writer.uint32(66).string(message.created);
         }
-        if (message.checksum.length !== 0) {
-            writer.uint32(74).bytes(message.checksum);
+        if (message.checksum !== "") {
+            writer.uint32(74).string(message.checksum);
         }
         if (message.previousVersionId !== "") {
             writer.uint32(82).string(message.previousVersionId);
@@ -242,7 +241,7 @@ exports.Metadata = {
                     message.created = reader.string();
                     break;
                 case 9:
-                    message.checksum = reader.bytes();
+                    message.checksum = reader.string();
                     break;
                 case 10:
                     message.previousVersionId = reader.string();
@@ -269,7 +268,7 @@ exports.Metadata = {
                 : [],
             mediaType: isSet(object.mediaType) ? String(object.mediaType) : "",
             created: isSet(object.created) ? String(object.created) : "",
-            checksum: isSet(object.checksum) ? bytesFromBase64(object.checksum) : new Uint8Array(),
+            checksum: isSet(object.checksum) ? String(object.checksum) : "",
             previousVersionId: isSet(object.previousVersionId) ? String(object.previousVersionId) : "",
             nextVersionId: isSet(object.nextVersionId) ? String(object.nextVersionId) : "",
         };
@@ -289,8 +288,7 @@ exports.Metadata = {
         }
         message.mediaType !== undefined && (obj.mediaType = message.mediaType);
         message.created !== undefined && (obj.created = message.created);
-        message.checksum !== undefined &&
-            (obj.checksum = base64FromBytes(message.checksum !== undefined ? message.checksum : new Uint8Array()));
+        message.checksum !== undefined && (obj.checksum = message.checksum);
         message.previousVersionId !== undefined && (obj.previousVersionId = message.previousVersionId);
         message.nextVersionId !== undefined && (obj.nextVersionId = message.nextVersionId);
         return obj;
@@ -305,7 +303,7 @@ exports.Metadata = {
         message.alsoKnownAs = object.alsoKnownAs?.map((e) => exports.AlternativeUri.fromPartial(e)) || [];
         message.mediaType = object.mediaType ?? "";
         message.created = object.created ?? "";
-        message.checksum = object.checksum ?? new Uint8Array();
+        message.checksum = object.checksum ?? "";
         message.previousVersionId = object.previousVersionId ?? "";
         message.nextVersionId = object.nextVersionId ?? "";
         return message;

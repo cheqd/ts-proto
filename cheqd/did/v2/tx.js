@@ -3,12 +3,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MsgClientImpl = exports.MsgDeactivateDidDocResponse = exports.MsgDeactivateDidDocPayload = exports.MsgUpdateDidDocResponse = exports.MsgUpdateDidDocPayload = exports.MsgCreateDidDocResponse = exports.MsgCreateDidDocPayload = exports.SignInfo = exports.MsgDeactivateDidDoc = exports.MsgUpdateDidDoc = exports.MsgCreateDidDoc = exports.protobufPackage = void 0;
+exports.MsgClientImpl = exports.MsgDeactivateDidDocResponse = exports.MsgDeactivateDidDocPayload = exports.MsgUpdateDidDocResponse = exports.MsgUpdateDidDocPayload = exports.MsgCreateDidDocResponse = exports.MsgCreateDidDocPayload = exports.SignInfo = exports.MsgDeactivateDidDoc = exports.MsgUpdateDidDoc = exports.MsgCreateDidDoc = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
 const diddoc_1 = require("./diddoc");
-exports.protobufPackage = "cheqd.did.v2";
 function createBaseMsgCreateDidDoc() {
     return { payload: undefined, signatures: [] };
 }

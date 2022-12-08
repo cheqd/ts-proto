@@ -19,11 +19,11 @@ jobs:
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
 
+      - name: "Install buf CLI"
+        uses: bufbuild/buf-setup-action@v1.9.0
+    
       - name: "Clean install dependencies"
         run: npm ci
 
       - name: "Run npm build"
         run: npm run build
-
-      # - name: "Run npm test"
-      #   run: npm run test

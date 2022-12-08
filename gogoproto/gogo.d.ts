@@ -1,2 +1,2 @@
-export declare const protobufPackage = "gogoproto";
+export {};
 //# sourceMappingURL=gogo.d.ts.map
