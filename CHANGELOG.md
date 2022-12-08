@@ -1,5 +1,7 @@
 # Changelog
 
+## [1.0.16-develop.2](https://github.com/cheqd/ts-proto/compare/1.0.16-develop.1...1.0.16-develop.2) (2022-12-08)
+
 ## [1.0.16-develop.1](https://github.com/cheqd/ts-proto/compare/1.0.15...1.0.16-develop.1) (2022-12-01)
 
 ## [1.0.15](https://github.com/cheqd/ts-proto/compare/1.0.14...1.0.15) (2022-11-08)
