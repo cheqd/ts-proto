@@ -51,11 +51,11 @@
     "@semantic-release/npm": "^9.0.1",
     "@semantic-release/release-notes-generator": "^10.0.3",
     "@types/long": "^5.0.0",
-    "@types/node": "^18.11.11",
+    "@types/node": "^18.11.17",
     "conventional-changelog-conventionalcommits": "^5.0.0",
     "loose-ts-check": "^1.2.0",
     "semantic-release": "^19.0.5",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.4"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
