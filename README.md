@@ -4,7 +4,7 @@
 
 [![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/cheqd/ts-proto?include_prereleases&label=dev%20release&style=flat-square)](https://github.com/cheqd/ts-proto/releases/) ![GitHub commits since latest release (by date)](https://img.shields.io/github/commits-since/cheqd/ts-proto/latest?style=flat-square) [![GitHub contributors](https://img.shields.io/github/contributors/cheqd/ts-proto?label=contributors%20%E2%9D%A4%EF%B8%8F&style=flat-square)](https://github.com/cheqd/ts-proto/graphs/contributors)
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/cheqd/ts-proto/Workflow%20Dispatch?label=workflows&style=flat-square)](https://github.com/cheqd/ts-proto/actions/workflows/dispatch.yml) [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/cheqd/ts-proto/CodeQL?label=CodeQL&style=flat-square)](https://github.com/cheqd/ts-proto/actions/workflows/codeql.yml) ![GitHub repo size](https://img.shields.io/github/repo-size/cheqd/ts-proto?style=flat-square)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/cheqd/ts-proto/dispatch.yml?label=workflows&style=flat-square)](https://github.com/cheqd/ts-proto/actions/workflows/dispatch.yml) [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/cheqd/ts-proto/codeql.yml?label=CodeQL&style=flat-square)](https://github.com/cheqd/ts-proto/actions/workflows/codeql.yml) ![GitHub repo size](https://img.shields.io/github/repo-size/cheqd/ts-proto?style=flat-square)
 
 ## ℹ️ Overview
 
