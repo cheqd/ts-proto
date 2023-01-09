@@ -1,22 +1,26 @@
 import _m0 from "protobufjs/minimal";
 import { DidDocWithMetadata, Metadata } from "./diddoc";
 export interface QueryGetDidDocRequest {
+    /** is a DID to be fetched */
     id: string;
 }
-export interface QueryGetDidDocResponse {
+export interface QueryDidDocResponse {
     value: DidDocWithMetadata | undefined;
 }
 export interface QueryGetDidDocVersionRequest {
+    /** is a DID */
     id: string;
+    /** is a unique value that maps DID Doc state at some point */
     version: string;
 }
-export interface QueryGetDidDocVersionResponse {
+export interface QueryDidDocVersionResponse {
     value: DidDocWithMetadata | undefined;
 }
 export interface QueryGetAllDidDocVersionsMetadataRequest {
+    /** is a DID */
     id: string;
 }
-export interface QueryGetAllDidDocVersionsMetadataResponse {
+export interface QueryAllDidDocVersionsMetadataResponse {
     versions: Metadata[];
 }
 export declare const QueryGetDidDocRequest: {
@@ -30,11 +34,11 @@ export declare const QueryGetDidDocRequest: {
         id?: string | undefined;
     } & { [K in Exclude<keyof I, "id">]: never; }>(object: I): QueryGetDidDocRequest;
 };
-export declare const QueryGetDidDocResponse: {
-    encode(message: QueryGetDidDocResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetDidDocResponse;
-    fromJSON(object: any): QueryGetDidDocResponse;
-    toJSON(message: QueryGetDidDocResponse): unknown;
+export declare const QueryDidDocResponse: {
+    encode(message: QueryDidDocResponse, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): QueryDidDocResponse;
+    fromJSON(object: any): QueryDidDocResponse;
+    toJSON(message: QueryDidDocResponse): unknown;
     fromPartial<I extends {
         value?: {
             didDoc?: {
@@ -43,7 +47,7 @@ export declare const QueryGetDidDocResponse: {
                 controller?: string[] | undefined;
                 verificationMethod?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] | undefined;
@@ -54,7 +58,7 @@ export declare const QueryGetDidDocResponse: {
                 keyAgreement?: string[] | undefined;
                 service?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
@@ -76,7 +80,7 @@ export declare const QueryGetDidDocResponse: {
                 controller?: string[] | undefined;
                 verificationMethod?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] | undefined;
@@ -87,7 +91,7 @@ export declare const QueryGetDidDocResponse: {
                 keyAgreement?: string[] | undefined;
                 service?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
@@ -107,7 +111,7 @@ export declare const QueryGetDidDocResponse: {
                 controller?: string[] | undefined;
                 verificationMethod?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] | undefined;
@@ -118,7 +122,7 @@ export declare const QueryGetDidDocResponse: {
                 keyAgreement?: string[] | undefined;
                 service?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
@@ -128,22 +132,22 @@ export declare const QueryGetDidDocResponse: {
                 controller?: (string[] & string[] & { [K_1 in Exclude<keyof I["value"]["didDoc"]["controller"], keyof string[]>]: never; }) | undefined;
                 verificationMethod?: ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] & ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 } & {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 } & { [K_2 in Exclude<keyof I["value"]["didDoc"]["verificationMethod"][number], keyof import("./diddoc").VerificationMethod>]: never; })[] & { [K_3 in Exclude<keyof I["value"]["didDoc"]["verificationMethod"], keyof {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[]>]: never; }) | undefined;
@@ -154,19 +158,19 @@ export declare const QueryGetDidDocResponse: {
                 keyAgreement?: (string[] & string[] & { [K_8 in Exclude<keyof I["value"]["didDoc"]["keyAgreement"], keyof string[]>]: never; }) | undefined;
                 service?: ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] & ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 } & {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: (string[] & string[] & { [K_9 in Exclude<keyof I["value"]["didDoc"]["service"][number]["serviceEndpoint"], keyof string[]>]: never; }) | undefined;
                 } & { [K_10 in Exclude<keyof I["value"]["didDoc"]["service"][number], keyof import("./diddoc").Service>]: never; })[] & { [K_11 in Exclude<keyof I["value"]["didDoc"]["service"], keyof {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[]>]: never; }) | undefined;
                 alsoKnownAs?: (string[] & string[] & { [K_12 in Exclude<keyof I["value"]["didDoc"]["alsoKnownAs"], keyof string[]>]: never; }) | undefined;
@@ -187,7 +191,7 @@ export declare const QueryGetDidDocResponse: {
                 previousVersionId?: string | undefined;
             } & { [K_14 in Exclude<keyof I["value"]["metadata"], keyof Metadata>]: never; }) | undefined;
         } & { [K_15 in Exclude<keyof I["value"], keyof DidDocWithMetadata>]: never; }) | undefined;
-    } & { [K_16 in Exclude<keyof I, "value">]: never; }>(object: I): QueryGetDidDocResponse;
+    } & { [K_16 in Exclude<keyof I, "value">]: never; }>(object: I): QueryDidDocResponse;
 };
 export declare const QueryGetDidDocVersionRequest: {
     encode(message: QueryGetDidDocVersionRequest, writer?: _m0.Writer): _m0.Writer;
@@ -202,11 +206,11 @@ export declare const QueryGetDidDocVersionRequest: {
         version?: string | undefined;
     } & { [K in Exclude<keyof I, keyof QueryGetDidDocVersionRequest>]: never; }>(object: I): QueryGetDidDocVersionRequest;
 };
-export declare const QueryGetDidDocVersionResponse: {
-    encode(message: QueryGetDidDocVersionResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetDidDocVersionResponse;
-    fromJSON(object: any): QueryGetDidDocVersionResponse;
-    toJSON(message: QueryGetDidDocVersionResponse): unknown;
+export declare const QueryDidDocVersionResponse: {
+    encode(message: QueryDidDocVersionResponse, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): QueryDidDocVersionResponse;
+    fromJSON(object: any): QueryDidDocVersionResponse;
+    toJSON(message: QueryDidDocVersionResponse): unknown;
     fromPartial<I extends {
         value?: {
             didDoc?: {
@@ -215,7 +219,7 @@ export declare const QueryGetDidDocVersionResponse: {
                 controller?: string[] | undefined;
                 verificationMethod?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] | undefined;
@@ -226,7 +230,7 @@ export declare const QueryGetDidDocVersionResponse: {
                 keyAgreement?: string[] | undefined;
                 service?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
@@ -248,7 +252,7 @@ export declare const QueryGetDidDocVersionResponse: {
                 controller?: string[] | undefined;
                 verificationMethod?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] | undefined;
@@ -259,7 +263,7 @@ export declare const QueryGetDidDocVersionResponse: {
                 keyAgreement?: string[] | undefined;
                 service?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
@@ -279,7 +283,7 @@ export declare const QueryGetDidDocVersionResponse: {
                 controller?: string[] | undefined;
                 verificationMethod?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] | undefined;
@@ -290,7 +294,7 @@ export declare const QueryGetDidDocVersionResponse: {
                 keyAgreement?: string[] | undefined;
                 service?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
@@ -300,22 +304,22 @@ export declare const QueryGetDidDocVersionResponse: {
                 controller?: (string[] & string[] & { [K_1 in Exclude<keyof I["value"]["didDoc"]["controller"], keyof string[]>]: never; }) | undefined;
                 verificationMethod?: ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] & ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 } & {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 } & { [K_2 in Exclude<keyof I["value"]["didDoc"]["verificationMethod"][number], keyof import("./diddoc").VerificationMethod>]: never; })[] & { [K_3 in Exclude<keyof I["value"]["didDoc"]["verificationMethod"], keyof {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[]>]: never; }) | undefined;
@@ -326,19 +330,19 @@ export declare const QueryGetDidDocVersionResponse: {
                 keyAgreement?: (string[] & string[] & { [K_8 in Exclude<keyof I["value"]["didDoc"]["keyAgreement"], keyof string[]>]: never; }) | undefined;
                 service?: ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] & ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 } & {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: (string[] & string[] & { [K_9 in Exclude<keyof I["value"]["didDoc"]["service"][number]["serviceEndpoint"], keyof string[]>]: never; }) | undefined;
                 } & { [K_10 in Exclude<keyof I["value"]["didDoc"]["service"][number], keyof import("./diddoc").Service>]: never; })[] & { [K_11 in Exclude<keyof I["value"]["didDoc"]["service"], keyof {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[]>]: never; }) | undefined;
                 alsoKnownAs?: (string[] & string[] & { [K_12 in Exclude<keyof I["value"]["didDoc"]["alsoKnownAs"], keyof string[]>]: never; }) | undefined;
@@ -359,7 +363,7 @@ export declare const QueryGetDidDocVersionResponse: {
                 previousVersionId?: string | undefined;
             } & { [K_14 in Exclude<keyof I["value"]["metadata"], keyof Metadata>]: never; }) | undefined;
         } & { [K_15 in Exclude<keyof I["value"], keyof DidDocWithMetadata>]: never; }) | undefined;
-    } & { [K_16 in Exclude<keyof I, "value">]: never; }>(object: I): QueryGetDidDocVersionResponse;
+    } & { [K_16 in Exclude<keyof I, "value">]: never; }>(object: I): QueryDidDocVersionResponse;
 };
 export declare const QueryGetAllDidDocVersionsMetadataRequest: {
     encode(message: QueryGetAllDidDocVersionsMetadataRequest, writer?: _m0.Writer): _m0.Writer;
@@ -372,11 +376,11 @@ export declare const QueryGetAllDidDocVersionsMetadataRequest: {
         id?: string | undefined;
     } & { [K in Exclude<keyof I, "id">]: never; }>(object: I): QueryGetAllDidDocVersionsMetadataRequest;
 };
-export declare const QueryGetAllDidDocVersionsMetadataResponse: {
-    encode(message: QueryGetAllDidDocVersionsMetadataResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetAllDidDocVersionsMetadataResponse;
-    fromJSON(object: any): QueryGetAllDidDocVersionsMetadataResponse;
-    toJSON(message: QueryGetAllDidDocVersionsMetadataResponse): unknown;
+export declare const QueryAllDidDocVersionsMetadataResponse: {
+    encode(message: QueryAllDidDocVersionsMetadataResponse, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllDidDocVersionsMetadataResponse;
+    fromJSON(object: any): QueryAllDidDocVersionsMetadataResponse;
+    toJSON(message: QueryAllDidDocVersionsMetadataResponse): unknown;
     fromPartial<I extends {
         versions?: {
             created?: string | undefined;
@@ -416,12 +420,12 @@ export declare const QueryGetAllDidDocVersionsMetadataResponse: {
             nextVersionId?: string | undefined;
             previousVersionId?: string | undefined;
         }[]>]: never; }) | undefined;
-    } & { [K_2 in Exclude<keyof I, "versions">]: never; }>(object: I): QueryGetAllDidDocVersionsMetadataResponse;
+    } & { [K_2 in Exclude<keyof I, "versions">]: never; }>(object: I): QueryAllDidDocVersionsMetadataResponse;
 };
 export interface Query {
-    DidDoc(request: QueryGetDidDocRequest): Promise<QueryGetDidDocResponse>;
-    DidDocVersion(request: QueryGetDidDocVersionRequest): Promise<QueryGetDidDocVersionResponse>;
-    AllDidDocVersionsMetadata(request: QueryGetAllDidDocVersionsMetadataRequest): Promise<QueryGetAllDidDocVersionsMetadataResponse>;
+    DidDoc(request: QueryGetDidDocRequest): Promise<QueryDidDocResponse>;
+    DidDocVersion(request: QueryGetDidDocVersionRequest): Promise<QueryDidDocVersionResponse>;
+    AllDidDocVersionsMetadata(request: QueryGetAllDidDocVersionsMetadataRequest): Promise<QueryAllDidDocVersionsMetadataResponse>;
 }
 export declare class QueryClientImpl implements Query {
     private readonly rpc;
@@ -429,9 +433,9 @@ export declare class QueryClientImpl implements Query {
     constructor(rpc: Rpc, opts?: {
         service?: string;
     });
-    DidDoc(request: QueryGetDidDocRequest): Promise<QueryGetDidDocResponse>;
-    DidDocVersion(request: QueryGetDidDocVersionRequest): Promise<QueryGetDidDocVersionResponse>;
-    AllDidDocVersionsMetadata(request: QueryGetAllDidDocVersionsMetadataRequest): Promise<QueryGetAllDidDocVersionsMetadataResponse>;
+    DidDoc(request: QueryGetDidDocRequest): Promise<QueryDidDocResponse>;
+    DidDocVersion(request: QueryGetDidDocVersionRequest): Promise<QueryDidDocVersionResponse>;
+    AllDidDocVersionsMetadata(request: QueryGetAllDidDocVersionsMetadataRequest): Promise<QueryAllDidDocVersionsMetadataResponse>;
 }
 interface Rpc {
     request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;

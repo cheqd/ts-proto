@@ -14,13 +14,13 @@ export interface DidDoc {
 }
 export interface VerificationMethod {
     id: string;
-    type: string;
+    verificationMethodType: string;
     controller: string;
     verificationMaterial: string;
 }
 export interface Service {
     id: string;
-    type: string;
+    serviceType: string;
     serviceEndpoint: string[];
 }
 export interface DidDocWithMetadata {
@@ -46,7 +46,7 @@ export declare const DidDoc: {
         controller?: string[] | undefined;
         verificationMethod?: {
             id?: string | undefined;
-            type?: string | undefined;
+            verificationMethodType?: string | undefined;
             controller?: string | undefined;
             verificationMaterial?: string | undefined;
         }[] | undefined;
@@ -57,7 +57,7 @@ export declare const DidDoc: {
         keyAgreement?: string[] | undefined;
         service?: {
             id?: string | undefined;
-            type?: string | undefined;
+            serviceType?: string | undefined;
             serviceEndpoint?: string[] | undefined;
         }[] | undefined;
         alsoKnownAs?: string[] | undefined;
@@ -67,22 +67,22 @@ export declare const DidDoc: {
         controller?: (string[] & string[] & { [K_1 in Exclude<keyof I["controller"], keyof string[]>]: never; }) | undefined;
         verificationMethod?: ({
             id?: string | undefined;
-            type?: string | undefined;
+            verificationMethodType?: string | undefined;
             controller?: string | undefined;
             verificationMaterial?: string | undefined;
         }[] & ({
             id?: string | undefined;
-            type?: string | undefined;
+            verificationMethodType?: string | undefined;
             controller?: string | undefined;
             verificationMaterial?: string | undefined;
         } & {
             id?: string | undefined;
-            type?: string | undefined;
+            verificationMethodType?: string | undefined;
             controller?: string | undefined;
             verificationMaterial?: string | undefined;
         } & { [K_2 in Exclude<keyof I["verificationMethod"][number], keyof VerificationMethod>]: never; })[] & { [K_3 in Exclude<keyof I["verificationMethod"], keyof {
             id?: string | undefined;
-            type?: string | undefined;
+            verificationMethodType?: string | undefined;
             controller?: string | undefined;
             verificationMaterial?: string | undefined;
         }[]>]: never; }) | undefined;
@@ -93,19 +93,19 @@ export declare const DidDoc: {
         keyAgreement?: (string[] & string[] & { [K_8 in Exclude<keyof I["keyAgreement"], keyof string[]>]: never; }) | undefined;
         service?: ({
             id?: string | undefined;
-            type?: string | undefined;
+            serviceType?: string | undefined;
             serviceEndpoint?: string[] | undefined;
         }[] & ({
             id?: string | undefined;
-            type?: string | undefined;
+            serviceType?: string | undefined;
             serviceEndpoint?: string[] | undefined;
         } & {
             id?: string | undefined;
-            type?: string | undefined;
+            serviceType?: string | undefined;
             serviceEndpoint?: (string[] & string[] & { [K_9 in Exclude<keyof I["service"][number]["serviceEndpoint"], keyof string[]>]: never; }) | undefined;
         } & { [K_10 in Exclude<keyof I["service"][number], keyof Service>]: never; })[] & { [K_11 in Exclude<keyof I["service"], keyof {
             id?: string | undefined;
-            type?: string | undefined;
+            serviceType?: string | undefined;
             serviceEndpoint?: string[] | undefined;
         }[]>]: never; }) | undefined;
         alsoKnownAs?: (string[] & string[] & { [K_12 in Exclude<keyof I["alsoKnownAs"], keyof string[]>]: never; }) | undefined;
@@ -118,12 +118,12 @@ export declare const VerificationMethod: {
     toJSON(message: VerificationMethod): unknown;
     fromPartial<I extends {
         id?: string | undefined;
-        type?: string | undefined;
+        verificationMethodType?: string | undefined;
         controller?: string | undefined;
         verificationMaterial?: string | undefined;
     } & {
         id?: string | undefined;
-        type?: string | undefined;
+        verificationMethodType?: string | undefined;
         controller?: string | undefined;
         verificationMaterial?: string | undefined;
     } & { [K in Exclude<keyof I, keyof VerificationMethod>]: never; }>(object: I): VerificationMethod;
@@ -135,11 +135,11 @@ export declare const Service: {
     toJSON(message: Service): unknown;
     fromPartial<I extends {
         id?: string | undefined;
-        type?: string | undefined;
+        serviceType?: string | undefined;
         serviceEndpoint?: string[] | undefined;
     } & {
         id?: string | undefined;
-        type?: string | undefined;
+        serviceType?: string | undefined;
         serviceEndpoint?: (string[] & string[] & { [K in Exclude<keyof I["serviceEndpoint"], keyof string[]>]: never; }) | undefined;
     } & { [K_1 in Exclude<keyof I, keyof Service>]: never; }>(object: I): Service;
 };
@@ -155,7 +155,7 @@ export declare const DidDocWithMetadata: {
             controller?: string[] | undefined;
             verificationMethod?: {
                 id?: string | undefined;
-                type?: string | undefined;
+                verificationMethodType?: string | undefined;
                 controller?: string | undefined;
                 verificationMaterial?: string | undefined;
             }[] | undefined;
@@ -166,7 +166,7 @@ export declare const DidDocWithMetadata: {
             keyAgreement?: string[] | undefined;
             service?: {
                 id?: string | undefined;
-                type?: string | undefined;
+                serviceType?: string | undefined;
                 serviceEndpoint?: string[] | undefined;
             }[] | undefined;
             alsoKnownAs?: string[] | undefined;
@@ -186,7 +186,7 @@ export declare const DidDocWithMetadata: {
             controller?: string[] | undefined;
             verificationMethod?: {
                 id?: string | undefined;
-                type?: string | undefined;
+                verificationMethodType?: string | undefined;
                 controller?: string | undefined;
                 verificationMaterial?: string | undefined;
             }[] | undefined;
@@ -197,7 +197,7 @@ export declare const DidDocWithMetadata: {
             keyAgreement?: string[] | undefined;
             service?: {
                 id?: string | undefined;
-                type?: string | undefined;
+                serviceType?: string | undefined;
                 serviceEndpoint?: string[] | undefined;
             }[] | undefined;
             alsoKnownAs?: string[] | undefined;
@@ -207,22 +207,22 @@ export declare const DidDocWithMetadata: {
             controller?: (string[] & string[] & { [K_1 in Exclude<keyof I["didDoc"]["controller"], keyof string[]>]: never; }) | undefined;
             verificationMethod?: ({
                 id?: string | undefined;
-                type?: string | undefined;
+                verificationMethodType?: string | undefined;
                 controller?: string | undefined;
                 verificationMaterial?: string | undefined;
             }[] & ({
                 id?: string | undefined;
-                type?: string | undefined;
+                verificationMethodType?: string | undefined;
                 controller?: string | undefined;
                 verificationMaterial?: string | undefined;
             } & {
                 id?: string | undefined;
-                type?: string | undefined;
+                verificationMethodType?: string | undefined;
                 controller?: string | undefined;
                 verificationMaterial?: string | undefined;
             } & { [K_2 in Exclude<keyof I["didDoc"]["verificationMethod"][number], keyof VerificationMethod>]: never; })[] & { [K_3 in Exclude<keyof I["didDoc"]["verificationMethod"], keyof {
                 id?: string | undefined;
-                type?: string | undefined;
+                verificationMethodType?: string | undefined;
                 controller?: string | undefined;
                 verificationMaterial?: string | undefined;
             }[]>]: never; }) | undefined;
@@ -233,19 +233,19 @@ export declare const DidDocWithMetadata: {
             keyAgreement?: (string[] & string[] & { [K_8 in Exclude<keyof I["didDoc"]["keyAgreement"], keyof string[]>]: never; }) | undefined;
             service?: ({
                 id?: string | undefined;
-                type?: string | undefined;
+                serviceType?: string | undefined;
                 serviceEndpoint?: string[] | undefined;
             }[] & ({
                 id?: string | undefined;
-                type?: string | undefined;
+                serviceType?: string | undefined;
                 serviceEndpoint?: string[] | undefined;
             } & {
                 id?: string | undefined;
-                type?: string | undefined;
+                serviceType?: string | undefined;
                 serviceEndpoint?: (string[] & string[] & { [K_9 in Exclude<keyof I["didDoc"]["service"][number]["serviceEndpoint"], keyof string[]>]: never; }) | undefined;
             } & { [K_10 in Exclude<keyof I["didDoc"]["service"][number], keyof Service>]: never; })[] & { [K_11 in Exclude<keyof I["didDoc"]["service"], keyof {
                 id?: string | undefined;
-                type?: string | undefined;
+                serviceType?: string | undefined;
                 serviceEndpoint?: string[] | undefined;
             }[]>]: never; }) | undefined;
             alsoKnownAs?: (string[] & string[] & { [K_12 in Exclude<keyof I["didDoc"]["alsoKnownAs"], keyof string[]>]: never; }) | undefined;

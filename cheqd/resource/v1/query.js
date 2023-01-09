@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.QueryClientImpl = exports.QueryGetAllResourceVersionsResponse = exports.QueryGetAllResourceVersionsRequest = exports.QueryGetCollectionResourcesResponse = exports.QueryGetCollectionResourcesRequest = exports.QueryGetResourceResponse = exports.QueryGetResourceRequest = void 0;
+exports.QueryClientImpl = exports.QueryGetAllResourceVersionsResponse = exports.QueryGetAllResourceVersionsRequest = exports.QueryCollectionResourcesResponse = exports.QueryGetCollectionResourcesRequest = exports.QueryResourceResponse = exports.QueryGetResourceRequest = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
@@ -60,10 +60,10 @@ exports.QueryGetResourceRequest = {
         return message;
     },
 };
-function createBaseQueryGetResourceResponse() {
+function createBaseQueryResourceResponse() {
     return { resource: undefined };
 }
-exports.QueryGetResourceResponse = {
+exports.QueryResourceResponse = {
     encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.resource !== undefined) {
             resource_1.Resource.encode(message.resource, writer.uint32(10).fork()).ldelim();
@@ -73,7 +73,7 @@ exports.QueryGetResourceResponse = {
     decode(input, length) {
         const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
-        const message = createBaseQueryGetResourceResponse();
+        const message = createBaseQueryResourceResponse();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
@@ -96,7 +96,7 @@ exports.QueryGetResourceResponse = {
         return obj;
     },
     fromPartial(object) {
-        const message = createBaseQueryGetResourceResponse();
+        const message = createBaseQueryResourceResponse();
         message.resource = (object.resource !== undefined && object.resource !== null)
             ? resource_1.Resource.fromPartial(object.resource)
             : undefined;
@@ -144,10 +144,10 @@ exports.QueryGetCollectionResourcesRequest = {
         return message;
     },
 };
-function createBaseQueryGetCollectionResourcesResponse() {
+function createBaseQueryCollectionResourcesResponse() {
     return { resources: [] };
 }
-exports.QueryGetCollectionResourcesResponse = {
+exports.QueryCollectionResourcesResponse = {
     encode(message, writer = minimal_1.default.Writer.create()) {
         for (const v of message.resources) {
             resource_1.ResourceHeader.encode(v, writer.uint32(10).fork()).ldelim();
@@ -157,7 +157,7 @@ exports.QueryGetCollectionResourcesResponse = {
     decode(input, length) {
         const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
-        const message = createBaseQueryGetCollectionResourcesResponse();
+        const message = createBaseQueryCollectionResourcesResponse();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
@@ -187,7 +187,7 @@ exports.QueryGetCollectionResourcesResponse = {
         return obj;
     },
     fromPartial(object) {
-        const message = createBaseQueryGetCollectionResourcesResponse();
+        const message = createBaseQueryCollectionResourcesResponse();
         message.resources = object.resources?.map((e) => resource_1.ResourceHeader.fromPartial(e)) || [];
         return message;
     },
@@ -312,12 +312,12 @@ class QueryClientImpl {
     Resource(request) {
         const data = exports.QueryGetResourceRequest.encode(request).finish();
         const promise = this.rpc.request(this.service, "Resource", data);
-        return promise.then((data) => exports.QueryGetResourceResponse.decode(new minimal_1.default.Reader(data)));
+        return promise.then((data) => exports.QueryResourceResponse.decode(new minimal_1.default.Reader(data)));
     }
     CollectionResources(request) {
         const data = exports.QueryGetCollectionResourcesRequest.encode(request).finish();
         const promise = this.rpc.request(this.service, "CollectionResources", data);
-        return promise.then((data) => exports.QueryGetCollectionResourcesResponse.decode(new minimal_1.default.Reader(data)));
+        return promise.then((data) => exports.QueryCollectionResourcesResponse.decode(new minimal_1.default.Reader(data)));
     }
     AllResourceVersions(request) {
         const data = exports.QueryGetAllResourceVersionsRequest.encode(request).finish();

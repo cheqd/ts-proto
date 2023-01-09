@@ -1,23 +1,28 @@
 import _m0 from "protobufjs/minimal";
 import { Metadata, ResourceWithMetadata } from "./resource";
 export interface QueryGetResourceRequest {
+    /** is unique identifier a for collection */
     collectionId: string;
+    /** is unique identifier for a resource */
     id: string;
 }
-export interface QueryGetResourceResponse {
+export interface QueryResourceResponse {
     resource: ResourceWithMetadata | undefined;
 }
 export interface QueryGetResourceMetadataRequest {
+    /** is unique identifier a for collection */
     collectionId: string;
+    /** is unique identifier for a resource */
     id: string;
 }
-export interface QueryGetResourceMetadataResponse {
+export interface QueryResourceMetadataResponse {
     resource: Metadata | undefined;
 }
 export interface QueryGetCollectionResourcesRequest {
+    /** is unique identifier a for collection */
     collectionId: string;
 }
-export interface QueryGetCollectionResourcesResponse {
+export interface QueryCollectionResourcesResponse {
     resources: Metadata[];
 }
 export declare const QueryGetResourceRequest: {
@@ -33,11 +38,11 @@ export declare const QueryGetResourceRequest: {
         id?: string | undefined;
     } & { [K in Exclude<keyof I, keyof QueryGetResourceRequest>]: never; }>(object: I): QueryGetResourceRequest;
 };
-export declare const QueryGetResourceResponse: {
-    encode(message: QueryGetResourceResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetResourceResponse;
-    fromJSON(object: any): QueryGetResourceResponse;
-    toJSON(message: QueryGetResourceResponse): unknown;
+export declare const QueryResourceResponse: {
+    encode(message: QueryResourceResponse, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): QueryResourceResponse;
+    fromJSON(object: any): QueryResourceResponse;
+    toJSON(message: QueryResourceResponse): unknown;
     fromPartial<I extends {
         resource?: {
             resource?: {
@@ -128,7 +133,7 @@ export declare const QueryGetResourceResponse: {
                 nextVersionId?: string | undefined;
             } & { [K_3 in Exclude<keyof I["resource"]["metadata"], keyof Metadata>]: never; }) | undefined;
         } & { [K_4 in Exclude<keyof I["resource"], keyof ResourceWithMetadata>]: never; }) | undefined;
-    } & { [K_5 in Exclude<keyof I, "resource">]: never; }>(object: I): QueryGetResourceResponse;
+    } & { [K_5 in Exclude<keyof I, "resource">]: never; }>(object: I): QueryResourceResponse;
 };
 export declare const QueryGetResourceMetadataRequest: {
     encode(message: QueryGetResourceMetadataRequest, writer?: _m0.Writer): _m0.Writer;
@@ -143,11 +148,11 @@ export declare const QueryGetResourceMetadataRequest: {
         id?: string | undefined;
     } & { [K in Exclude<keyof I, keyof QueryGetResourceMetadataRequest>]: never; }>(object: I): QueryGetResourceMetadataRequest;
 };
-export declare const QueryGetResourceMetadataResponse: {
-    encode(message: QueryGetResourceMetadataResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetResourceMetadataResponse;
-    fromJSON(object: any): QueryGetResourceMetadataResponse;
-    toJSON(message: QueryGetResourceMetadataResponse): unknown;
+export declare const QueryResourceMetadataResponse: {
+    encode(message: QueryResourceMetadataResponse, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): QueryResourceMetadataResponse;
+    fromJSON(object: any): QueryResourceMetadataResponse;
+    toJSON(message: QueryResourceMetadataResponse): unknown;
     fromPartial<I extends {
         resource?: {
             collectionId?: string | undefined;
@@ -206,7 +211,7 @@ export declare const QueryGetResourceMetadataResponse: {
             previousVersionId?: string | undefined;
             nextVersionId?: string | undefined;
         } & { [K_2 in Exclude<keyof I["resource"], keyof Metadata>]: never; }) | undefined;
-    } & { [K_3 in Exclude<keyof I, "resource">]: never; }>(object: I): QueryGetResourceMetadataResponse;
+    } & { [K_3 in Exclude<keyof I, "resource">]: never; }>(object: I): QueryResourceMetadataResponse;
 };
 export declare const QueryGetCollectionResourcesRequest: {
     encode(message: QueryGetCollectionResourcesRequest, writer?: _m0.Writer): _m0.Writer;
@@ -219,11 +224,11 @@ export declare const QueryGetCollectionResourcesRequest: {
         collectionId?: string | undefined;
     } & { [K in Exclude<keyof I, "collectionId">]: never; }>(object: I): QueryGetCollectionResourcesRequest;
 };
-export declare const QueryGetCollectionResourcesResponse: {
-    encode(message: QueryGetCollectionResourcesResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetCollectionResourcesResponse;
-    fromJSON(object: any): QueryGetCollectionResourcesResponse;
-    toJSON(message: QueryGetCollectionResourcesResponse): unknown;
+export declare const QueryCollectionResourcesResponse: {
+    encode(message: QueryCollectionResourcesResponse, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): QueryCollectionResourcesResponse;
+    fromJSON(object: any): QueryCollectionResourcesResponse;
+    toJSON(message: QueryCollectionResourcesResponse): unknown;
     fromPartial<I extends {
         resources?: {
             collectionId?: string | undefined;
@@ -312,12 +317,12 @@ export declare const QueryGetCollectionResourcesResponse: {
             previousVersionId?: string | undefined;
             nextVersionId?: string | undefined;
         }[]>]: never; }) | undefined;
-    } & { [K_4 in Exclude<keyof I, "resources">]: never; }>(object: I): QueryGetCollectionResourcesResponse;
+    } & { [K_4 in Exclude<keyof I, "resources">]: never; }>(object: I): QueryCollectionResourcesResponse;
 };
 export interface Query {
-    Resource(request: QueryGetResourceRequest): Promise<QueryGetResourceResponse>;
-    ResourceMetadata(request: QueryGetResourceMetadataRequest): Promise<QueryGetResourceMetadataResponse>;
-    CollectionResources(request: QueryGetCollectionResourcesRequest): Promise<QueryGetCollectionResourcesResponse>;
+    Resource(request: QueryGetResourceRequest): Promise<QueryResourceResponse>;
+    ResourceMetadata(request: QueryGetResourceMetadataRequest): Promise<QueryResourceMetadataResponse>;
+    CollectionResources(request: QueryGetCollectionResourcesRequest): Promise<QueryCollectionResourcesResponse>;
 }
 export declare class QueryClientImpl implements Query {
     private readonly rpc;
@@ -325,9 +330,9 @@ export declare class QueryClientImpl implements Query {
     constructor(rpc: Rpc, opts?: {
         service?: string;
     });
-    Resource(request: QueryGetResourceRequest): Promise<QueryGetResourceResponse>;
-    ResourceMetadata(request: QueryGetResourceMetadataRequest): Promise<QueryGetResourceMetadataResponse>;
-    CollectionResources(request: QueryGetCollectionResourcesRequest): Promise<QueryGetCollectionResourcesResponse>;
+    Resource(request: QueryGetResourceRequest): Promise<QueryResourceResponse>;
+    ResourceMetadata(request: QueryGetResourceMetadataRequest): Promise<QueryResourceMetadataResponse>;
+    CollectionResources(request: QueryGetCollectionResourcesRequest): Promise<QueryCollectionResourcesResponse>;
 }
 interface Rpc {
     request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;

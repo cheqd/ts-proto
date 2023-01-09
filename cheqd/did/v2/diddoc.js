@@ -209,15 +209,15 @@ exports.DidDoc = {
     },
 };
 function createBaseVerificationMethod() {
-    return { id: "", type: "", controller: "", verificationMaterial: "" };
+    return { id: "", verificationMethodType: "", controller: "", verificationMaterial: "" };
 }
 exports.VerificationMethod = {
     encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
-        if (message.type !== "") {
-            writer.uint32(18).string(message.type);
+        if (message.verificationMethodType !== "") {
+            writer.uint32(18).string(message.verificationMethodType);
         }
         if (message.controller !== "") {
             writer.uint32(26).string(message.controller);
@@ -238,7 +238,7 @@ exports.VerificationMethod = {
                     message.id = reader.string();
                     break;
                 case 2:
-                    message.type = reader.string();
+                    message.verificationMethodType = reader.string();
                     break;
                 case 3:
                     message.controller = reader.string();
@@ -256,7 +256,7 @@ exports.VerificationMethod = {
     fromJSON(object) {
         return {
             id: isSet(object.id) ? String(object.id) : "",
-            type: isSet(object.type) ? String(object.type) : "",
+            verificationMethodType: isSet(object.verificationMethodType) ? String(object.verificationMethodType) : "",
             controller: isSet(object.controller) ? String(object.controller) : "",
             verificationMaterial: isSet(object.verificationMaterial) ? String(object.verificationMaterial) : "",
         };
@@ -264,7 +264,7 @@ exports.VerificationMethod = {
     toJSON(message) {
         const obj = {};
         message.id !== undefined && (obj.id = message.id);
-        message.type !== undefined && (obj.type = message.type);
+        message.verificationMethodType !== undefined && (obj.verificationMethodType = message.verificationMethodType);
         message.controller !== undefined && (obj.controller = message.controller);
         message.verificationMaterial !== undefined && (obj.verificationMaterial = message.verificationMaterial);
         return obj;
@@ -272,22 +272,22 @@ exports.VerificationMethod = {
     fromPartial(object) {
         const message = createBaseVerificationMethod();
         message.id = object.id ?? "";
-        message.type = object.type ?? "";
+        message.verificationMethodType = object.verificationMethodType ?? "";
         message.controller = object.controller ?? "";
         message.verificationMaterial = object.verificationMaterial ?? "";
         return message;
     },
 };
 function createBaseService() {
-    return { id: "", type: "", serviceEndpoint: [] };
+    return { id: "", serviceType: "", serviceEndpoint: [] };
 }
 exports.Service = {
     encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
-        if (message.type !== "") {
-            writer.uint32(18).string(message.type);
+        if (message.serviceType !== "") {
+            writer.uint32(18).string(message.serviceType);
         }
         for (const v of message.serviceEndpoint) {
             writer.uint32(26).string(v);
@@ -305,7 +305,7 @@ exports.Service = {
                     message.id = reader.string();
                     break;
                 case 2:
-                    message.type = reader.string();
+                    message.serviceType = reader.string();
                     break;
                 case 3:
                     message.serviceEndpoint.push(reader.string());
@@ -320,14 +320,14 @@ exports.Service = {
     fromJSON(object) {
         return {
             id: isSet(object.id) ? String(object.id) : "",
-            type: isSet(object.type) ? String(object.type) : "",
+            serviceType: isSet(object.serviceType) ? String(object.serviceType) : "",
             serviceEndpoint: Array.isArray(object?.serviceEndpoint) ? object.serviceEndpoint.map((e) => String(e)) : [],
         };
     },
     toJSON(message) {
         const obj = {};
         message.id !== undefined && (obj.id = message.id);
-        message.type !== undefined && (obj.type = message.type);
+        message.serviceType !== undefined && (obj.serviceType = message.serviceType);
         if (message.serviceEndpoint) {
             obj.serviceEndpoint = message.serviceEndpoint.map((e) => e);
         }
@@ -339,7 +339,7 @@ exports.Service = {
     fromPartial(object) {
         const message = createBaseService();
         message.id = object.id ?? "";
-        message.type = object.type ?? "";
+        message.serviceType = object.serviceType ?? "";
         message.serviceEndpoint = object.serviceEndpoint?.map((e) => e) || [];
         return message;
     },
