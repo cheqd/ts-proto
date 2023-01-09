@@ -80,7 +80,7 @@ exports.FeeParams = {
         return message;
     },
 };
-var globalThis = (() => {
+var tsProtoGlobalThis = (() => {
     if (typeof globalThis !== "undefined") {
         return globalThis;
     }

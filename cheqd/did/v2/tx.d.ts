@@ -69,7 +69,7 @@ export declare const MsgCreateDidDoc: {
             controller?: string[] | undefined;
             verificationMethod?: {
                 id?: string | undefined;
-                type?: string | undefined;
+                verificationMethodType?: string | undefined;
                 controller?: string | undefined;
                 verificationMaterial?: string | undefined;
             }[] | undefined;
@@ -81,7 +81,7 @@ export declare const MsgCreateDidDoc: {
             alsoKnownAs?: string[] | undefined;
             service?: {
                 id?: string | undefined;
-                type?: string | undefined;
+                serviceType?: string | undefined;
                 serviceEndpoint?: string[] | undefined;
             }[] | undefined;
             versionId?: string | undefined;
@@ -97,7 +97,7 @@ export declare const MsgCreateDidDoc: {
             controller?: string[] | undefined;
             verificationMethod?: {
                 id?: string | undefined;
-                type?: string | undefined;
+                verificationMethodType?: string | undefined;
                 controller?: string | undefined;
                 verificationMaterial?: string | undefined;
             }[] | undefined;
@@ -109,7 +109,7 @@ export declare const MsgCreateDidDoc: {
             alsoKnownAs?: string[] | undefined;
             service?: {
                 id?: string | undefined;
-                type?: string | undefined;
+                serviceType?: string | undefined;
                 serviceEndpoint?: string[] | undefined;
             }[] | undefined;
             versionId?: string | undefined;
@@ -119,22 +119,22 @@ export declare const MsgCreateDidDoc: {
             controller?: (string[] & string[] & { [K_1 in Exclude<keyof I["payload"]["controller"], keyof string[]>]: never; }) | undefined;
             verificationMethod?: ({
                 id?: string | undefined;
-                type?: string | undefined;
+                verificationMethodType?: string | undefined;
                 controller?: string | undefined;
                 verificationMaterial?: string | undefined;
             }[] & ({
                 id?: string | undefined;
-                type?: string | undefined;
+                verificationMethodType?: string | undefined;
                 controller?: string | undefined;
                 verificationMaterial?: string | undefined;
             } & {
                 id?: string | undefined;
-                type?: string | undefined;
+                verificationMethodType?: string | undefined;
                 controller?: string | undefined;
                 verificationMaterial?: string | undefined;
             } & { [K_2 in Exclude<keyof I["payload"]["verificationMethod"][number], keyof VerificationMethod>]: never; })[] & { [K_3 in Exclude<keyof I["payload"]["verificationMethod"], keyof {
                 id?: string | undefined;
-                type?: string | undefined;
+                verificationMethodType?: string | undefined;
                 controller?: string | undefined;
                 verificationMaterial?: string | undefined;
             }[]>]: never; }) | undefined;
@@ -146,19 +146,19 @@ export declare const MsgCreateDidDoc: {
             alsoKnownAs?: (string[] & string[] & { [K_9 in Exclude<keyof I["payload"]["alsoKnownAs"], keyof string[]>]: never; }) | undefined;
             service?: ({
                 id?: string | undefined;
-                type?: string | undefined;
+                serviceType?: string | undefined;
                 serviceEndpoint?: string[] | undefined;
             }[] & ({
                 id?: string | undefined;
-                type?: string | undefined;
+                serviceType?: string | undefined;
                 serviceEndpoint?: string[] | undefined;
             } & {
                 id?: string | undefined;
-                type?: string | undefined;
+                serviceType?: string | undefined;
                 serviceEndpoint?: (string[] & string[] & { [K_10 in Exclude<keyof I["payload"]["service"][number]["serviceEndpoint"], keyof string[]>]: never; }) | undefined;
             } & { [K_11 in Exclude<keyof I["payload"]["service"][number], keyof Service>]: never; })[] & { [K_12 in Exclude<keyof I["payload"]["service"], keyof {
                 id?: string | undefined;
-                type?: string | undefined;
+                serviceType?: string | undefined;
                 serviceEndpoint?: string[] | undefined;
             }[]>]: never; }) | undefined;
             versionId?: string | undefined;
@@ -190,7 +190,7 @@ export declare const MsgUpdateDidDoc: {
             controller?: string[] | undefined;
             verificationMethod?: {
                 id?: string | undefined;
-                type?: string | undefined;
+                verificationMethodType?: string | undefined;
                 controller?: string | undefined;
                 verificationMaterial?: string | undefined;
             }[] | undefined;
@@ -202,7 +202,7 @@ export declare const MsgUpdateDidDoc: {
             alsoKnownAs?: string[] | undefined;
             service?: {
                 id?: string | undefined;
-                type?: string | undefined;
+                serviceType?: string | undefined;
                 serviceEndpoint?: string[] | undefined;
             }[] | undefined;
             versionId?: string | undefined;
@@ -218,7 +218,7 @@ export declare const MsgUpdateDidDoc: {
             controller?: string[] | undefined;
             verificationMethod?: {
                 id?: string | undefined;
-                type?: string | undefined;
+                verificationMethodType?: string | undefined;
                 controller?: string | undefined;
                 verificationMaterial?: string | undefined;
             }[] | undefined;
@@ -230,7 +230,7 @@ export declare const MsgUpdateDidDoc: {
             alsoKnownAs?: string[] | undefined;
             service?: {
                 id?: string | undefined;
-                type?: string | undefined;
+                serviceType?: string | undefined;
                 serviceEndpoint?: string[] | undefined;
             }[] | undefined;
             versionId?: string | undefined;
@@ -240,22 +240,22 @@ export declare const MsgUpdateDidDoc: {
             controller?: (string[] & string[] & { [K_1 in Exclude<keyof I["payload"]["controller"], keyof string[]>]: never; }) | undefined;
             verificationMethod?: ({
                 id?: string | undefined;
-                type?: string | undefined;
+                verificationMethodType?: string | undefined;
                 controller?: string | undefined;
                 verificationMaterial?: string | undefined;
             }[] & ({
                 id?: string | undefined;
-                type?: string | undefined;
+                verificationMethodType?: string | undefined;
                 controller?: string | undefined;
                 verificationMaterial?: string | undefined;
             } & {
                 id?: string | undefined;
-                type?: string | undefined;
+                verificationMethodType?: string | undefined;
                 controller?: string | undefined;
                 verificationMaterial?: string | undefined;
             } & { [K_2 in Exclude<keyof I["payload"]["verificationMethod"][number], keyof VerificationMethod>]: never; })[] & { [K_3 in Exclude<keyof I["payload"]["verificationMethod"], keyof {
                 id?: string | undefined;
-                type?: string | undefined;
+                verificationMethodType?: string | undefined;
                 controller?: string | undefined;
                 verificationMaterial?: string | undefined;
             }[]>]: never; }) | undefined;
@@ -267,19 +267,19 @@ export declare const MsgUpdateDidDoc: {
             alsoKnownAs?: (string[] & string[] & { [K_9 in Exclude<keyof I["payload"]["alsoKnownAs"], keyof string[]>]: never; }) | undefined;
             service?: ({
                 id?: string | undefined;
-                type?: string | undefined;
+                serviceType?: string | undefined;
                 serviceEndpoint?: string[] | undefined;
             }[] & ({
                 id?: string | undefined;
-                type?: string | undefined;
+                serviceType?: string | undefined;
                 serviceEndpoint?: string[] | undefined;
             } & {
                 id?: string | undefined;
-                type?: string | undefined;
+                serviceType?: string | undefined;
                 serviceEndpoint?: (string[] & string[] & { [K_10 in Exclude<keyof I["payload"]["service"][number]["serviceEndpoint"], keyof string[]>]: never; }) | undefined;
             } & { [K_11 in Exclude<keyof I["payload"]["service"][number], keyof Service>]: never; })[] & { [K_12 in Exclude<keyof I["payload"]["service"], keyof {
                 id?: string | undefined;
-                type?: string | undefined;
+                serviceType?: string | undefined;
                 serviceEndpoint?: string[] | undefined;
             }[]>]: never; }) | undefined;
             versionId?: string | undefined;
@@ -360,7 +360,7 @@ export declare const MsgCreateDidDocPayload: {
         controller?: string[] | undefined;
         verificationMethod?: {
             id?: string | undefined;
-            type?: string | undefined;
+            verificationMethodType?: string | undefined;
             controller?: string | undefined;
             verificationMaterial?: string | undefined;
         }[] | undefined;
@@ -372,7 +372,7 @@ export declare const MsgCreateDidDocPayload: {
         alsoKnownAs?: string[] | undefined;
         service?: {
             id?: string | undefined;
-            type?: string | undefined;
+            serviceType?: string | undefined;
             serviceEndpoint?: string[] | undefined;
         }[] | undefined;
         versionId?: string | undefined;
@@ -382,22 +382,22 @@ export declare const MsgCreateDidDocPayload: {
         controller?: (string[] & string[] & { [K_1 in Exclude<keyof I["controller"], keyof string[]>]: never; }) | undefined;
         verificationMethod?: ({
             id?: string | undefined;
-            type?: string | undefined;
+            verificationMethodType?: string | undefined;
             controller?: string | undefined;
             verificationMaterial?: string | undefined;
         }[] & ({
             id?: string | undefined;
-            type?: string | undefined;
+            verificationMethodType?: string | undefined;
             controller?: string | undefined;
             verificationMaterial?: string | undefined;
         } & {
             id?: string | undefined;
-            type?: string | undefined;
+            verificationMethodType?: string | undefined;
             controller?: string | undefined;
             verificationMaterial?: string | undefined;
         } & { [K_2 in Exclude<keyof I["verificationMethod"][number], keyof VerificationMethod>]: never; })[] & { [K_3 in Exclude<keyof I["verificationMethod"], keyof {
             id?: string | undefined;
-            type?: string | undefined;
+            verificationMethodType?: string | undefined;
             controller?: string | undefined;
             verificationMaterial?: string | undefined;
         }[]>]: never; }) | undefined;
@@ -409,19 +409,19 @@ export declare const MsgCreateDidDocPayload: {
         alsoKnownAs?: (string[] & string[] & { [K_9 in Exclude<keyof I["alsoKnownAs"], keyof string[]>]: never; }) | undefined;
         service?: ({
             id?: string | undefined;
-            type?: string | undefined;
+            serviceType?: string | undefined;
             serviceEndpoint?: string[] | undefined;
         }[] & ({
             id?: string | undefined;
-            type?: string | undefined;
+            serviceType?: string | undefined;
             serviceEndpoint?: string[] | undefined;
         } & {
             id?: string | undefined;
-            type?: string | undefined;
+            serviceType?: string | undefined;
             serviceEndpoint?: (string[] & string[] & { [K_10 in Exclude<keyof I["service"][number]["serviceEndpoint"], keyof string[]>]: never; }) | undefined;
         } & { [K_11 in Exclude<keyof I["service"][number], keyof Service>]: never; })[] & { [K_12 in Exclude<keyof I["service"], keyof {
             id?: string | undefined;
-            type?: string | undefined;
+            serviceType?: string | undefined;
             serviceEndpoint?: string[] | undefined;
         }[]>]: never; }) | undefined;
         versionId?: string | undefined;
@@ -440,7 +440,7 @@ export declare const MsgCreateDidDocResponse: {
                 controller?: string[] | undefined;
                 verificationMethod?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] | undefined;
@@ -451,7 +451,7 @@ export declare const MsgCreateDidDocResponse: {
                 keyAgreement?: string[] | undefined;
                 service?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
@@ -473,7 +473,7 @@ export declare const MsgCreateDidDocResponse: {
                 controller?: string[] | undefined;
                 verificationMethod?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] | undefined;
@@ -484,7 +484,7 @@ export declare const MsgCreateDidDocResponse: {
                 keyAgreement?: string[] | undefined;
                 service?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
@@ -504,7 +504,7 @@ export declare const MsgCreateDidDocResponse: {
                 controller?: string[] | undefined;
                 verificationMethod?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] | undefined;
@@ -515,7 +515,7 @@ export declare const MsgCreateDidDocResponse: {
                 keyAgreement?: string[] | undefined;
                 service?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
@@ -525,22 +525,22 @@ export declare const MsgCreateDidDocResponse: {
                 controller?: (string[] & string[] & { [K_1 in Exclude<keyof I["value"]["didDoc"]["controller"], keyof string[]>]: never; }) | undefined;
                 verificationMethod?: ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] & ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 } & {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 } & { [K_2 in Exclude<keyof I["value"]["didDoc"]["verificationMethod"][number], keyof VerificationMethod>]: never; })[] & { [K_3 in Exclude<keyof I["value"]["didDoc"]["verificationMethod"], keyof {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[]>]: never; }) | undefined;
@@ -551,19 +551,19 @@ export declare const MsgCreateDidDocResponse: {
                 keyAgreement?: (string[] & string[] & { [K_8 in Exclude<keyof I["value"]["didDoc"]["keyAgreement"], keyof string[]>]: never; }) | undefined;
                 service?: ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] & ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 } & {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: (string[] & string[] & { [K_9 in Exclude<keyof I["value"]["didDoc"]["service"][number]["serviceEndpoint"], keyof string[]>]: never; }) | undefined;
                 } & { [K_10 in Exclude<keyof I["value"]["didDoc"]["service"][number], keyof Service>]: never; })[] & { [K_11 in Exclude<keyof I["value"]["didDoc"]["service"], keyof {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[]>]: never; }) | undefined;
                 alsoKnownAs?: (string[] & string[] & { [K_12 in Exclude<keyof I["value"]["didDoc"]["alsoKnownAs"], keyof string[]>]: never; }) | undefined;
@@ -597,7 +597,7 @@ export declare const MsgUpdateDidDocPayload: {
         controller?: string[] | undefined;
         verificationMethod?: {
             id?: string | undefined;
-            type?: string | undefined;
+            verificationMethodType?: string | undefined;
             controller?: string | undefined;
             verificationMaterial?: string | undefined;
         }[] | undefined;
@@ -609,7 +609,7 @@ export declare const MsgUpdateDidDocPayload: {
         alsoKnownAs?: string[] | undefined;
         service?: {
             id?: string | undefined;
-            type?: string | undefined;
+            serviceType?: string | undefined;
             serviceEndpoint?: string[] | undefined;
         }[] | undefined;
         versionId?: string | undefined;
@@ -619,22 +619,22 @@ export declare const MsgUpdateDidDocPayload: {
         controller?: (string[] & string[] & { [K_1 in Exclude<keyof I["controller"], keyof string[]>]: never; }) | undefined;
         verificationMethod?: ({
             id?: string | undefined;
-            type?: string | undefined;
+            verificationMethodType?: string | undefined;
             controller?: string | undefined;
             verificationMaterial?: string | undefined;
         }[] & ({
             id?: string | undefined;
-            type?: string | undefined;
+            verificationMethodType?: string | undefined;
             controller?: string | undefined;
             verificationMaterial?: string | undefined;
         } & {
             id?: string | undefined;
-            type?: string | undefined;
+            verificationMethodType?: string | undefined;
             controller?: string | undefined;
             verificationMaterial?: string | undefined;
         } & { [K_2 in Exclude<keyof I["verificationMethod"][number], keyof VerificationMethod>]: never; })[] & { [K_3 in Exclude<keyof I["verificationMethod"], keyof {
             id?: string | undefined;
-            type?: string | undefined;
+            verificationMethodType?: string | undefined;
             controller?: string | undefined;
             verificationMaterial?: string | undefined;
         }[]>]: never; }) | undefined;
@@ -646,19 +646,19 @@ export declare const MsgUpdateDidDocPayload: {
         alsoKnownAs?: (string[] & string[] & { [K_9 in Exclude<keyof I["alsoKnownAs"], keyof string[]>]: never; }) | undefined;
         service?: ({
             id?: string | undefined;
-            type?: string | undefined;
+            serviceType?: string | undefined;
             serviceEndpoint?: string[] | undefined;
         }[] & ({
             id?: string | undefined;
-            type?: string | undefined;
+            serviceType?: string | undefined;
             serviceEndpoint?: string[] | undefined;
         } & {
             id?: string | undefined;
-            type?: string | undefined;
+            serviceType?: string | undefined;
             serviceEndpoint?: (string[] & string[] & { [K_10 in Exclude<keyof I["service"][number]["serviceEndpoint"], keyof string[]>]: never; }) | undefined;
         } & { [K_11 in Exclude<keyof I["service"][number], keyof Service>]: never; })[] & { [K_12 in Exclude<keyof I["service"], keyof {
             id?: string | undefined;
-            type?: string | undefined;
+            serviceType?: string | undefined;
             serviceEndpoint?: string[] | undefined;
         }[]>]: never; }) | undefined;
         versionId?: string | undefined;
@@ -677,7 +677,7 @@ export declare const MsgUpdateDidDocResponse: {
                 controller?: string[] | undefined;
                 verificationMethod?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] | undefined;
@@ -688,7 +688,7 @@ export declare const MsgUpdateDidDocResponse: {
                 keyAgreement?: string[] | undefined;
                 service?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
@@ -710,7 +710,7 @@ export declare const MsgUpdateDidDocResponse: {
                 controller?: string[] | undefined;
                 verificationMethod?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] | undefined;
@@ -721,7 +721,7 @@ export declare const MsgUpdateDidDocResponse: {
                 keyAgreement?: string[] | undefined;
                 service?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
@@ -741,7 +741,7 @@ export declare const MsgUpdateDidDocResponse: {
                 controller?: string[] | undefined;
                 verificationMethod?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] | undefined;
@@ -752,7 +752,7 @@ export declare const MsgUpdateDidDocResponse: {
                 keyAgreement?: string[] | undefined;
                 service?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
@@ -762,22 +762,22 @@ export declare const MsgUpdateDidDocResponse: {
                 controller?: (string[] & string[] & { [K_1 in Exclude<keyof I["value"]["didDoc"]["controller"], keyof string[]>]: never; }) | undefined;
                 verificationMethod?: ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] & ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 } & {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 } & { [K_2 in Exclude<keyof I["value"]["didDoc"]["verificationMethod"][number], keyof VerificationMethod>]: never; })[] & { [K_3 in Exclude<keyof I["value"]["didDoc"]["verificationMethod"], keyof {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[]>]: never; }) | undefined;
@@ -788,19 +788,19 @@ export declare const MsgUpdateDidDocResponse: {
                 keyAgreement?: (string[] & string[] & { [K_8 in Exclude<keyof I["value"]["didDoc"]["keyAgreement"], keyof string[]>]: never; }) | undefined;
                 service?: ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] & ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 } & {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: (string[] & string[] & { [K_9 in Exclude<keyof I["value"]["didDoc"]["service"][number]["serviceEndpoint"], keyof string[]>]: never; }) | undefined;
                 } & { [K_10 in Exclude<keyof I["value"]["didDoc"]["service"][number], keyof Service>]: never; })[] & { [K_11 in Exclude<keyof I["value"]["didDoc"]["service"], keyof {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[]>]: never; }) | undefined;
                 alsoKnownAs?: (string[] & string[] & { [K_12 in Exclude<keyof I["value"]["didDoc"]["alsoKnownAs"], keyof string[]>]: never; }) | undefined;
@@ -849,7 +849,7 @@ export declare const MsgDeactivateDidDocResponse: {
                 controller?: string[] | undefined;
                 verificationMethod?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] | undefined;
@@ -860,7 +860,7 @@ export declare const MsgDeactivateDidDocResponse: {
                 keyAgreement?: string[] | undefined;
                 service?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
@@ -882,7 +882,7 @@ export declare const MsgDeactivateDidDocResponse: {
                 controller?: string[] | undefined;
                 verificationMethod?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] | undefined;
@@ -893,7 +893,7 @@ export declare const MsgDeactivateDidDocResponse: {
                 keyAgreement?: string[] | undefined;
                 service?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
@@ -913,7 +913,7 @@ export declare const MsgDeactivateDidDocResponse: {
                 controller?: string[] | undefined;
                 verificationMethod?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] | undefined;
@@ -924,7 +924,7 @@ export declare const MsgDeactivateDidDocResponse: {
                 keyAgreement?: string[] | undefined;
                 service?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
@@ -934,22 +934,22 @@ export declare const MsgDeactivateDidDocResponse: {
                 controller?: (string[] & string[] & { [K_1 in Exclude<keyof I["value"]["didDoc"]["controller"], keyof string[]>]: never; }) | undefined;
                 verificationMethod?: ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] & ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 } & {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 } & { [K_2 in Exclude<keyof I["value"]["didDoc"]["verificationMethod"][number], keyof VerificationMethod>]: never; })[] & { [K_3 in Exclude<keyof I["value"]["didDoc"]["verificationMethod"], keyof {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[]>]: never; }) | undefined;
@@ -960,19 +960,19 @@ export declare const MsgDeactivateDidDocResponse: {
                 keyAgreement?: (string[] & string[] & { [K_8 in Exclude<keyof I["value"]["didDoc"]["keyAgreement"], keyof string[]>]: never; }) | undefined;
                 service?: ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] & ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 } & {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: (string[] & string[] & { [K_9 in Exclude<keyof I["value"]["didDoc"]["service"][number]["serviceEndpoint"], keyof string[]>]: never; }) | undefined;
                 } & { [K_10 in Exclude<keyof I["value"]["didDoc"]["service"][number], keyof Service>]: never; })[] & { [K_11 in Exclude<keyof I["value"]["didDoc"]["service"], keyof {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[]>]: never; }) | undefined;
                 alsoKnownAs?: (string[] & string[] & { [K_12 in Exclude<keyof I["value"]["didDoc"]["alsoKnownAs"], keyof string[]>]: never; }) | undefined;

@@ -2816,7 +2816,7 @@ exports.GeneratedCodeInfo_Annotation = {
         return message;
     },
 };
-var globalThis = (() => {
+var tsProtoGlobalThis = (() => {
     if (typeof globalThis !== "undefined") {
         return globalThis;
     }
@@ -2832,11 +2832,11 @@ var globalThis = (() => {
     throw "Unable to locate global object";
 })();
 function bytesFromBase64(b64) {
-    if (globalThis.Buffer) {
-        return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
+    if (tsProtoGlobalThis.Buffer) {
+        return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
     }
     else {
-        const bin = globalThis.atob(b64);
+        const bin = tsProtoGlobalThis.atob(b64);
         const arr = new Uint8Array(bin.length);
         for (let i = 0; i < bin.length; ++i) {
             arr[i] = bin.charCodeAt(i);
@@ -2845,15 +2845,15 @@ function bytesFromBase64(b64) {
     }
 }
 function base64FromBytes(arr) {
-    if (globalThis.Buffer) {
-        return globalThis.Buffer.from(arr).toString("base64");
+    if (tsProtoGlobalThis.Buffer) {
+        return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
     }
     else {
         const bin = [];
         arr.forEach((byte) => {
             bin.push(String.fromCharCode(byte));
         });
-        return globalThis.btoa(bin.join(""));
+        return tsProtoGlobalThis.btoa(bin.join(""));
     }
 }
 if (minimal_1.default.util.Long !== long_1.default) {
