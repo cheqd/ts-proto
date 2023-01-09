@@ -4,13 +4,13 @@ export interface QueryGetResourceRequest {
     collectionId: string;
     id: string;
 }
-export interface QueryGetResourceResponse {
+export interface QueryResourceResponse {
     resource: Resource | undefined;
 }
 export interface QueryGetCollectionResourcesRequest {
     collectionId: string;
 }
-export interface QueryGetCollectionResourcesResponse {
+export interface QueryCollectionResourcesResponse {
     resources: ResourceHeader[];
 }
 export interface QueryGetAllResourceVersionsRequest {
@@ -34,11 +34,11 @@ export declare const QueryGetResourceRequest: {
         id?: string | undefined;
     } & { [K in Exclude<keyof I, keyof QueryGetResourceRequest>]: never; }>(object: I): QueryGetResourceRequest;
 };
-export declare const QueryGetResourceResponse: {
-    encode(message: QueryGetResourceResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetResourceResponse;
-    fromJSON(object: any): QueryGetResourceResponse;
-    toJSON(message: QueryGetResourceResponse): unknown;
+export declare const QueryResourceResponse: {
+    encode(message: QueryResourceResponse, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): QueryResourceResponse;
+    fromJSON(object: any): QueryResourceResponse;
+    toJSON(message: QueryResourceResponse): unknown;
     fromPartial<I extends {
         resource?: {
             header?: {
@@ -92,7 +92,7 @@ export declare const QueryGetResourceResponse: {
             } & { [K in Exclude<keyof I["resource"]["header"], keyof ResourceHeader>]: never; }) | undefined;
             data?: Uint8Array | undefined;
         } & { [K_1 in Exclude<keyof I["resource"], keyof Resource>]: never; }) | undefined;
-    } & { [K_2 in Exclude<keyof I, "resource">]: never; }>(object: I): QueryGetResourceResponse;
+    } & { [K_2 in Exclude<keyof I, "resource">]: never; }>(object: I): QueryResourceResponse;
 };
 export declare const QueryGetCollectionResourcesRequest: {
     encode(message: QueryGetCollectionResourcesRequest, writer?: _m0.Writer): _m0.Writer;
@@ -105,11 +105,11 @@ export declare const QueryGetCollectionResourcesRequest: {
         collectionId?: string | undefined;
     } & { [K in Exclude<keyof I, "collectionId">]: never; }>(object: I): QueryGetCollectionResourcesRequest;
 };
-export declare const QueryGetCollectionResourcesResponse: {
-    encode(message: QueryGetCollectionResourcesResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetCollectionResourcesResponse;
-    fromJSON(object: any): QueryGetCollectionResourcesResponse;
-    toJSON(message: QueryGetCollectionResourcesResponse): unknown;
+export declare const QueryCollectionResourcesResponse: {
+    encode(message: QueryCollectionResourcesResponse, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): QueryCollectionResourcesResponse;
+    fromJSON(object: any): QueryCollectionResourcesResponse;
+    toJSON(message: QueryCollectionResourcesResponse): unknown;
     fromPartial<I extends {
         resources?: {
             collectionId?: string | undefined;
@@ -164,7 +164,7 @@ export declare const QueryGetCollectionResourcesResponse: {
             previousVersionId?: string | undefined;
             nextVersionId?: string | undefined;
         }[]>]: never; }) | undefined;
-    } & { [K_2 in Exclude<keyof I, "resources">]: never; }>(object: I): QueryGetCollectionResourcesResponse;
+    } & { [K_2 in Exclude<keyof I, "resources">]: never; }>(object: I): QueryCollectionResourcesResponse;
 };
 export declare const QueryGetAllResourceVersionsRequest: {
     encode(message: QueryGetAllResourceVersionsRequest, writer?: _m0.Writer): _m0.Writer;
@@ -244,8 +244,8 @@ export declare const QueryGetAllResourceVersionsResponse: {
 };
 /** Query defines the gRPC querier service. */
 export interface Query {
-    Resource(request: QueryGetResourceRequest): Promise<QueryGetResourceResponse>;
-    CollectionResources(request: QueryGetCollectionResourcesRequest): Promise<QueryGetCollectionResourcesResponse>;
+    Resource(request: QueryGetResourceRequest): Promise<QueryResourceResponse>;
+    CollectionResources(request: QueryGetCollectionResourcesRequest): Promise<QueryCollectionResourcesResponse>;
     AllResourceVersions(request: QueryGetAllResourceVersionsRequest): Promise<QueryGetAllResourceVersionsResponse>;
 }
 export declare class QueryClientImpl implements Query {
@@ -254,8 +254,8 @@ export declare class QueryClientImpl implements Query {
     constructor(rpc: Rpc, opts?: {
         service?: string;
     });
-    Resource(request: QueryGetResourceRequest): Promise<QueryGetResourceResponse>;
-    CollectionResources(request: QueryGetCollectionResourcesRequest): Promise<QueryGetCollectionResourcesResponse>;
+    Resource(request: QueryGetResourceRequest): Promise<QueryResourceResponse>;
+    CollectionResources(request: QueryGetCollectionResourcesRequest): Promise<QueryCollectionResourcesResponse>;
     AllResourceVersions(request: QueryGetAllResourceVersionsRequest): Promise<QueryGetAllResourceVersionsResponse>;
 }
 interface Rpc {

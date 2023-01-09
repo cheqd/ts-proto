@@ -24,7 +24,7 @@ export declare const DidDocVersionSet: {
                 controller?: string[] | undefined;
                 verificationMethod?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] | undefined;
@@ -35,7 +35,7 @@ export declare const DidDocVersionSet: {
                 keyAgreement?: string[] | undefined;
                 service?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
@@ -58,7 +58,7 @@ export declare const DidDocVersionSet: {
                 controller?: string[] | undefined;
                 verificationMethod?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] | undefined;
@@ -69,7 +69,7 @@ export declare const DidDocVersionSet: {
                 keyAgreement?: string[] | undefined;
                 service?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
@@ -89,7 +89,7 @@ export declare const DidDocVersionSet: {
                 controller?: string[] | undefined;
                 verificationMethod?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] | undefined;
@@ -100,7 +100,7 @@ export declare const DidDocVersionSet: {
                 keyAgreement?: string[] | undefined;
                 service?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
@@ -120,7 +120,7 @@ export declare const DidDocVersionSet: {
                 controller?: string[] | undefined;
                 verificationMethod?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] | undefined;
@@ -131,7 +131,7 @@ export declare const DidDocVersionSet: {
                 keyAgreement?: string[] | undefined;
                 service?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
@@ -141,22 +141,22 @@ export declare const DidDocVersionSet: {
                 controller?: (string[] & string[] & { [K_1 in Exclude<keyof I["didDocs"][number]["didDoc"]["controller"], keyof string[]>]: never; }) | undefined;
                 verificationMethod?: ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] & ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 } & {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 } & { [K_2 in Exclude<keyof I["didDocs"][number]["didDoc"]["verificationMethod"][number], keyof import("./diddoc").VerificationMethod>]: never; })[] & { [K_3 in Exclude<keyof I["didDocs"][number]["didDoc"]["verificationMethod"], keyof {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[]>]: never; }) | undefined;
@@ -167,19 +167,19 @@ export declare const DidDocVersionSet: {
                 keyAgreement?: (string[] & string[] & { [K_8 in Exclude<keyof I["didDocs"][number]["didDoc"]["keyAgreement"], keyof string[]>]: never; }) | undefined;
                 service?: ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] & ({
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 } & {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: (string[] & string[] & { [K_9 in Exclude<keyof I["didDocs"][number]["didDoc"]["service"][number]["serviceEndpoint"], keyof string[]>]: never; }) | undefined;
                 } & { [K_10 in Exclude<keyof I["didDocs"][number]["didDoc"]["service"][number], keyof import("./diddoc").Service>]: never; })[] & { [K_11 in Exclude<keyof I["didDocs"][number]["didDoc"]["service"], keyof {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[]>]: never; }) | undefined;
                 alsoKnownAs?: (string[] & string[] & { [K_12 in Exclude<keyof I["didDocs"][number]["didDoc"]["alsoKnownAs"], keyof string[]>]: never; }) | undefined;
@@ -206,7 +206,7 @@ export declare const DidDocVersionSet: {
                 controller?: string[] | undefined;
                 verificationMethod?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    verificationMethodType?: string | undefined;
                     controller?: string | undefined;
                     verificationMaterial?: string | undefined;
                 }[] | undefined;
@@ -217,7 +217,7 @@ export declare const DidDocVersionSet: {
                 keyAgreement?: string[] | undefined;
                 service?: {
                     id?: string | undefined;
-                    type?: string | undefined;
+                    serviceType?: string | undefined;
                     serviceEndpoint?: string[] | undefined;
                 }[] | undefined;
                 alsoKnownAs?: string[] | undefined;
@@ -249,7 +249,7 @@ export declare const GenesisState: {
                     controller?: string[] | undefined;
                     verificationMethod?: {
                         id?: string | undefined;
-                        type?: string | undefined;
+                        verificationMethodType?: string | undefined;
                         controller?: string | undefined;
                         verificationMaterial?: string | undefined;
                     }[] | undefined;
@@ -260,7 +260,7 @@ export declare const GenesisState: {
                     keyAgreement?: string[] | undefined;
                     service?: {
                         id?: string | undefined;
-                        type?: string | undefined;
+                        serviceType?: string | undefined;
                         serviceEndpoint?: string[] | undefined;
                     }[] | undefined;
                     alsoKnownAs?: string[] | undefined;
@@ -301,7 +301,7 @@ export declare const GenesisState: {
                     controller?: string[] | undefined;
                     verificationMethod?: {
                         id?: string | undefined;
-                        type?: string | undefined;
+                        verificationMethodType?: string | undefined;
                         controller?: string | undefined;
                         verificationMaterial?: string | undefined;
                     }[] | undefined;
@@ -312,7 +312,7 @@ export declare const GenesisState: {
                     keyAgreement?: string[] | undefined;
                     service?: {
                         id?: string | undefined;
-                        type?: string | undefined;
+                        serviceType?: string | undefined;
                         serviceEndpoint?: string[] | undefined;
                     }[] | undefined;
                     alsoKnownAs?: string[] | undefined;
@@ -335,7 +335,7 @@ export declare const GenesisState: {
                     controller?: string[] | undefined;
                     verificationMethod?: {
                         id?: string | undefined;
-                        type?: string | undefined;
+                        verificationMethodType?: string | undefined;
                         controller?: string | undefined;
                         verificationMaterial?: string | undefined;
                     }[] | undefined;
@@ -346,7 +346,7 @@ export declare const GenesisState: {
                     keyAgreement?: string[] | undefined;
                     service?: {
                         id?: string | undefined;
-                        type?: string | undefined;
+                        serviceType?: string | undefined;
                         serviceEndpoint?: string[] | undefined;
                     }[] | undefined;
                     alsoKnownAs?: string[] | undefined;
@@ -369,7 +369,7 @@ export declare const GenesisState: {
                     controller?: string[] | undefined;
                     verificationMethod?: {
                         id?: string | undefined;
-                        type?: string | undefined;
+                        verificationMethodType?: string | undefined;
                         controller?: string | undefined;
                         verificationMaterial?: string | undefined;
                     }[] | undefined;
@@ -380,7 +380,7 @@ export declare const GenesisState: {
                     keyAgreement?: string[] | undefined;
                     service?: {
                         id?: string | undefined;
-                        type?: string | undefined;
+                        serviceType?: string | undefined;
                         serviceEndpoint?: string[] | undefined;
                     }[] | undefined;
                     alsoKnownAs?: string[] | undefined;
@@ -400,7 +400,7 @@ export declare const GenesisState: {
                     controller?: string[] | undefined;
                     verificationMethod?: {
                         id?: string | undefined;
-                        type?: string | undefined;
+                        verificationMethodType?: string | undefined;
                         controller?: string | undefined;
                         verificationMaterial?: string | undefined;
                     }[] | undefined;
@@ -411,7 +411,7 @@ export declare const GenesisState: {
                     keyAgreement?: string[] | undefined;
                     service?: {
                         id?: string | undefined;
-                        type?: string | undefined;
+                        serviceType?: string | undefined;
                         serviceEndpoint?: string[] | undefined;
                     }[] | undefined;
                     alsoKnownAs?: string[] | undefined;
@@ -431,7 +431,7 @@ export declare const GenesisState: {
                     controller?: string[] | undefined;
                     verificationMethod?: {
                         id?: string | undefined;
-                        type?: string | undefined;
+                        verificationMethodType?: string | undefined;
                         controller?: string | undefined;
                         verificationMaterial?: string | undefined;
                     }[] | undefined;
@@ -442,7 +442,7 @@ export declare const GenesisState: {
                     keyAgreement?: string[] | undefined;
                     service?: {
                         id?: string | undefined;
-                        type?: string | undefined;
+                        serviceType?: string | undefined;
                         serviceEndpoint?: string[] | undefined;
                     }[] | undefined;
                     alsoKnownAs?: string[] | undefined;
@@ -452,22 +452,22 @@ export declare const GenesisState: {
                     controller?: (string[] & string[] & { [K_1 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["controller"], keyof string[]>]: never; }) | undefined;
                     verificationMethod?: ({
                         id?: string | undefined;
-                        type?: string | undefined;
+                        verificationMethodType?: string | undefined;
                         controller?: string | undefined;
                         verificationMaterial?: string | undefined;
                     }[] & ({
                         id?: string | undefined;
-                        type?: string | undefined;
+                        verificationMethodType?: string | undefined;
                         controller?: string | undefined;
                         verificationMaterial?: string | undefined;
                     } & {
                         id?: string | undefined;
-                        type?: string | undefined;
+                        verificationMethodType?: string | undefined;
                         controller?: string | undefined;
                         verificationMaterial?: string | undefined;
                     } & { [K_2 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["verificationMethod"][number], keyof import("./diddoc").VerificationMethod>]: never; })[] & { [K_3 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["verificationMethod"], keyof {
                         id?: string | undefined;
-                        type?: string | undefined;
+                        verificationMethodType?: string | undefined;
                         controller?: string | undefined;
                         verificationMaterial?: string | undefined;
                     }[]>]: never; }) | undefined;
@@ -478,19 +478,19 @@ export declare const GenesisState: {
                     keyAgreement?: (string[] & string[] & { [K_8 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["keyAgreement"], keyof string[]>]: never; }) | undefined;
                     service?: ({
                         id?: string | undefined;
-                        type?: string | undefined;
+                        serviceType?: string | undefined;
                         serviceEndpoint?: string[] | undefined;
                     }[] & ({
                         id?: string | undefined;
-                        type?: string | undefined;
+                        serviceType?: string | undefined;
                         serviceEndpoint?: string[] | undefined;
                     } & {
                         id?: string | undefined;
-                        type?: string | undefined;
+                        serviceType?: string | undefined;
                         serviceEndpoint?: (string[] & string[] & { [K_9 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["service"][number]["serviceEndpoint"], keyof string[]>]: never; }) | undefined;
                     } & { [K_10 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["service"][number], keyof import("./diddoc").Service>]: never; })[] & { [K_11 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["service"], keyof {
                         id?: string | undefined;
-                        type?: string | undefined;
+                        serviceType?: string | undefined;
                         serviceEndpoint?: string[] | undefined;
                     }[]>]: never; }) | undefined;
                     alsoKnownAs?: (string[] & string[] & { [K_12 in Exclude<keyof I["versionSets"][number]["didDocs"][number]["didDoc"]["alsoKnownAs"], keyof string[]>]: never; }) | undefined;
@@ -517,7 +517,7 @@ export declare const GenesisState: {
                     controller?: string[] | undefined;
                     verificationMethod?: {
                         id?: string | undefined;
-                        type?: string | undefined;
+                        verificationMethodType?: string | undefined;
                         controller?: string | undefined;
                         verificationMaterial?: string | undefined;
                     }[] | undefined;
@@ -528,7 +528,7 @@ export declare const GenesisState: {
                     keyAgreement?: string[] | undefined;
                     service?: {
                         id?: string | undefined;
-                        type?: string | undefined;
+                        serviceType?: string | undefined;
                         serviceEndpoint?: string[] | undefined;
                     }[] | undefined;
                     alsoKnownAs?: string[] | undefined;
@@ -551,7 +551,7 @@ export declare const GenesisState: {
                     controller?: string[] | undefined;
                     verificationMethod?: {
                         id?: string | undefined;
-                        type?: string | undefined;
+                        verificationMethodType?: string | undefined;
                         controller?: string | undefined;
                         verificationMaterial?: string | undefined;
                     }[] | undefined;
@@ -562,7 +562,7 @@ export declare const GenesisState: {
                     keyAgreement?: string[] | undefined;
                     service?: {
                         id?: string | undefined;
-                        type?: string | undefined;
+                        serviceType?: string | undefined;
                         serviceEndpoint?: string[] | undefined;
                     }[] | undefined;
                     alsoKnownAs?: string[] | undefined;

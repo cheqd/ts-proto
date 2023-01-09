@@ -4,28 +4,33 @@ import _m0 from "protobufjs/minimal";
 import { Metadata, ResourceWithMetadata } from "./resource";
 
 export interface QueryGetResourceRequest {
+  /** is unique identifier a for collection */
   collectionId: string;
+  /** is unique identifier for a resource */
   id: string;
 }
 
-export interface QueryGetResourceResponse {
+export interface QueryResourceResponse {
   resource: ResourceWithMetadata | undefined;
 }
 
 export interface QueryGetResourceMetadataRequest {
+  /** is unique identifier a for collection */
   collectionId: string;
+  /** is unique identifier for a resource */
   id: string;
 }
 
-export interface QueryGetResourceMetadataResponse {
+export interface QueryResourceMetadataResponse {
   resource: Metadata | undefined;
 }
 
 export interface QueryGetCollectionResourcesRequest {
+  /** is unique identifier a for collection */
   collectionId: string;
 }
 
-export interface QueryGetCollectionResourcesResponse {
+export interface QueryCollectionResourcesResponse {
   resources: Metadata[];
 }
 
@@ -87,22 +92,22 @@ export const QueryGetResourceRequest = {
   },
 };
 
-function createBaseQueryGetResourceResponse(): QueryGetResourceResponse {
+function createBaseQueryResourceResponse(): QueryResourceResponse {
   return { resource: undefined };
 }
 
-export const QueryGetResourceResponse = {
-  encode(message: QueryGetResourceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const QueryResourceResponse = {
+  encode(message: QueryResourceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.resource !== undefined) {
       ResourceWithMetadata.encode(message.resource, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetResourceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryResourceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryGetResourceResponse();
+    const message = createBaseQueryResourceResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -117,19 +122,19 @@ export const QueryGetResourceResponse = {
     return message;
   },
 
-  fromJSON(object: any): QueryGetResourceResponse {
+  fromJSON(object: any): QueryResourceResponse {
     return { resource: isSet(object.resource) ? ResourceWithMetadata.fromJSON(object.resource) : undefined };
   },
 
-  toJSON(message: QueryGetResourceResponse): unknown {
+  toJSON(message: QueryResourceResponse): unknown {
     const obj: any = {};
     message.resource !== undefined &&
       (obj.resource = message.resource ? ResourceWithMetadata.toJSON(message.resource) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGetResourceResponse>, I>>(object: I): QueryGetResourceResponse {
-    const message = createBaseQueryGetResourceResponse();
+  fromPartial<I extends Exact<DeepPartial<QueryResourceResponse>, I>>(object: I): QueryResourceResponse {
+    const message = createBaseQueryResourceResponse();
     message.resource = (object.resource !== undefined && object.resource !== null)
       ? ResourceWithMetadata.fromPartial(object.resource)
       : undefined;
@@ -197,22 +202,22 @@ export const QueryGetResourceMetadataRequest = {
   },
 };
 
-function createBaseQueryGetResourceMetadataResponse(): QueryGetResourceMetadataResponse {
+function createBaseQueryResourceMetadataResponse(): QueryResourceMetadataResponse {
   return { resource: undefined };
 }
 
-export const QueryGetResourceMetadataResponse = {
-  encode(message: QueryGetResourceMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const QueryResourceMetadataResponse = {
+  encode(message: QueryResourceMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.resource !== undefined) {
       Metadata.encode(message.resource, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetResourceMetadataResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryResourceMetadataResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryGetResourceMetadataResponse();
+    const message = createBaseQueryResourceMetadataResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -227,20 +232,20 @@ export const QueryGetResourceMetadataResponse = {
     return message;
   },
 
-  fromJSON(object: any): QueryGetResourceMetadataResponse {
+  fromJSON(object: any): QueryResourceMetadataResponse {
     return { resource: isSet(object.resource) ? Metadata.fromJSON(object.resource) : undefined };
   },
 
-  toJSON(message: QueryGetResourceMetadataResponse): unknown {
+  toJSON(message: QueryResourceMetadataResponse): unknown {
     const obj: any = {};
     message.resource !== undefined && (obj.resource = message.resource ? Metadata.toJSON(message.resource) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGetResourceMetadataResponse>, I>>(
+  fromPartial<I extends Exact<DeepPartial<QueryResourceMetadataResponse>, I>>(
     object: I,
-  ): QueryGetResourceMetadataResponse {
-    const message = createBaseQueryGetResourceMetadataResponse();
+  ): QueryResourceMetadataResponse {
+    const message = createBaseQueryResourceMetadataResponse();
     message.resource = (object.resource !== undefined && object.resource !== null)
       ? Metadata.fromPartial(object.resource)
       : undefined;
@@ -297,22 +302,22 @@ export const QueryGetCollectionResourcesRequest = {
   },
 };
 
-function createBaseQueryGetCollectionResourcesResponse(): QueryGetCollectionResourcesResponse {
+function createBaseQueryCollectionResourcesResponse(): QueryCollectionResourcesResponse {
   return { resources: [] };
 }
 
-export const QueryGetCollectionResourcesResponse = {
-  encode(message: QueryGetCollectionResourcesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const QueryCollectionResourcesResponse = {
+  encode(message: QueryCollectionResourcesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resources) {
       Metadata.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetCollectionResourcesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCollectionResourcesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryGetCollectionResourcesResponse();
+    const message = createBaseQueryCollectionResourcesResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -327,13 +332,13 @@ export const QueryGetCollectionResourcesResponse = {
     return message;
   },
 
-  fromJSON(object: any): QueryGetCollectionResourcesResponse {
+  fromJSON(object: any): QueryCollectionResourcesResponse {
     return {
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Metadata.fromJSON(e)) : [],
     };
   },
 
-  toJSON(message: QueryGetCollectionResourcesResponse): unknown {
+  toJSON(message: QueryCollectionResourcesResponse): unknown {
     const obj: any = {};
     if (message.resources) {
       obj.resources = message.resources.map((e) => e ? Metadata.toJSON(e) : undefined);
@@ -343,19 +348,19 @@ export const QueryGetCollectionResourcesResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGetCollectionResourcesResponse>, I>>(
+  fromPartial<I extends Exact<DeepPartial<QueryCollectionResourcesResponse>, I>>(
     object: I,
-  ): QueryGetCollectionResourcesResponse {
-    const message = createBaseQueryGetCollectionResourcesResponse();
+  ): QueryCollectionResourcesResponse {
+    const message = createBaseQueryCollectionResourcesResponse();
     message.resources = object.resources?.map((e) => Metadata.fromPartial(e)) || [];
     return message;
   },
 };
 
 export interface Query {
-  Resource(request: QueryGetResourceRequest): Promise<QueryGetResourceResponse>;
-  ResourceMetadata(request: QueryGetResourceMetadataRequest): Promise<QueryGetResourceMetadataResponse>;
-  CollectionResources(request: QueryGetCollectionResourcesRequest): Promise<QueryGetCollectionResourcesResponse>;
+  Resource(request: QueryGetResourceRequest): Promise<QueryResourceResponse>;
+  ResourceMetadata(request: QueryGetResourceMetadataRequest): Promise<QueryResourceMetadataResponse>;
+  CollectionResources(request: QueryGetCollectionResourcesRequest): Promise<QueryCollectionResourcesResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -368,22 +373,22 @@ export class QueryClientImpl implements Query {
     this.ResourceMetadata = this.ResourceMetadata.bind(this);
     this.CollectionResources = this.CollectionResources.bind(this);
   }
-  Resource(request: QueryGetResourceRequest): Promise<QueryGetResourceResponse> {
+  Resource(request: QueryGetResourceRequest): Promise<QueryResourceResponse> {
     const data = QueryGetResourceRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "Resource", data);
-    return promise.then((data) => QueryGetResourceResponse.decode(new _m0.Reader(data)));
+    return promise.then((data) => QueryResourceResponse.decode(new _m0.Reader(data)));
   }
 
-  ResourceMetadata(request: QueryGetResourceMetadataRequest): Promise<QueryGetResourceMetadataResponse> {
+  ResourceMetadata(request: QueryGetResourceMetadataRequest): Promise<QueryResourceMetadataResponse> {
     const data = QueryGetResourceMetadataRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "ResourceMetadata", data);
-    return promise.then((data) => QueryGetResourceMetadataResponse.decode(new _m0.Reader(data)));
+    return promise.then((data) => QueryResourceMetadataResponse.decode(new _m0.Reader(data)));
   }
 
-  CollectionResources(request: QueryGetCollectionResourcesRequest): Promise<QueryGetCollectionResourcesResponse> {
+  CollectionResources(request: QueryGetCollectionResourcesRequest): Promise<QueryCollectionResourcesResponse> {
     const data = QueryGetCollectionResourcesRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "CollectionResources", data);
-    return promise.then((data) => QueryGetCollectionResourcesResponse.decode(new _m0.Reader(data)));
+    return promise.then((data) => QueryCollectionResourcesResponse.decode(new _m0.Reader(data)));
   }
 }
 

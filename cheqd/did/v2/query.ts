@@ -4,27 +4,31 @@ import _m0 from "protobufjs/minimal";
 import { DidDocWithMetadata, Metadata } from "./diddoc";
 
 export interface QueryGetDidDocRequest {
+  /** is a DID to be fetched */
   id: string;
 }
 
-export interface QueryGetDidDocResponse {
+export interface QueryDidDocResponse {
   value: DidDocWithMetadata | undefined;
 }
 
 export interface QueryGetDidDocVersionRequest {
+  /** is a DID */
   id: string;
+  /** is a unique value that maps DID Doc state at some point */
   version: string;
 }
 
-export interface QueryGetDidDocVersionResponse {
+export interface QueryDidDocVersionResponse {
   value: DidDocWithMetadata | undefined;
 }
 
 export interface QueryGetAllDidDocVersionsMetadataRequest {
+  /** is a DID */
   id: string;
 }
 
-export interface QueryGetAllDidDocVersionsMetadataResponse {
+export interface QueryAllDidDocVersionsMetadataResponse {
   versions: Metadata[];
 }
 
@@ -75,22 +79,22 @@ export const QueryGetDidDocRequest = {
   },
 };
 
-function createBaseQueryGetDidDocResponse(): QueryGetDidDocResponse {
+function createBaseQueryDidDocResponse(): QueryDidDocResponse {
   return { value: undefined };
 }
 
-export const QueryGetDidDocResponse = {
-  encode(message: QueryGetDidDocResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const QueryDidDocResponse = {
+  encode(message: QueryDidDocResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== undefined) {
       DidDocWithMetadata.encode(message.value, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetDidDocResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDidDocResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryGetDidDocResponse();
+    const message = createBaseQueryDidDocResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -105,18 +109,18 @@ export const QueryGetDidDocResponse = {
     return message;
   },
 
-  fromJSON(object: any): QueryGetDidDocResponse {
+  fromJSON(object: any): QueryDidDocResponse {
     return { value: isSet(object.value) ? DidDocWithMetadata.fromJSON(object.value) : undefined };
   },
 
-  toJSON(message: QueryGetDidDocResponse): unknown {
+  toJSON(message: QueryDidDocResponse): unknown {
     const obj: any = {};
     message.value !== undefined && (obj.value = message.value ? DidDocWithMetadata.toJSON(message.value) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGetDidDocResponse>, I>>(object: I): QueryGetDidDocResponse {
-    const message = createBaseQueryGetDidDocResponse();
+  fromPartial<I extends Exact<DeepPartial<QueryDidDocResponse>, I>>(object: I): QueryDidDocResponse {
+    const message = createBaseQueryDidDocResponse();
     message.value = (object.value !== undefined && object.value !== null)
       ? DidDocWithMetadata.fromPartial(object.value)
       : undefined;
@@ -182,22 +186,22 @@ export const QueryGetDidDocVersionRequest = {
   },
 };
 
-function createBaseQueryGetDidDocVersionResponse(): QueryGetDidDocVersionResponse {
+function createBaseQueryDidDocVersionResponse(): QueryDidDocVersionResponse {
   return { value: undefined };
 }
 
-export const QueryGetDidDocVersionResponse = {
-  encode(message: QueryGetDidDocVersionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const QueryDidDocVersionResponse = {
+  encode(message: QueryDidDocVersionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== undefined) {
       DidDocWithMetadata.encode(message.value, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetDidDocVersionResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDidDocVersionResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryGetDidDocVersionResponse();
+    const message = createBaseQueryDidDocVersionResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -212,20 +216,18 @@ export const QueryGetDidDocVersionResponse = {
     return message;
   },
 
-  fromJSON(object: any): QueryGetDidDocVersionResponse {
+  fromJSON(object: any): QueryDidDocVersionResponse {
     return { value: isSet(object.value) ? DidDocWithMetadata.fromJSON(object.value) : undefined };
   },
 
-  toJSON(message: QueryGetDidDocVersionResponse): unknown {
+  toJSON(message: QueryDidDocVersionResponse): unknown {
     const obj: any = {};
     message.value !== undefined && (obj.value = message.value ? DidDocWithMetadata.toJSON(message.value) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGetDidDocVersionResponse>, I>>(
-    object: I,
-  ): QueryGetDidDocVersionResponse {
-    const message = createBaseQueryGetDidDocVersionResponse();
+  fromPartial<I extends Exact<DeepPartial<QueryDidDocVersionResponse>, I>>(object: I): QueryDidDocVersionResponse {
+    const message = createBaseQueryDidDocVersionResponse();
     message.value = (object.value !== undefined && object.value !== null)
       ? DidDocWithMetadata.fromPartial(object.value)
       : undefined;
@@ -282,22 +284,22 @@ export const QueryGetAllDidDocVersionsMetadataRequest = {
   },
 };
 
-function createBaseQueryGetAllDidDocVersionsMetadataResponse(): QueryGetAllDidDocVersionsMetadataResponse {
+function createBaseQueryAllDidDocVersionsMetadataResponse(): QueryAllDidDocVersionsMetadataResponse {
   return { versions: [] };
 }
 
-export const QueryGetAllDidDocVersionsMetadataResponse = {
-  encode(message: QueryGetAllDidDocVersionsMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const QueryAllDidDocVersionsMetadataResponse = {
+  encode(message: QueryAllDidDocVersionsMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.versions) {
       Metadata.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetAllDidDocVersionsMetadataResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllDidDocVersionsMetadataResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryGetAllDidDocVersionsMetadataResponse();
+    const message = createBaseQueryAllDidDocVersionsMetadataResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -312,11 +314,11 @@ export const QueryGetAllDidDocVersionsMetadataResponse = {
     return message;
   },
 
-  fromJSON(object: any): QueryGetAllDidDocVersionsMetadataResponse {
+  fromJSON(object: any): QueryAllDidDocVersionsMetadataResponse {
     return { versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Metadata.fromJSON(e)) : [] };
   },
 
-  toJSON(message: QueryGetAllDidDocVersionsMetadataResponse): unknown {
+  toJSON(message: QueryAllDidDocVersionsMetadataResponse): unknown {
     const obj: any = {};
     if (message.versions) {
       obj.versions = message.versions.map((e) => e ? Metadata.toJSON(e) : undefined);
@@ -326,21 +328,21 @@ export const QueryGetAllDidDocVersionsMetadataResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGetAllDidDocVersionsMetadataResponse>, I>>(
+  fromPartial<I extends Exact<DeepPartial<QueryAllDidDocVersionsMetadataResponse>, I>>(
     object: I,
-  ): QueryGetAllDidDocVersionsMetadataResponse {
-    const message = createBaseQueryGetAllDidDocVersionsMetadataResponse();
+  ): QueryAllDidDocVersionsMetadataResponse {
+    const message = createBaseQueryAllDidDocVersionsMetadataResponse();
     message.versions = object.versions?.map((e) => Metadata.fromPartial(e)) || [];
     return message;
   },
 };
 
 export interface Query {
-  DidDoc(request: QueryGetDidDocRequest): Promise<QueryGetDidDocResponse>;
-  DidDocVersion(request: QueryGetDidDocVersionRequest): Promise<QueryGetDidDocVersionResponse>;
+  DidDoc(request: QueryGetDidDocRequest): Promise<QueryDidDocResponse>;
+  DidDocVersion(request: QueryGetDidDocVersionRequest): Promise<QueryDidDocVersionResponse>;
   AllDidDocVersionsMetadata(
     request: QueryGetAllDidDocVersionsMetadataRequest,
-  ): Promise<QueryGetAllDidDocVersionsMetadataResponse>;
+  ): Promise<QueryAllDidDocVersionsMetadataResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -353,24 +355,24 @@ export class QueryClientImpl implements Query {
     this.DidDocVersion = this.DidDocVersion.bind(this);
     this.AllDidDocVersionsMetadata = this.AllDidDocVersionsMetadata.bind(this);
   }
-  DidDoc(request: QueryGetDidDocRequest): Promise<QueryGetDidDocResponse> {
+  DidDoc(request: QueryGetDidDocRequest): Promise<QueryDidDocResponse> {
     const data = QueryGetDidDocRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "DidDoc", data);
-    return promise.then((data) => QueryGetDidDocResponse.decode(new _m0.Reader(data)));
+    return promise.then((data) => QueryDidDocResponse.decode(new _m0.Reader(data)));
   }
 
-  DidDocVersion(request: QueryGetDidDocVersionRequest): Promise<QueryGetDidDocVersionResponse> {
+  DidDocVersion(request: QueryGetDidDocVersionRequest): Promise<QueryDidDocVersionResponse> {
     const data = QueryGetDidDocVersionRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "DidDocVersion", data);
-    return promise.then((data) => QueryGetDidDocVersionResponse.decode(new _m0.Reader(data)));
+    return promise.then((data) => QueryDidDocVersionResponse.decode(new _m0.Reader(data)));
   }
 
   AllDidDocVersionsMetadata(
     request: QueryGetAllDidDocVersionsMetadataRequest,
-  ): Promise<QueryGetAllDidDocVersionsMetadataResponse> {
+  ): Promise<QueryAllDidDocVersionsMetadataResponse> {
     const data = QueryGetAllDidDocVersionsMetadataRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "AllDidDocVersionsMetadata", data);
-    return promise.then((data) => QueryGetAllDidDocVersionsMetadataResponse.decode(new _m0.Reader(data)));
+    return promise.then((data) => QueryAllDidDocVersionsMetadataResponse.decode(new _m0.Reader(data)));
   }
 }
 
