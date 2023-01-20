@@ -223,6 +223,10 @@ export const Did = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<Did>, I>>(base?: I): Did {
+    return Did.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<Did>, I>>(object: I): Did {
     const message = createBaseDid();
     message.context = object.context?.map((e) => e) || [];
@@ -320,6 +324,10 @@ export const VerificationMethod = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<VerificationMethod>, I>>(base?: I): VerificationMethod {
+    return VerificationMethod.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<VerificationMethod>, I>>(object: I): VerificationMethod {
     const message = createBaseVerificationMethod();
     message.id = object.id ?? "";
@@ -387,6 +395,10 @@ export const Service = {
     message.type !== undefined && (obj.type = message.type);
     message.serviceEndpoint !== undefined && (obj.serviceEndpoint = message.serviceEndpoint);
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<Service>, I>>(base?: I): Service {
+    return Service.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<Service>, I>>(object: I): Service {

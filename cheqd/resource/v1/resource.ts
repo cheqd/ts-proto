@@ -70,6 +70,10 @@ export const Resource = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<Resource>, I>>(base?: I): Resource {
+    return Resource.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<Resource>, I>>(object: I): Resource {
     const message = createBaseResource();
     message.header = (object.header !== undefined && object.header !== null)
@@ -195,6 +199,10 @@ export const ResourceHeader = {
     message.previousVersionId !== undefined && (obj.previousVersionId = message.previousVersionId);
     message.nextVersionId !== undefined && (obj.nextVersionId = message.nextVersionId);
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ResourceHeader>, I>>(base?: I): ResourceHeader {
+    return ResourceHeader.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<ResourceHeader>, I>>(object: I): ResourceHeader {

@@ -70,6 +70,10 @@ export const StateValue = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<StateValue>, I>>(base?: I): StateValue {
+    return StateValue.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<StateValue>, I>>(object: I): StateValue {
     const message = createBaseStateValue();
     message.data = (object.data !== undefined && object.data !== null) ? Any.fromPartial(object.data) : undefined;
@@ -156,6 +160,10 @@ export const Metadata = {
       obj.resources = [];
     }
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<Metadata>, I>>(base?: I): Metadata {
+    return Metadata.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<Metadata>, I>>(object: I): Metadata {

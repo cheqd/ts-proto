@@ -3,70 +3,221 @@ import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { DidDocWithMetadata, Service, VerificationMethod } from "./diddoc";
 
+/**
+ * MsgCreateDidDoc defines the Msg/CreateDidDoc request type.
+ * It describes the parameters of a request for creating a new DID document.
+ */
 export interface MsgCreateDidDoc {
-  payload: MsgCreateDidDocPayload | undefined;
+  /** Payload containing the DID Document to be created */
+  payload:
+    | MsgCreateDidDocPayload
+    | undefined;
+  /** Signatures of the DID Document's controller(s) */
   signatures: SignInfo[];
 }
 
+/**
+ * MsgUpdateDidDoc defines the Msg/UpdateDidDoc request type.
+ * It describes the parameters of a request for updating an existing DID document.
+ */
 export interface MsgUpdateDidDoc {
-  payload: MsgUpdateDidDocPayload | undefined;
+  /** Payload containing the DID Document to be updated. This should be updated the DID Document. */
+  payload:
+    | MsgUpdateDidDocPayload
+    | undefined;
+  /** Signatures of the DID Document's controller(s) */
   signatures: SignInfo[];
 }
 
+/**
+ * MsgDeactivateDidDoc defines the Msg/DeactivateDidDoc request type.
+ * It describes the parameters of a request for deactivating an existing DID document.
+ */
 export interface MsgDeactivateDidDoc {
-  payload: MsgDeactivateDidDocPayload | undefined;
+  /** Payload containing the DID Document to be deactivated */
+  payload:
+    | MsgDeactivateDidDocPayload
+    | undefined;
+  /** Signatures of the DID Document's controller(s) */
   signatures: SignInfo[];
 }
 
+/** SignInfo defines the structure of a DID Document controller's signature */
 export interface SignInfo {
+  /** Verification method ID of the DID Controller */
   verificationMethodId: string;
+  /** Signature of the DID Document controller */
   signature: Uint8Array;
 }
 
+/** MsgCreateDidDocPayload defines the structure of the payload for creating a new DID document */
 export interface MsgCreateDidDocPayload {
+  /**
+   * context is a list of URIs used to identify the context of the DID document.
+   * Default: https://www.w3.org/ns/did/v1
+   */
   context: string[];
+  /**
+   * id is the DID of the DID document.
+   * Format: did:cheqd:<namespace>:<unique-identifier>
+   */
   id: string;
+  /** controller is a list of DIDs that are allowed to control the DID document. */
   controller: string[];
+  /**
+   * verificationMethod is a list of verification methods that can be used to
+   * verify a digital signature or cryptographic proof.
+   * Documentation: https://www.w3.org/TR/did-core/#verification-methods
+   *
+   * Required fields:
+   * - id: A unique identifier for the verification method
+   * - type: A supported verification method type (supported: Ed25519VerificationKey2018, Ed25519VerificationKey2020, JsonWebKey2020)
+   * - controller: DID of the controller of the verification method
+   * - verification_material: Public key of the verification method (supported: publicJwk, publicKeyBase58, publicKeyMultibase)
+   */
   verificationMethod: VerificationMethod[];
+  /**
+   * authentication is a list of verification methods that can be used to
+   * authenticate as the DID subject.
+   */
   authentication: string[];
+  /**
+   * assertionMethod is a list of verification methods that can be used to
+   * assert statements as the DID subject.
+   */
   assertionMethod: string[];
+  /**
+   * capabilityInvocation is a list of verification methods that can be used to
+   * invoke capabilities as the DID subject.
+   */
   capabilityInvocation: string[];
+  /**
+   * capabilityDelegation is a list of verification methods that can be used to
+   * delegate capabilities as the DID subject.
+   */
   capabilityDelegation: string[];
+  /**
+   * keyAgreement is a list of verification methods that can be used to perform
+   * key agreement as the DID subject.
+   */
   keyAgreement: string[];
-  alsoKnownAs: string[];
+  /**
+   * service is a list of services that can be used to interact with the DID subject.
+   * Documentation: https://www.w3.org/TR/did-core/#services
+   *
+   * Required fields:
+   * - id: A unique identifier for the service
+   * - type: A service type defined in DID Specification Registries
+   * - service_endpoint: Service endpoint(s), provided as a URI or set of URIs
+   */
   service: Service[];
+  /** alsoKnownAs is a list of DIDs that are known to refer to the same DID subject. */
+  alsoKnownAs: string[];
+  /**
+   * Version ID of the DID Document to be created
+   *
+   * Format: <uuid>
+   */
   versionId: string;
 }
 
+/** MsgCreateDidDocResponse defines response type for Msg/CreateDidDoc. */
 export interface MsgCreateDidDocResponse {
+  /** Return the created DID Document with metadata */
   value: DidDocWithMetadata | undefined;
 }
 
+/** MsgUpdateDidDocPayload defines the structure of the payload for updating an existing DID document */
 export interface MsgUpdateDidDocPayload {
+  /**
+   * context is a list of URIs used to identify the context of the DID document.
+   * Default: https://www.w3.org/ns/did/v1
+   */
   context: string[];
+  /**
+   * id is the DID of the DID document.
+   * Format: did:cheqd:<namespace>:<unique-identifier>
+   */
   id: string;
+  /** controller is a list of DIDs that are allowed to control the DID document. */
   controller: string[];
+  /**
+   * verificationMethod is a list of verification methods that can be used to
+   * verify a digital signature or cryptographic proof.
+   * Documentation: https://www.w3.org/TR/did-core/#verification-methods
+   *
+   * Required fields:
+   * - id: A unique identifier for the verification method
+   * - type: A supported verification method type (supported: Ed25519VerificationKey2018, Ed25519VerificationKey2020, JsonWebKey2020)
+   * - controller: DID of the controller of the verification method
+   * - verification_material: Public key of the verification method (supported: publicJwk, publicKeyBase58, publicKeyMultibase)
+   */
   verificationMethod: VerificationMethod[];
+  /**
+   * authentication is a list of verification methods that can be used to
+   * authenticate as the DID subject.
+   */
   authentication: string[];
+  /**
+   * assertionMethod is a list of verification methods that can be used to
+   * assert statements as the DID subject.
+   */
   assertionMethod: string[];
+  /**
+   * capabilityInvocation is a list of verification methods that can be used to
+   * invoke capabilities as the DID subject.
+   */
   capabilityInvocation: string[];
+  /**
+   * capabilityDelegation is a list of verification methods that can be used to
+   * delegate capabilities as the DID subject.
+   */
   capabilityDelegation: string[];
+  /**
+   * keyAgreement is a list of verification methods that can be used to perform
+   * key agreement as the DID subject.
+   */
   keyAgreement: string[];
-  alsoKnownAs: string[];
+  /**
+   * service is a list of services that can be used to interact with the DID subject.
+   * Documentation: https://www.w3.org/TR/did-core/#services
+   *
+   * Required fields:
+   * - id: A unique identifier for the service
+   * - type: A service type defined in DID Specification Registries
+   * - service_endpoint: Service endpoint(s), provided as a URI or set of URIs
+   */
   service: Service[];
+  /** alsoKnownAs is a list of DIDs that are known to refer to the same DID subject. */
+  alsoKnownAs: string[];
+  /**
+   * Updated version ID of the DID Document.
+   * Links to next/previous versions of the DID Document will be automatically updated.
+   *
+   * Format: <uuid>
+   */
   versionId: string;
 }
 
 export interface MsgUpdateDidDocResponse {
+  /** Return the updated DID Document with metadata */
   value: DidDocWithMetadata | undefined;
 }
 
+/** MsgDeactivateDidDocPayload defines the structure of the payload for deactivating an existing DID document */
 export interface MsgDeactivateDidDocPayload {
+  /** Unique identifier of the DID Document to be deactivated */
   id: string;
+  /**
+   * Version ID of the DID Document to be deactivated
+   * This is primarily used as a sanity check to ensure that the correct DID Document is being deactivated.
+   */
   versionId: string;
 }
 
+/** MsgDeactivateDidDocResponse defines response type for Msg/DeactivateDidDoc. */
 export interface MsgDeactivateDidDocResponse {
+  /** Return the deactivated DID Document with metadata */
   value: DidDocWithMetadata | undefined;
 }
 
@@ -123,6 +274,10 @@ export const MsgCreateDidDoc = {
       obj.signatures = [];
     }
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<MsgCreateDidDoc>, I>>(base?: I): MsgCreateDidDoc {
+    return MsgCreateDidDoc.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<MsgCreateDidDoc>, I>>(object: I): MsgCreateDidDoc {
@@ -190,6 +345,10 @@ export const MsgUpdateDidDoc = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<MsgUpdateDidDoc>, I>>(base?: I): MsgUpdateDidDoc {
+    return MsgUpdateDidDoc.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<MsgUpdateDidDoc>, I>>(object: I): MsgUpdateDidDoc {
     const message = createBaseMsgUpdateDidDoc();
     message.payload = (object.payload !== undefined && object.payload !== null)
@@ -255,6 +414,10 @@ export const MsgDeactivateDidDoc = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<MsgDeactivateDidDoc>, I>>(base?: I): MsgDeactivateDidDoc {
+    return MsgDeactivateDidDoc.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<MsgDeactivateDidDoc>, I>>(object: I): MsgDeactivateDidDoc {
     const message = createBaseMsgDeactivateDidDoc();
     message.payload = (object.payload !== undefined && object.payload !== null)
@@ -316,6 +479,10 @@ export const SignInfo = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<SignInfo>, I>>(base?: I): SignInfo {
+    return SignInfo.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<SignInfo>, I>>(object: I): SignInfo {
     const message = createBaseSignInfo();
     message.verificationMethodId = object.verificationMethodId ?? "";
@@ -335,8 +502,8 @@ function createBaseMsgCreateDidDocPayload(): MsgCreateDidDocPayload {
     capabilityInvocation: [],
     capabilityDelegation: [],
     keyAgreement: [],
-    alsoKnownAs: [],
     service: [],
+    alsoKnownAs: [],
     versionId: "",
   };
 }
@@ -370,11 +537,11 @@ export const MsgCreateDidDocPayload = {
     for (const v of message.keyAgreement) {
       writer.uint32(74).string(v!);
     }
-    for (const v of message.alsoKnownAs) {
-      writer.uint32(82).string(v!);
-    }
     for (const v of message.service) {
-      Service.encode(v!, writer.uint32(90).fork()).ldelim();
+      Service.encode(v!, writer.uint32(82).fork()).ldelim();
+    }
+    for (const v of message.alsoKnownAs) {
+      writer.uint32(90).string(v!);
     }
     if (message.versionId !== "") {
       writer.uint32(98).string(message.versionId);
@@ -417,10 +584,10 @@ export const MsgCreateDidDocPayload = {
           message.keyAgreement.push(reader.string());
           break;
         case 10:
-          message.alsoKnownAs.push(reader.string());
+          message.service.push(Service.decode(reader, reader.uint32()));
           break;
         case 11:
-          message.service.push(Service.decode(reader, reader.uint32()));
+          message.alsoKnownAs.push(reader.string());
           break;
         case 12:
           message.versionId = reader.string();
@@ -450,8 +617,8 @@ export const MsgCreateDidDocPayload = {
         ? object.capabilityDelegation.map((e: any) => String(e))
         : [],
       keyAgreement: Array.isArray(object?.keyAgreement) ? object.keyAgreement.map((e: any) => String(e)) : [],
-      alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e: any) => String(e)) : [],
       service: Array.isArray(object?.service) ? object.service.map((e: any) => Service.fromJSON(e)) : [],
+      alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e: any) => String(e)) : [],
       versionId: isSet(object.versionId) ? String(object.versionId) : "",
     };
   },
@@ -499,18 +666,22 @@ export const MsgCreateDidDocPayload = {
     } else {
       obj.keyAgreement = [];
     }
-    if (message.alsoKnownAs) {
-      obj.alsoKnownAs = message.alsoKnownAs.map((e) => e);
-    } else {
-      obj.alsoKnownAs = [];
-    }
     if (message.service) {
       obj.service = message.service.map((e) => e ? Service.toJSON(e) : undefined);
     } else {
       obj.service = [];
     }
+    if (message.alsoKnownAs) {
+      obj.alsoKnownAs = message.alsoKnownAs.map((e) => e);
+    } else {
+      obj.alsoKnownAs = [];
+    }
     message.versionId !== undefined && (obj.versionId = message.versionId);
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<MsgCreateDidDocPayload>, I>>(base?: I): MsgCreateDidDocPayload {
+    return MsgCreateDidDocPayload.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<MsgCreateDidDocPayload>, I>>(object: I): MsgCreateDidDocPayload {
@@ -524,8 +695,8 @@ export const MsgCreateDidDocPayload = {
     message.capabilityInvocation = object.capabilityInvocation?.map((e) => e) || [];
     message.capabilityDelegation = object.capabilityDelegation?.map((e) => e) || [];
     message.keyAgreement = object.keyAgreement?.map((e) => e) || [];
-    message.alsoKnownAs = object.alsoKnownAs?.map((e) => e) || [];
     message.service = object.service?.map((e) => Service.fromPartial(e)) || [];
+    message.alsoKnownAs = object.alsoKnownAs?.map((e) => e) || [];
     message.versionId = object.versionId ?? "";
     return message;
   },
@@ -571,6 +742,10 @@ export const MsgCreateDidDocResponse = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<MsgCreateDidDocResponse>, I>>(base?: I): MsgCreateDidDocResponse {
+    return MsgCreateDidDocResponse.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<MsgCreateDidDocResponse>, I>>(object: I): MsgCreateDidDocResponse {
     const message = createBaseMsgCreateDidDocResponse();
     message.value = (object.value !== undefined && object.value !== null)
@@ -591,8 +766,8 @@ function createBaseMsgUpdateDidDocPayload(): MsgUpdateDidDocPayload {
     capabilityInvocation: [],
     capabilityDelegation: [],
     keyAgreement: [],
-    alsoKnownAs: [],
     service: [],
+    alsoKnownAs: [],
     versionId: "",
   };
 }
@@ -626,11 +801,11 @@ export const MsgUpdateDidDocPayload = {
     for (const v of message.keyAgreement) {
       writer.uint32(74).string(v!);
     }
-    for (const v of message.alsoKnownAs) {
-      writer.uint32(82).string(v!);
-    }
     for (const v of message.service) {
-      Service.encode(v!, writer.uint32(90).fork()).ldelim();
+      Service.encode(v!, writer.uint32(82).fork()).ldelim();
+    }
+    for (const v of message.alsoKnownAs) {
+      writer.uint32(90).string(v!);
     }
     if (message.versionId !== "") {
       writer.uint32(98).string(message.versionId);
@@ -673,10 +848,10 @@ export const MsgUpdateDidDocPayload = {
           message.keyAgreement.push(reader.string());
           break;
         case 10:
-          message.alsoKnownAs.push(reader.string());
+          message.service.push(Service.decode(reader, reader.uint32()));
           break;
         case 11:
-          message.service.push(Service.decode(reader, reader.uint32()));
+          message.alsoKnownAs.push(reader.string());
           break;
         case 12:
           message.versionId = reader.string();
@@ -706,8 +881,8 @@ export const MsgUpdateDidDocPayload = {
         ? object.capabilityDelegation.map((e: any) => String(e))
         : [],
       keyAgreement: Array.isArray(object?.keyAgreement) ? object.keyAgreement.map((e: any) => String(e)) : [],
-      alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e: any) => String(e)) : [],
       service: Array.isArray(object?.service) ? object.service.map((e: any) => Service.fromJSON(e)) : [],
+      alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e: any) => String(e)) : [],
       versionId: isSet(object.versionId) ? String(object.versionId) : "",
     };
   },
@@ -755,18 +930,22 @@ export const MsgUpdateDidDocPayload = {
     } else {
       obj.keyAgreement = [];
     }
-    if (message.alsoKnownAs) {
-      obj.alsoKnownAs = message.alsoKnownAs.map((e) => e);
-    } else {
-      obj.alsoKnownAs = [];
-    }
     if (message.service) {
       obj.service = message.service.map((e) => e ? Service.toJSON(e) : undefined);
     } else {
       obj.service = [];
     }
+    if (message.alsoKnownAs) {
+      obj.alsoKnownAs = message.alsoKnownAs.map((e) => e);
+    } else {
+      obj.alsoKnownAs = [];
+    }
     message.versionId !== undefined && (obj.versionId = message.versionId);
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<MsgUpdateDidDocPayload>, I>>(base?: I): MsgUpdateDidDocPayload {
+    return MsgUpdateDidDocPayload.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<MsgUpdateDidDocPayload>, I>>(object: I): MsgUpdateDidDocPayload {
@@ -780,8 +959,8 @@ export const MsgUpdateDidDocPayload = {
     message.capabilityInvocation = object.capabilityInvocation?.map((e) => e) || [];
     message.capabilityDelegation = object.capabilityDelegation?.map((e) => e) || [];
     message.keyAgreement = object.keyAgreement?.map((e) => e) || [];
-    message.alsoKnownAs = object.alsoKnownAs?.map((e) => e) || [];
     message.service = object.service?.map((e) => Service.fromPartial(e)) || [];
+    message.alsoKnownAs = object.alsoKnownAs?.map((e) => e) || [];
     message.versionId = object.versionId ?? "";
     return message;
   },
@@ -825,6 +1004,10 @@ export const MsgUpdateDidDocResponse = {
     const obj: any = {};
     message.value !== undefined && (obj.value = message.value ? DidDocWithMetadata.toJSON(message.value) : undefined);
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<MsgUpdateDidDocResponse>, I>>(base?: I): MsgUpdateDidDocResponse {
+    return MsgUpdateDidDocResponse.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<MsgUpdateDidDocResponse>, I>>(object: I): MsgUpdateDidDocResponse {
@@ -886,6 +1069,10 @@ export const MsgDeactivateDidDocPayload = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<MsgDeactivateDidDocPayload>, I>>(base?: I): MsgDeactivateDidDocPayload {
+    return MsgDeactivateDidDocPayload.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<MsgDeactivateDidDocPayload>, I>>(object: I): MsgDeactivateDidDocPayload {
     const message = createBaseMsgDeactivateDidDocPayload();
     message.id = object.id ?? "";
@@ -934,6 +1121,10 @@ export const MsgDeactivateDidDocResponse = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<MsgDeactivateDidDocResponse>, I>>(base?: I): MsgDeactivateDidDocResponse {
+    return MsgDeactivateDidDocResponse.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<MsgDeactivateDidDocResponse>, I>>(object: I): MsgDeactivateDidDocResponse {
     const message = createBaseMsgDeactivateDidDocResponse();
     message.value = (object.value !== undefined && object.value !== null)
@@ -943,9 +1134,13 @@ export const MsgDeactivateDidDocResponse = {
   },
 };
 
+/** Msg defines the Cosmos SDK Msg service for the cheqd.did.v2 module. */
 export interface Msg {
+  /** CreateDidDoc defines a method for creating a new DID document */
   CreateDidDoc(request: MsgCreateDidDoc): Promise<MsgCreateDidDocResponse>;
+  /** UpdateDidDoc defines a method for updating an existing DID document */
   UpdateDidDoc(request: MsgUpdateDidDoc): Promise<MsgUpdateDidDocResponse>;
+  /** DeactivateDidDoc defines a method for deactivating an existing DID document */
   DeactivateDidDoc(request: MsgDeactivateDidDoc): Promise<MsgDeactivateDidDocResponse>;
 }
 
