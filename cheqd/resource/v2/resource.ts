@@ -3,12 +3,6 @@ import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 
-/** ResourceWithMetadata describes the overall structure of a DID-Linked Resource */
-export interface ResourceWithMetadata {
-  resource: Resource | undefined;
-  metadata: Metadata | undefined;
-}
-
 /** Resource stores the contents of a DID-Linked Resource */
 export interface Resource {
   /** bytes is the raw data of the Resource */
@@ -20,6 +14,11 @@ export interface Metadata {
   /**
    * collection_id is the ID of the collection that the Resource belongs to. Defined client-side.
    * This field is the unique identifier of the DID linked to this Resource
+   * Format: <unique-identifier>
+   *
+   * Examples:
+   * - c82f2b02-bdab-4dd7-b833-3e143745d612
+   * - wGHEXrZvJxR8vw5P3UWH1j
    */
   collectionId: string;
   /**
@@ -105,71 +104,11 @@ export interface AlternativeUri {
   description: string;
 }
 
-function createBaseResourceWithMetadata(): ResourceWithMetadata {
-  return { resource: undefined, metadata: undefined };
+/** ResourceWithMetadata describes the overall structure of a DID-Linked Resource */
+export interface ResourceWithMetadata {
+  resource: Resource | undefined;
+  metadata: Metadata | undefined;
 }
-
-export const ResourceWithMetadata = {
-  encode(message: ResourceWithMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.resource !== undefined) {
-      Resource.encode(message.resource, writer.uint32(10).fork()).ldelim();
-    }
-    if (message.metadata !== undefined) {
-      Metadata.encode(message.metadata, writer.uint32(18).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): ResourceWithMetadata {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseResourceWithMetadata();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.resource = Resource.decode(reader, reader.uint32());
-          break;
-        case 2:
-          message.metadata = Metadata.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): ResourceWithMetadata {
-    return {
-      resource: isSet(object.resource) ? Resource.fromJSON(object.resource) : undefined,
-      metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined,
-    };
-  },
-
-  toJSON(message: ResourceWithMetadata): unknown {
-    const obj: any = {};
-    message.resource !== undefined && (obj.resource = message.resource ? Resource.toJSON(message.resource) : undefined);
-    message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<ResourceWithMetadata>, I>>(base?: I): ResourceWithMetadata {
-    return ResourceWithMetadata.fromPartial(base ?? {});
-  },
-
-  fromPartial<I extends Exact<DeepPartial<ResourceWithMetadata>, I>>(object: I): ResourceWithMetadata {
-    const message = createBaseResourceWithMetadata();
-    message.resource = (object.resource !== undefined && object.resource !== null)
-      ? Resource.fromPartial(object.resource)
-      : undefined;
-    message.metadata = (object.metadata !== undefined && object.metadata !== null)
-      ? Metadata.fromPartial(object.metadata)
-      : undefined;
-    return message;
-  },
-};
 
 function createBaseResource(): Resource {
   return { data: new Uint8Array() };
@@ -442,6 +381,72 @@ export const AlternativeUri = {
     const message = createBaseAlternativeUri();
     message.uri = object.uri ?? "";
     message.description = object.description ?? "";
+    return message;
+  },
+};
+
+function createBaseResourceWithMetadata(): ResourceWithMetadata {
+  return { resource: undefined, metadata: undefined };
+}
+
+export const ResourceWithMetadata = {
+  encode(message: ResourceWithMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.resource !== undefined) {
+      Resource.encode(message.resource, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.metadata !== undefined) {
+      Metadata.encode(message.metadata, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResourceWithMetadata {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseResourceWithMetadata();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.resource = Resource.decode(reader, reader.uint32());
+          break;
+        case 2:
+          message.metadata = Metadata.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ResourceWithMetadata {
+    return {
+      resource: isSet(object.resource) ? Resource.fromJSON(object.resource) : undefined,
+      metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined,
+    };
+  },
+
+  toJSON(message: ResourceWithMetadata): unknown {
+    const obj: any = {};
+    message.resource !== undefined && (obj.resource = message.resource ? Resource.toJSON(message.resource) : undefined);
+    message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ResourceWithMetadata>, I>>(base?: I): ResourceWithMetadata {
+    return ResourceWithMetadata.fromPartial(base ?? {});
+  },
+
+  fromPartial<I extends Exact<DeepPartial<ResourceWithMetadata>, I>>(object: I): ResourceWithMetadata {
+    const message = createBaseResourceWithMetadata();
+    message.resource = (object.resource !== undefined && object.resource !== null)
+      ? Resource.fromPartial(object.resource)
+      : undefined;
+    message.metadata = (object.metadata !== undefined && object.metadata !== null)
+      ? Metadata.fromPartial(object.metadata)
+      : undefined;
     return message;
   },
 };
