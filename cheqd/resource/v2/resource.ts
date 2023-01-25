@@ -1,82 +1,109 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
+import { Timestamp } from "../../../google/protobuf/timestamp";
 
-export interface Resource {
-  data: Uint8Array;
-}
-
+/** ResourceWithMetadata describes the overall structure of a DID-Linked Resource */
 export interface ResourceWithMetadata {
   resource: Resource | undefined;
   metadata: Metadata | undefined;
 }
 
-export interface AlternativeUri {
-  uri: string;
-  description: string;
+/** Resource stores the contents of a DID-Linked Resource */
+export interface Resource {
+  /** bytes is the raw data of the Resource */
+  data: Uint8Array;
 }
 
+/** Metadata stores the metadata of a DID-Linked Resource */
 export interface Metadata {
+  /**
+   * collection_id is the ID of the collection that the Resource belongs to. Defined client-side.
+   * This field is the unique identifier of the DID linked to this Resource
+   */
   collectionId: string;
+  /**
+   * id is the ID of the Resource. Defined client-side.
+   * This field is a unique identifier for this specific version of the Resource.
+   * Format: <uuid>
+   */
   id: string;
+  /**
+   * name is a human-readable name for the Resource. Defined client-side.
+   * Does not change between different versions.
+   * Example: PassportSchema, EducationTrustRegistry
+   */
   name: string;
+  /**
+   * version is a human-readable semantic version for the Resource. Defined client-side.
+   * Stored as a string. OPTIONAL.
+   * Example: 1.0.0, v2.1.0
+   */
   version: string;
+  /**
+   * resource_type is a Resource type that identifies what the Resource is. Defined client-side.
+   * This is NOT the same as the resource's media type.
+   * Example: AnonCredsSchema, StatusList2021
+   */
   resourceType: string;
+  /** List of alternative URIs for the SAME Resource. */
   alsoKnownAs: AlternativeUri[];
+  /**
+   * media_type is IANA media type of the Resource. Defined ledger-side.
+   * Example: application/json, image/png
+   */
   mediaType: string;
-  created: string;
+  /**
+   * created is the time at which the Resource was created. Defined ledger-side.
+   * Format: RFC3339
+   * Example: 2021-01-01T00:00:00Z
+   */
+  created:
+    | Date
+    | undefined;
+  /**
+   * checksum is a SHA-256 checksum hash of the Resource. Defined ledger-side.
+   * Example: d14a028c2a3a2bc9476102bb288234c415a2b01f828ea62ac5b3e42f
+   */
   checksum: string;
+  /**
+   * previous_version_id is the ID of the previous version of the Resource. Defined ledger-side.
+   * This is based on the Resource's name and Resource type to determine whether it's the same Resource.
+   * Format: <uuid>
+   */
   previousVersionId: string;
+  /**
+   * next_version_id is the ID of the next version of the Resource. Defined ledger-side.
+   * This is based on the Resource's name and Resource type to determine whether it's the same Resource.
+   * Format: <uuid>
+   */
   nextVersionId: string;
 }
 
-function createBaseResource(): Resource {
-  return { data: new Uint8Array() };
+/**
+ * AlternativeUri are alternative URIs that can be used to access the Resource.
+ * By default, at least the DID URI equivalent of the Resource is populated.
+ */
+export interface AlternativeUri {
+  /**
+   * uri is the URI of the Resource.
+   * Examples:
+   * - did:cheqd:testnet:MjYxNzYKMjYxNzYK/resources/4600ea35-8916-4ac4-b412-55b8f49dd94e
+   * - https://resolver..cheqd.net/1.0/identifiers/did:cheqd:testnet:MjYxNzYKMjYxNzYK/resources/4600ea35-8916-4ac4-b412-55b8f49dd94e
+   * - https://example.com/example.json
+   * - https://gateway.ipfs.io/ipfs/bafybeihetj2ng3d74k7t754atv2s5dk76pcqtvxls6dntef3xa6rax25xe
+   * - ipfs://bafybeihetj2ng3d74k7t754atv2s5dk76pcqtvxls6dntef3xa6rax25xe
+   */
+  uri: string;
+  /**
+   * description is a human-readable description of the URI. Defined client-side.
+   * Examples:
+   * - did-uri
+   * - http-uri
+   * - ipfs-uri
+   */
+  description: string;
 }
-
-export const Resource = {
-  encode(message: Resource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.data.length !== 0) {
-      writer.uint32(10).bytes(message.data);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): Resource {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseResource();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.data = reader.bytes();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): Resource {
-    return { data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array() };
-  },
-
-  toJSON(message: Resource): unknown {
-    const obj: any = {};
-    message.data !== undefined &&
-      (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<Resource>, I>>(object: I): Resource {
-    const message = createBaseResource();
-    message.data = object.data ?? new Uint8Array();
-    return message;
-  },
-};
 
 function createBaseResourceWithMetadata(): ResourceWithMetadata {
   return { resource: undefined, metadata: undefined };
@@ -128,6 +155,10 @@ export const ResourceWithMetadata = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<ResourceWithMetadata>, I>>(base?: I): ResourceWithMetadata {
+    return ResourceWithMetadata.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<ResourceWithMetadata>, I>>(object: I): ResourceWithMetadata {
     const message = createBaseResourceWithMetadata();
     message.resource = (object.resource !== undefined && object.resource !== null)
@@ -136,6 +167,219 @@ export const ResourceWithMetadata = {
     message.metadata = (object.metadata !== undefined && object.metadata !== null)
       ? Metadata.fromPartial(object.metadata)
       : undefined;
+    return message;
+  },
+};
+
+function createBaseResource(): Resource {
+  return { data: new Uint8Array() };
+}
+
+export const Resource = {
+  encode(message: Resource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.data.length !== 0) {
+      writer.uint32(10).bytes(message.data);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Resource {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseResource();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.data = reader.bytes();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Resource {
+    return { data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array() };
+  },
+
+  toJSON(message: Resource): unknown {
+    const obj: any = {};
+    message.data !== undefined &&
+      (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<Resource>, I>>(base?: I): Resource {
+    return Resource.fromPartial(base ?? {});
+  },
+
+  fromPartial<I extends Exact<DeepPartial<Resource>, I>>(object: I): Resource {
+    const message = createBaseResource();
+    message.data = object.data ?? new Uint8Array();
+    return message;
+  },
+};
+
+function createBaseMetadata(): Metadata {
+  return {
+    collectionId: "",
+    id: "",
+    name: "",
+    version: "",
+    resourceType: "",
+    alsoKnownAs: [],
+    mediaType: "",
+    created: undefined,
+    checksum: "",
+    previousVersionId: "",
+    nextVersionId: "",
+  };
+}
+
+export const Metadata = {
+  encode(message: Metadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.collectionId !== "") {
+      writer.uint32(10).string(message.collectionId);
+    }
+    if (message.id !== "") {
+      writer.uint32(18).string(message.id);
+    }
+    if (message.name !== "") {
+      writer.uint32(26).string(message.name);
+    }
+    if (message.version !== "") {
+      writer.uint32(34).string(message.version);
+    }
+    if (message.resourceType !== "") {
+      writer.uint32(42).string(message.resourceType);
+    }
+    for (const v of message.alsoKnownAs) {
+      AlternativeUri.encode(v!, writer.uint32(50).fork()).ldelim();
+    }
+    if (message.mediaType !== "") {
+      writer.uint32(58).string(message.mediaType);
+    }
+    if (message.created !== undefined) {
+      Timestamp.encode(toTimestamp(message.created), writer.uint32(66).fork()).ldelim();
+    }
+    if (message.checksum !== "") {
+      writer.uint32(74).string(message.checksum);
+    }
+    if (message.previousVersionId !== "") {
+      writer.uint32(82).string(message.previousVersionId);
+    }
+    if (message.nextVersionId !== "") {
+      writer.uint32(90).string(message.nextVersionId);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Metadata {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMetadata();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.collectionId = reader.string();
+          break;
+        case 2:
+          message.id = reader.string();
+          break;
+        case 3:
+          message.name = reader.string();
+          break;
+        case 4:
+          message.version = reader.string();
+          break;
+        case 5:
+          message.resourceType = reader.string();
+          break;
+        case 6:
+          message.alsoKnownAs.push(AlternativeUri.decode(reader, reader.uint32()));
+          break;
+        case 7:
+          message.mediaType = reader.string();
+          break;
+        case 8:
+          message.created = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          break;
+        case 9:
+          message.checksum = reader.string();
+          break;
+        case 10:
+          message.previousVersionId = reader.string();
+          break;
+        case 11:
+          message.nextVersionId = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Metadata {
+    return {
+      collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      name: isSet(object.name) ? String(object.name) : "",
+      version: isSet(object.version) ? String(object.version) : "",
+      resourceType: isSet(object.resourceType) ? String(object.resourceType) : "",
+      alsoKnownAs: Array.isArray(object?.alsoKnownAs)
+        ? object.alsoKnownAs.map((e: any) => AlternativeUri.fromJSON(e))
+        : [],
+      mediaType: isSet(object.mediaType) ? String(object.mediaType) : "",
+      created: isSet(object.created) ? fromJsonTimestamp(object.created) : undefined,
+      checksum: isSet(object.checksum) ? String(object.checksum) : "",
+      previousVersionId: isSet(object.previousVersionId) ? String(object.previousVersionId) : "",
+      nextVersionId: isSet(object.nextVersionId) ? String(object.nextVersionId) : "",
+    };
+  },
+
+  toJSON(message: Metadata): unknown {
+    const obj: any = {};
+    message.collectionId !== undefined && (obj.collectionId = message.collectionId);
+    message.id !== undefined && (obj.id = message.id);
+    message.name !== undefined && (obj.name = message.name);
+    message.version !== undefined && (obj.version = message.version);
+    message.resourceType !== undefined && (obj.resourceType = message.resourceType);
+    if (message.alsoKnownAs) {
+      obj.alsoKnownAs = message.alsoKnownAs.map((e) => e ? AlternativeUri.toJSON(e) : undefined);
+    } else {
+      obj.alsoKnownAs = [];
+    }
+    message.mediaType !== undefined && (obj.mediaType = message.mediaType);
+    message.created !== undefined && (obj.created = message.created.toISOString());
+    message.checksum !== undefined && (obj.checksum = message.checksum);
+    message.previousVersionId !== undefined && (obj.previousVersionId = message.previousVersionId);
+    message.nextVersionId !== undefined && (obj.nextVersionId = message.nextVersionId);
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<Metadata>, I>>(base?: I): Metadata {
+    return Metadata.fromPartial(base ?? {});
+  },
+
+  fromPartial<I extends Exact<DeepPartial<Metadata>, I>>(object: I): Metadata {
+    const message = createBaseMetadata();
+    message.collectionId = object.collectionId ?? "";
+    message.id = object.id ?? "";
+    message.name = object.name ?? "";
+    message.version = object.version ?? "";
+    message.resourceType = object.resourceType ?? "";
+    message.alsoKnownAs = object.alsoKnownAs?.map((e) => AlternativeUri.fromPartial(e)) || [];
+    message.mediaType = object.mediaType ?? "";
+    message.created = object.created ?? undefined;
+    message.checksum = object.checksum ?? "";
+    message.previousVersionId = object.previousVersionId ?? "";
+    message.nextVersionId = object.nextVersionId ?? "";
     return message;
   },
 };
@@ -190,167 +434,14 @@ export const AlternativeUri = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<AlternativeUri>, I>>(base?: I): AlternativeUri {
+    return AlternativeUri.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<AlternativeUri>, I>>(object: I): AlternativeUri {
     const message = createBaseAlternativeUri();
     message.uri = object.uri ?? "";
     message.description = object.description ?? "";
-    return message;
-  },
-};
-
-function createBaseMetadata(): Metadata {
-  return {
-    collectionId: "",
-    id: "",
-    name: "",
-    version: "",
-    resourceType: "",
-    alsoKnownAs: [],
-    mediaType: "",
-    created: "",
-    checksum: "",
-    previousVersionId: "",
-    nextVersionId: "",
-  };
-}
-
-export const Metadata = {
-  encode(message: Metadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.collectionId !== "") {
-      writer.uint32(10).string(message.collectionId);
-    }
-    if (message.id !== "") {
-      writer.uint32(18).string(message.id);
-    }
-    if (message.name !== "") {
-      writer.uint32(26).string(message.name);
-    }
-    if (message.version !== "") {
-      writer.uint32(34).string(message.version);
-    }
-    if (message.resourceType !== "") {
-      writer.uint32(42).string(message.resourceType);
-    }
-    for (const v of message.alsoKnownAs) {
-      AlternativeUri.encode(v!, writer.uint32(50).fork()).ldelim();
-    }
-    if (message.mediaType !== "") {
-      writer.uint32(58).string(message.mediaType);
-    }
-    if (message.created !== "") {
-      writer.uint32(66).string(message.created);
-    }
-    if (message.checksum !== "") {
-      writer.uint32(74).string(message.checksum);
-    }
-    if (message.previousVersionId !== "") {
-      writer.uint32(82).string(message.previousVersionId);
-    }
-    if (message.nextVersionId !== "") {
-      writer.uint32(90).string(message.nextVersionId);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): Metadata {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMetadata();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.collectionId = reader.string();
-          break;
-        case 2:
-          message.id = reader.string();
-          break;
-        case 3:
-          message.name = reader.string();
-          break;
-        case 4:
-          message.version = reader.string();
-          break;
-        case 5:
-          message.resourceType = reader.string();
-          break;
-        case 6:
-          message.alsoKnownAs.push(AlternativeUri.decode(reader, reader.uint32()));
-          break;
-        case 7:
-          message.mediaType = reader.string();
-          break;
-        case 8:
-          message.created = reader.string();
-          break;
-        case 9:
-          message.checksum = reader.string();
-          break;
-        case 10:
-          message.previousVersionId = reader.string();
-          break;
-        case 11:
-          message.nextVersionId = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): Metadata {
-    return {
-      collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      name: isSet(object.name) ? String(object.name) : "",
-      version: isSet(object.version) ? String(object.version) : "",
-      resourceType: isSet(object.resourceType) ? String(object.resourceType) : "",
-      alsoKnownAs: Array.isArray(object?.alsoKnownAs)
-        ? object.alsoKnownAs.map((e: any) => AlternativeUri.fromJSON(e))
-        : [],
-      mediaType: isSet(object.mediaType) ? String(object.mediaType) : "",
-      created: isSet(object.created) ? String(object.created) : "",
-      checksum: isSet(object.checksum) ? String(object.checksum) : "",
-      previousVersionId: isSet(object.previousVersionId) ? String(object.previousVersionId) : "",
-      nextVersionId: isSet(object.nextVersionId) ? String(object.nextVersionId) : "",
-    };
-  },
-
-  toJSON(message: Metadata): unknown {
-    const obj: any = {};
-    message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-    message.id !== undefined && (obj.id = message.id);
-    message.name !== undefined && (obj.name = message.name);
-    message.version !== undefined && (obj.version = message.version);
-    message.resourceType !== undefined && (obj.resourceType = message.resourceType);
-    if (message.alsoKnownAs) {
-      obj.alsoKnownAs = message.alsoKnownAs.map((e) => e ? AlternativeUri.toJSON(e) : undefined);
-    } else {
-      obj.alsoKnownAs = [];
-    }
-    message.mediaType !== undefined && (obj.mediaType = message.mediaType);
-    message.created !== undefined && (obj.created = message.created);
-    message.checksum !== undefined && (obj.checksum = message.checksum);
-    message.previousVersionId !== undefined && (obj.previousVersionId = message.previousVersionId);
-    message.nextVersionId !== undefined && (obj.nextVersionId = message.nextVersionId);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<Metadata>, I>>(object: I): Metadata {
-    const message = createBaseMetadata();
-    message.collectionId = object.collectionId ?? "";
-    message.id = object.id ?? "";
-    message.name = object.name ?? "";
-    message.version = object.version ?? "";
-    message.resourceType = object.resourceType ?? "";
-    message.alsoKnownAs = object.alsoKnownAs?.map((e) => AlternativeUri.fromPartial(e)) || [];
-    message.mediaType = object.mediaType ?? "";
-    message.created = object.created ?? "";
-    message.checksum = object.checksum ?? "";
-    message.previousVersionId = object.previousVersionId ?? "";
-    message.nextVersionId = object.nextVersionId ?? "";
     return message;
   },
 };
@@ -410,6 +501,32 @@ type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function toTimestamp(date: Date): Timestamp {
+  const seconds = numberToLong(date.getTime() / 1_000);
+  const nanos = (date.getTime() % 1_000) * 1_000_000;
+  return { seconds, nanos };
+}
+
+function fromTimestamp(t: Timestamp): Date {
+  let millis = t.seconds.toNumber() * 1_000;
+  millis += t.nanos / 1_000_000;
+  return new Date(millis);
+}
+
+function fromJsonTimestamp(o: any): Date {
+  if (o instanceof Date) {
+    return o;
+  } else if (typeof o === "string") {
+    return new Date(o);
+  } else {
+    return fromTimestamp(Timestamp.fromJSON(o));
+  }
+}
+
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
+}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

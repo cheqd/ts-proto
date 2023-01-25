@@ -1,53 +1,109 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
+import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
 import { DidDocWithMetadata, Metadata } from "./diddoc";
 
-export interface QueryGetDidDocRequest {
-  /** is a DID to be fetched */
+/** QueryDidDocRequest is the request type for the Query/DidDoc method */
+export interface QueryDidDocRequest {
+  /**
+   * DID unique identifier of the DID Document to fetch.
+   * UUID-style DIDs as well as Indy-style DID are supported.
+   *
+   * Format: did:cheqd:<namespace>:<unique-identifier>
+   *
+   * Examples:
+   * - did:cheqd:mainnet:c82f2b02-bdab-4dd7-b833-3e143745d612
+   * - did:cheqd:testnet:wGHEXrZvJxR8vw5P3UWH1j
+   */
   id: string;
 }
 
+/** QueryDidDocResponse is the response type for the Query/DidDoc method */
 export interface QueryDidDocResponse {
+  /**
+   * Successful resolution of the DID Document returns the following:
+   * - did_doc is the latest version of the DID Document
+   * - metadata is is the DID Document metadata associated with the latest version of the DID Document
+   */
   value: DidDocWithMetadata | undefined;
 }
 
-export interface QueryGetDidDocVersionRequest {
-  /** is a DID */
+/** QueryDidDocVersionRequest is the request type for the Query/DidDocVersion method */
+export interface QueryDidDocVersionRequest {
+  /**
+   * DID unique identifier of the DID Document to fetch.
+   * UUID-style DIDs as well as Indy-style DID are supported.
+   *
+   * Format: did:cheqd:<namespace>:<unique-identifier>
+   *
+   * Examples:
+   * - did:cheqd:mainnet:c82f2b02-bdab-4dd7-b833-3e143745d612
+   * - did:cheqd:testnet:wGHEXrZvJxR8vw5P3UWH1j
+   */
   id: string;
-  /** is a unique value that maps DID Doc state at some point */
+  /**
+   * Unique version identifier of the DID Document to fetch.
+   * Returns the specified version of the DID Document.
+   *
+   * Format: <uuid>
+   *
+   * Example: 93f2573c-eca9-4098-96cb-a1ec676a29ed
+   */
   version: string;
 }
 
+/** QueryDidDocVersionResponse is the response type for the Query/DidDocVersion method */
 export interface QueryDidDocVersionResponse {
+  /**
+   * Successful resolution of the DID Document returns the following:
+   * - did_doc is the requested version of the DID Document
+   * - metadata is DID Document metadata associated with the requested version of the DID Document
+   */
   value: DidDocWithMetadata | undefined;
 }
 
-export interface QueryGetAllDidDocVersionsMetadataRequest {
-  /** is a DID */
+/** QueryAllDidDocVersionsMetadataRequest is the request type for the Query/AllDidDocVersionsMetadata method */
+export interface QueryAllDidDocVersionsMetadataRequest {
+  /**
+   * DID unique identifier of the DID Document to fetch version metadata.
+   * UUID-style DIDs as well as Indy-style DID are supported.
+   *
+   * Format: did:cheqd:<namespace>:<unique-identifier>
+   *
+   * Examples:
+   * - did:cheqd:mainnet:c82f2b02-bdab-4dd7-b833-3e143745d612
+   * - did:cheqd:testnet:wGHEXrZvJxR8vw5P3UWH1j
+   */
   id: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination: PageRequest | undefined;
 }
 
+/** QueryAllDidDocVersionsMetadataResponse is the response type for the Query/AllDidDocVersionsMetadata method */
 export interface QueryAllDidDocVersionsMetadataResponse {
+  /** versions is the list of all versions of the requested DID Document */
   versions: Metadata[];
+  /** pagination defines the pagination in the response. */
+  pagination: PageResponse | undefined;
 }
 
-function createBaseQueryGetDidDocRequest(): QueryGetDidDocRequest {
+function createBaseQueryDidDocRequest(): QueryDidDocRequest {
   return { id: "" };
 }
 
-export const QueryGetDidDocRequest = {
-  encode(message: QueryGetDidDocRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const QueryDidDocRequest = {
+  encode(message: QueryDidDocRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetDidDocRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDidDocRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryGetDidDocRequest();
+    const message = createBaseQueryDidDocRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -62,18 +118,22 @@ export const QueryGetDidDocRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryGetDidDocRequest {
+  fromJSON(object: any): QueryDidDocRequest {
     return { id: isSet(object.id) ? String(object.id) : "" };
   },
 
-  toJSON(message: QueryGetDidDocRequest): unknown {
+  toJSON(message: QueryDidDocRequest): unknown {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGetDidDocRequest>, I>>(object: I): QueryGetDidDocRequest {
-    const message = createBaseQueryGetDidDocRequest();
+  create<I extends Exact<DeepPartial<QueryDidDocRequest>, I>>(base?: I): QueryDidDocRequest {
+    return QueryDidDocRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryDidDocRequest>, I>>(object: I): QueryDidDocRequest {
+    const message = createBaseQueryDidDocRequest();
     message.id = object.id ?? "";
     return message;
   },
@@ -119,6 +179,10 @@ export const QueryDidDocResponse = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<QueryDidDocResponse>, I>>(base?: I): QueryDidDocResponse {
+    return QueryDidDocResponse.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<QueryDidDocResponse>, I>>(object: I): QueryDidDocResponse {
     const message = createBaseQueryDidDocResponse();
     message.value = (object.value !== undefined && object.value !== null)
@@ -128,12 +192,12 @@ export const QueryDidDocResponse = {
   },
 };
 
-function createBaseQueryGetDidDocVersionRequest(): QueryGetDidDocVersionRequest {
+function createBaseQueryDidDocVersionRequest(): QueryDidDocVersionRequest {
   return { id: "", version: "" };
 }
 
-export const QueryGetDidDocVersionRequest = {
-  encode(message: QueryGetDidDocVersionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const QueryDidDocVersionRequest = {
+  encode(message: QueryDidDocVersionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
@@ -143,10 +207,10 @@ export const QueryGetDidDocVersionRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetDidDocVersionRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDidDocVersionRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryGetDidDocVersionRequest();
+    const message = createBaseQueryDidDocVersionRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -164,22 +228,26 @@ export const QueryGetDidDocVersionRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryGetDidDocVersionRequest {
+  fromJSON(object: any): QueryDidDocVersionRequest {
     return {
       id: isSet(object.id) ? String(object.id) : "",
       version: isSet(object.version) ? String(object.version) : "",
     };
   },
 
-  toJSON(message: QueryGetDidDocVersionRequest): unknown {
+  toJSON(message: QueryDidDocVersionRequest): unknown {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
     message.version !== undefined && (obj.version = message.version);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGetDidDocVersionRequest>, I>>(object: I): QueryGetDidDocVersionRequest {
-    const message = createBaseQueryGetDidDocVersionRequest();
+  create<I extends Exact<DeepPartial<QueryDidDocVersionRequest>, I>>(base?: I): QueryDidDocVersionRequest {
+    return QueryDidDocVersionRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryDidDocVersionRequest>, I>>(object: I): QueryDidDocVersionRequest {
+    const message = createBaseQueryDidDocVersionRequest();
     message.id = object.id ?? "";
     message.version = object.version ?? "";
     return message;
@@ -226,6 +294,10 @@ export const QueryDidDocVersionResponse = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<QueryDidDocVersionResponse>, I>>(base?: I): QueryDidDocVersionResponse {
+    return QueryDidDocVersionResponse.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<QueryDidDocVersionResponse>, I>>(object: I): QueryDidDocVersionResponse {
     const message = createBaseQueryDidDocVersionResponse();
     message.value = (object.value !== undefined && object.value !== null)
@@ -235,27 +307,33 @@ export const QueryDidDocVersionResponse = {
   },
 };
 
-function createBaseQueryGetAllDidDocVersionsMetadataRequest(): QueryGetAllDidDocVersionsMetadataRequest {
-  return { id: "" };
+function createBaseQueryAllDidDocVersionsMetadataRequest(): QueryAllDidDocVersionsMetadataRequest {
+  return { id: "", pagination: undefined };
 }
 
-export const QueryGetAllDidDocVersionsMetadataRequest = {
-  encode(message: QueryGetAllDidDocVersionsMetadataRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const QueryAllDidDocVersionsMetadataRequest = {
+  encode(message: QueryAllDidDocVersionsMetadataRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
+    }
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetAllDidDocVersionsMetadataRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllDidDocVersionsMetadataRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryGetAllDidDocVersionsMetadataRequest();
+    const message = createBaseQueryAllDidDocVersionsMetadataRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
           message.id = reader.string();
+          break;
+        case 2:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -265,33 +343,50 @@ export const QueryGetAllDidDocVersionsMetadataRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryGetAllDidDocVersionsMetadataRequest {
-    return { id: isSet(object.id) ? String(object.id) : "" };
+  fromJSON(object: any): QueryAllDidDocVersionsMetadataRequest {
+    return {
+      id: isSet(object.id) ? String(object.id) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
+    };
   },
 
-  toJSON(message: QueryGetAllDidDocVersionsMetadataRequest): unknown {
+  toJSON(message: QueryAllDidDocVersionsMetadataRequest): unknown {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGetAllDidDocVersionsMetadataRequest>, I>>(
+  create<I extends Exact<DeepPartial<QueryAllDidDocVersionsMetadataRequest>, I>>(
+    base?: I,
+  ): QueryAllDidDocVersionsMetadataRequest {
+    return QueryAllDidDocVersionsMetadataRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryAllDidDocVersionsMetadataRequest>, I>>(
     object: I,
-  ): QueryGetAllDidDocVersionsMetadataRequest {
-    const message = createBaseQueryGetAllDidDocVersionsMetadataRequest();
+  ): QueryAllDidDocVersionsMetadataRequest {
+    const message = createBaseQueryAllDidDocVersionsMetadataRequest();
     message.id = object.id ?? "";
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
 function createBaseQueryAllDidDocVersionsMetadataResponse(): QueryAllDidDocVersionsMetadataResponse {
-  return { versions: [] };
+  return { versions: [], pagination: undefined };
 }
 
 export const QueryAllDidDocVersionsMetadataResponse = {
   encode(message: QueryAllDidDocVersionsMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.versions) {
       Metadata.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -306,6 +401,9 @@ export const QueryAllDidDocVersionsMetadataResponse = {
         case 1:
           message.versions.push(Metadata.decode(reader, reader.uint32()));
           break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -315,7 +413,10 @@ export const QueryAllDidDocVersionsMetadataResponse = {
   },
 
   fromJSON(object: any): QueryAllDidDocVersionsMetadataResponse {
-    return { versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Metadata.fromJSON(e)) : [] };
+    return {
+      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Metadata.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
+    };
   },
 
   toJSON(message: QueryAllDidDocVersionsMetadataResponse): unknown {
@@ -325,7 +426,15 @@ export const QueryAllDidDocVersionsMetadataResponse = {
     } else {
       obj.versions = [];
     }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<QueryAllDidDocVersionsMetadataResponse>, I>>(
+    base?: I,
+  ): QueryAllDidDocVersionsMetadataResponse {
+    return QueryAllDidDocVersionsMetadataResponse.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryAllDidDocVersionsMetadataResponse>, I>>(
@@ -333,15 +442,22 @@ export const QueryAllDidDocVersionsMetadataResponse = {
   ): QueryAllDidDocVersionsMetadataResponse {
     const message = createBaseQueryAllDidDocVersionsMetadataResponse();
     message.versions = object.versions?.map((e) => Metadata.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
+/** Query defines the gRPC querier service for the DID module */
 export interface Query {
-  DidDoc(request: QueryGetDidDocRequest): Promise<QueryDidDocResponse>;
-  DidDocVersion(request: QueryGetDidDocVersionRequest): Promise<QueryDidDocVersionResponse>;
+  /** Fetch latest version of a DID Document for a given DID */
+  DidDoc(request: QueryDidDocRequest): Promise<QueryDidDocResponse>;
+  /** Fetch specific version of a DID Document for a given DID */
+  DidDocVersion(request: QueryDidDocVersionRequest): Promise<QueryDidDocVersionResponse>;
+  /** Fetch list of all versions of DID Documents for a given DID */
   AllDidDocVersionsMetadata(
-    request: QueryGetAllDidDocVersionsMetadataRequest,
+    request: QueryAllDidDocVersionsMetadataRequest,
   ): Promise<QueryAllDidDocVersionsMetadataResponse>;
 }
 
@@ -355,22 +471,22 @@ export class QueryClientImpl implements Query {
     this.DidDocVersion = this.DidDocVersion.bind(this);
     this.AllDidDocVersionsMetadata = this.AllDidDocVersionsMetadata.bind(this);
   }
-  DidDoc(request: QueryGetDidDocRequest): Promise<QueryDidDocResponse> {
-    const data = QueryGetDidDocRequest.encode(request).finish();
+  DidDoc(request: QueryDidDocRequest): Promise<QueryDidDocResponse> {
+    const data = QueryDidDocRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "DidDoc", data);
     return promise.then((data) => QueryDidDocResponse.decode(new _m0.Reader(data)));
   }
 
-  DidDocVersion(request: QueryGetDidDocVersionRequest): Promise<QueryDidDocVersionResponse> {
-    const data = QueryGetDidDocVersionRequest.encode(request).finish();
+  DidDocVersion(request: QueryDidDocVersionRequest): Promise<QueryDidDocVersionResponse> {
+    const data = QueryDidDocVersionRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "DidDocVersion", data);
     return promise.then((data) => QueryDidDocVersionResponse.decode(new _m0.Reader(data)));
   }
 
   AllDidDocVersionsMetadata(
-    request: QueryGetAllDidDocVersionsMetadataRequest,
+    request: QueryAllDidDocVersionsMetadataRequest,
   ): Promise<QueryAllDidDocVersionsMetadataResponse> {
-    const data = QueryGetAllDidDocVersionsMetadataRequest.encode(request).finish();
+    const data = QueryAllDidDocVersionsMetadataRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "AllDidDocVersionsMetadata", data);
     return promise.then((data) => QueryAllDidDocVersionsMetadataResponse.decode(new _m0.Reader(data)));
   }

@@ -3,12 +3,40 @@ import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 
-/** FeeParams defines the parameters for the `resource` module fixed fee. */
+/**
+ * FeeParams defines the parameters for the cheqd Resource module fixed fee.
+ * Creation requests for different IANA media types are charged different fees.
+ */
 export interface FeeParams {
-  /** Media types define the fixed fee each for the `resource` module. */
-  image: Coin | undefined;
-  json: Coin | undefined;
-  default: Coin | undefined;
+  /**
+   * Fixed fee for creating a resource with media type 'image/*'
+   *
+   * Default: 10 CHEQ or 10000000000ncheq
+   */
+  image:
+    | Coin
+    | undefined;
+  /**
+   * Fixed fee for creating a resource with media type 'application/json'
+   *
+   * Default: 2.5 CHEQ or 2500000000ncheq
+   */
+  json:
+    | Coin
+    | undefined;
+  /**
+   * Fixed fee for creating a resource with all other media types
+   *
+   * Default: 5 CHEQ or 5000000000ncheq
+   */
+  default:
+    | Coin
+    | undefined;
+  /**
+   * Percentage of the fixed fee that will be burned
+   *
+   * Default: 0.5 (50%)
+   */
   burnFactor: string;
 }
 
@@ -76,6 +104,10 @@ export const FeeParams = {
     message.default !== undefined && (obj.default = message.default ? Coin.toJSON(message.default) : undefined);
     message.burnFactor !== undefined && (obj.burnFactor = message.burnFactor);
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<FeeParams>, I>>(base?: I): FeeParams {
+    return FeeParams.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<FeeParams>, I>>(object: I): FeeParams {

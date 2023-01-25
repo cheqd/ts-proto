@@ -4,14 +4,30 @@ import _m0 from "protobufjs/minimal";
 import { DidDocWithMetadata } from "./diddoc";
 import { FeeParams } from "./fee";
 
+/**
+ * DidDocVersionSet contains all versions of DID Documents and their metadata for a given DID.
+ * The latest version of the DID Document set is stored in the latest_version field.
+ */
 export interface DidDocVersionSet {
+  /** Latest version of the DID Document set */
   latestVersion: string;
+  /** All versions of the DID Document set */
   didDocs: DidDocWithMetadata[];
 }
 
+/** GenesisState defines the cheqd DID module's genesis state. */
 export interface GenesisState {
+  /**
+   * Namespace for the DID module
+   * Example: mainnet, testnet, local
+   */
   didNamespace: string;
+  /** All DID Document version sets (contains all versions of all DID Documents) */
   versionSets: DidDocVersionSet[];
+  /**
+   * Fee parameters for the DID module
+   * Defines fixed fees and burn percentage for each DID operation type (create, update, delete)
+   */
   feeParams: FeeParams | undefined;
 }
 
@@ -67,6 +83,10 @@ export const DidDocVersionSet = {
       obj.didDocs = [];
     }
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<DidDocVersionSet>, I>>(base?: I): DidDocVersionSet {
+    return DidDocVersionSet.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<DidDocVersionSet>, I>>(object: I): DidDocVersionSet {
@@ -140,6 +160,10 @@ export const GenesisState = {
     message.feeParams !== undefined &&
       (obj.feeParams = message.feeParams ? FeeParams.toJSON(message.feeParams) : undefined);
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GenesisState>, I>>(base?: I): GenesisState {
+    return GenesisState.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {

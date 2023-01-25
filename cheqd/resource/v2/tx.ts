@@ -4,22 +4,79 @@ import _m0 from "protobufjs/minimal";
 import { SignInfo } from "../../did/v2/tx";
 import { AlternativeUri, Metadata } from "./resource";
 
+/**
+ * MsgCreateResource defines the Msg/CreateResource request type.
+ * It describes the parameters of a request for creating a resource.
+ */
 export interface MsgCreateResource {
-  payload: MsgCreateResourcePayload | undefined;
+  /** Payload containing the resource to be created. */
+  payload:
+    | MsgCreateResourcePayload
+    | undefined;
+  /** Signatures of the corresponding DID Document's controller(s). */
   signatures: SignInfo[];
 }
 
+/**
+ * MsgCreateResourcePayload defines the structure of the payload for creating a resource.
+ *
+ * If a resource with the given id does not exist already,
+ * it will be created. The resource will be created in the resource collection.
+ *
+ * If a resource with the given id, collection_id already exists, an error code 2200 will be returned.
+ *
+ * A new version of the resource in an existing collection will be created,
+ * if a resource in that collection with the same name, resource_type and empty next_version_id exists.
+ *
+ * An update operation is not possible, because the resource is immutable by design.
+ */
 export interface MsgCreateResourcePayload {
+  /** data is a byte-representation of the actual Data the user wants to store. */
   data: Uint8Array;
+  /**
+   * collection_id is an identifier of the DidDocument the resource belongs to.
+   * Format: <unique-identifier>
+   *
+   * Examples:
+   * - c82f2b02-bdab-4dd7-b833-3e143745d612
+   * - wGHEXrZvJxR8vw5P3UWH1j
+   */
   collectionId: string;
+  /**
+   * id is a unique id of the resource.
+   * Format: <uuid>
+   */
   id: string;
+  /**
+   * name is a human-readable name of the resource.
+   * Format: <string>
+   *
+   * Does not change between different versions.
+   * Example: PassportSchema, EducationTrustRegistry
+   */
   name: string;
+  /**
+   * version is a version of the resource.
+   * Format: <string>
+   * Stored as a string. OPTIONAL.
+   *
+   * Example: 1.0.0, v2.1.0
+   */
   version: string;
+  /**
+   * resource_type is a type of the resource.
+   * Format: <string>
+   *
+   * This is NOT the same as the resource's media type.
+   * Example: AnonCredsSchema, StatusList2021
+   */
   resourceType: string;
+  /** also_known_as is a list of URIs that can be used to get the resource. */
   alsoKnownAs: AlternativeUri[];
 }
 
 export interface MsgCreateResourceResponse {
+  /** Return the created resource metadata. */
   resource: Metadata | undefined;
 }
 
@@ -76,6 +133,10 @@ export const MsgCreateResource = {
       obj.signatures = [];
     }
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<MsgCreateResource>, I>>(base?: I): MsgCreateResource {
+    return MsgCreateResource.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<MsgCreateResource>, I>>(object: I): MsgCreateResource {
@@ -185,6 +246,10 @@ export const MsgCreateResourcePayload = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<MsgCreateResourcePayload>, I>>(base?: I): MsgCreateResourcePayload {
+    return MsgCreateResourcePayload.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<MsgCreateResourcePayload>, I>>(object: I): MsgCreateResourcePayload {
     const message = createBaseMsgCreateResourcePayload();
     message.data = object.data ?? new Uint8Array();
@@ -238,6 +303,10 @@ export const MsgCreateResourceResponse = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<MsgCreateResourceResponse>, I>>(base?: I): MsgCreateResourceResponse {
+    return MsgCreateResourceResponse.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<MsgCreateResourceResponse>, I>>(object: I): MsgCreateResourceResponse {
     const message = createBaseMsgCreateResourceResponse();
     message.resource = (object.resource !== undefined && object.resource !== null)
@@ -247,8 +316,9 @@ export const MsgCreateResourceResponse = {
   },
 };
 
-/** Msg defines the Msg service. */
+/** Msg defines the Cosmos SDK Msg service for the cheqd.resource.v2 module. */
 export interface Msg {
+  /** CreateResource defines a method for creating a resource. */
   CreateResource(request: MsgCreateResource): Promise<MsgCreateResourceResponse>;
 }
 

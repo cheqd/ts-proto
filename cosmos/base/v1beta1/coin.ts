@@ -84,6 +84,10 @@ export const Coin = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<Coin>, I>>(base?: I): Coin {
+    return Coin.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<Coin>, I>>(object: I): Coin {
     const message = createBaseCoin();
     message.denom = object.denom ?? "";
@@ -142,6 +146,10 @@ export const DecCoin = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<DecCoin>, I>>(base?: I): DecCoin {
+    return DecCoin.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<DecCoin>, I>>(object: I): DecCoin {
     const message = createBaseDecCoin();
     message.denom = object.denom ?? "";
@@ -190,6 +198,10 @@ export const IntProto = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<IntProto>, I>>(base?: I): IntProto {
+    return IntProto.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<IntProto>, I>>(object: I): IntProto {
     const message = createBaseIntProto();
     message.int = object.int ?? "";
@@ -235,6 +247,10 @@ export const DecProto = {
     const obj: any = {};
     message.dec !== undefined && (obj.dec = message.dec);
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<DecProto>, I>>(base?: I): DecProto {
+    return DecProto.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<DecProto>, I>>(object: I): DecProto {

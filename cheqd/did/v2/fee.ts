@@ -3,12 +3,37 @@ import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 
-/** FeeParams defines the parameters for the `did` module fixed fee. */
+/** FeeParams defines the parameters for the cheqd DID module fixed fee */
 export interface FeeParams {
-  /** Tx types define the fixed fee each for the `did` module. */
-  createDid: Coin | undefined;
-  updateDid: Coin | undefined;
-  deactivateDid: Coin | undefined;
+  /**
+   * Fixed fee for creating a DID
+   *
+   * Default: 50 CHEQ or 50000000000ncheq
+   */
+  createDid:
+    | Coin
+    | undefined;
+  /**
+   * Fixed fee for updating a DID
+   *
+   * Default: 25 CHEQ or 25000000000ncheq
+   */
+  updateDid:
+    | Coin
+    | undefined;
+  /**
+   * Fixed fee for deactivating a DID
+   *
+   * Default: 10 CHEQ or 10000000000ncheq
+   */
+  deactivateDid:
+    | Coin
+    | undefined;
+  /**
+   * Percentage of the fixed fee that will be burned
+   *
+   * Default: 0.5 (50%)
+   */
   burnFactor: string;
 }
 
@@ -77,6 +102,10 @@ export const FeeParams = {
       (obj.deactivateDid = message.deactivateDid ? Coin.toJSON(message.deactivateDid) : undefined);
     message.burnFactor !== undefined && (obj.burnFactor = message.burnFactor);
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<FeeParams>, I>>(base?: I): FeeParams {
+    return FeeParams.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<FeeParams>, I>>(object: I): FeeParams {

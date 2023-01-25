@@ -1,45 +1,166 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
+import { Timestamp } from "../../../google/protobuf/timestamp";
 
+/**
+ * DidDoc defines a DID Document, as defined in the DID Core specification.
+ * Documentation: https://www.w3.org/TR/did-core/
+ */
 export interface DidDoc {
+  /**
+   * context is a list of URIs used to identify the context of the DID document.
+   * Default: https://www.w3.org/ns/did/v1
+   */
   context: string[];
+  /**
+   * id is the DID of the DID document.
+   * Format: did:cheqd:<namespace>:<unique-identifier>
+   */
   id: string;
+  /** controller is a list of DIDs that are allowed to control the DID document. */
   controller: string[];
+  /**
+   * verificationMethod is a list of verification methods that can be used to
+   * verify a digital signature or cryptographic proof.
+   */
   verificationMethod: VerificationMethod[];
+  /**
+   * authentication is a list of verification methods that can be used to
+   * authenticate as the DID subject.
+   */
   authentication: string[];
+  /**
+   * assertionMethod is a list of verification methods that can be used to
+   * assert statements as the DID subject.
+   */
   assertionMethod: string[];
+  /**
+   * capabilityInvocation is a list of verification methods that can be used to
+   * invoke capabilities as the DID subject.
+   */
   capabilityInvocation: string[];
+  /**
+   * capabilityDelegation is a list of verification methods that can be used to
+   * delegate capabilities as the DID subject.
+   */
   capabilityDelegation: string[];
+  /**
+   * keyAgreement is a list of verification methods that can be used to perform
+   * key agreement as the DID subject.
+   */
   keyAgreement: string[];
+  /** service is a list of services that can be used to interact with the DID subject. */
   service: Service[];
+  /** alsoKnownAs is a list of DIDs that are known to refer to the same DID subject. */
   alsoKnownAs: string[];
 }
 
+/**
+ * VerificationMethod defines a verification method, as defined in the DID Core specification.
+ * Documentation: https://www.w3.org/TR/did-core/#verification-methods
+ */
 export interface VerificationMethod {
+  /**
+   * id is the unique identifier of the verification method.
+   * Format: did:cheqd:<namespace>:<unique-identifier>#<key-id>
+   */
   id: string;
+  /**
+   * type is the type of the verification method.
+   * Example: Ed25519VerificationKey2020
+   */
   verificationMethodType: string;
+  /**
+   * controller is the DID of the controller of the verification method.
+   * Format: did:cheqd:<namespace>:<unique-identifier>
+   */
   controller: string;
+  /**
+   * verification_material is the public key of the verification method.
+   * Commonly used verification material types: publicJwk, publicKeyBase58, publicKeyMultibase
+   */
   verificationMaterial: string;
 }
 
+/**
+ * Service defines a service, as defined in the DID Core specification.
+ * Documentation: https://www.w3.org/TR/did-core/#services
+ */
 export interface Service {
+  /**
+   * id is the unique identifier of the service.
+   * Format: did:cheqd:<namespace>:<unique-identifier>#<service-id>
+   */
   id: string;
+  /**
+   * type is the type of the service.
+   * Example: LinkedResource
+   */
   serviceType: string;
+  /**
+   * serviceEndpoint is the endpoint of the service.
+   * Example: https://example.com/endpoint
+   */
   serviceEndpoint: string[];
 }
 
+/**
+ * DidDocWithMetadata defines a DID Document with metadata, as defined in the DID Core specification.
+ * Contains the DID Document, as well as DID Document metadata.
+ */
 export interface DidDocWithMetadata {
-  didDoc: DidDoc | undefined;
+  /** didDocument is the DID Document. */
+  didDoc:
+    | DidDoc
+    | undefined;
+  /** didDocumentMetadata is the DID Document metadata. */
   metadata: Metadata | undefined;
 }
 
+/**
+ * Metadata defines DID Document metadata, as defined in the DID Core specification.
+ * Documentation: https://www.w3.org/TR/did-core/#did-document-metadata-properties
+ */
 export interface Metadata {
-  created: string;
-  updated: string;
+  /**
+   * created is the timestamp of the creation of the DID Document.
+   * Format: RFC3339
+   * Example: 2021-03-10T15:16:17Z
+   */
+  created:
+    | Date
+    | undefined;
+  /**
+   * updated is the timestamp of the last update of the DID Document.
+   * Format: RFC3339
+   * Example: 2021-03-10T15:16:17Z
+   */
+  updated:
+    | Date
+    | undefined;
+  /**
+   * deactivated is a flag that indicates whether the DID Document is deactivated.
+   * Default: false
+   */
   deactivated: boolean;
+  /**
+   * version_id is the version identifier of the DID Document.
+   * Format: UUID
+   * Example: 123e4567-e89b-12d3-a456-426655440000
+   */
   versionId: string;
+  /**
+   * next_version_id is the version identifier of the next version of the DID Document.
+   * Format: UUID
+   * Example: 123e4567-e89b-12d3-a456-426655440000
+   */
   nextVersionId: string;
+  /**
+   * previous_version_id is the version identifier of the previous version of the DID Document.
+   * Format: UUID
+   * Example: 123e4567-e89b-12d3-a456-426655440000
+   */
   previousVersionId: string;
 }
 
@@ -223,6 +344,10 @@ export const DidDoc = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<DidDoc>, I>>(base?: I): DidDoc {
+    return DidDoc.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<DidDoc>, I>>(object: I): DidDoc {
     const message = createBaseDidDoc();
     message.context = object.context?.map((e) => e) || [];
@@ -306,6 +431,10 @@ export const VerificationMethod = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<VerificationMethod>, I>>(base?: I): VerificationMethod {
+    return VerificationMethod.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<VerificationMethod>, I>>(object: I): VerificationMethod {
     const message = createBaseVerificationMethod();
     message.id = object.id ?? "";
@@ -378,6 +507,10 @@ export const Service = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<Service>, I>>(base?: I): Service {
+    return Service.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<Service>, I>>(object: I): Service {
     const message = createBaseService();
     message.id = object.id ?? "";
@@ -437,6 +570,10 @@ export const DidDocWithMetadata = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<DidDocWithMetadata>, I>>(base?: I): DidDocWithMetadata {
+    return DidDocWithMetadata.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<DidDocWithMetadata>, I>>(object: I): DidDocWithMetadata {
     const message = createBaseDidDocWithMetadata();
     message.didDoc = (object.didDoc !== undefined && object.didDoc !== null)
@@ -450,16 +587,23 @@ export const DidDocWithMetadata = {
 };
 
 function createBaseMetadata(): Metadata {
-  return { created: "", updated: "", deactivated: false, versionId: "", nextVersionId: "", previousVersionId: "" };
+  return {
+    created: undefined,
+    updated: undefined,
+    deactivated: false,
+    versionId: "",
+    nextVersionId: "",
+    previousVersionId: "",
+  };
 }
 
 export const Metadata = {
   encode(message: Metadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.created !== "") {
-      writer.uint32(10).string(message.created);
+    if (message.created !== undefined) {
+      Timestamp.encode(toTimestamp(message.created), writer.uint32(10).fork()).ldelim();
     }
-    if (message.updated !== "") {
-      writer.uint32(18).string(message.updated);
+    if (message.updated !== undefined) {
+      Timestamp.encode(toTimestamp(message.updated), writer.uint32(18).fork()).ldelim();
     }
     if (message.deactivated === true) {
       writer.uint32(24).bool(message.deactivated);
@@ -484,10 +628,10 @@ export const Metadata = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.created = reader.string();
+          message.created = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.updated = reader.string();
+          message.updated = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 3:
           message.deactivated = reader.bool();
@@ -511,8 +655,8 @@ export const Metadata = {
 
   fromJSON(object: any): Metadata {
     return {
-      created: isSet(object.created) ? String(object.created) : "",
-      updated: isSet(object.updated) ? String(object.updated) : "",
+      created: isSet(object.created) ? fromJsonTimestamp(object.created) : undefined,
+      updated: isSet(object.updated) ? fromJsonTimestamp(object.updated) : undefined,
       deactivated: isSet(object.deactivated) ? Boolean(object.deactivated) : false,
       versionId: isSet(object.versionId) ? String(object.versionId) : "",
       nextVersionId: isSet(object.nextVersionId) ? String(object.nextVersionId) : "",
@@ -522,8 +666,8 @@ export const Metadata = {
 
   toJSON(message: Metadata): unknown {
     const obj: any = {};
-    message.created !== undefined && (obj.created = message.created);
-    message.updated !== undefined && (obj.updated = message.updated);
+    message.created !== undefined && (obj.created = message.created.toISOString());
+    message.updated !== undefined && (obj.updated = message.updated.toISOString());
     message.deactivated !== undefined && (obj.deactivated = message.deactivated);
     message.versionId !== undefined && (obj.versionId = message.versionId);
     message.nextVersionId !== undefined && (obj.nextVersionId = message.nextVersionId);
@@ -531,10 +675,14 @@ export const Metadata = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<Metadata>, I>>(base?: I): Metadata {
+    return Metadata.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<Metadata>, I>>(object: I): Metadata {
     const message = createBaseMetadata();
-    message.created = object.created ?? "";
-    message.updated = object.updated ?? "";
+    message.created = object.created ?? undefined;
+    message.updated = object.updated ?? undefined;
     message.deactivated = object.deactivated ?? false;
     message.versionId = object.versionId ?? "";
     message.nextVersionId = object.nextVersionId ?? "";
@@ -554,6 +702,32 @@ type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function toTimestamp(date: Date): Timestamp {
+  const seconds = numberToLong(date.getTime() / 1_000);
+  const nanos = (date.getTime() % 1_000) * 1_000_000;
+  return { seconds, nanos };
+}
+
+function fromTimestamp(t: Timestamp): Date {
+  let millis = t.seconds.toNumber() * 1_000;
+  millis += t.nanos / 1_000_000;
+  return new Date(millis);
+}
+
+function fromJsonTimestamp(o: any): Date {
+  if (o instanceof Date) {
+    return o;
+  } else if (typeof o === "string") {
+    return new Date(o);
+  } else {
+    return fromTimestamp(Timestamp.fromJSON(o));
+  }
+}
+
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
+}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
