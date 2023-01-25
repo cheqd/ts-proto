@@ -1,6 +1,7 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
+import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Metadata, ResourceWithMetadata } from "./resource";
 
 /** QueryResourceRequest is the request type for the Query/Resource RPC method */
@@ -66,12 +67,16 @@ export interface QueryCollectionResourcesRequest {
    * - wGHEXrZvJxR8vw5P3UWH1j
    */
   collectionId: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination: PageRequest | undefined;
 }
 
 /** QueryCollectionResourcesResponse is the response type for the Query/CollectionResources RPC method */
 export interface QueryCollectionResourcesResponse {
   /** resources is the requested collection of resource metadata */
   resources: Metadata[];
+  /** pagination defines the pagination in the response. */
+  pagination: PageResponse | undefined;
 }
 
 function createBaseQueryResourceRequest(): QueryResourceRequest {
@@ -308,13 +313,16 @@ export const QueryResourceMetadataResponse = {
 };
 
 function createBaseQueryCollectionResourcesRequest(): QueryCollectionResourcesRequest {
-  return { collectionId: "" };
+  return { collectionId: "", pagination: undefined };
 }
 
 export const QueryCollectionResourcesRequest = {
   encode(message: QueryCollectionResourcesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.collectionId !== "") {
       writer.uint32(10).string(message.collectionId);
+    }
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -329,6 +337,9 @@ export const QueryCollectionResourcesRequest = {
         case 1:
           message.collectionId = reader.string();
           break;
+        case 2:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -338,12 +349,17 @@ export const QueryCollectionResourcesRequest = {
   },
 
   fromJSON(object: any): QueryCollectionResourcesRequest {
-    return { collectionId: isSet(object.collectionId) ? String(object.collectionId) : "" };
+    return {
+      collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
+    };
   },
 
   toJSON(message: QueryCollectionResourcesRequest): unknown {
     const obj: any = {};
     message.collectionId !== undefined && (obj.collectionId = message.collectionId);
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
@@ -356,18 +372,24 @@ export const QueryCollectionResourcesRequest = {
   ): QueryCollectionResourcesRequest {
     const message = createBaseQueryCollectionResourcesRequest();
     message.collectionId = object.collectionId ?? "";
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
 function createBaseQueryCollectionResourcesResponse(): QueryCollectionResourcesResponse {
-  return { resources: [] };
+  return { resources: [], pagination: undefined };
 }
 
 export const QueryCollectionResourcesResponse = {
   encode(message: QueryCollectionResourcesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resources) {
       Metadata.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -382,6 +404,9 @@ export const QueryCollectionResourcesResponse = {
         case 1:
           message.resources.push(Metadata.decode(reader, reader.uint32()));
           break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -393,6 +418,7 @@ export const QueryCollectionResourcesResponse = {
   fromJSON(object: any): QueryCollectionResourcesResponse {
     return {
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Metadata.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
@@ -403,6 +429,8 @@ export const QueryCollectionResourcesResponse = {
     } else {
       obj.resources = [];
     }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
@@ -417,17 +445,20 @@ export const QueryCollectionResourcesResponse = {
   ): QueryCollectionResourcesResponse {
     const message = createBaseQueryCollectionResourcesResponse();
     message.resources = object.resources?.map((e) => Metadata.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
 /** Query defines the gRPC querier service for the resource module */
 export interface Query {
-  /** Fetch a resource from a collection with a given collection_id and id */
+  /** Fetch data/payload for a specific resource (without metadata) */
   Resource(request: QueryResourceRequest): Promise<QueryResourceResponse>;
-  /** Fetch a resource's metadata from a collection with a given collection_id and id */
+  /** Fetch only metadata for a specific resource */
   ResourceMetadata(request: QueryResourceMetadataRequest): Promise<QueryResourceMetadataResponse>;
-  /** Fetch all resource metadata from a collection with a given collection_id */
+  /** Fetch metadata for all resources in a collection */
   CollectionResources(request: QueryCollectionResourcesRequest): Promise<QueryCollectionResourcesResponse>;
 }
 

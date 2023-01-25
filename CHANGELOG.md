@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0-develop.1](https://github.com/cheqd/ts-proto/compare/1.0.16-develop.4...2.0.0-develop.1) (2023-01-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* Add support for cheqd/proto v2 [DEV-2154] (#69)
+
+### Features
+
+* Add support for cheqd/proto v2 [DEV-2154] ([#69](https://github.com/cheqd/ts-proto/issues/69)) ([e3d7b37](https://github.com/cheqd/ts-proto/commit/e3d7b37b60eed21a0155bfa16eb71db4aed10741))
+
 ## [1.0.16-develop.4](https://github.com/cheqd/ts-proto/compare/1.0.16-develop.3...1.0.16-develop.4) (2023-01-25)
 
 ## [1.0.16-develop.3](https://github.com/cheqd/ts-proto/compare/1.0.16-develop.2...1.0.16-develop.3) (2023-01-09)
