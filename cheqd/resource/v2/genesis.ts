@@ -4,8 +4,14 @@ import _m0 from "protobufjs/minimal";
 import { FeeParams } from "./fee";
 import { ResourceWithMetadata } from "./resource";
 
+/** GenesisState defines the chqed Resource module's genesis state */
 export interface GenesisState {
+  /** All Resources with metadata */
   resources: ResourceWithMetadata[];
+  /**
+   * Fee parameters for the Resource module
+   * Defines fixed fees and burn percentage for resources
+   */
   feeParams: FeeParams | undefined;
 }
 
@@ -64,6 +70,10 @@ export const GenesisState = {
     message.feeParams !== undefined &&
       (obj.feeParams = message.feeParams ? FeeParams.toJSON(message.feeParams) : undefined);
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GenesisState>, I>>(base?: I): GenesisState {
+    return GenesisState.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {

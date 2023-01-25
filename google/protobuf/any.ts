@@ -171,6 +171,10 @@ export const Any = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<Any>, I>>(base?: I): Any {
+    return Any.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<Any>, I>>(object: I): Any {
     const message = createBaseAny();
     message.typeUrl = object.typeUrl ?? "";

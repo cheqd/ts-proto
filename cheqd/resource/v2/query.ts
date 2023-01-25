@@ -1,45 +1,90 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
+import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Metadata, ResourceWithMetadata } from "./resource";
 
-export interface QueryGetResourceRequest {
-  /** is unique identifier a for collection */
+/** QueryResourceRequest is the request type for the Query/Resource RPC method */
+export interface QueryResourceRequest {
+  /**
+   * collection_id is an identifier of the DidDocument the resource belongs to.
+   * Format: <unique-identifier>
+   *
+   * Examples:
+   * - c82f2b02-bdab-4dd7-b833-3e143745d612
+   * - wGHEXrZvJxR8vw5P3UWH1j
+   */
   collectionId: string;
-  /** is unique identifier for a resource */
+  /**
+   * id is a unique id of the resource.
+   * Format: <uuid>
+   */
   id: string;
 }
 
+/** QueryResourceResponse is the response type for the Query/Resource RPC method */
 export interface QueryResourceResponse {
+  /**
+   * Successful resolution of the resource returns the following:
+   * - resource is the requested resource
+   * - metadata is the resource metadata associated with the requested resource
+   */
   resource: ResourceWithMetadata | undefined;
 }
 
-export interface QueryGetResourceMetadataRequest {
-  /** is unique identifier a for collection */
+/** QueryResourceMetadataRequest is the request type for the Query/ResourceMetadata RPC method */
+export interface QueryResourceMetadataRequest {
+  /**
+   * collection_id is an identifier of the DidDocument the resource belongs to.
+   * Format: <unique-identifier>
+   *
+   * Examples:
+   * - c82f2b02-bdab-4dd7-b833-3e143745d612
+   * - wGHEXrZvJxR8vw5P3UWH1j
+   */
   collectionId: string;
-  /** is unique identifier for a resource */
+  /**
+   * id is a unique id of the resource.
+   * Format: <uuid>
+   */
   id: string;
 }
 
+/** QueryResourceMetadataResponse is the response type for the Query/ResourceMetadata RPC method */
 export interface QueryResourceMetadataResponse {
+  /** resource is the requested resource metadata */
   resource: Metadata | undefined;
 }
 
-export interface QueryGetCollectionResourcesRequest {
-  /** is unique identifier a for collection */
+/** QueryCollectionResourcesRequest is the request type for the Query/CollectionResources RPC method */
+export interface QueryCollectionResourcesRequest {
+  /**
+   * collection_id is an identifier of the DidDocument the resource belongs to.
+   * Format: <unique-identifier>
+   *
+   * Examples:
+   * - c82f2b02-bdab-4dd7-b833-3e143745d612
+   * - wGHEXrZvJxR8vw5P3UWH1j
+   */
   collectionId: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination: PageRequest | undefined;
 }
 
+/** QueryCollectionResourcesResponse is the response type for the Query/CollectionResources RPC method */
 export interface QueryCollectionResourcesResponse {
+  /** resources is the requested collection of resource metadata */
   resources: Metadata[];
+  /** pagination defines the pagination in the response. */
+  pagination: PageResponse | undefined;
 }
 
-function createBaseQueryGetResourceRequest(): QueryGetResourceRequest {
+function createBaseQueryResourceRequest(): QueryResourceRequest {
   return { collectionId: "", id: "" };
 }
 
-export const QueryGetResourceRequest = {
-  encode(message: QueryGetResourceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const QueryResourceRequest = {
+  encode(message: QueryResourceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.collectionId !== "") {
       writer.uint32(10).string(message.collectionId);
     }
@@ -49,10 +94,10 @@ export const QueryGetResourceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetResourceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryResourceRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryGetResourceRequest();
+    const message = createBaseQueryResourceRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -70,22 +115,26 @@ export const QueryGetResourceRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryGetResourceRequest {
+  fromJSON(object: any): QueryResourceRequest {
     return {
       collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
       id: isSet(object.id) ? String(object.id) : "",
     };
   },
 
-  toJSON(message: QueryGetResourceRequest): unknown {
+  toJSON(message: QueryResourceRequest): unknown {
     const obj: any = {};
     message.collectionId !== undefined && (obj.collectionId = message.collectionId);
     message.id !== undefined && (obj.id = message.id);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGetResourceRequest>, I>>(object: I): QueryGetResourceRequest {
-    const message = createBaseQueryGetResourceRequest();
+  create<I extends Exact<DeepPartial<QueryResourceRequest>, I>>(base?: I): QueryResourceRequest {
+    return QueryResourceRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryResourceRequest>, I>>(object: I): QueryResourceRequest {
+    const message = createBaseQueryResourceRequest();
     message.collectionId = object.collectionId ?? "";
     message.id = object.id ?? "";
     return message;
@@ -133,6 +182,10 @@ export const QueryResourceResponse = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<QueryResourceResponse>, I>>(base?: I): QueryResourceResponse {
+    return QueryResourceResponse.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<QueryResourceResponse>, I>>(object: I): QueryResourceResponse {
     const message = createBaseQueryResourceResponse();
     message.resource = (object.resource !== undefined && object.resource !== null)
@@ -142,12 +195,12 @@ export const QueryResourceResponse = {
   },
 };
 
-function createBaseQueryGetResourceMetadataRequest(): QueryGetResourceMetadataRequest {
+function createBaseQueryResourceMetadataRequest(): QueryResourceMetadataRequest {
   return { collectionId: "", id: "" };
 }
 
-export const QueryGetResourceMetadataRequest = {
-  encode(message: QueryGetResourceMetadataRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const QueryResourceMetadataRequest = {
+  encode(message: QueryResourceMetadataRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.collectionId !== "") {
       writer.uint32(10).string(message.collectionId);
     }
@@ -157,10 +210,10 @@ export const QueryGetResourceMetadataRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetResourceMetadataRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryResourceMetadataRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryGetResourceMetadataRequest();
+    const message = createBaseQueryResourceMetadataRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -178,24 +231,26 @@ export const QueryGetResourceMetadataRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryGetResourceMetadataRequest {
+  fromJSON(object: any): QueryResourceMetadataRequest {
     return {
       collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
       id: isSet(object.id) ? String(object.id) : "",
     };
   },
 
-  toJSON(message: QueryGetResourceMetadataRequest): unknown {
+  toJSON(message: QueryResourceMetadataRequest): unknown {
     const obj: any = {};
     message.collectionId !== undefined && (obj.collectionId = message.collectionId);
     message.id !== undefined && (obj.id = message.id);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGetResourceMetadataRequest>, I>>(
-    object: I,
-  ): QueryGetResourceMetadataRequest {
-    const message = createBaseQueryGetResourceMetadataRequest();
+  create<I extends Exact<DeepPartial<QueryResourceMetadataRequest>, I>>(base?: I): QueryResourceMetadataRequest {
+    return QueryResourceMetadataRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryResourceMetadataRequest>, I>>(object: I): QueryResourceMetadataRequest {
+    const message = createBaseQueryResourceMetadataRequest();
     message.collectionId = object.collectionId ?? "";
     message.id = object.id ?? "";
     return message;
@@ -242,6 +297,10 @@ export const QueryResourceMetadataResponse = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<QueryResourceMetadataResponse>, I>>(base?: I): QueryResourceMetadataResponse {
+    return QueryResourceMetadataResponse.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<QueryResourceMetadataResponse>, I>>(
     object: I,
   ): QueryResourceMetadataResponse {
@@ -253,27 +312,33 @@ export const QueryResourceMetadataResponse = {
   },
 };
 
-function createBaseQueryGetCollectionResourcesRequest(): QueryGetCollectionResourcesRequest {
-  return { collectionId: "" };
+function createBaseQueryCollectionResourcesRequest(): QueryCollectionResourcesRequest {
+  return { collectionId: "", pagination: undefined };
 }
 
-export const QueryGetCollectionResourcesRequest = {
-  encode(message: QueryGetCollectionResourcesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const QueryCollectionResourcesRequest = {
+  encode(message: QueryCollectionResourcesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.collectionId !== "") {
       writer.uint32(10).string(message.collectionId);
+    }
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetCollectionResourcesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCollectionResourcesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryGetCollectionResourcesRequest();
+    const message = createBaseQueryCollectionResourcesRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
           message.collectionId = reader.string();
+          break;
+        case 2:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -283,33 +348,48 @@ export const QueryGetCollectionResourcesRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryGetCollectionResourcesRequest {
-    return { collectionId: isSet(object.collectionId) ? String(object.collectionId) : "" };
+  fromJSON(object: any): QueryCollectionResourcesRequest {
+    return {
+      collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
+    };
   },
 
-  toJSON(message: QueryGetCollectionResourcesRequest): unknown {
+  toJSON(message: QueryCollectionResourcesRequest): unknown {
     const obj: any = {};
     message.collectionId !== undefined && (obj.collectionId = message.collectionId);
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGetCollectionResourcesRequest>, I>>(
+  create<I extends Exact<DeepPartial<QueryCollectionResourcesRequest>, I>>(base?: I): QueryCollectionResourcesRequest {
+    return QueryCollectionResourcesRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryCollectionResourcesRequest>, I>>(
     object: I,
-  ): QueryGetCollectionResourcesRequest {
-    const message = createBaseQueryGetCollectionResourcesRequest();
+  ): QueryCollectionResourcesRequest {
+    const message = createBaseQueryCollectionResourcesRequest();
     message.collectionId = object.collectionId ?? "";
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
 function createBaseQueryCollectionResourcesResponse(): QueryCollectionResourcesResponse {
-  return { resources: [] };
+  return { resources: [], pagination: undefined };
 }
 
 export const QueryCollectionResourcesResponse = {
   encode(message: QueryCollectionResourcesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resources) {
       Metadata.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -324,6 +404,9 @@ export const QueryCollectionResourcesResponse = {
         case 1:
           message.resources.push(Metadata.decode(reader, reader.uint32()));
           break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -335,6 +418,7 @@ export const QueryCollectionResourcesResponse = {
   fromJSON(object: any): QueryCollectionResourcesResponse {
     return {
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Metadata.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
@@ -345,7 +429,15 @@ export const QueryCollectionResourcesResponse = {
     } else {
       obj.resources = [];
     }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<QueryCollectionResourcesResponse>, I>>(
+    base?: I,
+  ): QueryCollectionResourcesResponse {
+    return QueryCollectionResourcesResponse.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryCollectionResourcesResponse>, I>>(
@@ -353,14 +445,21 @@ export const QueryCollectionResourcesResponse = {
   ): QueryCollectionResourcesResponse {
     const message = createBaseQueryCollectionResourcesResponse();
     message.resources = object.resources?.map((e) => Metadata.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
+/** Query defines the gRPC querier service for the resource module */
 export interface Query {
-  Resource(request: QueryGetResourceRequest): Promise<QueryResourceResponse>;
-  ResourceMetadata(request: QueryGetResourceMetadataRequest): Promise<QueryResourceMetadataResponse>;
-  CollectionResources(request: QueryGetCollectionResourcesRequest): Promise<QueryCollectionResourcesResponse>;
+  /** Fetch data/payload for a specific resource (without metadata) */
+  Resource(request: QueryResourceRequest): Promise<QueryResourceResponse>;
+  /** Fetch only metadata for a specific resource */
+  ResourceMetadata(request: QueryResourceMetadataRequest): Promise<QueryResourceMetadataResponse>;
+  /** Fetch metadata for all resources in a collection */
+  CollectionResources(request: QueryCollectionResourcesRequest): Promise<QueryCollectionResourcesResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -373,20 +472,20 @@ export class QueryClientImpl implements Query {
     this.ResourceMetadata = this.ResourceMetadata.bind(this);
     this.CollectionResources = this.CollectionResources.bind(this);
   }
-  Resource(request: QueryGetResourceRequest): Promise<QueryResourceResponse> {
-    const data = QueryGetResourceRequest.encode(request).finish();
+  Resource(request: QueryResourceRequest): Promise<QueryResourceResponse> {
+    const data = QueryResourceRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "Resource", data);
     return promise.then((data) => QueryResourceResponse.decode(new _m0.Reader(data)));
   }
 
-  ResourceMetadata(request: QueryGetResourceMetadataRequest): Promise<QueryResourceMetadataResponse> {
-    const data = QueryGetResourceMetadataRequest.encode(request).finish();
+  ResourceMetadata(request: QueryResourceMetadataRequest): Promise<QueryResourceMetadataResponse> {
+    const data = QueryResourceMetadataRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "ResourceMetadata", data);
     return promise.then((data) => QueryResourceMetadataResponse.decode(new _m0.Reader(data)));
   }
 
-  CollectionResources(request: QueryGetCollectionResourcesRequest): Promise<QueryCollectionResourcesResponse> {
-    const data = QueryGetCollectionResourcesRequest.encode(request).finish();
+  CollectionResources(request: QueryCollectionResourcesRequest): Promise<QueryCollectionResourcesResponse> {
+    const data = QueryCollectionResourcesRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "CollectionResources", data);
     return promise.then((data) => QueryCollectionResourcesResponse.decode(new _m0.Reader(data)));
   }

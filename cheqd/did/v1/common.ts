@@ -54,6 +54,10 @@ export const KeyValuePair = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<KeyValuePair>, I>>(base?: I): KeyValuePair {
+    return KeyValuePair.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<KeyValuePair>, I>>(object: I): KeyValuePair {
     const message = createBaseKeyValuePair();
     message.key = object.key ?? "";
