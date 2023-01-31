@@ -58,6 +58,9 @@ exports.GenesisState = {
         }
         return obj;
     },
+    create(base) {
+        return exports.GenesisState.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseGenesisState();
         message.didNamespace = object.didNamespace ?? "";

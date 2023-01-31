@@ -193,6 +193,9 @@ exports.Did = {
         }
         return obj;
     },
+    create(base) {
+        return exports.Did.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseDid();
         message.context = object.context?.map((e) => e) || [];
@@ -285,6 +288,9 @@ exports.VerificationMethod = {
         message.publicKeyMultibase !== undefined && (obj.publicKeyMultibase = message.publicKeyMultibase);
         return obj;
     },
+    create(base) {
+        return exports.VerificationMethod.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseVerificationMethod();
         message.id = object.id ?? "";
@@ -347,6 +353,9 @@ exports.Service = {
         message.type !== undefined && (obj.type = message.type);
         message.serviceEndpoint !== undefined && (obj.serviceEndpoint = message.serviceEndpoint);
         return obj;
+    },
+    create(base) {
+        return exports.Service.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseService();

@@ -53,6 +53,9 @@ exports.Any = {
             (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
         return obj;
     },
+    create(base) {
+        return exports.Any.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseAny();
         message.typeUrl = object.typeUrl ?? "";

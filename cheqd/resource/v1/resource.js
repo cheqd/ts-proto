@@ -53,6 +53,9 @@ exports.Resource = {
             (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
         return obj;
     },
+    create(base) {
+        return exports.Resource.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseResource();
         message.header = (object.header !== undefined && object.header !== null)
@@ -173,6 +176,9 @@ exports.ResourceHeader = {
         message.previousVersionId !== undefined && (obj.previousVersionId = message.previousVersionId);
         message.nextVersionId !== undefined && (obj.nextVersionId = message.nextVersionId);
         return obj;
+    },
+    create(base) {
+        return exports.ResourceHeader.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseResourceHeader();

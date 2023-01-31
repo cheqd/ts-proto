@@ -60,6 +60,9 @@ exports.MsgCreateResource = {
         }
         return obj;
     },
+    create(base) {
+        return exports.MsgCreateResource.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseMsgCreateResource();
         message.payload = (object.payload !== undefined && object.payload !== null)
@@ -162,6 +165,9 @@ exports.MsgCreateResourcePayload = {
         }
         return obj;
     },
+    create(base) {
+        return exports.MsgCreateResourcePayload.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseMsgCreateResourcePayload();
         message.data = object.data ?? new Uint8Array();
@@ -208,6 +214,9 @@ exports.MsgCreateResourceResponse = {
         const obj = {};
         message.resource !== undefined && (obj.resource = message.resource ? resource_1.Metadata.toJSON(message.resource) : undefined);
         return obj;
+    },
+    create(base) {
+        return exports.MsgCreateResourceResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgCreateResourceResponse();

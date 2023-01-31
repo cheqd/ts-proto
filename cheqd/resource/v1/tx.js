@@ -60,6 +60,9 @@ exports.MsgCreateResource = {
         }
         return obj;
     },
+    create(base) {
+        return exports.MsgCreateResource.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseMsgCreateResource();
         message.payload = (object.payload !== undefined && object.payload !== null)
@@ -139,6 +142,9 @@ exports.MsgCreateResourcePayload = {
             (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
         return obj;
     },
+    create(base) {
+        return exports.MsgCreateResourcePayload.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseMsgCreateResourcePayload();
         message.collectionId = object.collectionId ?? "";
@@ -183,6 +189,9 @@ exports.MsgCreateResourceResponse = {
         const obj = {};
         message.resource !== undefined && (obj.resource = message.resource ? resource_1.Resource.toJSON(message.resource) : undefined);
         return obj;
+    },
+    create(base) {
+        return exports.MsgCreateResourceResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgCreateResourceResponse();

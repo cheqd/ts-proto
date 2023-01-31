@@ -59,6 +59,9 @@ exports.DidDocVersionSet = {
         }
         return obj;
     },
+    create(base) {
+        return exports.DidDocVersionSet.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseDidDocVersionSet();
         message.latestVersion = object.latestVersion ?? "";
@@ -126,6 +129,9 @@ exports.GenesisState = {
         message.feeParams !== undefined &&
             (obj.feeParams = message.feeParams ? fee_1.FeeParams.toJSON(message.feeParams) : undefined);
         return obj;
+    },
+    create(base) {
+        return exports.GenesisState.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseGenesisState();

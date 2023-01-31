@@ -44,6 +44,9 @@ exports.QueryGetDidRequest = {
         message.id !== undefined && (obj.id = message.id);
         return obj;
     },
+    create(base) {
+        return exports.QueryGetDidRequest.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseQueryGetDidRequest();
         message.id = object.id ?? "";
@@ -94,6 +97,9 @@ exports.QueryGetDidResponse = {
         message.did !== undefined && (obj.did = message.did ? did_1.Did.toJSON(message.did) : undefined);
         message.metadata !== undefined && (obj.metadata = message.metadata ? stateValue_1.Metadata.toJSON(message.metadata) : undefined);
         return obj;
+    },
+    create(base) {
+        return exports.QueryGetDidResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseQueryGetDidResponse();

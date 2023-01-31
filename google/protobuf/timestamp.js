@@ -3,30 +3,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GenesisState = void 0;
+exports.Timestamp = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
-const resource_1 = require("./resource");
-function createBaseGenesisState() {
-    return { resourceList: [] };
+function createBaseTimestamp() {
+    return { seconds: long_1.default.ZERO, nanos: 0 };
 }
-exports.GenesisState = {
+exports.Timestamp = {
     encode(message, writer = minimal_1.default.Writer.create()) {
-        for (const v of message.resourceList) {
-            resource_1.Resource.encode(v, writer.uint32(10).fork()).ldelim();
+        if (!message.seconds.isZero()) {
+            writer.uint32(8).int64(message.seconds);
+        }
+        if (message.nanos !== 0) {
+            writer.uint32(16).int32(message.nanos);
         }
         return writer;
     },
     decode(input, length) {
         const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
-        const message = createBaseGenesisState();
+        const message = createBaseTimestamp();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.resourceList.push(resource_1.Resource.decode(reader, reader.uint32()));
+                    message.seconds = reader.int64();
+                    break;
+                case 2:
+                    message.nanos = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -37,27 +42,25 @@ exports.GenesisState = {
     },
     fromJSON(object) {
         return {
-            resourceList: Array.isArray(object?.resourceList)
-                ? object.resourceList.map((e) => resource_1.Resource.fromJSON(e))
-                : [],
+            seconds: isSet(object.seconds) ? long_1.default.fromValue(object.seconds) : long_1.default.ZERO,
+            nanos: isSet(object.nanos) ? Number(object.nanos) : 0,
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.resourceList) {
-            obj.resourceList = message.resourceList.map((e) => e ? resource_1.Resource.toJSON(e) : undefined);
-        }
-        else {
-            obj.resourceList = [];
-        }
+        message.seconds !== undefined && (obj.seconds = (message.seconds || long_1.default.ZERO).toString());
+        message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
         return obj;
     },
     create(base) {
-        return exports.GenesisState.fromPartial(base ?? {});
+        return exports.Timestamp.fromPartial(base ?? {});
     },
     fromPartial(object) {
-        const message = createBaseGenesisState();
-        message.resourceList = object.resourceList?.map((e) => resource_1.Resource.fromPartial(e)) || [];
+        const message = createBaseTimestamp();
+        message.seconds = (object.seconds !== undefined && object.seconds !== null)
+            ? long_1.default.fromValue(object.seconds)
+            : long_1.default.ZERO;
+        message.nanos = object.nanos ?? 0;
         return message;
     },
 };
@@ -65,4 +68,7 @@ if (minimal_1.default.util.Long !== long_1.default) {
     minimal_1.default.util.Long = long_1.default;
     minimal_1.default.configure();
 }
-//# sourceMappingURL=genesis.js.map
+function isSet(value) {
+    return value !== null && value !== undefined;
+}
+//# sourceMappingURL=timestamp.js.map

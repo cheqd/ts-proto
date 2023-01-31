@@ -60,6 +60,9 @@ exports.MsgCreateDid = {
         }
         return obj;
     },
+    create(base) {
+        return exports.MsgCreateDid.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseMsgCreateDid();
         message.payload = (object.payload !== undefined && object.payload !== null)
@@ -119,6 +122,9 @@ exports.MsgUpdateDid = {
             obj.signatures = [];
         }
         return obj;
+    },
+    create(base) {
+        return exports.MsgUpdateDid.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgUpdateDid();
@@ -180,6 +186,9 @@ exports.MsgDeactivateDid = {
         }
         return obj;
     },
+    create(base) {
+        return exports.MsgDeactivateDid.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseMsgDeactivateDid();
         message.payload = (object.payload !== undefined && object.payload !== null)
@@ -234,6 +243,9 @@ exports.SignInfo = {
         message.signature !== undefined && (obj.signature = message.signature);
         return obj;
     },
+    create(base) {
+        return exports.SignInfo.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseSignInfo();
         message.verificationMethodId = object.verificationMethodId ?? "";
@@ -275,6 +287,9 @@ exports.MsgDeactivateDidPayload = {
         const obj = {};
         message.id !== undefined && (obj.id = message.id);
         return obj;
+    },
+    create(base) {
+        return exports.MsgDeactivateDidPayload.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgDeactivateDidPayload();
@@ -326,6 +341,9 @@ exports.MsgDeactivateDidResponse = {
         message.did !== undefined && (obj.did = message.did ? did_1.Did.toJSON(message.did) : undefined);
         message.metadata !== undefined && (obj.metadata = message.metadata ? stateValue_1.Metadata.toJSON(message.metadata) : undefined);
         return obj;
+    },
+    create(base) {
+        return exports.MsgDeactivateDidResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgDeactivateDidResponse();
@@ -521,6 +539,9 @@ exports.MsgCreateDidPayload = {
         }
         return obj;
     },
+    create(base) {
+        return exports.MsgCreateDidPayload.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseMsgCreateDidPayload();
         message.context = object.context?.map((e) => e) || [];
@@ -571,6 +592,9 @@ exports.MsgCreateDidResponse = {
         const obj = {};
         message.id !== undefined && (obj.id = message.id);
         return obj;
+    },
+    create(base) {
+        return exports.MsgCreateDidResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgCreateDidResponse();
@@ -772,6 +796,9 @@ exports.MsgUpdateDidPayload = {
         message.versionId !== undefined && (obj.versionId = message.versionId);
         return obj;
     },
+    create(base) {
+        return exports.MsgUpdateDidPayload.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseMsgUpdateDidPayload();
         message.context = object.context?.map((e) => e) || [];
@@ -823,6 +850,9 @@ exports.MsgUpdateDidResponse = {
         const obj = {};
         message.id !== undefined && (obj.id = message.id);
         return obj;
+    },
+    create(base) {
+        return exports.MsgUpdateDidResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgUpdateDidResponse();

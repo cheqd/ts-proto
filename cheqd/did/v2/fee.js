@@ -70,6 +70,9 @@ exports.FeeParams = {
         message.burnFactor !== undefined && (obj.burnFactor = message.burnFactor);
         return obj;
     },
+    create(base) {
+        return exports.FeeParams.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseFeeParams();
         message.createDid = (object.createDid !== undefined && object.createDid !== null)

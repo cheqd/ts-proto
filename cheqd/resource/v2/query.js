@@ -3,15 +3,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.QueryClientImpl = exports.QueryCollectionResourcesResponse = exports.QueryGetCollectionResourcesRequest = exports.QueryResourceMetadataResponse = exports.QueryGetResourceMetadataRequest = exports.QueryResourceResponse = exports.QueryGetResourceRequest = void 0;
+exports.QueryClientImpl = exports.QueryCollectionResourcesResponse = exports.QueryCollectionResourcesRequest = exports.QueryResourceMetadataResponse = exports.QueryResourceMetadataRequest = exports.QueryResourceResponse = exports.QueryResourceRequest = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
+const pagination_1 = require("../../../cosmos/base/query/v1beta1/pagination");
 const resource_1 = require("./resource");
-function createBaseQueryGetResourceRequest() {
+function createBaseQueryResourceRequest() {
     return { collectionId: "", id: "" };
 }
-exports.QueryGetResourceRequest = {
+exports.QueryResourceRequest = {
     encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.collectionId !== "") {
             writer.uint32(10).string(message.collectionId);
@@ -24,7 +25,7 @@ exports.QueryGetResourceRequest = {
     decode(input, length) {
         const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
-        const message = createBaseQueryGetResourceRequest();
+        const message = createBaseQueryResourceRequest();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
@@ -53,8 +54,11 @@ exports.QueryGetResourceRequest = {
         message.id !== undefined && (obj.id = message.id);
         return obj;
     },
+    create(base) {
+        return exports.QueryResourceRequest.fromPartial(base ?? {});
+    },
     fromPartial(object) {
-        const message = createBaseQueryGetResourceRequest();
+        const message = createBaseQueryResourceRequest();
         message.collectionId = object.collectionId ?? "";
         message.id = object.id ?? "";
         return message;
@@ -96,6 +100,9 @@ exports.QueryResourceResponse = {
             (obj.resource = message.resource ? resource_1.ResourceWithMetadata.toJSON(message.resource) : undefined);
         return obj;
     },
+    create(base) {
+        return exports.QueryResourceResponse.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseQueryResourceResponse();
         message.resource = (object.resource !== undefined && object.resource !== null)
@@ -104,10 +111,10 @@ exports.QueryResourceResponse = {
         return message;
     },
 };
-function createBaseQueryGetResourceMetadataRequest() {
+function createBaseQueryResourceMetadataRequest() {
     return { collectionId: "", id: "" };
 }
-exports.QueryGetResourceMetadataRequest = {
+exports.QueryResourceMetadataRequest = {
     encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.collectionId !== "") {
             writer.uint32(10).string(message.collectionId);
@@ -120,7 +127,7 @@ exports.QueryGetResourceMetadataRequest = {
     decode(input, length) {
         const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
-        const message = createBaseQueryGetResourceMetadataRequest();
+        const message = createBaseQueryResourceMetadataRequest();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
@@ -149,8 +156,11 @@ exports.QueryGetResourceMetadataRequest = {
         message.id !== undefined && (obj.id = message.id);
         return obj;
     },
+    create(base) {
+        return exports.QueryResourceMetadataRequest.fromPartial(base ?? {});
+    },
     fromPartial(object) {
-        const message = createBaseQueryGetResourceMetadataRequest();
+        const message = createBaseQueryResourceMetadataRequest();
         message.collectionId = object.collectionId ?? "";
         message.id = object.id ?? "";
         return message;
@@ -191,6 +201,9 @@ exports.QueryResourceMetadataResponse = {
         message.resource !== undefined && (obj.resource = message.resource ? resource_1.Metadata.toJSON(message.resource) : undefined);
         return obj;
     },
+    create(base) {
+        return exports.QueryResourceMetadataResponse.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseQueryResourceMetadataResponse();
         message.resource = (object.resource !== undefined && object.resource !== null)
@@ -199,25 +212,31 @@ exports.QueryResourceMetadataResponse = {
         return message;
     },
 };
-function createBaseQueryGetCollectionResourcesRequest() {
-    return { collectionId: "" };
+function createBaseQueryCollectionResourcesRequest() {
+    return { collectionId: "", pagination: undefined };
 }
-exports.QueryGetCollectionResourcesRequest = {
+exports.QueryCollectionResourcesRequest = {
     encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.collectionId !== "") {
             writer.uint32(10).string(message.collectionId);
+        }
+        if (message.pagination !== undefined) {
+            pagination_1.PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
         const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
-        const message = createBaseQueryGetCollectionResourcesRequest();
+        const message = createBaseQueryCollectionResourcesRequest();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
                     message.collectionId = reader.string();
+                    break;
+                case 2:
+                    message.pagination = pagination_1.PageRequest.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -227,26 +246,40 @@ exports.QueryGetCollectionResourcesRequest = {
         return message;
     },
     fromJSON(object) {
-        return { collectionId: isSet(object.collectionId) ? String(object.collectionId) : "" };
+        return {
+            collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
+            pagination: isSet(object.pagination) ? pagination_1.PageRequest.fromJSON(object.pagination) : undefined,
+        };
     },
     toJSON(message) {
         const obj = {};
         message.collectionId !== undefined && (obj.collectionId = message.collectionId);
+        message.pagination !== undefined &&
+            (obj.pagination = message.pagination ? pagination_1.PageRequest.toJSON(message.pagination) : undefined);
         return obj;
     },
+    create(base) {
+        return exports.QueryCollectionResourcesRequest.fromPartial(base ?? {});
+    },
     fromPartial(object) {
-        const message = createBaseQueryGetCollectionResourcesRequest();
+        const message = createBaseQueryCollectionResourcesRequest();
         message.collectionId = object.collectionId ?? "";
+        message.pagination = (object.pagination !== undefined && object.pagination !== null)
+            ? pagination_1.PageRequest.fromPartial(object.pagination)
+            : undefined;
         return message;
     },
 };
 function createBaseQueryCollectionResourcesResponse() {
-    return { resources: [] };
+    return { resources: [], pagination: undefined };
 }
 exports.QueryCollectionResourcesResponse = {
     encode(message, writer = minimal_1.default.Writer.create()) {
         for (const v of message.resources) {
             resource_1.Metadata.encode(v, writer.uint32(10).fork()).ldelim();
+        }
+        if (message.pagination !== undefined) {
+            pagination_1.PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
@@ -260,6 +293,9 @@ exports.QueryCollectionResourcesResponse = {
                 case 1:
                     message.resources.push(resource_1.Metadata.decode(reader, reader.uint32()));
                     break;
+                case 2:
+                    message.pagination = pagination_1.PageResponse.decode(reader, reader.uint32());
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -270,6 +306,7 @@ exports.QueryCollectionResourcesResponse = {
     fromJSON(object) {
         return {
             resources: Array.isArray(object?.resources) ? object.resources.map((e) => resource_1.Metadata.fromJSON(e)) : [],
+            pagination: isSet(object.pagination) ? pagination_1.PageResponse.fromJSON(object.pagination) : undefined,
         };
     },
     toJSON(message) {
@@ -280,11 +317,19 @@ exports.QueryCollectionResourcesResponse = {
         else {
             obj.resources = [];
         }
+        message.pagination !== undefined &&
+            (obj.pagination = message.pagination ? pagination_1.PageResponse.toJSON(message.pagination) : undefined);
         return obj;
+    },
+    create(base) {
+        return exports.QueryCollectionResourcesResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseQueryCollectionResourcesResponse();
         message.resources = object.resources?.map((e) => resource_1.Metadata.fromPartial(e)) || [];
+        message.pagination = (object.pagination !== undefined && object.pagination !== null)
+            ? pagination_1.PageResponse.fromPartial(object.pagination)
+            : undefined;
         return message;
     },
 };
@@ -297,17 +342,17 @@ class QueryClientImpl {
         this.CollectionResources = this.CollectionResources.bind(this);
     }
     Resource(request) {
-        const data = exports.QueryGetResourceRequest.encode(request).finish();
+        const data = exports.QueryResourceRequest.encode(request).finish();
         const promise = this.rpc.request(this.service, "Resource", data);
         return promise.then((data) => exports.QueryResourceResponse.decode(new minimal_1.default.Reader(data)));
     }
     ResourceMetadata(request) {
-        const data = exports.QueryGetResourceMetadataRequest.encode(request).finish();
+        const data = exports.QueryResourceMetadataRequest.encode(request).finish();
         const promise = this.rpc.request(this.service, "ResourceMetadata", data);
         return promise.then((data) => exports.QueryResourceMetadataResponse.decode(new minimal_1.default.Reader(data)));
     }
     CollectionResources(request) {
-        const data = exports.QueryGetCollectionResourcesRequest.encode(request).finish();
+        const data = exports.QueryCollectionResourcesRequest.encode(request).finish();
         const promise = this.rpc.request(this.service, "CollectionResources", data);
         return promise.then((data) => exports.QueryCollectionResourcesResponse.decode(new minimal_1.default.Reader(data)));
     }
