@@ -69,6 +69,9 @@ exports.FeeParams = {
         message.burnFactor !== undefined && (obj.burnFactor = message.burnFactor);
         return obj;
     },
+    create(base) {
+        return exports.FeeParams.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseFeeParams();
         message.image = (object.image !== undefined && object.image !== null) ? coin_1.Coin.fromPartial(object.image) : undefined;

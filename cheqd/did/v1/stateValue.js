@@ -53,6 +53,9 @@ exports.StateValue = {
         message.metadata !== undefined && (obj.metadata = message.metadata ? exports.Metadata.toJSON(message.metadata) : undefined);
         return obj;
     },
+    create(base) {
+        return exports.StateValue.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseStateValue();
         message.data = (object.data !== undefined && object.data !== null) ? any_1.Any.fromPartial(object.data) : undefined;
@@ -135,6 +138,9 @@ exports.Metadata = {
             obj.resources = [];
         }
         return obj;
+    },
+    create(base) {
+        return exports.Metadata.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMetadata();

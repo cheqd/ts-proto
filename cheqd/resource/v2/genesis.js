@@ -62,6 +62,9 @@ exports.GenesisState = {
             (obj.feeParams = message.feeParams ? fee_1.FeeParams.toJSON(message.feeParams) : undefined);
         return obj;
     },
+    create(base) {
+        return exports.GenesisState.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseGenesisState();
         message.resources = object.resources?.map((e) => resource_1.ResourceWithMetadata.fromPartial(e)) || [];

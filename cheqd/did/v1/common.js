@@ -49,6 +49,9 @@ exports.KeyValuePair = {
         message.value !== undefined && (obj.value = message.value);
         return obj;
     },
+    create(base) {
+        return exports.KeyValuePair.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseKeyValuePair();
         message.key = object.key ?? "";

@@ -53,6 +53,9 @@ exports.QueryGetResourceRequest = {
         message.id !== undefined && (obj.id = message.id);
         return obj;
     },
+    create(base) {
+        return exports.QueryGetResourceRequest.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseQueryGetResourceRequest();
         message.collectionId = object.collectionId ?? "";
@@ -94,6 +97,9 @@ exports.QueryResourceResponse = {
         const obj = {};
         message.resource !== undefined && (obj.resource = message.resource ? resource_1.Resource.toJSON(message.resource) : undefined);
         return obj;
+    },
+    create(base) {
+        return exports.QueryResourceResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseQueryResourceResponse();
@@ -137,6 +143,9 @@ exports.QueryGetCollectionResourcesRequest = {
         const obj = {};
         message.collectionId !== undefined && (obj.collectionId = message.collectionId);
         return obj;
+    },
+    create(base) {
+        return exports.QueryGetCollectionResourcesRequest.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseQueryGetCollectionResourcesRequest();
@@ -185,6 +194,9 @@ exports.QueryCollectionResourcesResponse = {
             obj.resources = [];
         }
         return obj;
+    },
+    create(base) {
+        return exports.QueryCollectionResourcesResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseQueryCollectionResourcesResponse();
@@ -245,6 +257,9 @@ exports.QueryGetAllResourceVersionsRequest = {
         message.resourceType !== undefined && (obj.resourceType = message.resourceType);
         return obj;
     },
+    create(base) {
+        return exports.QueryGetAllResourceVersionsRequest.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseQueryGetAllResourceVersionsRequest();
         message.collectionId = object.collectionId ?? "";
@@ -294,6 +309,9 @@ exports.QueryGetAllResourceVersionsResponse = {
             obj.resources = [];
         }
         return obj;
+    },
+    create(base) {
+        return exports.QueryGetAllResourceVersionsResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseQueryGetAllResourceVersionsResponse();

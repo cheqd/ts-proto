@@ -59,6 +59,9 @@ exports.MsgCreateDidDoc = {
         }
         return obj;
     },
+    create(base) {
+        return exports.MsgCreateDidDoc.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseMsgCreateDidDoc();
         message.payload = (object.payload !== undefined && object.payload !== null)
@@ -118,6 +121,9 @@ exports.MsgUpdateDidDoc = {
             obj.signatures = [];
         }
         return obj;
+    },
+    create(base) {
+        return exports.MsgUpdateDidDoc.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgUpdateDidDoc();
@@ -179,6 +185,9 @@ exports.MsgDeactivateDidDoc = {
         }
         return obj;
     },
+    create(base) {
+        return exports.MsgDeactivateDidDoc.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseMsgDeactivateDidDoc();
         message.payload = (object.payload !== undefined && object.payload !== null)
@@ -234,6 +243,9 @@ exports.SignInfo = {
             (obj.signature = base64FromBytes(message.signature !== undefined ? message.signature : new Uint8Array()));
         return obj;
     },
+    create(base) {
+        return exports.SignInfo.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseSignInfo();
         message.verificationMethodId = object.verificationMethodId ?? "";
@@ -252,8 +264,8 @@ function createBaseMsgCreateDidDocPayload() {
         capabilityInvocation: [],
         capabilityDelegation: [],
         keyAgreement: [],
-        alsoKnownAs: [],
         service: [],
+        alsoKnownAs: [],
         versionId: "",
     };
 }
@@ -286,11 +298,11 @@ exports.MsgCreateDidDocPayload = {
         for (const v of message.keyAgreement) {
             writer.uint32(74).string(v);
         }
-        for (const v of message.alsoKnownAs) {
-            writer.uint32(82).string(v);
-        }
         for (const v of message.service) {
-            diddoc_1.Service.encode(v, writer.uint32(90).fork()).ldelim();
+            diddoc_1.Service.encode(v, writer.uint32(82).fork()).ldelim();
+        }
+        for (const v of message.alsoKnownAs) {
+            writer.uint32(90).string(v);
         }
         if (message.versionId !== "") {
             writer.uint32(98).string(message.versionId);
@@ -332,10 +344,10 @@ exports.MsgCreateDidDocPayload = {
                     message.keyAgreement.push(reader.string());
                     break;
                 case 10:
-                    message.alsoKnownAs.push(reader.string());
+                    message.service.push(diddoc_1.Service.decode(reader, reader.uint32()));
                     break;
                 case 11:
-                    message.service.push(diddoc_1.Service.decode(reader, reader.uint32()));
+                    message.alsoKnownAs.push(reader.string());
                     break;
                 case 12:
                     message.versionId = reader.string();
@@ -364,8 +376,8 @@ exports.MsgCreateDidDocPayload = {
                 ? object.capabilityDelegation.map((e) => String(e))
                 : [],
             keyAgreement: Array.isArray(object?.keyAgreement) ? object.keyAgreement.map((e) => String(e)) : [],
-            alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e) => String(e)) : [],
             service: Array.isArray(object?.service) ? object.service.map((e) => diddoc_1.Service.fromJSON(e)) : [],
+            alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e) => String(e)) : [],
             versionId: isSet(object.versionId) ? String(object.versionId) : "",
         };
     },
@@ -420,20 +432,23 @@ exports.MsgCreateDidDocPayload = {
         else {
             obj.keyAgreement = [];
         }
-        if (message.alsoKnownAs) {
-            obj.alsoKnownAs = message.alsoKnownAs.map((e) => e);
-        }
-        else {
-            obj.alsoKnownAs = [];
-        }
         if (message.service) {
             obj.service = message.service.map((e) => e ? diddoc_1.Service.toJSON(e) : undefined);
         }
         else {
             obj.service = [];
         }
+        if (message.alsoKnownAs) {
+            obj.alsoKnownAs = message.alsoKnownAs.map((e) => e);
+        }
+        else {
+            obj.alsoKnownAs = [];
+        }
         message.versionId !== undefined && (obj.versionId = message.versionId);
         return obj;
+    },
+    create(base) {
+        return exports.MsgCreateDidDocPayload.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgCreateDidDocPayload();
@@ -446,8 +461,8 @@ exports.MsgCreateDidDocPayload = {
         message.capabilityInvocation = object.capabilityInvocation?.map((e) => e) || [];
         message.capabilityDelegation = object.capabilityDelegation?.map((e) => e) || [];
         message.keyAgreement = object.keyAgreement?.map((e) => e) || [];
-        message.alsoKnownAs = object.alsoKnownAs?.map((e) => e) || [];
         message.service = object.service?.map((e) => diddoc_1.Service.fromPartial(e)) || [];
+        message.alsoKnownAs = object.alsoKnownAs?.map((e) => e) || [];
         message.versionId = object.versionId ?? "";
         return message;
     },
@@ -487,6 +502,9 @@ exports.MsgCreateDidDocResponse = {
         message.value !== undefined && (obj.value = message.value ? diddoc_1.DidDocWithMetadata.toJSON(message.value) : undefined);
         return obj;
     },
+    create(base) {
+        return exports.MsgCreateDidDocResponse.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseMsgCreateDidDocResponse();
         message.value = (object.value !== undefined && object.value !== null)
@@ -506,8 +524,8 @@ function createBaseMsgUpdateDidDocPayload() {
         capabilityInvocation: [],
         capabilityDelegation: [],
         keyAgreement: [],
-        alsoKnownAs: [],
         service: [],
+        alsoKnownAs: [],
         versionId: "",
     };
 }
@@ -540,11 +558,11 @@ exports.MsgUpdateDidDocPayload = {
         for (const v of message.keyAgreement) {
             writer.uint32(74).string(v);
         }
-        for (const v of message.alsoKnownAs) {
-            writer.uint32(82).string(v);
-        }
         for (const v of message.service) {
-            diddoc_1.Service.encode(v, writer.uint32(90).fork()).ldelim();
+            diddoc_1.Service.encode(v, writer.uint32(82).fork()).ldelim();
+        }
+        for (const v of message.alsoKnownAs) {
+            writer.uint32(90).string(v);
         }
         if (message.versionId !== "") {
             writer.uint32(98).string(message.versionId);
@@ -586,10 +604,10 @@ exports.MsgUpdateDidDocPayload = {
                     message.keyAgreement.push(reader.string());
                     break;
                 case 10:
-                    message.alsoKnownAs.push(reader.string());
+                    message.service.push(diddoc_1.Service.decode(reader, reader.uint32()));
                     break;
                 case 11:
-                    message.service.push(diddoc_1.Service.decode(reader, reader.uint32()));
+                    message.alsoKnownAs.push(reader.string());
                     break;
                 case 12:
                     message.versionId = reader.string();
@@ -618,8 +636,8 @@ exports.MsgUpdateDidDocPayload = {
                 ? object.capabilityDelegation.map((e) => String(e))
                 : [],
             keyAgreement: Array.isArray(object?.keyAgreement) ? object.keyAgreement.map((e) => String(e)) : [],
-            alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e) => String(e)) : [],
             service: Array.isArray(object?.service) ? object.service.map((e) => diddoc_1.Service.fromJSON(e)) : [],
+            alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e) => String(e)) : [],
             versionId: isSet(object.versionId) ? String(object.versionId) : "",
         };
     },
@@ -674,20 +692,23 @@ exports.MsgUpdateDidDocPayload = {
         else {
             obj.keyAgreement = [];
         }
-        if (message.alsoKnownAs) {
-            obj.alsoKnownAs = message.alsoKnownAs.map((e) => e);
-        }
-        else {
-            obj.alsoKnownAs = [];
-        }
         if (message.service) {
             obj.service = message.service.map((e) => e ? diddoc_1.Service.toJSON(e) : undefined);
         }
         else {
             obj.service = [];
         }
+        if (message.alsoKnownAs) {
+            obj.alsoKnownAs = message.alsoKnownAs.map((e) => e);
+        }
+        else {
+            obj.alsoKnownAs = [];
+        }
         message.versionId !== undefined && (obj.versionId = message.versionId);
         return obj;
+    },
+    create(base) {
+        return exports.MsgUpdateDidDocPayload.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgUpdateDidDocPayload();
@@ -700,8 +721,8 @@ exports.MsgUpdateDidDocPayload = {
         message.capabilityInvocation = object.capabilityInvocation?.map((e) => e) || [];
         message.capabilityDelegation = object.capabilityDelegation?.map((e) => e) || [];
         message.keyAgreement = object.keyAgreement?.map((e) => e) || [];
-        message.alsoKnownAs = object.alsoKnownAs?.map((e) => e) || [];
         message.service = object.service?.map((e) => diddoc_1.Service.fromPartial(e)) || [];
+        message.alsoKnownAs = object.alsoKnownAs?.map((e) => e) || [];
         message.versionId = object.versionId ?? "";
         return message;
     },
@@ -740,6 +761,9 @@ exports.MsgUpdateDidDocResponse = {
         const obj = {};
         message.value !== undefined && (obj.value = message.value ? diddoc_1.DidDocWithMetadata.toJSON(message.value) : undefined);
         return obj;
+    },
+    create(base) {
+        return exports.MsgUpdateDidDocResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgUpdateDidDocResponse();
@@ -794,6 +818,9 @@ exports.MsgDeactivateDidDocPayload = {
         message.versionId !== undefined && (obj.versionId = message.versionId);
         return obj;
     },
+    create(base) {
+        return exports.MsgDeactivateDidDocPayload.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseMsgDeactivateDidDocPayload();
         message.id = object.id ?? "";
@@ -835,6 +862,9 @@ exports.MsgDeactivateDidDocResponse = {
         const obj = {};
         message.value !== undefined && (obj.value = message.value ? diddoc_1.DidDocWithMetadata.toJSON(message.value) : undefined);
         return obj;
+    },
+    create(base) {
+        return exports.MsgDeactivateDidDocResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgDeactivateDidDocResponse();

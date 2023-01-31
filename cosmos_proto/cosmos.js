@@ -91,6 +91,9 @@ exports.InterfaceDescriptor = {
         message.description !== undefined && (obj.description = message.description);
         return obj;
     },
+    create(base) {
+        return exports.InterfaceDescriptor.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseInterfaceDescriptor();
         message.name = object.name ?? "";
@@ -165,6 +168,9 @@ exports.ScalarDescriptor = {
             obj.fieldType = [];
         }
         return obj;
+    },
+    create(base) {
+        return exports.ScalarDescriptor.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseScalarDescriptor();

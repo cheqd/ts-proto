@@ -7,6 +7,7 @@ exports.Metadata = exports.DidDocWithMetadata = exports.Service = exports.Verifi
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
+const timestamp_1 = require("../../../google/protobuf/timestamp");
 function createBaseDidDoc() {
     return {
         context: [],
@@ -192,6 +193,9 @@ exports.DidDoc = {
         }
         return obj;
     },
+    create(base) {
+        return exports.DidDoc.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseDidDoc();
         message.context = object.context?.map((e) => e) || [];
@@ -269,6 +273,9 @@ exports.VerificationMethod = {
         message.verificationMaterial !== undefined && (obj.verificationMaterial = message.verificationMaterial);
         return obj;
     },
+    create(base) {
+        return exports.VerificationMethod.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseVerificationMethod();
         message.id = object.id ?? "";
@@ -336,6 +343,9 @@ exports.Service = {
         }
         return obj;
     },
+    create(base) {
+        return exports.Service.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseService();
         message.id = object.id ?? "";
@@ -389,6 +399,9 @@ exports.DidDocWithMetadata = {
         message.metadata !== undefined && (obj.metadata = message.metadata ? exports.Metadata.toJSON(message.metadata) : undefined);
         return obj;
     },
+    create(base) {
+        return exports.DidDocWithMetadata.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseDidDocWithMetadata();
         message.didDoc = (object.didDoc !== undefined && object.didDoc !== null)
@@ -401,15 +414,22 @@ exports.DidDocWithMetadata = {
     },
 };
 function createBaseMetadata() {
-    return { created: "", updated: "", deactivated: false, versionId: "", nextVersionId: "", previousVersionId: "" };
+    return {
+        created: undefined,
+        updated: undefined,
+        deactivated: false,
+        versionId: "",
+        nextVersionId: "",
+        previousVersionId: "",
+    };
 }
 exports.Metadata = {
     encode(message, writer = minimal_1.default.Writer.create()) {
-        if (message.created !== "") {
-            writer.uint32(10).string(message.created);
+        if (message.created !== undefined) {
+            timestamp_1.Timestamp.encode(toTimestamp(message.created), writer.uint32(10).fork()).ldelim();
         }
-        if (message.updated !== "") {
-            writer.uint32(18).string(message.updated);
+        if (message.updated !== undefined) {
+            timestamp_1.Timestamp.encode(toTimestamp(message.updated), writer.uint32(18).fork()).ldelim();
         }
         if (message.deactivated === true) {
             writer.uint32(24).bool(message.deactivated);
@@ -433,10 +453,10 @@ exports.Metadata = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.created = reader.string();
+                    message.created = fromTimestamp(timestamp_1.Timestamp.decode(reader, reader.uint32()));
                     break;
                 case 2:
-                    message.updated = reader.string();
+                    message.updated = fromTimestamp(timestamp_1.Timestamp.decode(reader, reader.uint32()));
                     break;
                 case 3:
                     message.deactivated = reader.bool();
@@ -459,8 +479,8 @@ exports.Metadata = {
     },
     fromJSON(object) {
         return {
-            created: isSet(object.created) ? String(object.created) : "",
-            updated: isSet(object.updated) ? String(object.updated) : "",
+            created: isSet(object.created) ? fromJsonTimestamp(object.created) : undefined,
+            updated: isSet(object.updated) ? fromJsonTimestamp(object.updated) : undefined,
             deactivated: isSet(object.deactivated) ? Boolean(object.deactivated) : false,
             versionId: isSet(object.versionId) ? String(object.versionId) : "",
             nextVersionId: isSet(object.nextVersionId) ? String(object.nextVersionId) : "",
@@ -469,18 +489,21 @@ exports.Metadata = {
     },
     toJSON(message) {
         const obj = {};
-        message.created !== undefined && (obj.created = message.created);
-        message.updated !== undefined && (obj.updated = message.updated);
+        message.created !== undefined && (obj.created = message.created.toISOString());
+        message.updated !== undefined && (obj.updated = message.updated.toISOString());
         message.deactivated !== undefined && (obj.deactivated = message.deactivated);
         message.versionId !== undefined && (obj.versionId = message.versionId);
         message.nextVersionId !== undefined && (obj.nextVersionId = message.nextVersionId);
         message.previousVersionId !== undefined && (obj.previousVersionId = message.previousVersionId);
         return obj;
     },
+    create(base) {
+        return exports.Metadata.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseMetadata();
-        message.created = object.created ?? "";
-        message.updated = object.updated ?? "";
+        message.created = object.created ?? undefined;
+        message.updated = object.updated ?? undefined;
         message.deactivated = object.deactivated ?? false;
         message.versionId = object.versionId ?? "";
         message.nextVersionId = object.nextVersionId ?? "";
@@ -488,6 +511,30 @@ exports.Metadata = {
         return message;
     },
 };
+function toTimestamp(date) {
+    const seconds = numberToLong(date.getTime() / 1000);
+    const nanos = (date.getTime() % 1000) * 1000000;
+    return { seconds, nanos };
+}
+function fromTimestamp(t) {
+    let millis = t.seconds.toNumber() * 1000;
+    millis += t.nanos / 1000000;
+    return new Date(millis);
+}
+function fromJsonTimestamp(o) {
+    if (o instanceof Date) {
+        return o;
+    }
+    else if (typeof o === "string") {
+        return new Date(o);
+    }
+    else {
+        return fromTimestamp(timestamp_1.Timestamp.fromJSON(o));
+    }
+}
+function numberToLong(number) {
+    return long_1.default.fromNumber(number);
+}
 if (minimal_1.default.util.Long !== long_1.default) {
     minimal_1.default.util.Long = long_1.default;
     minimal_1.default.configure();

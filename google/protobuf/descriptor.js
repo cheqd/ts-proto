@@ -409,6 +409,9 @@ exports.FileDescriptorSet = {
         }
         return obj;
     },
+    create(base) {
+        return exports.FileDescriptorSet.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseFileDescriptorSet();
         message.file = object.file?.map((e) => exports.FileDescriptorProto.fromPartial(e)) || [];
@@ -615,6 +618,9 @@ exports.FileDescriptorProto = {
         message.syntax !== undefined && (obj.syntax = message.syntax);
         return obj;
     },
+    create(base) {
+        return exports.FileDescriptorProto.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseFileDescriptorProto();
         message.name = object.name ?? "";
@@ -807,6 +813,9 @@ exports.DescriptorProto = {
         }
         return obj;
     },
+    create(base) {
+        return exports.DescriptorProto.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseDescriptorProto();
         message.name = object.name ?? "";
@@ -878,6 +887,9 @@ exports.DescriptorProto_ExtensionRange = {
             (obj.options = message.options ? exports.ExtensionRangeOptions.toJSON(message.options) : undefined);
         return obj;
     },
+    create(base) {
+        return exports.DescriptorProto_ExtensionRange.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseDescriptorProto_ExtensionRange();
         message.start = object.start ?? 0;
@@ -930,6 +942,9 @@ exports.DescriptorProto_ReservedRange = {
         message.end !== undefined && (obj.end = Math.round(message.end));
         return obj;
     },
+    create(base) {
+        return exports.DescriptorProto_ReservedRange.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseDescriptorProto_ReservedRange();
         message.start = object.start ?? 0;
@@ -980,6 +995,9 @@ exports.ExtensionRangeOptions = {
             obj.uninterpretedOption = [];
         }
         return obj;
+    },
+    create(base) {
+        return exports.ExtensionRangeOptions.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseExtensionRangeOptions();
@@ -1116,6 +1134,9 @@ exports.FieldDescriptorProto = {
         message.proto3Optional !== undefined && (obj.proto3Optional = message.proto3Optional);
         return obj;
     },
+    create(base) {
+        return exports.FieldDescriptorProto.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseFieldDescriptorProto();
         message.name = object.name ?? "";
@@ -1178,6 +1199,9 @@ exports.OneofDescriptorProto = {
         message.name !== undefined && (obj.name = message.name);
         message.options !== undefined && (obj.options = message.options ? exports.OneofOptions.toJSON(message.options) : undefined);
         return obj;
+    },
+    create(base) {
+        return exports.OneofDescriptorProto.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseOneofDescriptorProto();
@@ -1274,6 +1298,9 @@ exports.EnumDescriptorProto = {
         }
         return obj;
     },
+    create(base) {
+        return exports.EnumDescriptorProto.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseEnumDescriptorProto();
         message.name = object.name ?? "";
@@ -1328,6 +1355,9 @@ exports.EnumDescriptorProto_EnumReservedRange = {
         message.start !== undefined && (obj.start = Math.round(message.start));
         message.end !== undefined && (obj.end = Math.round(message.end));
         return obj;
+    },
+    create(base) {
+        return exports.EnumDescriptorProto_EnumReservedRange.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseEnumDescriptorProto_EnumReservedRange();
@@ -1389,6 +1419,9 @@ exports.EnumValueDescriptorProto = {
         message.options !== undefined &&
             (obj.options = message.options ? exports.EnumValueOptions.toJSON(message.options) : undefined);
         return obj;
+    },
+    create(base) {
+        return exports.EnumValueDescriptorProto.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseEnumValueDescriptorProto();
@@ -1458,6 +1491,9 @@ exports.ServiceDescriptorProto = {
         message.options !== undefined &&
             (obj.options = message.options ? exports.ServiceOptions.toJSON(message.options) : undefined);
         return obj;
+    },
+    create(base) {
+        return exports.ServiceDescriptorProto.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseServiceDescriptorProto();
@@ -1553,6 +1589,9 @@ exports.MethodDescriptorProto = {
         message.clientStreaming !== undefined && (obj.clientStreaming = message.clientStreaming);
         message.serverStreaming !== undefined && (obj.serverStreaming = message.serverStreaming);
         return obj;
+    },
+    create(base) {
+        return exports.MethodDescriptorProto.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMethodDescriptorProto();
@@ -1796,6 +1835,9 @@ exports.FileOptions = {
         }
         return obj;
     },
+    create(base) {
+        return exports.FileOptions.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseFileOptions();
         message.javaPackage = object.javaPackage ?? "";
@@ -1906,6 +1948,9 @@ exports.MessageOptions = {
             obj.uninterpretedOption = [];
         }
         return obj;
+    },
+    create(base) {
+        return exports.MessageOptions.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMessageOptions();
@@ -2026,6 +2071,9 @@ exports.FieldOptions = {
         }
         return obj;
     },
+    create(base) {
+        return exports.FieldOptions.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseFieldOptions();
         message.ctype = object.ctype ?? 0;
@@ -2082,6 +2130,9 @@ exports.OneofOptions = {
             obj.uninterpretedOption = [];
         }
         return obj;
+    },
+    create(base) {
+        return exports.OneofOptions.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseOneofOptions();
@@ -2149,6 +2200,9 @@ exports.EnumOptions = {
         }
         return obj;
     },
+    create(base) {
+        return exports.EnumOptions.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseEnumOptions();
         message.allowAlias = object.allowAlias ?? false;
@@ -2209,6 +2263,9 @@ exports.EnumValueOptions = {
         }
         return obj;
     },
+    create(base) {
+        return exports.EnumValueOptions.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseEnumValueOptions();
         message.deprecated = object.deprecated ?? false;
@@ -2267,6 +2324,9 @@ exports.ServiceOptions = {
             obj.uninterpretedOption = [];
         }
         return obj;
+    },
+    create(base) {
+        return exports.ServiceOptions.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseServiceOptions();
@@ -2337,6 +2397,9 @@ exports.MethodOptions = {
             obj.uninterpretedOption = [];
         }
         return obj;
+    },
+    create(base) {
+        return exports.MethodOptions.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMethodOptions();
@@ -2447,6 +2510,9 @@ exports.UninterpretedOption = {
         message.aggregateValue !== undefined && (obj.aggregateValue = message.aggregateValue);
         return obj;
     },
+    create(base) {
+        return exports.UninterpretedOption.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseUninterpretedOption();
         message.name = object.name?.map((e) => exports.UninterpretedOption_NamePart.fromPartial(e)) || [];
@@ -2508,6 +2574,9 @@ exports.UninterpretedOption_NamePart = {
         message.isExtension !== undefined && (obj.isExtension = message.isExtension);
         return obj;
     },
+    create(base) {
+        return exports.UninterpretedOption_NamePart.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseUninterpretedOption_NamePart();
         message.namePart = object.namePart ?? "";
@@ -2558,6 +2627,9 @@ exports.SourceCodeInfo = {
             obj.location = [];
         }
         return obj;
+    },
+    create(base) {
+        return exports.SourceCodeInfo.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseSourceCodeInfo();
@@ -2671,6 +2743,9 @@ exports.SourceCodeInfo_Location = {
         }
         return obj;
     },
+    create(base) {
+        return exports.SourceCodeInfo_Location.fromPartial(base ?? {});
+    },
     fromPartial(object) {
         const message = createBaseSourceCodeInfo_Location();
         message.path = object.path?.map((e) => e) || [];
@@ -2724,6 +2799,9 @@ exports.GeneratedCodeInfo = {
             obj.annotation = [];
         }
         return obj;
+    },
+    create(base) {
+        return exports.GeneratedCodeInfo.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseGeneratedCodeInfo();
@@ -2806,6 +2884,9 @@ exports.GeneratedCodeInfo_Annotation = {
         message.begin !== undefined && (obj.begin = Math.round(message.begin));
         message.end !== undefined && (obj.end = Math.round(message.end));
         return obj;
+    },
+    create(base) {
+        return exports.GeneratedCodeInfo_Annotation.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseGeneratedCodeInfo_Annotation();
