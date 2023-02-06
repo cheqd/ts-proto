@@ -35,7 +35,7 @@ jobs:
           ref: ${{ env.BASE_BRANCH }}
 
       - name: "Install buf CLI"
-        uses: bufbuild/buf-setup-action@v1.9.0
+        uses: bufbuild/buf-setup-action@v1.13.1
 
       - name: Generate TypeScript code for Protobufs
         run: buf generate buf.build/cheqd/proto
