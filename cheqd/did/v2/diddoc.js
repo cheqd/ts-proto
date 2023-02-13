@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Metadata = exports.DidDocWithMetadata = exports.Service = exports.VerificationMethod = exports.DidDoc = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
-const minimal_1 = __importDefault(require("protobufjs/minimal"));
-const timestamp_1 = require("../../../google/protobuf/timestamp");
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
+const timestamp_js_1 = require("../../../google/protobuf/timestamp.js");
 function createBaseDidDoc() {
     return {
         context: [],
@@ -24,7 +24,7 @@ function createBaseDidDoc() {
     };
 }
 exports.DidDoc = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         for (const v of message.context) {
             writer.uint32(10).string(v);
         }
@@ -61,7 +61,7 @@ exports.DidDoc = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseDidDoc();
         while (reader.pos < end) {
@@ -216,7 +216,7 @@ function createBaseVerificationMethod() {
     return { id: "", verificationMethodType: "", controller: "", verificationMaterial: "" };
 }
 exports.VerificationMethod = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
@@ -232,7 +232,7 @@ exports.VerificationMethod = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseVerificationMethod();
         while (reader.pos < end) {
@@ -289,7 +289,7 @@ function createBaseService() {
     return { id: "", serviceType: "", serviceEndpoint: [] };
 }
 exports.Service = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
@@ -302,7 +302,7 @@ exports.Service = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseService();
         while (reader.pos < end) {
@@ -358,7 +358,7 @@ function createBaseDidDocWithMetadata() {
     return { didDoc: undefined, metadata: undefined };
 }
 exports.DidDocWithMetadata = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.didDoc !== undefined) {
             exports.DidDoc.encode(message.didDoc, writer.uint32(10).fork()).ldelim();
         }
@@ -368,7 +368,7 @@ exports.DidDocWithMetadata = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseDidDocWithMetadata();
         while (reader.pos < end) {
@@ -424,12 +424,12 @@ function createBaseMetadata() {
     };
 }
 exports.Metadata = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.created !== undefined) {
-            timestamp_1.Timestamp.encode(toTimestamp(message.created), writer.uint32(10).fork()).ldelim();
+            timestamp_js_1.Timestamp.encode(toTimestamp(message.created), writer.uint32(10).fork()).ldelim();
         }
         if (message.updated !== undefined) {
-            timestamp_1.Timestamp.encode(toTimestamp(message.updated), writer.uint32(18).fork()).ldelim();
+            timestamp_js_1.Timestamp.encode(toTimestamp(message.updated), writer.uint32(18).fork()).ldelim();
         }
         if (message.deactivated === true) {
             writer.uint32(24).bool(message.deactivated);
@@ -446,17 +446,17 @@ exports.Metadata = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMetadata();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.created = fromTimestamp(timestamp_1.Timestamp.decode(reader, reader.uint32()));
+                    message.created = fromTimestamp(timestamp_js_1.Timestamp.decode(reader, reader.uint32()));
                     break;
                 case 2:
-                    message.updated = fromTimestamp(timestamp_1.Timestamp.decode(reader, reader.uint32()));
+                    message.updated = fromTimestamp(timestamp_js_1.Timestamp.decode(reader, reader.uint32()));
                     break;
                 case 3:
                     message.deactivated = reader.bool();
@@ -512,13 +512,13 @@ exports.Metadata = {
     },
 };
 function toTimestamp(date) {
-    const seconds = numberToLong(date.getTime() / 1000);
-    const nanos = (date.getTime() % 1000) * 1000000;
+    const seconds = numberToLong(date.getTime() / 1_000);
+    const nanos = (date.getTime() % 1_000) * 1_000_000;
     return { seconds, nanos };
 }
 function fromTimestamp(t) {
-    let millis = t.seconds.toNumber() * 1000;
-    millis += t.nanos / 1000000;
+    let millis = t.seconds.toNumber() * 1_000;
+    millis += t.nanos / 1_000_000;
     return new Date(millis);
 }
 function fromJsonTimestamp(o) {
@@ -529,15 +529,15 @@ function fromJsonTimestamp(o) {
         return new Date(o);
     }
     else {
-        return fromTimestamp(timestamp_1.Timestamp.fromJSON(o));
+        return fromTimestamp(timestamp_js_1.Timestamp.fromJSON(o));
     }
 }
 function numberToLong(number) {
     return long_1.default.fromNumber(number);
 }
-if (minimal_1.default.util.Long !== long_1.default) {
-    minimal_1.default.util.Long = long_1.default;
-    minimal_1.default.configure();
+if (minimal_js_1.default.util.Long !== long_1.default) {
+    minimal_js_1.default.util.Long = long_1.default;
+    minimal_js_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

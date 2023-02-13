@@ -1,8 +1,8 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal";
-import { Did } from "./did";
-import { Metadata } from "./stateValue";
+import _m0 from "protobufjs/minimal.js";
+import { Did } from "./did.js";
+import { Metadata } from "./stateValue.js";
 
 export interface QueryGetDidRequest {
   id: string;

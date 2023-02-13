@@ -1,8 +1,8 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal";
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-import { DidDocWithMetadata, Metadata } from "./diddoc";
+import _m0 from "protobufjs/minimal.js";
+import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { DidDocWithMetadata, Metadata } from "./diddoc.js";
 
 /** QueryDidDocRequest is the request type for the Query/DidDoc method */
 export interface QueryDidDocRequest {

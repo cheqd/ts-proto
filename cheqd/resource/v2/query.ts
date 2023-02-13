@@ -1,8 +1,8 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal";
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Metadata, ResourceWithMetadata } from "./resource";
+import _m0 from "protobufjs/minimal.js";
+import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { Metadata, ResourceWithMetadata } from "./resource.js";
 
 /** QueryResourceRequest is the request type for the Query/Resource RPC method */
 export interface QueryResourceRequest {

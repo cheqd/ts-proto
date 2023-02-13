@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal";
-import { Resource } from "./resource";
+import _m0 from "protobufjs/minimal.js";
+import { Resource } from "./resource.js";
 
 /** GenesisState defines the cheqd module's genesis state. */
 export interface GenesisState {
