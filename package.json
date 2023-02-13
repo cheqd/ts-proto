@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "long": "^5.2.1",
-    "protobufjs": "~7.2.0"
+    "protobufjs": "^7.2.2"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.2",
