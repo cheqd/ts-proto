@@ -1,7 +1,6 @@
 name: "Release"
 on:
   workflow_call:
-  merge_group:
 defaults:
   run:
     shell: bash
