@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0-develop.1](https://github.com/cheqd/ts-proto/compare/2.0.1...3.0.0-develop.1) (2023-02-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* Transition to ESM exports (#79)
+
+### Build System
+
+* Transition to ESM exports ([#79](https://github.com/cheqd/ts-proto/issues/79)) ([d0a59cc](https://github.com/cheqd/ts-proto/commit/d0a59cc03306e6e91184d226868ef2ce5ce66c1c))
+
 ## [2.0.1](https://github.com/cheqd/ts-proto/compare/2.0.0...2.0.1) (2023-02-13)
 
 ## [2.0.1-develop.1](https://github.com/cheqd/ts-proto/compare/2.0.0...2.0.1-develop.1) (2023-02-13)

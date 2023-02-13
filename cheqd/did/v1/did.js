@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Service = exports.VerificationMethod = exports.Did = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
-const minimal_1 = __importDefault(require("protobufjs/minimal"));
-const common_1 = require("./common");
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
+const common_js_1 = require("./common.js");
 function createBaseDid() {
     return {
         context: [],
@@ -24,7 +24,7 @@ function createBaseDid() {
     };
 }
 exports.Did = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         for (const v of message.context) {
             writer.uint32(10).string(v);
         }
@@ -61,7 +61,7 @@ exports.Did = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseDid();
         while (reader.pos < end) {
@@ -216,7 +216,7 @@ function createBaseVerificationMethod() {
     return { id: "", type: "", controller: "", publicKeyJwk: [], publicKeyMultibase: "" };
 }
 exports.VerificationMethod = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
@@ -227,7 +227,7 @@ exports.VerificationMethod = {
             writer.uint32(26).string(message.controller);
         }
         for (const v of message.publicKeyJwk) {
-            common_1.KeyValuePair.encode(v, writer.uint32(34).fork()).ldelim();
+            common_js_1.KeyValuePair.encode(v, writer.uint32(34).fork()).ldelim();
         }
         if (message.publicKeyMultibase !== "") {
             writer.uint32(42).string(message.publicKeyMultibase);
@@ -235,7 +235,7 @@ exports.VerificationMethod = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseVerificationMethod();
         while (reader.pos < end) {
@@ -251,7 +251,7 @@ exports.VerificationMethod = {
                     message.controller = reader.string();
                     break;
                 case 4:
-                    message.publicKeyJwk.push(common_1.KeyValuePair.decode(reader, reader.uint32()));
+                    message.publicKeyJwk.push(common_js_1.KeyValuePair.decode(reader, reader.uint32()));
                     break;
                 case 5:
                     message.publicKeyMultibase = reader.string();
@@ -269,7 +269,7 @@ exports.VerificationMethod = {
             type: isSet(object.type) ? String(object.type) : "",
             controller: isSet(object.controller) ? String(object.controller) : "",
             publicKeyJwk: Array.isArray(object?.publicKeyJwk)
-                ? object.publicKeyJwk.map((e) => common_1.KeyValuePair.fromJSON(e))
+                ? object.publicKeyJwk.map((e) => common_js_1.KeyValuePair.fromJSON(e))
                 : [],
             publicKeyMultibase: isSet(object.publicKeyMultibase) ? String(object.publicKeyMultibase) : "",
         };
@@ -280,7 +280,7 @@ exports.VerificationMethod = {
         message.type !== undefined && (obj.type = message.type);
         message.controller !== undefined && (obj.controller = message.controller);
         if (message.publicKeyJwk) {
-            obj.publicKeyJwk = message.publicKeyJwk.map((e) => e ? common_1.KeyValuePair.toJSON(e) : undefined);
+            obj.publicKeyJwk = message.publicKeyJwk.map((e) => e ? common_js_1.KeyValuePair.toJSON(e) : undefined);
         }
         else {
             obj.publicKeyJwk = [];
@@ -296,7 +296,7 @@ exports.VerificationMethod = {
         message.id = object.id ?? "";
         message.type = object.type ?? "";
         message.controller = object.controller ?? "";
-        message.publicKeyJwk = object.publicKeyJwk?.map((e) => common_1.KeyValuePair.fromPartial(e)) || [];
+        message.publicKeyJwk = object.publicKeyJwk?.map((e) => common_js_1.KeyValuePair.fromPartial(e)) || [];
         message.publicKeyMultibase = object.publicKeyMultibase ?? "";
         return message;
     },
@@ -305,7 +305,7 @@ function createBaseService() {
     return { id: "", type: "", serviceEndpoint: "" };
 }
 exports.Service = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
@@ -318,7 +318,7 @@ exports.Service = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseService();
         while (reader.pos < end) {
@@ -365,9 +365,9 @@ exports.Service = {
         return message;
     },
 };
-if (minimal_1.default.util.Long !== long_1.default) {
-    minimal_1.default.util.Long = long_1.default;
-    minimal_1.default.configure();
+if (minimal_js_1.default.util.Long !== long_1.default) {
+    minimal_js_1.default.util.Long = long_1.default;
+    minimal_js_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

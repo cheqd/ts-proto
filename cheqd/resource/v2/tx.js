@@ -6,24 +6,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MsgClientImpl = exports.MsgCreateResourceResponse = exports.MsgCreateResourcePayload = exports.MsgCreateResource = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
-const minimal_1 = __importDefault(require("protobufjs/minimal"));
-const tx_1 = require("../../did/v2/tx");
-const resource_1 = require("./resource");
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
+const tx_js_1 = require("../../did/v2/tx.js");
+const resource_js_1 = require("./resource.js");
 function createBaseMsgCreateResource() {
     return { payload: undefined, signatures: [] };
 }
 exports.MsgCreateResource = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.payload !== undefined) {
             exports.MsgCreateResourcePayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
         }
         for (const v of message.signatures) {
-            tx_1.SignInfo.encode(v, writer.uint32(18).fork()).ldelim();
+            tx_js_1.SignInfo.encode(v, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgCreateResource();
         while (reader.pos < end) {
@@ -33,7 +33,7 @@ exports.MsgCreateResource = {
                     message.payload = exports.MsgCreateResourcePayload.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.signatures.push(tx_1.SignInfo.decode(reader, reader.uint32()));
+                    message.signatures.push(tx_js_1.SignInfo.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -45,7 +45,7 @@ exports.MsgCreateResource = {
     fromJSON(object) {
         return {
             payload: isSet(object.payload) ? exports.MsgCreateResourcePayload.fromJSON(object.payload) : undefined,
-            signatures: Array.isArray(object?.signatures) ? object.signatures.map((e) => tx_1.SignInfo.fromJSON(e)) : [],
+            signatures: Array.isArray(object?.signatures) ? object.signatures.map((e) => tx_js_1.SignInfo.fromJSON(e)) : [],
         };
     },
     toJSON(message) {
@@ -53,7 +53,7 @@ exports.MsgCreateResource = {
         message.payload !== undefined &&
             (obj.payload = message.payload ? exports.MsgCreateResourcePayload.toJSON(message.payload) : undefined);
         if (message.signatures) {
-            obj.signatures = message.signatures.map((e) => e ? tx_1.SignInfo.toJSON(e) : undefined);
+            obj.signatures = message.signatures.map((e) => e ? tx_js_1.SignInfo.toJSON(e) : undefined);
         }
         else {
             obj.signatures = [];
@@ -68,7 +68,7 @@ exports.MsgCreateResource = {
         message.payload = (object.payload !== undefined && object.payload !== null)
             ? exports.MsgCreateResourcePayload.fromPartial(object.payload)
             : undefined;
-        message.signatures = object.signatures?.map((e) => tx_1.SignInfo.fromPartial(e)) || [];
+        message.signatures = object.signatures?.map((e) => tx_js_1.SignInfo.fromPartial(e)) || [];
         return message;
     },
 };
@@ -76,7 +76,7 @@ function createBaseMsgCreateResourcePayload() {
     return { data: new Uint8Array(), collectionId: "", id: "", name: "", version: "", resourceType: "", alsoKnownAs: [] };
 }
 exports.MsgCreateResourcePayload = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.data.length !== 0) {
             writer.uint32(10).bytes(message.data);
         }
@@ -96,12 +96,12 @@ exports.MsgCreateResourcePayload = {
             writer.uint32(50).string(message.resourceType);
         }
         for (const v of message.alsoKnownAs) {
-            resource_1.AlternativeUri.encode(v, writer.uint32(58).fork()).ldelim();
+            resource_js_1.AlternativeUri.encode(v, writer.uint32(58).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgCreateResourcePayload();
         while (reader.pos < end) {
@@ -126,7 +126,7 @@ exports.MsgCreateResourcePayload = {
                     message.resourceType = reader.string();
                     break;
                 case 7:
-                    message.alsoKnownAs.push(resource_1.AlternativeUri.decode(reader, reader.uint32()));
+                    message.alsoKnownAs.push(resource_js_1.AlternativeUri.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -144,7 +144,7 @@ exports.MsgCreateResourcePayload = {
             version: isSet(object.version) ? String(object.version) : "",
             resourceType: isSet(object.resourceType) ? String(object.resourceType) : "",
             alsoKnownAs: Array.isArray(object?.alsoKnownAs)
-                ? object.alsoKnownAs.map((e) => resource_1.AlternativeUri.fromJSON(e))
+                ? object.alsoKnownAs.map((e) => resource_js_1.AlternativeUri.fromJSON(e))
                 : [],
         };
     },
@@ -158,7 +158,7 @@ exports.MsgCreateResourcePayload = {
         message.version !== undefined && (obj.version = message.version);
         message.resourceType !== undefined && (obj.resourceType = message.resourceType);
         if (message.alsoKnownAs) {
-            obj.alsoKnownAs = message.alsoKnownAs.map((e) => e ? resource_1.AlternativeUri.toJSON(e) : undefined);
+            obj.alsoKnownAs = message.alsoKnownAs.map((e) => e ? resource_js_1.AlternativeUri.toJSON(e) : undefined);
         }
         else {
             obj.alsoKnownAs = [];
@@ -176,7 +176,7 @@ exports.MsgCreateResourcePayload = {
         message.name = object.name ?? "";
         message.version = object.version ?? "";
         message.resourceType = object.resourceType ?? "";
-        message.alsoKnownAs = object.alsoKnownAs?.map((e) => resource_1.AlternativeUri.fromPartial(e)) || [];
+        message.alsoKnownAs = object.alsoKnownAs?.map((e) => resource_js_1.AlternativeUri.fromPartial(e)) || [];
         return message;
     },
 };
@@ -184,21 +184,21 @@ function createBaseMsgCreateResourceResponse() {
     return { resource: undefined };
 }
 exports.MsgCreateResourceResponse = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.resource !== undefined) {
-            resource_1.Metadata.encode(message.resource, writer.uint32(10).fork()).ldelim();
+            resource_js_1.Metadata.encode(message.resource, writer.uint32(10).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgCreateResourceResponse();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.resource = resource_1.Metadata.decode(reader, reader.uint32());
+                    message.resource = resource_js_1.Metadata.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -208,11 +208,11 @@ exports.MsgCreateResourceResponse = {
         return message;
     },
     fromJSON(object) {
-        return { resource: isSet(object.resource) ? resource_1.Metadata.fromJSON(object.resource) : undefined };
+        return { resource: isSet(object.resource) ? resource_js_1.Metadata.fromJSON(object.resource) : undefined };
     },
     toJSON(message) {
         const obj = {};
-        message.resource !== undefined && (obj.resource = message.resource ? resource_1.Metadata.toJSON(message.resource) : undefined);
+        message.resource !== undefined && (obj.resource = message.resource ? resource_js_1.Metadata.toJSON(message.resource) : undefined);
         return obj;
     },
     create(base) {
@@ -221,12 +221,14 @@ exports.MsgCreateResourceResponse = {
     fromPartial(object) {
         const message = createBaseMsgCreateResourceResponse();
         message.resource = (object.resource !== undefined && object.resource !== null)
-            ? resource_1.Metadata.fromPartial(object.resource)
+            ? resource_js_1.Metadata.fromPartial(object.resource)
             : undefined;
         return message;
     },
 };
 class MsgClientImpl {
+    rpc;
+    service;
     constructor(rpc, opts) {
         this.service = opts?.service || "cheqd.resource.v2.Msg";
         this.rpc = rpc;
@@ -235,7 +237,7 @@ class MsgClientImpl {
     CreateResource(request) {
         const data = exports.MsgCreateResource.encode(request).finish();
         const promise = this.rpc.request(this.service, "CreateResource", data);
-        return promise.then((data) => exports.MsgCreateResourceResponse.decode(new minimal_1.default.Reader(data)));
+        return promise.then((data) => exports.MsgCreateResourceResponse.decode(new minimal_js_1.default.Reader(data)));
     }
 }
 exports.MsgClientImpl = MsgClientImpl;
@@ -279,9 +281,9 @@ function base64FromBytes(arr) {
         return tsProtoGlobalThis.btoa(bin.join(""));
     }
 }
-if (minimal_1.default.util.Long !== long_1.default) {
-    minimal_1.default.util.Long = long_1.default;
-    minimal_1.default.configure();
+if (minimal_js_1.default.util.Long !== long_1.default) {
+    minimal_js_1.default.util.Long = long_1.default;
+    minimal_js_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

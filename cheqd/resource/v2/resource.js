@@ -6,20 +6,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ResourceWithMetadata = exports.AlternativeUri = exports.Metadata = exports.Resource = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
-const minimal_1 = __importDefault(require("protobufjs/minimal"));
-const timestamp_1 = require("../../../google/protobuf/timestamp");
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
+const timestamp_js_1 = require("../../../google/protobuf/timestamp.js");
 function createBaseResource() {
     return { data: new Uint8Array() };
 }
 exports.Resource = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.data.length !== 0) {
             writer.uint32(10).bytes(message.data);
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseResource();
         while (reader.pos < end) {
@@ -69,7 +69,7 @@ function createBaseMetadata() {
     };
 }
 exports.Metadata = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.collectionId !== "") {
             writer.uint32(10).string(message.collectionId);
         }
@@ -92,7 +92,7 @@ exports.Metadata = {
             writer.uint32(58).string(message.mediaType);
         }
         if (message.created !== undefined) {
-            timestamp_1.Timestamp.encode(toTimestamp(message.created), writer.uint32(66).fork()).ldelim();
+            timestamp_js_1.Timestamp.encode(toTimestamp(message.created), writer.uint32(66).fork()).ldelim();
         }
         if (message.checksum !== "") {
             writer.uint32(74).string(message.checksum);
@@ -106,7 +106,7 @@ exports.Metadata = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMetadata();
         while (reader.pos < end) {
@@ -134,7 +134,7 @@ exports.Metadata = {
                     message.mediaType = reader.string();
                     break;
                 case 8:
-                    message.created = fromTimestamp(timestamp_1.Timestamp.decode(reader, reader.uint32()));
+                    message.created = fromTimestamp(timestamp_js_1.Timestamp.decode(reader, reader.uint32()));
                     break;
                 case 9:
                     message.checksum = reader.string();
@@ -212,7 +212,7 @@ function createBaseAlternativeUri() {
     return { uri: "", description: "" };
 }
 exports.AlternativeUri = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.uri !== "") {
             writer.uint32(10).string(message.uri);
         }
@@ -222,7 +222,7 @@ exports.AlternativeUri = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseAlternativeUri();
         while (reader.pos < end) {
@@ -267,7 +267,7 @@ function createBaseResourceWithMetadata() {
     return { resource: undefined, metadata: undefined };
 }
 exports.ResourceWithMetadata = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.resource !== undefined) {
             exports.Resource.encode(message.resource, writer.uint32(10).fork()).ldelim();
         }
@@ -277,7 +277,7 @@ exports.ResourceWithMetadata = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseResourceWithMetadata();
         while (reader.pos < end) {
@@ -363,13 +363,13 @@ function base64FromBytes(arr) {
     }
 }
 function toTimestamp(date) {
-    const seconds = numberToLong(date.getTime() / 1000);
-    const nanos = (date.getTime() % 1000) * 1000000;
+    const seconds = numberToLong(date.getTime() / 1_000);
+    const nanos = (date.getTime() % 1_000) * 1_000_000;
     return { seconds, nanos };
 }
 function fromTimestamp(t) {
-    let millis = t.seconds.toNumber() * 1000;
-    millis += t.nanos / 1000000;
+    let millis = t.seconds.toNumber() * 1_000;
+    millis += t.nanos / 1_000_000;
     return new Date(millis);
 }
 function fromJsonTimestamp(o) {
@@ -380,15 +380,15 @@ function fromJsonTimestamp(o) {
         return new Date(o);
     }
     else {
-        return fromTimestamp(timestamp_1.Timestamp.fromJSON(o));
+        return fromTimestamp(timestamp_js_1.Timestamp.fromJSON(o));
     }
 }
 function numberToLong(number) {
     return long_1.default.fromNumber(number);
 }
-if (minimal_1.default.util.Long !== long_1.default) {
-    minimal_1.default.util.Long = long_1.default;
-    minimal_1.default.configure();
+if (minimal_js_1.default.util.Long !== long_1.default) {
+    minimal_js_1.default.util.Long = long_1.default;
+    minimal_js_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

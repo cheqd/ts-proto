@@ -6,12 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CustomHttpPattern = exports.HttpRule = exports.Http = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
-const minimal_1 = __importDefault(require("protobufjs/minimal"));
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
 function createBaseHttp() {
     return { rules: [], fullyDecodeReservedExpansion: false };
 }
 exports.Http = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         for (const v of message.rules) {
             exports.HttpRule.encode(v, writer.uint32(10).fork()).ldelim();
         }
@@ -21,7 +21,7 @@ exports.Http = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseHttp();
         while (reader.pos < end) {
@@ -85,7 +85,7 @@ function createBaseHttpRule() {
     };
 }
 exports.HttpRule = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.selector !== "") {
             writer.uint32(10).string(message.selector);
         }
@@ -119,7 +119,7 @@ exports.HttpRule = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseHttpRule();
         while (reader.pos < end) {
@@ -222,7 +222,7 @@ function createBaseCustomHttpPattern() {
     return { kind: "", path: "" };
 }
 exports.CustomHttpPattern = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.kind !== "") {
             writer.uint32(10).string(message.kind);
         }
@@ -232,7 +232,7 @@ exports.CustomHttpPattern = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseCustomHttpPattern();
         while (reader.pos < end) {
@@ -270,9 +270,9 @@ exports.CustomHttpPattern = {
         return message;
     },
 };
-if (minimal_1.default.util.Long !== long_1.default) {
-    minimal_1.default.util.Long = long_1.default;
-    minimal_1.default.configure();
+if (minimal_js_1.default.util.Long !== long_1.default) {
+    minimal_js_1.default.util.Long = long_1.default;
+    minimal_js_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

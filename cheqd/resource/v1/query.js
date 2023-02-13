@@ -6,13 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.QueryClientImpl = exports.QueryGetAllResourceVersionsResponse = exports.QueryGetAllResourceVersionsRequest = exports.QueryCollectionResourcesResponse = exports.QueryGetCollectionResourcesRequest = exports.QueryResourceResponse = exports.QueryGetResourceRequest = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
-const minimal_1 = __importDefault(require("protobufjs/minimal"));
-const resource_1 = require("./resource");
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
+const resource_js_1 = require("./resource.js");
 function createBaseQueryGetResourceRequest() {
     return { collectionId: "", id: "" };
 }
 exports.QueryGetResourceRequest = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.collectionId !== "") {
             writer.uint32(10).string(message.collectionId);
         }
@@ -22,7 +22,7 @@ exports.QueryGetResourceRequest = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryGetResourceRequest();
         while (reader.pos < end) {
@@ -67,21 +67,21 @@ function createBaseQueryResourceResponse() {
     return { resource: undefined };
 }
 exports.QueryResourceResponse = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.resource !== undefined) {
-            resource_1.Resource.encode(message.resource, writer.uint32(10).fork()).ldelim();
+            resource_js_1.Resource.encode(message.resource, writer.uint32(10).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryResourceResponse();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.resource = resource_1.Resource.decode(reader, reader.uint32());
+                    message.resource = resource_js_1.Resource.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -91,11 +91,11 @@ exports.QueryResourceResponse = {
         return message;
     },
     fromJSON(object) {
-        return { resource: isSet(object.resource) ? resource_1.Resource.fromJSON(object.resource) : undefined };
+        return { resource: isSet(object.resource) ? resource_js_1.Resource.fromJSON(object.resource) : undefined };
     },
     toJSON(message) {
         const obj = {};
-        message.resource !== undefined && (obj.resource = message.resource ? resource_1.Resource.toJSON(message.resource) : undefined);
+        message.resource !== undefined && (obj.resource = message.resource ? resource_js_1.Resource.toJSON(message.resource) : undefined);
         return obj;
     },
     create(base) {
@@ -104,7 +104,7 @@ exports.QueryResourceResponse = {
     fromPartial(object) {
         const message = createBaseQueryResourceResponse();
         message.resource = (object.resource !== undefined && object.resource !== null)
-            ? resource_1.Resource.fromPartial(object.resource)
+            ? resource_js_1.Resource.fromPartial(object.resource)
             : undefined;
         return message;
     },
@@ -113,14 +113,14 @@ function createBaseQueryGetCollectionResourcesRequest() {
     return { collectionId: "" };
 }
 exports.QueryGetCollectionResourcesRequest = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.collectionId !== "") {
             writer.uint32(10).string(message.collectionId);
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryGetCollectionResourcesRequest();
         while (reader.pos < end) {
@@ -157,21 +157,21 @@ function createBaseQueryCollectionResourcesResponse() {
     return { resources: [] };
 }
 exports.QueryCollectionResourcesResponse = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         for (const v of message.resources) {
-            resource_1.ResourceHeader.encode(v, writer.uint32(10).fork()).ldelim();
+            resource_js_1.ResourceHeader.encode(v, writer.uint32(10).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryCollectionResourcesResponse();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.resources.push(resource_1.ResourceHeader.decode(reader, reader.uint32()));
+                    message.resources.push(resource_js_1.ResourceHeader.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -182,13 +182,13 @@ exports.QueryCollectionResourcesResponse = {
     },
     fromJSON(object) {
         return {
-            resources: Array.isArray(object?.resources) ? object.resources.map((e) => resource_1.ResourceHeader.fromJSON(e)) : [],
+            resources: Array.isArray(object?.resources) ? object.resources.map((e) => resource_js_1.ResourceHeader.fromJSON(e)) : [],
         };
     },
     toJSON(message) {
         const obj = {};
         if (message.resources) {
-            obj.resources = message.resources.map((e) => e ? resource_1.ResourceHeader.toJSON(e) : undefined);
+            obj.resources = message.resources.map((e) => e ? resource_js_1.ResourceHeader.toJSON(e) : undefined);
         }
         else {
             obj.resources = [];
@@ -200,7 +200,7 @@ exports.QueryCollectionResourcesResponse = {
     },
     fromPartial(object) {
         const message = createBaseQueryCollectionResourcesResponse();
-        message.resources = object.resources?.map((e) => resource_1.ResourceHeader.fromPartial(e)) || [];
+        message.resources = object.resources?.map((e) => resource_js_1.ResourceHeader.fromPartial(e)) || [];
         return message;
     },
 };
@@ -208,7 +208,7 @@ function createBaseQueryGetAllResourceVersionsRequest() {
     return { collectionId: "", name: "", resourceType: "" };
 }
 exports.QueryGetAllResourceVersionsRequest = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.collectionId !== "") {
             writer.uint32(10).string(message.collectionId);
         }
@@ -221,7 +221,7 @@ exports.QueryGetAllResourceVersionsRequest = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryGetAllResourceVersionsRequest();
         while (reader.pos < end) {
@@ -272,21 +272,21 @@ function createBaseQueryGetAllResourceVersionsResponse() {
     return { resources: [] };
 }
 exports.QueryGetAllResourceVersionsResponse = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         for (const v of message.resources) {
-            resource_1.ResourceHeader.encode(v, writer.uint32(10).fork()).ldelim();
+            resource_js_1.ResourceHeader.encode(v, writer.uint32(10).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryGetAllResourceVersionsResponse();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.resources.push(resource_1.ResourceHeader.decode(reader, reader.uint32()));
+                    message.resources.push(resource_js_1.ResourceHeader.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -297,13 +297,13 @@ exports.QueryGetAllResourceVersionsResponse = {
     },
     fromJSON(object) {
         return {
-            resources: Array.isArray(object?.resources) ? object.resources.map((e) => resource_1.ResourceHeader.fromJSON(e)) : [],
+            resources: Array.isArray(object?.resources) ? object.resources.map((e) => resource_js_1.ResourceHeader.fromJSON(e)) : [],
         };
     },
     toJSON(message) {
         const obj = {};
         if (message.resources) {
-            obj.resources = message.resources.map((e) => e ? resource_1.ResourceHeader.toJSON(e) : undefined);
+            obj.resources = message.resources.map((e) => e ? resource_js_1.ResourceHeader.toJSON(e) : undefined);
         }
         else {
             obj.resources = [];
@@ -315,11 +315,13 @@ exports.QueryGetAllResourceVersionsResponse = {
     },
     fromPartial(object) {
         const message = createBaseQueryGetAllResourceVersionsResponse();
-        message.resources = object.resources?.map((e) => resource_1.ResourceHeader.fromPartial(e)) || [];
+        message.resources = object.resources?.map((e) => resource_js_1.ResourceHeader.fromPartial(e)) || [];
         return message;
     },
 };
 class QueryClientImpl {
+    rpc;
+    service;
     constructor(rpc, opts) {
         this.service = opts?.service || "cheqdid.cheqdnode.resource.v1.Query";
         this.rpc = rpc;
@@ -330,23 +332,23 @@ class QueryClientImpl {
     Resource(request) {
         const data = exports.QueryGetResourceRequest.encode(request).finish();
         const promise = this.rpc.request(this.service, "Resource", data);
-        return promise.then((data) => exports.QueryResourceResponse.decode(new minimal_1.default.Reader(data)));
+        return promise.then((data) => exports.QueryResourceResponse.decode(new minimal_js_1.default.Reader(data)));
     }
     CollectionResources(request) {
         const data = exports.QueryGetCollectionResourcesRequest.encode(request).finish();
         const promise = this.rpc.request(this.service, "CollectionResources", data);
-        return promise.then((data) => exports.QueryCollectionResourcesResponse.decode(new minimal_1.default.Reader(data)));
+        return promise.then((data) => exports.QueryCollectionResourcesResponse.decode(new minimal_js_1.default.Reader(data)));
     }
     AllResourceVersions(request) {
         const data = exports.QueryGetAllResourceVersionsRequest.encode(request).finish();
         const promise = this.rpc.request(this.service, "AllResourceVersions", data);
-        return promise.then((data) => exports.QueryGetAllResourceVersionsResponse.decode(new minimal_1.default.Reader(data)));
+        return promise.then((data) => exports.QueryGetAllResourceVersionsResponse.decode(new minimal_js_1.default.Reader(data)));
     }
 }
 exports.QueryClientImpl = QueryClientImpl;
-if (minimal_1.default.util.Long !== long_1.default) {
-    minimal_1.default.util.Long = long_1.default;
-    minimal_1.default.configure();
+if (minimal_js_1.default.util.Long !== long_1.default) {
+    minimal_js_1.default.util.Long = long_1.default;
+    minimal_js_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

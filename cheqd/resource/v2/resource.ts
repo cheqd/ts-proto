@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal";
-import { Timestamp } from "../../../google/protobuf/timestamp";
+import _m0 from "protobufjs/minimal.js";
+import { Timestamp } from "../../../google/protobuf/timestamp.js";
 
 /** Resource stores the contents of a DID-Linked Resource */
 export interface Resource {

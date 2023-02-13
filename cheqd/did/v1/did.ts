@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal";
-import { KeyValuePair } from "./common";
+import _m0 from "protobufjs/minimal.js";
+import { KeyValuePair } from "./common.js";
 
 export interface Did {
   /** optional */
