@@ -6,12 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Timestamp = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
-const minimal_1 = __importDefault(require("protobufjs/minimal"));
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
 function createBaseTimestamp() {
     return { seconds: long_1.default.ZERO, nanos: 0 };
 }
 exports.Timestamp = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (!message.seconds.isZero()) {
             writer.uint32(8).int64(message.seconds);
         }
@@ -21,7 +21,7 @@ exports.Timestamp = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseTimestamp();
         while (reader.pos < end) {
@@ -64,9 +64,9 @@ exports.Timestamp = {
         return message;
     },
 };
-if (minimal_1.default.util.Long !== long_1.default) {
-    minimal_1.default.util.Long = long_1.default;
-    minimal_1.default.configure();
+if (minimal_js_1.default.util.Long !== long_1.default) {
+    minimal_js_1.default.util.Long = long_1.default;
+    minimal_js_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

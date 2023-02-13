@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
-const minimal_1 = __importDefault(require("protobufjs/minimal"));
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
 var tsProtoGlobalThis = (() => {
     if (typeof globalThis !== "undefined") {
         return globalThis;
@@ -21,8 +21,8 @@ var tsProtoGlobalThis = (() => {
     }
     throw "Unable to locate global object";
 })();
-if (minimal_1.default.util.Long !== long_1.default) {
-    minimal_1.default.util.Long = long_1.default;
-    minimal_1.default.configure();
+if (minimal_js_1.default.util.Long !== long_1.default) {
+    minimal_js_1.default.util.Long = long_1.default;
+    minimal_js_1.default.configure();
 }
 //# sourceMappingURL=annotations.js.map
