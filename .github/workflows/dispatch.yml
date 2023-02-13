@@ -1,7 +1,5 @@
 name: "Workflow Dispatch"
-on:
-  push:
-  merge_group:
+on: push
 concurrency: 
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
