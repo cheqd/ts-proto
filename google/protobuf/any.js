@@ -1,17 +1,11 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Any = void 0;
 /* eslint-disable */
-const long_1 = __importDefault(require("long"));
-const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
+import Long from "long";
+import _m0 from "protobufjs/minimal.js";
 function createBaseAny() {
     return { typeUrl: "", value: new Uint8Array() };
 }
-exports.Any = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const Any = {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.typeUrl !== "") {
             writer.uint32(10).string(message.typeUrl);
         }
@@ -21,7 +15,7 @@ exports.Any = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseAny();
         while (reader.pos < end) {
@@ -54,7 +48,7 @@ exports.Any = {
         return obj;
     },
     create(base) {
-        return exports.Any.fromPartial(base ?? {});
+        return Any.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseAny();
@@ -103,9 +97,9 @@ function base64FromBytes(arr) {
         return tsProtoGlobalThis.btoa(bin.join(""));
     }
 }
-if (minimal_js_1.default.util.Long !== long_1.default) {
-    minimal_js_1.default.util.Long = long_1.default;
-    minimal_js_1.default.configure();
+if (_m0.util.Long !== Long) {
+    _m0.util.Long = Long;
+    _m0.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

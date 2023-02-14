@@ -1,13 +1,7 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Metadata = exports.DidDocWithMetadata = exports.Service = exports.VerificationMethod = exports.DidDoc = void 0;
 /* eslint-disable */
-const long_1 = __importDefault(require("long"));
-const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
-const timestamp_js_1 = require("../../../google/protobuf/timestamp.js");
+import Long from "long";
+import _m0 from "protobufjs/minimal.js";
+import { Timestamp } from "../../../google/protobuf/timestamp.js";
 function createBaseDidDoc() {
     return {
         context: [],
@@ -23,8 +17,8 @@ function createBaseDidDoc() {
         alsoKnownAs: [],
     };
 }
-exports.DidDoc = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const DidDoc = {
+    encode(message, writer = _m0.Writer.create()) {
         for (const v of message.context) {
             writer.uint32(10).string(v);
         }
@@ -35,7 +29,7 @@ exports.DidDoc = {
             writer.uint32(26).string(v);
         }
         for (const v of message.verificationMethod) {
-            exports.VerificationMethod.encode(v, writer.uint32(34).fork()).ldelim();
+            VerificationMethod.encode(v, writer.uint32(34).fork()).ldelim();
         }
         for (const v of message.authentication) {
             writer.uint32(42).string(v);
@@ -53,7 +47,7 @@ exports.DidDoc = {
             writer.uint32(74).string(v);
         }
         for (const v of message.service) {
-            exports.Service.encode(v, writer.uint32(82).fork()).ldelim();
+            Service.encode(v, writer.uint32(82).fork()).ldelim();
         }
         for (const v of message.alsoKnownAs) {
             writer.uint32(90).string(v);
@@ -61,7 +55,7 @@ exports.DidDoc = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseDidDoc();
         while (reader.pos < end) {
@@ -77,7 +71,7 @@ exports.DidDoc = {
                     message.controller.push(reader.string());
                     break;
                 case 4:
-                    message.verificationMethod.push(exports.VerificationMethod.decode(reader, reader.uint32()));
+                    message.verificationMethod.push(VerificationMethod.decode(reader, reader.uint32()));
                     break;
                 case 5:
                     message.authentication.push(reader.string());
@@ -95,7 +89,7 @@ exports.DidDoc = {
                     message.keyAgreement.push(reader.string());
                     break;
                 case 10:
-                    message.service.push(exports.Service.decode(reader, reader.uint32()));
+                    message.service.push(Service.decode(reader, reader.uint32()));
                     break;
                 case 11:
                     message.alsoKnownAs.push(reader.string());
@@ -113,7 +107,7 @@ exports.DidDoc = {
             id: isSet(object.id) ? String(object.id) : "",
             controller: Array.isArray(object?.controller) ? object.controller.map((e) => String(e)) : [],
             verificationMethod: Array.isArray(object?.verificationMethod)
-                ? object.verificationMethod.map((e) => exports.VerificationMethod.fromJSON(e))
+                ? object.verificationMethod.map((e) => VerificationMethod.fromJSON(e))
                 : [],
             authentication: Array.isArray(object?.authentication) ? object.authentication.map((e) => String(e)) : [],
             assertionMethod: Array.isArray(object?.assertionMethod) ? object.assertionMethod.map((e) => String(e)) : [],
@@ -124,7 +118,7 @@ exports.DidDoc = {
                 ? object.capabilityDelegation.map((e) => String(e))
                 : [],
             keyAgreement: Array.isArray(object?.keyAgreement) ? object.keyAgreement.map((e) => String(e)) : [],
-            service: Array.isArray(object?.service) ? object.service.map((e) => exports.Service.fromJSON(e)) : [],
+            service: Array.isArray(object?.service) ? object.service.map((e) => Service.fromJSON(e)) : [],
             alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e) => String(e)) : [],
         };
     },
@@ -144,7 +138,7 @@ exports.DidDoc = {
             obj.controller = [];
         }
         if (message.verificationMethod) {
-            obj.verificationMethod = message.verificationMethod.map((e) => e ? exports.VerificationMethod.toJSON(e) : undefined);
+            obj.verificationMethod = message.verificationMethod.map((e) => e ? VerificationMethod.toJSON(e) : undefined);
         }
         else {
             obj.verificationMethod = [];
@@ -180,7 +174,7 @@ exports.DidDoc = {
             obj.keyAgreement = [];
         }
         if (message.service) {
-            obj.service = message.service.map((e) => e ? exports.Service.toJSON(e) : undefined);
+            obj.service = message.service.map((e) => e ? Service.toJSON(e) : undefined);
         }
         else {
             obj.service = [];
@@ -194,20 +188,20 @@ exports.DidDoc = {
         return obj;
     },
     create(base) {
-        return exports.DidDoc.fromPartial(base ?? {});
+        return DidDoc.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseDidDoc();
         message.context = object.context?.map((e) => e) || [];
         message.id = object.id ?? "";
         message.controller = object.controller?.map((e) => e) || [];
-        message.verificationMethod = object.verificationMethod?.map((e) => exports.VerificationMethod.fromPartial(e)) || [];
+        message.verificationMethod = object.verificationMethod?.map((e) => VerificationMethod.fromPartial(e)) || [];
         message.authentication = object.authentication?.map((e) => e) || [];
         message.assertionMethod = object.assertionMethod?.map((e) => e) || [];
         message.capabilityInvocation = object.capabilityInvocation?.map((e) => e) || [];
         message.capabilityDelegation = object.capabilityDelegation?.map((e) => e) || [];
         message.keyAgreement = object.keyAgreement?.map((e) => e) || [];
-        message.service = object.service?.map((e) => exports.Service.fromPartial(e)) || [];
+        message.service = object.service?.map((e) => Service.fromPartial(e)) || [];
         message.alsoKnownAs = object.alsoKnownAs?.map((e) => e) || [];
         return message;
     },
@@ -215,8 +209,8 @@ exports.DidDoc = {
 function createBaseVerificationMethod() {
     return { id: "", verificationMethodType: "", controller: "", verificationMaterial: "" };
 }
-exports.VerificationMethod = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const VerificationMethod = {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
@@ -232,7 +226,7 @@ exports.VerificationMethod = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseVerificationMethod();
         while (reader.pos < end) {
@@ -274,7 +268,7 @@ exports.VerificationMethod = {
         return obj;
     },
     create(base) {
-        return exports.VerificationMethod.fromPartial(base ?? {});
+        return VerificationMethod.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseVerificationMethod();
@@ -288,8 +282,8 @@ exports.VerificationMethod = {
 function createBaseService() {
     return { id: "", serviceType: "", serviceEndpoint: [] };
 }
-exports.Service = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const Service = {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
@@ -302,7 +296,7 @@ exports.Service = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseService();
         while (reader.pos < end) {
@@ -344,7 +338,7 @@ exports.Service = {
         return obj;
     },
     create(base) {
-        return exports.Service.fromPartial(base ?? {});
+        return Service.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseService();
@@ -357,28 +351,28 @@ exports.Service = {
 function createBaseDidDocWithMetadata() {
     return { didDoc: undefined, metadata: undefined };
 }
-exports.DidDocWithMetadata = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const DidDocWithMetadata = {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.didDoc !== undefined) {
-            exports.DidDoc.encode(message.didDoc, writer.uint32(10).fork()).ldelim();
+            DidDoc.encode(message.didDoc, writer.uint32(10).fork()).ldelim();
         }
         if (message.metadata !== undefined) {
-            exports.Metadata.encode(message.metadata, writer.uint32(18).fork()).ldelim();
+            Metadata.encode(message.metadata, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseDidDocWithMetadata();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.didDoc = exports.DidDoc.decode(reader, reader.uint32());
+                    message.didDoc = DidDoc.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.metadata = exports.Metadata.decode(reader, reader.uint32());
+                    message.metadata = Metadata.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -389,26 +383,26 @@ exports.DidDocWithMetadata = {
     },
     fromJSON(object) {
         return {
-            didDoc: isSet(object.didDoc) ? exports.DidDoc.fromJSON(object.didDoc) : undefined,
-            metadata: isSet(object.metadata) ? exports.Metadata.fromJSON(object.metadata) : undefined,
+            didDoc: isSet(object.didDoc) ? DidDoc.fromJSON(object.didDoc) : undefined,
+            metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined,
         };
     },
     toJSON(message) {
         const obj = {};
-        message.didDoc !== undefined && (obj.didDoc = message.didDoc ? exports.DidDoc.toJSON(message.didDoc) : undefined);
-        message.metadata !== undefined && (obj.metadata = message.metadata ? exports.Metadata.toJSON(message.metadata) : undefined);
+        message.didDoc !== undefined && (obj.didDoc = message.didDoc ? DidDoc.toJSON(message.didDoc) : undefined);
+        message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
         return obj;
     },
     create(base) {
-        return exports.DidDocWithMetadata.fromPartial(base ?? {});
+        return DidDocWithMetadata.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseDidDocWithMetadata();
         message.didDoc = (object.didDoc !== undefined && object.didDoc !== null)
-            ? exports.DidDoc.fromPartial(object.didDoc)
+            ? DidDoc.fromPartial(object.didDoc)
             : undefined;
         message.metadata = (object.metadata !== undefined && object.metadata !== null)
-            ? exports.Metadata.fromPartial(object.metadata)
+            ? Metadata.fromPartial(object.metadata)
             : undefined;
         return message;
     },
@@ -423,13 +417,13 @@ function createBaseMetadata() {
         previousVersionId: "",
     };
 }
-exports.Metadata = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const Metadata = {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.created !== undefined) {
-            timestamp_js_1.Timestamp.encode(toTimestamp(message.created), writer.uint32(10).fork()).ldelim();
+            Timestamp.encode(toTimestamp(message.created), writer.uint32(10).fork()).ldelim();
         }
         if (message.updated !== undefined) {
-            timestamp_js_1.Timestamp.encode(toTimestamp(message.updated), writer.uint32(18).fork()).ldelim();
+            Timestamp.encode(toTimestamp(message.updated), writer.uint32(18).fork()).ldelim();
         }
         if (message.deactivated === true) {
             writer.uint32(24).bool(message.deactivated);
@@ -446,17 +440,17 @@ exports.Metadata = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMetadata();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.created = fromTimestamp(timestamp_js_1.Timestamp.decode(reader, reader.uint32()));
+                    message.created = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
                     break;
                 case 2:
-                    message.updated = fromTimestamp(timestamp_js_1.Timestamp.decode(reader, reader.uint32()));
+                    message.updated = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
                     break;
                 case 3:
                     message.deactivated = reader.bool();
@@ -498,7 +492,7 @@ exports.Metadata = {
         return obj;
     },
     create(base) {
-        return exports.Metadata.fromPartial(base ?? {});
+        return Metadata.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMetadata();
@@ -529,15 +523,15 @@ function fromJsonTimestamp(o) {
         return new Date(o);
     }
     else {
-        return fromTimestamp(timestamp_js_1.Timestamp.fromJSON(o));
+        return fromTimestamp(Timestamp.fromJSON(o));
     }
 }
 function numberToLong(number) {
-    return long_1.default.fromNumber(number);
+    return Long.fromNumber(number);
 }
-if (minimal_js_1.default.util.Long !== long_1.default) {
-    minimal_js_1.default.util.Long = long_1.default;
-    minimal_js_1.default.configure();
+if (_m0.util.Long !== Long) {
+    _m0.util.Long = Long;
+    _m0.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

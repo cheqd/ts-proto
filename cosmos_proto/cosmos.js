@@ -1,20 +1,14 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ScalarDescriptor = exports.InterfaceDescriptor = exports.scalarTypeToJSON = exports.scalarTypeFromJSON = exports.ScalarType = void 0;
 /* eslint-disable */
-const long_1 = __importDefault(require("long"));
-const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
-var ScalarType;
+import Long from "long";
+import _m0 from "protobufjs/minimal.js";
+export var ScalarType;
 (function (ScalarType) {
     ScalarType[ScalarType["SCALAR_TYPE_UNSPECIFIED"] = 0] = "SCALAR_TYPE_UNSPECIFIED";
     ScalarType[ScalarType["SCALAR_TYPE_STRING"] = 1] = "SCALAR_TYPE_STRING";
     ScalarType[ScalarType["SCALAR_TYPE_BYTES"] = 2] = "SCALAR_TYPE_BYTES";
     ScalarType[ScalarType["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
-})(ScalarType = exports.ScalarType || (exports.ScalarType = {}));
-function scalarTypeFromJSON(object) {
+})(ScalarType || (ScalarType = {}));
+export function scalarTypeFromJSON(object) {
     switch (object) {
         case 0:
         case "SCALAR_TYPE_UNSPECIFIED":
@@ -31,8 +25,7 @@ function scalarTypeFromJSON(object) {
             return ScalarType.UNRECOGNIZED;
     }
 }
-exports.scalarTypeFromJSON = scalarTypeFromJSON;
-function scalarTypeToJSON(object) {
+export function scalarTypeToJSON(object) {
     switch (object) {
         case ScalarType.SCALAR_TYPE_UNSPECIFIED:
             return "SCALAR_TYPE_UNSPECIFIED";
@@ -45,12 +38,11 @@ function scalarTypeToJSON(object) {
             return "UNRECOGNIZED";
     }
 }
-exports.scalarTypeToJSON = scalarTypeToJSON;
 function createBaseInterfaceDescriptor() {
     return { name: "", description: "" };
 }
-exports.InterfaceDescriptor = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const InterfaceDescriptor = {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.name !== "") {
             writer.uint32(10).string(message.name);
         }
@@ -60,7 +52,7 @@ exports.InterfaceDescriptor = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseInterfaceDescriptor();
         while (reader.pos < end) {
@@ -92,7 +84,7 @@ exports.InterfaceDescriptor = {
         return obj;
     },
     create(base) {
-        return exports.InterfaceDescriptor.fromPartial(base ?? {});
+        return InterfaceDescriptor.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseInterfaceDescriptor();
@@ -104,8 +96,8 @@ exports.InterfaceDescriptor = {
 function createBaseScalarDescriptor() {
     return { name: "", description: "", fieldType: [] };
 }
-exports.ScalarDescriptor = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const ScalarDescriptor = {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.name !== "") {
             writer.uint32(10).string(message.name);
         }
@@ -120,7 +112,7 @@ exports.ScalarDescriptor = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseScalarDescriptor();
         while (reader.pos < end) {
@@ -170,7 +162,7 @@ exports.ScalarDescriptor = {
         return obj;
     },
     create(base) {
-        return exports.ScalarDescriptor.fromPartial(base ?? {});
+        return ScalarDescriptor.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseScalarDescriptor();
@@ -180,9 +172,9 @@ exports.ScalarDescriptor = {
         return message;
     },
 };
-if (minimal_js_1.default.util.Long !== long_1.default) {
-    minimal_js_1.default.util.Long = long_1.default;
-    minimal_js_1.default.configure();
+if (_m0.util.Long !== Long) {
+    _m0.util.Long = Long;
+    _m0.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

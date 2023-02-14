@@ -1,26 +1,20 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.QueryClientImpl = exports.QueryGetDidResponse = exports.QueryGetDidRequest = void 0;
 /* eslint-disable */
-const long_1 = __importDefault(require("long"));
-const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
-const did_js_1 = require("./did.js");
-const stateValue_js_1 = require("./stateValue.js");
+import Long from "long";
+import _m0 from "protobufjs/minimal.js";
+import { Did } from "./did.js";
+import { Metadata } from "./stateValue.js";
 function createBaseQueryGetDidRequest() {
     return { id: "" };
 }
-exports.QueryGetDidRequest = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const QueryGetDidRequest = {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryGetDidRequest();
         while (reader.pos < end) {
@@ -45,7 +39,7 @@ exports.QueryGetDidRequest = {
         return obj;
     },
     create(base) {
-        return exports.QueryGetDidRequest.fromPartial(base ?? {});
+        return QueryGetDidRequest.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseQueryGetDidRequest();
@@ -56,28 +50,28 @@ exports.QueryGetDidRequest = {
 function createBaseQueryGetDidResponse() {
     return { did: undefined, metadata: undefined };
 }
-exports.QueryGetDidResponse = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const QueryGetDidResponse = {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.did !== undefined) {
-            did_js_1.Did.encode(message.did, writer.uint32(10).fork()).ldelim();
+            Did.encode(message.did, writer.uint32(10).fork()).ldelim();
         }
         if (message.metadata !== undefined) {
-            stateValue_js_1.Metadata.encode(message.metadata, writer.uint32(18).fork()).ldelim();
+            Metadata.encode(message.metadata, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryGetDidResponse();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.did = did_js_1.Did.decode(reader, reader.uint32());
+                    message.did = Did.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.metadata = stateValue_js_1.Metadata.decode(reader, reader.uint32());
+                    message.metadata = Metadata.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -88,29 +82,29 @@ exports.QueryGetDidResponse = {
     },
     fromJSON(object) {
         return {
-            did: isSet(object.did) ? did_js_1.Did.fromJSON(object.did) : undefined,
-            metadata: isSet(object.metadata) ? stateValue_js_1.Metadata.fromJSON(object.metadata) : undefined,
+            did: isSet(object.did) ? Did.fromJSON(object.did) : undefined,
+            metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined,
         };
     },
     toJSON(message) {
         const obj = {};
-        message.did !== undefined && (obj.did = message.did ? did_js_1.Did.toJSON(message.did) : undefined);
-        message.metadata !== undefined && (obj.metadata = message.metadata ? stateValue_js_1.Metadata.toJSON(message.metadata) : undefined);
+        message.did !== undefined && (obj.did = message.did ? Did.toJSON(message.did) : undefined);
+        message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
         return obj;
     },
     create(base) {
-        return exports.QueryGetDidResponse.fromPartial(base ?? {});
+        return QueryGetDidResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseQueryGetDidResponse();
-        message.did = (object.did !== undefined && object.did !== null) ? did_js_1.Did.fromPartial(object.did) : undefined;
+        message.did = (object.did !== undefined && object.did !== null) ? Did.fromPartial(object.did) : undefined;
         message.metadata = (object.metadata !== undefined && object.metadata !== null)
-            ? stateValue_js_1.Metadata.fromPartial(object.metadata)
+            ? Metadata.fromPartial(object.metadata)
             : undefined;
         return message;
     },
 };
-class QueryClientImpl {
+export class QueryClientImpl {
     rpc;
     service;
     constructor(rpc, opts) {
@@ -119,15 +113,14 @@ class QueryClientImpl {
         this.Did = this.Did.bind(this);
     }
     Did(request) {
-        const data = exports.QueryGetDidRequest.encode(request).finish();
+        const data = QueryGetDidRequest.encode(request).finish();
         const promise = this.rpc.request(this.service, "Did", data);
-        return promise.then((data) => exports.QueryGetDidResponse.decode(new minimal_js_1.default.Reader(data)));
+        return promise.then((data) => QueryGetDidResponse.decode(new _m0.Reader(data)));
     }
 }
-exports.QueryClientImpl = QueryClientImpl;
-if (minimal_js_1.default.util.Long !== long_1.default) {
-    minimal_js_1.default.util.Long = long_1.default;
-    minimal_js_1.default.configure();
+if (_m0.util.Long !== Long) {
+    _m0.util.Long = Long;
+    _m0.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

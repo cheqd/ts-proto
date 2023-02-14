@@ -1,17 +1,11 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.KeyValuePair = void 0;
 /* eslint-disable */
-const long_1 = __importDefault(require("long"));
-const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
+import Long from "long";
+import _m0 from "protobufjs/minimal.js";
 function createBaseKeyValuePair() {
     return { key: "", value: "" };
 }
-exports.KeyValuePair = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const KeyValuePair = {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.key !== "") {
             writer.uint32(10).string(message.key);
         }
@@ -21,7 +15,7 @@ exports.KeyValuePair = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseKeyValuePair();
         while (reader.pos < end) {
@@ -50,7 +44,7 @@ exports.KeyValuePair = {
         return obj;
     },
     create(base) {
-        return exports.KeyValuePair.fromPartial(base ?? {});
+        return KeyValuePair.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseKeyValuePair();
@@ -59,9 +53,9 @@ exports.KeyValuePair = {
         return message;
     },
 };
-if (minimal_js_1.default.util.Long !== long_1.default) {
-    minimal_js_1.default.util.Long = long_1.default;
-    minimal_js_1.default.configure();
+if (_m0.util.Long !== Long) {
+    _m0.util.Long = Long;
+    _m0.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;
