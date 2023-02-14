@@ -1,28 +1,22 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.GenesisState = void 0;
 /* eslint-disable */
-const long_1 = __importDefault(require("long"));
-const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
-const stateValue_js_1 = require("./stateValue.js");
+import Long from "long";
+import _m0 from "protobufjs/minimal.js";
+import { StateValue } from "./stateValue.js";
 function createBaseGenesisState() {
     return { didNamespace: "", didList: [] };
 }
-exports.GenesisState = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const GenesisState = {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.didNamespace !== "") {
             writer.uint32(10).string(message.didNamespace);
         }
         for (const v of message.didList) {
-            stateValue_js_1.StateValue.encode(v, writer.uint32(18).fork()).ldelim();
+            StateValue.encode(v, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseGenesisState();
         while (reader.pos < end) {
@@ -32,7 +26,7 @@ exports.GenesisState = {
                     message.didNamespace = reader.string();
                     break;
                 case 2:
-                    message.didList.push(stateValue_js_1.StateValue.decode(reader, reader.uint32()));
+                    message.didList.push(StateValue.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -44,14 +38,14 @@ exports.GenesisState = {
     fromJSON(object) {
         return {
             didNamespace: isSet(object.didNamespace) ? String(object.didNamespace) : "",
-            didList: Array.isArray(object?.didList) ? object.didList.map((e) => stateValue_js_1.StateValue.fromJSON(e)) : [],
+            didList: Array.isArray(object?.didList) ? object.didList.map((e) => StateValue.fromJSON(e)) : [],
         };
     },
     toJSON(message) {
         const obj = {};
         message.didNamespace !== undefined && (obj.didNamespace = message.didNamespace);
         if (message.didList) {
-            obj.didList = message.didList.map((e) => e ? stateValue_js_1.StateValue.toJSON(e) : undefined);
+            obj.didList = message.didList.map((e) => e ? StateValue.toJSON(e) : undefined);
         }
         else {
             obj.didList = [];
@@ -59,18 +53,18 @@ exports.GenesisState = {
         return obj;
     },
     create(base) {
-        return exports.GenesisState.fromPartial(base ?? {});
+        return GenesisState.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseGenesisState();
         message.didNamespace = object.didNamespace ?? "";
-        message.didList = object.didList?.map((e) => stateValue_js_1.StateValue.fromPartial(e)) || [];
+        message.didList = object.didList?.map((e) => StateValue.fromPartial(e)) || [];
         return message;
     },
 };
-if (minimal_js_1.default.util.Long !== long_1.default) {
-    minimal_js_1.default.util.Long = long_1.default;
-    minimal_js_1.default.configure();
+if (_m0.util.Long !== Long) {
+    _m0.util.Long = Long;
+    _m0.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

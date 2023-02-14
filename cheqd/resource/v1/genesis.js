@@ -1,32 +1,26 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.GenesisState = void 0;
 /* eslint-disable */
-const long_1 = __importDefault(require("long"));
-const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
-const resource_js_1 = require("./resource.js");
+import Long from "long";
+import _m0 from "protobufjs/minimal.js";
+import { Resource } from "./resource.js";
 function createBaseGenesisState() {
     return { resourceList: [] };
 }
-exports.GenesisState = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const GenesisState = {
+    encode(message, writer = _m0.Writer.create()) {
         for (const v of message.resourceList) {
-            resource_js_1.Resource.encode(v, writer.uint32(10).fork()).ldelim();
+            Resource.encode(v, writer.uint32(10).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseGenesisState();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.resourceList.push(resource_js_1.Resource.decode(reader, reader.uint32()));
+                    message.resourceList.push(Resource.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -38,14 +32,14 @@ exports.GenesisState = {
     fromJSON(object) {
         return {
             resourceList: Array.isArray(object?.resourceList)
-                ? object.resourceList.map((e) => resource_js_1.Resource.fromJSON(e))
+                ? object.resourceList.map((e) => Resource.fromJSON(e))
                 : [],
         };
     },
     toJSON(message) {
         const obj = {};
         if (message.resourceList) {
-            obj.resourceList = message.resourceList.map((e) => e ? resource_js_1.Resource.toJSON(e) : undefined);
+            obj.resourceList = message.resourceList.map((e) => e ? Resource.toJSON(e) : undefined);
         }
         else {
             obj.resourceList = [];
@@ -53,16 +47,16 @@ exports.GenesisState = {
         return obj;
     },
     create(base) {
-        return exports.GenesisState.fromPartial(base ?? {});
+        return GenesisState.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseGenesisState();
-        message.resourceList = object.resourceList?.map((e) => resource_js_1.Resource.fromPartial(e)) || [];
+        message.resourceList = object.resourceList?.map((e) => Resource.fromPartial(e)) || [];
         return message;
     },
 };
-if (minimal_js_1.default.util.Long !== long_1.default) {
-    minimal_js_1.default.util.Long = long_1.default;
-    minimal_js_1.default.configure();
+if (_m0.util.Long !== Long) {
+    _m0.util.Long = Long;
+    _m0.configure();
 }
 //# sourceMappingURL=genesis.js.map
