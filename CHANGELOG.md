@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/cheqd/ts-proto/compare/3.0.0...3.1.0) (2023-02-14)
+
+
+### Features
+
+* Switched to `esnext` as default tied latest ([#81](https://github.com/cheqd/ts-proto/issues/81)) ([097ee07](https://github.com/cheqd/ts-proto/commit/097ee0709b9a24c14070dd8282f305da51293dd0))
+
 ## [3.1.0-develop.1](https://github.com/cheqd/ts-proto/compare/3.0.0...3.1.0-develop.1) (2023-02-14)
 
 
