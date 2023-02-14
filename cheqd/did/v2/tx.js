@@ -1,38 +1,32 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.MsgClientImpl = exports.MsgDeactivateDidDocResponse = exports.MsgDeactivateDidDocPayload = exports.MsgUpdateDidDocResponse = exports.MsgUpdateDidDocPayload = exports.MsgCreateDidDocResponse = exports.MsgCreateDidDocPayload = exports.SignInfo = exports.MsgDeactivateDidDoc = exports.MsgUpdateDidDoc = exports.MsgCreateDidDoc = void 0;
 /* eslint-disable */
-const long_1 = __importDefault(require("long"));
-const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
-const diddoc_js_1 = require("./diddoc.js");
+import Long from "long";
+import _m0 from "protobufjs/minimal.js";
+import { DidDocWithMetadata, Service, VerificationMethod } from "./diddoc.js";
 function createBaseMsgCreateDidDoc() {
     return { payload: undefined, signatures: [] };
 }
-exports.MsgCreateDidDoc = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const MsgCreateDidDoc = {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.payload !== undefined) {
-            exports.MsgCreateDidDocPayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
+            MsgCreateDidDocPayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
         }
         for (const v of message.signatures) {
-            exports.SignInfo.encode(v, writer.uint32(18).fork()).ldelim();
+            SignInfo.encode(v, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgCreateDidDoc();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.payload = exports.MsgCreateDidDocPayload.decode(reader, reader.uint32());
+                    message.payload = MsgCreateDidDocPayload.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.signatures.push(exports.SignInfo.decode(reader, reader.uint32()));
+                    message.signatures.push(SignInfo.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -43,16 +37,16 @@ exports.MsgCreateDidDoc = {
     },
     fromJSON(object) {
         return {
-            payload: isSet(object.payload) ? exports.MsgCreateDidDocPayload.fromJSON(object.payload) : undefined,
-            signatures: Array.isArray(object?.signatures) ? object.signatures.map((e) => exports.SignInfo.fromJSON(e)) : [],
+            payload: isSet(object.payload) ? MsgCreateDidDocPayload.fromJSON(object.payload) : undefined,
+            signatures: Array.isArray(object?.signatures) ? object.signatures.map((e) => SignInfo.fromJSON(e)) : [],
         };
     },
     toJSON(message) {
         const obj = {};
         message.payload !== undefined &&
-            (obj.payload = message.payload ? exports.MsgCreateDidDocPayload.toJSON(message.payload) : undefined);
+            (obj.payload = message.payload ? MsgCreateDidDocPayload.toJSON(message.payload) : undefined);
         if (message.signatures) {
-            obj.signatures = message.signatures.map((e) => e ? exports.SignInfo.toJSON(e) : undefined);
+            obj.signatures = message.signatures.map((e) => e ? SignInfo.toJSON(e) : undefined);
         }
         else {
             obj.signatures = [];
@@ -60,42 +54,42 @@ exports.MsgCreateDidDoc = {
         return obj;
     },
     create(base) {
-        return exports.MsgCreateDidDoc.fromPartial(base ?? {});
+        return MsgCreateDidDoc.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgCreateDidDoc();
         message.payload = (object.payload !== undefined && object.payload !== null)
-            ? exports.MsgCreateDidDocPayload.fromPartial(object.payload)
+            ? MsgCreateDidDocPayload.fromPartial(object.payload)
             : undefined;
-        message.signatures = object.signatures?.map((e) => exports.SignInfo.fromPartial(e)) || [];
+        message.signatures = object.signatures?.map((e) => SignInfo.fromPartial(e)) || [];
         return message;
     },
 };
 function createBaseMsgUpdateDidDoc() {
     return { payload: undefined, signatures: [] };
 }
-exports.MsgUpdateDidDoc = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const MsgUpdateDidDoc = {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.payload !== undefined) {
-            exports.MsgUpdateDidDocPayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
+            MsgUpdateDidDocPayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
         }
         for (const v of message.signatures) {
-            exports.SignInfo.encode(v, writer.uint32(18).fork()).ldelim();
+            SignInfo.encode(v, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgUpdateDidDoc();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.payload = exports.MsgUpdateDidDocPayload.decode(reader, reader.uint32());
+                    message.payload = MsgUpdateDidDocPayload.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.signatures.push(exports.SignInfo.decode(reader, reader.uint32()));
+                    message.signatures.push(SignInfo.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -106,16 +100,16 @@ exports.MsgUpdateDidDoc = {
     },
     fromJSON(object) {
         return {
-            payload: isSet(object.payload) ? exports.MsgUpdateDidDocPayload.fromJSON(object.payload) : undefined,
-            signatures: Array.isArray(object?.signatures) ? object.signatures.map((e) => exports.SignInfo.fromJSON(e)) : [],
+            payload: isSet(object.payload) ? MsgUpdateDidDocPayload.fromJSON(object.payload) : undefined,
+            signatures: Array.isArray(object?.signatures) ? object.signatures.map((e) => SignInfo.fromJSON(e)) : [],
         };
     },
     toJSON(message) {
         const obj = {};
         message.payload !== undefined &&
-            (obj.payload = message.payload ? exports.MsgUpdateDidDocPayload.toJSON(message.payload) : undefined);
+            (obj.payload = message.payload ? MsgUpdateDidDocPayload.toJSON(message.payload) : undefined);
         if (message.signatures) {
-            obj.signatures = message.signatures.map((e) => e ? exports.SignInfo.toJSON(e) : undefined);
+            obj.signatures = message.signatures.map((e) => e ? SignInfo.toJSON(e) : undefined);
         }
         else {
             obj.signatures = [];
@@ -123,42 +117,42 @@ exports.MsgUpdateDidDoc = {
         return obj;
     },
     create(base) {
-        return exports.MsgUpdateDidDoc.fromPartial(base ?? {});
+        return MsgUpdateDidDoc.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgUpdateDidDoc();
         message.payload = (object.payload !== undefined && object.payload !== null)
-            ? exports.MsgUpdateDidDocPayload.fromPartial(object.payload)
+            ? MsgUpdateDidDocPayload.fromPartial(object.payload)
             : undefined;
-        message.signatures = object.signatures?.map((e) => exports.SignInfo.fromPartial(e)) || [];
+        message.signatures = object.signatures?.map((e) => SignInfo.fromPartial(e)) || [];
         return message;
     },
 };
 function createBaseMsgDeactivateDidDoc() {
     return { payload: undefined, signatures: [] };
 }
-exports.MsgDeactivateDidDoc = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const MsgDeactivateDidDoc = {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.payload !== undefined) {
-            exports.MsgDeactivateDidDocPayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
+            MsgDeactivateDidDocPayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
         }
         for (const v of message.signatures) {
-            exports.SignInfo.encode(v, writer.uint32(18).fork()).ldelim();
+            SignInfo.encode(v, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgDeactivateDidDoc();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.payload = exports.MsgDeactivateDidDocPayload.decode(reader, reader.uint32());
+                    message.payload = MsgDeactivateDidDocPayload.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.signatures.push(exports.SignInfo.decode(reader, reader.uint32()));
+                    message.signatures.push(SignInfo.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -169,16 +163,16 @@ exports.MsgDeactivateDidDoc = {
     },
     fromJSON(object) {
         return {
-            payload: isSet(object.payload) ? exports.MsgDeactivateDidDocPayload.fromJSON(object.payload) : undefined,
-            signatures: Array.isArray(object?.signatures) ? object.signatures.map((e) => exports.SignInfo.fromJSON(e)) : [],
+            payload: isSet(object.payload) ? MsgDeactivateDidDocPayload.fromJSON(object.payload) : undefined,
+            signatures: Array.isArray(object?.signatures) ? object.signatures.map((e) => SignInfo.fromJSON(e)) : [],
         };
     },
     toJSON(message) {
         const obj = {};
         message.payload !== undefined &&
-            (obj.payload = message.payload ? exports.MsgDeactivateDidDocPayload.toJSON(message.payload) : undefined);
+            (obj.payload = message.payload ? MsgDeactivateDidDocPayload.toJSON(message.payload) : undefined);
         if (message.signatures) {
-            obj.signatures = message.signatures.map((e) => e ? exports.SignInfo.toJSON(e) : undefined);
+            obj.signatures = message.signatures.map((e) => e ? SignInfo.toJSON(e) : undefined);
         }
         else {
             obj.signatures = [];
@@ -186,22 +180,22 @@ exports.MsgDeactivateDidDoc = {
         return obj;
     },
     create(base) {
-        return exports.MsgDeactivateDidDoc.fromPartial(base ?? {});
+        return MsgDeactivateDidDoc.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgDeactivateDidDoc();
         message.payload = (object.payload !== undefined && object.payload !== null)
-            ? exports.MsgDeactivateDidDocPayload.fromPartial(object.payload)
+            ? MsgDeactivateDidDocPayload.fromPartial(object.payload)
             : undefined;
-        message.signatures = object.signatures?.map((e) => exports.SignInfo.fromPartial(e)) || [];
+        message.signatures = object.signatures?.map((e) => SignInfo.fromPartial(e)) || [];
         return message;
     },
 };
 function createBaseSignInfo() {
     return { verificationMethodId: "", signature: new Uint8Array() };
 }
-exports.SignInfo = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const SignInfo = {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.verificationMethodId !== "") {
             writer.uint32(10).string(message.verificationMethodId);
         }
@@ -211,7 +205,7 @@ exports.SignInfo = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseSignInfo();
         while (reader.pos < end) {
@@ -244,7 +238,7 @@ exports.SignInfo = {
         return obj;
     },
     create(base) {
-        return exports.SignInfo.fromPartial(base ?? {});
+        return SignInfo.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseSignInfo();
@@ -269,8 +263,8 @@ function createBaseMsgCreateDidDocPayload() {
         versionId: "",
     };
 }
-exports.MsgCreateDidDocPayload = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const MsgCreateDidDocPayload = {
+    encode(message, writer = _m0.Writer.create()) {
         for (const v of message.context) {
             writer.uint32(10).string(v);
         }
@@ -281,7 +275,7 @@ exports.MsgCreateDidDocPayload = {
             writer.uint32(26).string(v);
         }
         for (const v of message.verificationMethod) {
-            diddoc_js_1.VerificationMethod.encode(v, writer.uint32(34).fork()).ldelim();
+            VerificationMethod.encode(v, writer.uint32(34).fork()).ldelim();
         }
         for (const v of message.authentication) {
             writer.uint32(42).string(v);
@@ -299,7 +293,7 @@ exports.MsgCreateDidDocPayload = {
             writer.uint32(74).string(v);
         }
         for (const v of message.service) {
-            diddoc_js_1.Service.encode(v, writer.uint32(82).fork()).ldelim();
+            Service.encode(v, writer.uint32(82).fork()).ldelim();
         }
         for (const v of message.alsoKnownAs) {
             writer.uint32(90).string(v);
@@ -310,7 +304,7 @@ exports.MsgCreateDidDocPayload = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgCreateDidDocPayload();
         while (reader.pos < end) {
@@ -326,7 +320,7 @@ exports.MsgCreateDidDocPayload = {
                     message.controller.push(reader.string());
                     break;
                 case 4:
-                    message.verificationMethod.push(diddoc_js_1.VerificationMethod.decode(reader, reader.uint32()));
+                    message.verificationMethod.push(VerificationMethod.decode(reader, reader.uint32()));
                     break;
                 case 5:
                     message.authentication.push(reader.string());
@@ -344,7 +338,7 @@ exports.MsgCreateDidDocPayload = {
                     message.keyAgreement.push(reader.string());
                     break;
                 case 10:
-                    message.service.push(diddoc_js_1.Service.decode(reader, reader.uint32()));
+                    message.service.push(Service.decode(reader, reader.uint32()));
                     break;
                 case 11:
                     message.alsoKnownAs.push(reader.string());
@@ -365,7 +359,7 @@ exports.MsgCreateDidDocPayload = {
             id: isSet(object.id) ? String(object.id) : "",
             controller: Array.isArray(object?.controller) ? object.controller.map((e) => String(e)) : [],
             verificationMethod: Array.isArray(object?.verificationMethod)
-                ? object.verificationMethod.map((e) => diddoc_js_1.VerificationMethod.fromJSON(e))
+                ? object.verificationMethod.map((e) => VerificationMethod.fromJSON(e))
                 : [],
             authentication: Array.isArray(object?.authentication) ? object.authentication.map((e) => String(e)) : [],
             assertionMethod: Array.isArray(object?.assertionMethod) ? object.assertionMethod.map((e) => String(e)) : [],
@@ -376,7 +370,7 @@ exports.MsgCreateDidDocPayload = {
                 ? object.capabilityDelegation.map((e) => String(e))
                 : [],
             keyAgreement: Array.isArray(object?.keyAgreement) ? object.keyAgreement.map((e) => String(e)) : [],
-            service: Array.isArray(object?.service) ? object.service.map((e) => diddoc_js_1.Service.fromJSON(e)) : [],
+            service: Array.isArray(object?.service) ? object.service.map((e) => Service.fromJSON(e)) : [],
             alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e) => String(e)) : [],
             versionId: isSet(object.versionId) ? String(object.versionId) : "",
         };
@@ -397,7 +391,7 @@ exports.MsgCreateDidDocPayload = {
             obj.controller = [];
         }
         if (message.verificationMethod) {
-            obj.verificationMethod = message.verificationMethod.map((e) => e ? diddoc_js_1.VerificationMethod.toJSON(e) : undefined);
+            obj.verificationMethod = message.verificationMethod.map((e) => e ? VerificationMethod.toJSON(e) : undefined);
         }
         else {
             obj.verificationMethod = [];
@@ -433,7 +427,7 @@ exports.MsgCreateDidDocPayload = {
             obj.keyAgreement = [];
         }
         if (message.service) {
-            obj.service = message.service.map((e) => e ? diddoc_js_1.Service.toJSON(e) : undefined);
+            obj.service = message.service.map((e) => e ? Service.toJSON(e) : undefined);
         }
         else {
             obj.service = [];
@@ -448,20 +442,20 @@ exports.MsgCreateDidDocPayload = {
         return obj;
     },
     create(base) {
-        return exports.MsgCreateDidDocPayload.fromPartial(base ?? {});
+        return MsgCreateDidDocPayload.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgCreateDidDocPayload();
         message.context = object.context?.map((e) => e) || [];
         message.id = object.id ?? "";
         message.controller = object.controller?.map((e) => e) || [];
-        message.verificationMethod = object.verificationMethod?.map((e) => diddoc_js_1.VerificationMethod.fromPartial(e)) || [];
+        message.verificationMethod = object.verificationMethod?.map((e) => VerificationMethod.fromPartial(e)) || [];
         message.authentication = object.authentication?.map((e) => e) || [];
         message.assertionMethod = object.assertionMethod?.map((e) => e) || [];
         message.capabilityInvocation = object.capabilityInvocation?.map((e) => e) || [];
         message.capabilityDelegation = object.capabilityDelegation?.map((e) => e) || [];
         message.keyAgreement = object.keyAgreement?.map((e) => e) || [];
-        message.service = object.service?.map((e) => diddoc_js_1.Service.fromPartial(e)) || [];
+        message.service = object.service?.map((e) => Service.fromPartial(e)) || [];
         message.alsoKnownAs = object.alsoKnownAs?.map((e) => e) || [];
         message.versionId = object.versionId ?? "";
         return message;
@@ -470,22 +464,22 @@ exports.MsgCreateDidDocPayload = {
 function createBaseMsgCreateDidDocResponse() {
     return { value: undefined };
 }
-exports.MsgCreateDidDocResponse = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const MsgCreateDidDocResponse = {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.value !== undefined) {
-            diddoc_js_1.DidDocWithMetadata.encode(message.value, writer.uint32(10).fork()).ldelim();
+            DidDocWithMetadata.encode(message.value, writer.uint32(10).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgCreateDidDocResponse();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.value = diddoc_js_1.DidDocWithMetadata.decode(reader, reader.uint32());
+                    message.value = DidDocWithMetadata.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -495,20 +489,20 @@ exports.MsgCreateDidDocResponse = {
         return message;
     },
     fromJSON(object) {
-        return { value: isSet(object.value) ? diddoc_js_1.DidDocWithMetadata.fromJSON(object.value) : undefined };
+        return { value: isSet(object.value) ? DidDocWithMetadata.fromJSON(object.value) : undefined };
     },
     toJSON(message) {
         const obj = {};
-        message.value !== undefined && (obj.value = message.value ? diddoc_js_1.DidDocWithMetadata.toJSON(message.value) : undefined);
+        message.value !== undefined && (obj.value = message.value ? DidDocWithMetadata.toJSON(message.value) : undefined);
         return obj;
     },
     create(base) {
-        return exports.MsgCreateDidDocResponse.fromPartial(base ?? {});
+        return MsgCreateDidDocResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgCreateDidDocResponse();
         message.value = (object.value !== undefined && object.value !== null)
-            ? diddoc_js_1.DidDocWithMetadata.fromPartial(object.value)
+            ? DidDocWithMetadata.fromPartial(object.value)
             : undefined;
         return message;
     },
@@ -529,8 +523,8 @@ function createBaseMsgUpdateDidDocPayload() {
         versionId: "",
     };
 }
-exports.MsgUpdateDidDocPayload = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const MsgUpdateDidDocPayload = {
+    encode(message, writer = _m0.Writer.create()) {
         for (const v of message.context) {
             writer.uint32(10).string(v);
         }
@@ -541,7 +535,7 @@ exports.MsgUpdateDidDocPayload = {
             writer.uint32(26).string(v);
         }
         for (const v of message.verificationMethod) {
-            diddoc_js_1.VerificationMethod.encode(v, writer.uint32(34).fork()).ldelim();
+            VerificationMethod.encode(v, writer.uint32(34).fork()).ldelim();
         }
         for (const v of message.authentication) {
             writer.uint32(42).string(v);
@@ -559,7 +553,7 @@ exports.MsgUpdateDidDocPayload = {
             writer.uint32(74).string(v);
         }
         for (const v of message.service) {
-            diddoc_js_1.Service.encode(v, writer.uint32(82).fork()).ldelim();
+            Service.encode(v, writer.uint32(82).fork()).ldelim();
         }
         for (const v of message.alsoKnownAs) {
             writer.uint32(90).string(v);
@@ -570,7 +564,7 @@ exports.MsgUpdateDidDocPayload = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgUpdateDidDocPayload();
         while (reader.pos < end) {
@@ -586,7 +580,7 @@ exports.MsgUpdateDidDocPayload = {
                     message.controller.push(reader.string());
                     break;
                 case 4:
-                    message.verificationMethod.push(diddoc_js_1.VerificationMethod.decode(reader, reader.uint32()));
+                    message.verificationMethod.push(VerificationMethod.decode(reader, reader.uint32()));
                     break;
                 case 5:
                     message.authentication.push(reader.string());
@@ -604,7 +598,7 @@ exports.MsgUpdateDidDocPayload = {
                     message.keyAgreement.push(reader.string());
                     break;
                 case 10:
-                    message.service.push(diddoc_js_1.Service.decode(reader, reader.uint32()));
+                    message.service.push(Service.decode(reader, reader.uint32()));
                     break;
                 case 11:
                     message.alsoKnownAs.push(reader.string());
@@ -625,7 +619,7 @@ exports.MsgUpdateDidDocPayload = {
             id: isSet(object.id) ? String(object.id) : "",
             controller: Array.isArray(object?.controller) ? object.controller.map((e) => String(e)) : [],
             verificationMethod: Array.isArray(object?.verificationMethod)
-                ? object.verificationMethod.map((e) => diddoc_js_1.VerificationMethod.fromJSON(e))
+                ? object.verificationMethod.map((e) => VerificationMethod.fromJSON(e))
                 : [],
             authentication: Array.isArray(object?.authentication) ? object.authentication.map((e) => String(e)) : [],
             assertionMethod: Array.isArray(object?.assertionMethod) ? object.assertionMethod.map((e) => String(e)) : [],
@@ -636,7 +630,7 @@ exports.MsgUpdateDidDocPayload = {
                 ? object.capabilityDelegation.map((e) => String(e))
                 : [],
             keyAgreement: Array.isArray(object?.keyAgreement) ? object.keyAgreement.map((e) => String(e)) : [],
-            service: Array.isArray(object?.service) ? object.service.map((e) => diddoc_js_1.Service.fromJSON(e)) : [],
+            service: Array.isArray(object?.service) ? object.service.map((e) => Service.fromJSON(e)) : [],
             alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e) => String(e)) : [],
             versionId: isSet(object.versionId) ? String(object.versionId) : "",
         };
@@ -657,7 +651,7 @@ exports.MsgUpdateDidDocPayload = {
             obj.controller = [];
         }
         if (message.verificationMethod) {
-            obj.verificationMethod = message.verificationMethod.map((e) => e ? diddoc_js_1.VerificationMethod.toJSON(e) : undefined);
+            obj.verificationMethod = message.verificationMethod.map((e) => e ? VerificationMethod.toJSON(e) : undefined);
         }
         else {
             obj.verificationMethod = [];
@@ -693,7 +687,7 @@ exports.MsgUpdateDidDocPayload = {
             obj.keyAgreement = [];
         }
         if (message.service) {
-            obj.service = message.service.map((e) => e ? diddoc_js_1.Service.toJSON(e) : undefined);
+            obj.service = message.service.map((e) => e ? Service.toJSON(e) : undefined);
         }
         else {
             obj.service = [];
@@ -708,20 +702,20 @@ exports.MsgUpdateDidDocPayload = {
         return obj;
     },
     create(base) {
-        return exports.MsgUpdateDidDocPayload.fromPartial(base ?? {});
+        return MsgUpdateDidDocPayload.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgUpdateDidDocPayload();
         message.context = object.context?.map((e) => e) || [];
         message.id = object.id ?? "";
         message.controller = object.controller?.map((e) => e) || [];
-        message.verificationMethod = object.verificationMethod?.map((e) => diddoc_js_1.VerificationMethod.fromPartial(e)) || [];
+        message.verificationMethod = object.verificationMethod?.map((e) => VerificationMethod.fromPartial(e)) || [];
         message.authentication = object.authentication?.map((e) => e) || [];
         message.assertionMethod = object.assertionMethod?.map((e) => e) || [];
         message.capabilityInvocation = object.capabilityInvocation?.map((e) => e) || [];
         message.capabilityDelegation = object.capabilityDelegation?.map((e) => e) || [];
         message.keyAgreement = object.keyAgreement?.map((e) => e) || [];
-        message.service = object.service?.map((e) => diddoc_js_1.Service.fromPartial(e)) || [];
+        message.service = object.service?.map((e) => Service.fromPartial(e)) || [];
         message.alsoKnownAs = object.alsoKnownAs?.map((e) => e) || [];
         message.versionId = object.versionId ?? "";
         return message;
@@ -730,22 +724,22 @@ exports.MsgUpdateDidDocPayload = {
 function createBaseMsgUpdateDidDocResponse() {
     return { value: undefined };
 }
-exports.MsgUpdateDidDocResponse = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const MsgUpdateDidDocResponse = {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.value !== undefined) {
-            diddoc_js_1.DidDocWithMetadata.encode(message.value, writer.uint32(10).fork()).ldelim();
+            DidDocWithMetadata.encode(message.value, writer.uint32(10).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgUpdateDidDocResponse();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.value = diddoc_js_1.DidDocWithMetadata.decode(reader, reader.uint32());
+                    message.value = DidDocWithMetadata.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -755,20 +749,20 @@ exports.MsgUpdateDidDocResponse = {
         return message;
     },
     fromJSON(object) {
-        return { value: isSet(object.value) ? diddoc_js_1.DidDocWithMetadata.fromJSON(object.value) : undefined };
+        return { value: isSet(object.value) ? DidDocWithMetadata.fromJSON(object.value) : undefined };
     },
     toJSON(message) {
         const obj = {};
-        message.value !== undefined && (obj.value = message.value ? diddoc_js_1.DidDocWithMetadata.toJSON(message.value) : undefined);
+        message.value !== undefined && (obj.value = message.value ? DidDocWithMetadata.toJSON(message.value) : undefined);
         return obj;
     },
     create(base) {
-        return exports.MsgUpdateDidDocResponse.fromPartial(base ?? {});
+        return MsgUpdateDidDocResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgUpdateDidDocResponse();
         message.value = (object.value !== undefined && object.value !== null)
-            ? diddoc_js_1.DidDocWithMetadata.fromPartial(object.value)
+            ? DidDocWithMetadata.fromPartial(object.value)
             : undefined;
         return message;
     },
@@ -776,8 +770,8 @@ exports.MsgUpdateDidDocResponse = {
 function createBaseMsgDeactivateDidDocPayload() {
     return { id: "", versionId: "" };
 }
-exports.MsgDeactivateDidDocPayload = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const MsgDeactivateDidDocPayload = {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
@@ -787,7 +781,7 @@ exports.MsgDeactivateDidDocPayload = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgDeactivateDidDocPayload();
         while (reader.pos < end) {
@@ -819,7 +813,7 @@ exports.MsgDeactivateDidDocPayload = {
         return obj;
     },
     create(base) {
-        return exports.MsgDeactivateDidDocPayload.fromPartial(base ?? {});
+        return MsgDeactivateDidDocPayload.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgDeactivateDidDocPayload();
@@ -831,22 +825,22 @@ exports.MsgDeactivateDidDocPayload = {
 function createBaseMsgDeactivateDidDocResponse() {
     return { value: undefined };
 }
-exports.MsgDeactivateDidDocResponse = {
-    encode(message, writer = minimal_js_1.default.Writer.create()) {
+export const MsgDeactivateDidDocResponse = {
+    encode(message, writer = _m0.Writer.create()) {
         if (message.value !== undefined) {
-            diddoc_js_1.DidDocWithMetadata.encode(message.value, writer.uint32(10).fork()).ldelim();
+            DidDocWithMetadata.encode(message.value, writer.uint32(10).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_js_1.default.Reader ? input : new minimal_js_1.default.Reader(input);
+        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgDeactivateDidDocResponse();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.value = diddoc_js_1.DidDocWithMetadata.decode(reader, reader.uint32());
+                    message.value = DidDocWithMetadata.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -856,25 +850,25 @@ exports.MsgDeactivateDidDocResponse = {
         return message;
     },
     fromJSON(object) {
-        return { value: isSet(object.value) ? diddoc_js_1.DidDocWithMetadata.fromJSON(object.value) : undefined };
+        return { value: isSet(object.value) ? DidDocWithMetadata.fromJSON(object.value) : undefined };
     },
     toJSON(message) {
         const obj = {};
-        message.value !== undefined && (obj.value = message.value ? diddoc_js_1.DidDocWithMetadata.toJSON(message.value) : undefined);
+        message.value !== undefined && (obj.value = message.value ? DidDocWithMetadata.toJSON(message.value) : undefined);
         return obj;
     },
     create(base) {
-        return exports.MsgDeactivateDidDocResponse.fromPartial(base ?? {});
+        return MsgDeactivateDidDocResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgDeactivateDidDocResponse();
         message.value = (object.value !== undefined && object.value !== null)
-            ? diddoc_js_1.DidDocWithMetadata.fromPartial(object.value)
+            ? DidDocWithMetadata.fromPartial(object.value)
             : undefined;
         return message;
     },
 };
-class MsgClientImpl {
+export class MsgClientImpl {
     rpc;
     service;
     constructor(rpc, opts) {
@@ -885,22 +879,21 @@ class MsgClientImpl {
         this.DeactivateDidDoc = this.DeactivateDidDoc.bind(this);
     }
     CreateDidDoc(request) {
-        const data = exports.MsgCreateDidDoc.encode(request).finish();
+        const data = MsgCreateDidDoc.encode(request).finish();
         const promise = this.rpc.request(this.service, "CreateDidDoc", data);
-        return promise.then((data) => exports.MsgCreateDidDocResponse.decode(new minimal_js_1.default.Reader(data)));
+        return promise.then((data) => MsgCreateDidDocResponse.decode(new _m0.Reader(data)));
     }
     UpdateDidDoc(request) {
-        const data = exports.MsgUpdateDidDoc.encode(request).finish();
+        const data = MsgUpdateDidDoc.encode(request).finish();
         const promise = this.rpc.request(this.service, "UpdateDidDoc", data);
-        return promise.then((data) => exports.MsgUpdateDidDocResponse.decode(new minimal_js_1.default.Reader(data)));
+        return promise.then((data) => MsgUpdateDidDocResponse.decode(new _m0.Reader(data)));
     }
     DeactivateDidDoc(request) {
-        const data = exports.MsgDeactivateDidDoc.encode(request).finish();
+        const data = MsgDeactivateDidDoc.encode(request).finish();
         const promise = this.rpc.request(this.service, "DeactivateDidDoc", data);
-        return promise.then((data) => exports.MsgDeactivateDidDocResponse.decode(new minimal_js_1.default.Reader(data)));
+        return promise.then((data) => MsgDeactivateDidDocResponse.decode(new _m0.Reader(data)));
     }
 }
-exports.MsgClientImpl = MsgClientImpl;
 var tsProtoGlobalThis = (() => {
     if (typeof globalThis !== "undefined") {
         return globalThis;
@@ -941,9 +934,9 @@ function base64FromBytes(arr) {
         return tsProtoGlobalThis.btoa(bin.join(""));
     }
 }
-if (minimal_js_1.default.util.Long !== long_1.default) {
-    minimal_js_1.default.util.Long = long_1.default;
-    minimal_js_1.default.configure();
+if (_m0.util.Long !== Long) {
+    _m0.util.Long = Long;
+    _m0.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;
