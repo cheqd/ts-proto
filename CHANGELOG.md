@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.1-develop.1](https://github.com/cheqd/ts-proto/compare/3.1.0...3.1.1-develop.1) (2023-02-15)
+
+
+### Bug Fixes
+
+* Resolved conflicting spaces in md ([db80e2c](https://github.com/cheqd/ts-proto/commit/db80e2c15a3e4aa80173c16a4a36e8fa1623c3ce))
+
 ## [3.1.0](https://github.com/cheqd/ts-proto/compare/3.0.0...3.1.0) (2023-02-14)
 
 

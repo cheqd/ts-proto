@@ -1,6 +1,6 @@
 {
   "name": "@cheqd/ts-proto",
-  "version": "3.1.0",
+  "version": "3.1.1-develop.1",
   "description": "A TypeScript package for all transpiled cheqd ProtoBuf definitions.",
   "main": "index.js",
   "type": "module",
