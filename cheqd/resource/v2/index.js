@@ -1,7 +1,7 @@
-export * from './genesis';
-export * from './query';
-export * from './resource';
-export * from './tx';
-export * from './fee';
+export * from './genesis.js';
+export * from './query.js';
+export * from './resource.js';
+export * from './tx.js';
+export * from './fee.js';
 export const protobufPackage = "cheqd.resource.v2";
 //# sourceMappingURL=index.js.map
