@@ -1,5 +1,7 @@
 # Changelog
 
+## [3.1.3](https://github.com/cheqd/ts-proto/compare/3.1.2...3.1.3) (2023-03-09)
+
 ## [3.1.2](https://github.com/cheqd/ts-proto/compare/3.1.1...3.1.2) (2023-02-20)
 
 
