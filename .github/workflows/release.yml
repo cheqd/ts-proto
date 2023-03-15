@@ -30,7 +30,7 @@ jobs:
           private_key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
 
       - name: "Install buf CLI"
-        uses: bufbuild/buf-setup-action@v1.14.0
+        uses: bufbuild/buf-setup-action@v1.15.1
       
       - name: "Clean install dependencies"
         run: npm ci
