@@ -26,19 +26,24 @@ export const QueryGetDidRequest = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetDidRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGetDidRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.id = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -80,22 +85,31 @@ export const QueryGetDidResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetDidResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGetDidResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.did = Did.decode(reader, reader.uint32());
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.metadata = Metadata.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -144,7 +158,7 @@ export class QueryClientImpl implements Query {
   Did(request: QueryGetDidRequest): Promise<QueryGetDidResponse> {
     const data = QueryGetDidRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "Did", data);
-    return promise.then((data) => QueryGetDidResponse.decode(new _m0.Reader(data)));
+    return promise.then((data) => QueryGetDidResponse.decode(_m0.Reader.create(data)));
   }
 }
 

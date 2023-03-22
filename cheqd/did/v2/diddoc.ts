@@ -219,49 +219,94 @@ export const DidDoc = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): DidDoc {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDidDoc();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.context.push(reader.string());
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.id = reader.string();
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.controller.push(reader.string());
-          break;
+          continue;
         case 4:
+          if (tag != 34) {
+            break;
+          }
+
           message.verificationMethod.push(VerificationMethod.decode(reader, reader.uint32()));
-          break;
+          continue;
         case 5:
+          if (tag != 42) {
+            break;
+          }
+
           message.authentication.push(reader.string());
-          break;
+          continue;
         case 6:
+          if (tag != 50) {
+            break;
+          }
+
           message.assertionMethod.push(reader.string());
-          break;
+          continue;
         case 7:
+          if (tag != 58) {
+            break;
+          }
+
           message.capabilityInvocation.push(reader.string());
-          break;
+          continue;
         case 8:
+          if (tag != 66) {
+            break;
+          }
+
           message.capabilityDelegation.push(reader.string());
-          break;
+          continue;
         case 9:
+          if (tag != 74) {
+            break;
+          }
+
           message.keyAgreement.push(reader.string());
-          break;
+          continue;
         case 10:
+          if (tag != 82) {
+            break;
+          }
+
           message.service.push(Service.decode(reader, reader.uint32()));
-          break;
+          continue;
         case 11:
+          if (tag != 90) {
+            break;
+          }
+
           message.alsoKnownAs.push(reader.string());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -387,28 +432,45 @@ export const VerificationMethod = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): VerificationMethod {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVerificationMethod();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.id = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.verificationMethodType = reader.string();
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.controller = reader.string();
-          break;
+          continue;
         case 4:
+          if (tag != 34) {
+            break;
+          }
+
           message.verificationMaterial = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -464,25 +526,38 @@ export const Service = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Service {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseService();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.id = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.serviceType = reader.string();
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.serviceEndpoint.push(reader.string());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -536,22 +611,31 @@ export const DidDocWithMetadata = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): DidDocWithMetadata {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDidDocWithMetadata();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.didDoc = DidDoc.decode(reader, reader.uint32());
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.metadata = Metadata.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -621,34 +705,59 @@ export const Metadata = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Metadata {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetadata();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.created = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.updated = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          break;
+          continue;
         case 3:
+          if (tag != 24) {
+            break;
+          }
+
           message.deactivated = reader.bool();
-          break;
+          continue;
         case 4:
+          if (tag != 34) {
+            break;
+          }
+
           message.versionId = reader.string();
-          break;
+          continue;
         case 5:
+          if (tag != 42) {
+            break;
+          }
+
           message.nextVersionId = reader.string();
-          break;
+          continue;
         case 6:
+          if (tag != 50) {
+            break;
+          }
+
           message.previousVersionId = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
