@@ -46,22 +46,31 @@ export const QueryGetResourceRequest = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetResourceRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGetResourceRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.collectionId = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.id = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -105,19 +114,24 @@ export const QueryResourceResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryResourceResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryResourceResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.resource = Resource.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -158,19 +172,24 @@ export const QueryGetCollectionResourcesRequest = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetCollectionResourcesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGetCollectionResourcesRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.collectionId = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -213,19 +232,24 @@ export const QueryCollectionResourcesResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryCollectionResourcesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCollectionResourcesResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.resources.push(ResourceHeader.decode(reader, reader.uint32()));
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -280,25 +304,38 @@ export const QueryGetAllResourceVersionsRequest = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetAllResourceVersionsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGetAllResourceVersionsRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.collectionId = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.name = reader.string();
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.resourceType = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -349,19 +386,24 @@ export const QueryGetAllResourceVersionsResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetAllResourceVersionsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGetAllResourceVersionsResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.resources.push(ResourceHeader.decode(reader, reader.uint32()));
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -417,19 +459,19 @@ export class QueryClientImpl implements Query {
   Resource(request: QueryGetResourceRequest): Promise<QueryResourceResponse> {
     const data = QueryGetResourceRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "Resource", data);
-    return promise.then((data) => QueryResourceResponse.decode(new _m0.Reader(data)));
+    return promise.then((data) => QueryResourceResponse.decode(_m0.Reader.create(data)));
   }
 
   CollectionResources(request: QueryGetCollectionResourcesRequest): Promise<QueryCollectionResourcesResponse> {
     const data = QueryGetCollectionResourcesRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "CollectionResources", data);
-    return promise.then((data) => QueryCollectionResourcesResponse.decode(new _m0.Reader(data)));
+    return promise.then((data) => QueryCollectionResourcesResponse.decode(_m0.Reader.create(data)));
   }
 
   AllResourceVersions(request: QueryGetAllResourceVersionsRequest): Promise<QueryGetAllResourceVersionsResponse> {
     const data = QueryGetAllResourceVersionsRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "AllResourceVersions", data);
-    return promise.then((data) => QueryGetAllResourceVersionsResponse.decode(new _m0.Reader(data)));
+    return promise.then((data) => QueryGetAllResourceVersionsResponse.decode(_m0.Reader.create(data)));
   }
 }
 
