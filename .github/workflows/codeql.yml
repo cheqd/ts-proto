@@ -33,6 +33,8 @@ jobs:
       
       - name: "Install buf CLI"
         uses: bufbuild/buf-setup-action@v1.15.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build
         run: |
