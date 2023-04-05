@@ -12,7 +12,7 @@
             "channel": "2.x"
         }
     ],
-    "tagFormat": "${version}",
+    "tagFormat": "${version}-commonjs",
     "ci": true,
     "preset": "conventionalcommits",
     "plugins": [
