@@ -36,6 +36,8 @@ jobs:
 
       - name: "Install buf CLI"
         uses: bufbuild/buf-setup-action@v1.15.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Generate TypeScript code for Protobufs
         run: buf generate buf.build/cheqd/proto
