@@ -1,5 +1,42 @@
 # Changelog
 
+## 1.0.0 (2023-04-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* Transition to ESM exports (#79)
+* Add support for cheqd/proto v2 [DEV-2154] (#69)
+
+### Features
+
+* Add support for cheqd/proto v2 [DEV-2154] ([#69](https://github.com/cheqd/ts-proto/issues/69)) ([e3d7b37](https://github.com/cheqd/ts-proto/commit/e3d7b37b60eed21a0155bfa16eb71db4aed10741))
+* Revert to commonjs ([5e6d72d](https://github.com/cheqd/ts-proto/commit/5e6d72dbc87cf5bac59d7506912f9b7d94b87338))
+* Switched to `esnext` as default tied latest ([#81](https://github.com/cheqd/ts-proto/issues/81)) ([097ee07](https://github.com/cheqd/ts-proto/commit/097ee0709b9a24c14070dd8282f305da51293dd0))
+* TS proto stubs ([bcd9c91](https://github.com/cheqd/ts-proto/commit/bcd9c91f493a87bca59a9d84d1b918be4e58ce86))
+
+
+### Bug Fixes
+
+* Build options in package.json and tsconfig ([097590b](https://github.com/cheqd/ts-proto/commit/097590b7d1a137f048c9921615d199379432680b))
+* Bump dependencies ([4ebe43b](https://github.com/cheqd/ts-proto/commit/4ebe43b826044e98f96ee0d2b88f0a1640e14772))
+* **ci:** Restore cheqd-bot token ([d90cbf8](https://github.com/cheqd/ts-proto/commit/d90cbf85a5cf7b41bc0552d3e84d9a3cfcaac873))
+* Move Dependabot to correct location ([0e629cf](https://github.com/cheqd/ts-proto/commit/0e629cf00827beea030731da6b3dc2a1e48e717a))
+* Regenerate protobufs ([e36a1b9](https://github.com/cheqd/ts-proto/commit/e36a1b9963f686d92ef872ebc25dfe3ac42c1fbf))
+* Regenerate protobufs ([9ea84fe](https://github.com/cheqd/ts-proto/commit/9ea84fe75fea6da75680081675b2841fd4877534))
+* **release:** Added loosely type checked build ([36e4edc](https://github.com/cheqd/ts-proto/commit/36e4edc9fd7bd819b1495e2a8e5583e7219b8da9))
+* **release:** Added separate output build dir ([7e1da0b](https://github.com/cheqd/ts-proto/commit/7e1da0b702cdd356ddb5b04876edaba44e4efb8a))
+* **release:** Including pre-built `js` files ([40fd636](https://github.com/cheqd/ts-proto/commit/40fd636ada1273d155088ea16fd09f4ac9ce05d6))
+* **release:** Reverted incomplete release from partial branch ([65ee39d](https://github.com/cheqd/ts-proto/commit/65ee39d625ae6d31f969f3ba076cb56e1751b665))
+* **release:** Switched to strict type check build & removed separate output dir ([a522542](https://github.com/cheqd/ts-proto/commit/a522542b1dfef1b404bf440afa89cca1ec67437c))
+* Resolved conflicting spaces in md ([db80e2c](https://github.com/cheqd/ts-proto/commit/db80e2c15a3e4aa80173c16a4a36e8fa1623c3ce))
+* Set correct value for releaserc scope ([52996b8](https://github.com/cheqd/ts-proto/commit/52996b87675343956bee79c33dc9966ab0d89b71))
+
+
+### Build System
+
+* Transition to ESM exports ([#79](https://github.com/cheqd/ts-proto/issues/79)) ([d0a59cc](https://github.com/cheqd/ts-proto/commit/d0a59cc03306e6e91184d226868ef2ce5ce66c1c))
+
 ## [3.1.4](https://github.com/cheqd/ts-proto/compare/3.1.3...3.1.4) (2023-03-15)
 
 ## [3.1.4-develop.1](https://github.com/cheqd/ts-proto/compare/3.1.3...3.1.4-develop.1) (2023-03-15)
