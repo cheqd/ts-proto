@@ -2,10 +2,6 @@
 
 ## [3.1.5-develop.1](https://github.com/cheqd/ts-proto/compare/3.1.4...3.1.5-develop.1) (2023-04-05)
 
-## [3.1.5-develop.1](https://github.com/cheqd/ts-proto/compare/3.1.4...3.1.5-develop.1) (2023-04-05)
-
-## [3.1.5-develop.1](https://github.com/cheqd/ts-proto/compare/3.1.4...3.1.5-develop.1) (2023-03-22)
-
 ## [3.1.4](https://github.com/cheqd/ts-proto/compare/3.1.3...3.1.4) (2023-03-15)
 
 ## [3.1.4-develop.1](https://github.com/cheqd/ts-proto/compare/3.1.3...3.1.4-develop.1) (2023-03-15)
