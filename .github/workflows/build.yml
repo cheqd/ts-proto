@@ -20,7 +20,7 @@ jobs:
           cache-dependency-path: '**/package-lock.json'
 
       - name: "Install buf CLI"
-        uses: bufbuild/buf-setup-action@v1.15.1
+        uses: bufbuild/buf-setup-action@v1.16.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
     
