@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal.js";
-import { Resource, ResourceHeader } from "./resource.js";
+import _m0 from "protobufjs/minimal";
+import { Resource, ResourceHeader } from "./resource";
 
 export interface QueryGetResourceRequest {
   collectionId: string;

@@ -1,8 +1,8 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal.js";
-import { DidDocWithMetadata } from "./diddoc.js";
-import { FeeParams } from "./fee.js";
+import _m0 from "protobufjs/minimal";
+import { DidDocWithMetadata } from "./diddoc";
+import { FeeParams } from "./fee";
 
 /**
  * DidDocVersionSet contains all versions of DID Documents and their metadata for a given DID.

@@ -1,11 +1,17 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PageResponse = exports.PageRequest = void 0;
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal.js";
+const long_1 = __importDefault(require("long"));
+const minimal_1 = __importDefault(require("protobufjs/minimal"));
 function createBasePageRequest() {
-    return { key: new Uint8Array(), offset: Long.UZERO, limit: Long.UZERO, countTotal: false, reverse: false };
+    return { key: new Uint8Array(), offset: long_1.default.UZERO, limit: long_1.default.UZERO, countTotal: false, reverse: false };
 }
-export const PageRequest = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.PageRequest = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.key.length !== 0) {
             writer.uint32(10).bytes(message.key);
         }
@@ -24,7 +30,7 @@ export const PageRequest = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBasePageRequest();
         while (reader.pos < end) {
@@ -55,8 +61,8 @@ export const PageRequest = {
     fromJSON(object) {
         return {
             key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-            offset: isSet(object.offset) ? Long.fromValue(object.offset) : Long.UZERO,
-            limit: isSet(object.limit) ? Long.fromValue(object.limit) : Long.UZERO,
+            offset: isSet(object.offset) ? long_1.default.fromValue(object.offset) : long_1.default.UZERO,
+            limit: isSet(object.limit) ? long_1.default.fromValue(object.limit) : long_1.default.UZERO,
             countTotal: isSet(object.countTotal) ? Boolean(object.countTotal) : false,
             reverse: isSet(object.reverse) ? Boolean(object.reverse) : false,
         };
@@ -65,32 +71,32 @@ export const PageRequest = {
         const obj = {};
         message.key !== undefined &&
             (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-        message.offset !== undefined && (obj.offset = (message.offset || Long.UZERO).toString());
-        message.limit !== undefined && (obj.limit = (message.limit || Long.UZERO).toString());
+        message.offset !== undefined && (obj.offset = (message.offset || long_1.default.UZERO).toString());
+        message.limit !== undefined && (obj.limit = (message.limit || long_1.default.UZERO).toString());
         message.countTotal !== undefined && (obj.countTotal = message.countTotal);
         message.reverse !== undefined && (obj.reverse = message.reverse);
         return obj;
     },
     create(base) {
-        return PageRequest.fromPartial(base ?? {});
+        return exports.PageRequest.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBasePageRequest();
         message.key = object.key ?? new Uint8Array();
         message.offset = (object.offset !== undefined && object.offset !== null)
-            ? Long.fromValue(object.offset)
-            : Long.UZERO;
-        message.limit = (object.limit !== undefined && object.limit !== null) ? Long.fromValue(object.limit) : Long.UZERO;
+            ? long_1.default.fromValue(object.offset)
+            : long_1.default.UZERO;
+        message.limit = (object.limit !== undefined && object.limit !== null) ? long_1.default.fromValue(object.limit) : long_1.default.UZERO;
         message.countTotal = object.countTotal ?? false;
         message.reverse = object.reverse ?? false;
         return message;
     },
 };
 function createBasePageResponse() {
-    return { nextKey: new Uint8Array(), total: Long.UZERO };
+    return { nextKey: new Uint8Array(), total: long_1.default.UZERO };
 }
-export const PageResponse = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.PageResponse = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.nextKey.length !== 0) {
             writer.uint32(10).bytes(message.nextKey);
         }
@@ -100,7 +106,7 @@ export const PageResponse = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBasePageResponse();
         while (reader.pos < end) {
@@ -122,23 +128,23 @@ export const PageResponse = {
     fromJSON(object) {
         return {
             nextKey: isSet(object.nextKey) ? bytesFromBase64(object.nextKey) : new Uint8Array(),
-            total: isSet(object.total) ? Long.fromValue(object.total) : Long.UZERO,
+            total: isSet(object.total) ? long_1.default.fromValue(object.total) : long_1.default.UZERO,
         };
     },
     toJSON(message) {
         const obj = {};
         message.nextKey !== undefined &&
             (obj.nextKey = base64FromBytes(message.nextKey !== undefined ? message.nextKey : new Uint8Array()));
-        message.total !== undefined && (obj.total = (message.total || Long.UZERO).toString());
+        message.total !== undefined && (obj.total = (message.total || long_1.default.UZERO).toString());
         return obj;
     },
     create(base) {
-        return PageResponse.fromPartial(base ?? {});
+        return exports.PageResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBasePageResponse();
         message.nextKey = object.nextKey ?? new Uint8Array();
-        message.total = (object.total !== undefined && object.total !== null) ? Long.fromValue(object.total) : Long.UZERO;
+        message.total = (object.total !== undefined && object.total !== null) ? long_1.default.fromValue(object.total) : long_1.default.UZERO;
         return message;
     },
 };
@@ -182,9 +188,9 @@ function base64FromBytes(arr) {
         return tsProtoGlobalThis.btoa(bin.join(""));
     }
 }
-if (_m0.util.Long !== Long) {
-    _m0.util.Long = Long;
-    _m0.configure();
+if (minimal_1.default.util.Long !== long_1.default) {
+    minimal_1.default.util.Long = long_1.default;
+    minimal_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

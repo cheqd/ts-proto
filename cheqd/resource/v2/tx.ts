@@ -1,8 +1,8 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal.js";
-import { SignInfo } from "../../did/v2/tx.js";
-import { AlternativeUri, Metadata } from "./resource.js";
+import _m0 from "protobufjs/minimal";
+import { SignInfo } from "../../did/v2/tx";
+import { AlternativeUri, Metadata } from "./resource";
 
 /**
  * MsgCreateResource defines the Msg/CreateResource request type.

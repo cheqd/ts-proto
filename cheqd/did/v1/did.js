@@ -1,7 +1,13 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Service = exports.VerificationMethod = exports.Did = void 0;
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal.js";
-import { KeyValuePair } from "./common.js";
+const long_1 = __importDefault(require("long"));
+const minimal_1 = __importDefault(require("protobufjs/minimal"));
+const common_1 = require("./common");
 function createBaseDid() {
     return {
         context: [],
@@ -17,8 +23,8 @@ function createBaseDid() {
         alsoKnownAs: [],
     };
 }
-export const Did = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.Did = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         for (const v of message.context) {
             writer.uint32(10).string(v);
         }
@@ -29,7 +35,7 @@ export const Did = {
             writer.uint32(26).string(v);
         }
         for (const v of message.verificationMethod) {
-            VerificationMethod.encode(v, writer.uint32(34).fork()).ldelim();
+            exports.VerificationMethod.encode(v, writer.uint32(34).fork()).ldelim();
         }
         for (const v of message.authentication) {
             writer.uint32(42).string(v);
@@ -47,7 +53,7 @@ export const Did = {
             writer.uint32(74).string(v);
         }
         for (const v of message.service) {
-            Service.encode(v, writer.uint32(82).fork()).ldelim();
+            exports.Service.encode(v, writer.uint32(82).fork()).ldelim();
         }
         for (const v of message.alsoKnownAs) {
             writer.uint32(90).string(v);
@@ -55,7 +61,7 @@ export const Did = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseDid();
         while (reader.pos < end) {
@@ -71,7 +77,7 @@ export const Did = {
                     message.controller.push(reader.string());
                     break;
                 case 4:
-                    message.verificationMethod.push(VerificationMethod.decode(reader, reader.uint32()));
+                    message.verificationMethod.push(exports.VerificationMethod.decode(reader, reader.uint32()));
                     break;
                 case 5:
                     message.authentication.push(reader.string());
@@ -89,7 +95,7 @@ export const Did = {
                     message.keyAgreement.push(reader.string());
                     break;
                 case 10:
-                    message.service.push(Service.decode(reader, reader.uint32()));
+                    message.service.push(exports.Service.decode(reader, reader.uint32()));
                     break;
                 case 11:
                     message.alsoKnownAs.push(reader.string());
@@ -107,7 +113,7 @@ export const Did = {
             id: isSet(object.id) ? String(object.id) : "",
             controller: Array.isArray(object?.controller) ? object.controller.map((e) => String(e)) : [],
             verificationMethod: Array.isArray(object?.verificationMethod)
-                ? object.verificationMethod.map((e) => VerificationMethod.fromJSON(e))
+                ? object.verificationMethod.map((e) => exports.VerificationMethod.fromJSON(e))
                 : [],
             authentication: Array.isArray(object?.authentication) ? object.authentication.map((e) => String(e)) : [],
             assertionMethod: Array.isArray(object?.assertionMethod) ? object.assertionMethod.map((e) => String(e)) : [],
@@ -118,7 +124,7 @@ export const Did = {
                 ? object.capabilityDelegation.map((e) => String(e))
                 : [],
             keyAgreement: Array.isArray(object?.keyAgreement) ? object.keyAgreement.map((e) => String(e)) : [],
-            service: Array.isArray(object?.service) ? object.service.map((e) => Service.fromJSON(e)) : [],
+            service: Array.isArray(object?.service) ? object.service.map((e) => exports.Service.fromJSON(e)) : [],
             alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e) => String(e)) : [],
         };
     },
@@ -138,7 +144,7 @@ export const Did = {
             obj.controller = [];
         }
         if (message.verificationMethod) {
-            obj.verificationMethod = message.verificationMethod.map((e) => e ? VerificationMethod.toJSON(e) : undefined);
+            obj.verificationMethod = message.verificationMethod.map((e) => e ? exports.VerificationMethod.toJSON(e) : undefined);
         }
         else {
             obj.verificationMethod = [];
@@ -174,7 +180,7 @@ export const Did = {
             obj.keyAgreement = [];
         }
         if (message.service) {
-            obj.service = message.service.map((e) => e ? Service.toJSON(e) : undefined);
+            obj.service = message.service.map((e) => e ? exports.Service.toJSON(e) : undefined);
         }
         else {
             obj.service = [];
@@ -188,20 +194,20 @@ export const Did = {
         return obj;
     },
     create(base) {
-        return Did.fromPartial(base ?? {});
+        return exports.Did.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseDid();
         message.context = object.context?.map((e) => e) || [];
         message.id = object.id ?? "";
         message.controller = object.controller?.map((e) => e) || [];
-        message.verificationMethod = object.verificationMethod?.map((e) => VerificationMethod.fromPartial(e)) || [];
+        message.verificationMethod = object.verificationMethod?.map((e) => exports.VerificationMethod.fromPartial(e)) || [];
         message.authentication = object.authentication?.map((e) => e) || [];
         message.assertionMethod = object.assertionMethod?.map((e) => e) || [];
         message.capabilityInvocation = object.capabilityInvocation?.map((e) => e) || [];
         message.capabilityDelegation = object.capabilityDelegation?.map((e) => e) || [];
         message.keyAgreement = object.keyAgreement?.map((e) => e) || [];
-        message.service = object.service?.map((e) => Service.fromPartial(e)) || [];
+        message.service = object.service?.map((e) => exports.Service.fromPartial(e)) || [];
         message.alsoKnownAs = object.alsoKnownAs?.map((e) => e) || [];
         return message;
     },
@@ -209,8 +215,8 @@ export const Did = {
 function createBaseVerificationMethod() {
     return { id: "", type: "", controller: "", publicKeyJwk: [], publicKeyMultibase: "" };
 }
-export const VerificationMethod = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.VerificationMethod = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
@@ -221,7 +227,7 @@ export const VerificationMethod = {
             writer.uint32(26).string(message.controller);
         }
         for (const v of message.publicKeyJwk) {
-            KeyValuePair.encode(v, writer.uint32(34).fork()).ldelim();
+            common_1.KeyValuePair.encode(v, writer.uint32(34).fork()).ldelim();
         }
         if (message.publicKeyMultibase !== "") {
             writer.uint32(42).string(message.publicKeyMultibase);
@@ -229,7 +235,7 @@ export const VerificationMethod = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseVerificationMethod();
         while (reader.pos < end) {
@@ -245,7 +251,7 @@ export const VerificationMethod = {
                     message.controller = reader.string();
                     break;
                 case 4:
-                    message.publicKeyJwk.push(KeyValuePair.decode(reader, reader.uint32()));
+                    message.publicKeyJwk.push(common_1.KeyValuePair.decode(reader, reader.uint32()));
                     break;
                 case 5:
                     message.publicKeyMultibase = reader.string();
@@ -263,7 +269,7 @@ export const VerificationMethod = {
             type: isSet(object.type) ? String(object.type) : "",
             controller: isSet(object.controller) ? String(object.controller) : "",
             publicKeyJwk: Array.isArray(object?.publicKeyJwk)
-                ? object.publicKeyJwk.map((e) => KeyValuePair.fromJSON(e))
+                ? object.publicKeyJwk.map((e) => common_1.KeyValuePair.fromJSON(e))
                 : [],
             publicKeyMultibase: isSet(object.publicKeyMultibase) ? String(object.publicKeyMultibase) : "",
         };
@@ -274,7 +280,7 @@ export const VerificationMethod = {
         message.type !== undefined && (obj.type = message.type);
         message.controller !== undefined && (obj.controller = message.controller);
         if (message.publicKeyJwk) {
-            obj.publicKeyJwk = message.publicKeyJwk.map((e) => e ? KeyValuePair.toJSON(e) : undefined);
+            obj.publicKeyJwk = message.publicKeyJwk.map((e) => e ? common_1.KeyValuePair.toJSON(e) : undefined);
         }
         else {
             obj.publicKeyJwk = [];
@@ -283,14 +289,14 @@ export const VerificationMethod = {
         return obj;
     },
     create(base) {
-        return VerificationMethod.fromPartial(base ?? {});
+        return exports.VerificationMethod.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseVerificationMethod();
         message.id = object.id ?? "";
         message.type = object.type ?? "";
         message.controller = object.controller ?? "";
-        message.publicKeyJwk = object.publicKeyJwk?.map((e) => KeyValuePair.fromPartial(e)) || [];
+        message.publicKeyJwk = object.publicKeyJwk?.map((e) => common_1.KeyValuePair.fromPartial(e)) || [];
         message.publicKeyMultibase = object.publicKeyMultibase ?? "";
         return message;
     },
@@ -298,8 +304,8 @@ export const VerificationMethod = {
 function createBaseService() {
     return { id: "", type: "", serviceEndpoint: "" };
 }
-export const Service = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.Service = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
@@ -312,7 +318,7 @@ export const Service = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseService();
         while (reader.pos < end) {
@@ -349,7 +355,7 @@ export const Service = {
         return obj;
     },
     create(base) {
-        return Service.fromPartial(base ?? {});
+        return exports.Service.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseService();
@@ -359,9 +365,9 @@ export const Service = {
         return message;
     },
 };
-if (_m0.util.Long !== Long) {
-    _m0.util.Long = Long;
-    _m0.configure();
+if (minimal_1.default.util.Long !== long_1.default) {
+    minimal_1.default.util.Long = long_1.default;
+    minimal_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

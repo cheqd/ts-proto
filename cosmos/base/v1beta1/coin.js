@@ -1,11 +1,17 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DecProto = exports.IntProto = exports.DecCoin = exports.Coin = void 0;
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal.js";
+const long_1 = __importDefault(require("long"));
+const minimal_1 = __importDefault(require("protobufjs/minimal"));
 function createBaseCoin() {
     return { denom: "", amount: "" };
 }
-export const Coin = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.Coin = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.denom !== "") {
             writer.uint32(10).string(message.denom);
         }
@@ -15,7 +21,7 @@ export const Coin = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseCoin();
         while (reader.pos < end) {
@@ -47,7 +53,7 @@ export const Coin = {
         return obj;
     },
     create(base) {
-        return Coin.fromPartial(base ?? {});
+        return exports.Coin.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseCoin();
@@ -59,8 +65,8 @@ export const Coin = {
 function createBaseDecCoin() {
     return { denom: "", amount: "" };
 }
-export const DecCoin = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.DecCoin = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.denom !== "") {
             writer.uint32(10).string(message.denom);
         }
@@ -70,7 +76,7 @@ export const DecCoin = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseDecCoin();
         while (reader.pos < end) {
@@ -102,7 +108,7 @@ export const DecCoin = {
         return obj;
     },
     create(base) {
-        return DecCoin.fromPartial(base ?? {});
+        return exports.DecCoin.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseDecCoin();
@@ -114,15 +120,15 @@ export const DecCoin = {
 function createBaseIntProto() {
     return { int: "" };
 }
-export const IntProto = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.IntProto = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.int !== "") {
             writer.uint32(10).string(message.int);
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseIntProto();
         while (reader.pos < end) {
@@ -147,7 +153,7 @@ export const IntProto = {
         return obj;
     },
     create(base) {
-        return IntProto.fromPartial(base ?? {});
+        return exports.IntProto.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseIntProto();
@@ -158,15 +164,15 @@ export const IntProto = {
 function createBaseDecProto() {
     return { dec: "" };
 }
-export const DecProto = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.DecProto = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.dec !== "") {
             writer.uint32(10).string(message.dec);
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseDecProto();
         while (reader.pos < end) {
@@ -191,7 +197,7 @@ export const DecProto = {
         return obj;
     },
     create(base) {
-        return DecProto.fromPartial(base ?? {});
+        return exports.DecProto.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseDecProto();
@@ -199,9 +205,9 @@ export const DecProto = {
         return message;
     },
 };
-if (_m0.util.Long !== Long) {
-    _m0.util.Long = Long;
-    _m0.configure();
+if (minimal_1.default.util.Long !== long_1.default) {
+    minimal_1.default.util.Long = long_1.default;
+    minimal_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

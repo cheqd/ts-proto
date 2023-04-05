@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal.js";
-import { Timestamp } from "../../../google/protobuf/timestamp.js";
+import _m0 from "protobufjs/minimal";
+import { Timestamp } from "../../../google/protobuf/timestamp";
 
 /**
  * DidDoc defines a DID Document, as defined in the DID Core specification.

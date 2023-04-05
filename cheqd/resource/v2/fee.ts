@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal.js";
-import { Coin } from "../../../cosmos/base/v1beta1/coin.js";
+import _m0 from "protobufjs/minimal";
+import { Coin } from "../../../cosmos/base/v1beta1/coin";
 
 /**
  * FeeParams defines the parameters for the cheqd Resource module fixed fee.
