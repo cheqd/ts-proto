@@ -101,19 +101,24 @@ export const QueryDidDocRequest = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryDidDocRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDidDocRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.id = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -152,19 +157,24 @@ export const QueryDidDocResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryDidDocResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDidDocResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.value = DidDocWithMetadata.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -208,22 +218,31 @@ export const QueryDidDocVersionRequest = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryDidDocVersionRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDidDocVersionRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.id = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.version = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -267,19 +286,24 @@ export const QueryDidDocVersionResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryDidDocVersionResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDidDocVersionResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.value = DidDocWithMetadata.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -323,22 +347,31 @@ export const QueryAllDidDocVersionsMetadataRequest = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllDidDocVersionsMetadataRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllDidDocVersionsMetadataRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.id = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.pagination = PageRequest.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -392,22 +425,31 @@ export const QueryAllDidDocVersionsMetadataResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllDidDocVersionsMetadataResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllDidDocVersionsMetadataResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.versions.push(Metadata.decode(reader, reader.uint32()));
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.pagination = PageResponse.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -474,13 +516,13 @@ export class QueryClientImpl implements Query {
   DidDoc(request: QueryDidDocRequest): Promise<QueryDidDocResponse> {
     const data = QueryDidDocRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "DidDoc", data);
-    return promise.then((data) => QueryDidDocResponse.decode(new _m0.Reader(data)));
+    return promise.then((data) => QueryDidDocResponse.decode(_m0.Reader.create(data)));
   }
 
   DidDocVersion(request: QueryDidDocVersionRequest): Promise<QueryDidDocVersionResponse> {
     const data = QueryDidDocVersionRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "DidDocVersion", data);
-    return promise.then((data) => QueryDidDocVersionResponse.decode(new _m0.Reader(data)));
+    return promise.then((data) => QueryDidDocVersionResponse.decode(_m0.Reader.create(data)));
   }
 
   AllDidDocVersionsMetadata(
@@ -488,7 +530,7 @@ export class QueryClientImpl implements Query {
   ): Promise<QueryAllDidDocVersionsMetadataResponse> {
     const data = QueryAllDidDocVersionsMetadataRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "AllDidDocVersionsMetadata", data);
-    return promise.then((data) => QueryAllDidDocVersionsMetadataResponse.decode(new _m0.Reader(data)));
+    return promise.then((data) => QueryAllDidDocVersionsMetadataResponse.decode(_m0.Reader.create(data)));
   }
 }
 

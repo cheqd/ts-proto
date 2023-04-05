@@ -60,22 +60,29 @@ exports.InterfaceDescriptor = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseInterfaceDescriptor();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
+                    if (tag != 10) {
+                        break;
+                    }
                     message.name = reader.string();
-                    break;
+                    continue;
                 case 2:
+                    if (tag != 18) {
+                        break;
+                    }
                     message.description = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    continue;
             }
+            if ((tag & 7) == 4 || tag == 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
         }
         return message;
     },
@@ -120,33 +127,42 @@ exports.ScalarDescriptor = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseScalarDescriptor();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
+                    if (tag != 10) {
+                        break;
+                    }
                     message.name = reader.string();
-                    break;
+                    continue;
                 case 2:
+                    if (tag != 18) {
+                        break;
+                    }
                     message.description = reader.string();
-                    break;
+                    continue;
                 case 3:
-                    if ((tag & 7) === 2) {
+                    if (tag == 24) {
+                        message.fieldType.push(reader.int32());
+                        continue;
+                    }
+                    if (tag == 26) {
                         const end2 = reader.uint32() + reader.pos;
                         while (reader.pos < end2) {
                             message.fieldType.push(reader.int32());
                         }
+                        continue;
                     }
-                    else {
-                        message.fieldType.push(reader.int32());
-                    }
-                    break;
-                default:
-                    reader.skipType(tag & 7);
                     break;
             }
+            if ((tag & 7) == 4 || tag == 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
         }
         return message;
     },
