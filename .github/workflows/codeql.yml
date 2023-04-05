@@ -32,7 +32,9 @@ jobs:
           queries: security-and-quality
       
       - name: "Install buf CLI"
-        uses: bufbuild/buf-setup-action@v1.14.0
+        uses: bufbuild/buf-setup-action@v1.16.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build
         run: |
