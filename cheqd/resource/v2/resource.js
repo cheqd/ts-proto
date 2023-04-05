@@ -1,19 +1,25 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ResourceWithMetadata = exports.AlternativeUri = exports.Metadata = exports.Resource = void 0;
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal.js";
-import { Timestamp } from "../../../google/protobuf/timestamp.js";
+const long_1 = __importDefault(require("long"));
+const minimal_1 = __importDefault(require("protobufjs/minimal"));
+const timestamp_1 = require("../../../google/protobuf/timestamp");
 function createBaseResource() {
     return { data: new Uint8Array() };
 }
-export const Resource = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.Resource = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.data.length !== 0) {
             writer.uint32(10).bytes(message.data);
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseResource();
         while (reader.pos < end) {
@@ -39,7 +45,7 @@ export const Resource = {
         return obj;
     },
     create(base) {
-        return Resource.fromPartial(base ?? {});
+        return exports.Resource.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseResource();
@@ -62,8 +68,8 @@ function createBaseMetadata() {
         nextVersionId: "",
     };
 }
-export const Metadata = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.Metadata = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.collectionId !== "") {
             writer.uint32(10).string(message.collectionId);
         }
@@ -80,13 +86,13 @@ export const Metadata = {
             writer.uint32(42).string(message.resourceType);
         }
         for (const v of message.alsoKnownAs) {
-            AlternativeUri.encode(v, writer.uint32(50).fork()).ldelim();
+            exports.AlternativeUri.encode(v, writer.uint32(50).fork()).ldelim();
         }
         if (message.mediaType !== "") {
             writer.uint32(58).string(message.mediaType);
         }
         if (message.created !== undefined) {
-            Timestamp.encode(toTimestamp(message.created), writer.uint32(66).fork()).ldelim();
+            timestamp_1.Timestamp.encode(toTimestamp(message.created), writer.uint32(66).fork()).ldelim();
         }
         if (message.checksum !== "") {
             writer.uint32(74).string(message.checksum);
@@ -100,7 +106,7 @@ export const Metadata = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMetadata();
         while (reader.pos < end) {
@@ -122,13 +128,13 @@ export const Metadata = {
                     message.resourceType = reader.string();
                     break;
                 case 6:
-                    message.alsoKnownAs.push(AlternativeUri.decode(reader, reader.uint32()));
+                    message.alsoKnownAs.push(exports.AlternativeUri.decode(reader, reader.uint32()));
                     break;
                 case 7:
                     message.mediaType = reader.string();
                     break;
                 case 8:
-                    message.created = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+                    message.created = fromTimestamp(timestamp_1.Timestamp.decode(reader, reader.uint32()));
                     break;
                 case 9:
                     message.checksum = reader.string();
@@ -154,7 +160,7 @@ export const Metadata = {
             version: isSet(object.version) ? String(object.version) : "",
             resourceType: isSet(object.resourceType) ? String(object.resourceType) : "",
             alsoKnownAs: Array.isArray(object?.alsoKnownAs)
-                ? object.alsoKnownAs.map((e) => AlternativeUri.fromJSON(e))
+                ? object.alsoKnownAs.map((e) => exports.AlternativeUri.fromJSON(e))
                 : [],
             mediaType: isSet(object.mediaType) ? String(object.mediaType) : "",
             created: isSet(object.created) ? fromJsonTimestamp(object.created) : undefined,
@@ -171,7 +177,7 @@ export const Metadata = {
         message.version !== undefined && (obj.version = message.version);
         message.resourceType !== undefined && (obj.resourceType = message.resourceType);
         if (message.alsoKnownAs) {
-            obj.alsoKnownAs = message.alsoKnownAs.map((e) => e ? AlternativeUri.toJSON(e) : undefined);
+            obj.alsoKnownAs = message.alsoKnownAs.map((e) => e ? exports.AlternativeUri.toJSON(e) : undefined);
         }
         else {
             obj.alsoKnownAs = [];
@@ -184,7 +190,7 @@ export const Metadata = {
         return obj;
     },
     create(base) {
-        return Metadata.fromPartial(base ?? {});
+        return exports.Metadata.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMetadata();
@@ -193,7 +199,7 @@ export const Metadata = {
         message.name = object.name ?? "";
         message.version = object.version ?? "";
         message.resourceType = object.resourceType ?? "";
-        message.alsoKnownAs = object.alsoKnownAs?.map((e) => AlternativeUri.fromPartial(e)) || [];
+        message.alsoKnownAs = object.alsoKnownAs?.map((e) => exports.AlternativeUri.fromPartial(e)) || [];
         message.mediaType = object.mediaType ?? "";
         message.created = object.created ?? undefined;
         message.checksum = object.checksum ?? "";
@@ -205,8 +211,8 @@ export const Metadata = {
 function createBaseAlternativeUri() {
     return { uri: "", description: "" };
 }
-export const AlternativeUri = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.AlternativeUri = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.uri !== "") {
             writer.uint32(10).string(message.uri);
         }
@@ -216,7 +222,7 @@ export const AlternativeUri = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseAlternativeUri();
         while (reader.pos < end) {
@@ -248,7 +254,7 @@ export const AlternativeUri = {
         return obj;
     },
     create(base) {
-        return AlternativeUri.fromPartial(base ?? {});
+        return exports.AlternativeUri.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseAlternativeUri();
@@ -260,28 +266,28 @@ export const AlternativeUri = {
 function createBaseResourceWithMetadata() {
     return { resource: undefined, metadata: undefined };
 }
-export const ResourceWithMetadata = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.ResourceWithMetadata = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.resource !== undefined) {
-            Resource.encode(message.resource, writer.uint32(10).fork()).ldelim();
+            exports.Resource.encode(message.resource, writer.uint32(10).fork()).ldelim();
         }
         if (message.metadata !== undefined) {
-            Metadata.encode(message.metadata, writer.uint32(18).fork()).ldelim();
+            exports.Metadata.encode(message.metadata, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseResourceWithMetadata();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.resource = Resource.decode(reader, reader.uint32());
+                    message.resource = exports.Resource.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.metadata = Metadata.decode(reader, reader.uint32());
+                    message.metadata = exports.Metadata.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -292,26 +298,26 @@ export const ResourceWithMetadata = {
     },
     fromJSON(object) {
         return {
-            resource: isSet(object.resource) ? Resource.fromJSON(object.resource) : undefined,
-            metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined,
+            resource: isSet(object.resource) ? exports.Resource.fromJSON(object.resource) : undefined,
+            metadata: isSet(object.metadata) ? exports.Metadata.fromJSON(object.metadata) : undefined,
         };
     },
     toJSON(message) {
         const obj = {};
-        message.resource !== undefined && (obj.resource = message.resource ? Resource.toJSON(message.resource) : undefined);
-        message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
+        message.resource !== undefined && (obj.resource = message.resource ? exports.Resource.toJSON(message.resource) : undefined);
+        message.metadata !== undefined && (obj.metadata = message.metadata ? exports.Metadata.toJSON(message.metadata) : undefined);
         return obj;
     },
     create(base) {
-        return ResourceWithMetadata.fromPartial(base ?? {});
+        return exports.ResourceWithMetadata.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseResourceWithMetadata();
         message.resource = (object.resource !== undefined && object.resource !== null)
-            ? Resource.fromPartial(object.resource)
+            ? exports.Resource.fromPartial(object.resource)
             : undefined;
         message.metadata = (object.metadata !== undefined && object.metadata !== null)
-            ? Metadata.fromPartial(object.metadata)
+            ? exports.Metadata.fromPartial(object.metadata)
             : undefined;
         return message;
     },
@@ -357,13 +363,13 @@ function base64FromBytes(arr) {
     }
 }
 function toTimestamp(date) {
-    const seconds = numberToLong(date.getTime() / 1_000);
-    const nanos = (date.getTime() % 1_000) * 1_000_000;
+    const seconds = numberToLong(date.getTime() / 1000);
+    const nanos = (date.getTime() % 1000) * 1000000;
     return { seconds, nanos };
 }
 function fromTimestamp(t) {
-    let millis = t.seconds.toNumber() * 1_000;
-    millis += t.nanos / 1_000_000;
+    let millis = t.seconds.toNumber() * 1000;
+    millis += t.nanos / 1000000;
     return new Date(millis);
 }
 function fromJsonTimestamp(o) {
@@ -374,15 +380,15 @@ function fromJsonTimestamp(o) {
         return new Date(o);
     }
     else {
-        return fromTimestamp(Timestamp.fromJSON(o));
+        return fromTimestamp(timestamp_1.Timestamp.fromJSON(o));
     }
 }
 function numberToLong(number) {
-    return Long.fromNumber(number);
+    return long_1.default.fromNumber(number);
 }
-if (_m0.util.Long !== Long) {
-    _m0.util.Long = Long;
-    _m0.configure();
+if (minimal_1.default.util.Long !== long_1.default) {
+    minimal_1.default.util.Long = long_1.default;
+    minimal_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

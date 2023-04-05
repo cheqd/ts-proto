@@ -1,11 +1,17 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Timestamp = void 0;
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal.js";
+const long_1 = __importDefault(require("long"));
+const minimal_1 = __importDefault(require("protobufjs/minimal"));
 function createBaseTimestamp() {
-    return { seconds: Long.ZERO, nanos: 0 };
+    return { seconds: long_1.default.ZERO, nanos: 0 };
 }
-export const Timestamp = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.Timestamp = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (!message.seconds.isZero()) {
             writer.uint32(8).int64(message.seconds);
         }
@@ -15,7 +21,7 @@ export const Timestamp = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseTimestamp();
         while (reader.pos < end) {
@@ -36,31 +42,31 @@ export const Timestamp = {
     },
     fromJSON(object) {
         return {
-            seconds: isSet(object.seconds) ? Long.fromValue(object.seconds) : Long.ZERO,
+            seconds: isSet(object.seconds) ? long_1.default.fromValue(object.seconds) : long_1.default.ZERO,
             nanos: isSet(object.nanos) ? Number(object.nanos) : 0,
         };
     },
     toJSON(message) {
         const obj = {};
-        message.seconds !== undefined && (obj.seconds = (message.seconds || Long.ZERO).toString());
+        message.seconds !== undefined && (obj.seconds = (message.seconds || long_1.default.ZERO).toString());
         message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
         return obj;
     },
     create(base) {
-        return Timestamp.fromPartial(base ?? {});
+        return exports.Timestamp.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseTimestamp();
         message.seconds = (object.seconds !== undefined && object.seconds !== null)
-            ? Long.fromValue(object.seconds)
-            : Long.ZERO;
+            ? long_1.default.fromValue(object.seconds)
+            : long_1.default.ZERO;
         message.nanos = object.nanos ?? 0;
         return message;
     },
 };
-if (_m0.util.Long !== Long) {
-    _m0.util.Long = Long;
-    _m0.configure();
+if (minimal_1.default.util.Long !== long_1.default) {
+    minimal_1.default.util.Long = long_1.default;
+    minimal_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

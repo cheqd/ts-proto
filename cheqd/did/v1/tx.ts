@@ -1,8 +1,8 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal.js";
-import { Did, Service, VerificationMethod } from "./did.js";
-import { Metadata } from "./stateValue.js";
+import _m0 from "protobufjs/minimal";
+import { Did, Service, VerificationMethod } from "./did";
+import { Metadata } from "./stateValue";
 
 /** this line is used by starport scaffolding # proto/tx/message */
 export interface MsgCreateDid {

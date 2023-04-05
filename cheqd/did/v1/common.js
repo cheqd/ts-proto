@@ -1,11 +1,17 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.KeyValuePair = void 0;
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal.js";
+const long_1 = __importDefault(require("long"));
+const minimal_1 = __importDefault(require("protobufjs/minimal"));
 function createBaseKeyValuePair() {
     return { key: "", value: "" };
 }
-export const KeyValuePair = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.KeyValuePair = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.key !== "") {
             writer.uint32(10).string(message.key);
         }
@@ -15,7 +21,7 @@ export const KeyValuePair = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseKeyValuePair();
         while (reader.pos < end) {
@@ -44,7 +50,7 @@ export const KeyValuePair = {
         return obj;
     },
     create(base) {
-        return KeyValuePair.fromPartial(base ?? {});
+        return exports.KeyValuePair.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseKeyValuePair();
@@ -53,9 +59,9 @@ export const KeyValuePair = {
         return message;
     },
 };
-if (_m0.util.Long !== Long) {
-    _m0.util.Long = Long;
-    _m0.configure();
+if (minimal_1.default.util.Long !== long_1.default) {
+    minimal_1.default.util.Long = long_1.default;
+    minimal_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

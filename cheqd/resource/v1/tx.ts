@@ -1,8 +1,8 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal.js";
-import { SignInfo } from "../../did/v1/tx.js";
-import { Resource } from "./resource.js";
+import _m0 from "protobufjs/minimal";
+import { SignInfo } from "../../did/v1/tx";
+import { Resource } from "./resource";
 
 /** this line is used by starport scaffolding # proto/tx/message */
 export interface MsgCreateResource {

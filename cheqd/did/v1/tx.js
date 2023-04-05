@@ -1,33 +1,39 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MsgClientImpl = exports.MsgUpdateDidResponse = exports.MsgUpdateDidPayload = exports.MsgCreateDidResponse = exports.MsgCreateDidPayload = exports.MsgDeactivateDidResponse = exports.MsgDeactivateDidPayload = exports.SignInfo = exports.MsgDeactivateDid = exports.MsgUpdateDid = exports.MsgCreateDid = void 0;
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal.js";
-import { Did, Service, VerificationMethod } from "./did.js";
-import { Metadata } from "./stateValue.js";
+const long_1 = __importDefault(require("long"));
+const minimal_1 = __importDefault(require("protobufjs/minimal"));
+const did_1 = require("./did");
+const stateValue_1 = require("./stateValue");
 function createBaseMsgCreateDid() {
     return { payload: undefined, signatures: [] };
 }
-export const MsgCreateDid = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.MsgCreateDid = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.payload !== undefined) {
-            MsgCreateDidPayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
+            exports.MsgCreateDidPayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
         }
         for (const v of message.signatures) {
-            SignInfo.encode(v, writer.uint32(18).fork()).ldelim();
+            exports.SignInfo.encode(v, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgCreateDid();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.payload = MsgCreateDidPayload.decode(reader, reader.uint32());
+                    message.payload = exports.MsgCreateDidPayload.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.signatures.push(SignInfo.decode(reader, reader.uint32()));
+                    message.signatures.push(exports.SignInfo.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -38,16 +44,16 @@ export const MsgCreateDid = {
     },
     fromJSON(object) {
         return {
-            payload: isSet(object.payload) ? MsgCreateDidPayload.fromJSON(object.payload) : undefined,
-            signatures: Array.isArray(object?.signatures) ? object.signatures.map((e) => SignInfo.fromJSON(e)) : [],
+            payload: isSet(object.payload) ? exports.MsgCreateDidPayload.fromJSON(object.payload) : undefined,
+            signatures: Array.isArray(object?.signatures) ? object.signatures.map((e) => exports.SignInfo.fromJSON(e)) : [],
         };
     },
     toJSON(message) {
         const obj = {};
         message.payload !== undefined &&
-            (obj.payload = message.payload ? MsgCreateDidPayload.toJSON(message.payload) : undefined);
+            (obj.payload = message.payload ? exports.MsgCreateDidPayload.toJSON(message.payload) : undefined);
         if (message.signatures) {
-            obj.signatures = message.signatures.map((e) => e ? SignInfo.toJSON(e) : undefined);
+            obj.signatures = message.signatures.map((e) => e ? exports.SignInfo.toJSON(e) : undefined);
         }
         else {
             obj.signatures = [];
@@ -55,42 +61,42 @@ export const MsgCreateDid = {
         return obj;
     },
     create(base) {
-        return MsgCreateDid.fromPartial(base ?? {});
+        return exports.MsgCreateDid.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgCreateDid();
         message.payload = (object.payload !== undefined && object.payload !== null)
-            ? MsgCreateDidPayload.fromPartial(object.payload)
+            ? exports.MsgCreateDidPayload.fromPartial(object.payload)
             : undefined;
-        message.signatures = object.signatures?.map((e) => SignInfo.fromPartial(e)) || [];
+        message.signatures = object.signatures?.map((e) => exports.SignInfo.fromPartial(e)) || [];
         return message;
     },
 };
 function createBaseMsgUpdateDid() {
     return { payload: undefined, signatures: [] };
 }
-export const MsgUpdateDid = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.MsgUpdateDid = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.payload !== undefined) {
-            MsgUpdateDidPayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
+            exports.MsgUpdateDidPayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
         }
         for (const v of message.signatures) {
-            SignInfo.encode(v, writer.uint32(18).fork()).ldelim();
+            exports.SignInfo.encode(v, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgUpdateDid();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.payload = MsgUpdateDidPayload.decode(reader, reader.uint32());
+                    message.payload = exports.MsgUpdateDidPayload.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.signatures.push(SignInfo.decode(reader, reader.uint32()));
+                    message.signatures.push(exports.SignInfo.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -101,16 +107,16 @@ export const MsgUpdateDid = {
     },
     fromJSON(object) {
         return {
-            payload: isSet(object.payload) ? MsgUpdateDidPayload.fromJSON(object.payload) : undefined,
-            signatures: Array.isArray(object?.signatures) ? object.signatures.map((e) => SignInfo.fromJSON(e)) : [],
+            payload: isSet(object.payload) ? exports.MsgUpdateDidPayload.fromJSON(object.payload) : undefined,
+            signatures: Array.isArray(object?.signatures) ? object.signatures.map((e) => exports.SignInfo.fromJSON(e)) : [],
         };
     },
     toJSON(message) {
         const obj = {};
         message.payload !== undefined &&
-            (obj.payload = message.payload ? MsgUpdateDidPayload.toJSON(message.payload) : undefined);
+            (obj.payload = message.payload ? exports.MsgUpdateDidPayload.toJSON(message.payload) : undefined);
         if (message.signatures) {
-            obj.signatures = message.signatures.map((e) => e ? SignInfo.toJSON(e) : undefined);
+            obj.signatures = message.signatures.map((e) => e ? exports.SignInfo.toJSON(e) : undefined);
         }
         else {
             obj.signatures = [];
@@ -118,42 +124,42 @@ export const MsgUpdateDid = {
         return obj;
     },
     create(base) {
-        return MsgUpdateDid.fromPartial(base ?? {});
+        return exports.MsgUpdateDid.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgUpdateDid();
         message.payload = (object.payload !== undefined && object.payload !== null)
-            ? MsgUpdateDidPayload.fromPartial(object.payload)
+            ? exports.MsgUpdateDidPayload.fromPartial(object.payload)
             : undefined;
-        message.signatures = object.signatures?.map((e) => SignInfo.fromPartial(e)) || [];
+        message.signatures = object.signatures?.map((e) => exports.SignInfo.fromPartial(e)) || [];
         return message;
     },
 };
 function createBaseMsgDeactivateDid() {
     return { payload: undefined, signatures: [] };
 }
-export const MsgDeactivateDid = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.MsgDeactivateDid = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.payload !== undefined) {
-            MsgDeactivateDidPayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
+            exports.MsgDeactivateDidPayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
         }
         for (const v of message.signatures) {
-            SignInfo.encode(v, writer.uint32(18).fork()).ldelim();
+            exports.SignInfo.encode(v, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgDeactivateDid();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.payload = MsgDeactivateDidPayload.decode(reader, reader.uint32());
+                    message.payload = exports.MsgDeactivateDidPayload.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.signatures.push(SignInfo.decode(reader, reader.uint32()));
+                    message.signatures.push(exports.SignInfo.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -164,16 +170,16 @@ export const MsgDeactivateDid = {
     },
     fromJSON(object) {
         return {
-            payload: isSet(object.payload) ? MsgDeactivateDidPayload.fromJSON(object.payload) : undefined,
-            signatures: Array.isArray(object?.signatures) ? object.signatures.map((e) => SignInfo.fromJSON(e)) : [],
+            payload: isSet(object.payload) ? exports.MsgDeactivateDidPayload.fromJSON(object.payload) : undefined,
+            signatures: Array.isArray(object?.signatures) ? object.signatures.map((e) => exports.SignInfo.fromJSON(e)) : [],
         };
     },
     toJSON(message) {
         const obj = {};
         message.payload !== undefined &&
-            (obj.payload = message.payload ? MsgDeactivateDidPayload.toJSON(message.payload) : undefined);
+            (obj.payload = message.payload ? exports.MsgDeactivateDidPayload.toJSON(message.payload) : undefined);
         if (message.signatures) {
-            obj.signatures = message.signatures.map((e) => e ? SignInfo.toJSON(e) : undefined);
+            obj.signatures = message.signatures.map((e) => e ? exports.SignInfo.toJSON(e) : undefined);
         }
         else {
             obj.signatures = [];
@@ -181,22 +187,22 @@ export const MsgDeactivateDid = {
         return obj;
     },
     create(base) {
-        return MsgDeactivateDid.fromPartial(base ?? {});
+        return exports.MsgDeactivateDid.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgDeactivateDid();
         message.payload = (object.payload !== undefined && object.payload !== null)
-            ? MsgDeactivateDidPayload.fromPartial(object.payload)
+            ? exports.MsgDeactivateDidPayload.fromPartial(object.payload)
             : undefined;
-        message.signatures = object.signatures?.map((e) => SignInfo.fromPartial(e)) || [];
+        message.signatures = object.signatures?.map((e) => exports.SignInfo.fromPartial(e)) || [];
         return message;
     },
 };
 function createBaseSignInfo() {
     return { verificationMethodId: "", signature: "" };
 }
-export const SignInfo = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.SignInfo = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.verificationMethodId !== "") {
             writer.uint32(10).string(message.verificationMethodId);
         }
@@ -206,7 +212,7 @@ export const SignInfo = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseSignInfo();
         while (reader.pos < end) {
@@ -238,7 +244,7 @@ export const SignInfo = {
         return obj;
     },
     create(base) {
-        return SignInfo.fromPartial(base ?? {});
+        return exports.SignInfo.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseSignInfo();
@@ -250,15 +256,15 @@ export const SignInfo = {
 function createBaseMsgDeactivateDidPayload() {
     return { id: "" };
 }
-export const MsgDeactivateDidPayload = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.MsgDeactivateDidPayload = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgDeactivateDidPayload();
         while (reader.pos < end) {
@@ -283,7 +289,7 @@ export const MsgDeactivateDidPayload = {
         return obj;
     },
     create(base) {
-        return MsgDeactivateDidPayload.fromPartial(base ?? {});
+        return exports.MsgDeactivateDidPayload.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgDeactivateDidPayload();
@@ -294,28 +300,28 @@ export const MsgDeactivateDidPayload = {
 function createBaseMsgDeactivateDidResponse() {
     return { did: undefined, metadata: undefined };
 }
-export const MsgDeactivateDidResponse = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.MsgDeactivateDidResponse = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.did !== undefined) {
-            Did.encode(message.did, writer.uint32(10).fork()).ldelim();
+            did_1.Did.encode(message.did, writer.uint32(10).fork()).ldelim();
         }
         if (message.metadata !== undefined) {
-            Metadata.encode(message.metadata, writer.uint32(18).fork()).ldelim();
+            stateValue_1.Metadata.encode(message.metadata, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgDeactivateDidResponse();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.did = Did.decode(reader, reader.uint32());
+                    message.did = did_1.Did.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.metadata = Metadata.decode(reader, reader.uint32());
+                    message.metadata = stateValue_1.Metadata.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -326,24 +332,24 @@ export const MsgDeactivateDidResponse = {
     },
     fromJSON(object) {
         return {
-            did: isSet(object.did) ? Did.fromJSON(object.did) : undefined,
-            metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined,
+            did: isSet(object.did) ? did_1.Did.fromJSON(object.did) : undefined,
+            metadata: isSet(object.metadata) ? stateValue_1.Metadata.fromJSON(object.metadata) : undefined,
         };
     },
     toJSON(message) {
         const obj = {};
-        message.did !== undefined && (obj.did = message.did ? Did.toJSON(message.did) : undefined);
-        message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
+        message.did !== undefined && (obj.did = message.did ? did_1.Did.toJSON(message.did) : undefined);
+        message.metadata !== undefined && (obj.metadata = message.metadata ? stateValue_1.Metadata.toJSON(message.metadata) : undefined);
         return obj;
     },
     create(base) {
-        return MsgDeactivateDidResponse.fromPartial(base ?? {});
+        return exports.MsgDeactivateDidResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgDeactivateDidResponse();
-        message.did = (object.did !== undefined && object.did !== null) ? Did.fromPartial(object.did) : undefined;
+        message.did = (object.did !== undefined && object.did !== null) ? did_1.Did.fromPartial(object.did) : undefined;
         message.metadata = (object.metadata !== undefined && object.metadata !== null)
-            ? Metadata.fromPartial(object.metadata)
+            ? stateValue_1.Metadata.fromPartial(object.metadata)
             : undefined;
         return message;
     },
@@ -363,8 +369,8 @@ function createBaseMsgCreateDidPayload() {
         service: [],
     };
 }
-export const MsgCreateDidPayload = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.MsgCreateDidPayload = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         for (const v of message.context) {
             writer.uint32(10).string(v);
         }
@@ -375,7 +381,7 @@ export const MsgCreateDidPayload = {
             writer.uint32(26).string(v);
         }
         for (const v of message.verificationMethod) {
-            VerificationMethod.encode(v, writer.uint32(34).fork()).ldelim();
+            did_1.VerificationMethod.encode(v, writer.uint32(34).fork()).ldelim();
         }
         for (const v of message.authentication) {
             writer.uint32(42).string(v);
@@ -396,12 +402,12 @@ export const MsgCreateDidPayload = {
             writer.uint32(82).string(v);
         }
         for (const v of message.service) {
-            Service.encode(v, writer.uint32(90).fork()).ldelim();
+            did_1.Service.encode(v, writer.uint32(90).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgCreateDidPayload();
         while (reader.pos < end) {
@@ -417,7 +423,7 @@ export const MsgCreateDidPayload = {
                     message.controller.push(reader.string());
                     break;
                 case 4:
-                    message.verificationMethod.push(VerificationMethod.decode(reader, reader.uint32()));
+                    message.verificationMethod.push(did_1.VerificationMethod.decode(reader, reader.uint32()));
                     break;
                 case 5:
                     message.authentication.push(reader.string());
@@ -438,7 +444,7 @@ export const MsgCreateDidPayload = {
                     message.alsoKnownAs.push(reader.string());
                     break;
                 case 11:
-                    message.service.push(Service.decode(reader, reader.uint32()));
+                    message.service.push(did_1.Service.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -453,7 +459,7 @@ export const MsgCreateDidPayload = {
             id: isSet(object.id) ? String(object.id) : "",
             controller: Array.isArray(object?.controller) ? object.controller.map((e) => String(e)) : [],
             verificationMethod: Array.isArray(object?.verificationMethod)
-                ? object.verificationMethod.map((e) => VerificationMethod.fromJSON(e))
+                ? object.verificationMethod.map((e) => did_1.VerificationMethod.fromJSON(e))
                 : [],
             authentication: Array.isArray(object?.authentication) ? object.authentication.map((e) => String(e)) : [],
             assertionMethod: Array.isArray(object?.assertionMethod) ? object.assertionMethod.map((e) => String(e)) : [],
@@ -465,7 +471,7 @@ export const MsgCreateDidPayload = {
                 : [],
             keyAgreement: Array.isArray(object?.keyAgreement) ? object.keyAgreement.map((e) => String(e)) : [],
             alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e) => String(e)) : [],
-            service: Array.isArray(object?.service) ? object.service.map((e) => Service.fromJSON(e)) : [],
+            service: Array.isArray(object?.service) ? object.service.map((e) => did_1.Service.fromJSON(e)) : [],
         };
     },
     toJSON(message) {
@@ -484,7 +490,7 @@ export const MsgCreateDidPayload = {
             obj.controller = [];
         }
         if (message.verificationMethod) {
-            obj.verificationMethod = message.verificationMethod.map((e) => e ? VerificationMethod.toJSON(e) : undefined);
+            obj.verificationMethod = message.verificationMethod.map((e) => e ? did_1.VerificationMethod.toJSON(e) : undefined);
         }
         else {
             obj.verificationMethod = [];
@@ -526,7 +532,7 @@ export const MsgCreateDidPayload = {
             obj.alsoKnownAs = [];
         }
         if (message.service) {
-            obj.service = message.service.map((e) => e ? Service.toJSON(e) : undefined);
+            obj.service = message.service.map((e) => e ? did_1.Service.toJSON(e) : undefined);
         }
         else {
             obj.service = [];
@@ -534,36 +540,36 @@ export const MsgCreateDidPayload = {
         return obj;
     },
     create(base) {
-        return MsgCreateDidPayload.fromPartial(base ?? {});
+        return exports.MsgCreateDidPayload.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgCreateDidPayload();
         message.context = object.context?.map((e) => e) || [];
         message.id = object.id ?? "";
         message.controller = object.controller?.map((e) => e) || [];
-        message.verificationMethod = object.verificationMethod?.map((e) => VerificationMethod.fromPartial(e)) || [];
+        message.verificationMethod = object.verificationMethod?.map((e) => did_1.VerificationMethod.fromPartial(e)) || [];
         message.authentication = object.authentication?.map((e) => e) || [];
         message.assertionMethod = object.assertionMethod?.map((e) => e) || [];
         message.capabilityInvocation = object.capabilityInvocation?.map((e) => e) || [];
         message.capabilityDelegation = object.capabilityDelegation?.map((e) => e) || [];
         message.keyAgreement = object.keyAgreement?.map((e) => e) || [];
         message.alsoKnownAs = object.alsoKnownAs?.map((e) => e) || [];
-        message.service = object.service?.map((e) => Service.fromPartial(e)) || [];
+        message.service = object.service?.map((e) => did_1.Service.fromPartial(e)) || [];
         return message;
     },
 };
 function createBaseMsgCreateDidResponse() {
     return { id: "" };
 }
-export const MsgCreateDidResponse = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.MsgCreateDidResponse = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgCreateDidResponse();
         while (reader.pos < end) {
@@ -588,7 +594,7 @@ export const MsgCreateDidResponse = {
         return obj;
     },
     create(base) {
-        return MsgCreateDidResponse.fromPartial(base ?? {});
+        return exports.MsgCreateDidResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgCreateDidResponse();
@@ -612,8 +618,8 @@ function createBaseMsgUpdateDidPayload() {
         versionId: "",
     };
 }
-export const MsgUpdateDidPayload = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.MsgUpdateDidPayload = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         for (const v of message.context) {
             writer.uint32(10).string(v);
         }
@@ -624,7 +630,7 @@ export const MsgUpdateDidPayload = {
             writer.uint32(26).string(v);
         }
         for (const v of message.verificationMethod) {
-            VerificationMethod.encode(v, writer.uint32(34).fork()).ldelim();
+            did_1.VerificationMethod.encode(v, writer.uint32(34).fork()).ldelim();
         }
         for (const v of message.authentication) {
             writer.uint32(42).string(v);
@@ -645,7 +651,7 @@ export const MsgUpdateDidPayload = {
             writer.uint32(82).string(v);
         }
         for (const v of message.service) {
-            Service.encode(v, writer.uint32(90).fork()).ldelim();
+            did_1.Service.encode(v, writer.uint32(90).fork()).ldelim();
         }
         if (message.versionId !== "") {
             writer.uint32(98).string(message.versionId);
@@ -653,7 +659,7 @@ export const MsgUpdateDidPayload = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgUpdateDidPayload();
         while (reader.pos < end) {
@@ -669,7 +675,7 @@ export const MsgUpdateDidPayload = {
                     message.controller.push(reader.string());
                     break;
                 case 4:
-                    message.verificationMethod.push(VerificationMethod.decode(reader, reader.uint32()));
+                    message.verificationMethod.push(did_1.VerificationMethod.decode(reader, reader.uint32()));
                     break;
                 case 5:
                     message.authentication.push(reader.string());
@@ -690,7 +696,7 @@ export const MsgUpdateDidPayload = {
                     message.alsoKnownAs.push(reader.string());
                     break;
                 case 11:
-                    message.service.push(Service.decode(reader, reader.uint32()));
+                    message.service.push(did_1.Service.decode(reader, reader.uint32()));
                     break;
                 case 12:
                     message.versionId = reader.string();
@@ -708,7 +714,7 @@ export const MsgUpdateDidPayload = {
             id: isSet(object.id) ? String(object.id) : "",
             controller: Array.isArray(object?.controller) ? object.controller.map((e) => String(e)) : [],
             verificationMethod: Array.isArray(object?.verificationMethod)
-                ? object.verificationMethod.map((e) => VerificationMethod.fromJSON(e))
+                ? object.verificationMethod.map((e) => did_1.VerificationMethod.fromJSON(e))
                 : [],
             authentication: Array.isArray(object?.authentication) ? object.authentication.map((e) => String(e)) : [],
             assertionMethod: Array.isArray(object?.assertionMethod) ? object.assertionMethod.map((e) => String(e)) : [],
@@ -720,7 +726,7 @@ export const MsgUpdateDidPayload = {
                 : [],
             keyAgreement: Array.isArray(object?.keyAgreement) ? object.keyAgreement.map((e) => String(e)) : [],
             alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e) => String(e)) : [],
-            service: Array.isArray(object?.service) ? object.service.map((e) => Service.fromJSON(e)) : [],
+            service: Array.isArray(object?.service) ? object.service.map((e) => did_1.Service.fromJSON(e)) : [],
             versionId: isSet(object.versionId) ? String(object.versionId) : "",
         };
     },
@@ -740,7 +746,7 @@ export const MsgUpdateDidPayload = {
             obj.controller = [];
         }
         if (message.verificationMethod) {
-            obj.verificationMethod = message.verificationMethod.map((e) => e ? VerificationMethod.toJSON(e) : undefined);
+            obj.verificationMethod = message.verificationMethod.map((e) => e ? did_1.VerificationMethod.toJSON(e) : undefined);
         }
         else {
             obj.verificationMethod = [];
@@ -782,7 +788,7 @@ export const MsgUpdateDidPayload = {
             obj.alsoKnownAs = [];
         }
         if (message.service) {
-            obj.service = message.service.map((e) => e ? Service.toJSON(e) : undefined);
+            obj.service = message.service.map((e) => e ? did_1.Service.toJSON(e) : undefined);
         }
         else {
             obj.service = [];
@@ -791,21 +797,21 @@ export const MsgUpdateDidPayload = {
         return obj;
     },
     create(base) {
-        return MsgUpdateDidPayload.fromPartial(base ?? {});
+        return exports.MsgUpdateDidPayload.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgUpdateDidPayload();
         message.context = object.context?.map((e) => e) || [];
         message.id = object.id ?? "";
         message.controller = object.controller?.map((e) => e) || [];
-        message.verificationMethod = object.verificationMethod?.map((e) => VerificationMethod.fromPartial(e)) || [];
+        message.verificationMethod = object.verificationMethod?.map((e) => did_1.VerificationMethod.fromPartial(e)) || [];
         message.authentication = object.authentication?.map((e) => e) || [];
         message.assertionMethod = object.assertionMethod?.map((e) => e) || [];
         message.capabilityInvocation = object.capabilityInvocation?.map((e) => e) || [];
         message.capabilityDelegation = object.capabilityDelegation?.map((e) => e) || [];
         message.keyAgreement = object.keyAgreement?.map((e) => e) || [];
         message.alsoKnownAs = object.alsoKnownAs?.map((e) => e) || [];
-        message.service = object.service?.map((e) => Service.fromPartial(e)) || [];
+        message.service = object.service?.map((e) => did_1.Service.fromPartial(e)) || [];
         message.versionId = object.versionId ?? "";
         return message;
     },
@@ -813,15 +819,15 @@ export const MsgUpdateDidPayload = {
 function createBaseMsgUpdateDidResponse() {
     return { id: "" };
 }
-export const MsgUpdateDidResponse = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.MsgUpdateDidResponse = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgUpdateDidResponse();
         while (reader.pos < end) {
@@ -846,7 +852,7 @@ export const MsgUpdateDidResponse = {
         return obj;
     },
     create(base) {
-        return MsgUpdateDidResponse.fromPartial(base ?? {});
+        return exports.MsgUpdateDidResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgUpdateDidResponse();
@@ -854,9 +860,7 @@ export const MsgUpdateDidResponse = {
         return message;
     },
 };
-export class MsgClientImpl {
-    rpc;
-    service;
+class MsgClientImpl {
     constructor(rpc, opts) {
         this.service = opts?.service || "cheqdid.cheqdnode.cheqd.v1.Msg";
         this.rpc = rpc;
@@ -865,24 +869,25 @@ export class MsgClientImpl {
         this.DeactivateDid = this.DeactivateDid.bind(this);
     }
     CreateDid(request) {
-        const data = MsgCreateDid.encode(request).finish();
+        const data = exports.MsgCreateDid.encode(request).finish();
         const promise = this.rpc.request(this.service, "CreateDid", data);
-        return promise.then((data) => MsgCreateDidResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => exports.MsgCreateDidResponse.decode(new minimal_1.default.Reader(data)));
     }
     UpdateDid(request) {
-        const data = MsgUpdateDid.encode(request).finish();
+        const data = exports.MsgUpdateDid.encode(request).finish();
         const promise = this.rpc.request(this.service, "UpdateDid", data);
-        return promise.then((data) => MsgUpdateDidResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => exports.MsgUpdateDidResponse.decode(new minimal_1.default.Reader(data)));
     }
     DeactivateDid(request) {
-        const data = MsgDeactivateDid.encode(request).finish();
+        const data = exports.MsgDeactivateDid.encode(request).finish();
         const promise = this.rpc.request(this.service, "DeactivateDid", data);
-        return promise.then((data) => MsgDeactivateDidResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => exports.MsgDeactivateDidResponse.decode(new minimal_1.default.Reader(data)));
     }
 }
-if (_m0.util.Long !== Long) {
-    _m0.util.Long = Long;
-    _m0.configure();
+exports.MsgClientImpl = MsgClientImpl;
+if (minimal_1.default.util.Long !== long_1.default) {
+    minimal_1.default.util.Long = long_1.default;
+    minimal_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

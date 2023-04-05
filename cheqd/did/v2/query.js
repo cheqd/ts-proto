@@ -1,20 +1,26 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.QueryClientImpl = exports.QueryAllDidDocVersionsMetadataResponse = exports.QueryAllDidDocVersionsMetadataRequest = exports.QueryDidDocVersionResponse = exports.QueryDidDocVersionRequest = exports.QueryDidDocResponse = exports.QueryDidDocRequest = void 0;
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal.js";
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination.js";
-import { DidDocWithMetadata, Metadata } from "./diddoc.js";
+const long_1 = __importDefault(require("long"));
+const minimal_1 = __importDefault(require("protobufjs/minimal"));
+const pagination_1 = require("../../../cosmos/base/query/v1beta1/pagination");
+const diddoc_1 = require("./diddoc");
 function createBaseQueryDidDocRequest() {
     return { id: "" };
 }
-export const QueryDidDocRequest = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.QueryDidDocRequest = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryDidDocRequest();
         while (reader.pos < end) {
@@ -39,7 +45,7 @@ export const QueryDidDocRequest = {
         return obj;
     },
     create(base) {
-        return QueryDidDocRequest.fromPartial(base ?? {});
+        return exports.QueryDidDocRequest.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseQueryDidDocRequest();
@@ -50,22 +56,22 @@ export const QueryDidDocRequest = {
 function createBaseQueryDidDocResponse() {
     return { value: undefined };
 }
-export const QueryDidDocResponse = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.QueryDidDocResponse = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.value !== undefined) {
-            DidDocWithMetadata.encode(message.value, writer.uint32(10).fork()).ldelim();
+            diddoc_1.DidDocWithMetadata.encode(message.value, writer.uint32(10).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryDidDocResponse();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.value = DidDocWithMetadata.decode(reader, reader.uint32());
+                    message.value = diddoc_1.DidDocWithMetadata.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -75,20 +81,20 @@ export const QueryDidDocResponse = {
         return message;
     },
     fromJSON(object) {
-        return { value: isSet(object.value) ? DidDocWithMetadata.fromJSON(object.value) : undefined };
+        return { value: isSet(object.value) ? diddoc_1.DidDocWithMetadata.fromJSON(object.value) : undefined };
     },
     toJSON(message) {
         const obj = {};
-        message.value !== undefined && (obj.value = message.value ? DidDocWithMetadata.toJSON(message.value) : undefined);
+        message.value !== undefined && (obj.value = message.value ? diddoc_1.DidDocWithMetadata.toJSON(message.value) : undefined);
         return obj;
     },
     create(base) {
-        return QueryDidDocResponse.fromPartial(base ?? {});
+        return exports.QueryDidDocResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseQueryDidDocResponse();
         message.value = (object.value !== undefined && object.value !== null)
-            ? DidDocWithMetadata.fromPartial(object.value)
+            ? diddoc_1.DidDocWithMetadata.fromPartial(object.value)
             : undefined;
         return message;
     },
@@ -96,8 +102,8 @@ export const QueryDidDocResponse = {
 function createBaseQueryDidDocVersionRequest() {
     return { id: "", version: "" };
 }
-export const QueryDidDocVersionRequest = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.QueryDidDocVersionRequest = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
@@ -107,7 +113,7 @@ export const QueryDidDocVersionRequest = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryDidDocVersionRequest();
         while (reader.pos < end) {
@@ -139,7 +145,7 @@ export const QueryDidDocVersionRequest = {
         return obj;
     },
     create(base) {
-        return QueryDidDocVersionRequest.fromPartial(base ?? {});
+        return exports.QueryDidDocVersionRequest.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseQueryDidDocVersionRequest();
@@ -151,22 +157,22 @@ export const QueryDidDocVersionRequest = {
 function createBaseQueryDidDocVersionResponse() {
     return { value: undefined };
 }
-export const QueryDidDocVersionResponse = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.QueryDidDocVersionResponse = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.value !== undefined) {
-            DidDocWithMetadata.encode(message.value, writer.uint32(10).fork()).ldelim();
+            diddoc_1.DidDocWithMetadata.encode(message.value, writer.uint32(10).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryDidDocVersionResponse();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.value = DidDocWithMetadata.decode(reader, reader.uint32());
+                    message.value = diddoc_1.DidDocWithMetadata.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -176,20 +182,20 @@ export const QueryDidDocVersionResponse = {
         return message;
     },
     fromJSON(object) {
-        return { value: isSet(object.value) ? DidDocWithMetadata.fromJSON(object.value) : undefined };
+        return { value: isSet(object.value) ? diddoc_1.DidDocWithMetadata.fromJSON(object.value) : undefined };
     },
     toJSON(message) {
         const obj = {};
-        message.value !== undefined && (obj.value = message.value ? DidDocWithMetadata.toJSON(message.value) : undefined);
+        message.value !== undefined && (obj.value = message.value ? diddoc_1.DidDocWithMetadata.toJSON(message.value) : undefined);
         return obj;
     },
     create(base) {
-        return QueryDidDocVersionResponse.fromPartial(base ?? {});
+        return exports.QueryDidDocVersionResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseQueryDidDocVersionResponse();
         message.value = (object.value !== undefined && object.value !== null)
-            ? DidDocWithMetadata.fromPartial(object.value)
+            ? diddoc_1.DidDocWithMetadata.fromPartial(object.value)
             : undefined;
         return message;
     },
@@ -197,18 +203,18 @@ export const QueryDidDocVersionResponse = {
 function createBaseQueryAllDidDocVersionsMetadataRequest() {
     return { id: "", pagination: undefined };
 }
-export const QueryAllDidDocVersionsMetadataRequest = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.QueryAllDidDocVersionsMetadataRequest = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
         if (message.pagination !== undefined) {
-            PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
+            pagination_1.PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryAllDidDocVersionsMetadataRequest();
         while (reader.pos < end) {
@@ -218,7 +224,7 @@ export const QueryAllDidDocVersionsMetadataRequest = {
                     message.id = reader.string();
                     break;
                 case 2:
-                    message.pagination = PageRequest.decode(reader, reader.uint32());
+                    message.pagination = pagination_1.PageRequest.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -230,24 +236,24 @@ export const QueryAllDidDocVersionsMetadataRequest = {
     fromJSON(object) {
         return {
             id: isSet(object.id) ? String(object.id) : "",
-            pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
+            pagination: isSet(object.pagination) ? pagination_1.PageRequest.fromJSON(object.pagination) : undefined,
         };
     },
     toJSON(message) {
         const obj = {};
         message.id !== undefined && (obj.id = message.id);
         message.pagination !== undefined &&
-            (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+            (obj.pagination = message.pagination ? pagination_1.PageRequest.toJSON(message.pagination) : undefined);
         return obj;
     },
     create(base) {
-        return QueryAllDidDocVersionsMetadataRequest.fromPartial(base ?? {});
+        return exports.QueryAllDidDocVersionsMetadataRequest.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseQueryAllDidDocVersionsMetadataRequest();
         message.id = object.id ?? "";
         message.pagination = (object.pagination !== undefined && object.pagination !== null)
-            ? PageRequest.fromPartial(object.pagination)
+            ? pagination_1.PageRequest.fromPartial(object.pagination)
             : undefined;
         return message;
     },
@@ -255,28 +261,28 @@ export const QueryAllDidDocVersionsMetadataRequest = {
 function createBaseQueryAllDidDocVersionsMetadataResponse() {
     return { versions: [], pagination: undefined };
 }
-export const QueryAllDidDocVersionsMetadataResponse = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.QueryAllDidDocVersionsMetadataResponse = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         for (const v of message.versions) {
-            Metadata.encode(v, writer.uint32(10).fork()).ldelim();
+            diddoc_1.Metadata.encode(v, writer.uint32(10).fork()).ldelim();
         }
         if (message.pagination !== undefined) {
-            PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
+            pagination_1.PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryAllDidDocVersionsMetadataResponse();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.versions.push(Metadata.decode(reader, reader.uint32()));
+                    message.versions.push(diddoc_1.Metadata.decode(reader, reader.uint32()));
                     break;
                 case 2:
-                    message.pagination = PageResponse.decode(reader, reader.uint32());
+                    message.pagination = pagination_1.PageResponse.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -287,37 +293,35 @@ export const QueryAllDidDocVersionsMetadataResponse = {
     },
     fromJSON(object) {
         return {
-            versions: Array.isArray(object?.versions) ? object.versions.map((e) => Metadata.fromJSON(e)) : [],
-            pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
+            versions: Array.isArray(object?.versions) ? object.versions.map((e) => diddoc_1.Metadata.fromJSON(e)) : [],
+            pagination: isSet(object.pagination) ? pagination_1.PageResponse.fromJSON(object.pagination) : undefined,
         };
     },
     toJSON(message) {
         const obj = {};
         if (message.versions) {
-            obj.versions = message.versions.map((e) => e ? Metadata.toJSON(e) : undefined);
+            obj.versions = message.versions.map((e) => e ? diddoc_1.Metadata.toJSON(e) : undefined);
         }
         else {
             obj.versions = [];
         }
         message.pagination !== undefined &&
-            (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+            (obj.pagination = message.pagination ? pagination_1.PageResponse.toJSON(message.pagination) : undefined);
         return obj;
     },
     create(base) {
-        return QueryAllDidDocVersionsMetadataResponse.fromPartial(base ?? {});
+        return exports.QueryAllDidDocVersionsMetadataResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseQueryAllDidDocVersionsMetadataResponse();
-        message.versions = object.versions?.map((e) => Metadata.fromPartial(e)) || [];
+        message.versions = object.versions?.map((e) => diddoc_1.Metadata.fromPartial(e)) || [];
         message.pagination = (object.pagination !== undefined && object.pagination !== null)
-            ? PageResponse.fromPartial(object.pagination)
+            ? pagination_1.PageResponse.fromPartial(object.pagination)
             : undefined;
         return message;
     },
 };
-export class QueryClientImpl {
-    rpc;
-    service;
+class QueryClientImpl {
     constructor(rpc, opts) {
         this.service = opts?.service || "cheqd.did.v2.Query";
         this.rpc = rpc;
@@ -326,24 +330,25 @@ export class QueryClientImpl {
         this.AllDidDocVersionsMetadata = this.AllDidDocVersionsMetadata.bind(this);
     }
     DidDoc(request) {
-        const data = QueryDidDocRequest.encode(request).finish();
+        const data = exports.QueryDidDocRequest.encode(request).finish();
         const promise = this.rpc.request(this.service, "DidDoc", data);
-        return promise.then((data) => QueryDidDocResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => exports.QueryDidDocResponse.decode(new minimal_1.default.Reader(data)));
     }
     DidDocVersion(request) {
-        const data = QueryDidDocVersionRequest.encode(request).finish();
+        const data = exports.QueryDidDocVersionRequest.encode(request).finish();
         const promise = this.rpc.request(this.service, "DidDocVersion", data);
-        return promise.then((data) => QueryDidDocVersionResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => exports.QueryDidDocVersionResponse.decode(new minimal_1.default.Reader(data)));
     }
     AllDidDocVersionsMetadata(request) {
-        const data = QueryAllDidDocVersionsMetadataRequest.encode(request).finish();
+        const data = exports.QueryAllDidDocVersionsMetadataRequest.encode(request).finish();
         const promise = this.rpc.request(this.service, "AllDidDocVersionsMetadata", data);
-        return promise.then((data) => QueryAllDidDocVersionsMetadataResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => exports.QueryAllDidDocVersionsMetadataResponse.decode(new minimal_1.default.Reader(data)));
     }
 }
-if (_m0.util.Long !== Long) {
-    _m0.util.Long = Long;
-    _m0.configure();
+exports.QueryClientImpl = QueryClientImpl;
+if (minimal_1.default.util.Long !== long_1.default) {
+    minimal_1.default.util.Long = long_1.default;
+    minimal_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

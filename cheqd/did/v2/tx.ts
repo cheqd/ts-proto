@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal.js";
-import { DidDocWithMetadata, Service, VerificationMethod } from "./diddoc.js";
+import _m0 from "protobufjs/minimal";
+import { DidDocWithMetadata, Service, VerificationMethod } from "./diddoc";
 
 /**
  * MsgCreateDidDoc defines the Msg/CreateDidDoc request type.

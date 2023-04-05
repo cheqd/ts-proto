@@ -1,32 +1,38 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Metadata = exports.StateValue = void 0;
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal.js";
-import { Any } from "../../../google/protobuf/any.js";
+const long_1 = __importDefault(require("long"));
+const minimal_1 = __importDefault(require("protobufjs/minimal"));
+const any_1 = require("../../../google/protobuf/any");
 function createBaseStateValue() {
     return { data: undefined, metadata: undefined };
 }
-export const StateValue = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.StateValue = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.data !== undefined) {
-            Any.encode(message.data, writer.uint32(10).fork()).ldelim();
+            any_1.Any.encode(message.data, writer.uint32(10).fork()).ldelim();
         }
         if (message.metadata !== undefined) {
-            Metadata.encode(message.metadata, writer.uint32(18).fork()).ldelim();
+            exports.Metadata.encode(message.metadata, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseStateValue();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.data = Any.decode(reader, reader.uint32());
+                    message.data = any_1.Any.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.metadata = Metadata.decode(reader, reader.uint32());
+                    message.metadata = exports.Metadata.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -37,24 +43,24 @@ export const StateValue = {
     },
     fromJSON(object) {
         return {
-            data: isSet(object.data) ? Any.fromJSON(object.data) : undefined,
-            metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined,
+            data: isSet(object.data) ? any_1.Any.fromJSON(object.data) : undefined,
+            metadata: isSet(object.metadata) ? exports.Metadata.fromJSON(object.metadata) : undefined,
         };
     },
     toJSON(message) {
         const obj = {};
-        message.data !== undefined && (obj.data = message.data ? Any.toJSON(message.data) : undefined);
-        message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
+        message.data !== undefined && (obj.data = message.data ? any_1.Any.toJSON(message.data) : undefined);
+        message.metadata !== undefined && (obj.metadata = message.metadata ? exports.Metadata.toJSON(message.metadata) : undefined);
         return obj;
     },
     create(base) {
-        return StateValue.fromPartial(base ?? {});
+        return exports.StateValue.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseStateValue();
-        message.data = (object.data !== undefined && object.data !== null) ? Any.fromPartial(object.data) : undefined;
+        message.data = (object.data !== undefined && object.data !== null) ? any_1.Any.fromPartial(object.data) : undefined;
         message.metadata = (object.metadata !== undefined && object.metadata !== null)
-            ? Metadata.fromPartial(object.metadata)
+            ? exports.Metadata.fromPartial(object.metadata)
             : undefined;
         return message;
     },
@@ -62,8 +68,8 @@ export const StateValue = {
 function createBaseMetadata() {
     return { created: "", updated: "", deactivated: false, versionId: "", resources: [] };
 }
-export const Metadata = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.Metadata = {
+    encode(message, writer = minimal_1.default.Writer.create()) {
         if (message.created !== "") {
             writer.uint32(10).string(message.created);
         }
@@ -82,7 +88,7 @@ export const Metadata = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMetadata();
         while (reader.pos < end) {
@@ -134,7 +140,7 @@ export const Metadata = {
         return obj;
     },
     create(base) {
-        return Metadata.fromPartial(base ?? {});
+        return exports.Metadata.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMetadata();
@@ -146,9 +152,9 @@ export const Metadata = {
         return message;
     },
 };
-if (_m0.util.Long !== Long) {
-    _m0.util.Long = Long;
-    _m0.configure();
+if (minimal_1.default.util.Long !== long_1.default) {
+    minimal_1.default.util.Long = long_1.default;
+    minimal_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

@@ -1,8 +1,8 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal.js";
-import { FeeParams } from "./fee.js";
-import { ResourceWithMetadata } from "./resource.js";
+import _m0 from "protobufjs/minimal";
+import { FeeParams } from "./fee";
+import { ResourceWithMetadata } from "./resource";
 
 /** GenesisState defines the chqed Resource module's genesis state */
 export interface GenesisState {

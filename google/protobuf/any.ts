@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal.js";
+import _m0 from "protobufjs/minimal";
 
 /**
  * `Any` contains an arbitrary serialized protocol buffer message along with a
@@ -26,10 +26,6 @@ import _m0 from "protobufjs/minimal.js";
  *     ...
  *     if (any.is(Foo.class)) {
  *       foo = any.unpack(Foo.class);
- *     }
- *     // or ...
- *     if (any.isSameTypeAs(Foo.getDefaultInstance())) {
- *       foo = any.unpack(Foo.getDefaultInstance());
  *     }
  *
  * Example 3: Pack and unpack a message in Python.
