@@ -10,6 +10,7 @@ on:
         options:
           - main
           - develop
+          - commonjs
 defaults:
   run:
     shell: bash
@@ -35,7 +36,7 @@ jobs:
           ref: ${{ env.BASE_BRANCH }}
 
       - name: "Install buf CLI"
-        uses: bufbuild/buf-setup-action@v1.14.0
+        uses: bufbuild/buf-setup-action@v1.15.1
 
       - name: Generate TypeScript code for Protobufs
         run: buf generate buf.build/cheqd/proto
@@ -47,7 +48,7 @@ jobs:
         run: npm run build
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4.2.3
+        uses: peter-evans/create-pull-request@v4.2.4
         with:
           base: ${{ env.BASE_BRANCH }}
           branch: ${{ env.PR_BRANCH }}

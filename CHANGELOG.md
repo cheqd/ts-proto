@@ -1,5 +1,72 @@
 # Changelog
 
+## [3.1.4](https://github.com/cheqd/ts-proto/compare/3.1.3...3.1.4) (2023-03-15)
+
+## [3.1.4-develop.1](https://github.com/cheqd/ts-proto/compare/3.1.3...3.1.4-develop.1) (2023-03-15)
+
+## [3.1.3-develop.1](https://github.com/cheqd/ts-proto/compare/3.1.2...3.1.3-develop.1) (2023-03-09)
+
+## [3.1.3](https://github.com/cheqd/ts-proto/compare/3.1.2...3.1.3) (2023-03-09)
+
+## [3.1.2](https://github.com/cheqd/ts-proto/compare/3.1.1...3.1.2) (2023-02-20)
+
+
+### Bug Fixes
+
+* Resolved conflicting spaces in md ([db80e2c](https://github.com/cheqd/ts-proto/commit/db80e2c15a3e4aa80173c16a4a36e8fa1623c3ce))
+
+## [3.1.2-develop.1](https://github.com/cheqd/ts-proto/compare/3.1.1...3.1.2-develop.1) (2023-02-15)
+
+
+### Bug Fixes
+
+* Resolved conflicting spaces in md ([db80e2c](https://github.com/cheqd/ts-proto/commit/db80e2c15a3e4aa80173c16a4a36e8fa1623c3ce))
+
+## [3.1.1-develop.1](https://github.com/cheqd/ts-proto/compare/3.1.0...3.1.1-develop.1) (2023-02-15)
+
+
+### Bug Fixes
+
+* Resolved conflicting spaces in md ([db80e2c](https://github.com/cheqd/ts-proto/commit/db80e2c15a3e4aa80173c16a4a36e8fa1623c3ce))
+
+## [3.1.0](https://github.com/cheqd/ts-proto/compare/3.0.0...3.1.0) (2023-02-14)
+
+
+### Features
+
+* Switched to `esnext` as default tied latest ([#81](https://github.com/cheqd/ts-proto/issues/81)) ([097ee07](https://github.com/cheqd/ts-proto/commit/097ee0709b9a24c14070dd8282f305da51293dd0))
+
+## [3.1.0-develop.2](https://github.com/cheqd/ts-proto/compare/3.1.0-develop.1...3.1.0-develop.2) (2023-02-14)
+
+## [3.1.0-develop.1](https://github.com/cheqd/ts-proto/compare/3.0.0...3.1.0-develop.1) (2023-02-14)
+
+
+### Features
+
+* Switched to `esnext` as default tied latest ([#81](https://github.com/cheqd/ts-proto/issues/81)) ([097ee07](https://github.com/cheqd/ts-proto/commit/097ee0709b9a24c14070dd8282f305da51293dd0))
+
+## [3.0.0](https://github.com/cheqd/ts-proto/compare/2.0.1...3.0.0) (2023-02-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* Transition to ESM exports (#79)
+
+### Build System
+
+* Transition to ESM exports ([#79](https://github.com/cheqd/ts-proto/issues/79)) ([d0a59cc](https://github.com/cheqd/ts-proto/commit/d0a59cc03306e6e91184d226868ef2ce5ce66c1c))
+
+## [3.0.0-develop.1](https://github.com/cheqd/ts-proto/compare/2.0.1...3.0.0-develop.1) (2023-02-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* Transition to ESM exports (#79)
+
+### Build System
+
+* Transition to ESM exports ([#79](https://github.com/cheqd/ts-proto/issues/79)) ([d0a59cc](https://github.com/cheqd/ts-proto/commit/d0a59cc03306e6e91184d226868ef2ce5ce66c1c))
+
 ## [2.0.1](https://github.com/cheqd/ts-proto/compare/2.0.0...2.0.1) (2023-02-13)
 
 ## [2.0.1-develop.1](https://github.com/cheqd/ts-proto/compare/2.0.0...2.0.1-develop.1) (2023-02-13)

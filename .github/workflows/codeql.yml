@@ -4,6 +4,7 @@ on:
     branches:
       - main
       - develop
+      - commonjs
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -32,7 +33,7 @@ jobs:
           queries: security-and-quality
       
       - name: "Install buf CLI"
-        uses: bufbuild/buf-setup-action@v1.14.0
+        uses: bufbuild/buf-setup-action@v1.15.1
 
       - name: Build
         run: |
