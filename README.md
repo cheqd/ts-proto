@@ -12,7 +12,7 @@ The purpose of this [`@cheqd/ts-proto` NPM package](https://www.npmjs.com/packag
 
 ## 📖 Documentation
 
-Our [identity documentation site](https://docs.cheqd.io/identity/) explains how `@cheqd/ts-proto` is [consumed in Veramo SDK for cheqd](https://docs.cheqd.io/identity/guides/software-development-kits-sdks/veramo-sdk-for-cheqd) (as an example of how this package can be consumed).
+Our [identity documentation site](https://docs.cheqd.io/identity/) explains how `@cheqd/ts-proto` is [consumed in Veramo SDK for cheqd](https://docs.cheqd.io/identity/guides/sdk/veramo-sdk-for-cheqd) (as an example of how this package can be consumed).
 
 ## 💬 Community
 

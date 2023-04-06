@@ -1,6 +1,15 @@
 # Changelog
 
-## [3.1.5-develop.1](https://github.com/cheqd/ts-proto/compare/3.1.4...3.1.5-develop.1) (2023-03-22)
+## [3.2.0-develop.1](https://github.com/cheqd/ts-proto/compare/3.1.4...3.2.0-develop.1) (2023-04-06)
+
+
+### Features
+
+* Regenerated Protobufs ([73bf174](https://github.com/cheqd/ts-proto/commit/73bf174616490c7924b47c5ab97cf8bbc10c63a8))
+
+## [3.1.5-develop.1](https://github.com/cheqd/ts-proto/compare/3.1.4...3.1.5-develop.1) (2023-04-06)
+
+## [3.1.5-develop.1](https://github.com/cheqd/ts-proto/compare/3.1.4...3.1.5-develop.1) (2023-04-05)
 
 ## [3.1.4](https://github.com/cheqd/ts-proto/compare/3.1.3...3.1.4) (2023-03-15)
 
