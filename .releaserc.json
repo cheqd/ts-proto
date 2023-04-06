@@ -5,6 +5,10 @@
             "name": "develop",
             "channel": "beta",
             "prerelease": true
+        },
+        {
+            "name": "release/2.x",
+            "range": "2.x"
         }
     ],
     "tagFormat": "${version}",
