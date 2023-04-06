@@ -8,7 +8,9 @@
         },
         {
             "name": "release/2.x",
-            "range": "2.x"
+            "range": "2.x",
+            "channel": "cjs",
+            "prerelease": true
         }
     ],
     "tagFormat": "${version}",
