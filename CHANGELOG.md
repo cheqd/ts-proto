@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/cheqd/ts-proto/compare/2.0.1...2.1.0) (2023-04-06)
+
+
+### Features
+
+* Backport changes to v2.x branch ([#109](https://github.com/cheqd/ts-proto/issues/109)) ([b5c7276](https://github.com/cheqd/ts-proto/commit/b5c7276a9d3fd5d83ab8fc9e9c313e413e3b23aa)), closes [#85](https://github.com/cheqd/ts-proto/issues/85)
+
 ## [2.0.1](https://github.com/cheqd/ts-proto/compare/2.0.0...2.0.1) (2023-02-13)
 
 ## [2.0.1-develop.1](https://github.com/cheqd/ts-proto/compare/2.0.0...2.0.1-develop.1) (2023-02-13)
