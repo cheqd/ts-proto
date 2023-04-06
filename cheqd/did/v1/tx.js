@@ -23,22 +23,29 @@ exports.MsgCreateDid = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgCreateDid();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
+                    if (tag != 10) {
+                        break;
+                    }
                     message.payload = exports.MsgCreateDidPayload.decode(reader, reader.uint32());
-                    break;
+                    continue;
                 case 2:
+                    if (tag != 18) {
+                        break;
+                    }
                     message.signatures.push(exports.SignInfo.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    continue;
             }
+            if ((tag & 7) == 4 || tag == 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
         }
         return message;
     },
@@ -86,22 +93,29 @@ exports.MsgUpdateDid = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgUpdateDid();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
+                    if (tag != 10) {
+                        break;
+                    }
                     message.payload = exports.MsgUpdateDidPayload.decode(reader, reader.uint32());
-                    break;
+                    continue;
                 case 2:
+                    if (tag != 18) {
+                        break;
+                    }
                     message.signatures.push(exports.SignInfo.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    continue;
             }
+            if ((tag & 7) == 4 || tag == 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
         }
         return message;
     },
@@ -149,22 +163,29 @@ exports.MsgDeactivateDid = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgDeactivateDid();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
+                    if (tag != 10) {
+                        break;
+                    }
                     message.payload = exports.MsgDeactivateDidPayload.decode(reader, reader.uint32());
-                    break;
+                    continue;
                 case 2:
+                    if (tag != 18) {
+                        break;
+                    }
                     message.signatures.push(exports.SignInfo.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    continue;
             }
+            if ((tag & 7) == 4 || tag == 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
         }
         return message;
     },
@@ -212,22 +233,29 @@ exports.SignInfo = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseSignInfo();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
+                    if (tag != 10) {
+                        break;
+                    }
                     message.verificationMethodId = reader.string();
-                    break;
+                    continue;
                 case 2:
+                    if (tag != 18) {
+                        break;
+                    }
                     message.signature = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    continue;
             }
+            if ((tag & 7) == 4 || tag == 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
         }
         return message;
     },
@@ -264,19 +292,23 @@ exports.MsgDeactivateDidPayload = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgDeactivateDidPayload();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
+                    if (tag != 10) {
+                        break;
+                    }
                     message.id = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    continue;
             }
+            if ((tag & 7) == 4 || tag == 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
         }
         return message;
     },
@@ -311,22 +343,29 @@ exports.MsgDeactivateDidResponse = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgDeactivateDidResponse();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
+                    if (tag != 10) {
+                        break;
+                    }
                     message.did = did_1.Did.decode(reader, reader.uint32());
-                    break;
+                    continue;
                 case 2:
+                    if (tag != 18) {
+                        break;
+                    }
                     message.metadata = stateValue_1.Metadata.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    continue;
             }
+            if ((tag & 7) == 4 || tag == 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
         }
         return message;
     },
@@ -407,49 +446,83 @@ exports.MsgCreateDidPayload = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgCreateDidPayload();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
+                    if (tag != 10) {
+                        break;
+                    }
                     message.context.push(reader.string());
-                    break;
+                    continue;
                 case 2:
+                    if (tag != 18) {
+                        break;
+                    }
                     message.id = reader.string();
-                    break;
+                    continue;
                 case 3:
+                    if (tag != 26) {
+                        break;
+                    }
                     message.controller.push(reader.string());
-                    break;
+                    continue;
                 case 4:
+                    if (tag != 34) {
+                        break;
+                    }
                     message.verificationMethod.push(did_1.VerificationMethod.decode(reader, reader.uint32()));
-                    break;
+                    continue;
                 case 5:
+                    if (tag != 42) {
+                        break;
+                    }
                     message.authentication.push(reader.string());
-                    break;
+                    continue;
                 case 6:
+                    if (tag != 50) {
+                        break;
+                    }
                     message.assertionMethod.push(reader.string());
-                    break;
+                    continue;
                 case 7:
+                    if (tag != 58) {
+                        break;
+                    }
                     message.capabilityInvocation.push(reader.string());
-                    break;
+                    continue;
                 case 8:
+                    if (tag != 66) {
+                        break;
+                    }
                     message.capabilityDelegation.push(reader.string());
-                    break;
+                    continue;
                 case 9:
+                    if (tag != 74) {
+                        break;
+                    }
                     message.keyAgreement.push(reader.string());
-                    break;
+                    continue;
                 case 10:
+                    if (tag != 82) {
+                        break;
+                    }
                     message.alsoKnownAs.push(reader.string());
-                    break;
+                    continue;
                 case 11:
+                    if (tag != 90) {
+                        break;
+                    }
                     message.service.push(did_1.Service.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    continue;
             }
+            if ((tag & 7) == 4 || tag == 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
         }
         return message;
     },
@@ -569,19 +642,23 @@ exports.MsgCreateDidResponse = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgCreateDidResponse();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
+                    if (tag != 10) {
+                        break;
+                    }
                     message.id = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    continue;
             }
+            if ((tag & 7) == 4 || tag == 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
         }
         return message;
     },
@@ -659,52 +736,89 @@ exports.MsgUpdateDidPayload = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgUpdateDidPayload();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
+                    if (tag != 10) {
+                        break;
+                    }
                     message.context.push(reader.string());
-                    break;
+                    continue;
                 case 2:
+                    if (tag != 18) {
+                        break;
+                    }
                     message.id = reader.string();
-                    break;
+                    continue;
                 case 3:
+                    if (tag != 26) {
+                        break;
+                    }
                     message.controller.push(reader.string());
-                    break;
+                    continue;
                 case 4:
+                    if (tag != 34) {
+                        break;
+                    }
                     message.verificationMethod.push(did_1.VerificationMethod.decode(reader, reader.uint32()));
-                    break;
+                    continue;
                 case 5:
+                    if (tag != 42) {
+                        break;
+                    }
                     message.authentication.push(reader.string());
-                    break;
+                    continue;
                 case 6:
+                    if (tag != 50) {
+                        break;
+                    }
                     message.assertionMethod.push(reader.string());
-                    break;
+                    continue;
                 case 7:
+                    if (tag != 58) {
+                        break;
+                    }
                     message.capabilityInvocation.push(reader.string());
-                    break;
+                    continue;
                 case 8:
+                    if (tag != 66) {
+                        break;
+                    }
                     message.capabilityDelegation.push(reader.string());
-                    break;
+                    continue;
                 case 9:
+                    if (tag != 74) {
+                        break;
+                    }
                     message.keyAgreement.push(reader.string());
-                    break;
+                    continue;
                 case 10:
+                    if (tag != 82) {
+                        break;
+                    }
                     message.alsoKnownAs.push(reader.string());
-                    break;
+                    continue;
                 case 11:
+                    if (tag != 90) {
+                        break;
+                    }
                     message.service.push(did_1.Service.decode(reader, reader.uint32()));
-                    break;
+                    continue;
                 case 12:
+                    if (tag != 98) {
+                        break;
+                    }
                     message.versionId = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    continue;
             }
+            if ((tag & 7) == 4 || tag == 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
         }
         return message;
     },
@@ -827,19 +941,23 @@ exports.MsgUpdateDidResponse = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgUpdateDidResponse();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
+                    if (tag != 10) {
+                        break;
+                    }
                     message.id = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    continue;
             }
+            if ((tag & 7) == 4 || tag == 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
         }
         return message;
     },
@@ -871,17 +989,17 @@ class MsgClientImpl {
     CreateDid(request) {
         const data = exports.MsgCreateDid.encode(request).finish();
         const promise = this.rpc.request(this.service, "CreateDid", data);
-        return promise.then((data) => exports.MsgCreateDidResponse.decode(new minimal_1.default.Reader(data)));
+        return promise.then((data) => exports.MsgCreateDidResponse.decode(minimal_1.default.Reader.create(data)));
     }
     UpdateDid(request) {
         const data = exports.MsgUpdateDid.encode(request).finish();
         const promise = this.rpc.request(this.service, "UpdateDid", data);
-        return promise.then((data) => exports.MsgUpdateDidResponse.decode(new minimal_1.default.Reader(data)));
+        return promise.then((data) => exports.MsgUpdateDidResponse.decode(minimal_1.default.Reader.create(data)));
     }
     DeactivateDid(request) {
         const data = exports.MsgDeactivateDid.encode(request).finish();
         const promise = this.rpc.request(this.service, "DeactivateDid", data);
-        return promise.then((data) => exports.MsgDeactivateDidResponse.decode(new minimal_1.default.Reader(data)));
+        return promise.then((data) => exports.MsgDeactivateDidResponse.decode(minimal_1.default.Reader.create(data)));
     }
 }
 exports.MsgClientImpl = MsgClientImpl;

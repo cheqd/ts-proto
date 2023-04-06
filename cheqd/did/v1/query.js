@@ -20,19 +20,23 @@ exports.QueryGetDidRequest = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryGetDidRequest();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
+                    if (tag != 10) {
+                        break;
+                    }
                     message.id = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    continue;
             }
+            if ((tag & 7) == 4 || tag == 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
         }
         return message;
     },
@@ -67,22 +71,29 @@ exports.QueryGetDidResponse = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryGetDidResponse();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
+                    if (tag != 10) {
+                        break;
+                    }
                     message.did = did_1.Did.decode(reader, reader.uint32());
-                    break;
+                    continue;
                 case 2:
+                    if (tag != 18) {
+                        break;
+                    }
                     message.metadata = stateValue_1.Metadata.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    continue;
             }
+            if ((tag & 7) == 4 || tag == 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
         }
         return message;
     },
@@ -119,7 +130,7 @@ class QueryClientImpl {
     Did(request) {
         const data = exports.QueryGetDidRequest.encode(request).finish();
         const promise = this.rpc.request(this.service, "Did", data);
-        return promise.then((data) => exports.QueryGetDidResponse.decode(new minimal_1.default.Reader(data)));
+        return promise.then((data) => exports.QueryGetDidResponse.decode(minimal_1.default.Reader.create(data)));
     }
 }
 exports.QueryClientImpl = QueryClientImpl;

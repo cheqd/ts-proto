@@ -23,22 +23,29 @@ exports.QueryResourceRequest = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryResourceRequest();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
+                    if (tag != 10) {
+                        break;
+                    }
                     message.collectionId = reader.string();
-                    break;
+                    continue;
                 case 2:
+                    if (tag != 18) {
+                        break;
+                    }
                     message.id = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    continue;
             }
+            if ((tag & 7) == 4 || tag == 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
         }
         return message;
     },
@@ -75,19 +82,23 @@ exports.QueryResourceResponse = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryResourceResponse();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
+                    if (tag != 10) {
+                        break;
+                    }
                     message.resource = resource_1.ResourceWithMetadata.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    continue;
             }
+            if ((tag & 7) == 4 || tag == 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
         }
         return message;
     },
@@ -125,22 +136,29 @@ exports.QueryResourceMetadataRequest = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryResourceMetadataRequest();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
+                    if (tag != 10) {
+                        break;
+                    }
                     message.collectionId = reader.string();
-                    break;
+                    continue;
                 case 2:
+                    if (tag != 18) {
+                        break;
+                    }
                     message.id = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    continue;
             }
+            if ((tag & 7) == 4 || tag == 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
         }
         return message;
     },
@@ -177,19 +195,23 @@ exports.QueryResourceMetadataResponse = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryResourceMetadataResponse();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
+                    if (tag != 10) {
+                        break;
+                    }
                     message.resource = resource_1.Metadata.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    continue;
             }
+            if ((tag & 7) == 4 || tag == 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
         }
         return message;
     },
@@ -226,22 +248,29 @@ exports.QueryCollectionResourcesRequest = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryCollectionResourcesRequest();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
+                    if (tag != 10) {
+                        break;
+                    }
                     message.collectionId = reader.string();
-                    break;
+                    continue;
                 case 2:
+                    if (tag != 18) {
+                        break;
+                    }
                     message.pagination = pagination_1.PageRequest.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    continue;
             }
+            if ((tag & 7) == 4 || tag == 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
         }
         return message;
     },
@@ -284,22 +313,29 @@ exports.QueryCollectionResourcesResponse = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : new minimal_1.default.Reader(input);
+        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryCollectionResourcesResponse();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
+                    if (tag != 10) {
+                        break;
+                    }
                     message.resources.push(resource_1.Metadata.decode(reader, reader.uint32()));
-                    break;
+                    continue;
                 case 2:
+                    if (tag != 18) {
+                        break;
+                    }
                     message.pagination = pagination_1.PageResponse.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    continue;
             }
+            if ((tag & 7) == 4 || tag == 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
         }
         return message;
     },
@@ -344,17 +380,17 @@ class QueryClientImpl {
     Resource(request) {
         const data = exports.QueryResourceRequest.encode(request).finish();
         const promise = this.rpc.request(this.service, "Resource", data);
-        return promise.then((data) => exports.QueryResourceResponse.decode(new minimal_1.default.Reader(data)));
+        return promise.then((data) => exports.QueryResourceResponse.decode(minimal_1.default.Reader.create(data)));
     }
     ResourceMetadata(request) {
         const data = exports.QueryResourceMetadataRequest.encode(request).finish();
         const promise = this.rpc.request(this.service, "ResourceMetadata", data);
-        return promise.then((data) => exports.QueryResourceMetadataResponse.decode(new minimal_1.default.Reader(data)));
+        return promise.then((data) => exports.QueryResourceMetadataResponse.decode(minimal_1.default.Reader.create(data)));
     }
     CollectionResources(request) {
         const data = exports.QueryCollectionResourcesRequest.encode(request).finish();
         const promise = this.rpc.request(this.service, "CollectionResources", data);
-        return promise.then((data) => exports.QueryCollectionResourcesResponse.decode(new minimal_1.default.Reader(data)));
+        return promise.then((data) => exports.QueryCollectionResourcesResponse.decode(minimal_1.default.Reader.create(data)));
     }
 }
 exports.QueryClientImpl = QueryClientImpl;
