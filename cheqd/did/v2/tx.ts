@@ -237,22 +237,31 @@ export const MsgCreateDidDoc = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateDidDoc {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateDidDoc();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.payload = MsgCreateDidDocPayload.decode(reader, reader.uint32());
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.signatures.push(SignInfo.decode(reader, reader.uint32()));
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -306,22 +315,31 @@ export const MsgUpdateDidDoc = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateDidDoc {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateDidDoc();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.payload = MsgUpdateDidDocPayload.decode(reader, reader.uint32());
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.signatures.push(SignInfo.decode(reader, reader.uint32()));
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -375,22 +393,31 @@ export const MsgDeactivateDidDoc = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeactivateDidDoc {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeactivateDidDoc();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.payload = MsgDeactivateDidDocPayload.decode(reader, reader.uint32());
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.signatures.push(SignInfo.decode(reader, reader.uint32()));
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -444,22 +471,31 @@ export const SignInfo = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): SignInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignInfo();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.verificationMethodId = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.signature = reader.bytes();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -550,52 +586,101 @@ export const MsgCreateDidDocPayload = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateDidDocPayload {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateDidDocPayload();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.context.push(reader.string());
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.id = reader.string();
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.controller.push(reader.string());
-          break;
+          continue;
         case 4:
+          if (tag != 34) {
+            break;
+          }
+
           message.verificationMethod.push(VerificationMethod.decode(reader, reader.uint32()));
-          break;
+          continue;
         case 5:
+          if (tag != 42) {
+            break;
+          }
+
           message.authentication.push(reader.string());
-          break;
+          continue;
         case 6:
+          if (tag != 50) {
+            break;
+          }
+
           message.assertionMethod.push(reader.string());
-          break;
+          continue;
         case 7:
+          if (tag != 58) {
+            break;
+          }
+
           message.capabilityInvocation.push(reader.string());
-          break;
+          continue;
         case 8:
+          if (tag != 66) {
+            break;
+          }
+
           message.capabilityDelegation.push(reader.string());
-          break;
+          continue;
         case 9:
+          if (tag != 74) {
+            break;
+          }
+
           message.keyAgreement.push(reader.string());
-          break;
+          continue;
         case 10:
+          if (tag != 82) {
+            break;
+          }
+
           message.service.push(Service.decode(reader, reader.uint32()));
-          break;
+          continue;
         case 11:
+          if (tag != 90) {
+            break;
+          }
+
           message.alsoKnownAs.push(reader.string());
-          break;
+          continue;
         case 12:
+          if (tag != 98) {
+            break;
+          }
+
           message.versionId = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -715,19 +800,24 @@ export const MsgCreateDidDocResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateDidDocResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateDidDocResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.value = DidDocWithMetadata.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -814,52 +904,101 @@ export const MsgUpdateDidDocPayload = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateDidDocPayload {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateDidDocPayload();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.context.push(reader.string());
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.id = reader.string();
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.controller.push(reader.string());
-          break;
+          continue;
         case 4:
+          if (tag != 34) {
+            break;
+          }
+
           message.verificationMethod.push(VerificationMethod.decode(reader, reader.uint32()));
-          break;
+          continue;
         case 5:
+          if (tag != 42) {
+            break;
+          }
+
           message.authentication.push(reader.string());
-          break;
+          continue;
         case 6:
+          if (tag != 50) {
+            break;
+          }
+
           message.assertionMethod.push(reader.string());
-          break;
+          continue;
         case 7:
+          if (tag != 58) {
+            break;
+          }
+
           message.capabilityInvocation.push(reader.string());
-          break;
+          continue;
         case 8:
+          if (tag != 66) {
+            break;
+          }
+
           message.capabilityDelegation.push(reader.string());
-          break;
+          continue;
         case 9:
+          if (tag != 74) {
+            break;
+          }
+
           message.keyAgreement.push(reader.string());
-          break;
+          continue;
         case 10:
+          if (tag != 82) {
+            break;
+          }
+
           message.service.push(Service.decode(reader, reader.uint32()));
-          break;
+          continue;
         case 11:
+          if (tag != 90) {
+            break;
+          }
+
           message.alsoKnownAs.push(reader.string());
-          break;
+          continue;
         case 12:
+          if (tag != 98) {
+            break;
+          }
+
           message.versionId = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -979,19 +1118,24 @@ export const MsgUpdateDidDocResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateDidDocResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateDidDocResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.value = DidDocWithMetadata.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -1035,22 +1179,31 @@ export const MsgDeactivateDidDocPayload = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeactivateDidDocPayload {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeactivateDidDocPayload();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.id = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.versionId = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -1094,19 +1247,24 @@ export const MsgDeactivateDidDocResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeactivateDidDocResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeactivateDidDocResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.value = DidDocWithMetadata.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -1157,19 +1315,19 @@ export class MsgClientImpl implements Msg {
   CreateDidDoc(request: MsgCreateDidDoc): Promise<MsgCreateDidDocResponse> {
     const data = MsgCreateDidDoc.encode(request).finish();
     const promise = this.rpc.request(this.service, "CreateDidDoc", data);
-    return promise.then((data) => MsgCreateDidDocResponse.decode(new _m0.Reader(data)));
+    return promise.then((data) => MsgCreateDidDocResponse.decode(_m0.Reader.create(data)));
   }
 
   UpdateDidDoc(request: MsgUpdateDidDoc): Promise<MsgUpdateDidDocResponse> {
     const data = MsgUpdateDidDoc.encode(request).finish();
     const promise = this.rpc.request(this.service, "UpdateDidDoc", data);
-    return promise.then((data) => MsgUpdateDidDocResponse.decode(new _m0.Reader(data)));
+    return promise.then((data) => MsgUpdateDidDocResponse.decode(_m0.Reader.create(data)));
   }
 
   DeactivateDidDoc(request: MsgDeactivateDidDoc): Promise<MsgDeactivateDidDocResponse> {
     const data = MsgDeactivateDidDoc.encode(request).finish();
     const promise = this.rpc.request(this.service, "DeactivateDidDoc", data);
-    return promise.then((data) => MsgDeactivateDidDocResponse.decode(new _m0.Reader(data)));
+    return promise.then((data) => MsgDeactivateDidDocResponse.decode(_m0.Reader.create(data)));
   }
 }
 
