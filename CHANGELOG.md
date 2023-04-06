@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/cheqd/ts-proto/compare/2.1.2...2.2.0) (2023-04-06)
+
+
+### Features
+
+* Regenerate Protobufs on release/2.x branch ([#112](https://github.com/cheqd/ts-proto/issues/112)) ([1477005](https://github.com/cheqd/ts-proto/commit/1477005446992d422ab1f55690bee37ccafd89c0)), closes [#102](https://github.com/cheqd/ts-proto/issues/102)
+
 ## [2.1.2](https://github.com/cheqd/ts-proto/compare/2.1.1...2.1.2) (2023-04-06)
 
 ## [2.1.1](https://github.com/cheqd/ts-proto/compare/2.1.0...2.1.1) (2023-04-06)
