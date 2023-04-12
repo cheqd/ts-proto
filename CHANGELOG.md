@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/cheqd/ts-proto/compare/3.1.4...3.2.0) (2023-04-06)
+
+
+### Features
+
+* Regenerated Protobufs ([73bf174](https://github.com/cheqd/ts-proto/commit/73bf174616490c7924b47c5ab97cf8bbc10c63a8))
+
 ## [3.2.0-develop.1](https://github.com/cheqd/ts-proto/compare/3.1.4...3.2.0-develop.1) (2023-04-06)
 
 
