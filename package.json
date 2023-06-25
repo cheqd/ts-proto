@@ -52,7 +52,7 @@
     "@semantic-release/release-notes-generator": "^11.0.3",
     "@types/long": "^5.0.0",
     "@types/node": "^20.3.1",
-    "conventional-changelog-conventionalcommits": "^5.0.0",
+    "conventional-changelog-conventionalcommits": "^6.1.0",
     "loose-ts-check": "^2.0.0",
     "semantic-release": "^21.0.5",
     "typescript": "^5.1.3"
