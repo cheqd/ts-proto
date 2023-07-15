@@ -49,12 +49,12 @@
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^9.0.3",
     "@semantic-release/npm": "^10.0.4",
-    "@semantic-release/release-notes-generator": "^11.0.3",
+    "@semantic-release/release-notes-generator": "^11.0.4",
     "@types/long": "^5.0.0",
-    "@types/node": "^20.3.3",
+    "@types/node": "^20.4.2",
     "conventional-changelog-conventionalcommits": "^6.1.0",
     "loose-ts-check": "^2.0.0",
-    "semantic-release": "^21.0.6",
+    "semantic-release": "^21.0.7",
     "typescript": "^5.1.6"
   },
   "publishConfig": {

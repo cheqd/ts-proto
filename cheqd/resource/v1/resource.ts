@@ -20,7 +20,7 @@ export interface ResourceHeader {
 }
 
 function createBaseResource(): Resource {
-  return { header: undefined, data: new Uint8Array() };
+  return { header: undefined, data: new Uint8Array(0) };
 }
 
 export const Resource = {
@@ -42,21 +42,21 @@ export const Resource = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.header = ResourceHeader.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.data = reader.bytes();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -67,7 +67,7 @@ export const Resource = {
   fromJSON(object: any): Resource {
     return {
       header: isSet(object.header) ? ResourceHeader.fromJSON(object.header) : undefined,
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
     };
   },
 
@@ -75,7 +75,7 @@ export const Resource = {
     const obj: any = {};
     message.header !== undefined && (obj.header = message.header ? ResourceHeader.toJSON(message.header) : undefined);
     message.data !== undefined &&
-      (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
+      (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array(0)));
     return obj;
   },
 
@@ -88,7 +88,7 @@ export const Resource = {
     message.header = (object.header !== undefined && object.header !== null)
       ? ResourceHeader.fromPartial(object.header)
       : undefined;
-    message.data = object.data ?? new Uint8Array();
+    message.data = object.data ?? new Uint8Array(0);
     return message;
   },
 };
@@ -101,7 +101,7 @@ function createBaseResourceHeader(): ResourceHeader {
     resourceType: "",
     mediaType: "",
     created: "",
-    checksum: new Uint8Array(),
+    checksum: new Uint8Array(0),
     previousVersionId: "",
     nextVersionId: "",
   };
@@ -147,70 +147,70 @@ export const ResourceHeader = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.collectionId = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.id = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.resourceType = reader.string();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.mediaType = reader.string();
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
           message.created = reader.string();
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
           message.checksum = reader.bytes();
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
           message.previousVersionId = reader.string();
           continue;
         case 9:
-          if (tag != 74) {
+          if (tag !== 74) {
             break;
           }
 
           message.nextVersionId = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -226,7 +226,7 @@ export const ResourceHeader = {
       resourceType: isSet(object.resourceType) ? String(object.resourceType) : "",
       mediaType: isSet(object.mediaType) ? String(object.mediaType) : "",
       created: isSet(object.created) ? String(object.created) : "",
-      checksum: isSet(object.checksum) ? bytesFromBase64(object.checksum) : new Uint8Array(),
+      checksum: isSet(object.checksum) ? bytesFromBase64(object.checksum) : new Uint8Array(0),
       previousVersionId: isSet(object.previousVersionId) ? String(object.previousVersionId) : "",
       nextVersionId: isSet(object.nextVersionId) ? String(object.nextVersionId) : "",
     };
@@ -241,7 +241,7 @@ export const ResourceHeader = {
     message.mediaType !== undefined && (obj.mediaType = message.mediaType);
     message.created !== undefined && (obj.created = message.created);
     message.checksum !== undefined &&
-      (obj.checksum = base64FromBytes(message.checksum !== undefined ? message.checksum : new Uint8Array()));
+      (obj.checksum = base64FromBytes(message.checksum !== undefined ? message.checksum : new Uint8Array(0)));
     message.previousVersionId !== undefined && (obj.previousVersionId = message.previousVersionId);
     message.nextVersionId !== undefined && (obj.nextVersionId = message.nextVersionId);
     return obj;
@@ -259,17 +259,17 @@ export const ResourceHeader = {
     message.resourceType = object.resourceType ?? "";
     message.mediaType = object.mediaType ?? "";
     message.created = object.created ?? "";
-    message.checksum = object.checksum ?? new Uint8Array();
+    message.checksum = object.checksum ?? new Uint8Array(0);
     message.previousVersionId = object.previousVersionId ?? "";
     message.nextVersionId = object.nextVersionId ?? "";
     return message;
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var tsProtoGlobalThis: any = (() => {
+declare const self: any | undefined;
+declare const window: any | undefined;
+declare const global: any | undefined;
+const tsProtoGlobalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }
