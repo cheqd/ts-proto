@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.QueryClientImpl = exports.QueryGetDidResponse = exports.QueryGetDidRequest = void 0;
+exports.QueryClientImpl = exports.QueryServiceName = exports.QueryGetDidResponse = exports.QueryGetDidRequest = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
@@ -27,13 +27,13 @@ exports.QueryGetDidRequest = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -78,19 +78,19 @@ exports.QueryGetDidResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.did = did_1.Did.decode(reader, reader.uint32());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.metadata = stateValue_1.Metadata.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -121,9 +121,10 @@ exports.QueryGetDidResponse = {
         return message;
     },
 };
+exports.QueryServiceName = "cheqdid.cheqdnode.cheqd.v1.Query";
 class QueryClientImpl {
     constructor(rpc, opts) {
-        this.service = opts?.service || "cheqdid.cheqdnode.cheqd.v1.Query";
+        this.service = opts?.service || exports.QueryServiceName;
         this.rpc = rpc;
         this.Did = this.Did.bind(this);
     }

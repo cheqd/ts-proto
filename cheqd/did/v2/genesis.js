@@ -30,19 +30,19 @@ exports.DidDocVersionSet = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.latestVersion = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.didDocs.push(diddoc_1.DidDocWithMetadata.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -100,25 +100,25 @@ exports.GenesisState = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.didNamespace = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.versionSets.push(exports.DidDocVersionSet.decode(reader, reader.uint32()));
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.feeParams = fee_1.FeeParams.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);

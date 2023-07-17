@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MsgClientImpl = exports.MsgDeactivateDidDocResponse = exports.MsgDeactivateDidDocPayload = exports.MsgUpdateDidDocResponse = exports.MsgUpdateDidDocPayload = exports.MsgCreateDidDocResponse = exports.MsgCreateDidDocPayload = exports.SignInfo = exports.MsgDeactivateDidDoc = exports.MsgUpdateDidDoc = exports.MsgCreateDidDoc = void 0;
+exports.MsgClientImpl = exports.MsgServiceName = exports.MsgDeactivateDidDocResponse = exports.MsgDeactivateDidDocPayload = exports.MsgUpdateDidDocResponse = exports.MsgUpdateDidDocPayload = exports.MsgCreateDidDocResponse = exports.MsgCreateDidDocPayload = exports.SignInfo = exports.MsgDeactivateDidDoc = exports.MsgUpdateDidDoc = exports.MsgCreateDidDoc = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
@@ -29,19 +29,19 @@ exports.MsgCreateDidDoc = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.payload = exports.MsgCreateDidDocPayload.decode(reader, reader.uint32());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.signatures.push(exports.SignInfo.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -99,19 +99,19 @@ exports.MsgUpdateDidDoc = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.payload = exports.MsgUpdateDidDocPayload.decode(reader, reader.uint32());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.signatures.push(exports.SignInfo.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -169,19 +169,19 @@ exports.MsgDeactivateDidDoc = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.payload = exports.MsgDeactivateDidDocPayload.decode(reader, reader.uint32());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.signatures.push(exports.SignInfo.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -219,7 +219,7 @@ exports.MsgDeactivateDidDoc = {
     },
 };
 function createBaseSignInfo() {
-    return { verificationMethodId: "", signature: new Uint8Array() };
+    return { verificationMethodId: "", signature: new Uint8Array(0) };
 }
 exports.SignInfo = {
     encode(message, writer = minimal_1.default.Writer.create()) {
@@ -239,19 +239,19 @@ exports.SignInfo = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.verificationMethodId = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.signature = reader.bytes();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -261,14 +261,14 @@ exports.SignInfo = {
     fromJSON(object) {
         return {
             verificationMethodId: isSet(object.verificationMethodId) ? String(object.verificationMethodId) : "",
-            signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(),
+            signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(0),
         };
     },
     toJSON(message) {
         const obj = {};
         message.verificationMethodId !== undefined && (obj.verificationMethodId = message.verificationMethodId);
         message.signature !== undefined &&
-            (obj.signature = base64FromBytes(message.signature !== undefined ? message.signature : new Uint8Array()));
+            (obj.signature = base64FromBytes(message.signature !== undefined ? message.signature : new Uint8Array(0)));
         return obj;
     },
     create(base) {
@@ -277,7 +277,7 @@ exports.SignInfo = {
     fromPartial(object) {
         const message = createBaseSignInfo();
         message.verificationMethodId = object.verificationMethodId ?? "";
-        message.signature = object.signature ?? new Uint8Array();
+        message.signature = object.signature ?? new Uint8Array(0);
         return message;
     },
 };
@@ -345,79 +345,79 @@ exports.MsgCreateDidDocPayload = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.context.push(reader.string());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.controller.push(reader.string());
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.verificationMethod.push(diddoc_1.VerificationMethod.decode(reader, reader.uint32()));
                     continue;
                 case 5:
-                    if (tag != 42) {
+                    if (tag !== 42) {
                         break;
                     }
                     message.authentication.push(reader.string());
                     continue;
                 case 6:
-                    if (tag != 50) {
+                    if (tag !== 50) {
                         break;
                     }
                     message.assertionMethod.push(reader.string());
                     continue;
                 case 7:
-                    if (tag != 58) {
+                    if (tag !== 58) {
                         break;
                     }
                     message.capabilityInvocation.push(reader.string());
                     continue;
                 case 8:
-                    if (tag != 66) {
+                    if (tag !== 66) {
                         break;
                     }
                     message.capabilityDelegation.push(reader.string());
                     continue;
                 case 9:
-                    if (tag != 74) {
+                    if (tag !== 74) {
                         break;
                     }
                     message.keyAgreement.push(reader.string());
                     continue;
                 case 10:
-                    if (tag != 82) {
+                    if (tag !== 82) {
                         break;
                     }
                     message.service.push(diddoc_1.Service.decode(reader, reader.uint32()));
                     continue;
                 case 11:
-                    if (tag != 90) {
+                    if (tag !== 90) {
                         break;
                     }
                     message.alsoKnownAs.push(reader.string());
                     continue;
                 case 12:
-                    if (tag != 98) {
+                    if (tag !== 98) {
                         break;
                     }
                     message.versionId = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -550,13 +550,13 @@ exports.MsgCreateDidDocResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.value = diddoc_1.DidDocWithMetadata.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -646,79 +646,79 @@ exports.MsgUpdateDidDocPayload = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.context.push(reader.string());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.controller.push(reader.string());
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.verificationMethod.push(diddoc_1.VerificationMethod.decode(reader, reader.uint32()));
                     continue;
                 case 5:
-                    if (tag != 42) {
+                    if (tag !== 42) {
                         break;
                     }
                     message.authentication.push(reader.string());
                     continue;
                 case 6:
-                    if (tag != 50) {
+                    if (tag !== 50) {
                         break;
                     }
                     message.assertionMethod.push(reader.string());
                     continue;
                 case 7:
-                    if (tag != 58) {
+                    if (tag !== 58) {
                         break;
                     }
                     message.capabilityInvocation.push(reader.string());
                     continue;
                 case 8:
-                    if (tag != 66) {
+                    if (tag !== 66) {
                         break;
                     }
                     message.capabilityDelegation.push(reader.string());
                     continue;
                 case 9:
-                    if (tag != 74) {
+                    if (tag !== 74) {
                         break;
                     }
                     message.keyAgreement.push(reader.string());
                     continue;
                 case 10:
-                    if (tag != 82) {
+                    if (tag !== 82) {
                         break;
                     }
                     message.service.push(diddoc_1.Service.decode(reader, reader.uint32()));
                     continue;
                 case 11:
-                    if (tag != 90) {
+                    if (tag !== 90) {
                         break;
                     }
                     message.alsoKnownAs.push(reader.string());
                     continue;
                 case 12:
-                    if (tag != 98) {
+                    if (tag !== 98) {
                         break;
                     }
                     message.versionId = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -851,13 +851,13 @@ exports.MsgUpdateDidDocResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.value = diddoc_1.DidDocWithMetadata.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -904,19 +904,19 @@ exports.MsgDeactivateDidDocPayload = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.versionId = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -963,13 +963,13 @@ exports.MsgDeactivateDidDocResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.value = diddoc_1.DidDocWithMetadata.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -995,9 +995,10 @@ exports.MsgDeactivateDidDocResponse = {
         return message;
     },
 };
+exports.MsgServiceName = "cheqd.did.v2.Msg";
 class MsgClientImpl {
     constructor(rpc, opts) {
-        this.service = opts?.service || "cheqd.did.v2.Msg";
+        this.service = opts?.service || exports.MsgServiceName;
         this.rpc = rpc;
         this.CreateDidDoc = this.CreateDidDoc.bind(this);
         this.UpdateDidDoc = this.UpdateDidDoc.bind(this);
@@ -1020,7 +1021,7 @@ class MsgClientImpl {
     }
 }
 exports.MsgClientImpl = MsgClientImpl;
-var tsProtoGlobalThis = (() => {
+const tsProtoGlobalThis = (() => {
     if (typeof globalThis !== "undefined") {
         return globalThis;
     }

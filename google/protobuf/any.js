@@ -8,7 +8,7 @@ exports.Any = void 0;
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
 function createBaseAny() {
-    return { typeUrl: "", value: new Uint8Array() };
+    return { typeUrl: "", value: new Uint8Array(0) };
 }
 exports.Any = {
     encode(message, writer = minimal_1.default.Writer.create()) {
@@ -28,19 +28,19 @@ exports.Any = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.typeUrl = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.value = reader.bytes();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -50,14 +50,14 @@ exports.Any = {
     fromJSON(object) {
         return {
             typeUrl: isSet(object.typeUrl) ? String(object.typeUrl) : "",
-            value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
+            value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(0),
         };
     },
     toJSON(message) {
         const obj = {};
         message.typeUrl !== undefined && (obj.typeUrl = message.typeUrl);
         message.value !== undefined &&
-            (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
+            (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array(0)));
         return obj;
     },
     create(base) {
@@ -66,11 +66,11 @@ exports.Any = {
     fromPartial(object) {
         const message = createBaseAny();
         message.typeUrl = object.typeUrl ?? "";
-        message.value = object.value ?? new Uint8Array();
+        message.value = object.value ?? new Uint8Array(0);
         return message;
     },
 };
-var tsProtoGlobalThis = (() => {
+const tsProtoGlobalThis = (() => {
     if (typeof globalThis !== "undefined") {
         return globalThis;
     }

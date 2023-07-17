@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MsgClientImpl = exports.MsgUpdateDidResponse = exports.MsgUpdateDidPayload = exports.MsgCreateDidResponse = exports.MsgCreateDidPayload = exports.MsgDeactivateDidResponse = exports.MsgDeactivateDidPayload = exports.SignInfo = exports.MsgDeactivateDid = exports.MsgUpdateDid = exports.MsgCreateDid = void 0;
+exports.MsgClientImpl = exports.MsgServiceName = exports.MsgUpdateDidResponse = exports.MsgUpdateDidPayload = exports.MsgCreateDidResponse = exports.MsgCreateDidPayload = exports.MsgDeactivateDidResponse = exports.MsgDeactivateDidPayload = exports.SignInfo = exports.MsgDeactivateDid = exports.MsgUpdateDid = exports.MsgCreateDid = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
@@ -30,19 +30,19 @@ exports.MsgCreateDid = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.payload = exports.MsgCreateDidPayload.decode(reader, reader.uint32());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.signatures.push(exports.SignInfo.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -100,19 +100,19 @@ exports.MsgUpdateDid = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.payload = exports.MsgUpdateDidPayload.decode(reader, reader.uint32());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.signatures.push(exports.SignInfo.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -170,19 +170,19 @@ exports.MsgDeactivateDid = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.payload = exports.MsgDeactivateDidPayload.decode(reader, reader.uint32());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.signatures.push(exports.SignInfo.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -240,19 +240,19 @@ exports.SignInfo = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.verificationMethodId = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.signature = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -299,13 +299,13 @@ exports.MsgDeactivateDidPayload = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -350,19 +350,19 @@ exports.MsgDeactivateDidResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.did = did_1.Did.decode(reader, reader.uint32());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.metadata = stateValue_1.Metadata.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -453,73 +453,73 @@ exports.MsgCreateDidPayload = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.context.push(reader.string());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.controller.push(reader.string());
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.verificationMethod.push(did_1.VerificationMethod.decode(reader, reader.uint32()));
                     continue;
                 case 5:
-                    if (tag != 42) {
+                    if (tag !== 42) {
                         break;
                     }
                     message.authentication.push(reader.string());
                     continue;
                 case 6:
-                    if (tag != 50) {
+                    if (tag !== 50) {
                         break;
                     }
                     message.assertionMethod.push(reader.string());
                     continue;
                 case 7:
-                    if (tag != 58) {
+                    if (tag !== 58) {
                         break;
                     }
                     message.capabilityInvocation.push(reader.string());
                     continue;
                 case 8:
-                    if (tag != 66) {
+                    if (tag !== 66) {
                         break;
                     }
                     message.capabilityDelegation.push(reader.string());
                     continue;
                 case 9:
-                    if (tag != 74) {
+                    if (tag !== 74) {
                         break;
                     }
                     message.keyAgreement.push(reader.string());
                     continue;
                 case 10:
-                    if (tag != 82) {
+                    if (tag !== 82) {
                         break;
                     }
                     message.alsoKnownAs.push(reader.string());
                     continue;
                 case 11:
-                    if (tag != 90) {
+                    if (tag !== 90) {
                         break;
                     }
                     message.service.push(did_1.Service.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -649,13 +649,13 @@ exports.MsgCreateDidResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -743,79 +743,79 @@ exports.MsgUpdateDidPayload = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.context.push(reader.string());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.controller.push(reader.string());
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.verificationMethod.push(did_1.VerificationMethod.decode(reader, reader.uint32()));
                     continue;
                 case 5:
-                    if (tag != 42) {
+                    if (tag !== 42) {
                         break;
                     }
                     message.authentication.push(reader.string());
                     continue;
                 case 6:
-                    if (tag != 50) {
+                    if (tag !== 50) {
                         break;
                     }
                     message.assertionMethod.push(reader.string());
                     continue;
                 case 7:
-                    if (tag != 58) {
+                    if (tag !== 58) {
                         break;
                     }
                     message.capabilityInvocation.push(reader.string());
                     continue;
                 case 8:
-                    if (tag != 66) {
+                    if (tag !== 66) {
                         break;
                     }
                     message.capabilityDelegation.push(reader.string());
                     continue;
                 case 9:
-                    if (tag != 74) {
+                    if (tag !== 74) {
                         break;
                     }
                     message.keyAgreement.push(reader.string());
                     continue;
                 case 10:
-                    if (tag != 82) {
+                    if (tag !== 82) {
                         break;
                     }
                     message.alsoKnownAs.push(reader.string());
                     continue;
                 case 11:
-                    if (tag != 90) {
+                    if (tag !== 90) {
                         break;
                     }
                     message.service.push(did_1.Service.decode(reader, reader.uint32()));
                     continue;
                 case 12:
-                    if (tag != 98) {
+                    if (tag !== 98) {
                         break;
                     }
                     message.versionId = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -948,13 +948,13 @@ exports.MsgUpdateDidResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -978,9 +978,10 @@ exports.MsgUpdateDidResponse = {
         return message;
     },
 };
+exports.MsgServiceName = "cheqdid.cheqdnode.cheqd.v1.Msg";
 class MsgClientImpl {
     constructor(rpc, opts) {
-        this.service = opts?.service || "cheqdid.cheqdnode.cheqd.v1.Msg";
+        this.service = opts?.service || exports.MsgServiceName;
         this.rpc = rpc;
         this.CreateDid = this.CreateDid.bind(this);
         this.UpdateDid = this.UpdateDid.bind(this);

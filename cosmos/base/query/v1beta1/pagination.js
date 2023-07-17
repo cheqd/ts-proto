@@ -8,7 +8,7 @@ exports.PageResponse = exports.PageRequest = void 0;
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
 function createBasePageRequest() {
-    return { key: new Uint8Array(), offset: long_1.default.UZERO, limit: long_1.default.UZERO, countTotal: false, reverse: false };
+    return { key: new Uint8Array(0), offset: long_1.default.UZERO, limit: long_1.default.UZERO, countTotal: false, reverse: false };
 }
 exports.PageRequest = {
     encode(message, writer = minimal_1.default.Writer.create()) {
@@ -37,37 +37,37 @@ exports.PageRequest = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.key = reader.bytes();
                     continue;
                 case 2:
-                    if (tag != 16) {
+                    if (tag !== 16) {
                         break;
                     }
                     message.offset = reader.uint64();
                     continue;
                 case 3:
-                    if (tag != 24) {
+                    if (tag !== 24) {
                         break;
                     }
                     message.limit = reader.uint64();
                     continue;
                 case 4:
-                    if (tag != 32) {
+                    if (tag !== 32) {
                         break;
                     }
                     message.countTotal = reader.bool();
                     continue;
                 case 5:
-                    if (tag != 40) {
+                    if (tag !== 40) {
                         break;
                     }
                     message.reverse = reader.bool();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -76,7 +76,7 @@ exports.PageRequest = {
     },
     fromJSON(object) {
         return {
-            key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+            key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(0),
             offset: isSet(object.offset) ? long_1.default.fromValue(object.offset) : long_1.default.UZERO,
             limit: isSet(object.limit) ? long_1.default.fromValue(object.limit) : long_1.default.UZERO,
             countTotal: isSet(object.countTotal) ? Boolean(object.countTotal) : false,
@@ -86,7 +86,7 @@ exports.PageRequest = {
     toJSON(message) {
         const obj = {};
         message.key !== undefined &&
-            (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
+            (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array(0)));
         message.offset !== undefined && (obj.offset = (message.offset || long_1.default.UZERO).toString());
         message.limit !== undefined && (obj.limit = (message.limit || long_1.default.UZERO).toString());
         message.countTotal !== undefined && (obj.countTotal = message.countTotal);
@@ -98,7 +98,7 @@ exports.PageRequest = {
     },
     fromPartial(object) {
         const message = createBasePageRequest();
-        message.key = object.key ?? new Uint8Array();
+        message.key = object.key ?? new Uint8Array(0);
         message.offset = (object.offset !== undefined && object.offset !== null)
             ? long_1.default.fromValue(object.offset)
             : long_1.default.UZERO;
@@ -109,7 +109,7 @@ exports.PageRequest = {
     },
 };
 function createBasePageResponse() {
-    return { nextKey: new Uint8Array(), total: long_1.default.UZERO };
+    return { nextKey: new Uint8Array(0), total: long_1.default.UZERO };
 }
 exports.PageResponse = {
     encode(message, writer = minimal_1.default.Writer.create()) {
@@ -129,19 +129,19 @@ exports.PageResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.nextKey = reader.bytes();
                     continue;
                 case 2:
-                    if (tag != 16) {
+                    if (tag !== 16) {
                         break;
                     }
                     message.total = reader.uint64();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -150,14 +150,14 @@ exports.PageResponse = {
     },
     fromJSON(object) {
         return {
-            nextKey: isSet(object.nextKey) ? bytesFromBase64(object.nextKey) : new Uint8Array(),
+            nextKey: isSet(object.nextKey) ? bytesFromBase64(object.nextKey) : new Uint8Array(0),
             total: isSet(object.total) ? long_1.default.fromValue(object.total) : long_1.default.UZERO,
         };
     },
     toJSON(message) {
         const obj = {};
         message.nextKey !== undefined &&
-            (obj.nextKey = base64FromBytes(message.nextKey !== undefined ? message.nextKey : new Uint8Array()));
+            (obj.nextKey = base64FromBytes(message.nextKey !== undefined ? message.nextKey : new Uint8Array(0)));
         message.total !== undefined && (obj.total = (message.total || long_1.default.UZERO).toString());
         return obj;
     },
@@ -166,12 +166,12 @@ exports.PageResponse = {
     },
     fromPartial(object) {
         const message = createBasePageResponse();
-        message.nextKey = object.nextKey ?? new Uint8Array();
+        message.nextKey = object.nextKey ?? new Uint8Array(0);
         message.total = (object.total !== undefined && object.total !== null) ? long_1.default.fromValue(object.total) : long_1.default.UZERO;
         return message;
     },
 };
-var tsProtoGlobalThis = (() => {
+const tsProtoGlobalThis = (() => {
     if (typeof globalThis !== "undefined") {
         return globalThis;
     }

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.QueryClientImpl = exports.QueryAllDidDocVersionsMetadataResponse = exports.QueryAllDidDocVersionsMetadataRequest = exports.QueryDidDocVersionResponse = exports.QueryDidDocVersionRequest = exports.QueryDidDocResponse = exports.QueryDidDocRequest = void 0;
+exports.QueryClientImpl = exports.QueryServiceName = exports.QueryAllDidDocVersionsMetadataResponse = exports.QueryAllDidDocVersionsMetadataRequest = exports.QueryDidDocVersionResponse = exports.QueryDidDocVersionRequest = exports.QueryDidDocResponse = exports.QueryDidDocRequest = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
@@ -27,13 +27,13 @@ exports.QueryDidDocRequest = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -75,13 +75,13 @@ exports.QueryDidDocResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.value = diddoc_1.DidDocWithMetadata.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -128,19 +128,19 @@ exports.QueryDidDocVersionRequest = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.version = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -187,13 +187,13 @@ exports.QueryDidDocVersionResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.value = diddoc_1.DidDocWithMetadata.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -240,19 +240,19 @@ exports.QueryAllDidDocVersionsMetadataRequest = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.pagination = pagination_1.PageRequest.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -305,19 +305,19 @@ exports.QueryAllDidDocVersionsMetadataResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.versions.push(diddoc_1.Metadata.decode(reader, reader.uint32()));
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.pagination = pagination_1.PageResponse.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -354,9 +354,10 @@ exports.QueryAllDidDocVersionsMetadataResponse = {
         return message;
     },
 };
+exports.QueryServiceName = "cheqd.did.v2.Query";
 class QueryClientImpl {
     constructor(rpc, opts) {
-        this.service = opts?.service || "cheqd.did.v2.Query";
+        this.service = opts?.service || exports.QueryServiceName;
         this.rpc = rpc;
         this.DidDoc = this.DidDoc.bind(this);
         this.DidDocVersion = this.DidDocVersion.bind(this);

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.QueryClientImpl = exports.QueryGetAllResourceVersionsResponse = exports.QueryGetAllResourceVersionsRequest = exports.QueryCollectionResourcesResponse = exports.QueryGetCollectionResourcesRequest = exports.QueryResourceResponse = exports.QueryGetResourceRequest = void 0;
+exports.QueryClientImpl = exports.QueryServiceName = exports.QueryGetAllResourceVersionsResponse = exports.QueryGetAllResourceVersionsRequest = exports.QueryCollectionResourcesResponse = exports.QueryGetCollectionResourcesRequest = exports.QueryResourceResponse = exports.QueryGetResourceRequest = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
@@ -29,19 +29,19 @@ exports.QueryGetResourceRequest = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.collectionId = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -88,13 +88,13 @@ exports.QueryResourceResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.resource = resource_1.Resource.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -138,13 +138,13 @@ exports.QueryGetCollectionResourcesRequest = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.collectionId = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -186,13 +186,13 @@ exports.QueryCollectionResourcesResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.resources.push(resource_1.ResourceHeader.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -247,25 +247,25 @@ exports.QueryGetAllResourceVersionsRequest = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.collectionId = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.name = reader.string();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.resourceType = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -315,13 +315,13 @@ exports.QueryGetAllResourceVersionsResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.resources.push(resource_1.ResourceHeader.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -352,9 +352,10 @@ exports.QueryGetAllResourceVersionsResponse = {
         return message;
     },
 };
+exports.QueryServiceName = "cheqdid.cheqdnode.resource.v1.Query";
 class QueryClientImpl {
     constructor(rpc, opts) {
-        this.service = opts?.service || "cheqdid.cheqdnode.resource.v1.Query";
+        this.service = opts?.service || exports.QueryServiceName;
         this.rpc = rpc;
         this.Resource = this.Resource.bind(this);
         this.CollectionResources = this.CollectionResources.bind(this);

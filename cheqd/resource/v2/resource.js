@@ -9,7 +9,7 @@ const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
 const timestamp_1 = require("../../../google/protobuf/timestamp");
 function createBaseResource() {
-    return { data: new Uint8Array() };
+    return { data: new Uint8Array(0) };
 }
 exports.Resource = {
     encode(message, writer = minimal_1.default.Writer.create()) {
@@ -26,13 +26,13 @@ exports.Resource = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.data = reader.bytes();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -40,12 +40,12 @@ exports.Resource = {
         return message;
     },
     fromJSON(object) {
-        return { data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array() };
+        return { data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0) };
     },
     toJSON(message) {
         const obj = {};
         message.data !== undefined &&
-            (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
+            (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array(0)));
         return obj;
     },
     create(base) {
@@ -53,7 +53,7 @@ exports.Resource = {
     },
     fromPartial(object) {
         const message = createBaseResource();
-        message.data = object.data ?? new Uint8Array();
+        message.data = object.data ?? new Uint8Array(0);
         return message;
     },
 };
@@ -117,73 +117,73 @@ exports.Metadata = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.collectionId = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.name = reader.string();
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.version = reader.string();
                     continue;
                 case 5:
-                    if (tag != 42) {
+                    if (tag !== 42) {
                         break;
                     }
                     message.resourceType = reader.string();
                     continue;
                 case 6:
-                    if (tag != 50) {
+                    if (tag !== 50) {
                         break;
                     }
                     message.alsoKnownAs.push(exports.AlternativeUri.decode(reader, reader.uint32()));
                     continue;
                 case 7:
-                    if (tag != 58) {
+                    if (tag !== 58) {
                         break;
                     }
                     message.mediaType = reader.string();
                     continue;
                 case 8:
-                    if (tag != 66) {
+                    if (tag !== 66) {
                         break;
                     }
                     message.created = fromTimestamp(timestamp_1.Timestamp.decode(reader, reader.uint32()));
                     continue;
                 case 9:
-                    if (tag != 74) {
+                    if (tag !== 74) {
                         break;
                     }
                     message.checksum = reader.string();
                     continue;
                 case 10:
-                    if (tag != 82) {
+                    if (tag !== 82) {
                         break;
                     }
                     message.previousVersionId = reader.string();
                     continue;
                 case 11:
-                    if (tag != 90) {
+                    if (tag !== 90) {
                         break;
                     }
                     message.nextVersionId = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -267,19 +267,19 @@ exports.AlternativeUri = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.uri = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.description = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -329,19 +329,19 @@ exports.ResourceWithMetadata = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.resource = exports.Resource.decode(reader, reader.uint32());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.metadata = exports.Metadata.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -374,7 +374,7 @@ exports.ResourceWithMetadata = {
         return message;
     },
 };
-var tsProtoGlobalThis = (() => {
+const tsProtoGlobalThis = (() => {
     if (typeof globalThis !== "undefined") {
         return globalThis;
     }
@@ -420,8 +420,8 @@ function toTimestamp(date) {
     return { seconds, nanos };
 }
 function fromTimestamp(t) {
-    let millis = t.seconds.toNumber() * 1000;
-    millis += t.nanos / 1000000;
+    let millis = (t.seconds.toNumber() || 0) * 1000;
+    millis += (t.nanos || 0) / 1000000;
     return new Date(millis);
 }
 function fromJsonTimestamp(o) {

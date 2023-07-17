@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MsgClientImpl = exports.MsgCreateResourceResponse = exports.MsgCreateResourcePayload = exports.MsgCreateResource = void 0;
+exports.MsgClientImpl = exports.MsgServiceName = exports.MsgCreateResourceResponse = exports.MsgCreateResourcePayload = exports.MsgCreateResource = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
@@ -30,19 +30,19 @@ exports.MsgCreateResource = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.payload = exports.MsgCreateResourcePayload.decode(reader, reader.uint32());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.signatures.push(tx_1.SignInfo.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -80,7 +80,15 @@ exports.MsgCreateResource = {
     },
 };
 function createBaseMsgCreateResourcePayload() {
-    return { data: new Uint8Array(), collectionId: "", id: "", name: "", version: "", resourceType: "", alsoKnownAs: [] };
+    return {
+        data: new Uint8Array(0),
+        collectionId: "",
+        id: "",
+        name: "",
+        version: "",
+        resourceType: "",
+        alsoKnownAs: [],
+    };
 }
 exports.MsgCreateResourcePayload = {
     encode(message, writer = minimal_1.default.Writer.create()) {
@@ -115,49 +123,49 @@ exports.MsgCreateResourcePayload = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.data = reader.bytes();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.collectionId = reader.string();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.name = reader.string();
                     continue;
                 case 5:
-                    if (tag != 42) {
+                    if (tag !== 42) {
                         break;
                     }
                     message.version = reader.string();
                     continue;
                 case 6:
-                    if (tag != 50) {
+                    if (tag !== 50) {
                         break;
                     }
                     message.resourceType = reader.string();
                     continue;
                 case 7:
-                    if (tag != 58) {
+                    if (tag !== 58) {
                         break;
                     }
                     message.alsoKnownAs.push(resource_1.AlternativeUri.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -166,7 +174,7 @@ exports.MsgCreateResourcePayload = {
     },
     fromJSON(object) {
         return {
-            data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+            data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
             collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
             id: isSet(object.id) ? String(object.id) : "",
             name: isSet(object.name) ? String(object.name) : "",
@@ -180,7 +188,7 @@ exports.MsgCreateResourcePayload = {
     toJSON(message) {
         const obj = {};
         message.data !== undefined &&
-            (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
+            (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array(0)));
         message.collectionId !== undefined && (obj.collectionId = message.collectionId);
         message.id !== undefined && (obj.id = message.id);
         message.name !== undefined && (obj.name = message.name);
@@ -199,7 +207,7 @@ exports.MsgCreateResourcePayload = {
     },
     fromPartial(object) {
         const message = createBaseMsgCreateResourcePayload();
-        message.data = object.data ?? new Uint8Array();
+        message.data = object.data ?? new Uint8Array(0);
         message.collectionId = object.collectionId ?? "";
         message.id = object.id ?? "";
         message.name = object.name ?? "";
@@ -227,13 +235,13 @@ exports.MsgCreateResourceResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.resource = resource_1.Metadata.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -259,9 +267,10 @@ exports.MsgCreateResourceResponse = {
         return message;
     },
 };
+exports.MsgServiceName = "cheqd.resource.v2.Msg";
 class MsgClientImpl {
     constructor(rpc, opts) {
-        this.service = opts?.service || "cheqd.resource.v2.Msg";
+        this.service = opts?.service || exports.MsgServiceName;
         this.rpc = rpc;
         this.CreateResource = this.CreateResource.bind(this);
     }
@@ -272,7 +281,7 @@ class MsgClientImpl {
     }
 }
 exports.MsgClientImpl = MsgClientImpl;
-var tsProtoGlobalThis = (() => {
+const tsProtoGlobalThis = (() => {
     if (typeof globalThis !== "undefined") {
         return globalThis;
     }
