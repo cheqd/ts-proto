@@ -113,11 +113,18 @@ export const FeeParams = {
 
   toJSON(message: FeeParams): unknown {
     const obj: any = {};
-    message.createDid !== undefined && (obj.createDid = message.createDid ? Coin.toJSON(message.createDid) : undefined);
-    message.updateDid !== undefined && (obj.updateDid = message.updateDid ? Coin.toJSON(message.updateDid) : undefined);
-    message.deactivateDid !== undefined &&
-      (obj.deactivateDid = message.deactivateDid ? Coin.toJSON(message.deactivateDid) : undefined);
-    message.burnFactor !== undefined && (obj.burnFactor = message.burnFactor);
+    if (message.createDid !== undefined) {
+      obj.createDid = Coin.toJSON(message.createDid);
+    }
+    if (message.updateDid !== undefined) {
+      obj.updateDid = Coin.toJSON(message.updateDid);
+    }
+    if (message.deactivateDid !== undefined) {
+      obj.deactivateDid = Coin.toJSON(message.deactivateDid);
+    }
+    if (message.burnFactor !== "") {
+      obj.burnFactor = message.burnFactor;
+    }
     return obj;
   },
 

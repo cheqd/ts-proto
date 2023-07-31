@@ -127,12 +127,11 @@ export const MsgCreateDid = {
 
   toJSON(message: MsgCreateDid): unknown {
     const obj: any = {};
-    message.payload !== undefined &&
-      (obj.payload = message.payload ? MsgCreateDidPayload.toJSON(message.payload) : undefined);
-    if (message.signatures) {
-      obj.signatures = message.signatures.map((e) => e ? SignInfo.toJSON(e) : undefined);
-    } else {
-      obj.signatures = [];
+    if (message.payload !== undefined) {
+      obj.payload = MsgCreateDidPayload.toJSON(message.payload);
+    }
+    if (message.signatures?.length) {
+      obj.signatures = message.signatures.map((e) => SignInfo.toJSON(e));
     }
     return obj;
   },
@@ -205,12 +204,11 @@ export const MsgUpdateDid = {
 
   toJSON(message: MsgUpdateDid): unknown {
     const obj: any = {};
-    message.payload !== undefined &&
-      (obj.payload = message.payload ? MsgUpdateDidPayload.toJSON(message.payload) : undefined);
-    if (message.signatures) {
-      obj.signatures = message.signatures.map((e) => e ? SignInfo.toJSON(e) : undefined);
-    } else {
-      obj.signatures = [];
+    if (message.payload !== undefined) {
+      obj.payload = MsgUpdateDidPayload.toJSON(message.payload);
+    }
+    if (message.signatures?.length) {
+      obj.signatures = message.signatures.map((e) => SignInfo.toJSON(e));
     }
     return obj;
   },
@@ -283,12 +281,11 @@ export const MsgDeactivateDid = {
 
   toJSON(message: MsgDeactivateDid): unknown {
     const obj: any = {};
-    message.payload !== undefined &&
-      (obj.payload = message.payload ? MsgDeactivateDidPayload.toJSON(message.payload) : undefined);
-    if (message.signatures) {
-      obj.signatures = message.signatures.map((e) => e ? SignInfo.toJSON(e) : undefined);
-    } else {
-      obj.signatures = [];
+    if (message.payload !== undefined) {
+      obj.payload = MsgDeactivateDidPayload.toJSON(message.payload);
+    }
+    if (message.signatures?.length) {
+      obj.signatures = message.signatures.map((e) => SignInfo.toJSON(e));
     }
     return obj;
   },
@@ -361,8 +358,12 @@ export const SignInfo = {
 
   toJSON(message: SignInfo): unknown {
     const obj: any = {};
-    message.verificationMethodId !== undefined && (obj.verificationMethodId = message.verificationMethodId);
-    message.signature !== undefined && (obj.signature = message.signature);
+    if (message.verificationMethodId !== "") {
+      obj.verificationMethodId = message.verificationMethodId;
+    }
+    if (message.signature !== "") {
+      obj.signature = message.signature;
+    }
     return obj;
   },
 
@@ -419,7 +420,9 @@ export const MsgDeactivateDidPayload = {
 
   toJSON(message: MsgDeactivateDidPayload): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
     return obj;
   },
 
@@ -488,8 +491,12 @@ export const MsgDeactivateDidResponse = {
 
   toJSON(message: MsgDeactivateDidResponse): unknown {
     const obj: any = {};
-    message.did !== undefined && (obj.did = message.did ? Did.toJSON(message.did) : undefined);
-    message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
+    if (message.did !== undefined) {
+      obj.did = Did.toJSON(message.did);
+    }
+    if (message.metadata !== undefined) {
+      obj.metadata = Metadata.toJSON(message.metadata);
+    }
     return obj;
   },
 
@@ -678,56 +685,38 @@ export const MsgCreateDidPayload = {
 
   toJSON(message: MsgCreateDidPayload): unknown {
     const obj: any = {};
-    if (message.context) {
-      obj.context = message.context.map((e) => e);
-    } else {
-      obj.context = [];
+    if (message.context?.length) {
+      obj.context = message.context;
     }
-    message.id !== undefined && (obj.id = message.id);
-    if (message.controller) {
-      obj.controller = message.controller.map((e) => e);
-    } else {
-      obj.controller = [];
+    if (message.id !== "") {
+      obj.id = message.id;
     }
-    if (message.verificationMethod) {
-      obj.verificationMethod = message.verificationMethod.map((e) => e ? VerificationMethod.toJSON(e) : undefined);
-    } else {
-      obj.verificationMethod = [];
+    if (message.controller?.length) {
+      obj.controller = message.controller;
     }
-    if (message.authentication) {
-      obj.authentication = message.authentication.map((e) => e);
-    } else {
-      obj.authentication = [];
+    if (message.verificationMethod?.length) {
+      obj.verificationMethod = message.verificationMethod.map((e) => VerificationMethod.toJSON(e));
     }
-    if (message.assertionMethod) {
-      obj.assertionMethod = message.assertionMethod.map((e) => e);
-    } else {
-      obj.assertionMethod = [];
+    if (message.authentication?.length) {
+      obj.authentication = message.authentication;
     }
-    if (message.capabilityInvocation) {
-      obj.capabilityInvocation = message.capabilityInvocation.map((e) => e);
-    } else {
-      obj.capabilityInvocation = [];
+    if (message.assertionMethod?.length) {
+      obj.assertionMethod = message.assertionMethod;
     }
-    if (message.capabilityDelegation) {
-      obj.capabilityDelegation = message.capabilityDelegation.map((e) => e);
-    } else {
-      obj.capabilityDelegation = [];
+    if (message.capabilityInvocation?.length) {
+      obj.capabilityInvocation = message.capabilityInvocation;
     }
-    if (message.keyAgreement) {
-      obj.keyAgreement = message.keyAgreement.map((e) => e);
-    } else {
-      obj.keyAgreement = [];
+    if (message.capabilityDelegation?.length) {
+      obj.capabilityDelegation = message.capabilityDelegation;
     }
-    if (message.alsoKnownAs) {
-      obj.alsoKnownAs = message.alsoKnownAs.map((e) => e);
-    } else {
-      obj.alsoKnownAs = [];
+    if (message.keyAgreement?.length) {
+      obj.keyAgreement = message.keyAgreement;
     }
-    if (message.service) {
-      obj.service = message.service.map((e) => e ? Service.toJSON(e) : undefined);
-    } else {
-      obj.service = [];
+    if (message.alsoKnownAs?.length) {
+      obj.alsoKnownAs = message.alsoKnownAs;
+    }
+    if (message.service?.length) {
+      obj.service = message.service.map((e) => Service.toJSON(e));
     }
     return obj;
   },
@@ -794,7 +783,9 @@ export const MsgCreateDidResponse = {
 
   toJSON(message: MsgCreateDidResponse): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
     return obj;
   },
 
@@ -992,58 +983,42 @@ export const MsgUpdateDidPayload = {
 
   toJSON(message: MsgUpdateDidPayload): unknown {
     const obj: any = {};
-    if (message.context) {
-      obj.context = message.context.map((e) => e);
-    } else {
-      obj.context = [];
+    if (message.context?.length) {
+      obj.context = message.context;
     }
-    message.id !== undefined && (obj.id = message.id);
-    if (message.controller) {
-      obj.controller = message.controller.map((e) => e);
-    } else {
-      obj.controller = [];
+    if (message.id !== "") {
+      obj.id = message.id;
     }
-    if (message.verificationMethod) {
-      obj.verificationMethod = message.verificationMethod.map((e) => e ? VerificationMethod.toJSON(e) : undefined);
-    } else {
-      obj.verificationMethod = [];
+    if (message.controller?.length) {
+      obj.controller = message.controller;
     }
-    if (message.authentication) {
-      obj.authentication = message.authentication.map((e) => e);
-    } else {
-      obj.authentication = [];
+    if (message.verificationMethod?.length) {
+      obj.verificationMethod = message.verificationMethod.map((e) => VerificationMethod.toJSON(e));
     }
-    if (message.assertionMethod) {
-      obj.assertionMethod = message.assertionMethod.map((e) => e);
-    } else {
-      obj.assertionMethod = [];
+    if (message.authentication?.length) {
+      obj.authentication = message.authentication;
     }
-    if (message.capabilityInvocation) {
-      obj.capabilityInvocation = message.capabilityInvocation.map((e) => e);
-    } else {
-      obj.capabilityInvocation = [];
+    if (message.assertionMethod?.length) {
+      obj.assertionMethod = message.assertionMethod;
     }
-    if (message.capabilityDelegation) {
-      obj.capabilityDelegation = message.capabilityDelegation.map((e) => e);
-    } else {
-      obj.capabilityDelegation = [];
+    if (message.capabilityInvocation?.length) {
+      obj.capabilityInvocation = message.capabilityInvocation;
     }
-    if (message.keyAgreement) {
-      obj.keyAgreement = message.keyAgreement.map((e) => e);
-    } else {
-      obj.keyAgreement = [];
+    if (message.capabilityDelegation?.length) {
+      obj.capabilityDelegation = message.capabilityDelegation;
     }
-    if (message.alsoKnownAs) {
-      obj.alsoKnownAs = message.alsoKnownAs.map((e) => e);
-    } else {
-      obj.alsoKnownAs = [];
+    if (message.keyAgreement?.length) {
+      obj.keyAgreement = message.keyAgreement;
     }
-    if (message.service) {
-      obj.service = message.service.map((e) => e ? Service.toJSON(e) : undefined);
-    } else {
-      obj.service = [];
+    if (message.alsoKnownAs?.length) {
+      obj.alsoKnownAs = message.alsoKnownAs;
     }
-    message.versionId !== undefined && (obj.versionId = message.versionId);
+    if (message.service?.length) {
+      obj.service = message.service.map((e) => Service.toJSON(e));
+    }
+    if (message.versionId !== "") {
+      obj.versionId = message.versionId;
+    }
     return obj;
   },
 
@@ -1110,7 +1085,9 @@ export const MsgUpdateDidResponse = {
 
   toJSON(message: MsgUpdateDidResponse): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
     return obj;
   },
 

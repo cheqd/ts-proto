@@ -23,19 +23,19 @@ export const StateValue = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.data = Any.decode(reader, reader.uint32());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.metadata = Metadata.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -50,8 +50,12 @@ export const StateValue = {
     },
     toJSON(message) {
         const obj = {};
-        message.data !== undefined && (obj.data = message.data ? Any.toJSON(message.data) : undefined);
-        message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
+        if (message.data !== undefined) {
+            obj.data = Any.toJSON(message.data);
+        }
+        if (message.metadata !== undefined) {
+            obj.metadata = Metadata.toJSON(message.metadata);
+        }
         return obj;
     },
     create(base) {
@@ -96,37 +100,37 @@ export const Metadata = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.created = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.updated = reader.string();
                     continue;
                 case 3:
-                    if (tag != 24) {
+                    if (tag !== 24) {
                         break;
                     }
                     message.deactivated = reader.bool();
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.versionId = reader.string();
                     continue;
                 case 5:
-                    if (tag != 42) {
+                    if (tag !== 42) {
                         break;
                     }
                     message.resources.push(reader.string());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -144,15 +148,20 @@ export const Metadata = {
     },
     toJSON(message) {
         const obj = {};
-        message.created !== undefined && (obj.created = message.created);
-        message.updated !== undefined && (obj.updated = message.updated);
-        message.deactivated !== undefined && (obj.deactivated = message.deactivated);
-        message.versionId !== undefined && (obj.versionId = message.versionId);
-        if (message.resources) {
-            obj.resources = message.resources.map((e) => e);
+        if (message.created !== "") {
+            obj.created = message.created;
         }
-        else {
-            obj.resources = [];
+        if (message.updated !== "") {
+            obj.updated = message.updated;
+        }
+        if (message.deactivated === true) {
+            obj.deactivated = message.deactivated;
+        }
+        if (message.versionId !== "") {
+            obj.versionId = message.versionId;
+        }
+        if (message.resources?.length) {
+            obj.resources = message.resources;
         }
         return obj;
     },

@@ -3,7 +3,7 @@ import Long from "long";
 import _m0 from "protobufjs/minimal.js";
 import { Timestamp } from "../../../google/protobuf/timestamp.js";
 function createBaseResource() {
-    return { data: new Uint8Array() };
+    return { data: new Uint8Array(0) };
 }
 export const Resource = {
     encode(message, writer = _m0.Writer.create()) {
@@ -20,13 +20,13 @@ export const Resource = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.data = reader.bytes();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -34,12 +34,13 @@ export const Resource = {
         return message;
     },
     fromJSON(object) {
-        return { data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array() };
+        return { data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0) };
     },
     toJSON(message) {
         const obj = {};
-        message.data !== undefined &&
-            (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
+        if (message.data.length !== 0) {
+            obj.data = base64FromBytes(message.data);
+        }
         return obj;
     },
     create(base) {
@@ -47,7 +48,7 @@ export const Resource = {
     },
     fromPartial(object) {
         const message = createBaseResource();
-        message.data = object.data ?? new Uint8Array();
+        message.data = object.data ?? new Uint8Array(0);
         return message;
     },
 };
@@ -111,73 +112,73 @@ export const Metadata = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.collectionId = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.name = reader.string();
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.version = reader.string();
                     continue;
                 case 5:
-                    if (tag != 42) {
+                    if (tag !== 42) {
                         break;
                     }
                     message.resourceType = reader.string();
                     continue;
                 case 6:
-                    if (tag != 50) {
+                    if (tag !== 50) {
                         break;
                     }
                     message.alsoKnownAs.push(AlternativeUri.decode(reader, reader.uint32()));
                     continue;
                 case 7:
-                    if (tag != 58) {
+                    if (tag !== 58) {
                         break;
                     }
                     message.mediaType = reader.string();
                     continue;
                 case 8:
-                    if (tag != 66) {
+                    if (tag !== 66) {
                         break;
                     }
                     message.created = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
                     continue;
                 case 9:
-                    if (tag != 74) {
+                    if (tag !== 74) {
                         break;
                     }
                     message.checksum = reader.string();
                     continue;
                 case 10:
-                    if (tag != 82) {
+                    if (tag !== 82) {
                         break;
                     }
                     message.previousVersionId = reader.string();
                     continue;
                 case 11:
-                    if (tag != 90) {
+                    if (tag !== 90) {
                         break;
                     }
                     message.nextVersionId = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -203,22 +204,39 @@ export const Metadata = {
     },
     toJSON(message) {
         const obj = {};
-        message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-        message.id !== undefined && (obj.id = message.id);
-        message.name !== undefined && (obj.name = message.name);
-        message.version !== undefined && (obj.version = message.version);
-        message.resourceType !== undefined && (obj.resourceType = message.resourceType);
-        if (message.alsoKnownAs) {
-            obj.alsoKnownAs = message.alsoKnownAs.map((e) => e ? AlternativeUri.toJSON(e) : undefined);
+        if (message.collectionId !== "") {
+            obj.collectionId = message.collectionId;
         }
-        else {
-            obj.alsoKnownAs = [];
+        if (message.id !== "") {
+            obj.id = message.id;
         }
-        message.mediaType !== undefined && (obj.mediaType = message.mediaType);
-        message.created !== undefined && (obj.created = message.created.toISOString());
-        message.checksum !== undefined && (obj.checksum = message.checksum);
-        message.previousVersionId !== undefined && (obj.previousVersionId = message.previousVersionId);
-        message.nextVersionId !== undefined && (obj.nextVersionId = message.nextVersionId);
+        if (message.name !== "") {
+            obj.name = message.name;
+        }
+        if (message.version !== "") {
+            obj.version = message.version;
+        }
+        if (message.resourceType !== "") {
+            obj.resourceType = message.resourceType;
+        }
+        if (message.alsoKnownAs?.length) {
+            obj.alsoKnownAs = message.alsoKnownAs.map((e) => AlternativeUri.toJSON(e));
+        }
+        if (message.mediaType !== "") {
+            obj.mediaType = message.mediaType;
+        }
+        if (message.created !== undefined) {
+            obj.created = message.created.toISOString();
+        }
+        if (message.checksum !== "") {
+            obj.checksum = message.checksum;
+        }
+        if (message.previousVersionId !== "") {
+            obj.previousVersionId = message.previousVersionId;
+        }
+        if (message.nextVersionId !== "") {
+            obj.nextVersionId = message.nextVersionId;
+        }
         return obj;
     },
     create(base) {
@@ -261,19 +279,19 @@ export const AlternativeUri = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.uri = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.description = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -288,8 +306,12 @@ export const AlternativeUri = {
     },
     toJSON(message) {
         const obj = {};
-        message.uri !== undefined && (obj.uri = message.uri);
-        message.description !== undefined && (obj.description = message.description);
+        if (message.uri !== "") {
+            obj.uri = message.uri;
+        }
+        if (message.description !== "") {
+            obj.description = message.description;
+        }
         return obj;
     },
     create(base) {
@@ -323,19 +345,19 @@ export const ResourceWithMetadata = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.resource = Resource.decode(reader, reader.uint32());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.metadata = Metadata.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -350,8 +372,12 @@ export const ResourceWithMetadata = {
     },
     toJSON(message) {
         const obj = {};
-        message.resource !== undefined && (obj.resource = message.resource ? Resource.toJSON(message.resource) : undefined);
-        message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
+        if (message.resource !== undefined) {
+            obj.resource = Resource.toJSON(message.resource);
+        }
+        if (message.metadata !== undefined) {
+            obj.metadata = Metadata.toJSON(message.metadata);
+        }
         return obj;
     },
     create(base) {
@@ -368,7 +394,7 @@ export const ResourceWithMetadata = {
         return message;
     },
 };
-var tsProtoGlobalThis = (() => {
+const tsProtoGlobalThis = (() => {
     if (typeof globalThis !== "undefined") {
         return globalThis;
     }
@@ -414,8 +440,8 @@ function toTimestamp(date) {
     return { seconds, nanos };
 }
 function fromTimestamp(t) {
-    let millis = t.seconds.toNumber() * 1_000;
-    millis += t.nanos / 1_000_000;
+    let millis = (t.seconds.toNumber() || 0) * 1_000;
+    millis += (t.nanos || 0) / 1_000_000;
     return new Date(millis);
 }
 function fromJsonTimestamp(o) {

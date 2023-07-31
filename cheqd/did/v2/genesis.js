@@ -24,19 +24,19 @@ export const DidDocVersionSet = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.latestVersion = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.didDocs.push(DidDocWithMetadata.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -51,12 +51,11 @@ export const DidDocVersionSet = {
     },
     toJSON(message) {
         const obj = {};
-        message.latestVersion !== undefined && (obj.latestVersion = message.latestVersion);
-        if (message.didDocs) {
-            obj.didDocs = message.didDocs.map((e) => e ? DidDocWithMetadata.toJSON(e) : undefined);
+        if (message.latestVersion !== "") {
+            obj.latestVersion = message.latestVersion;
         }
-        else {
-            obj.didDocs = [];
+        if (message.didDocs?.length) {
+            obj.didDocs = message.didDocs.map((e) => DidDocWithMetadata.toJSON(e));
         }
         return obj;
     },
@@ -94,25 +93,25 @@ export const GenesisState = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.didNamespace = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.versionSets.push(DidDocVersionSet.decode(reader, reader.uint32()));
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.feeParams = FeeParams.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -130,15 +129,15 @@ export const GenesisState = {
     },
     toJSON(message) {
         const obj = {};
-        message.didNamespace !== undefined && (obj.didNamespace = message.didNamespace);
-        if (message.versionSets) {
-            obj.versionSets = message.versionSets.map((e) => e ? DidDocVersionSet.toJSON(e) : undefined);
+        if (message.didNamespace !== "") {
+            obj.didNamespace = message.didNamespace;
         }
-        else {
-            obj.versionSets = [];
+        if (message.versionSets?.length) {
+            obj.versionSets = message.versionSets.map((e) => DidDocVersionSet.toJSON(e));
         }
-        message.feeParams !== undefined &&
-            (obj.feeParams = message.feeParams ? FeeParams.toJSON(message.feeParams) : undefined);
+        if (message.feeParams !== undefined) {
+            obj.feeParams = FeeParams.toJSON(message.feeParams);
+        }
         return obj;
     },
     create(base) {

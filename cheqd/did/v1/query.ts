@@ -54,7 +54,9 @@ export const QueryGetDidRequest = {
 
   toJSON(message: QueryGetDidRequest): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
     return obj;
   },
 
@@ -123,8 +125,12 @@ export const QueryGetDidResponse = {
 
   toJSON(message: QueryGetDidResponse): unknown {
     const obj: any = {};
-    message.did !== undefined && (obj.did = message.did ? Did.toJSON(message.did) : undefined);
-    message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
+    if (message.did !== undefined) {
+      obj.did = Did.toJSON(message.did);
+    }
+    if (message.metadata !== undefined) {
+      obj.metadata = Metadata.toJSON(message.metadata);
+    }
     return obj;
   },
 

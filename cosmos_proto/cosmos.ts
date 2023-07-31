@@ -146,8 +146,12 @@ export const InterfaceDescriptor = {
 
   toJSON(message: InterfaceDescriptor): unknown {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
     return obj;
   },
 
@@ -240,12 +244,14 @@ export const ScalarDescriptor = {
 
   toJSON(message: ScalarDescriptor): unknown {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
-    if (message.fieldType) {
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    if (message.fieldType?.length) {
       obj.fieldType = message.fieldType.map((e) => scalarTypeToJSON(e));
-    } else {
-      obj.fieldType = [];
     }
     return obj;
   },

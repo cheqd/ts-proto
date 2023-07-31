@@ -23,19 +23,19 @@ export const QueryGetResourceRequest = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.collectionId = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -50,8 +50,12 @@ export const QueryGetResourceRequest = {
     },
     toJSON(message) {
         const obj = {};
-        message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-        message.id !== undefined && (obj.id = message.id);
+        if (message.collectionId !== "") {
+            obj.collectionId = message.collectionId;
+        }
+        if (message.id !== "") {
+            obj.id = message.id;
+        }
         return obj;
     },
     create(base) {
@@ -82,13 +86,13 @@ export const QueryResourceResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.resource = Resource.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -100,7 +104,9 @@ export const QueryResourceResponse = {
     },
     toJSON(message) {
         const obj = {};
-        message.resource !== undefined && (obj.resource = message.resource ? Resource.toJSON(message.resource) : undefined);
+        if (message.resource !== undefined) {
+            obj.resource = Resource.toJSON(message.resource);
+        }
         return obj;
     },
     create(base) {
@@ -132,13 +138,13 @@ export const QueryGetCollectionResourcesRequest = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.collectionId = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -150,7 +156,9 @@ export const QueryGetCollectionResourcesRequest = {
     },
     toJSON(message) {
         const obj = {};
-        message.collectionId !== undefined && (obj.collectionId = message.collectionId);
+        if (message.collectionId !== "") {
+            obj.collectionId = message.collectionId;
+        }
         return obj;
     },
     create(base) {
@@ -180,13 +188,13 @@ export const QueryCollectionResourcesResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.resources.push(ResourceHeader.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -200,11 +208,8 @@ export const QueryCollectionResourcesResponse = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.resources) {
-            obj.resources = message.resources.map((e) => e ? ResourceHeader.toJSON(e) : undefined);
-        }
-        else {
-            obj.resources = [];
+        if (message.resources?.length) {
+            obj.resources = message.resources.map((e) => ResourceHeader.toJSON(e));
         }
         return obj;
     },
@@ -241,25 +246,25 @@ export const QueryGetAllResourceVersionsRequest = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.collectionId = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.name = reader.string();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.resourceType = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -275,9 +280,15 @@ export const QueryGetAllResourceVersionsRequest = {
     },
     toJSON(message) {
         const obj = {};
-        message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-        message.name !== undefined && (obj.name = message.name);
-        message.resourceType !== undefined && (obj.resourceType = message.resourceType);
+        if (message.collectionId !== "") {
+            obj.collectionId = message.collectionId;
+        }
+        if (message.name !== "") {
+            obj.name = message.name;
+        }
+        if (message.resourceType !== "") {
+            obj.resourceType = message.resourceType;
+        }
         return obj;
     },
     create(base) {
@@ -309,13 +320,13 @@ export const QueryGetAllResourceVersionsResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.resources.push(ResourceHeader.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -329,11 +340,8 @@ export const QueryGetAllResourceVersionsResponse = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.resources) {
-            obj.resources = message.resources.map((e) => e ? ResourceHeader.toJSON(e) : undefined);
-        }
-        else {
-            obj.resources = [];
+        if (message.resources?.length) {
+            obj.resources = message.resources.map((e) => ResourceHeader.toJSON(e));
         }
         return obj;
     },
@@ -346,11 +354,12 @@ export const QueryGetAllResourceVersionsResponse = {
         return message;
     },
 };
+export const QueryServiceName = "cheqdid.cheqdnode.resource.v1.Query";
 export class QueryClientImpl {
     rpc;
     service;
     constructor(rpc, opts) {
-        this.service = opts?.service || "cheqdid.cheqdnode.resource.v1.Query";
+        this.service = opts?.service || QueryServiceName;
         this.rpc = rpc;
         this.Resource = this.Resource.bind(this);
         this.CollectionResources = this.CollectionResources.bind(this);

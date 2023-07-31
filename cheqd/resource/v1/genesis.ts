@@ -53,10 +53,8 @@ export const GenesisState = {
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    if (message.resourceList) {
-      obj.resourceList = message.resourceList.map((e) => e ? Resource.toJSON(e) : undefined);
-    } else {
-      obj.resourceList = [];
+    if (message.resourceList?.length) {
+      obj.resourceList = message.resourceList.map((e) => Resource.toJSON(e));
     }
     return obj;
   },

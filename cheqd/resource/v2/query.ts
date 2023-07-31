@@ -133,8 +133,12 @@ export const QueryResourceRequest = {
 
   toJSON(message: QueryResourceRequest): unknown {
     const obj: any = {};
-    message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-    message.id !== undefined && (obj.id = message.id);
+    if (message.collectionId !== "") {
+      obj.collectionId = message.collectionId;
+    }
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
     return obj;
   },
 
@@ -191,8 +195,9 @@ export const QueryResourceResponse = {
 
   toJSON(message: QueryResourceResponse): unknown {
     const obj: any = {};
-    message.resource !== undefined &&
-      (obj.resource = message.resource ? ResourceWithMetadata.toJSON(message.resource) : undefined);
+    if (message.resource !== undefined) {
+      obj.resource = ResourceWithMetadata.toJSON(message.resource);
+    }
     return obj;
   },
 
@@ -263,8 +268,12 @@ export const QueryResourceMetadataRequest = {
 
   toJSON(message: QueryResourceMetadataRequest): unknown {
     const obj: any = {};
-    message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-    message.id !== undefined && (obj.id = message.id);
+    if (message.collectionId !== "") {
+      obj.collectionId = message.collectionId;
+    }
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
     return obj;
   },
 
@@ -321,7 +330,9 @@ export const QueryResourceMetadataResponse = {
 
   toJSON(message: QueryResourceMetadataResponse): unknown {
     const obj: any = {};
-    message.resource !== undefined && (obj.resource = message.resource ? Metadata.toJSON(message.resource) : undefined);
+    if (message.resource !== undefined) {
+      obj.resource = Metadata.toJSON(message.resource);
+    }
     return obj;
   },
 
@@ -394,9 +405,12 @@ export const QueryCollectionResourcesRequest = {
 
   toJSON(message: QueryCollectionResourcesRequest): unknown {
     const obj: any = {};
-    message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-    message.pagination !== undefined &&
-      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    if (message.collectionId !== "") {
+      obj.collectionId = message.collectionId;
+    }
+    if (message.pagination !== undefined) {
+      obj.pagination = PageRequest.toJSON(message.pagination);
+    }
     return obj;
   },
 
@@ -470,13 +484,12 @@ export const QueryCollectionResourcesResponse = {
 
   toJSON(message: QueryCollectionResourcesResponse): unknown {
     const obj: any = {};
-    if (message.resources) {
-      obj.resources = message.resources.map((e) => e ? Metadata.toJSON(e) : undefined);
-    } else {
-      obj.resources = [];
+    if (message.resources?.length) {
+      obj.resources = message.resources.map((e) => Metadata.toJSON(e));
     }
-    message.pagination !== undefined &&
-      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    if (message.pagination !== undefined) {
+      obj.pagination = PageResponse.toJSON(message.pagination);
+    }
     return obj;
   },
 

@@ -23,19 +23,19 @@ export const GenesisState = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.didNamespace = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.didList.push(StateValue.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -50,12 +50,11 @@ export const GenesisState = {
     },
     toJSON(message) {
         const obj = {};
-        message.didNamespace !== undefined && (obj.didNamespace = message.didNamespace);
-        if (message.didList) {
-            obj.didList = message.didList.map((e) => e ? StateValue.toJSON(e) : undefined);
+        if (message.didNamespace !== "") {
+            obj.didNamespace = message.didNamespace;
         }
-        else {
-            obj.didList = [];
+        if (message.didList?.length) {
+            obj.didList = message.didList.map((e) => StateValue.toJSON(e));
         }
         return obj;
     },

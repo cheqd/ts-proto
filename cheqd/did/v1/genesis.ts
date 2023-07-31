@@ -63,11 +63,11 @@ export const GenesisState = {
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    message.didNamespace !== undefined && (obj.didNamespace = message.didNamespace);
-    if (message.didList) {
-      obj.didList = message.didList.map((e) => e ? StateValue.toJSON(e) : undefined);
-    } else {
-      obj.didList = [];
+    if (message.didNamespace !== "") {
+      obj.didNamespace = message.didNamespace;
+    }
+    if (message.didList?.length) {
+      obj.didList = message.didList.map((e) => StateValue.toJSON(e));
     }
     return obj;
   },

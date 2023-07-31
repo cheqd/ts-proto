@@ -24,19 +24,19 @@ export const GenesisState = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.resources.push(ResourceWithMetadata.decode(reader, reader.uint32()));
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.feeParams = FeeParams.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -53,14 +53,12 @@ export const GenesisState = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.resources) {
-            obj.resources = message.resources.map((e) => e ? ResourceWithMetadata.toJSON(e) : undefined);
+        if (message.resources?.length) {
+            obj.resources = message.resources.map((e) => ResourceWithMetadata.toJSON(e));
         }
-        else {
-            obj.resources = [];
+        if (message.feeParams !== undefined) {
+            obj.feeParams = FeeParams.toJSON(message.feeParams);
         }
-        message.feeParams !== undefined &&
-            (obj.feeParams = message.feeParams ? FeeParams.toJSON(message.feeParams) : undefined);
         return obj;
     },
     create(base) {

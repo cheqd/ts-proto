@@ -62,73 +62,73 @@ export const DidDoc = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.context.push(reader.string());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.controller.push(reader.string());
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.verificationMethod.push(VerificationMethod.decode(reader, reader.uint32()));
                     continue;
                 case 5:
-                    if (tag != 42) {
+                    if (tag !== 42) {
                         break;
                     }
                     message.authentication.push(reader.string());
                     continue;
                 case 6:
-                    if (tag != 50) {
+                    if (tag !== 50) {
                         break;
                     }
                     message.assertionMethod.push(reader.string());
                     continue;
                 case 7:
-                    if (tag != 58) {
+                    if (tag !== 58) {
                         break;
                     }
                     message.capabilityInvocation.push(reader.string());
                     continue;
                 case 8:
-                    if (tag != 66) {
+                    if (tag !== 66) {
                         break;
                     }
                     message.capabilityDelegation.push(reader.string());
                     continue;
                 case 9:
-                    if (tag != 74) {
+                    if (tag !== 74) {
                         break;
                     }
                     message.keyAgreement.push(reader.string());
                     continue;
                 case 10:
-                    if (tag != 82) {
+                    if (tag !== 82) {
                         break;
                     }
                     message.service.push(Service.decode(reader, reader.uint32()));
                     continue;
                 case 11:
-                    if (tag != 90) {
+                    if (tag !== 90) {
                         break;
                     }
                     message.alsoKnownAs.push(reader.string());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -158,66 +158,38 @@ export const DidDoc = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.context) {
-            obj.context = message.context.map((e) => e);
+        if (message.context?.length) {
+            obj.context = message.context;
         }
-        else {
-            obj.context = [];
+        if (message.id !== "") {
+            obj.id = message.id;
         }
-        message.id !== undefined && (obj.id = message.id);
-        if (message.controller) {
-            obj.controller = message.controller.map((e) => e);
+        if (message.controller?.length) {
+            obj.controller = message.controller;
         }
-        else {
-            obj.controller = [];
+        if (message.verificationMethod?.length) {
+            obj.verificationMethod = message.verificationMethod.map((e) => VerificationMethod.toJSON(e));
         }
-        if (message.verificationMethod) {
-            obj.verificationMethod = message.verificationMethod.map((e) => e ? VerificationMethod.toJSON(e) : undefined);
+        if (message.authentication?.length) {
+            obj.authentication = message.authentication;
         }
-        else {
-            obj.verificationMethod = [];
+        if (message.assertionMethod?.length) {
+            obj.assertionMethod = message.assertionMethod;
         }
-        if (message.authentication) {
-            obj.authentication = message.authentication.map((e) => e);
+        if (message.capabilityInvocation?.length) {
+            obj.capabilityInvocation = message.capabilityInvocation;
         }
-        else {
-            obj.authentication = [];
+        if (message.capabilityDelegation?.length) {
+            obj.capabilityDelegation = message.capabilityDelegation;
         }
-        if (message.assertionMethod) {
-            obj.assertionMethod = message.assertionMethod.map((e) => e);
+        if (message.keyAgreement?.length) {
+            obj.keyAgreement = message.keyAgreement;
         }
-        else {
-            obj.assertionMethod = [];
+        if (message.service?.length) {
+            obj.service = message.service.map((e) => Service.toJSON(e));
         }
-        if (message.capabilityInvocation) {
-            obj.capabilityInvocation = message.capabilityInvocation.map((e) => e);
-        }
-        else {
-            obj.capabilityInvocation = [];
-        }
-        if (message.capabilityDelegation) {
-            obj.capabilityDelegation = message.capabilityDelegation.map((e) => e);
-        }
-        else {
-            obj.capabilityDelegation = [];
-        }
-        if (message.keyAgreement) {
-            obj.keyAgreement = message.keyAgreement.map((e) => e);
-        }
-        else {
-            obj.keyAgreement = [];
-        }
-        if (message.service) {
-            obj.service = message.service.map((e) => e ? Service.toJSON(e) : undefined);
-        }
-        else {
-            obj.service = [];
-        }
-        if (message.alsoKnownAs) {
-            obj.alsoKnownAs = message.alsoKnownAs.map((e) => e);
-        }
-        else {
-            obj.alsoKnownAs = [];
+        if (message.alsoKnownAs?.length) {
+            obj.alsoKnownAs = message.alsoKnownAs;
         }
         return obj;
     },
@@ -267,31 +239,31 @@ export const VerificationMethod = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.verificationMethodType = reader.string();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.controller = reader.string();
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.verificationMaterial = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -308,10 +280,18 @@ export const VerificationMethod = {
     },
     toJSON(message) {
         const obj = {};
-        message.id !== undefined && (obj.id = message.id);
-        message.verificationMethodType !== undefined && (obj.verificationMethodType = message.verificationMethodType);
-        message.controller !== undefined && (obj.controller = message.controller);
-        message.verificationMaterial !== undefined && (obj.verificationMaterial = message.verificationMaterial);
+        if (message.id !== "") {
+            obj.id = message.id;
+        }
+        if (message.verificationMethodType !== "") {
+            obj.verificationMethodType = message.verificationMethodType;
+        }
+        if (message.controller !== "") {
+            obj.controller = message.controller;
+        }
+        if (message.verificationMaterial !== "") {
+            obj.verificationMaterial = message.verificationMaterial;
+        }
         return obj;
     },
     create(base) {
@@ -350,25 +330,25 @@ export const Service = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.serviceType = reader.string();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.serviceEndpoint.push(reader.string());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -384,13 +364,14 @@ export const Service = {
     },
     toJSON(message) {
         const obj = {};
-        message.id !== undefined && (obj.id = message.id);
-        message.serviceType !== undefined && (obj.serviceType = message.serviceType);
-        if (message.serviceEndpoint) {
-            obj.serviceEndpoint = message.serviceEndpoint.map((e) => e);
+        if (message.id !== "") {
+            obj.id = message.id;
         }
-        else {
-            obj.serviceEndpoint = [];
+        if (message.serviceType !== "") {
+            obj.serviceType = message.serviceType;
+        }
+        if (message.serviceEndpoint?.length) {
+            obj.serviceEndpoint = message.serviceEndpoint;
         }
         return obj;
     },
@@ -426,19 +407,19 @@ export const DidDocWithMetadata = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.didDoc = DidDoc.decode(reader, reader.uint32());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.metadata = Metadata.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -453,8 +434,12 @@ export const DidDocWithMetadata = {
     },
     toJSON(message) {
         const obj = {};
-        message.didDoc !== undefined && (obj.didDoc = message.didDoc ? DidDoc.toJSON(message.didDoc) : undefined);
-        message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
+        if (message.didDoc !== undefined) {
+            obj.didDoc = DidDoc.toJSON(message.didDoc);
+        }
+        if (message.metadata !== undefined) {
+            obj.metadata = Metadata.toJSON(message.metadata);
+        }
         return obj;
     },
     create(base) {
@@ -511,43 +496,43 @@ export const Metadata = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.created = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.updated = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
                     continue;
                 case 3:
-                    if (tag != 24) {
+                    if (tag !== 24) {
                         break;
                     }
                     message.deactivated = reader.bool();
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.versionId = reader.string();
                     continue;
                 case 5:
-                    if (tag != 42) {
+                    if (tag !== 42) {
                         break;
                     }
                     message.nextVersionId = reader.string();
                     continue;
                 case 6:
-                    if (tag != 50) {
+                    if (tag !== 50) {
                         break;
                     }
                     message.previousVersionId = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -566,12 +551,24 @@ export const Metadata = {
     },
     toJSON(message) {
         const obj = {};
-        message.created !== undefined && (obj.created = message.created.toISOString());
-        message.updated !== undefined && (obj.updated = message.updated.toISOString());
-        message.deactivated !== undefined && (obj.deactivated = message.deactivated);
-        message.versionId !== undefined && (obj.versionId = message.versionId);
-        message.nextVersionId !== undefined && (obj.nextVersionId = message.nextVersionId);
-        message.previousVersionId !== undefined && (obj.previousVersionId = message.previousVersionId);
+        if (message.created !== undefined) {
+            obj.created = message.created.toISOString();
+        }
+        if (message.updated !== undefined) {
+            obj.updated = message.updated.toISOString();
+        }
+        if (message.deactivated === true) {
+            obj.deactivated = message.deactivated;
+        }
+        if (message.versionId !== "") {
+            obj.versionId = message.versionId;
+        }
+        if (message.nextVersionId !== "") {
+            obj.nextVersionId = message.nextVersionId;
+        }
+        if (message.previousVersionId !== "") {
+            obj.previousVersionId = message.previousVersionId;
+        }
         return obj;
     },
     create(base) {
@@ -594,8 +591,8 @@ function toTimestamp(date) {
     return { seconds, nanos };
 }
 function fromTimestamp(t) {
-    let millis = t.seconds.toNumber() * 1_000;
-    millis += t.nanos / 1_000_000;
+    let millis = (t.seconds.toNumber() || 0) * 1_000;
+    millis += (t.nanos || 0) / 1_000_000;
     return new Date(millis);
 }
 function fromJsonTimestamp(o) {

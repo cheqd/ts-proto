@@ -21,13 +21,13 @@ export const QueryGetDidRequest = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -39,7 +39,9 @@ export const QueryGetDidRequest = {
     },
     toJSON(message) {
         const obj = {};
-        message.id !== undefined && (obj.id = message.id);
+        if (message.id !== "") {
+            obj.id = message.id;
+        }
         return obj;
     },
     create(base) {
@@ -72,19 +74,19 @@ export const QueryGetDidResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.did = Did.decode(reader, reader.uint32());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.metadata = Metadata.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -99,8 +101,12 @@ export const QueryGetDidResponse = {
     },
     toJSON(message) {
         const obj = {};
-        message.did !== undefined && (obj.did = message.did ? Did.toJSON(message.did) : undefined);
-        message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
+        if (message.did !== undefined) {
+            obj.did = Did.toJSON(message.did);
+        }
+        if (message.metadata !== undefined) {
+            obj.metadata = Metadata.toJSON(message.metadata);
+        }
         return obj;
     },
     create(base) {
@@ -115,11 +121,12 @@ export const QueryGetDidResponse = {
         return message;
     },
 };
+export const QueryServiceName = "cheqdid.cheqdnode.cheqd.v1.Query";
 export class QueryClientImpl {
     rpc;
     service;
     constructor(rpc, opts) {
-        this.service = opts?.service || "cheqdid.cheqdnode.cheqd.v1.Query";
+        this.service = opts?.service || QueryServiceName;
         this.rpc = rpc;
         this.Did = this.Did.bind(this);
     }

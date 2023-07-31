@@ -2,7 +2,7 @@
 import Long from "long";
 import _m0 from "protobufjs/minimal.js";
 function createBaseAny() {
-    return { typeUrl: "", value: new Uint8Array() };
+    return { typeUrl: "", value: new Uint8Array(0) };
 }
 export const Any = {
     encode(message, writer = _m0.Writer.create()) {
@@ -22,19 +22,19 @@ export const Any = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.typeUrl = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.value = reader.bytes();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -44,14 +44,17 @@ export const Any = {
     fromJSON(object) {
         return {
             typeUrl: isSet(object.typeUrl) ? String(object.typeUrl) : "",
-            value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
+            value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(0),
         };
     },
     toJSON(message) {
         const obj = {};
-        message.typeUrl !== undefined && (obj.typeUrl = message.typeUrl);
-        message.value !== undefined &&
-            (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
+        if (message.typeUrl !== "") {
+            obj.typeUrl = message.typeUrl;
+        }
+        if (message.value.length !== 0) {
+            obj.value = base64FromBytes(message.value);
+        }
         return obj;
     },
     create(base) {
@@ -60,11 +63,11 @@ export const Any = {
     fromPartial(object) {
         const message = createBaseAny();
         message.typeUrl = object.typeUrl ?? "";
-        message.value = object.value ?? new Uint8Array();
+        message.value = object.value ?? new Uint8Array(0);
         return message;
     },
 };
-var tsProtoGlobalThis = (() => {
+const tsProtoGlobalThis = (() => {
     if (typeof globalThis !== "undefined") {
         return globalThis;
     }

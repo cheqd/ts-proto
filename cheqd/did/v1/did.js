@@ -62,73 +62,73 @@ export const Did = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.context.push(reader.string());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.controller.push(reader.string());
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.verificationMethod.push(VerificationMethod.decode(reader, reader.uint32()));
                     continue;
                 case 5:
-                    if (tag != 42) {
+                    if (tag !== 42) {
                         break;
                     }
                     message.authentication.push(reader.string());
                     continue;
                 case 6:
-                    if (tag != 50) {
+                    if (tag !== 50) {
                         break;
                     }
                     message.assertionMethod.push(reader.string());
                     continue;
                 case 7:
-                    if (tag != 58) {
+                    if (tag !== 58) {
                         break;
                     }
                     message.capabilityInvocation.push(reader.string());
                     continue;
                 case 8:
-                    if (tag != 66) {
+                    if (tag !== 66) {
                         break;
                     }
                     message.capabilityDelegation.push(reader.string());
                     continue;
                 case 9:
-                    if (tag != 74) {
+                    if (tag !== 74) {
                         break;
                     }
                     message.keyAgreement.push(reader.string());
                     continue;
                 case 10:
-                    if (tag != 82) {
+                    if (tag !== 82) {
                         break;
                     }
                     message.service.push(Service.decode(reader, reader.uint32()));
                     continue;
                 case 11:
-                    if (tag != 90) {
+                    if (tag !== 90) {
                         break;
                     }
                     message.alsoKnownAs.push(reader.string());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -158,66 +158,38 @@ export const Did = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.context) {
-            obj.context = message.context.map((e) => e);
+        if (message.context?.length) {
+            obj.context = message.context;
         }
-        else {
-            obj.context = [];
+        if (message.id !== "") {
+            obj.id = message.id;
         }
-        message.id !== undefined && (obj.id = message.id);
-        if (message.controller) {
-            obj.controller = message.controller.map((e) => e);
+        if (message.controller?.length) {
+            obj.controller = message.controller;
         }
-        else {
-            obj.controller = [];
+        if (message.verificationMethod?.length) {
+            obj.verificationMethod = message.verificationMethod.map((e) => VerificationMethod.toJSON(e));
         }
-        if (message.verificationMethod) {
-            obj.verificationMethod = message.verificationMethod.map((e) => e ? VerificationMethod.toJSON(e) : undefined);
+        if (message.authentication?.length) {
+            obj.authentication = message.authentication;
         }
-        else {
-            obj.verificationMethod = [];
+        if (message.assertionMethod?.length) {
+            obj.assertionMethod = message.assertionMethod;
         }
-        if (message.authentication) {
-            obj.authentication = message.authentication.map((e) => e);
+        if (message.capabilityInvocation?.length) {
+            obj.capabilityInvocation = message.capabilityInvocation;
         }
-        else {
-            obj.authentication = [];
+        if (message.capabilityDelegation?.length) {
+            obj.capabilityDelegation = message.capabilityDelegation;
         }
-        if (message.assertionMethod) {
-            obj.assertionMethod = message.assertionMethod.map((e) => e);
+        if (message.keyAgreement?.length) {
+            obj.keyAgreement = message.keyAgreement;
         }
-        else {
-            obj.assertionMethod = [];
+        if (message.service?.length) {
+            obj.service = message.service.map((e) => Service.toJSON(e));
         }
-        if (message.capabilityInvocation) {
-            obj.capabilityInvocation = message.capabilityInvocation.map((e) => e);
-        }
-        else {
-            obj.capabilityInvocation = [];
-        }
-        if (message.capabilityDelegation) {
-            obj.capabilityDelegation = message.capabilityDelegation.map((e) => e);
-        }
-        else {
-            obj.capabilityDelegation = [];
-        }
-        if (message.keyAgreement) {
-            obj.keyAgreement = message.keyAgreement.map((e) => e);
-        }
-        else {
-            obj.keyAgreement = [];
-        }
-        if (message.service) {
-            obj.service = message.service.map((e) => e ? Service.toJSON(e) : undefined);
-        }
-        else {
-            obj.service = [];
-        }
-        if (message.alsoKnownAs) {
-            obj.alsoKnownAs = message.alsoKnownAs.map((e) => e);
-        }
-        else {
-            obj.alsoKnownAs = [];
+        if (message.alsoKnownAs?.length) {
+            obj.alsoKnownAs = message.alsoKnownAs;
         }
         return obj;
     },
@@ -270,37 +242,37 @@ export const VerificationMethod = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.type = reader.string();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.controller = reader.string();
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.publicKeyJwk.push(KeyValuePair.decode(reader, reader.uint32()));
                     continue;
                 case 5:
-                    if (tag != 42) {
+                    if (tag !== 42) {
                         break;
                     }
                     message.publicKeyMultibase = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -320,16 +292,21 @@ export const VerificationMethod = {
     },
     toJSON(message) {
         const obj = {};
-        message.id !== undefined && (obj.id = message.id);
-        message.type !== undefined && (obj.type = message.type);
-        message.controller !== undefined && (obj.controller = message.controller);
-        if (message.publicKeyJwk) {
-            obj.publicKeyJwk = message.publicKeyJwk.map((e) => e ? KeyValuePair.toJSON(e) : undefined);
+        if (message.id !== "") {
+            obj.id = message.id;
         }
-        else {
-            obj.publicKeyJwk = [];
+        if (message.type !== "") {
+            obj.type = message.type;
         }
-        message.publicKeyMultibase !== undefined && (obj.publicKeyMultibase = message.publicKeyMultibase);
+        if (message.controller !== "") {
+            obj.controller = message.controller;
+        }
+        if (message.publicKeyJwk?.length) {
+            obj.publicKeyJwk = message.publicKeyJwk.map((e) => KeyValuePair.toJSON(e));
+        }
+        if (message.publicKeyMultibase !== "") {
+            obj.publicKeyMultibase = message.publicKeyMultibase;
+        }
         return obj;
     },
     create(base) {
@@ -369,25 +346,25 @@ export const Service = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.type = reader.string();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.serviceEndpoint = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -403,9 +380,15 @@ export const Service = {
     },
     toJSON(message) {
         const obj = {};
-        message.id !== undefined && (obj.id = message.id);
-        message.type !== undefined && (obj.type = message.type);
-        message.serviceEndpoint !== undefined && (obj.serviceEndpoint = message.serviceEndpoint);
+        if (message.id !== "") {
+            obj.id = message.id;
+        }
+        if (message.type !== "") {
+            obj.type = message.type;
+        }
+        if (message.serviceEndpoint !== "") {
+            obj.serviceEndpoint = message.serviceEndpoint;
+        }
         return obj;
     },
     create(base) {

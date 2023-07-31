@@ -24,19 +24,19 @@ export const MsgCreateResource = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.payload = MsgCreateResourcePayload.decode(reader, reader.uint32());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.signatures.push(SignInfo.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -51,13 +51,11 @@ export const MsgCreateResource = {
     },
     toJSON(message) {
         const obj = {};
-        message.payload !== undefined &&
-            (obj.payload = message.payload ? MsgCreateResourcePayload.toJSON(message.payload) : undefined);
-        if (message.signatures) {
-            obj.signatures = message.signatures.map((e) => e ? SignInfo.toJSON(e) : undefined);
+        if (message.payload !== undefined) {
+            obj.payload = MsgCreateResourcePayload.toJSON(message.payload);
         }
-        else {
-            obj.signatures = [];
+        if (message.signatures?.length) {
+            obj.signatures = message.signatures.map((e) => SignInfo.toJSON(e));
         }
         return obj;
     },
@@ -74,7 +72,7 @@ export const MsgCreateResource = {
     },
 };
 function createBaseMsgCreateResourcePayload() {
-    return { collectionId: "", id: "", name: "", resourceType: "", data: new Uint8Array() };
+    return { collectionId: "", id: "", name: "", resourceType: "", data: new Uint8Array(0) };
 }
 export const MsgCreateResourcePayload = {
     encode(message, writer = _m0.Writer.create()) {
@@ -103,37 +101,37 @@ export const MsgCreateResourcePayload = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.collectionId = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.name = reader.string();
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.resourceType = reader.string();
                     continue;
                 case 6:
-                    if (tag != 50) {
+                    if (tag !== 50) {
                         break;
                     }
                     message.data = reader.bytes();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -146,17 +144,26 @@ export const MsgCreateResourcePayload = {
             id: isSet(object.id) ? String(object.id) : "",
             name: isSet(object.name) ? String(object.name) : "",
             resourceType: isSet(object.resourceType) ? String(object.resourceType) : "",
-            data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+            data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
         };
     },
     toJSON(message) {
         const obj = {};
-        message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-        message.id !== undefined && (obj.id = message.id);
-        message.name !== undefined && (obj.name = message.name);
-        message.resourceType !== undefined && (obj.resourceType = message.resourceType);
-        message.data !== undefined &&
-            (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
+        if (message.collectionId !== "") {
+            obj.collectionId = message.collectionId;
+        }
+        if (message.id !== "") {
+            obj.id = message.id;
+        }
+        if (message.name !== "") {
+            obj.name = message.name;
+        }
+        if (message.resourceType !== "") {
+            obj.resourceType = message.resourceType;
+        }
+        if (message.data.length !== 0) {
+            obj.data = base64FromBytes(message.data);
+        }
         return obj;
     },
     create(base) {
@@ -168,7 +175,7 @@ export const MsgCreateResourcePayload = {
         message.id = object.id ?? "";
         message.name = object.name ?? "";
         message.resourceType = object.resourceType ?? "";
-        message.data = object.data ?? new Uint8Array();
+        message.data = object.data ?? new Uint8Array(0);
         return message;
     },
 };
@@ -190,13 +197,13 @@ export const MsgCreateResourceResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.resource = Resource.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -208,7 +215,9 @@ export const MsgCreateResourceResponse = {
     },
     toJSON(message) {
         const obj = {};
-        message.resource !== undefined && (obj.resource = message.resource ? Resource.toJSON(message.resource) : undefined);
+        if (message.resource !== undefined) {
+            obj.resource = Resource.toJSON(message.resource);
+        }
         return obj;
     },
     create(base) {
@@ -222,11 +231,12 @@ export const MsgCreateResourceResponse = {
         return message;
     },
 };
+export const MsgServiceName = "cheqdid.cheqdnode.resource.v1.Msg";
 export class MsgClientImpl {
     rpc;
     service;
     constructor(rpc, opts) {
-        this.service = opts?.service || "cheqdid.cheqdnode.resource.v1.Msg";
+        this.service = opts?.service || MsgServiceName;
         this.rpc = rpc;
         this.CreateResource = this.CreateResource.bind(this);
     }
@@ -236,7 +246,7 @@ export class MsgClientImpl {
         return promise.then((data) => MsgCreateResourceResponse.decode(_m0.Reader.create(data)));
     }
 }
-var tsProtoGlobalThis = (() => {
+const tsProtoGlobalThis = (() => {
     if (typeof globalThis !== "undefined") {
         return globalThis;
     }

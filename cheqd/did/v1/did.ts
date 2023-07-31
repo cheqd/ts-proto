@@ -214,56 +214,38 @@ export const Did = {
 
   toJSON(message: Did): unknown {
     const obj: any = {};
-    if (message.context) {
-      obj.context = message.context.map((e) => e);
-    } else {
-      obj.context = [];
+    if (message.context?.length) {
+      obj.context = message.context;
     }
-    message.id !== undefined && (obj.id = message.id);
-    if (message.controller) {
-      obj.controller = message.controller.map((e) => e);
-    } else {
-      obj.controller = [];
+    if (message.id !== "") {
+      obj.id = message.id;
     }
-    if (message.verificationMethod) {
-      obj.verificationMethod = message.verificationMethod.map((e) => e ? VerificationMethod.toJSON(e) : undefined);
-    } else {
-      obj.verificationMethod = [];
+    if (message.controller?.length) {
+      obj.controller = message.controller;
     }
-    if (message.authentication) {
-      obj.authentication = message.authentication.map((e) => e);
-    } else {
-      obj.authentication = [];
+    if (message.verificationMethod?.length) {
+      obj.verificationMethod = message.verificationMethod.map((e) => VerificationMethod.toJSON(e));
     }
-    if (message.assertionMethod) {
-      obj.assertionMethod = message.assertionMethod.map((e) => e);
-    } else {
-      obj.assertionMethod = [];
+    if (message.authentication?.length) {
+      obj.authentication = message.authentication;
     }
-    if (message.capabilityInvocation) {
-      obj.capabilityInvocation = message.capabilityInvocation.map((e) => e);
-    } else {
-      obj.capabilityInvocation = [];
+    if (message.assertionMethod?.length) {
+      obj.assertionMethod = message.assertionMethod;
     }
-    if (message.capabilityDelegation) {
-      obj.capabilityDelegation = message.capabilityDelegation.map((e) => e);
-    } else {
-      obj.capabilityDelegation = [];
+    if (message.capabilityInvocation?.length) {
+      obj.capabilityInvocation = message.capabilityInvocation;
     }
-    if (message.keyAgreement) {
-      obj.keyAgreement = message.keyAgreement.map((e) => e);
-    } else {
-      obj.keyAgreement = [];
+    if (message.capabilityDelegation?.length) {
+      obj.capabilityDelegation = message.capabilityDelegation;
     }
-    if (message.service) {
-      obj.service = message.service.map((e) => e ? Service.toJSON(e) : undefined);
-    } else {
-      obj.service = [];
+    if (message.keyAgreement?.length) {
+      obj.keyAgreement = message.keyAgreement;
     }
-    if (message.alsoKnownAs) {
-      obj.alsoKnownAs = message.alsoKnownAs.map((e) => e);
-    } else {
-      obj.alsoKnownAs = [];
+    if (message.service?.length) {
+      obj.service = message.service.map((e) => Service.toJSON(e));
+    }
+    if (message.alsoKnownAs?.length) {
+      obj.alsoKnownAs = message.alsoKnownAs;
     }
     return obj;
   },
@@ -378,15 +360,21 @@ export const VerificationMethod = {
 
   toJSON(message: VerificationMethod): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.type !== undefined && (obj.type = message.type);
-    message.controller !== undefined && (obj.controller = message.controller);
-    if (message.publicKeyJwk) {
-      obj.publicKeyJwk = message.publicKeyJwk.map((e) => e ? KeyValuePair.toJSON(e) : undefined);
-    } else {
-      obj.publicKeyJwk = [];
+    if (message.id !== "") {
+      obj.id = message.id;
     }
-    message.publicKeyMultibase !== undefined && (obj.publicKeyMultibase = message.publicKeyMultibase);
+    if (message.type !== "") {
+      obj.type = message.type;
+    }
+    if (message.controller !== "") {
+      obj.controller = message.controller;
+    }
+    if (message.publicKeyJwk?.length) {
+      obj.publicKeyJwk = message.publicKeyJwk.map((e) => KeyValuePair.toJSON(e));
+    }
+    if (message.publicKeyMultibase !== "") {
+      obj.publicKeyMultibase = message.publicKeyMultibase;
+    }
     return obj;
   },
 
@@ -470,9 +458,15 @@ export const Service = {
 
   toJSON(message: Service): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.type !== undefined && (obj.type = message.type);
-    message.serviceEndpoint !== undefined && (obj.serviceEndpoint = message.serviceEndpoint);
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.type !== "") {
+      obj.type = message.type;
+    }
+    if (message.serviceEndpoint !== "") {
+      obj.serviceEndpoint = message.serviceEndpoint;
+    }
     return obj;
   },
 

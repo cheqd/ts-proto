@@ -77,12 +77,11 @@ export const MsgCreateResource = {
 
   toJSON(message: MsgCreateResource): unknown {
     const obj: any = {};
-    message.payload !== undefined &&
-      (obj.payload = message.payload ? MsgCreateResourcePayload.toJSON(message.payload) : undefined);
-    if (message.signatures) {
-      obj.signatures = message.signatures.map((e) => e ? SignInfo.toJSON(e) : undefined);
-    } else {
-      obj.signatures = [];
+    if (message.payload !== undefined) {
+      obj.payload = MsgCreateResourcePayload.toJSON(message.payload);
+    }
+    if (message.signatures?.length) {
+      obj.signatures = message.signatures.map((e) => SignInfo.toJSON(e));
     }
     return obj;
   },
@@ -188,12 +187,21 @@ export const MsgCreateResourcePayload = {
 
   toJSON(message: MsgCreateResourcePayload): unknown {
     const obj: any = {};
-    message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-    message.id !== undefined && (obj.id = message.id);
-    message.name !== undefined && (obj.name = message.name);
-    message.resourceType !== undefined && (obj.resourceType = message.resourceType);
-    message.data !== undefined &&
-      (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array(0)));
+    if (message.collectionId !== "") {
+      obj.collectionId = message.collectionId;
+    }
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.resourceType !== "") {
+      obj.resourceType = message.resourceType;
+    }
+    if (message.data.length !== 0) {
+      obj.data = base64FromBytes(message.data);
+    }
     return obj;
   },
 
@@ -253,7 +261,9 @@ export const MsgCreateResourceResponse = {
 
   toJSON(message: MsgCreateResourceResponse): unknown {
     const obj: any = {};
-    message.resource !== undefined && (obj.resource = message.resource ? Resource.toJSON(message.resource) : undefined);
+    if (message.resource !== undefined) {
+      obj.resource = Resource.toJSON(message.resource);
+    }
     return obj;
   },
 

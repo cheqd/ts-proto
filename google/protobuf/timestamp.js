@@ -22,19 +22,19 @@ export const Timestamp = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 8) {
+                    if (tag !== 8) {
                         break;
                     }
                     message.seconds = reader.int64();
                     continue;
                 case 2:
-                    if (tag != 16) {
+                    if (tag !== 16) {
                         break;
                     }
                     message.nanos = reader.int32();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -49,8 +49,12 @@ export const Timestamp = {
     },
     toJSON(message) {
         const obj = {};
-        message.seconds !== undefined && (obj.seconds = (message.seconds || Long.ZERO).toString());
-        message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
+        if (!message.seconds.isZero()) {
+            obj.seconds = (message.seconds || Long.ZERO).toString();
+        }
+        if (message.nanos !== 0) {
+            obj.nanos = Math.round(message.nanos);
+        }
         return obj;
     },
     create(base) {
