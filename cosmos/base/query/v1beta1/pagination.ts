@@ -154,12 +154,21 @@ export const PageRequest = {
 
   toJSON(message: PageRequest): unknown {
     const obj: any = {};
-    message.key !== undefined &&
-      (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array(0)));
-    message.offset !== undefined && (obj.offset = (message.offset || Long.UZERO).toString());
-    message.limit !== undefined && (obj.limit = (message.limit || Long.UZERO).toString());
-    message.countTotal !== undefined && (obj.countTotal = message.countTotal);
-    message.reverse !== undefined && (obj.reverse = message.reverse);
+    if (message.key.length !== 0) {
+      obj.key = base64FromBytes(message.key);
+    }
+    if (!message.offset.isZero()) {
+      obj.offset = (message.offset || Long.UZERO).toString();
+    }
+    if (!message.limit.isZero()) {
+      obj.limit = (message.limit || Long.UZERO).toString();
+    }
+    if (message.countTotal === true) {
+      obj.countTotal = message.countTotal;
+    }
+    if (message.reverse === true) {
+      obj.reverse = message.reverse;
+    }
     return obj;
   },
 
@@ -234,9 +243,12 @@ export const PageResponse = {
 
   toJSON(message: PageResponse): unknown {
     const obj: any = {};
-    message.nextKey !== undefined &&
-      (obj.nextKey = base64FromBytes(message.nextKey !== undefined ? message.nextKey : new Uint8Array(0)));
-    message.total !== undefined && (obj.total = (message.total || Long.UZERO).toString());
+    if (message.nextKey.length !== 0) {
+      obj.nextKey = base64FromBytes(message.nextKey);
+    }
+    if (!message.total.isZero()) {
+      obj.total = (message.total || Long.UZERO).toString();
+    }
     return obj;
   },
 

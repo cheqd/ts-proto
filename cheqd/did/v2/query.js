@@ -21,13 +21,13 @@ export const QueryDidDocRequest = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -39,7 +39,9 @@ export const QueryDidDocRequest = {
     },
     toJSON(message) {
         const obj = {};
-        message.id !== undefined && (obj.id = message.id);
+        if (message.id !== "") {
+            obj.id = message.id;
+        }
         return obj;
     },
     create(base) {
@@ -69,13 +71,13 @@ export const QueryDidDocResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.value = DidDocWithMetadata.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -87,7 +89,9 @@ export const QueryDidDocResponse = {
     },
     toJSON(message) {
         const obj = {};
-        message.value !== undefined && (obj.value = message.value ? DidDocWithMetadata.toJSON(message.value) : undefined);
+        if (message.value !== undefined) {
+            obj.value = DidDocWithMetadata.toJSON(message.value);
+        }
         return obj;
     },
     create(base) {
@@ -122,19 +126,19 @@ export const QueryDidDocVersionRequest = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.version = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -149,8 +153,12 @@ export const QueryDidDocVersionRequest = {
     },
     toJSON(message) {
         const obj = {};
-        message.id !== undefined && (obj.id = message.id);
-        message.version !== undefined && (obj.version = message.version);
+        if (message.id !== "") {
+            obj.id = message.id;
+        }
+        if (message.version !== "") {
+            obj.version = message.version;
+        }
         return obj;
     },
     create(base) {
@@ -181,13 +189,13 @@ export const QueryDidDocVersionResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.value = DidDocWithMetadata.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -199,7 +207,9 @@ export const QueryDidDocVersionResponse = {
     },
     toJSON(message) {
         const obj = {};
-        message.value !== undefined && (obj.value = message.value ? DidDocWithMetadata.toJSON(message.value) : undefined);
+        if (message.value !== undefined) {
+            obj.value = DidDocWithMetadata.toJSON(message.value);
+        }
         return obj;
     },
     create(base) {
@@ -234,19 +244,19 @@ export const QueryAllDidDocVersionsMetadataRequest = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.pagination = PageRequest.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -261,9 +271,12 @@ export const QueryAllDidDocVersionsMetadataRequest = {
     },
     toJSON(message) {
         const obj = {};
-        message.id !== undefined && (obj.id = message.id);
-        message.pagination !== undefined &&
-            (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+        if (message.id !== "") {
+            obj.id = message.id;
+        }
+        if (message.pagination !== undefined) {
+            obj.pagination = PageRequest.toJSON(message.pagination);
+        }
         return obj;
     },
     create(base) {
@@ -299,19 +312,19 @@ export const QueryAllDidDocVersionsMetadataResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.versions.push(Metadata.decode(reader, reader.uint32()));
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.pagination = PageResponse.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -326,14 +339,12 @@ export const QueryAllDidDocVersionsMetadataResponse = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.versions) {
-            obj.versions = message.versions.map((e) => e ? Metadata.toJSON(e) : undefined);
+        if (message.versions?.length) {
+            obj.versions = message.versions.map((e) => Metadata.toJSON(e));
         }
-        else {
-            obj.versions = [];
+        if (message.pagination !== undefined) {
+            obj.pagination = PageResponse.toJSON(message.pagination);
         }
-        message.pagination !== undefined &&
-            (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
         return obj;
     },
     create(base) {
@@ -348,11 +359,12 @@ export const QueryAllDidDocVersionsMetadataResponse = {
         return message;
     },
 };
+export const QueryServiceName = "cheqd.did.v2.Query";
 export class QueryClientImpl {
     rpc;
     service;
     constructor(rpc, opts) {
-        this.service = opts?.service || "cheqd.did.v2.Query";
+        this.service = opts?.service || QueryServiceName;
         this.rpc = rpc;
         this.DidDoc = this.DidDoc.bind(this);
         this.DidDocVersion = this.DidDocVersion.bind(this);

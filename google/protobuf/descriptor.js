@@ -540,13 +540,13 @@ export const FileDescriptorSet = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.file.push(FileDescriptorProto.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -558,11 +558,8 @@ export const FileDescriptorSet = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.file) {
-            obj.file = message.file.map((e) => e ? FileDescriptorProto.toJSON(e) : undefined);
-        }
-        else {
-            obj.file = [];
+        if (message.file?.length) {
+            obj.file = message.file.map((e) => FileDescriptorProto.toJSON(e));
         }
         return obj;
     },
@@ -647,29 +644,29 @@ export const FileDescriptorProto = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.name = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.package = reader.string();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.dependency.push(reader.string());
                     continue;
                 case 10:
-                    if (tag == 80) {
+                    if (tag === 80) {
                         message.publicDependency.push(reader.int32());
                         continue;
                     }
-                    if (tag == 82) {
+                    if (tag === 82) {
                         const end2 = reader.uint32() + reader.pos;
                         while (reader.pos < end2) {
                             message.publicDependency.push(reader.int32());
@@ -678,11 +675,11 @@ export const FileDescriptorProto = {
                     }
                     break;
                 case 11:
-                    if (tag == 88) {
+                    if (tag === 88) {
                         message.weakDependency.push(reader.int32());
                         continue;
                     }
-                    if (tag == 90) {
+                    if (tag === 90) {
                         const end2 = reader.uint32() + reader.pos;
                         while (reader.pos < end2) {
                             message.weakDependency.push(reader.int32());
@@ -691,55 +688,55 @@ export const FileDescriptorProto = {
                     }
                     break;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.messageType.push(DescriptorProto.decode(reader, reader.uint32()));
                     continue;
                 case 5:
-                    if (tag != 42) {
+                    if (tag !== 42) {
                         break;
                     }
                     message.enumType.push(EnumDescriptorProto.decode(reader, reader.uint32()));
                     continue;
                 case 6:
-                    if (tag != 50) {
+                    if (tag !== 50) {
                         break;
                     }
                     message.service.push(ServiceDescriptorProto.decode(reader, reader.uint32()));
                     continue;
                 case 7:
-                    if (tag != 58) {
+                    if (tag !== 58) {
                         break;
                     }
                     message.extension.push(FieldDescriptorProto.decode(reader, reader.uint32()));
                     continue;
                 case 8:
-                    if (tag != 66) {
+                    if (tag !== 66) {
                         break;
                     }
                     message.options = FileOptions.decode(reader, reader.uint32());
                     continue;
                 case 9:
-                    if (tag != 74) {
+                    if (tag !== 74) {
                         break;
                     }
                     message.sourceCodeInfo = SourceCodeInfo.decode(reader, reader.uint32());
                     continue;
                 case 12:
-                    if (tag != 98) {
+                    if (tag !== 98) {
                         break;
                     }
                     message.syntax = reader.string();
                     continue;
                 case 13:
-                    if (tag != 106) {
+                    if (tag !== 106) {
                         break;
                     }
                     message.edition = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -771,55 +768,45 @@ export const FileDescriptorProto = {
     },
     toJSON(message) {
         const obj = {};
-        message.name !== undefined && (obj.name = message.name);
-        message.package !== undefined && (obj.package = message.package);
-        if (message.dependency) {
-            obj.dependency = message.dependency.map((e) => e);
+        if (message.name !== "") {
+            obj.name = message.name;
         }
-        else {
-            obj.dependency = [];
+        if (message.package !== "") {
+            obj.package = message.package;
         }
-        if (message.publicDependency) {
+        if (message.dependency?.length) {
+            obj.dependency = message.dependency;
+        }
+        if (message.publicDependency?.length) {
             obj.publicDependency = message.publicDependency.map((e) => Math.round(e));
         }
-        else {
-            obj.publicDependency = [];
-        }
-        if (message.weakDependency) {
+        if (message.weakDependency?.length) {
             obj.weakDependency = message.weakDependency.map((e) => Math.round(e));
         }
-        else {
-            obj.weakDependency = [];
+        if (message.messageType?.length) {
+            obj.messageType = message.messageType.map((e) => DescriptorProto.toJSON(e));
         }
-        if (message.messageType) {
-            obj.messageType = message.messageType.map((e) => e ? DescriptorProto.toJSON(e) : undefined);
+        if (message.enumType?.length) {
+            obj.enumType = message.enumType.map((e) => EnumDescriptorProto.toJSON(e));
         }
-        else {
-            obj.messageType = [];
+        if (message.service?.length) {
+            obj.service = message.service.map((e) => ServiceDescriptorProto.toJSON(e));
         }
-        if (message.enumType) {
-            obj.enumType = message.enumType.map((e) => e ? EnumDescriptorProto.toJSON(e) : undefined);
+        if (message.extension?.length) {
+            obj.extension = message.extension.map((e) => FieldDescriptorProto.toJSON(e));
         }
-        else {
-            obj.enumType = [];
+        if (message.options !== undefined) {
+            obj.options = FileOptions.toJSON(message.options);
         }
-        if (message.service) {
-            obj.service = message.service.map((e) => e ? ServiceDescriptorProto.toJSON(e) : undefined);
+        if (message.sourceCodeInfo !== undefined) {
+            obj.sourceCodeInfo = SourceCodeInfo.toJSON(message.sourceCodeInfo);
         }
-        else {
-            obj.service = [];
+        if (message.syntax !== "") {
+            obj.syntax = message.syntax;
         }
-        if (message.extension) {
-            obj.extension = message.extension.map((e) => e ? FieldDescriptorProto.toJSON(e) : undefined);
+        if (message.edition !== "") {
+            obj.edition = message.edition;
         }
-        else {
-            obj.extension = [];
-        }
-        message.options !== undefined && (obj.options = message.options ? FileOptions.toJSON(message.options) : undefined);
-        message.sourceCodeInfo !== undefined &&
-            (obj.sourceCodeInfo = message.sourceCodeInfo ? SourceCodeInfo.toJSON(message.sourceCodeInfo) : undefined);
-        message.syntax !== undefined && (obj.syntax = message.syntax);
-        message.edition !== undefined && (obj.edition = message.edition);
         return obj;
     },
     create(base) {
@@ -903,67 +890,67 @@ export const DescriptorProto = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.name = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.field.push(FieldDescriptorProto.decode(reader, reader.uint32()));
                     continue;
                 case 6:
-                    if (tag != 50) {
+                    if (tag !== 50) {
                         break;
                     }
                     message.extension.push(FieldDescriptorProto.decode(reader, reader.uint32()));
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.nestedType.push(DescriptorProto.decode(reader, reader.uint32()));
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.enumType.push(EnumDescriptorProto.decode(reader, reader.uint32()));
                     continue;
                 case 5:
-                    if (tag != 42) {
+                    if (tag !== 42) {
                         break;
                     }
                     message.extensionRange.push(DescriptorProto_ExtensionRange.decode(reader, reader.uint32()));
                     continue;
                 case 8:
-                    if (tag != 66) {
+                    if (tag !== 66) {
                         break;
                     }
                     message.oneofDecl.push(OneofDescriptorProto.decode(reader, reader.uint32()));
                     continue;
                 case 7:
-                    if (tag != 58) {
+                    if (tag !== 58) {
                         break;
                     }
                     message.options = MessageOptions.decode(reader, reader.uint32());
                     continue;
                 case 9:
-                    if (tag != 74) {
+                    if (tag !== 74) {
                         break;
                     }
                     message.reservedRange.push(DescriptorProto_ReservedRange.decode(reader, reader.uint32()));
                     continue;
                 case 10:
-                    if (tag != 82) {
+                    if (tag !== 82) {
                         break;
                     }
                     message.reservedName.push(reader.string());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -996,56 +983,35 @@ export const DescriptorProto = {
     },
     toJSON(message) {
         const obj = {};
-        message.name !== undefined && (obj.name = message.name);
-        if (message.field) {
-            obj.field = message.field.map((e) => e ? FieldDescriptorProto.toJSON(e) : undefined);
+        if (message.name !== "") {
+            obj.name = message.name;
         }
-        else {
-            obj.field = [];
+        if (message.field?.length) {
+            obj.field = message.field.map((e) => FieldDescriptorProto.toJSON(e));
         }
-        if (message.extension) {
-            obj.extension = message.extension.map((e) => e ? FieldDescriptorProto.toJSON(e) : undefined);
+        if (message.extension?.length) {
+            obj.extension = message.extension.map((e) => FieldDescriptorProto.toJSON(e));
         }
-        else {
-            obj.extension = [];
+        if (message.nestedType?.length) {
+            obj.nestedType = message.nestedType.map((e) => DescriptorProto.toJSON(e));
         }
-        if (message.nestedType) {
-            obj.nestedType = message.nestedType.map((e) => e ? DescriptorProto.toJSON(e) : undefined);
+        if (message.enumType?.length) {
+            obj.enumType = message.enumType.map((e) => EnumDescriptorProto.toJSON(e));
         }
-        else {
-            obj.nestedType = [];
+        if (message.extensionRange?.length) {
+            obj.extensionRange = message.extensionRange.map((e) => DescriptorProto_ExtensionRange.toJSON(e));
         }
-        if (message.enumType) {
-            obj.enumType = message.enumType.map((e) => e ? EnumDescriptorProto.toJSON(e) : undefined);
+        if (message.oneofDecl?.length) {
+            obj.oneofDecl = message.oneofDecl.map((e) => OneofDescriptorProto.toJSON(e));
         }
-        else {
-            obj.enumType = [];
+        if (message.options !== undefined) {
+            obj.options = MessageOptions.toJSON(message.options);
         }
-        if (message.extensionRange) {
-            obj.extensionRange = message.extensionRange.map((e) => e ? DescriptorProto_ExtensionRange.toJSON(e) : undefined);
+        if (message.reservedRange?.length) {
+            obj.reservedRange = message.reservedRange.map((e) => DescriptorProto_ReservedRange.toJSON(e));
         }
-        else {
-            obj.extensionRange = [];
-        }
-        if (message.oneofDecl) {
-            obj.oneofDecl = message.oneofDecl.map((e) => e ? OneofDescriptorProto.toJSON(e) : undefined);
-        }
-        else {
-            obj.oneofDecl = [];
-        }
-        message.options !== undefined &&
-            (obj.options = message.options ? MessageOptions.toJSON(message.options) : undefined);
-        if (message.reservedRange) {
-            obj.reservedRange = message.reservedRange.map((e) => e ? DescriptorProto_ReservedRange.toJSON(e) : undefined);
-        }
-        else {
-            obj.reservedRange = [];
-        }
-        if (message.reservedName) {
-            obj.reservedName = message.reservedName.map((e) => e);
-        }
-        else {
-            obj.reservedName = [];
+        if (message.reservedName?.length) {
+            obj.reservedName = message.reservedName;
         }
         return obj;
     },
@@ -1093,25 +1059,25 @@ export const DescriptorProto_ExtensionRange = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 8) {
+                    if (tag !== 8) {
                         break;
                     }
                     message.start = reader.int32();
                     continue;
                 case 2:
-                    if (tag != 16) {
+                    if (tag !== 16) {
                         break;
                     }
                     message.end = reader.int32();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.options = ExtensionRangeOptions.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -1127,10 +1093,15 @@ export const DescriptorProto_ExtensionRange = {
     },
     toJSON(message) {
         const obj = {};
-        message.start !== undefined && (obj.start = Math.round(message.start));
-        message.end !== undefined && (obj.end = Math.round(message.end));
-        message.options !== undefined &&
-            (obj.options = message.options ? ExtensionRangeOptions.toJSON(message.options) : undefined);
+        if (message.start !== 0) {
+            obj.start = Math.round(message.start);
+        }
+        if (message.end !== 0) {
+            obj.end = Math.round(message.end);
+        }
+        if (message.options !== undefined) {
+            obj.options = ExtensionRangeOptions.toJSON(message.options);
+        }
         return obj;
     },
     create(base) {
@@ -1167,19 +1138,19 @@ export const DescriptorProto_ReservedRange = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 8) {
+                    if (tag !== 8) {
                         break;
                     }
                     message.start = reader.int32();
                     continue;
                 case 2:
-                    if (tag != 16) {
+                    if (tag !== 16) {
                         break;
                     }
                     message.end = reader.int32();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -1191,8 +1162,12 @@ export const DescriptorProto_ReservedRange = {
     },
     toJSON(message) {
         const obj = {};
-        message.start !== undefined && (obj.start = Math.round(message.start));
-        message.end !== undefined && (obj.end = Math.round(message.end));
+        if (message.start !== 0) {
+            obj.start = Math.round(message.start);
+        }
+        if (message.end !== 0) {
+            obj.end = Math.round(message.end);
+        }
         return obj;
     },
     create(base) {
@@ -1223,13 +1198,13 @@ export const ExtensionRangeOptions = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 999:
-                    if (tag != 7994) {
+                    if (tag !== 7994) {
                         break;
                     }
                     message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -1245,11 +1220,8 @@ export const ExtensionRangeOptions = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? UninterpretedOption.toJSON(e) : undefined);
-        }
-        else {
-            obj.uninterpretedOption = [];
+        if (message.uninterpretedOption?.length) {
+            obj.uninterpretedOption = message.uninterpretedOption.map((e) => UninterpretedOption.toJSON(e));
         }
         return obj;
     },
@@ -1322,73 +1294,73 @@ export const FieldDescriptorProto = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.name = reader.string();
                     continue;
                 case 3:
-                    if (tag != 24) {
+                    if (tag !== 24) {
                         break;
                     }
                     message.number = reader.int32();
                     continue;
                 case 4:
-                    if (tag != 32) {
+                    if (tag !== 32) {
                         break;
                     }
                     message.label = reader.int32();
                     continue;
                 case 5:
-                    if (tag != 40) {
+                    if (tag !== 40) {
                         break;
                     }
                     message.type = reader.int32();
                     continue;
                 case 6:
-                    if (tag != 50) {
+                    if (tag !== 50) {
                         break;
                     }
                     message.typeName = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.extendee = reader.string();
                     continue;
                 case 7:
-                    if (tag != 58) {
+                    if (tag !== 58) {
                         break;
                     }
                     message.defaultValue = reader.string();
                     continue;
                 case 9:
-                    if (tag != 72) {
+                    if (tag !== 72) {
                         break;
                     }
                     message.oneofIndex = reader.int32();
                     continue;
                 case 10:
-                    if (tag != 82) {
+                    if (tag !== 82) {
                         break;
                     }
                     message.jsonName = reader.string();
                     continue;
                 case 8:
-                    if (tag != 66) {
+                    if (tag !== 66) {
                         break;
                     }
                     message.options = FieldOptions.decode(reader, reader.uint32());
                     continue;
                 case 17:
-                    if (tag != 136) {
+                    if (tag !== 136) {
                         break;
                     }
                     message.proto3Optional = reader.bool();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -1412,17 +1384,39 @@ export const FieldDescriptorProto = {
     },
     toJSON(message) {
         const obj = {};
-        message.name !== undefined && (obj.name = message.name);
-        message.number !== undefined && (obj.number = Math.round(message.number));
-        message.label !== undefined && (obj.label = fieldDescriptorProto_LabelToJSON(message.label));
-        message.type !== undefined && (obj.type = fieldDescriptorProto_TypeToJSON(message.type));
-        message.typeName !== undefined && (obj.typeName = message.typeName);
-        message.extendee !== undefined && (obj.extendee = message.extendee);
-        message.defaultValue !== undefined && (obj.defaultValue = message.defaultValue);
-        message.oneofIndex !== undefined && (obj.oneofIndex = Math.round(message.oneofIndex));
-        message.jsonName !== undefined && (obj.jsonName = message.jsonName);
-        message.options !== undefined && (obj.options = message.options ? FieldOptions.toJSON(message.options) : undefined);
-        message.proto3Optional !== undefined && (obj.proto3Optional = message.proto3Optional);
+        if (message.name !== "") {
+            obj.name = message.name;
+        }
+        if (message.number !== 0) {
+            obj.number = Math.round(message.number);
+        }
+        if (message.label !== 1) {
+            obj.label = fieldDescriptorProto_LabelToJSON(message.label);
+        }
+        if (message.type !== 1) {
+            obj.type = fieldDescriptorProto_TypeToJSON(message.type);
+        }
+        if (message.typeName !== "") {
+            obj.typeName = message.typeName;
+        }
+        if (message.extendee !== "") {
+            obj.extendee = message.extendee;
+        }
+        if (message.defaultValue !== "") {
+            obj.defaultValue = message.defaultValue;
+        }
+        if (message.oneofIndex !== 0) {
+            obj.oneofIndex = Math.round(message.oneofIndex);
+        }
+        if (message.jsonName !== "") {
+            obj.jsonName = message.jsonName;
+        }
+        if (message.options !== undefined) {
+            obj.options = FieldOptions.toJSON(message.options);
+        }
+        if (message.proto3Optional === true) {
+            obj.proto3Optional = message.proto3Optional;
+        }
         return obj;
     },
     create(base) {
@@ -1467,19 +1461,19 @@ export const OneofDescriptorProto = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.name = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.options = OneofOptions.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -1494,8 +1488,12 @@ export const OneofDescriptorProto = {
     },
     toJSON(message) {
         const obj = {};
-        message.name !== undefined && (obj.name = message.name);
-        message.options !== undefined && (obj.options = message.options ? OneofOptions.toJSON(message.options) : undefined);
+        if (message.name !== "") {
+            obj.name = message.name;
+        }
+        if (message.options !== undefined) {
+            obj.options = OneofOptions.toJSON(message.options);
+        }
         return obj;
     },
     create(base) {
@@ -1540,37 +1538,37 @@ export const EnumDescriptorProto = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.name = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.value.push(EnumValueDescriptorProto.decode(reader, reader.uint32()));
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.options = EnumOptions.decode(reader, reader.uint32());
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.reservedRange.push(EnumDescriptorProto_EnumReservedRange.decode(reader, reader.uint32()));
                     continue;
                 case 5:
-                    if (tag != 42) {
+                    if (tag !== 42) {
                         break;
                     }
                     message.reservedName.push(reader.string());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -1590,25 +1588,20 @@ export const EnumDescriptorProto = {
     },
     toJSON(message) {
         const obj = {};
-        message.name !== undefined && (obj.name = message.name);
-        if (message.value) {
-            obj.value = message.value.map((e) => e ? EnumValueDescriptorProto.toJSON(e) : undefined);
+        if (message.name !== "") {
+            obj.name = message.name;
         }
-        else {
-            obj.value = [];
+        if (message.value?.length) {
+            obj.value = message.value.map((e) => EnumValueDescriptorProto.toJSON(e));
         }
-        message.options !== undefined && (obj.options = message.options ? EnumOptions.toJSON(message.options) : undefined);
-        if (message.reservedRange) {
-            obj.reservedRange = message.reservedRange.map((e) => e ? EnumDescriptorProto_EnumReservedRange.toJSON(e) : undefined);
+        if (message.options !== undefined) {
+            obj.options = EnumOptions.toJSON(message.options);
         }
-        else {
-            obj.reservedRange = [];
+        if (message.reservedRange?.length) {
+            obj.reservedRange = message.reservedRange.map((e) => EnumDescriptorProto_EnumReservedRange.toJSON(e));
         }
-        if (message.reservedName) {
-            obj.reservedName = message.reservedName.map((e) => e);
-        }
-        else {
-            obj.reservedName = [];
+        if (message.reservedName?.length) {
+            obj.reservedName = message.reservedName;
         }
         return obj;
     },
@@ -1649,19 +1642,19 @@ export const EnumDescriptorProto_EnumReservedRange = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 8) {
+                    if (tag !== 8) {
                         break;
                     }
                     message.start = reader.int32();
                     continue;
                 case 2:
-                    if (tag != 16) {
+                    if (tag !== 16) {
                         break;
                     }
                     message.end = reader.int32();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -1673,8 +1666,12 @@ export const EnumDescriptorProto_EnumReservedRange = {
     },
     toJSON(message) {
         const obj = {};
-        message.start !== undefined && (obj.start = Math.round(message.start));
-        message.end !== undefined && (obj.end = Math.round(message.end));
+        if (message.start !== 0) {
+            obj.start = Math.round(message.start);
+        }
+        if (message.end !== 0) {
+            obj.end = Math.round(message.end);
+        }
         return obj;
     },
     create(base) {
@@ -1711,25 +1708,25 @@ export const EnumValueDescriptorProto = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.name = reader.string();
                     continue;
                 case 2:
-                    if (tag != 16) {
+                    if (tag !== 16) {
                         break;
                     }
                     message.number = reader.int32();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.options = EnumValueOptions.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -1745,10 +1742,15 @@ export const EnumValueDescriptorProto = {
     },
     toJSON(message) {
         const obj = {};
-        message.name !== undefined && (obj.name = message.name);
-        message.number !== undefined && (obj.number = Math.round(message.number));
-        message.options !== undefined &&
-            (obj.options = message.options ? EnumValueOptions.toJSON(message.options) : undefined);
+        if (message.name !== "") {
+            obj.name = message.name;
+        }
+        if (message.number !== 0) {
+            obj.number = Math.round(message.number);
+        }
+        if (message.options !== undefined) {
+            obj.options = EnumValueOptions.toJSON(message.options);
+        }
         return obj;
     },
     create(base) {
@@ -1788,25 +1790,25 @@ export const ServiceDescriptorProto = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.name = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.method.push(MethodDescriptorProto.decode(reader, reader.uint32()));
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.options = ServiceOptions.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -1822,15 +1824,15 @@ export const ServiceDescriptorProto = {
     },
     toJSON(message) {
         const obj = {};
-        message.name !== undefined && (obj.name = message.name);
-        if (message.method) {
-            obj.method = message.method.map((e) => e ? MethodDescriptorProto.toJSON(e) : undefined);
+        if (message.name !== "") {
+            obj.name = message.name;
         }
-        else {
-            obj.method = [];
+        if (message.method?.length) {
+            obj.method = message.method.map((e) => MethodDescriptorProto.toJSON(e));
         }
-        message.options !== undefined &&
-            (obj.options = message.options ? ServiceOptions.toJSON(message.options) : undefined);
+        if (message.options !== undefined) {
+            obj.options = ServiceOptions.toJSON(message.options);
+        }
         return obj;
     },
     create(base) {
@@ -1886,43 +1888,43 @@ export const MethodDescriptorProto = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.name = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.inputType = reader.string();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.outputType = reader.string();
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.options = MethodOptions.decode(reader, reader.uint32());
                     continue;
                 case 5:
-                    if (tag != 40) {
+                    if (tag !== 40) {
                         break;
                     }
                     message.clientStreaming = reader.bool();
                     continue;
                 case 6:
-                    if (tag != 48) {
+                    if (tag !== 48) {
                         break;
                     }
                     message.serverStreaming = reader.bool();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -1941,13 +1943,24 @@ export const MethodDescriptorProto = {
     },
     toJSON(message) {
         const obj = {};
-        message.name !== undefined && (obj.name = message.name);
-        message.inputType !== undefined && (obj.inputType = message.inputType);
-        message.outputType !== undefined && (obj.outputType = message.outputType);
-        message.options !== undefined &&
-            (obj.options = message.options ? MethodOptions.toJSON(message.options) : undefined);
-        message.clientStreaming !== undefined && (obj.clientStreaming = message.clientStreaming);
-        message.serverStreaming !== undefined && (obj.serverStreaming = message.serverStreaming);
+        if (message.name !== "") {
+            obj.name = message.name;
+        }
+        if (message.inputType !== "") {
+            obj.inputType = message.inputType;
+        }
+        if (message.outputType !== "") {
+            obj.outputType = message.outputType;
+        }
+        if (message.options !== undefined) {
+            obj.options = MethodOptions.toJSON(message.options);
+        }
+        if (message.clientStreaming === true) {
+            obj.clientStreaming = message.clientStreaming;
+        }
+        if (message.serverStreaming === true) {
+            obj.serverStreaming = message.serverStreaming;
+        }
         return obj;
     },
     create(base) {
@@ -2066,133 +2079,133 @@ export const FileOptions = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.javaPackage = reader.string();
                     continue;
                 case 8:
-                    if (tag != 66) {
+                    if (tag !== 66) {
                         break;
                     }
                     message.javaOuterClassname = reader.string();
                     continue;
                 case 10:
-                    if (tag != 80) {
+                    if (tag !== 80) {
                         break;
                     }
                     message.javaMultipleFiles = reader.bool();
                     continue;
                 case 20:
-                    if (tag != 160) {
+                    if (tag !== 160) {
                         break;
                     }
                     message.javaGenerateEqualsAndHash = reader.bool();
                     continue;
                 case 27:
-                    if (tag != 216) {
+                    if (tag !== 216) {
                         break;
                     }
                     message.javaStringCheckUtf8 = reader.bool();
                     continue;
                 case 9:
-                    if (tag != 72) {
+                    if (tag !== 72) {
                         break;
                     }
                     message.optimizeFor = reader.int32();
                     continue;
                 case 11:
-                    if (tag != 90) {
+                    if (tag !== 90) {
                         break;
                     }
                     message.goPackage = reader.string();
                     continue;
                 case 16:
-                    if (tag != 128) {
+                    if (tag !== 128) {
                         break;
                     }
                     message.ccGenericServices = reader.bool();
                     continue;
                 case 17:
-                    if (tag != 136) {
+                    if (tag !== 136) {
                         break;
                     }
                     message.javaGenericServices = reader.bool();
                     continue;
                 case 18:
-                    if (tag != 144) {
+                    if (tag !== 144) {
                         break;
                     }
                     message.pyGenericServices = reader.bool();
                     continue;
                 case 42:
-                    if (tag != 336) {
+                    if (tag !== 336) {
                         break;
                     }
                     message.phpGenericServices = reader.bool();
                     continue;
                 case 23:
-                    if (tag != 184) {
+                    if (tag !== 184) {
                         break;
                     }
                     message.deprecated = reader.bool();
                     continue;
                 case 31:
-                    if (tag != 248) {
+                    if (tag !== 248) {
                         break;
                     }
                     message.ccEnableArenas = reader.bool();
                     continue;
                 case 36:
-                    if (tag != 290) {
+                    if (tag !== 290) {
                         break;
                     }
                     message.objcClassPrefix = reader.string();
                     continue;
                 case 37:
-                    if (tag != 298) {
+                    if (tag !== 298) {
                         break;
                     }
                     message.csharpNamespace = reader.string();
                     continue;
                 case 39:
-                    if (tag != 314) {
+                    if (tag !== 314) {
                         break;
                     }
                     message.swiftPrefix = reader.string();
                     continue;
                 case 40:
-                    if (tag != 322) {
+                    if (tag !== 322) {
                         break;
                     }
                     message.phpClassPrefix = reader.string();
                     continue;
                 case 41:
-                    if (tag != 330) {
+                    if (tag !== 330) {
                         break;
                     }
                     message.phpNamespace = reader.string();
                     continue;
                 case 44:
-                    if (tag != 354) {
+                    if (tag !== 354) {
                         break;
                     }
                     message.phpMetadataNamespace = reader.string();
                     continue;
                 case 45:
-                    if (tag != 362) {
+                    if (tag !== 362) {
                         break;
                     }
                     message.rubyPackage = reader.string();
                     continue;
                 case 999:
-                    if (tag != 7994) {
+                    if (tag !== 7994) {
                         break;
                     }
                     message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -2230,32 +2243,68 @@ export const FileOptions = {
     },
     toJSON(message) {
         const obj = {};
-        message.javaPackage !== undefined && (obj.javaPackage = message.javaPackage);
-        message.javaOuterClassname !== undefined && (obj.javaOuterClassname = message.javaOuterClassname);
-        message.javaMultipleFiles !== undefined && (obj.javaMultipleFiles = message.javaMultipleFiles);
-        message.javaGenerateEqualsAndHash !== undefined &&
-            (obj.javaGenerateEqualsAndHash = message.javaGenerateEqualsAndHash);
-        message.javaStringCheckUtf8 !== undefined && (obj.javaStringCheckUtf8 = message.javaStringCheckUtf8);
-        message.optimizeFor !== undefined && (obj.optimizeFor = fileOptions_OptimizeModeToJSON(message.optimizeFor));
-        message.goPackage !== undefined && (obj.goPackage = message.goPackage);
-        message.ccGenericServices !== undefined && (obj.ccGenericServices = message.ccGenericServices);
-        message.javaGenericServices !== undefined && (obj.javaGenericServices = message.javaGenericServices);
-        message.pyGenericServices !== undefined && (obj.pyGenericServices = message.pyGenericServices);
-        message.phpGenericServices !== undefined && (obj.phpGenericServices = message.phpGenericServices);
-        message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-        message.ccEnableArenas !== undefined && (obj.ccEnableArenas = message.ccEnableArenas);
-        message.objcClassPrefix !== undefined && (obj.objcClassPrefix = message.objcClassPrefix);
-        message.csharpNamespace !== undefined && (obj.csharpNamespace = message.csharpNamespace);
-        message.swiftPrefix !== undefined && (obj.swiftPrefix = message.swiftPrefix);
-        message.phpClassPrefix !== undefined && (obj.phpClassPrefix = message.phpClassPrefix);
-        message.phpNamespace !== undefined && (obj.phpNamespace = message.phpNamespace);
-        message.phpMetadataNamespace !== undefined && (obj.phpMetadataNamespace = message.phpMetadataNamespace);
-        message.rubyPackage !== undefined && (obj.rubyPackage = message.rubyPackage);
-        if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? UninterpretedOption.toJSON(e) : undefined);
+        if (message.javaPackage !== "") {
+            obj.javaPackage = message.javaPackage;
         }
-        else {
-            obj.uninterpretedOption = [];
+        if (message.javaOuterClassname !== "") {
+            obj.javaOuterClassname = message.javaOuterClassname;
+        }
+        if (message.javaMultipleFiles === true) {
+            obj.javaMultipleFiles = message.javaMultipleFiles;
+        }
+        if (message.javaGenerateEqualsAndHash === true) {
+            obj.javaGenerateEqualsAndHash = message.javaGenerateEqualsAndHash;
+        }
+        if (message.javaStringCheckUtf8 === true) {
+            obj.javaStringCheckUtf8 = message.javaStringCheckUtf8;
+        }
+        if (message.optimizeFor !== 1) {
+            obj.optimizeFor = fileOptions_OptimizeModeToJSON(message.optimizeFor);
+        }
+        if (message.goPackage !== "") {
+            obj.goPackage = message.goPackage;
+        }
+        if (message.ccGenericServices === true) {
+            obj.ccGenericServices = message.ccGenericServices;
+        }
+        if (message.javaGenericServices === true) {
+            obj.javaGenericServices = message.javaGenericServices;
+        }
+        if (message.pyGenericServices === true) {
+            obj.pyGenericServices = message.pyGenericServices;
+        }
+        if (message.phpGenericServices === true) {
+            obj.phpGenericServices = message.phpGenericServices;
+        }
+        if (message.deprecated === true) {
+            obj.deprecated = message.deprecated;
+        }
+        if (message.ccEnableArenas === true) {
+            obj.ccEnableArenas = message.ccEnableArenas;
+        }
+        if (message.objcClassPrefix !== "") {
+            obj.objcClassPrefix = message.objcClassPrefix;
+        }
+        if (message.csharpNamespace !== "") {
+            obj.csharpNamespace = message.csharpNamespace;
+        }
+        if (message.swiftPrefix !== "") {
+            obj.swiftPrefix = message.swiftPrefix;
+        }
+        if (message.phpClassPrefix !== "") {
+            obj.phpClassPrefix = message.phpClassPrefix;
+        }
+        if (message.phpNamespace !== "") {
+            obj.phpNamespace = message.phpNamespace;
+        }
+        if (message.phpMetadataNamespace !== "") {
+            obj.phpMetadataNamespace = message.phpMetadataNamespace;
+        }
+        if (message.rubyPackage !== "") {
+            obj.rubyPackage = message.rubyPackage;
+        }
+        if (message.uninterpretedOption?.length) {
+            obj.uninterpretedOption = message.uninterpretedOption.map((e) => UninterpretedOption.toJSON(e));
         }
         return obj;
     },
@@ -2328,43 +2377,43 @@ export const MessageOptions = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 8) {
+                    if (tag !== 8) {
                         break;
                     }
                     message.messageSetWireFormat = reader.bool();
                     continue;
                 case 2:
-                    if (tag != 16) {
+                    if (tag !== 16) {
                         break;
                     }
                     message.noStandardDescriptorAccessor = reader.bool();
                     continue;
                 case 3:
-                    if (tag != 24) {
+                    if (tag !== 24) {
                         break;
                     }
                     message.deprecated = reader.bool();
                     continue;
                 case 7:
-                    if (tag != 56) {
+                    if (tag !== 56) {
                         break;
                     }
                     message.mapEntry = reader.bool();
                     continue;
                 case 11:
-                    if (tag != 88) {
+                    if (tag !== 88) {
                         break;
                     }
                     message.deprecatedLegacyJsonFieldConflicts = reader.bool();
                     continue;
                 case 999:
-                    if (tag != 7994) {
+                    if (tag !== 7994) {
                         break;
                     }
                     message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -2389,18 +2438,23 @@ export const MessageOptions = {
     },
     toJSON(message) {
         const obj = {};
-        message.messageSetWireFormat !== undefined && (obj.messageSetWireFormat = message.messageSetWireFormat);
-        message.noStandardDescriptorAccessor !== undefined &&
-            (obj.noStandardDescriptorAccessor = message.noStandardDescriptorAccessor);
-        message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-        message.mapEntry !== undefined && (obj.mapEntry = message.mapEntry);
-        message.deprecatedLegacyJsonFieldConflicts !== undefined &&
-            (obj.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts);
-        if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? UninterpretedOption.toJSON(e) : undefined);
+        if (message.messageSetWireFormat === true) {
+            obj.messageSetWireFormat = message.messageSetWireFormat;
         }
-        else {
-            obj.uninterpretedOption = [];
+        if (message.noStandardDescriptorAccessor === true) {
+            obj.noStandardDescriptorAccessor = message.noStandardDescriptorAccessor;
+        }
+        if (message.deprecated === true) {
+            obj.deprecated = message.deprecated;
+        }
+        if (message.mapEntry === true) {
+            obj.mapEntry = message.mapEntry;
+        }
+        if (message.deprecatedLegacyJsonFieldConflicts === true) {
+            obj.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
+        }
+        if (message.uninterpretedOption?.length) {
+            obj.uninterpretedOption = message.uninterpretedOption.map((e) => UninterpretedOption.toJSON(e));
         }
         return obj;
     },
@@ -2478,73 +2532,73 @@ export const FieldOptions = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 8) {
+                    if (tag !== 8) {
                         break;
                     }
                     message.ctype = reader.int32();
                     continue;
                 case 2:
-                    if (tag != 16) {
+                    if (tag !== 16) {
                         break;
                     }
                     message.packed = reader.bool();
                     continue;
                 case 6:
-                    if (tag != 48) {
+                    if (tag !== 48) {
                         break;
                     }
                     message.jstype = reader.int32();
                     continue;
                 case 5:
-                    if (tag != 40) {
+                    if (tag !== 40) {
                         break;
                     }
                     message.lazy = reader.bool();
                     continue;
                 case 15:
-                    if (tag != 120) {
+                    if (tag !== 120) {
                         break;
                     }
                     message.unverifiedLazy = reader.bool();
                     continue;
                 case 3:
-                    if (tag != 24) {
+                    if (tag !== 24) {
                         break;
                     }
                     message.deprecated = reader.bool();
                     continue;
                 case 10:
-                    if (tag != 80) {
+                    if (tag !== 80) {
                         break;
                     }
                     message.weak = reader.bool();
                     continue;
                 case 16:
-                    if (tag != 128) {
+                    if (tag !== 128) {
                         break;
                     }
                     message.debugRedact = reader.bool();
                     continue;
                 case 17:
-                    if (tag != 136) {
+                    if (tag !== 136) {
                         break;
                     }
                     message.retention = reader.int32();
                     continue;
                 case 18:
-                    if (tag != 144) {
+                    if (tag !== 144) {
                         break;
                     }
                     message.target = reader.int32();
                     continue;
                 case 999:
-                    if (tag != 7994) {
+                    if (tag !== 7994) {
                         break;
                     }
                     message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -2570,21 +2624,38 @@ export const FieldOptions = {
     },
     toJSON(message) {
         const obj = {};
-        message.ctype !== undefined && (obj.ctype = fieldOptions_CTypeToJSON(message.ctype));
-        message.packed !== undefined && (obj.packed = message.packed);
-        message.jstype !== undefined && (obj.jstype = fieldOptions_JSTypeToJSON(message.jstype));
-        message.lazy !== undefined && (obj.lazy = message.lazy);
-        message.unverifiedLazy !== undefined && (obj.unverifiedLazy = message.unverifiedLazy);
-        message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-        message.weak !== undefined && (obj.weak = message.weak);
-        message.debugRedact !== undefined && (obj.debugRedact = message.debugRedact);
-        message.retention !== undefined && (obj.retention = fieldOptions_OptionRetentionToJSON(message.retention));
-        message.target !== undefined && (obj.target = fieldOptions_OptionTargetTypeToJSON(message.target));
-        if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? UninterpretedOption.toJSON(e) : undefined);
+        if (message.ctype !== 0) {
+            obj.ctype = fieldOptions_CTypeToJSON(message.ctype);
         }
-        else {
-            obj.uninterpretedOption = [];
+        if (message.packed === true) {
+            obj.packed = message.packed;
+        }
+        if (message.jstype !== 0) {
+            obj.jstype = fieldOptions_JSTypeToJSON(message.jstype);
+        }
+        if (message.lazy === true) {
+            obj.lazy = message.lazy;
+        }
+        if (message.unverifiedLazy === true) {
+            obj.unverifiedLazy = message.unverifiedLazy;
+        }
+        if (message.deprecated === true) {
+            obj.deprecated = message.deprecated;
+        }
+        if (message.weak === true) {
+            obj.weak = message.weak;
+        }
+        if (message.debugRedact === true) {
+            obj.debugRedact = message.debugRedact;
+        }
+        if (message.retention !== 0) {
+            obj.retention = fieldOptions_OptionRetentionToJSON(message.retention);
+        }
+        if (message.target !== 0) {
+            obj.target = fieldOptions_OptionTargetTypeToJSON(message.target);
+        }
+        if (message.uninterpretedOption?.length) {
+            obj.uninterpretedOption = message.uninterpretedOption.map((e) => UninterpretedOption.toJSON(e));
         }
         return obj;
     },
@@ -2625,13 +2696,13 @@ export const OneofOptions = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 999:
-                    if (tag != 7994) {
+                    if (tag !== 7994) {
                         break;
                     }
                     message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -2647,11 +2718,8 @@ export const OneofOptions = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? UninterpretedOption.toJSON(e) : undefined);
-        }
-        else {
-            obj.uninterpretedOption = [];
+        if (message.uninterpretedOption?.length) {
+            obj.uninterpretedOption = message.uninterpretedOption.map((e) => UninterpretedOption.toJSON(e));
         }
         return obj;
     },
@@ -2691,31 +2759,31 @@ export const EnumOptions = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 2:
-                    if (tag != 16) {
+                    if (tag !== 16) {
                         break;
                     }
                     message.allowAlias = reader.bool();
                     continue;
                 case 3:
-                    if (tag != 24) {
+                    if (tag !== 24) {
                         break;
                     }
                     message.deprecated = reader.bool();
                     continue;
                 case 6:
-                    if (tag != 48) {
+                    if (tag !== 48) {
                         break;
                     }
                     message.deprecatedLegacyJsonFieldConflicts = reader.bool();
                     continue;
                 case 999:
-                    if (tag != 7994) {
+                    if (tag !== 7994) {
                         break;
                     }
                     message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -2736,15 +2804,17 @@ export const EnumOptions = {
     },
     toJSON(message) {
         const obj = {};
-        message.allowAlias !== undefined && (obj.allowAlias = message.allowAlias);
-        message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-        message.deprecatedLegacyJsonFieldConflicts !== undefined &&
-            (obj.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts);
-        if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? UninterpretedOption.toJSON(e) : undefined);
+        if (message.allowAlias === true) {
+            obj.allowAlias = message.allowAlias;
         }
-        else {
-            obj.uninterpretedOption = [];
+        if (message.deprecated === true) {
+            obj.deprecated = message.deprecated;
+        }
+        if (message.deprecatedLegacyJsonFieldConflicts === true) {
+            obj.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
+        }
+        if (message.uninterpretedOption?.length) {
+            obj.uninterpretedOption = message.uninterpretedOption.map((e) => UninterpretedOption.toJSON(e));
         }
         return obj;
     },
@@ -2781,19 +2851,19 @@ export const EnumValueOptions = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 8) {
+                    if (tag !== 8) {
                         break;
                     }
                     message.deprecated = reader.bool();
                     continue;
                 case 999:
-                    if (tag != 7994) {
+                    if (tag !== 7994) {
                         break;
                     }
                     message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -2810,12 +2880,11 @@ export const EnumValueOptions = {
     },
     toJSON(message) {
         const obj = {};
-        message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-        if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? UninterpretedOption.toJSON(e) : undefined);
+        if (message.deprecated === true) {
+            obj.deprecated = message.deprecated;
         }
-        else {
-            obj.uninterpretedOption = [];
+        if (message.uninterpretedOption?.length) {
+            obj.uninterpretedOption = message.uninterpretedOption.map((e) => UninterpretedOption.toJSON(e));
         }
         return obj;
     },
@@ -2850,19 +2919,19 @@ export const ServiceOptions = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 33:
-                    if (tag != 264) {
+                    if (tag !== 264) {
                         break;
                     }
                     message.deprecated = reader.bool();
                     continue;
                 case 999:
-                    if (tag != 7994) {
+                    if (tag !== 7994) {
                         break;
                     }
                     message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -2879,12 +2948,11 @@ export const ServiceOptions = {
     },
     toJSON(message) {
         const obj = {};
-        message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-        if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? UninterpretedOption.toJSON(e) : undefined);
+        if (message.deprecated === true) {
+            obj.deprecated = message.deprecated;
         }
-        else {
-            obj.uninterpretedOption = [];
+        if (message.uninterpretedOption?.length) {
+            obj.uninterpretedOption = message.uninterpretedOption.map((e) => UninterpretedOption.toJSON(e));
         }
         return obj;
     },
@@ -2922,25 +2990,25 @@ export const MethodOptions = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 33:
-                    if (tag != 264) {
+                    if (tag !== 264) {
                         break;
                     }
                     message.deprecated = reader.bool();
                     continue;
                 case 34:
-                    if (tag != 272) {
+                    if (tag !== 272) {
                         break;
                     }
                     message.idempotencyLevel = reader.int32();
                     continue;
                 case 999:
-                    if (tag != 7994) {
+                    if (tag !== 7994) {
                         break;
                     }
                     message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -2960,14 +3028,14 @@ export const MethodOptions = {
     },
     toJSON(message) {
         const obj = {};
-        message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-        message.idempotencyLevel !== undefined &&
-            (obj.idempotencyLevel = methodOptions_IdempotencyLevelToJSON(message.idempotencyLevel));
-        if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? UninterpretedOption.toJSON(e) : undefined);
+        if (message.deprecated === true) {
+            obj.deprecated = message.deprecated;
         }
-        else {
-            obj.uninterpretedOption = [];
+        if (message.idempotencyLevel !== 0) {
+            obj.idempotencyLevel = methodOptions_IdempotencyLevelToJSON(message.idempotencyLevel);
+        }
+        if (message.uninterpretedOption?.length) {
+            obj.uninterpretedOption = message.uninterpretedOption.map((e) => UninterpretedOption.toJSON(e));
         }
         return obj;
     },
@@ -2989,7 +3057,7 @@ function createBaseUninterpretedOption() {
         positiveIntValue: Long.UZERO,
         negativeIntValue: Long.ZERO,
         doubleValue: 0,
-        stringValue: new Uint8Array(),
+        stringValue: new Uint8Array(0),
         aggregateValue: "",
     };
 }
@@ -3026,49 +3094,49 @@ export const UninterpretedOption = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.name.push(UninterpretedOption_NamePart.decode(reader, reader.uint32()));
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.identifierValue = reader.string();
                     continue;
                 case 4:
-                    if (tag != 32) {
+                    if (tag !== 32) {
                         break;
                     }
                     message.positiveIntValue = reader.uint64();
                     continue;
                 case 5:
-                    if (tag != 40) {
+                    if (tag !== 40) {
                         break;
                     }
                     message.negativeIntValue = reader.int64();
                     continue;
                 case 6:
-                    if (tag != 49) {
+                    if (tag !== 49) {
                         break;
                     }
                     message.doubleValue = reader.double();
                     continue;
                 case 7:
-                    if (tag != 58) {
+                    if (tag !== 58) {
                         break;
                     }
                     message.stringValue = reader.bytes();
                     continue;
                 case 8:
-                    if (tag != 66) {
+                    if (tag !== 66) {
                         break;
                     }
                     message.aggregateValue = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -3082,27 +3150,33 @@ export const UninterpretedOption = {
             positiveIntValue: isSet(object.positiveIntValue) ? Long.fromValue(object.positiveIntValue) : Long.UZERO,
             negativeIntValue: isSet(object.negativeIntValue) ? Long.fromValue(object.negativeIntValue) : Long.ZERO,
             doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : 0,
-            stringValue: isSet(object.stringValue) ? bytesFromBase64(object.stringValue) : new Uint8Array(),
+            stringValue: isSet(object.stringValue) ? bytesFromBase64(object.stringValue) : new Uint8Array(0),
             aggregateValue: isSet(object.aggregateValue) ? String(object.aggregateValue) : "",
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.name) {
-            obj.name = message.name.map((e) => e ? UninterpretedOption_NamePart.toJSON(e) : undefined);
+        if (message.name?.length) {
+            obj.name = message.name.map((e) => UninterpretedOption_NamePart.toJSON(e));
         }
-        else {
-            obj.name = [];
+        if (message.identifierValue !== "") {
+            obj.identifierValue = message.identifierValue;
         }
-        message.identifierValue !== undefined && (obj.identifierValue = message.identifierValue);
-        message.positiveIntValue !== undefined &&
-            (obj.positiveIntValue = (message.positiveIntValue || Long.UZERO).toString());
-        message.negativeIntValue !== undefined &&
-            (obj.negativeIntValue = (message.negativeIntValue || Long.ZERO).toString());
-        message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
-        message.stringValue !== undefined &&
-            (obj.stringValue = base64FromBytes(message.stringValue !== undefined ? message.stringValue : new Uint8Array()));
-        message.aggregateValue !== undefined && (obj.aggregateValue = message.aggregateValue);
+        if (!message.positiveIntValue.isZero()) {
+            obj.positiveIntValue = (message.positiveIntValue || Long.UZERO).toString();
+        }
+        if (!message.negativeIntValue.isZero()) {
+            obj.negativeIntValue = (message.negativeIntValue || Long.ZERO).toString();
+        }
+        if (message.doubleValue !== 0) {
+            obj.doubleValue = message.doubleValue;
+        }
+        if (message.stringValue.length !== 0) {
+            obj.stringValue = base64FromBytes(message.stringValue);
+        }
+        if (message.aggregateValue !== "") {
+            obj.aggregateValue = message.aggregateValue;
+        }
         return obj;
     },
     create(base) {
@@ -3119,7 +3193,7 @@ export const UninterpretedOption = {
             ? Long.fromValue(object.negativeIntValue)
             : Long.ZERO;
         message.doubleValue = object.doubleValue ?? 0;
-        message.stringValue = object.stringValue ?? new Uint8Array();
+        message.stringValue = object.stringValue ?? new Uint8Array(0);
         message.aggregateValue = object.aggregateValue ?? "";
         return message;
     },
@@ -3145,19 +3219,19 @@ export const UninterpretedOption_NamePart = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.namePart = reader.string();
                     continue;
                 case 2:
-                    if (tag != 16) {
+                    if (tag !== 16) {
                         break;
                     }
                     message.isExtension = reader.bool();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -3172,8 +3246,12 @@ export const UninterpretedOption_NamePart = {
     },
     toJSON(message) {
         const obj = {};
-        message.namePart !== undefined && (obj.namePart = message.namePart);
-        message.isExtension !== undefined && (obj.isExtension = message.isExtension);
+        if (message.namePart !== "") {
+            obj.namePart = message.namePart;
+        }
+        if (message.isExtension === true) {
+            obj.isExtension = message.isExtension;
+        }
         return obj;
     },
     create(base) {
@@ -3204,13 +3282,13 @@ export const SourceCodeInfo = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.location.push(SourceCodeInfo_Location.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -3226,11 +3304,8 @@ export const SourceCodeInfo = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.location) {
-            obj.location = message.location.map((e) => e ? SourceCodeInfo_Location.toJSON(e) : undefined);
-        }
-        else {
-            obj.location = [];
+        if (message.location?.length) {
+            obj.location = message.location.map((e) => SourceCodeInfo_Location.toJSON(e));
         }
         return obj;
     },
@@ -3277,11 +3352,11 @@ export const SourceCodeInfo_Location = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag == 8) {
+                    if (tag === 8) {
                         message.path.push(reader.int32());
                         continue;
                     }
-                    if (tag == 10) {
+                    if (tag === 10) {
                         const end2 = reader.uint32() + reader.pos;
                         while (reader.pos < end2) {
                             message.path.push(reader.int32());
@@ -3290,11 +3365,11 @@ export const SourceCodeInfo_Location = {
                     }
                     break;
                 case 2:
-                    if (tag == 16) {
+                    if (tag === 16) {
                         message.span.push(reader.int32());
                         continue;
                     }
-                    if (tag == 18) {
+                    if (tag === 18) {
                         const end2 = reader.uint32() + reader.pos;
                         while (reader.pos < end2) {
                             message.span.push(reader.int32());
@@ -3303,25 +3378,25 @@ export const SourceCodeInfo_Location = {
                     }
                     break;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.leadingComments = reader.string();
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.trailingComments = reader.string();
                     continue;
                 case 6:
-                    if (tag != 50) {
+                    if (tag !== 50) {
                         break;
                     }
                     message.leadingDetachedComments.push(reader.string());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -3341,25 +3416,20 @@ export const SourceCodeInfo_Location = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.path) {
+        if (message.path?.length) {
             obj.path = message.path.map((e) => Math.round(e));
         }
-        else {
-            obj.path = [];
-        }
-        if (message.span) {
+        if (message.span?.length) {
             obj.span = message.span.map((e) => Math.round(e));
         }
-        else {
-            obj.span = [];
+        if (message.leadingComments !== "") {
+            obj.leadingComments = message.leadingComments;
         }
-        message.leadingComments !== undefined && (obj.leadingComments = message.leadingComments);
-        message.trailingComments !== undefined && (obj.trailingComments = message.trailingComments);
-        if (message.leadingDetachedComments) {
-            obj.leadingDetachedComments = message.leadingDetachedComments.map((e) => e);
+        if (message.trailingComments !== "") {
+            obj.trailingComments = message.trailingComments;
         }
-        else {
-            obj.leadingDetachedComments = [];
+        if (message.leadingDetachedComments?.length) {
+            obj.leadingDetachedComments = message.leadingDetachedComments;
         }
         return obj;
     },
@@ -3394,13 +3464,13 @@ export const GeneratedCodeInfo = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.annotation.push(GeneratedCodeInfo_Annotation.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -3416,11 +3486,8 @@ export const GeneratedCodeInfo = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.annotation) {
-            obj.annotation = message.annotation.map((e) => e ? GeneratedCodeInfo_Annotation.toJSON(e) : undefined);
-        }
-        else {
-            obj.annotation = [];
+        if (message.annotation?.length) {
+            obj.annotation = message.annotation.map((e) => GeneratedCodeInfo_Annotation.toJSON(e));
         }
         return obj;
     },
@@ -3465,11 +3532,11 @@ export const GeneratedCodeInfo_Annotation = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag == 8) {
+                    if (tag === 8) {
                         message.path.push(reader.int32());
                         continue;
                     }
-                    if (tag == 10) {
+                    if (tag === 10) {
                         const end2 = reader.uint32() + reader.pos;
                         while (reader.pos < end2) {
                             message.path.push(reader.int32());
@@ -3478,31 +3545,31 @@ export const GeneratedCodeInfo_Annotation = {
                     }
                     break;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.sourceFile = reader.string();
                     continue;
                 case 3:
-                    if (tag != 24) {
+                    if (tag !== 24) {
                         break;
                     }
                     message.begin = reader.int32();
                     continue;
                 case 4:
-                    if (tag != 32) {
+                    if (tag !== 32) {
                         break;
                     }
                     message.end = reader.int32();
                     continue;
                 case 5:
-                    if (tag != 40) {
+                    if (tag !== 40) {
                         break;
                     }
                     message.semantic = reader.int32();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -3520,16 +3587,21 @@ export const GeneratedCodeInfo_Annotation = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.path) {
+        if (message.path?.length) {
             obj.path = message.path.map((e) => Math.round(e));
         }
-        else {
-            obj.path = [];
+        if (message.sourceFile !== "") {
+            obj.sourceFile = message.sourceFile;
         }
-        message.sourceFile !== undefined && (obj.sourceFile = message.sourceFile);
-        message.begin !== undefined && (obj.begin = Math.round(message.begin));
-        message.end !== undefined && (obj.end = Math.round(message.end));
-        message.semantic !== undefined && (obj.semantic = generatedCodeInfo_Annotation_SemanticToJSON(message.semantic));
+        if (message.begin !== 0) {
+            obj.begin = Math.round(message.begin);
+        }
+        if (message.end !== 0) {
+            obj.end = Math.round(message.end);
+        }
+        if (message.semantic !== 0) {
+            obj.semantic = generatedCodeInfo_Annotation_SemanticToJSON(message.semantic);
+        }
         return obj;
     },
     create(base) {
@@ -3545,7 +3617,7 @@ export const GeneratedCodeInfo_Annotation = {
         return message;
     },
 };
-var tsProtoGlobalThis = (() => {
+const tsProtoGlobalThis = (() => {
     if (typeof globalThis !== "undefined") {
         return globalThis;
     }

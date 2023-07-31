@@ -84,8 +84,12 @@ export const QueryGetResourceRequest = {
 
   toJSON(message: QueryGetResourceRequest): unknown {
     const obj: any = {};
-    message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-    message.id !== undefined && (obj.id = message.id);
+    if (message.collectionId !== "") {
+      obj.collectionId = message.collectionId;
+    }
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
     return obj;
   },
 
@@ -142,7 +146,9 @@ export const QueryResourceResponse = {
 
   toJSON(message: QueryResourceResponse): unknown {
     const obj: any = {};
-    message.resource !== undefined && (obj.resource = message.resource ? Resource.toJSON(message.resource) : undefined);
+    if (message.resource !== undefined) {
+      obj.resource = Resource.toJSON(message.resource);
+    }
     return obj;
   },
 
@@ -200,7 +206,9 @@ export const QueryGetCollectionResourcesRequest = {
 
   toJSON(message: QueryGetCollectionResourcesRequest): unknown {
     const obj: any = {};
-    message.collectionId !== undefined && (obj.collectionId = message.collectionId);
+    if (message.collectionId !== "") {
+      obj.collectionId = message.collectionId;
+    }
     return obj;
   },
 
@@ -262,10 +270,8 @@ export const QueryCollectionResourcesResponse = {
 
   toJSON(message: QueryCollectionResourcesResponse): unknown {
     const obj: any = {};
-    if (message.resources) {
-      obj.resources = message.resources.map((e) => e ? ResourceHeader.toJSON(e) : undefined);
-    } else {
-      obj.resources = [];
+    if (message.resources?.length) {
+      obj.resources = message.resources.map((e) => ResourceHeader.toJSON(e));
     }
     return obj;
   },
@@ -350,9 +356,15 @@ export const QueryGetAllResourceVersionsRequest = {
 
   toJSON(message: QueryGetAllResourceVersionsRequest): unknown {
     const obj: any = {};
-    message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-    message.name !== undefined && (obj.name = message.name);
-    message.resourceType !== undefined && (obj.resourceType = message.resourceType);
+    if (message.collectionId !== "") {
+      obj.collectionId = message.collectionId;
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.resourceType !== "") {
+      obj.resourceType = message.resourceType;
+    }
     return obj;
   },
 
@@ -416,10 +428,8 @@ export const QueryGetAllResourceVersionsResponse = {
 
   toJSON(message: QueryGetAllResourceVersionsResponse): unknown {
     const obj: any = {};
-    if (message.resources) {
-      obj.resources = message.resources.map((e) => e ? ResourceHeader.toJSON(e) : undefined);
-    } else {
-      obj.resources = [];
+    if (message.resources?.length) {
+      obj.resources = message.resources.map((e) => ResourceHeader.toJSON(e));
     }
     return obj;
   },

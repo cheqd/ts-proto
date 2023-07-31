@@ -73,9 +73,12 @@ export const Resource = {
 
   toJSON(message: Resource): unknown {
     const obj: any = {};
-    message.header !== undefined && (obj.header = message.header ? ResourceHeader.toJSON(message.header) : undefined);
-    message.data !== undefined &&
-      (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array(0)));
+    if (message.header !== undefined) {
+      obj.header = ResourceHeader.toJSON(message.header);
+    }
+    if (message.data.length !== 0) {
+      obj.data = base64FromBytes(message.data);
+    }
     return obj;
   },
 
@@ -234,16 +237,33 @@ export const ResourceHeader = {
 
   toJSON(message: ResourceHeader): unknown {
     const obj: any = {};
-    message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-    message.id !== undefined && (obj.id = message.id);
-    message.name !== undefined && (obj.name = message.name);
-    message.resourceType !== undefined && (obj.resourceType = message.resourceType);
-    message.mediaType !== undefined && (obj.mediaType = message.mediaType);
-    message.created !== undefined && (obj.created = message.created);
-    message.checksum !== undefined &&
-      (obj.checksum = base64FromBytes(message.checksum !== undefined ? message.checksum : new Uint8Array(0)));
-    message.previousVersionId !== undefined && (obj.previousVersionId = message.previousVersionId);
-    message.nextVersionId !== undefined && (obj.nextVersionId = message.nextVersionId);
+    if (message.collectionId !== "") {
+      obj.collectionId = message.collectionId;
+    }
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.resourceType !== "") {
+      obj.resourceType = message.resourceType;
+    }
+    if (message.mediaType !== "") {
+      obj.mediaType = message.mediaType;
+    }
+    if (message.created !== "") {
+      obj.created = message.created;
+    }
+    if (message.checksum.length !== 0) {
+      obj.checksum = base64FromBytes(message.checksum);
+    }
+    if (message.previousVersionId !== "") {
+      obj.previousVersionId = message.previousVersionId;
+    }
+    if (message.nextVersionId !== "") {
+      obj.nextVersionId = message.nextVersionId;
+    }
     return obj;
   },
 

@@ -59,19 +59,19 @@ export const InterfaceDescriptor = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.name = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.description = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -86,8 +86,12 @@ export const InterfaceDescriptor = {
     },
     toJSON(message) {
         const obj = {};
-        message.name !== undefined && (obj.name = message.name);
-        message.description !== undefined && (obj.description = message.description);
+        if (message.name !== "") {
+            obj.name = message.name;
+        }
+        if (message.description !== "") {
+            obj.description = message.description;
+        }
         return obj;
     },
     create(base) {
@@ -126,23 +130,23 @@ export const ScalarDescriptor = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.name = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.description = reader.string();
                     continue;
                 case 3:
-                    if (tag == 24) {
+                    if (tag === 24) {
                         message.fieldType.push(reader.int32());
                         continue;
                     }
-                    if (tag == 26) {
+                    if (tag === 26) {
                         const end2 = reader.uint32() + reader.pos;
                         while (reader.pos < end2) {
                             message.fieldType.push(reader.int32());
@@ -151,7 +155,7 @@ export const ScalarDescriptor = {
                     }
                     break;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -167,13 +171,14 @@ export const ScalarDescriptor = {
     },
     toJSON(message) {
         const obj = {};
-        message.name !== undefined && (obj.name = message.name);
-        message.description !== undefined && (obj.description = message.description);
-        if (message.fieldType) {
-            obj.fieldType = message.fieldType.map((e) => scalarTypeToJSON(e));
+        if (message.name !== "") {
+            obj.name = message.name;
         }
-        else {
-            obj.fieldType = [];
+        if (message.description !== "") {
+            obj.description = message.description;
+        }
+        if (message.fieldType?.length) {
+            obj.fieldType = message.fieldType.map((e) => scalarTypeToJSON(e));
         }
         return obj;
     },

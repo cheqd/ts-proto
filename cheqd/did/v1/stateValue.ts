@@ -74,8 +74,12 @@ export const StateValue = {
 
   toJSON(message: StateValue): unknown {
     const obj: any = {};
-    message.data !== undefined && (obj.data = message.data ? Any.toJSON(message.data) : undefined);
-    message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
+    if (message.data !== undefined) {
+      obj.data = Any.toJSON(message.data);
+    }
+    if (message.metadata !== undefined) {
+      obj.metadata = Metadata.toJSON(message.metadata);
+    }
     return obj;
   },
 
@@ -180,14 +184,20 @@ export const Metadata = {
 
   toJSON(message: Metadata): unknown {
     const obj: any = {};
-    message.created !== undefined && (obj.created = message.created);
-    message.updated !== undefined && (obj.updated = message.updated);
-    message.deactivated !== undefined && (obj.deactivated = message.deactivated);
-    message.versionId !== undefined && (obj.versionId = message.versionId);
-    if (message.resources) {
-      obj.resources = message.resources.map((e) => e);
-    } else {
-      obj.resources = [];
+    if (message.created !== "") {
+      obj.created = message.created;
+    }
+    if (message.updated !== "") {
+      obj.updated = message.updated;
+    }
+    if (message.deactivated === true) {
+      obj.deactivated = message.deactivated;
+    }
+    if (message.versionId !== "") {
+      obj.versionId = message.versionId;
+    }
+    if (message.resources?.length) {
+      obj.resources = message.resources;
     }
     return obj;
   },

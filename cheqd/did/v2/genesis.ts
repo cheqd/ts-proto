@@ -85,11 +85,11 @@ export const DidDocVersionSet = {
 
   toJSON(message: DidDocVersionSet): unknown {
     const obj: any = {};
-    message.latestVersion !== undefined && (obj.latestVersion = message.latestVersion);
-    if (message.didDocs) {
-      obj.didDocs = message.didDocs.map((e) => e ? DidDocWithMetadata.toJSON(e) : undefined);
-    } else {
-      obj.didDocs = [];
+    if (message.latestVersion !== "") {
+      obj.latestVersion = message.latestVersion;
+    }
+    if (message.didDocs?.length) {
+      obj.didDocs = message.didDocs.map((e) => DidDocWithMetadata.toJSON(e));
     }
     return obj;
   },
@@ -173,14 +173,15 @@ export const GenesisState = {
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    message.didNamespace !== undefined && (obj.didNamespace = message.didNamespace);
-    if (message.versionSets) {
-      obj.versionSets = message.versionSets.map((e) => e ? DidDocVersionSet.toJSON(e) : undefined);
-    } else {
-      obj.versionSets = [];
+    if (message.didNamespace !== "") {
+      obj.didNamespace = message.didNamespace;
     }
-    message.feeParams !== undefined &&
-      (obj.feeParams = message.feeParams ? FeeParams.toJSON(message.feeParams) : undefined);
+    if (message.versionSets?.length) {
+      obj.versionSets = message.versionSets.map((e) => DidDocVersionSet.toJSON(e));
+    }
+    if (message.feeParams !== undefined) {
+      obj.feeParams = FeeParams.toJSON(message.feeParams);
+    }
     return obj;
   },
 

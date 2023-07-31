@@ -151,8 +151,9 @@ export const Resource = {
 
   toJSON(message: Resource): unknown {
     const obj: any = {};
-    message.data !== undefined &&
-      (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array(0)));
+    if (message.data.length !== 0) {
+      obj.data = base64FromBytes(message.data);
+    }
     return obj;
   },
 
@@ -334,21 +335,39 @@ export const Metadata = {
 
   toJSON(message: Metadata): unknown {
     const obj: any = {};
-    message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-    message.id !== undefined && (obj.id = message.id);
-    message.name !== undefined && (obj.name = message.name);
-    message.version !== undefined && (obj.version = message.version);
-    message.resourceType !== undefined && (obj.resourceType = message.resourceType);
-    if (message.alsoKnownAs) {
-      obj.alsoKnownAs = message.alsoKnownAs.map((e) => e ? AlternativeUri.toJSON(e) : undefined);
-    } else {
-      obj.alsoKnownAs = [];
+    if (message.collectionId !== "") {
+      obj.collectionId = message.collectionId;
     }
-    message.mediaType !== undefined && (obj.mediaType = message.mediaType);
-    message.created !== undefined && (obj.created = message.created.toISOString());
-    message.checksum !== undefined && (obj.checksum = message.checksum);
-    message.previousVersionId !== undefined && (obj.previousVersionId = message.previousVersionId);
-    message.nextVersionId !== undefined && (obj.nextVersionId = message.nextVersionId);
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.version !== "") {
+      obj.version = message.version;
+    }
+    if (message.resourceType !== "") {
+      obj.resourceType = message.resourceType;
+    }
+    if (message.alsoKnownAs?.length) {
+      obj.alsoKnownAs = message.alsoKnownAs.map((e) => AlternativeUri.toJSON(e));
+    }
+    if (message.mediaType !== "") {
+      obj.mediaType = message.mediaType;
+    }
+    if (message.created !== undefined) {
+      obj.created = message.created.toISOString();
+    }
+    if (message.checksum !== "") {
+      obj.checksum = message.checksum;
+    }
+    if (message.previousVersionId !== "") {
+      obj.previousVersionId = message.previousVersionId;
+    }
+    if (message.nextVersionId !== "") {
+      obj.nextVersionId = message.nextVersionId;
+    }
     return obj;
   },
 
@@ -427,8 +446,12 @@ export const AlternativeUri = {
 
   toJSON(message: AlternativeUri): unknown {
     const obj: any = {};
-    message.uri !== undefined && (obj.uri = message.uri);
-    message.description !== undefined && (obj.description = message.description);
+    if (message.uri !== "") {
+      obj.uri = message.uri;
+    }
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
     return obj;
   },
 
@@ -498,8 +521,12 @@ export const ResourceWithMetadata = {
 
   toJSON(message: ResourceWithMetadata): unknown {
     const obj: any = {};
-    message.resource !== undefined && (obj.resource = message.resource ? Resource.toJSON(message.resource) : undefined);
-    message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
+    if (message.resource !== undefined) {
+      obj.resource = Resource.toJSON(message.resource);
+    }
+    if (message.metadata !== undefined) {
+      obj.metadata = Metadata.toJSON(message.metadata);
+    }
     return obj;
   },
 

@@ -22,19 +22,19 @@ export const Coin = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.denom = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.amount = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -49,8 +49,12 @@ export const Coin = {
     },
     toJSON(message) {
         const obj = {};
-        message.denom !== undefined && (obj.denom = message.denom);
-        message.amount !== undefined && (obj.amount = message.amount);
+        if (message.denom !== "") {
+            obj.denom = message.denom;
+        }
+        if (message.amount !== "") {
+            obj.amount = message.amount;
+        }
         return obj;
     },
     create(base) {
@@ -84,19 +88,19 @@ export const DecCoin = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.denom = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.amount = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -111,8 +115,12 @@ export const DecCoin = {
     },
     toJSON(message) {
         const obj = {};
-        message.denom !== undefined && (obj.denom = message.denom);
-        message.amount !== undefined && (obj.amount = message.amount);
+        if (message.denom !== "") {
+            obj.denom = message.denom;
+        }
+        if (message.amount !== "") {
+            obj.amount = message.amount;
+        }
         return obj;
     },
     create(base) {
@@ -143,13 +151,13 @@ export const IntProto = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.int = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -161,7 +169,9 @@ export const IntProto = {
     },
     toJSON(message) {
         const obj = {};
-        message.int !== undefined && (obj.int = message.int);
+        if (message.int !== "") {
+            obj.int = message.int;
+        }
         return obj;
     },
     create(base) {
@@ -191,13 +201,13 @@ export const DecProto = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.dec = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -209,7 +219,9 @@ export const DecProto = {
     },
     toJSON(message) {
         const obj = {};
-        message.dec !== undefined && (obj.dec = message.dec);
+        if (message.dec !== "") {
+            obj.dec = message.dec;
+        }
         return obj;
     },
     create(base) {

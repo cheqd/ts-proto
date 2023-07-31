@@ -116,10 +116,18 @@ export const FeeParams = {
 
   toJSON(message: FeeParams): unknown {
     const obj: any = {};
-    message.image !== undefined && (obj.image = message.image ? Coin.toJSON(message.image) : undefined);
-    message.json !== undefined && (obj.json = message.json ? Coin.toJSON(message.json) : undefined);
-    message.default !== undefined && (obj.default = message.default ? Coin.toJSON(message.default) : undefined);
-    message.burnFactor !== undefined && (obj.burnFactor = message.burnFactor);
+    if (message.image !== undefined) {
+      obj.image = Coin.toJSON(message.image);
+    }
+    if (message.json !== undefined) {
+      obj.json = Coin.toJSON(message.json);
+    }
+    if (message.default !== undefined) {
+      obj.default = Coin.toJSON(message.default);
+    }
+    if (message.burnFactor !== "") {
+      obj.burnFactor = message.burnFactor;
+    }
     return obj;
   },
 

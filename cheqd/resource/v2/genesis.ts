@@ -71,13 +71,12 @@ export const GenesisState = {
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    if (message.resources) {
-      obj.resources = message.resources.map((e) => e ? ResourceWithMetadata.toJSON(e) : undefined);
-    } else {
-      obj.resources = [];
+    if (message.resources?.length) {
+      obj.resources = message.resources.map((e) => ResourceWithMetadata.toJSON(e));
     }
-    message.feeParams !== undefined &&
-      (obj.feeParams = message.feeParams ? FeeParams.toJSON(message.feeParams) : undefined);
+    if (message.feeParams !== undefined) {
+      obj.feeParams = FeeParams.toJSON(message.feeParams);
+    }
     return obj;
   },
 

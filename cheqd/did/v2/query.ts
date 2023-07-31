@@ -129,7 +129,9 @@ export const QueryDidDocRequest = {
 
   toJSON(message: QueryDidDocRequest): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
     return obj;
   },
 
@@ -185,7 +187,9 @@ export const QueryDidDocResponse = {
 
   toJSON(message: QueryDidDocResponse): unknown {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value ? DidDocWithMetadata.toJSON(message.value) : undefined);
+    if (message.value !== undefined) {
+      obj.value = DidDocWithMetadata.toJSON(message.value);
+    }
     return obj;
   },
 
@@ -256,8 +260,12 @@ export const QueryDidDocVersionRequest = {
 
   toJSON(message: QueryDidDocVersionRequest): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.version !== undefined && (obj.version = message.version);
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.version !== "") {
+      obj.version = message.version;
+    }
     return obj;
   },
 
@@ -314,7 +322,9 @@ export const QueryDidDocVersionResponse = {
 
   toJSON(message: QueryDidDocVersionResponse): unknown {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value ? DidDocWithMetadata.toJSON(message.value) : undefined);
+    if (message.value !== undefined) {
+      obj.value = DidDocWithMetadata.toJSON(message.value);
+    }
     return obj;
   },
 
@@ -385,9 +395,12 @@ export const QueryAllDidDocVersionsMetadataRequest = {
 
   toJSON(message: QueryAllDidDocVersionsMetadataRequest): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.pagination !== undefined &&
-      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.pagination !== undefined) {
+      obj.pagination = PageRequest.toJSON(message.pagination);
+    }
     return obj;
   },
 
@@ -463,13 +476,12 @@ export const QueryAllDidDocVersionsMetadataResponse = {
 
   toJSON(message: QueryAllDidDocVersionsMetadataResponse): unknown {
     const obj: any = {};
-    if (message.versions) {
-      obj.versions = message.versions.map((e) => e ? Metadata.toJSON(e) : undefined);
-    } else {
-      obj.versions = [];
+    if (message.versions?.length) {
+      obj.versions = message.versions.map((e) => Metadata.toJSON(e));
     }
-    message.pagination !== undefined &&
-      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    if (message.pagination !== undefined) {
+      obj.pagination = PageResponse.toJSON(message.pagination);
+    }
     return obj;
   },
 

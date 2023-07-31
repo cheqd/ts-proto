@@ -24,19 +24,19 @@ export const MsgCreateResource = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.payload = MsgCreateResourcePayload.decode(reader, reader.uint32());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.signatures.push(SignInfo.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -51,13 +51,11 @@ export const MsgCreateResource = {
     },
     toJSON(message) {
         const obj = {};
-        message.payload !== undefined &&
-            (obj.payload = message.payload ? MsgCreateResourcePayload.toJSON(message.payload) : undefined);
-        if (message.signatures) {
-            obj.signatures = message.signatures.map((e) => e ? SignInfo.toJSON(e) : undefined);
+        if (message.payload !== undefined) {
+            obj.payload = MsgCreateResourcePayload.toJSON(message.payload);
         }
-        else {
-            obj.signatures = [];
+        if (message.signatures?.length) {
+            obj.signatures = message.signatures.map((e) => SignInfo.toJSON(e));
         }
         return obj;
     },
@@ -74,7 +72,15 @@ export const MsgCreateResource = {
     },
 };
 function createBaseMsgCreateResourcePayload() {
-    return { data: new Uint8Array(), collectionId: "", id: "", name: "", version: "", resourceType: "", alsoKnownAs: [] };
+    return {
+        data: new Uint8Array(0),
+        collectionId: "",
+        id: "",
+        name: "",
+        version: "",
+        resourceType: "",
+        alsoKnownAs: [],
+    };
 }
 export const MsgCreateResourcePayload = {
     encode(message, writer = _m0.Writer.create()) {
@@ -109,49 +115,49 @@ export const MsgCreateResourcePayload = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.data = reader.bytes();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.collectionId = reader.string();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.name = reader.string();
                     continue;
                 case 5:
-                    if (tag != 42) {
+                    if (tag !== 42) {
                         break;
                     }
                     message.version = reader.string();
                     continue;
                 case 6:
-                    if (tag != 50) {
+                    if (tag !== 50) {
                         break;
                     }
                     message.resourceType = reader.string();
                     continue;
                 case 7:
-                    if (tag != 58) {
+                    if (tag !== 58) {
                         break;
                     }
                     message.alsoKnownAs.push(AlternativeUri.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -160,7 +166,7 @@ export const MsgCreateResourcePayload = {
     },
     fromJSON(object) {
         return {
-            data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+            data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
             collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
             id: isSet(object.id) ? String(object.id) : "",
             name: isSet(object.name) ? String(object.name) : "",
@@ -173,18 +179,26 @@ export const MsgCreateResourcePayload = {
     },
     toJSON(message) {
         const obj = {};
-        message.data !== undefined &&
-            (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-        message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-        message.id !== undefined && (obj.id = message.id);
-        message.name !== undefined && (obj.name = message.name);
-        message.version !== undefined && (obj.version = message.version);
-        message.resourceType !== undefined && (obj.resourceType = message.resourceType);
-        if (message.alsoKnownAs) {
-            obj.alsoKnownAs = message.alsoKnownAs.map((e) => e ? AlternativeUri.toJSON(e) : undefined);
+        if (message.data.length !== 0) {
+            obj.data = base64FromBytes(message.data);
         }
-        else {
-            obj.alsoKnownAs = [];
+        if (message.collectionId !== "") {
+            obj.collectionId = message.collectionId;
+        }
+        if (message.id !== "") {
+            obj.id = message.id;
+        }
+        if (message.name !== "") {
+            obj.name = message.name;
+        }
+        if (message.version !== "") {
+            obj.version = message.version;
+        }
+        if (message.resourceType !== "") {
+            obj.resourceType = message.resourceType;
+        }
+        if (message.alsoKnownAs?.length) {
+            obj.alsoKnownAs = message.alsoKnownAs.map((e) => AlternativeUri.toJSON(e));
         }
         return obj;
     },
@@ -193,7 +207,7 @@ export const MsgCreateResourcePayload = {
     },
     fromPartial(object) {
         const message = createBaseMsgCreateResourcePayload();
-        message.data = object.data ?? new Uint8Array();
+        message.data = object.data ?? new Uint8Array(0);
         message.collectionId = object.collectionId ?? "";
         message.id = object.id ?? "";
         message.name = object.name ?? "";
@@ -221,13 +235,13 @@ export const MsgCreateResourceResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.resource = Metadata.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -239,7 +253,9 @@ export const MsgCreateResourceResponse = {
     },
     toJSON(message) {
         const obj = {};
-        message.resource !== undefined && (obj.resource = message.resource ? Metadata.toJSON(message.resource) : undefined);
+        if (message.resource !== undefined) {
+            obj.resource = Metadata.toJSON(message.resource);
+        }
         return obj;
     },
     create(base) {
@@ -253,11 +269,12 @@ export const MsgCreateResourceResponse = {
         return message;
     },
 };
+export const MsgServiceName = "cheqd.resource.v2.Msg";
 export class MsgClientImpl {
     rpc;
     service;
     constructor(rpc, opts) {
-        this.service = opts?.service || "cheqd.resource.v2.Msg";
+        this.service = opts?.service || MsgServiceName;
         this.rpc = rpc;
         this.CreateResource = this.CreateResource.bind(this);
     }
@@ -267,7 +284,7 @@ export class MsgClientImpl {
         return promise.then((data) => MsgCreateResourceResponse.decode(_m0.Reader.create(data)));
     }
 }
-var tsProtoGlobalThis = (() => {
+const tsProtoGlobalThis = (() => {
     if (typeof globalThis !== "undefined") {
         return globalThis;
     }

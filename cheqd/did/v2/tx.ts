@@ -275,12 +275,11 @@ export const MsgCreateDidDoc = {
 
   toJSON(message: MsgCreateDidDoc): unknown {
     const obj: any = {};
-    message.payload !== undefined &&
-      (obj.payload = message.payload ? MsgCreateDidDocPayload.toJSON(message.payload) : undefined);
-    if (message.signatures) {
-      obj.signatures = message.signatures.map((e) => e ? SignInfo.toJSON(e) : undefined);
-    } else {
-      obj.signatures = [];
+    if (message.payload !== undefined) {
+      obj.payload = MsgCreateDidDocPayload.toJSON(message.payload);
+    }
+    if (message.signatures?.length) {
+      obj.signatures = message.signatures.map((e) => SignInfo.toJSON(e));
     }
     return obj;
   },
@@ -353,12 +352,11 @@ export const MsgUpdateDidDoc = {
 
   toJSON(message: MsgUpdateDidDoc): unknown {
     const obj: any = {};
-    message.payload !== undefined &&
-      (obj.payload = message.payload ? MsgUpdateDidDocPayload.toJSON(message.payload) : undefined);
-    if (message.signatures) {
-      obj.signatures = message.signatures.map((e) => e ? SignInfo.toJSON(e) : undefined);
-    } else {
-      obj.signatures = [];
+    if (message.payload !== undefined) {
+      obj.payload = MsgUpdateDidDocPayload.toJSON(message.payload);
+    }
+    if (message.signatures?.length) {
+      obj.signatures = message.signatures.map((e) => SignInfo.toJSON(e));
     }
     return obj;
   },
@@ -431,12 +429,11 @@ export const MsgDeactivateDidDoc = {
 
   toJSON(message: MsgDeactivateDidDoc): unknown {
     const obj: any = {};
-    message.payload !== undefined &&
-      (obj.payload = message.payload ? MsgDeactivateDidDocPayload.toJSON(message.payload) : undefined);
-    if (message.signatures) {
-      obj.signatures = message.signatures.map((e) => e ? SignInfo.toJSON(e) : undefined);
-    } else {
-      obj.signatures = [];
+    if (message.payload !== undefined) {
+      obj.payload = MsgDeactivateDidDocPayload.toJSON(message.payload);
+    }
+    if (message.signatures?.length) {
+      obj.signatures = message.signatures.map((e) => SignInfo.toJSON(e));
     }
     return obj;
   },
@@ -509,9 +506,12 @@ export const SignInfo = {
 
   toJSON(message: SignInfo): unknown {
     const obj: any = {};
-    message.verificationMethodId !== undefined && (obj.verificationMethodId = message.verificationMethodId);
-    message.signature !== undefined &&
-      (obj.signature = base64FromBytes(message.signature !== undefined ? message.signature : new Uint8Array(0)));
+    if (message.verificationMethodId !== "") {
+      obj.verificationMethodId = message.verificationMethodId;
+    }
+    if (message.signature.length !== 0) {
+      obj.signature = base64FromBytes(message.signature);
+    }
     return obj;
   },
 
@@ -710,58 +710,42 @@ export const MsgCreateDidDocPayload = {
 
   toJSON(message: MsgCreateDidDocPayload): unknown {
     const obj: any = {};
-    if (message.context) {
-      obj.context = message.context.map((e) => e);
-    } else {
-      obj.context = [];
+    if (message.context?.length) {
+      obj.context = message.context;
     }
-    message.id !== undefined && (obj.id = message.id);
-    if (message.controller) {
-      obj.controller = message.controller.map((e) => e);
-    } else {
-      obj.controller = [];
+    if (message.id !== "") {
+      obj.id = message.id;
     }
-    if (message.verificationMethod) {
-      obj.verificationMethod = message.verificationMethod.map((e) => e ? VerificationMethod.toJSON(e) : undefined);
-    } else {
-      obj.verificationMethod = [];
+    if (message.controller?.length) {
+      obj.controller = message.controller;
     }
-    if (message.authentication) {
-      obj.authentication = message.authentication.map((e) => e);
-    } else {
-      obj.authentication = [];
+    if (message.verificationMethod?.length) {
+      obj.verificationMethod = message.verificationMethod.map((e) => VerificationMethod.toJSON(e));
     }
-    if (message.assertionMethod) {
-      obj.assertionMethod = message.assertionMethod.map((e) => e);
-    } else {
-      obj.assertionMethod = [];
+    if (message.authentication?.length) {
+      obj.authentication = message.authentication;
     }
-    if (message.capabilityInvocation) {
-      obj.capabilityInvocation = message.capabilityInvocation.map((e) => e);
-    } else {
-      obj.capabilityInvocation = [];
+    if (message.assertionMethod?.length) {
+      obj.assertionMethod = message.assertionMethod;
     }
-    if (message.capabilityDelegation) {
-      obj.capabilityDelegation = message.capabilityDelegation.map((e) => e);
-    } else {
-      obj.capabilityDelegation = [];
+    if (message.capabilityInvocation?.length) {
+      obj.capabilityInvocation = message.capabilityInvocation;
     }
-    if (message.keyAgreement) {
-      obj.keyAgreement = message.keyAgreement.map((e) => e);
-    } else {
-      obj.keyAgreement = [];
+    if (message.capabilityDelegation?.length) {
+      obj.capabilityDelegation = message.capabilityDelegation;
     }
-    if (message.service) {
-      obj.service = message.service.map((e) => e ? Service.toJSON(e) : undefined);
-    } else {
-      obj.service = [];
+    if (message.keyAgreement?.length) {
+      obj.keyAgreement = message.keyAgreement;
     }
-    if (message.alsoKnownAs) {
-      obj.alsoKnownAs = message.alsoKnownAs.map((e) => e);
-    } else {
-      obj.alsoKnownAs = [];
+    if (message.service?.length) {
+      obj.service = message.service.map((e) => Service.toJSON(e));
     }
-    message.versionId !== undefined && (obj.versionId = message.versionId);
+    if (message.alsoKnownAs?.length) {
+      obj.alsoKnownAs = message.alsoKnownAs;
+    }
+    if (message.versionId !== "") {
+      obj.versionId = message.versionId;
+    }
     return obj;
   },
 
@@ -828,7 +812,9 @@ export const MsgCreateDidDocResponse = {
 
   toJSON(message: MsgCreateDidDocResponse): unknown {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value ? DidDocWithMetadata.toJSON(message.value) : undefined);
+    if (message.value !== undefined) {
+      obj.value = DidDocWithMetadata.toJSON(message.value);
+    }
     return obj;
   },
 
@@ -1028,58 +1014,42 @@ export const MsgUpdateDidDocPayload = {
 
   toJSON(message: MsgUpdateDidDocPayload): unknown {
     const obj: any = {};
-    if (message.context) {
-      obj.context = message.context.map((e) => e);
-    } else {
-      obj.context = [];
+    if (message.context?.length) {
+      obj.context = message.context;
     }
-    message.id !== undefined && (obj.id = message.id);
-    if (message.controller) {
-      obj.controller = message.controller.map((e) => e);
-    } else {
-      obj.controller = [];
+    if (message.id !== "") {
+      obj.id = message.id;
     }
-    if (message.verificationMethod) {
-      obj.verificationMethod = message.verificationMethod.map((e) => e ? VerificationMethod.toJSON(e) : undefined);
-    } else {
-      obj.verificationMethod = [];
+    if (message.controller?.length) {
+      obj.controller = message.controller;
     }
-    if (message.authentication) {
-      obj.authentication = message.authentication.map((e) => e);
-    } else {
-      obj.authentication = [];
+    if (message.verificationMethod?.length) {
+      obj.verificationMethod = message.verificationMethod.map((e) => VerificationMethod.toJSON(e));
     }
-    if (message.assertionMethod) {
-      obj.assertionMethod = message.assertionMethod.map((e) => e);
-    } else {
-      obj.assertionMethod = [];
+    if (message.authentication?.length) {
+      obj.authentication = message.authentication;
     }
-    if (message.capabilityInvocation) {
-      obj.capabilityInvocation = message.capabilityInvocation.map((e) => e);
-    } else {
-      obj.capabilityInvocation = [];
+    if (message.assertionMethod?.length) {
+      obj.assertionMethod = message.assertionMethod;
     }
-    if (message.capabilityDelegation) {
-      obj.capabilityDelegation = message.capabilityDelegation.map((e) => e);
-    } else {
-      obj.capabilityDelegation = [];
+    if (message.capabilityInvocation?.length) {
+      obj.capabilityInvocation = message.capabilityInvocation;
     }
-    if (message.keyAgreement) {
-      obj.keyAgreement = message.keyAgreement.map((e) => e);
-    } else {
-      obj.keyAgreement = [];
+    if (message.capabilityDelegation?.length) {
+      obj.capabilityDelegation = message.capabilityDelegation;
     }
-    if (message.service) {
-      obj.service = message.service.map((e) => e ? Service.toJSON(e) : undefined);
-    } else {
-      obj.service = [];
+    if (message.keyAgreement?.length) {
+      obj.keyAgreement = message.keyAgreement;
     }
-    if (message.alsoKnownAs) {
-      obj.alsoKnownAs = message.alsoKnownAs.map((e) => e);
-    } else {
-      obj.alsoKnownAs = [];
+    if (message.service?.length) {
+      obj.service = message.service.map((e) => Service.toJSON(e));
     }
-    message.versionId !== undefined && (obj.versionId = message.versionId);
+    if (message.alsoKnownAs?.length) {
+      obj.alsoKnownAs = message.alsoKnownAs;
+    }
+    if (message.versionId !== "") {
+      obj.versionId = message.versionId;
+    }
     return obj;
   },
 
@@ -1146,7 +1116,9 @@ export const MsgUpdateDidDocResponse = {
 
   toJSON(message: MsgUpdateDidDocResponse): unknown {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value ? DidDocWithMetadata.toJSON(message.value) : undefined);
+    if (message.value !== undefined) {
+      obj.value = DidDocWithMetadata.toJSON(message.value);
+    }
     return obj;
   },
 
@@ -1217,8 +1189,12 @@ export const MsgDeactivateDidDocPayload = {
 
   toJSON(message: MsgDeactivateDidDocPayload): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.versionId !== undefined && (obj.versionId = message.versionId);
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.versionId !== "") {
+      obj.versionId = message.versionId;
+    }
     return obj;
   },
 
@@ -1275,7 +1251,9 @@ export const MsgDeactivateDidDocResponse = {
 
   toJSON(message: MsgDeactivateDidDocResponse): unknown {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value ? DidDocWithMetadata.toJSON(message.value) : undefined);
+    if (message.value !== undefined) {
+      obj.value = DidDocWithMetadata.toJSON(message.value);
+    }
     return obj;
   },
 

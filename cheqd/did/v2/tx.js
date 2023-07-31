@@ -23,19 +23,19 @@ export const MsgCreateDidDoc = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.payload = MsgCreateDidDocPayload.decode(reader, reader.uint32());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.signatures.push(SignInfo.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -50,13 +50,11 @@ export const MsgCreateDidDoc = {
     },
     toJSON(message) {
         const obj = {};
-        message.payload !== undefined &&
-            (obj.payload = message.payload ? MsgCreateDidDocPayload.toJSON(message.payload) : undefined);
-        if (message.signatures) {
-            obj.signatures = message.signatures.map((e) => e ? SignInfo.toJSON(e) : undefined);
+        if (message.payload !== undefined) {
+            obj.payload = MsgCreateDidDocPayload.toJSON(message.payload);
         }
-        else {
-            obj.signatures = [];
+        if (message.signatures?.length) {
+            obj.signatures = message.signatures.map((e) => SignInfo.toJSON(e));
         }
         return obj;
     },
@@ -93,19 +91,19 @@ export const MsgUpdateDidDoc = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.payload = MsgUpdateDidDocPayload.decode(reader, reader.uint32());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.signatures.push(SignInfo.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -120,13 +118,11 @@ export const MsgUpdateDidDoc = {
     },
     toJSON(message) {
         const obj = {};
-        message.payload !== undefined &&
-            (obj.payload = message.payload ? MsgUpdateDidDocPayload.toJSON(message.payload) : undefined);
-        if (message.signatures) {
-            obj.signatures = message.signatures.map((e) => e ? SignInfo.toJSON(e) : undefined);
+        if (message.payload !== undefined) {
+            obj.payload = MsgUpdateDidDocPayload.toJSON(message.payload);
         }
-        else {
-            obj.signatures = [];
+        if (message.signatures?.length) {
+            obj.signatures = message.signatures.map((e) => SignInfo.toJSON(e));
         }
         return obj;
     },
@@ -163,19 +159,19 @@ export const MsgDeactivateDidDoc = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.payload = MsgDeactivateDidDocPayload.decode(reader, reader.uint32());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.signatures.push(SignInfo.decode(reader, reader.uint32()));
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -190,13 +186,11 @@ export const MsgDeactivateDidDoc = {
     },
     toJSON(message) {
         const obj = {};
-        message.payload !== undefined &&
-            (obj.payload = message.payload ? MsgDeactivateDidDocPayload.toJSON(message.payload) : undefined);
-        if (message.signatures) {
-            obj.signatures = message.signatures.map((e) => e ? SignInfo.toJSON(e) : undefined);
+        if (message.payload !== undefined) {
+            obj.payload = MsgDeactivateDidDocPayload.toJSON(message.payload);
         }
-        else {
-            obj.signatures = [];
+        if (message.signatures?.length) {
+            obj.signatures = message.signatures.map((e) => SignInfo.toJSON(e));
         }
         return obj;
     },
@@ -213,7 +207,7 @@ export const MsgDeactivateDidDoc = {
     },
 };
 function createBaseSignInfo() {
-    return { verificationMethodId: "", signature: new Uint8Array() };
+    return { verificationMethodId: "", signature: new Uint8Array(0) };
 }
 export const SignInfo = {
     encode(message, writer = _m0.Writer.create()) {
@@ -233,19 +227,19 @@ export const SignInfo = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.verificationMethodId = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.signature = reader.bytes();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -255,14 +249,17 @@ export const SignInfo = {
     fromJSON(object) {
         return {
             verificationMethodId: isSet(object.verificationMethodId) ? String(object.verificationMethodId) : "",
-            signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(),
+            signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(0),
         };
     },
     toJSON(message) {
         const obj = {};
-        message.verificationMethodId !== undefined && (obj.verificationMethodId = message.verificationMethodId);
-        message.signature !== undefined &&
-            (obj.signature = base64FromBytes(message.signature !== undefined ? message.signature : new Uint8Array()));
+        if (message.verificationMethodId !== "") {
+            obj.verificationMethodId = message.verificationMethodId;
+        }
+        if (message.signature.length !== 0) {
+            obj.signature = base64FromBytes(message.signature);
+        }
         return obj;
     },
     create(base) {
@@ -271,7 +268,7 @@ export const SignInfo = {
     fromPartial(object) {
         const message = createBaseSignInfo();
         message.verificationMethodId = object.verificationMethodId ?? "";
-        message.signature = object.signature ?? new Uint8Array();
+        message.signature = object.signature ?? new Uint8Array(0);
         return message;
     },
 };
@@ -339,79 +336,79 @@ export const MsgCreateDidDocPayload = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.context.push(reader.string());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.controller.push(reader.string());
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.verificationMethod.push(VerificationMethod.decode(reader, reader.uint32()));
                     continue;
                 case 5:
-                    if (tag != 42) {
+                    if (tag !== 42) {
                         break;
                     }
                     message.authentication.push(reader.string());
                     continue;
                 case 6:
-                    if (tag != 50) {
+                    if (tag !== 50) {
                         break;
                     }
                     message.assertionMethod.push(reader.string());
                     continue;
                 case 7:
-                    if (tag != 58) {
+                    if (tag !== 58) {
                         break;
                     }
                     message.capabilityInvocation.push(reader.string());
                     continue;
                 case 8:
-                    if (tag != 66) {
+                    if (tag !== 66) {
                         break;
                     }
                     message.capabilityDelegation.push(reader.string());
                     continue;
                 case 9:
-                    if (tag != 74) {
+                    if (tag !== 74) {
                         break;
                     }
                     message.keyAgreement.push(reader.string());
                     continue;
                 case 10:
-                    if (tag != 82) {
+                    if (tag !== 82) {
                         break;
                     }
                     message.service.push(Service.decode(reader, reader.uint32()));
                     continue;
                 case 11:
-                    if (tag != 90) {
+                    if (tag !== 90) {
                         break;
                     }
                     message.alsoKnownAs.push(reader.string());
                     continue;
                 case 12:
-                    if (tag != 98) {
+                    if (tag !== 98) {
                         break;
                     }
                     message.versionId = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -442,68 +439,42 @@ export const MsgCreateDidDocPayload = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.context) {
-            obj.context = message.context.map((e) => e);
+        if (message.context?.length) {
+            obj.context = message.context;
         }
-        else {
-            obj.context = [];
+        if (message.id !== "") {
+            obj.id = message.id;
         }
-        message.id !== undefined && (obj.id = message.id);
-        if (message.controller) {
-            obj.controller = message.controller.map((e) => e);
+        if (message.controller?.length) {
+            obj.controller = message.controller;
         }
-        else {
-            obj.controller = [];
+        if (message.verificationMethod?.length) {
+            obj.verificationMethod = message.verificationMethod.map((e) => VerificationMethod.toJSON(e));
         }
-        if (message.verificationMethod) {
-            obj.verificationMethod = message.verificationMethod.map((e) => e ? VerificationMethod.toJSON(e) : undefined);
+        if (message.authentication?.length) {
+            obj.authentication = message.authentication;
         }
-        else {
-            obj.verificationMethod = [];
+        if (message.assertionMethod?.length) {
+            obj.assertionMethod = message.assertionMethod;
         }
-        if (message.authentication) {
-            obj.authentication = message.authentication.map((e) => e);
+        if (message.capabilityInvocation?.length) {
+            obj.capabilityInvocation = message.capabilityInvocation;
         }
-        else {
-            obj.authentication = [];
+        if (message.capabilityDelegation?.length) {
+            obj.capabilityDelegation = message.capabilityDelegation;
         }
-        if (message.assertionMethod) {
-            obj.assertionMethod = message.assertionMethod.map((e) => e);
+        if (message.keyAgreement?.length) {
+            obj.keyAgreement = message.keyAgreement;
         }
-        else {
-            obj.assertionMethod = [];
+        if (message.service?.length) {
+            obj.service = message.service.map((e) => Service.toJSON(e));
         }
-        if (message.capabilityInvocation) {
-            obj.capabilityInvocation = message.capabilityInvocation.map((e) => e);
+        if (message.alsoKnownAs?.length) {
+            obj.alsoKnownAs = message.alsoKnownAs;
         }
-        else {
-            obj.capabilityInvocation = [];
+        if (message.versionId !== "") {
+            obj.versionId = message.versionId;
         }
-        if (message.capabilityDelegation) {
-            obj.capabilityDelegation = message.capabilityDelegation.map((e) => e);
-        }
-        else {
-            obj.capabilityDelegation = [];
-        }
-        if (message.keyAgreement) {
-            obj.keyAgreement = message.keyAgreement.map((e) => e);
-        }
-        else {
-            obj.keyAgreement = [];
-        }
-        if (message.service) {
-            obj.service = message.service.map((e) => e ? Service.toJSON(e) : undefined);
-        }
-        else {
-            obj.service = [];
-        }
-        if (message.alsoKnownAs) {
-            obj.alsoKnownAs = message.alsoKnownAs.map((e) => e);
-        }
-        else {
-            obj.alsoKnownAs = [];
-        }
-        message.versionId !== undefined && (obj.versionId = message.versionId);
         return obj;
     },
     create(base) {
@@ -544,13 +515,13 @@ export const MsgCreateDidDocResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.value = DidDocWithMetadata.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -562,7 +533,9 @@ export const MsgCreateDidDocResponse = {
     },
     toJSON(message) {
         const obj = {};
-        message.value !== undefined && (obj.value = message.value ? DidDocWithMetadata.toJSON(message.value) : undefined);
+        if (message.value !== undefined) {
+            obj.value = DidDocWithMetadata.toJSON(message.value);
+        }
         return obj;
     },
     create(base) {
@@ -640,79 +613,79 @@ export const MsgUpdateDidDocPayload = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.context.push(reader.string());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.controller.push(reader.string());
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.verificationMethod.push(VerificationMethod.decode(reader, reader.uint32()));
                     continue;
                 case 5:
-                    if (tag != 42) {
+                    if (tag !== 42) {
                         break;
                     }
                     message.authentication.push(reader.string());
                     continue;
                 case 6:
-                    if (tag != 50) {
+                    if (tag !== 50) {
                         break;
                     }
                     message.assertionMethod.push(reader.string());
                     continue;
                 case 7:
-                    if (tag != 58) {
+                    if (tag !== 58) {
                         break;
                     }
                     message.capabilityInvocation.push(reader.string());
                     continue;
                 case 8:
-                    if (tag != 66) {
+                    if (tag !== 66) {
                         break;
                     }
                     message.capabilityDelegation.push(reader.string());
                     continue;
                 case 9:
-                    if (tag != 74) {
+                    if (tag !== 74) {
                         break;
                     }
                     message.keyAgreement.push(reader.string());
                     continue;
                 case 10:
-                    if (tag != 82) {
+                    if (tag !== 82) {
                         break;
                     }
                     message.service.push(Service.decode(reader, reader.uint32()));
                     continue;
                 case 11:
-                    if (tag != 90) {
+                    if (tag !== 90) {
                         break;
                     }
                     message.alsoKnownAs.push(reader.string());
                     continue;
                 case 12:
-                    if (tag != 98) {
+                    if (tag !== 98) {
                         break;
                     }
                     message.versionId = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -743,68 +716,42 @@ export const MsgUpdateDidDocPayload = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.context) {
-            obj.context = message.context.map((e) => e);
+        if (message.context?.length) {
+            obj.context = message.context;
         }
-        else {
-            obj.context = [];
+        if (message.id !== "") {
+            obj.id = message.id;
         }
-        message.id !== undefined && (obj.id = message.id);
-        if (message.controller) {
-            obj.controller = message.controller.map((e) => e);
+        if (message.controller?.length) {
+            obj.controller = message.controller;
         }
-        else {
-            obj.controller = [];
+        if (message.verificationMethod?.length) {
+            obj.verificationMethod = message.verificationMethod.map((e) => VerificationMethod.toJSON(e));
         }
-        if (message.verificationMethod) {
-            obj.verificationMethod = message.verificationMethod.map((e) => e ? VerificationMethod.toJSON(e) : undefined);
+        if (message.authentication?.length) {
+            obj.authentication = message.authentication;
         }
-        else {
-            obj.verificationMethod = [];
+        if (message.assertionMethod?.length) {
+            obj.assertionMethod = message.assertionMethod;
         }
-        if (message.authentication) {
-            obj.authentication = message.authentication.map((e) => e);
+        if (message.capabilityInvocation?.length) {
+            obj.capabilityInvocation = message.capabilityInvocation;
         }
-        else {
-            obj.authentication = [];
+        if (message.capabilityDelegation?.length) {
+            obj.capabilityDelegation = message.capabilityDelegation;
         }
-        if (message.assertionMethod) {
-            obj.assertionMethod = message.assertionMethod.map((e) => e);
+        if (message.keyAgreement?.length) {
+            obj.keyAgreement = message.keyAgreement;
         }
-        else {
-            obj.assertionMethod = [];
+        if (message.service?.length) {
+            obj.service = message.service.map((e) => Service.toJSON(e));
         }
-        if (message.capabilityInvocation) {
-            obj.capabilityInvocation = message.capabilityInvocation.map((e) => e);
+        if (message.alsoKnownAs?.length) {
+            obj.alsoKnownAs = message.alsoKnownAs;
         }
-        else {
-            obj.capabilityInvocation = [];
+        if (message.versionId !== "") {
+            obj.versionId = message.versionId;
         }
-        if (message.capabilityDelegation) {
-            obj.capabilityDelegation = message.capabilityDelegation.map((e) => e);
-        }
-        else {
-            obj.capabilityDelegation = [];
-        }
-        if (message.keyAgreement) {
-            obj.keyAgreement = message.keyAgreement.map((e) => e);
-        }
-        else {
-            obj.keyAgreement = [];
-        }
-        if (message.service) {
-            obj.service = message.service.map((e) => e ? Service.toJSON(e) : undefined);
-        }
-        else {
-            obj.service = [];
-        }
-        if (message.alsoKnownAs) {
-            obj.alsoKnownAs = message.alsoKnownAs.map((e) => e);
-        }
-        else {
-            obj.alsoKnownAs = [];
-        }
-        message.versionId !== undefined && (obj.versionId = message.versionId);
         return obj;
     },
     create(base) {
@@ -845,13 +792,13 @@ export const MsgUpdateDidDocResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.value = DidDocWithMetadata.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -863,7 +810,9 @@ export const MsgUpdateDidDocResponse = {
     },
     toJSON(message) {
         const obj = {};
-        message.value !== undefined && (obj.value = message.value ? DidDocWithMetadata.toJSON(message.value) : undefined);
+        if (message.value !== undefined) {
+            obj.value = DidDocWithMetadata.toJSON(message.value);
+        }
         return obj;
     },
     create(base) {
@@ -898,19 +847,19 @@ export const MsgDeactivateDidDocPayload = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.versionId = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -925,8 +874,12 @@ export const MsgDeactivateDidDocPayload = {
     },
     toJSON(message) {
         const obj = {};
-        message.id !== undefined && (obj.id = message.id);
-        message.versionId !== undefined && (obj.versionId = message.versionId);
+        if (message.id !== "") {
+            obj.id = message.id;
+        }
+        if (message.versionId !== "") {
+            obj.versionId = message.versionId;
+        }
         return obj;
     },
     create(base) {
@@ -957,13 +910,13 @@ export const MsgDeactivateDidDocResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.value = DidDocWithMetadata.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -975,7 +928,9 @@ export const MsgDeactivateDidDocResponse = {
     },
     toJSON(message) {
         const obj = {};
-        message.value !== undefined && (obj.value = message.value ? DidDocWithMetadata.toJSON(message.value) : undefined);
+        if (message.value !== undefined) {
+            obj.value = DidDocWithMetadata.toJSON(message.value);
+        }
         return obj;
     },
     create(base) {
@@ -989,11 +944,12 @@ export const MsgDeactivateDidDocResponse = {
         return message;
     },
 };
+export const MsgServiceName = "cheqd.did.v2.Msg";
 export class MsgClientImpl {
     rpc;
     service;
     constructor(rpc, opts) {
-        this.service = opts?.service || "cheqd.did.v2.Msg";
+        this.service = opts?.service || MsgServiceName;
         this.rpc = rpc;
         this.CreateDidDoc = this.CreateDidDoc.bind(this);
         this.UpdateDidDoc = this.UpdateDidDoc.bind(this);
@@ -1015,7 +971,7 @@ export class MsgClientImpl {
         return promise.then((data) => MsgDeactivateDidDocResponse.decode(_m0.Reader.create(data)));
     }
 }
-var tsProtoGlobalThis = (() => {
+const tsProtoGlobalThis = (() => {
     if (typeof globalThis !== "undefined") {
         return globalThis;
     }

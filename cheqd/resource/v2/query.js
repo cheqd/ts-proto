@@ -24,19 +24,19 @@ export const QueryResourceRequest = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.collectionId = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -51,8 +51,12 @@ export const QueryResourceRequest = {
     },
     toJSON(message) {
         const obj = {};
-        message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-        message.id !== undefined && (obj.id = message.id);
+        if (message.collectionId !== "") {
+            obj.collectionId = message.collectionId;
+        }
+        if (message.id !== "") {
+            obj.id = message.id;
+        }
         return obj;
     },
     create(base) {
@@ -83,13 +87,13 @@ export const QueryResourceResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.resource = ResourceWithMetadata.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -101,8 +105,9 @@ export const QueryResourceResponse = {
     },
     toJSON(message) {
         const obj = {};
-        message.resource !== undefined &&
-            (obj.resource = message.resource ? ResourceWithMetadata.toJSON(message.resource) : undefined);
+        if (message.resource !== undefined) {
+            obj.resource = ResourceWithMetadata.toJSON(message.resource);
+        }
         return obj;
     },
     create(base) {
@@ -137,19 +142,19 @@ export const QueryResourceMetadataRequest = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.collectionId = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.id = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -164,8 +169,12 @@ export const QueryResourceMetadataRequest = {
     },
     toJSON(message) {
         const obj = {};
-        message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-        message.id !== undefined && (obj.id = message.id);
+        if (message.collectionId !== "") {
+            obj.collectionId = message.collectionId;
+        }
+        if (message.id !== "") {
+            obj.id = message.id;
+        }
         return obj;
     },
     create(base) {
@@ -196,13 +205,13 @@ export const QueryResourceMetadataResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.resource = Metadata.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -214,7 +223,9 @@ export const QueryResourceMetadataResponse = {
     },
     toJSON(message) {
         const obj = {};
-        message.resource !== undefined && (obj.resource = message.resource ? Metadata.toJSON(message.resource) : undefined);
+        if (message.resource !== undefined) {
+            obj.resource = Metadata.toJSON(message.resource);
+        }
         return obj;
     },
     create(base) {
@@ -249,19 +260,19 @@ export const QueryCollectionResourcesRequest = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.collectionId = reader.string();
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.pagination = PageRequest.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -276,9 +287,12 @@ export const QueryCollectionResourcesRequest = {
     },
     toJSON(message) {
         const obj = {};
-        message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-        message.pagination !== undefined &&
-            (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+        if (message.collectionId !== "") {
+            obj.collectionId = message.collectionId;
+        }
+        if (message.pagination !== undefined) {
+            obj.pagination = PageRequest.toJSON(message.pagination);
+        }
         return obj;
     },
     create(base) {
@@ -314,19 +328,19 @@ export const QueryCollectionResourcesResponse = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.resources.push(Metadata.decode(reader, reader.uint32()));
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.pagination = PageResponse.decode(reader, reader.uint32());
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -341,14 +355,12 @@ export const QueryCollectionResourcesResponse = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.resources) {
-            obj.resources = message.resources.map((e) => e ? Metadata.toJSON(e) : undefined);
+        if (message.resources?.length) {
+            obj.resources = message.resources.map((e) => Metadata.toJSON(e));
         }
-        else {
-            obj.resources = [];
+        if (message.pagination !== undefined) {
+            obj.pagination = PageResponse.toJSON(message.pagination);
         }
-        message.pagination !== undefined &&
-            (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
         return obj;
     },
     create(base) {
@@ -363,11 +375,12 @@ export const QueryCollectionResourcesResponse = {
         return message;
     },
 };
+export const QueryServiceName = "cheqd.resource.v2.Query";
 export class QueryClientImpl {
     rpc;
     service;
     constructor(rpc, opts) {
-        this.service = opts?.service || "cheqd.resource.v2.Query";
+        this.service = opts?.service || QueryServiceName;
         this.rpc = rpc;
         this.Resource = this.Resource.bind(this);
         this.ResourceMetadata = this.ResourceMetadata.bind(this);

@@ -29,31 +29,31 @@ export const FeeParams = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    if (tag != 10) {
+                    if (tag !== 10) {
                         break;
                     }
                     message.image = Coin.decode(reader, reader.uint32());
                     continue;
                 case 2:
-                    if (tag != 18) {
+                    if (tag !== 18) {
                         break;
                     }
                     message.json = Coin.decode(reader, reader.uint32());
                     continue;
                 case 3:
-                    if (tag != 26) {
+                    if (tag !== 26) {
                         break;
                     }
                     message.default = Coin.decode(reader, reader.uint32());
                     continue;
                 case 4:
-                    if (tag != 34) {
+                    if (tag !== 34) {
                         break;
                     }
                     message.burnFactor = reader.string();
                     continue;
             }
-            if ((tag & 7) == 4 || tag == 0) {
+            if ((tag & 7) === 4 || tag === 0) {
                 break;
             }
             reader.skipType(tag & 7);
@@ -70,10 +70,18 @@ export const FeeParams = {
     },
     toJSON(message) {
         const obj = {};
-        message.image !== undefined && (obj.image = message.image ? Coin.toJSON(message.image) : undefined);
-        message.json !== undefined && (obj.json = message.json ? Coin.toJSON(message.json) : undefined);
-        message.default !== undefined && (obj.default = message.default ? Coin.toJSON(message.default) : undefined);
-        message.burnFactor !== undefined && (obj.burnFactor = message.burnFactor);
+        if (message.image !== undefined) {
+            obj.image = Coin.toJSON(message.image);
+        }
+        if (message.json !== undefined) {
+            obj.json = Coin.toJSON(message.json);
+        }
+        if (message.default !== undefined) {
+            obj.default = Coin.toJSON(message.default);
+        }
+        if (message.burnFactor !== "") {
+            obj.burnFactor = message.burnFactor;
+        }
         return obj;
     },
     create(base) {
