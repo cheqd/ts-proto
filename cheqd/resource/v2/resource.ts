@@ -158,9 +158,8 @@ export const Resource = {
   },
 
   create<I extends Exact<DeepPartial<Resource>, I>>(base?: I): Resource {
-    return Resource.fromPartial(base ?? {});
+    return Resource.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Resource>, I>>(object: I): Resource {
     const message = createBaseResource();
     message.data = object.data ?? new Uint8Array(0);
@@ -372,9 +371,8 @@ export const Metadata = {
   },
 
   create<I extends Exact<DeepPartial<Metadata>, I>>(base?: I): Metadata {
-    return Metadata.fromPartial(base ?? {});
+    return Metadata.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Metadata>, I>>(object: I): Metadata {
     const message = createBaseMetadata();
     message.collectionId = object.collectionId ?? "";
@@ -456,9 +454,8 @@ export const AlternativeUri = {
   },
 
   create<I extends Exact<DeepPartial<AlternativeUri>, I>>(base?: I): AlternativeUri {
-    return AlternativeUri.fromPartial(base ?? {});
+    return AlternativeUri.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<AlternativeUri>, I>>(object: I): AlternativeUri {
     const message = createBaseAlternativeUri();
     message.uri = object.uri ?? "";
@@ -531,9 +528,8 @@ export const ResourceWithMetadata = {
   },
 
   create<I extends Exact<DeepPartial<ResourceWithMetadata>, I>>(base?: I): ResourceWithMetadata {
-    return ResourceWithMetadata.fromPartial(base ?? {});
+    return ResourceWithMetadata.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ResourceWithMetadata>, I>>(object: I): ResourceWithMetadata {
     const message = createBaseResourceWithMetadata();
     message.resource = (object.resource !== undefined && object.resource !== null)

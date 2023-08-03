@@ -143,9 +143,8 @@ export const QueryResourceRequest = {
   },
 
   create<I extends Exact<DeepPartial<QueryResourceRequest>, I>>(base?: I): QueryResourceRequest {
-    return QueryResourceRequest.fromPartial(base ?? {});
+    return QueryResourceRequest.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryResourceRequest>, I>>(object: I): QueryResourceRequest {
     const message = createBaseQueryResourceRequest();
     message.collectionId = object.collectionId ?? "";
@@ -202,9 +201,8 @@ export const QueryResourceResponse = {
   },
 
   create<I extends Exact<DeepPartial<QueryResourceResponse>, I>>(base?: I): QueryResourceResponse {
-    return QueryResourceResponse.fromPartial(base ?? {});
+    return QueryResourceResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryResourceResponse>, I>>(object: I): QueryResourceResponse {
     const message = createBaseQueryResourceResponse();
     message.resource = (object.resource !== undefined && object.resource !== null)
@@ -278,9 +276,8 @@ export const QueryResourceMetadataRequest = {
   },
 
   create<I extends Exact<DeepPartial<QueryResourceMetadataRequest>, I>>(base?: I): QueryResourceMetadataRequest {
-    return QueryResourceMetadataRequest.fromPartial(base ?? {});
+    return QueryResourceMetadataRequest.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryResourceMetadataRequest>, I>>(object: I): QueryResourceMetadataRequest {
     const message = createBaseQueryResourceMetadataRequest();
     message.collectionId = object.collectionId ?? "";
@@ -337,9 +334,8 @@ export const QueryResourceMetadataResponse = {
   },
 
   create<I extends Exact<DeepPartial<QueryResourceMetadataResponse>, I>>(base?: I): QueryResourceMetadataResponse {
-    return QueryResourceMetadataResponse.fromPartial(base ?? {});
+    return QueryResourceMetadataResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryResourceMetadataResponse>, I>>(
     object: I,
   ): QueryResourceMetadataResponse {
@@ -415,9 +411,8 @@ export const QueryCollectionResourcesRequest = {
   },
 
   create<I extends Exact<DeepPartial<QueryCollectionResourcesRequest>, I>>(base?: I): QueryCollectionResourcesRequest {
-    return QueryCollectionResourcesRequest.fromPartial(base ?? {});
+    return QueryCollectionResourcesRequest.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryCollectionResourcesRequest>, I>>(
     object: I,
   ): QueryCollectionResourcesRequest {
@@ -496,9 +491,8 @@ export const QueryCollectionResourcesResponse = {
   create<I extends Exact<DeepPartial<QueryCollectionResourcesResponse>, I>>(
     base?: I,
   ): QueryCollectionResourcesResponse {
-    return QueryCollectionResourcesResponse.fromPartial(base ?? {});
+    return QueryCollectionResourcesResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryCollectionResourcesResponse>, I>>(
     object: I,
   ): QueryCollectionResourcesResponse {

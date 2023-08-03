@@ -438,9 +438,8 @@ export const Http = {
   },
 
   create<I extends Exact<DeepPartial<Http>, I>>(base?: I): Http {
-    return Http.fromPartial(base ?? {});
+    return Http.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Http>, I>>(object: I): Http {
     const message = createBaseHttp();
     message.rules = object.rules?.map((e) => HttpRule.fromPartial(e)) || [];
@@ -638,9 +637,8 @@ export const HttpRule = {
   },
 
   create<I extends Exact<DeepPartial<HttpRule>, I>>(base?: I): HttpRule {
-    return HttpRule.fromPartial(base ?? {});
+    return HttpRule.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<HttpRule>, I>>(object: I): HttpRule {
     const message = createBaseHttpRule();
     message.selector = object.selector ?? "";
@@ -720,9 +718,8 @@ export const CustomHttpPattern = {
   },
 
   create<I extends Exact<DeepPartial<CustomHttpPattern>, I>>(base?: I): CustomHttpPattern {
-    return CustomHttpPattern.fromPartial(base ?? {});
+    return CustomHttpPattern.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<CustomHttpPattern>, I>>(object: I): CustomHttpPattern {
     const message = createBaseCustomHttpPattern();
     message.kind = object.kind ?? "";

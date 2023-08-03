@@ -156,9 +156,8 @@ export const InterfaceDescriptor = {
   },
 
   create<I extends Exact<DeepPartial<InterfaceDescriptor>, I>>(base?: I): InterfaceDescriptor {
-    return InterfaceDescriptor.fromPartial(base ?? {});
+    return InterfaceDescriptor.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<InterfaceDescriptor>, I>>(object: I): InterfaceDescriptor {
     const message = createBaseInterfaceDescriptor();
     message.name = object.name ?? "";
@@ -257,9 +256,8 @@ export const ScalarDescriptor = {
   },
 
   create<I extends Exact<DeepPartial<ScalarDescriptor>, I>>(base?: I): ScalarDescriptor {
-    return ScalarDescriptor.fromPartial(base ?? {});
+    return ScalarDescriptor.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ScalarDescriptor>, I>>(object: I): ScalarDescriptor {
     const message = createBaseScalarDescriptor();
     message.name = object.name ?? "";

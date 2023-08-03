@@ -129,9 +129,8 @@ export const FeeParams = {
   },
 
   create<I extends Exact<DeepPartial<FeeParams>, I>>(base?: I): FeeParams {
-    return FeeParams.fromPartial(base ?? {});
+    return FeeParams.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<FeeParams>, I>>(object: I): FeeParams {
     const message = createBaseFeeParams();
     message.createDid = (object.createDid !== undefined && object.createDid !== null)
