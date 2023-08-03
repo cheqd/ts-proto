@@ -61,9 +61,8 @@ export const QueryGetDidRequest = {
   },
 
   create<I extends Exact<DeepPartial<QueryGetDidRequest>, I>>(base?: I): QueryGetDidRequest {
-    return QueryGetDidRequest.fromPartial(base ?? {});
+    return QueryGetDidRequest.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryGetDidRequest>, I>>(object: I): QueryGetDidRequest {
     const message = createBaseQueryGetDidRequest();
     message.id = object.id ?? "";
@@ -135,9 +134,8 @@ export const QueryGetDidResponse = {
   },
 
   create<I extends Exact<DeepPartial<QueryGetDidResponse>, I>>(base?: I): QueryGetDidResponse {
-    return QueryGetDidResponse.fromPartial(base ?? {});
+    return QueryGetDidResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryGetDidResponse>, I>>(object: I): QueryGetDidResponse {
     const message = createBaseQueryGetDidResponse();
     message.did = (object.did !== undefined && object.did !== null) ? Did.fromPartial(object.did) : undefined;

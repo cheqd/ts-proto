@@ -173,9 +173,8 @@ export const PageRequest = {
   },
 
   create<I extends Exact<DeepPartial<PageRequest>, I>>(base?: I): PageRequest {
-    return PageRequest.fromPartial(base ?? {});
+    return PageRequest.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<PageRequest>, I>>(object: I): PageRequest {
     const message = createBasePageRequest();
     message.key = object.key ?? new Uint8Array(0);
@@ -253,9 +252,8 @@ export const PageResponse = {
   },
 
   create<I extends Exact<DeepPartial<PageResponse>, I>>(base?: I): PageResponse {
-    return PageResponse.fromPartial(base ?? {});
+    return PageResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<PageResponse>, I>>(object: I): PageResponse {
     const message = createBasePageResponse();
     message.nextKey = object.nextKey ?? new Uint8Array(0);

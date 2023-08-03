@@ -95,9 +95,8 @@ export const DidDocVersionSet = {
   },
 
   create<I extends Exact<DeepPartial<DidDocVersionSet>, I>>(base?: I): DidDocVersionSet {
-    return DidDocVersionSet.fromPartial(base ?? {});
+    return DidDocVersionSet.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<DidDocVersionSet>, I>>(object: I): DidDocVersionSet {
     const message = createBaseDidDocVersionSet();
     message.latestVersion = object.latestVersion ?? "";
@@ -186,9 +185,8 @@ export const GenesisState = {
   },
 
   create<I extends Exact<DeepPartial<GenesisState>, I>>(base?: I): GenesisState {
-    return GenesisState.fromPartial(base ?? {});
+    return GenesisState.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
     const message = createBaseGenesisState();
     message.didNamespace = object.didNamespace ?? "";

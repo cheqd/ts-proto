@@ -285,9 +285,8 @@ export const MsgCreateDidDoc = {
   },
 
   create<I extends Exact<DeepPartial<MsgCreateDidDoc>, I>>(base?: I): MsgCreateDidDoc {
-    return MsgCreateDidDoc.fromPartial(base ?? {});
+    return MsgCreateDidDoc.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgCreateDidDoc>, I>>(object: I): MsgCreateDidDoc {
     const message = createBaseMsgCreateDidDoc();
     message.payload = (object.payload !== undefined && object.payload !== null)
@@ -362,9 +361,8 @@ export const MsgUpdateDidDoc = {
   },
 
   create<I extends Exact<DeepPartial<MsgUpdateDidDoc>, I>>(base?: I): MsgUpdateDidDoc {
-    return MsgUpdateDidDoc.fromPartial(base ?? {});
+    return MsgUpdateDidDoc.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgUpdateDidDoc>, I>>(object: I): MsgUpdateDidDoc {
     const message = createBaseMsgUpdateDidDoc();
     message.payload = (object.payload !== undefined && object.payload !== null)
@@ -439,9 +437,8 @@ export const MsgDeactivateDidDoc = {
   },
 
   create<I extends Exact<DeepPartial<MsgDeactivateDidDoc>, I>>(base?: I): MsgDeactivateDidDoc {
-    return MsgDeactivateDidDoc.fromPartial(base ?? {});
+    return MsgDeactivateDidDoc.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgDeactivateDidDoc>, I>>(object: I): MsgDeactivateDidDoc {
     const message = createBaseMsgDeactivateDidDoc();
     message.payload = (object.payload !== undefined && object.payload !== null)
@@ -516,9 +513,8 @@ export const SignInfo = {
   },
 
   create<I extends Exact<DeepPartial<SignInfo>, I>>(base?: I): SignInfo {
-    return SignInfo.fromPartial(base ?? {});
+    return SignInfo.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<SignInfo>, I>>(object: I): SignInfo {
     const message = createBaseSignInfo();
     message.verificationMethodId = object.verificationMethodId ?? "";
@@ -750,9 +746,8 @@ export const MsgCreateDidDocPayload = {
   },
 
   create<I extends Exact<DeepPartial<MsgCreateDidDocPayload>, I>>(base?: I): MsgCreateDidDocPayload {
-    return MsgCreateDidDocPayload.fromPartial(base ?? {});
+    return MsgCreateDidDocPayload.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgCreateDidDocPayload>, I>>(object: I): MsgCreateDidDocPayload {
     const message = createBaseMsgCreateDidDocPayload();
     message.context = object.context?.map((e) => e) || [];
@@ -819,9 +814,8 @@ export const MsgCreateDidDocResponse = {
   },
 
   create<I extends Exact<DeepPartial<MsgCreateDidDocResponse>, I>>(base?: I): MsgCreateDidDocResponse {
-    return MsgCreateDidDocResponse.fromPartial(base ?? {});
+    return MsgCreateDidDocResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgCreateDidDocResponse>, I>>(object: I): MsgCreateDidDocResponse {
     const message = createBaseMsgCreateDidDocResponse();
     message.value = (object.value !== undefined && object.value !== null)
@@ -1054,9 +1048,8 @@ export const MsgUpdateDidDocPayload = {
   },
 
   create<I extends Exact<DeepPartial<MsgUpdateDidDocPayload>, I>>(base?: I): MsgUpdateDidDocPayload {
-    return MsgUpdateDidDocPayload.fromPartial(base ?? {});
+    return MsgUpdateDidDocPayload.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgUpdateDidDocPayload>, I>>(object: I): MsgUpdateDidDocPayload {
     const message = createBaseMsgUpdateDidDocPayload();
     message.context = object.context?.map((e) => e) || [];
@@ -1123,9 +1116,8 @@ export const MsgUpdateDidDocResponse = {
   },
 
   create<I extends Exact<DeepPartial<MsgUpdateDidDocResponse>, I>>(base?: I): MsgUpdateDidDocResponse {
-    return MsgUpdateDidDocResponse.fromPartial(base ?? {});
+    return MsgUpdateDidDocResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgUpdateDidDocResponse>, I>>(object: I): MsgUpdateDidDocResponse {
     const message = createBaseMsgUpdateDidDocResponse();
     message.value = (object.value !== undefined && object.value !== null)
@@ -1199,9 +1191,8 @@ export const MsgDeactivateDidDocPayload = {
   },
 
   create<I extends Exact<DeepPartial<MsgDeactivateDidDocPayload>, I>>(base?: I): MsgDeactivateDidDocPayload {
-    return MsgDeactivateDidDocPayload.fromPartial(base ?? {});
+    return MsgDeactivateDidDocPayload.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgDeactivateDidDocPayload>, I>>(object: I): MsgDeactivateDidDocPayload {
     const message = createBaseMsgDeactivateDidDocPayload();
     message.id = object.id ?? "";
@@ -1258,9 +1249,8 @@ export const MsgDeactivateDidDocResponse = {
   },
 
   create<I extends Exact<DeepPartial<MsgDeactivateDidDocResponse>, I>>(base?: I): MsgDeactivateDidDocResponse {
-    return MsgDeactivateDidDocResponse.fromPartial(base ?? {});
+    return MsgDeactivateDidDocResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgDeactivateDidDocResponse>, I>>(object: I): MsgDeactivateDidDocResponse {
     const message = createBaseMsgDeactivateDidDocResponse();
     message.value = (object.value !== undefined && object.value !== null)

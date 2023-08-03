@@ -136,9 +136,8 @@ export const QueryDidDocRequest = {
   },
 
   create<I extends Exact<DeepPartial<QueryDidDocRequest>, I>>(base?: I): QueryDidDocRequest {
-    return QueryDidDocRequest.fromPartial(base ?? {});
+    return QueryDidDocRequest.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryDidDocRequest>, I>>(object: I): QueryDidDocRequest {
     const message = createBaseQueryDidDocRequest();
     message.id = object.id ?? "";
@@ -194,9 +193,8 @@ export const QueryDidDocResponse = {
   },
 
   create<I extends Exact<DeepPartial<QueryDidDocResponse>, I>>(base?: I): QueryDidDocResponse {
-    return QueryDidDocResponse.fromPartial(base ?? {});
+    return QueryDidDocResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryDidDocResponse>, I>>(object: I): QueryDidDocResponse {
     const message = createBaseQueryDidDocResponse();
     message.value = (object.value !== undefined && object.value !== null)
@@ -270,9 +268,8 @@ export const QueryDidDocVersionRequest = {
   },
 
   create<I extends Exact<DeepPartial<QueryDidDocVersionRequest>, I>>(base?: I): QueryDidDocVersionRequest {
-    return QueryDidDocVersionRequest.fromPartial(base ?? {});
+    return QueryDidDocVersionRequest.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryDidDocVersionRequest>, I>>(object: I): QueryDidDocVersionRequest {
     const message = createBaseQueryDidDocVersionRequest();
     message.id = object.id ?? "";
@@ -329,9 +326,8 @@ export const QueryDidDocVersionResponse = {
   },
 
   create<I extends Exact<DeepPartial<QueryDidDocVersionResponse>, I>>(base?: I): QueryDidDocVersionResponse {
-    return QueryDidDocVersionResponse.fromPartial(base ?? {});
+    return QueryDidDocVersionResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryDidDocVersionResponse>, I>>(object: I): QueryDidDocVersionResponse {
     const message = createBaseQueryDidDocVersionResponse();
     message.value = (object.value !== undefined && object.value !== null)
@@ -407,9 +403,8 @@ export const QueryAllDidDocVersionsMetadataRequest = {
   create<I extends Exact<DeepPartial<QueryAllDidDocVersionsMetadataRequest>, I>>(
     base?: I,
   ): QueryAllDidDocVersionsMetadataRequest {
-    return QueryAllDidDocVersionsMetadataRequest.fromPartial(base ?? {});
+    return QueryAllDidDocVersionsMetadataRequest.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryAllDidDocVersionsMetadataRequest>, I>>(
     object: I,
   ): QueryAllDidDocVersionsMetadataRequest {
@@ -488,9 +483,8 @@ export const QueryAllDidDocVersionsMetadataResponse = {
   create<I extends Exact<DeepPartial<QueryAllDidDocVersionsMetadataResponse>, I>>(
     base?: I,
   ): QueryAllDidDocVersionsMetadataResponse {
-    return QueryAllDidDocVersionsMetadataResponse.fromPartial(base ?? {});
+    return QueryAllDidDocVersionsMetadataResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryAllDidDocVersionsMetadataResponse>, I>>(
     object: I,
   ): QueryAllDidDocVersionsMetadataResponse {

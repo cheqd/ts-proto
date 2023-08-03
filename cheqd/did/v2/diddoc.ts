@@ -372,9 +372,8 @@ export const DidDoc = {
   },
 
   create<I extends Exact<DeepPartial<DidDoc>, I>>(base?: I): DidDoc {
-    return DidDoc.fromPartial(base ?? {});
+    return DidDoc.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<DidDoc>, I>>(object: I): DidDoc {
     const message = createBaseDidDoc();
     message.context = object.context?.map((e) => e) || [];
@@ -484,9 +483,8 @@ export const VerificationMethod = {
   },
 
   create<I extends Exact<DeepPartial<VerificationMethod>, I>>(base?: I): VerificationMethod {
-    return VerificationMethod.fromPartial(base ?? {});
+    return VerificationMethod.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<VerificationMethod>, I>>(object: I): VerificationMethod {
     const message = createBaseVerificationMethod();
     message.id = object.id ?? "";
@@ -575,9 +573,8 @@ export const Service = {
   },
 
   create<I extends Exact<DeepPartial<Service>, I>>(base?: I): Service {
-    return Service.fromPartial(base ?? {});
+    return Service.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Service>, I>>(object: I): Service {
     const message = createBaseService();
     message.id = object.id ?? "";
@@ -651,9 +648,8 @@ export const DidDocWithMetadata = {
   },
 
   create<I extends Exact<DeepPartial<DidDocWithMetadata>, I>>(base?: I): DidDocWithMetadata {
-    return DidDocWithMetadata.fromPartial(base ?? {});
+    return DidDocWithMetadata.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<DidDocWithMetadata>, I>>(object: I): DidDocWithMetadata {
     const message = createBaseDidDocWithMetadata();
     message.didDoc = (object.didDoc !== undefined && object.didDoc !== null)
@@ -793,9 +789,8 @@ export const Metadata = {
   },
 
   create<I extends Exact<DeepPartial<Metadata>, I>>(base?: I): Metadata {
-    return Metadata.fromPartial(base ?? {});
+    return Metadata.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Metadata>, I>>(object: I): Metadata {
     const message = createBaseMetadata();
     message.created = object.created ?? undefined;

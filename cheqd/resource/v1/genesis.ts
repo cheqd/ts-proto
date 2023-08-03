@@ -60,9 +60,8 @@ export const GenesisState = {
   },
 
   create<I extends Exact<DeepPartial<GenesisState>, I>>(base?: I): GenesisState {
-    return GenesisState.fromPartial(base ?? {});
+    return GenesisState.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
     const message = createBaseGenesisState();
     message.resourceList = object.resourceList?.map((e) => Resource.fromPartial(e)) || [];

@@ -87,9 +87,8 @@ export const MsgCreateResource = {
   },
 
   create<I extends Exact<DeepPartial<MsgCreateResource>, I>>(base?: I): MsgCreateResource {
-    return MsgCreateResource.fromPartial(base ?? {});
+    return MsgCreateResource.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgCreateResource>, I>>(object: I): MsgCreateResource {
     const message = createBaseMsgCreateResource();
     message.payload = (object.payload !== undefined && object.payload !== null)
@@ -206,9 +205,8 @@ export const MsgCreateResourcePayload = {
   },
 
   create<I extends Exact<DeepPartial<MsgCreateResourcePayload>, I>>(base?: I): MsgCreateResourcePayload {
-    return MsgCreateResourcePayload.fromPartial(base ?? {});
+    return MsgCreateResourcePayload.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgCreateResourcePayload>, I>>(object: I): MsgCreateResourcePayload {
     const message = createBaseMsgCreateResourcePayload();
     message.collectionId = object.collectionId ?? "";
@@ -268,9 +266,8 @@ export const MsgCreateResourceResponse = {
   },
 
   create<I extends Exact<DeepPartial<MsgCreateResourceResponse>, I>>(base?: I): MsgCreateResourceResponse {
-    return MsgCreateResourceResponse.fromPartial(base ?? {});
+    return MsgCreateResourceResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgCreateResourceResponse>, I>>(object: I): MsgCreateResourceResponse {
     const message = createBaseMsgCreateResourceResponse();
     message.resource = (object.resource !== undefined && object.resource !== null)
