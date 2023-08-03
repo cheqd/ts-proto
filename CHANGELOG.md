@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/cheqd/ts-proto/compare/3.2.3...3.3.0) (2023-08-03)
+
+
+### Features
+
+* Rebuild for upstream Protobuf changes ([#159](https://github.com/cheqd/ts-proto/issues/159)) ([56d844a](https://github.com/cheqd/ts-proto/commit/56d844af43adb050866535bc1e39752a308298cc))
+
 ## [3.3.0-develop.1](https://github.com/cheqd/ts-proto/compare/3.2.3...3.3.0-develop.1) (2023-08-03)
 
 
