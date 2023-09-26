@@ -31,7 +31,7 @@ MD011: true
 
 # Multiple consecutive blank lines <https://github.com/DavidAnson/markdownlint/blob/master/doc/Rules.md#md012>
 MD012:
-  maximum: 5
+  maximum: 2
 
 # Line length <https://github.com/DavidAnson/markdownlint/blob/master/doc/Rules.md#md013>
 MD013: false

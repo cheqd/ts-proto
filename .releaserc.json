@@ -14,7 +14,7 @@
     ],
     "tagFormat": "${version}",
     "ci": true,
-    "preset": "angular",
+    "preset": "conventionalcommits",
     "plugins": [
         [ "@semantic-release/commit-analyzer",
             {
