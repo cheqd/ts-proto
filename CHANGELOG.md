@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.5](https://github.com/cheqd/ts-proto/compare/3.3.4...3.3.5) (2023-09-26)
+
+
+### Bug Fixes
+
+* Releaserc config ([0d8d255](https://github.com/cheqd/ts-proto/commit/0d8d255833a386b304d0f33065730e664b84f8fc))
+
 ## [3.3.4](https://github.com/cheqd/ts-proto/compare/3.3.3...3.3.4) (2023-09-26)
 
 ## [3.3.4-develop.2](https://github.com/cheqd/ts-proto/compare/3.3.4-develop.1...3.3.4-develop.2) (2023-09-26)
