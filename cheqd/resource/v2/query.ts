@@ -126,8 +126,8 @@ export const QueryResourceRequest = {
 
   fromJSON(object: any): QueryResourceRequest {
     return {
-      collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
-      id: isSet(object.id) ? String(object.id) : "",
+      collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
     };
   },
 
@@ -259,8 +259,8 @@ export const QueryResourceMetadataRequest = {
 
   fromJSON(object: any): QueryResourceMetadataRequest {
     return {
-      collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
-      id: isSet(object.id) ? String(object.id) : "",
+      collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
     };
   },
 
@@ -394,7 +394,7 @@ export const QueryCollectionResourcesRequest = {
 
   fromJSON(object: any): QueryCollectionResourcesRequest {
     return {
-      collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
+      collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -472,7 +472,9 @@ export const QueryCollectionResourcesResponse = {
 
   fromJSON(object: any): QueryCollectionResourcesResponse {
     return {
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Metadata.fromJSON(e)) : [],
+      resources: globalThis.Array.isArray(object?.resources)
+        ? object.resources.map((e: any) => Metadata.fromJSON(e))
+        : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -552,7 +554,7 @@ interface Rpc {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends Long ? string | number | Long : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;

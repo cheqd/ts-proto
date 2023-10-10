@@ -124,7 +124,7 @@ export const QueryDidDocRequest = {
   },
 
   fromJSON(object: any): QueryDidDocRequest {
-    return { id: isSet(object.id) ? String(object.id) : "" };
+    return { id: isSet(object.id) ? globalThis.String(object.id) : "" };
   },
 
   toJSON(message: QueryDidDocRequest): unknown {
@@ -251,8 +251,8 @@ export const QueryDidDocVersionRequest = {
 
   fromJSON(object: any): QueryDidDocVersionRequest {
     return {
-      id: isSet(object.id) ? String(object.id) : "",
-      version: isSet(object.version) ? String(object.version) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      version: isSet(object.version) ? globalThis.String(object.version) : "",
     };
   },
 
@@ -384,7 +384,7 @@ export const QueryAllDidDocVersionsMetadataRequest = {
 
   fromJSON(object: any): QueryAllDidDocVersionsMetadataRequest {
     return {
-      id: isSet(object.id) ? String(object.id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -464,7 +464,7 @@ export const QueryAllDidDocVersionsMetadataResponse = {
 
   fromJSON(object: any): QueryAllDidDocVersionsMetadataResponse {
     return {
-      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Metadata.fromJSON(e)) : [],
+      versions: globalThis.Array.isArray(object?.versions) ? object.versions.map((e: any) => Metadata.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -548,7 +548,7 @@ interface Rpc {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends Long ? string | number | Long : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;

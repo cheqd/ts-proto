@@ -139,11 +139,13 @@ export const Metadata = {
     },
     fromJSON(object) {
         return {
-            created: isSet(object.created) ? String(object.created) : "",
-            updated: isSet(object.updated) ? String(object.updated) : "",
-            deactivated: isSet(object.deactivated) ? Boolean(object.deactivated) : false,
-            versionId: isSet(object.versionId) ? String(object.versionId) : "",
-            resources: Array.isArray(object?.resources) ? object.resources.map((e) => String(e)) : [],
+            created: isSet(object.created) ? globalThis.String(object.created) : "",
+            updated: isSet(object.updated) ? globalThis.String(object.updated) : "",
+            deactivated: isSet(object.deactivated) ? globalThis.Boolean(object.deactivated) : false,
+            versionId: isSet(object.versionId) ? globalThis.String(object.versionId) : "",
+            resources: globalThis.Array.isArray(object?.resources)
+                ? object.resources.map((e) => globalThis.String(e))
+                : [],
         };
     },
     toJSON(message) {

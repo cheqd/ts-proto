@@ -45,8 +45,10 @@ export const DidDocVersionSet = {
     },
     fromJSON(object) {
         return {
-            latestVersion: isSet(object.latestVersion) ? String(object.latestVersion) : "",
-            didDocs: Array.isArray(object?.didDocs) ? object.didDocs.map((e) => DidDocWithMetadata.fromJSON(e)) : [],
+            latestVersion: isSet(object.latestVersion) ? globalThis.String(object.latestVersion) : "",
+            didDocs: globalThis.Array.isArray(object?.didDocs)
+                ? object.didDocs.map((e) => DidDocWithMetadata.fromJSON(e))
+                : [],
         };
     },
     toJSON(message) {
@@ -120,8 +122,8 @@ export const GenesisState = {
     },
     fromJSON(object) {
         return {
-            didNamespace: isSet(object.didNamespace) ? String(object.didNamespace) : "",
-            versionSets: Array.isArray(object?.versionSets)
+            didNamespace: isSet(object.didNamespace) ? globalThis.String(object.didNamespace) : "",
+            versionSets: globalThis.Array.isArray(object?.versionSets)
                 ? object.versionSets.map((e) => DidDocVersionSet.fromJSON(e))
                 : [],
             feeParams: isSet(object.feeParams) ? FeeParams.fromJSON(object.feeParams) : undefined,

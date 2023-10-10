@@ -65,7 +65,7 @@ export const FeeParams = {
             createDid: isSet(object.createDid) ? Coin.fromJSON(object.createDid) : undefined,
             updateDid: isSet(object.updateDid) ? Coin.fromJSON(object.updateDid) : undefined,
             deactivateDid: isSet(object.deactivateDid) ? Coin.fromJSON(object.deactivateDid) : undefined,
-            burnFactor: isSet(object.burnFactor) ? String(object.burnFactor) : "",
+            burnFactor: isSet(object.burnFactor) ? globalThis.String(object.burnFactor) : "",
         };
     },
     toJSON(message) {

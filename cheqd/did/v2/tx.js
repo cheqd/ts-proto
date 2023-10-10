@@ -45,7 +45,9 @@ export const MsgCreateDidDoc = {
     fromJSON(object) {
         return {
             payload: isSet(object.payload) ? MsgCreateDidDocPayload.fromJSON(object.payload) : undefined,
-            signatures: Array.isArray(object?.signatures) ? object.signatures.map((e) => SignInfo.fromJSON(e)) : [],
+            signatures: globalThis.Array.isArray(object?.signatures)
+                ? object.signatures.map((e) => SignInfo.fromJSON(e))
+                : [],
         };
     },
     toJSON(message) {
@@ -113,7 +115,9 @@ export const MsgUpdateDidDoc = {
     fromJSON(object) {
         return {
             payload: isSet(object.payload) ? MsgUpdateDidDocPayload.fromJSON(object.payload) : undefined,
-            signatures: Array.isArray(object?.signatures) ? object.signatures.map((e) => SignInfo.fromJSON(e)) : [],
+            signatures: globalThis.Array.isArray(object?.signatures)
+                ? object.signatures.map((e) => SignInfo.fromJSON(e))
+                : [],
         };
     },
     toJSON(message) {
@@ -181,7 +185,9 @@ export const MsgDeactivateDidDoc = {
     fromJSON(object) {
         return {
             payload: isSet(object.payload) ? MsgDeactivateDidDocPayload.fromJSON(object.payload) : undefined,
-            signatures: Array.isArray(object?.signatures) ? object.signatures.map((e) => SignInfo.fromJSON(e)) : [],
+            signatures: globalThis.Array.isArray(object?.signatures)
+                ? object.signatures.map((e) => SignInfo.fromJSON(e))
+                : [],
         };
     },
     toJSON(message) {
@@ -248,7 +254,7 @@ export const SignInfo = {
     },
     fromJSON(object) {
         return {
-            verificationMethodId: isSet(object.verificationMethodId) ? String(object.verificationMethodId) : "",
+            verificationMethodId: isSet(object.verificationMethodId) ? globalThis.String(object.verificationMethodId) : "",
             signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(0),
         };
     },
@@ -417,24 +423,34 @@ export const MsgCreateDidDocPayload = {
     },
     fromJSON(object) {
         return {
-            context: Array.isArray(object?.context) ? object.context.map((e) => String(e)) : [],
-            id: isSet(object.id) ? String(object.id) : "",
-            controller: Array.isArray(object?.controller) ? object.controller.map((e) => String(e)) : [],
-            verificationMethod: Array.isArray(object?.verificationMethod)
+            context: globalThis.Array.isArray(object?.context) ? object.context.map((e) => globalThis.String(e)) : [],
+            id: isSet(object.id) ? globalThis.String(object.id) : "",
+            controller: globalThis.Array.isArray(object?.controller)
+                ? object.controller.map((e) => globalThis.String(e))
+                : [],
+            verificationMethod: globalThis.Array.isArray(object?.verificationMethod)
                 ? object.verificationMethod.map((e) => VerificationMethod.fromJSON(e))
                 : [],
-            authentication: Array.isArray(object?.authentication) ? object.authentication.map((e) => String(e)) : [],
-            assertionMethod: Array.isArray(object?.assertionMethod) ? object.assertionMethod.map((e) => String(e)) : [],
-            capabilityInvocation: Array.isArray(object?.capabilityInvocation)
-                ? object.capabilityInvocation.map((e) => String(e))
+            authentication: globalThis.Array.isArray(object?.authentication)
+                ? object.authentication.map((e) => globalThis.String(e))
                 : [],
-            capabilityDelegation: Array.isArray(object?.capabilityDelegation)
-                ? object.capabilityDelegation.map((e) => String(e))
+            assertionMethod: globalThis.Array.isArray(object?.assertionMethod)
+                ? object.assertionMethod.map((e) => globalThis.String(e))
                 : [],
-            keyAgreement: Array.isArray(object?.keyAgreement) ? object.keyAgreement.map((e) => String(e)) : [],
-            service: Array.isArray(object?.service) ? object.service.map((e) => Service.fromJSON(e)) : [],
-            alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e) => String(e)) : [],
-            versionId: isSet(object.versionId) ? String(object.versionId) : "",
+            capabilityInvocation: globalThis.Array.isArray(object?.capabilityInvocation)
+                ? object.capabilityInvocation.map((e) => globalThis.String(e))
+                : [],
+            capabilityDelegation: globalThis.Array.isArray(object?.capabilityDelegation)
+                ? object.capabilityDelegation.map((e) => globalThis.String(e))
+                : [],
+            keyAgreement: globalThis.Array.isArray(object?.keyAgreement)
+                ? object.keyAgreement.map((e) => globalThis.String(e))
+                : [],
+            service: globalThis.Array.isArray(object?.service) ? object.service.map((e) => Service.fromJSON(e)) : [],
+            alsoKnownAs: globalThis.Array.isArray(object?.alsoKnownAs)
+                ? object.alsoKnownAs.map((e) => globalThis.String(e))
+                : [],
+            versionId: isSet(object.versionId) ? globalThis.String(object.versionId) : "",
         };
     },
     toJSON(message) {
@@ -694,24 +710,34 @@ export const MsgUpdateDidDocPayload = {
     },
     fromJSON(object) {
         return {
-            context: Array.isArray(object?.context) ? object.context.map((e) => String(e)) : [],
-            id: isSet(object.id) ? String(object.id) : "",
-            controller: Array.isArray(object?.controller) ? object.controller.map((e) => String(e)) : [],
-            verificationMethod: Array.isArray(object?.verificationMethod)
+            context: globalThis.Array.isArray(object?.context) ? object.context.map((e) => globalThis.String(e)) : [],
+            id: isSet(object.id) ? globalThis.String(object.id) : "",
+            controller: globalThis.Array.isArray(object?.controller)
+                ? object.controller.map((e) => globalThis.String(e))
+                : [],
+            verificationMethod: globalThis.Array.isArray(object?.verificationMethod)
                 ? object.verificationMethod.map((e) => VerificationMethod.fromJSON(e))
                 : [],
-            authentication: Array.isArray(object?.authentication) ? object.authentication.map((e) => String(e)) : [],
-            assertionMethod: Array.isArray(object?.assertionMethod) ? object.assertionMethod.map((e) => String(e)) : [],
-            capabilityInvocation: Array.isArray(object?.capabilityInvocation)
-                ? object.capabilityInvocation.map((e) => String(e))
+            authentication: globalThis.Array.isArray(object?.authentication)
+                ? object.authentication.map((e) => globalThis.String(e))
                 : [],
-            capabilityDelegation: Array.isArray(object?.capabilityDelegation)
-                ? object.capabilityDelegation.map((e) => String(e))
+            assertionMethod: globalThis.Array.isArray(object?.assertionMethod)
+                ? object.assertionMethod.map((e) => globalThis.String(e))
                 : [],
-            keyAgreement: Array.isArray(object?.keyAgreement) ? object.keyAgreement.map((e) => String(e)) : [],
-            service: Array.isArray(object?.service) ? object.service.map((e) => Service.fromJSON(e)) : [],
-            alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e) => String(e)) : [],
-            versionId: isSet(object.versionId) ? String(object.versionId) : "",
+            capabilityInvocation: globalThis.Array.isArray(object?.capabilityInvocation)
+                ? object.capabilityInvocation.map((e) => globalThis.String(e))
+                : [],
+            capabilityDelegation: globalThis.Array.isArray(object?.capabilityDelegation)
+                ? object.capabilityDelegation.map((e) => globalThis.String(e))
+                : [],
+            keyAgreement: globalThis.Array.isArray(object?.keyAgreement)
+                ? object.keyAgreement.map((e) => globalThis.String(e))
+                : [],
+            service: globalThis.Array.isArray(object?.service) ? object.service.map((e) => Service.fromJSON(e)) : [],
+            alsoKnownAs: globalThis.Array.isArray(object?.alsoKnownAs)
+                ? object.alsoKnownAs.map((e) => globalThis.String(e))
+                : [],
+            versionId: isSet(object.versionId) ? globalThis.String(object.versionId) : "",
         };
     },
     toJSON(message) {
@@ -868,8 +894,8 @@ export const MsgDeactivateDidDocPayload = {
     },
     fromJSON(object) {
         return {
-            id: isSet(object.id) ? String(object.id) : "",
-            versionId: isSet(object.versionId) ? String(object.versionId) : "",
+            id: isSet(object.id) ? globalThis.String(object.id) : "",
+            versionId: isSet(object.versionId) ? globalThis.String(object.versionId) : "",
         };
     },
     toJSON(message) {
@@ -971,27 +997,12 @@ export class MsgClientImpl {
         return promise.then((data) => MsgDeactivateDidDocResponse.decode(_m0.Reader.create(data)));
     }
 }
-const tsProtoGlobalThis = (() => {
-    if (typeof globalThis !== "undefined") {
-        return globalThis;
-    }
-    if (typeof self !== "undefined") {
-        return self;
-    }
-    if (typeof window !== "undefined") {
-        return window;
-    }
-    if (typeof global !== "undefined") {
-        return global;
-    }
-    throw "Unable to locate global object";
-})();
 function bytesFromBase64(b64) {
-    if (tsProtoGlobalThis.Buffer) {
-        return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+    if (globalThis.Buffer) {
+        return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
     }
     else {
-        const bin = tsProtoGlobalThis.atob(b64);
+        const bin = globalThis.atob(b64);
         const arr = new Uint8Array(bin.length);
         for (let i = 0; i < bin.length; ++i) {
             arr[i] = bin.charCodeAt(i);
@@ -1000,15 +1011,15 @@ function bytesFromBase64(b64) {
     }
 }
 function base64FromBytes(arr) {
-    if (tsProtoGlobalThis.Buffer) {
-        return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+    if (globalThis.Buffer) {
+        return globalThis.Buffer.from(arr).toString("base64");
     }
     else {
         const bin = [];
         arr.forEach((byte) => {
-            bin.push(String.fromCharCode(byte));
+            bin.push(globalThis.String.fromCharCode(byte));
         });
-        return tsProtoGlobalThis.btoa(bin.join(""));
+        return globalThis.btoa(bin.join(""));
     }
 }
 if (_m0.util.Long !== Long) {

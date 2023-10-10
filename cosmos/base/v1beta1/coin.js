@@ -43,8 +43,8 @@ export const Coin = {
     },
     fromJSON(object) {
         return {
-            denom: isSet(object.denom) ? String(object.denom) : "",
-            amount: isSet(object.amount) ? String(object.amount) : "",
+            denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
+            amount: isSet(object.amount) ? globalThis.String(object.amount) : "",
         };
     },
     toJSON(message) {
@@ -109,8 +109,8 @@ export const DecCoin = {
     },
     fromJSON(object) {
         return {
-            denom: isSet(object.denom) ? String(object.denom) : "",
-            amount: isSet(object.amount) ? String(object.amount) : "",
+            denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
+            amount: isSet(object.amount) ? globalThis.String(object.amount) : "",
         };
     },
     toJSON(message) {
@@ -165,7 +165,7 @@ export const IntProto = {
         return message;
     },
     fromJSON(object) {
-        return { int: isSet(object.int) ? String(object.int) : "" };
+        return { int: isSet(object.int) ? globalThis.String(object.int) : "" };
     },
     toJSON(message) {
         const obj = {};
@@ -215,7 +215,7 @@ export const DecProto = {
         return message;
     },
     fromJSON(object) {
-        return { dec: isSet(object.dec) ? String(object.dec) : "" };
+        return { dec: isSet(object.dec) ? globalThis.String(object.dec) : "" };
     },
     toJSON(message) {
         const obj = {};

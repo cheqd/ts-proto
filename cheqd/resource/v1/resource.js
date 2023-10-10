@@ -184,15 +184,15 @@ export const ResourceHeader = {
     },
     fromJSON(object) {
         return {
-            collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
-            id: isSet(object.id) ? String(object.id) : "",
-            name: isSet(object.name) ? String(object.name) : "",
-            resourceType: isSet(object.resourceType) ? String(object.resourceType) : "",
-            mediaType: isSet(object.mediaType) ? String(object.mediaType) : "",
-            created: isSet(object.created) ? String(object.created) : "",
+            collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+            id: isSet(object.id) ? globalThis.String(object.id) : "",
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            resourceType: isSet(object.resourceType) ? globalThis.String(object.resourceType) : "",
+            mediaType: isSet(object.mediaType) ? globalThis.String(object.mediaType) : "",
+            created: isSet(object.created) ? globalThis.String(object.created) : "",
             checksum: isSet(object.checksum) ? bytesFromBase64(object.checksum) : new Uint8Array(0),
-            previousVersionId: isSet(object.previousVersionId) ? String(object.previousVersionId) : "",
-            nextVersionId: isSet(object.nextVersionId) ? String(object.nextVersionId) : "",
+            previousVersionId: isSet(object.previousVersionId) ? globalThis.String(object.previousVersionId) : "",
+            nextVersionId: isSet(object.nextVersionId) ? globalThis.String(object.nextVersionId) : "",
         };
     },
     toJSON(message) {
@@ -243,27 +243,12 @@ export const ResourceHeader = {
         return message;
     },
 };
-const tsProtoGlobalThis = (() => {
-    if (typeof globalThis !== "undefined") {
-        return globalThis;
-    }
-    if (typeof self !== "undefined") {
-        return self;
-    }
-    if (typeof window !== "undefined") {
-        return window;
-    }
-    if (typeof global !== "undefined") {
-        return global;
-    }
-    throw "Unable to locate global object";
-})();
 function bytesFromBase64(b64) {
-    if (tsProtoGlobalThis.Buffer) {
-        return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+    if (globalThis.Buffer) {
+        return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
     }
     else {
-        const bin = tsProtoGlobalThis.atob(b64);
+        const bin = globalThis.atob(b64);
         const arr = new Uint8Array(bin.length);
         for (let i = 0; i < bin.length; ++i) {
             arr[i] = bin.charCodeAt(i);
@@ -272,15 +257,15 @@ function bytesFromBase64(b64) {
     }
 }
 function base64FromBytes(arr) {
-    if (tsProtoGlobalThis.Buffer) {
-        return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+    if (globalThis.Buffer) {
+        return globalThis.Buffer.from(arr).toString("base64");
     }
     else {
         const bin = [];
         arr.forEach((byte) => {
-            bin.push(String.fromCharCode(byte));
+            bin.push(globalThis.String.fromCharCode(byte));
         });
-        return tsProtoGlobalThis.btoa(bin.join(""));
+        return globalThis.btoa(bin.join(""));
     }
 }
 if (_m0.util.Long !== Long) {

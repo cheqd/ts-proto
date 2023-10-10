@@ -56,8 +56,8 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      didNamespace: isSet(object.didNamespace) ? String(object.didNamespace) : "",
-      didList: Array.isArray(object?.didList) ? object.didList.map((e: any) => StateValue.fromJSON(e)) : [],
+      didNamespace: isSet(object.didNamespace) ? globalThis.String(object.didNamespace) : "",
+      didList: globalThis.Array.isArray(object?.didList) ? object.didList.map((e: any) => StateValue.fromJSON(e)) : [],
     };
   },
 
@@ -86,7 +86,7 @@ export const GenesisState = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends Long ? string | number | Long : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;

@@ -35,7 +35,7 @@ export const QueryDidDocRequest = {
         return message;
     },
     fromJSON(object) {
-        return { id: isSet(object.id) ? String(object.id) : "" };
+        return { id: isSet(object.id) ? globalThis.String(object.id) : "" };
     },
     toJSON(message) {
         const obj = {};
@@ -147,8 +147,8 @@ export const QueryDidDocVersionRequest = {
     },
     fromJSON(object) {
         return {
-            id: isSet(object.id) ? String(object.id) : "",
-            version: isSet(object.version) ? String(object.version) : "",
+            id: isSet(object.id) ? globalThis.String(object.id) : "",
+            version: isSet(object.version) ? globalThis.String(object.version) : "",
         };
     },
     toJSON(message) {
@@ -265,7 +265,7 @@ export const QueryAllDidDocVersionsMetadataRequest = {
     },
     fromJSON(object) {
         return {
-            id: isSet(object.id) ? String(object.id) : "",
+            id: isSet(object.id) ? globalThis.String(object.id) : "",
             pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
         };
     },
@@ -333,7 +333,7 @@ export const QueryAllDidDocVersionsMetadataResponse = {
     },
     fromJSON(object) {
         return {
-            versions: Array.isArray(object?.versions) ? object.versions.map((e) => Metadata.fromJSON(e)) : [],
+            versions: globalThis.Array.isArray(object?.versions) ? object.versions.map((e) => Metadata.fromJSON(e)) : [],
             pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
         };
     },
