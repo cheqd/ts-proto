@@ -187,19 +187,19 @@ export const Metadata = {
     },
     fromJSON(object) {
         return {
-            collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
-            id: isSet(object.id) ? String(object.id) : "",
-            name: isSet(object.name) ? String(object.name) : "",
-            version: isSet(object.version) ? String(object.version) : "",
-            resourceType: isSet(object.resourceType) ? String(object.resourceType) : "",
-            alsoKnownAs: Array.isArray(object?.alsoKnownAs)
+            collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+            id: isSet(object.id) ? globalThis.String(object.id) : "",
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            version: isSet(object.version) ? globalThis.String(object.version) : "",
+            resourceType: isSet(object.resourceType) ? globalThis.String(object.resourceType) : "",
+            alsoKnownAs: globalThis.Array.isArray(object?.alsoKnownAs)
                 ? object.alsoKnownAs.map((e) => AlternativeUri.fromJSON(e))
                 : [],
-            mediaType: isSet(object.mediaType) ? String(object.mediaType) : "",
+            mediaType: isSet(object.mediaType) ? globalThis.String(object.mediaType) : "",
             created: isSet(object.created) ? fromJsonTimestamp(object.created) : undefined,
-            checksum: isSet(object.checksum) ? String(object.checksum) : "",
-            previousVersionId: isSet(object.previousVersionId) ? String(object.previousVersionId) : "",
-            nextVersionId: isSet(object.nextVersionId) ? String(object.nextVersionId) : "",
+            checksum: isSet(object.checksum) ? globalThis.String(object.checksum) : "",
+            previousVersionId: isSet(object.previousVersionId) ? globalThis.String(object.previousVersionId) : "",
+            nextVersionId: isSet(object.nextVersionId) ? globalThis.String(object.nextVersionId) : "",
         };
     },
     toJSON(message) {
@@ -300,8 +300,8 @@ export const AlternativeUri = {
     },
     fromJSON(object) {
         return {
-            uri: isSet(object.uri) ? String(object.uri) : "",
-            description: isSet(object.description) ? String(object.description) : "",
+            uri: isSet(object.uri) ? globalThis.String(object.uri) : "",
+            description: isSet(object.description) ? globalThis.String(object.description) : "",
         };
     },
     toJSON(message) {
@@ -394,27 +394,12 @@ export const ResourceWithMetadata = {
         return message;
     },
 };
-const tsProtoGlobalThis = (() => {
-    if (typeof globalThis !== "undefined") {
-        return globalThis;
-    }
-    if (typeof self !== "undefined") {
-        return self;
-    }
-    if (typeof window !== "undefined") {
-        return window;
-    }
-    if (typeof global !== "undefined") {
-        return global;
-    }
-    throw "Unable to locate global object";
-})();
 function bytesFromBase64(b64) {
-    if (tsProtoGlobalThis.Buffer) {
-        return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+    if (globalThis.Buffer) {
+        return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
     }
     else {
-        const bin = tsProtoGlobalThis.atob(b64);
+        const bin = globalThis.atob(b64);
         const arr = new Uint8Array(bin.length);
         for (let i = 0; i < bin.length; ++i) {
             arr[i] = bin.charCodeAt(i);
@@ -423,15 +408,15 @@ function bytesFromBase64(b64) {
     }
 }
 function base64FromBytes(arr) {
-    if (tsProtoGlobalThis.Buffer) {
-        return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+    if (globalThis.Buffer) {
+        return globalThis.Buffer.from(arr).toString("base64");
     }
     else {
         const bin = [];
         arr.forEach((byte) => {
-            bin.push(String.fromCharCode(byte));
+            bin.push(globalThis.String.fromCharCode(byte));
         });
-        return tsProtoGlobalThis.btoa(bin.join(""));
+        return globalThis.btoa(bin.join(""));
     }
 }
 function toTimestamp(date) {
@@ -442,14 +427,14 @@ function toTimestamp(date) {
 function fromTimestamp(t) {
     let millis = (t.seconds.toNumber() || 0) * 1_000;
     millis += (t.nanos || 0) / 1_000_000;
-    return new Date(millis);
+    return new globalThis.Date(millis);
 }
 function fromJsonTimestamp(o) {
-    if (o instanceof Date) {
+    if (o instanceof globalThis.Date) {
         return o;
     }
     else if (typeof o === "string") {
-        return new Date(o);
+        return new globalThis.Date(o);
     }
     else {
         return fromTimestamp(Timestamp.fromJSON(o));

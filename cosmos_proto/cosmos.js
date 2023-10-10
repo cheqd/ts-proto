@@ -80,8 +80,8 @@ export const InterfaceDescriptor = {
     },
     fromJSON(object) {
         return {
-            name: isSet(object.name) ? String(object.name) : "",
-            description: isSet(object.description) ? String(object.description) : "",
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            description: isSet(object.description) ? globalThis.String(object.description) : "",
         };
     },
     toJSON(message) {
@@ -164,9 +164,11 @@ export const ScalarDescriptor = {
     },
     fromJSON(object) {
         return {
-            name: isSet(object.name) ? String(object.name) : "",
-            description: isSet(object.description) ? String(object.description) : "",
-            fieldType: Array.isArray(object?.fieldType) ? object.fieldType.map((e) => scalarTypeFromJSON(e)) : [],
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            description: isSet(object.description) ? globalThis.String(object.description) : "",
+            fieldType: globalThis.Array.isArray(object?.fieldType)
+                ? object.fieldType.map((e) => scalarTypeFromJSON(e))
+                : [],
         };
     },
     toJSON(message) {

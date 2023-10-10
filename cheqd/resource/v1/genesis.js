@@ -35,7 +35,7 @@ export const GenesisState = {
     },
     fromJSON(object) {
         return {
-            resourceList: Array.isArray(object?.resourceList)
+            resourceList: globalThis.Array.isArray(object?.resourceList)
                 ? object.resourceList.map((e) => Resource.fromJSON(e))
                 : [],
         };

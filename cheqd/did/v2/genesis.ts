@@ -78,8 +78,10 @@ export const DidDocVersionSet = {
 
   fromJSON(object: any): DidDocVersionSet {
     return {
-      latestVersion: isSet(object.latestVersion) ? String(object.latestVersion) : "",
-      didDocs: Array.isArray(object?.didDocs) ? object.didDocs.map((e: any) => DidDocWithMetadata.fromJSON(e)) : [],
+      latestVersion: isSet(object.latestVersion) ? globalThis.String(object.latestVersion) : "",
+      didDocs: globalThis.Array.isArray(object?.didDocs)
+        ? object.didDocs.map((e: any) => DidDocWithMetadata.fromJSON(e))
+        : [],
     };
   },
 
@@ -162,8 +164,8 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      didNamespace: isSet(object.didNamespace) ? String(object.didNamespace) : "",
-      versionSets: Array.isArray(object?.versionSets)
+      didNamespace: isSet(object.didNamespace) ? globalThis.String(object.didNamespace) : "",
+      versionSets: globalThis.Array.isArray(object?.versionSets)
         ? object.versionSets.map((e: any) => DidDocVersionSet.fromJSON(e))
         : [],
       feeParams: isSet(object.feeParams) ? FeeParams.fromJSON(object.feeParams) : undefined,
@@ -201,7 +203,7 @@ export const GenesisState = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends Long ? string | number | Long : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;

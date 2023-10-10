@@ -42,7 +42,10 @@ export const KeyValuePair = {
         return message;
     },
     fromJSON(object) {
-        return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object.value) ? String(object.value) : "" };
+        return {
+            key: isSet(object.key) ? globalThis.String(object.key) : "",
+            value: isSet(object.value) ? globalThis.String(object.value) : "",
+        };
     },
     toJSON(message) {
         const obj = {};

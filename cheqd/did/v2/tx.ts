@@ -269,7 +269,9 @@ export const MsgCreateDidDoc = {
   fromJSON(object: any): MsgCreateDidDoc {
     return {
       payload: isSet(object.payload) ? MsgCreateDidDocPayload.fromJSON(object.payload) : undefined,
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignInfo.fromJSON(e)) : [],
+      signatures: globalThis.Array.isArray(object?.signatures)
+        ? object.signatures.map((e: any) => SignInfo.fromJSON(e))
+        : [],
     };
   },
 
@@ -345,7 +347,9 @@ export const MsgUpdateDidDoc = {
   fromJSON(object: any): MsgUpdateDidDoc {
     return {
       payload: isSet(object.payload) ? MsgUpdateDidDocPayload.fromJSON(object.payload) : undefined,
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignInfo.fromJSON(e)) : [],
+      signatures: globalThis.Array.isArray(object?.signatures)
+        ? object.signatures.map((e: any) => SignInfo.fromJSON(e))
+        : [],
     };
   },
 
@@ -421,7 +425,9 @@ export const MsgDeactivateDidDoc = {
   fromJSON(object: any): MsgDeactivateDidDoc {
     return {
       payload: isSet(object.payload) ? MsgDeactivateDidDocPayload.fromJSON(object.payload) : undefined,
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignInfo.fromJSON(e)) : [],
+      signatures: globalThis.Array.isArray(object?.signatures)
+        ? object.signatures.map((e: any) => SignInfo.fromJSON(e))
+        : [],
     };
   },
 
@@ -496,7 +502,7 @@ export const SignInfo = {
 
   fromJSON(object: any): SignInfo {
     return {
-      verificationMethodId: isSet(object.verificationMethodId) ? String(object.verificationMethodId) : "",
+      verificationMethodId: isSet(object.verificationMethodId) ? globalThis.String(object.verificationMethodId) : "",
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(0),
     };
   },
@@ -683,24 +689,34 @@ export const MsgCreateDidDocPayload = {
 
   fromJSON(object: any): MsgCreateDidDocPayload {
     return {
-      context: Array.isArray(object?.context) ? object.context.map((e: any) => String(e)) : [],
-      id: isSet(object.id) ? String(object.id) : "",
-      controller: Array.isArray(object?.controller) ? object.controller.map((e: any) => String(e)) : [],
-      verificationMethod: Array.isArray(object?.verificationMethod)
+      context: globalThis.Array.isArray(object?.context) ? object.context.map((e: any) => globalThis.String(e)) : [],
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      controller: globalThis.Array.isArray(object?.controller)
+        ? object.controller.map((e: any) => globalThis.String(e))
+        : [],
+      verificationMethod: globalThis.Array.isArray(object?.verificationMethod)
         ? object.verificationMethod.map((e: any) => VerificationMethod.fromJSON(e))
         : [],
-      authentication: Array.isArray(object?.authentication) ? object.authentication.map((e: any) => String(e)) : [],
-      assertionMethod: Array.isArray(object?.assertionMethod) ? object.assertionMethod.map((e: any) => String(e)) : [],
-      capabilityInvocation: Array.isArray(object?.capabilityInvocation)
-        ? object.capabilityInvocation.map((e: any) => String(e))
+      authentication: globalThis.Array.isArray(object?.authentication)
+        ? object.authentication.map((e: any) => globalThis.String(e))
         : [],
-      capabilityDelegation: Array.isArray(object?.capabilityDelegation)
-        ? object.capabilityDelegation.map((e: any) => String(e))
+      assertionMethod: globalThis.Array.isArray(object?.assertionMethod)
+        ? object.assertionMethod.map((e: any) => globalThis.String(e))
         : [],
-      keyAgreement: Array.isArray(object?.keyAgreement) ? object.keyAgreement.map((e: any) => String(e)) : [],
-      service: Array.isArray(object?.service) ? object.service.map((e: any) => Service.fromJSON(e)) : [],
-      alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e: any) => String(e)) : [],
-      versionId: isSet(object.versionId) ? String(object.versionId) : "",
+      capabilityInvocation: globalThis.Array.isArray(object?.capabilityInvocation)
+        ? object.capabilityInvocation.map((e: any) => globalThis.String(e))
+        : [],
+      capabilityDelegation: globalThis.Array.isArray(object?.capabilityDelegation)
+        ? object.capabilityDelegation.map((e: any) => globalThis.String(e))
+        : [],
+      keyAgreement: globalThis.Array.isArray(object?.keyAgreement)
+        ? object.keyAgreement.map((e: any) => globalThis.String(e))
+        : [],
+      service: globalThis.Array.isArray(object?.service) ? object.service.map((e: any) => Service.fromJSON(e)) : [],
+      alsoKnownAs: globalThis.Array.isArray(object?.alsoKnownAs)
+        ? object.alsoKnownAs.map((e: any) => globalThis.String(e))
+        : [],
+      versionId: isSet(object.versionId) ? globalThis.String(object.versionId) : "",
     };
   },
 
@@ -985,24 +1001,34 @@ export const MsgUpdateDidDocPayload = {
 
   fromJSON(object: any): MsgUpdateDidDocPayload {
     return {
-      context: Array.isArray(object?.context) ? object.context.map((e: any) => String(e)) : [],
-      id: isSet(object.id) ? String(object.id) : "",
-      controller: Array.isArray(object?.controller) ? object.controller.map((e: any) => String(e)) : [],
-      verificationMethod: Array.isArray(object?.verificationMethod)
+      context: globalThis.Array.isArray(object?.context) ? object.context.map((e: any) => globalThis.String(e)) : [],
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      controller: globalThis.Array.isArray(object?.controller)
+        ? object.controller.map((e: any) => globalThis.String(e))
+        : [],
+      verificationMethod: globalThis.Array.isArray(object?.verificationMethod)
         ? object.verificationMethod.map((e: any) => VerificationMethod.fromJSON(e))
         : [],
-      authentication: Array.isArray(object?.authentication) ? object.authentication.map((e: any) => String(e)) : [],
-      assertionMethod: Array.isArray(object?.assertionMethod) ? object.assertionMethod.map((e: any) => String(e)) : [],
-      capabilityInvocation: Array.isArray(object?.capabilityInvocation)
-        ? object.capabilityInvocation.map((e: any) => String(e))
+      authentication: globalThis.Array.isArray(object?.authentication)
+        ? object.authentication.map((e: any) => globalThis.String(e))
         : [],
-      capabilityDelegation: Array.isArray(object?.capabilityDelegation)
-        ? object.capabilityDelegation.map((e: any) => String(e))
+      assertionMethod: globalThis.Array.isArray(object?.assertionMethod)
+        ? object.assertionMethod.map((e: any) => globalThis.String(e))
         : [],
-      keyAgreement: Array.isArray(object?.keyAgreement) ? object.keyAgreement.map((e: any) => String(e)) : [],
-      service: Array.isArray(object?.service) ? object.service.map((e: any) => Service.fromJSON(e)) : [],
-      alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e: any) => String(e)) : [],
-      versionId: isSet(object.versionId) ? String(object.versionId) : "",
+      capabilityInvocation: globalThis.Array.isArray(object?.capabilityInvocation)
+        ? object.capabilityInvocation.map((e: any) => globalThis.String(e))
+        : [],
+      capabilityDelegation: globalThis.Array.isArray(object?.capabilityDelegation)
+        ? object.capabilityDelegation.map((e: any) => globalThis.String(e))
+        : [],
+      keyAgreement: globalThis.Array.isArray(object?.keyAgreement)
+        ? object.keyAgreement.map((e: any) => globalThis.String(e))
+        : [],
+      service: globalThis.Array.isArray(object?.service) ? object.service.map((e: any) => Service.fromJSON(e)) : [],
+      alsoKnownAs: globalThis.Array.isArray(object?.alsoKnownAs)
+        ? object.alsoKnownAs.map((e: any) => globalThis.String(e))
+        : [],
+      versionId: isSet(object.versionId) ? globalThis.String(object.versionId) : "",
     };
   },
 
@@ -1174,8 +1200,8 @@ export const MsgDeactivateDidDocPayload = {
 
   fromJSON(object: any): MsgDeactivateDidDocPayload {
     return {
-      id: isSet(object.id) ? String(object.id) : "",
-      versionId: isSet(object.versionId) ? String(object.versionId) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      versionId: isSet(object.versionId) ? globalThis.String(object.versionId) : "",
     };
   },
 
@@ -1304,30 +1330,11 @@ interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -1337,21 +1344,21 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends Long ? string | number | Long : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;

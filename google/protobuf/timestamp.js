@@ -44,7 +44,7 @@ export const Timestamp = {
     fromJSON(object) {
         return {
             seconds: isSet(object.seconds) ? Long.fromValue(object.seconds) : Long.ZERO,
-            nanos: isSet(object.nanos) ? Number(object.nanos) : 0,
+            nanos: isSet(object.nanos) ? globalThis.Number(object.nanos) : 0,
         };
     },
     toJSON(message) {

@@ -35,7 +35,7 @@ export const QueryGetDidRequest = {
         return message;
     },
     fromJSON(object) {
-        return { id: isSet(object.id) ? String(object.id) : "" };
+        return { id: isSet(object.id) ? globalThis.String(object.id) : "" };
     },
     toJSON(message) {
         const obj = {};

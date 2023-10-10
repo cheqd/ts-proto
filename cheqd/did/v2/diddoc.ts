@@ -313,23 +313,35 @@ export const DidDoc = {
 
   fromJSON(object: any): DidDoc {
     return {
-      context: Array.isArray(object?.context) ? object.context.map((e: any) => String(e)) : [],
-      id: isSet(object.id) ? String(object.id) : "",
-      controller: Array.isArray(object?.controller) ? object.controller.map((e: any) => String(e)) : [],
-      verificationMethod: Array.isArray(object?.verificationMethod)
+      context: globalThis.Array.isArray(object?.context) ? object.context.map((e: any) => globalThis.String(e)) : [],
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      controller: globalThis.Array.isArray(object?.controller)
+        ? object.controller.map((e: any) => globalThis.String(e))
+        : [],
+      verificationMethod: globalThis.Array.isArray(object?.verificationMethod)
         ? object.verificationMethod.map((e: any) => VerificationMethod.fromJSON(e))
         : [],
-      authentication: Array.isArray(object?.authentication) ? object.authentication.map((e: any) => String(e)) : [],
-      assertionMethod: Array.isArray(object?.assertionMethod) ? object.assertionMethod.map((e: any) => String(e)) : [],
-      capabilityInvocation: Array.isArray(object?.capabilityInvocation)
-        ? object.capabilityInvocation.map((e: any) => String(e))
+      authentication: globalThis.Array.isArray(object?.authentication)
+        ? object.authentication.map((e: any) => globalThis.String(e))
         : [],
-      capabilityDelegation: Array.isArray(object?.capabilityDelegation)
-        ? object.capabilityDelegation.map((e: any) => String(e))
+      assertionMethod: globalThis.Array.isArray(object?.assertionMethod)
+        ? object.assertionMethod.map((e: any) => globalThis.String(e))
         : [],
-      keyAgreement: Array.isArray(object?.keyAgreement) ? object.keyAgreement.map((e: any) => String(e)) : [],
-      service: Array.isArray(object?.service) ? object.service.map((e: any) => Service.fromJSON(e)) : [],
-      alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e: any) => String(e)) : [],
+      capabilityInvocation: globalThis.Array.isArray(object?.capabilityInvocation)
+        ? object.capabilityInvocation.map((e: any) => globalThis.String(e))
+        : [],
+      capabilityDelegation: globalThis.Array.isArray(object?.capabilityDelegation)
+        ? object.capabilityDelegation.map((e: any) => globalThis.String(e))
+        : [],
+      keyAgreement: globalThis.Array.isArray(object?.keyAgreement)
+        ? object.keyAgreement.map((e: any) => globalThis.String(e))
+        : [],
+      service: globalThis.Array.isArray(object?.service)
+        ? object.service.map((e: any) => Service.fromJSON(e))
+        : [],
+      alsoKnownAs: globalThis.Array.isArray(object?.alsoKnownAs)
+        ? object.alsoKnownAs.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -458,10 +470,12 @@ export const VerificationMethod = {
 
   fromJSON(object: any): VerificationMethod {
     return {
-      id: isSet(object.id) ? String(object.id) : "",
-      verificationMethodType: isSet(object.verificationMethodType) ? String(object.verificationMethodType) : "",
-      controller: isSet(object.controller) ? String(object.controller) : "",
-      verificationMaterial: isSet(object.verificationMaterial) ? String(object.verificationMaterial) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      verificationMethodType: isSet(object.verificationMethodType)
+        ? globalThis.String(object.verificationMethodType)
+        : "",
+      controller: isSet(object.controller) ? globalThis.String(object.controller) : "",
+      verificationMaterial: isSet(object.verificationMaterial) ? globalThis.String(object.verificationMaterial) : "",
     };
   },
 
@@ -552,9 +566,11 @@ export const Service = {
 
   fromJSON(object: any): Service {
     return {
-      id: isSet(object.id) ? String(object.id) : "",
-      serviceType: isSet(object.serviceType) ? String(object.serviceType) : "",
-      serviceEndpoint: Array.isArray(object?.serviceEndpoint) ? object.serviceEndpoint.map((e: any) => String(e)) : [],
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      serviceType: isSet(object.serviceType) ? globalThis.String(object.serviceType) : "",
+      serviceEndpoint: globalThis.Array.isArray(object?.serviceEndpoint)
+        ? object.serviceEndpoint.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -758,10 +774,10 @@ export const Metadata = {
     return {
       created: isSet(object.created) ? fromJsonTimestamp(object.created) : undefined,
       updated: isSet(object.updated) ? fromJsonTimestamp(object.updated) : undefined,
-      deactivated: isSet(object.deactivated) ? Boolean(object.deactivated) : false,
-      versionId: isSet(object.versionId) ? String(object.versionId) : "",
-      nextVersionId: isSet(object.nextVersionId) ? String(object.nextVersionId) : "",
-      previousVersionId: isSet(object.previousVersionId) ? String(object.previousVersionId) : "",
+      deactivated: isSet(object.deactivated) ? globalThis.Boolean(object.deactivated) : false,
+      versionId: isSet(object.versionId) ? globalThis.String(object.versionId) : "",
+      nextVersionId: isSet(object.nextVersionId) ? globalThis.String(object.nextVersionId) : "",
+      previousVersionId: isSet(object.previousVersionId) ? globalThis.String(object.previousVersionId) : "",
     };
   },
 
@@ -806,7 +822,7 @@ export const Metadata = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends Long ? string | number | Long : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
@@ -824,14 +840,14 @@ function toTimestamp(date: Date): Timestamp {
 function fromTimestamp(t: Timestamp): Date {
   let millis = (t.seconds.toNumber() || 0) * 1_000;
   millis += (t.nanos || 0) / 1_000_000;
-  return new Date(millis);
+  return new globalThis.Date(millis);
 }
 
 function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
+  if (o instanceof globalThis.Date) {
     return o;
   } else if (typeof o === "string") {
-    return new Date(o);
+    return new globalThis.Date(o);
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }

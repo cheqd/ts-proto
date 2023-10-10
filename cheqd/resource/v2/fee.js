@@ -65,7 +65,7 @@ export const FeeParams = {
             image: isSet(object.image) ? Coin.fromJSON(object.image) : undefined,
             json: isSet(object.json) ? Coin.fromJSON(object.json) : undefined,
             default: isSet(object.default) ? Coin.fromJSON(object.default) : undefined,
-            burnFactor: isSet(object.burnFactor) ? String(object.burnFactor) : "",
+            burnFactor: isSet(object.burnFactor) ? globalThis.String(object.burnFactor) : "",
         };
     },
     toJSON(message) {

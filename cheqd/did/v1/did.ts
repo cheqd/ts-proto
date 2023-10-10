@@ -192,23 +192,35 @@ export const Did = {
 
   fromJSON(object: any): Did {
     return {
-      context: Array.isArray(object?.context) ? object.context.map((e: any) => String(e)) : [],
-      id: isSet(object.id) ? String(object.id) : "",
-      controller: Array.isArray(object?.controller) ? object.controller.map((e: any) => String(e)) : [],
-      verificationMethod: Array.isArray(object?.verificationMethod)
+      context: globalThis.Array.isArray(object?.context) ? object.context.map((e: any) => globalThis.String(e)) : [],
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      controller: globalThis.Array.isArray(object?.controller)
+        ? object.controller.map((e: any) => globalThis.String(e))
+        : [],
+      verificationMethod: globalThis.Array.isArray(object?.verificationMethod)
         ? object.verificationMethod.map((e: any) => VerificationMethod.fromJSON(e))
         : [],
-      authentication: Array.isArray(object?.authentication) ? object.authentication.map((e: any) => String(e)) : [],
-      assertionMethod: Array.isArray(object?.assertionMethod) ? object.assertionMethod.map((e: any) => String(e)) : [],
-      capabilityInvocation: Array.isArray(object?.capabilityInvocation)
-        ? object.capabilityInvocation.map((e: any) => String(e))
+      authentication: globalThis.Array.isArray(object?.authentication)
+        ? object.authentication.map((e: any) => globalThis.String(e))
         : [],
-      capabilityDelegation: Array.isArray(object?.capabilityDelegation)
-        ? object.capabilityDelegation.map((e: any) => String(e))
+      assertionMethod: globalThis.Array.isArray(object?.assertionMethod)
+        ? object.assertionMethod.map((e: any) => globalThis.String(e))
         : [],
-      keyAgreement: Array.isArray(object?.keyAgreement) ? object.keyAgreement.map((e: any) => String(e)) : [],
-      service: Array.isArray(object?.service) ? object.service.map((e: any) => Service.fromJSON(e)) : [],
-      alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e: any) => String(e)) : [],
+      capabilityInvocation: globalThis.Array.isArray(object?.capabilityInvocation)
+        ? object.capabilityInvocation.map((e: any) => globalThis.String(e))
+        : [],
+      capabilityDelegation: globalThis.Array.isArray(object?.capabilityDelegation)
+        ? object.capabilityDelegation.map((e: any) => globalThis.String(e))
+        : [],
+      keyAgreement: globalThis.Array.isArray(object?.keyAgreement)
+        ? object.keyAgreement.map((e: any) => globalThis.String(e))
+        : [],
+      service: globalThis.Array.isArray(object?.service)
+        ? object.service.map((e: any) => Service.fromJSON(e))
+        : [],
+      alsoKnownAs: globalThis.Array.isArray(object?.alsoKnownAs)
+        ? object.alsoKnownAs.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -347,13 +359,13 @@ export const VerificationMethod = {
 
   fromJSON(object: any): VerificationMethod {
     return {
-      id: isSet(object.id) ? String(object.id) : "",
-      type: isSet(object.type) ? String(object.type) : "",
-      controller: isSet(object.controller) ? String(object.controller) : "",
-      publicKeyJwk: Array.isArray(object?.publicKeyJwk)
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      type: isSet(object.type) ? globalThis.String(object.type) : "",
+      controller: isSet(object.controller) ? globalThis.String(object.controller) : "",
+      publicKeyJwk: globalThis.Array.isArray(object?.publicKeyJwk)
         ? object.publicKeyJwk.map((e: any) => KeyValuePair.fromJSON(e))
         : [],
-      publicKeyMultibase: isSet(object.publicKeyMultibase) ? String(object.publicKeyMultibase) : "",
+      publicKeyMultibase: isSet(object.publicKeyMultibase) ? globalThis.String(object.publicKeyMultibase) : "",
     };
   },
 
@@ -448,9 +460,9 @@ export const Service = {
 
   fromJSON(object: any): Service {
     return {
-      id: isSet(object.id) ? String(object.id) : "",
-      type: isSet(object.type) ? String(object.type) : "",
-      serviceEndpoint: isSet(object.serviceEndpoint) ? String(object.serviceEndpoint) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      type: isSet(object.type) ? globalThis.String(object.type) : "",
+      serviceEndpoint: isSet(object.serviceEndpoint) ? globalThis.String(object.serviceEndpoint) : "",
     };
   },
 
@@ -483,7 +495,7 @@ export const Service = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends Long ? string | number | Long : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;

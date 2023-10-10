@@ -173,11 +173,13 @@ export const Metadata = {
 
   fromJSON(object: any): Metadata {
     return {
-      created: isSet(object.created) ? String(object.created) : "",
-      updated: isSet(object.updated) ? String(object.updated) : "",
-      deactivated: isSet(object.deactivated) ? Boolean(object.deactivated) : false,
-      versionId: isSet(object.versionId) ? String(object.versionId) : "",
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => String(e)) : [],
+      created: isSet(object.created) ? globalThis.String(object.created) : "",
+      updated: isSet(object.updated) ? globalThis.String(object.updated) : "",
+      deactivated: isSet(object.deactivated) ? globalThis.Boolean(object.deactivated) : false,
+      versionId: isSet(object.versionId) ? globalThis.String(object.versionId) : "",
+      resources: globalThis.Array.isArray(object?.resources)
+        ? object.resources.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -218,7 +220,7 @@ export const Metadata = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends Long ? string | number | Long : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;

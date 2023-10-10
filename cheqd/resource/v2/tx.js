@@ -46,7 +46,9 @@ export const MsgCreateResource = {
     fromJSON(object) {
         return {
             payload: isSet(object.payload) ? MsgCreateResourcePayload.fromJSON(object.payload) : undefined,
-            signatures: Array.isArray(object?.signatures) ? object.signatures.map((e) => SignInfo.fromJSON(e)) : [],
+            signatures: globalThis.Array.isArray(object?.signatures)
+                ? object.signatures.map((e) => SignInfo.fromJSON(e))
+                : [],
         };
     },
     toJSON(message) {
@@ -167,12 +169,12 @@ export const MsgCreateResourcePayload = {
     fromJSON(object) {
         return {
             data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
-            collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
-            id: isSet(object.id) ? String(object.id) : "",
-            name: isSet(object.name) ? String(object.name) : "",
-            version: isSet(object.version) ? String(object.version) : "",
-            resourceType: isSet(object.resourceType) ? String(object.resourceType) : "",
-            alsoKnownAs: Array.isArray(object?.alsoKnownAs)
+            collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+            id: isSet(object.id) ? globalThis.String(object.id) : "",
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            version: isSet(object.version) ? globalThis.String(object.version) : "",
+            resourceType: isSet(object.resourceType) ? globalThis.String(object.resourceType) : "",
+            alsoKnownAs: globalThis.Array.isArray(object?.alsoKnownAs)
                 ? object.alsoKnownAs.map((e) => AlternativeUri.fromJSON(e))
                 : [],
         };
@@ -284,27 +286,12 @@ export class MsgClientImpl {
         return promise.then((data) => MsgCreateResourceResponse.decode(_m0.Reader.create(data)));
     }
 }
-const tsProtoGlobalThis = (() => {
-    if (typeof globalThis !== "undefined") {
-        return globalThis;
-    }
-    if (typeof self !== "undefined") {
-        return self;
-    }
-    if (typeof window !== "undefined") {
-        return window;
-    }
-    if (typeof global !== "undefined") {
-        return global;
-    }
-    throw "Unable to locate global object";
-})();
 function bytesFromBase64(b64) {
-    if (tsProtoGlobalThis.Buffer) {
-        return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+    if (globalThis.Buffer) {
+        return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
     }
     else {
-        const bin = tsProtoGlobalThis.atob(b64);
+        const bin = globalThis.atob(b64);
         const arr = new Uint8Array(bin.length);
         for (let i = 0; i < bin.length; ++i) {
             arr[i] = bin.charCodeAt(i);
@@ -313,15 +300,15 @@ function bytesFromBase64(b64) {
     }
 }
 function base64FromBytes(arr) {
-    if (tsProtoGlobalThis.Buffer) {
-        return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+    if (globalThis.Buffer) {
+        return globalThis.Buffer.from(arr).toString("base64");
     }
     else {
         const bin = [];
         arr.forEach((byte) => {
-            bin.push(String.fromCharCode(byte));
+            bin.push(globalThis.String.fromCharCode(byte));
         });
-        return tsProtoGlobalThis.btoa(bin.join(""));
+        return globalThis.btoa(bin.join(""));
     }
 }
 if (_m0.util.Long !== Long) {

@@ -121,7 +121,9 @@ export const MsgCreateDid = {
   fromJSON(object: any): MsgCreateDid {
     return {
       payload: isSet(object.payload) ? MsgCreateDidPayload.fromJSON(object.payload) : undefined,
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignInfo.fromJSON(e)) : [],
+      signatures: globalThis.Array.isArray(object?.signatures)
+        ? object.signatures.map((e: any) => SignInfo.fromJSON(e))
+        : [],
     };
   },
 
@@ -197,7 +199,9 @@ export const MsgUpdateDid = {
   fromJSON(object: any): MsgUpdateDid {
     return {
       payload: isSet(object.payload) ? MsgUpdateDidPayload.fromJSON(object.payload) : undefined,
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignInfo.fromJSON(e)) : [],
+      signatures: globalThis.Array.isArray(object?.signatures)
+        ? object.signatures.map((e: any) => SignInfo.fromJSON(e))
+        : [],
     };
   },
 
@@ -273,7 +277,9 @@ export const MsgDeactivateDid = {
   fromJSON(object: any): MsgDeactivateDid {
     return {
       payload: isSet(object.payload) ? MsgDeactivateDidPayload.fromJSON(object.payload) : undefined,
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignInfo.fromJSON(e)) : [],
+      signatures: globalThis.Array.isArray(object?.signatures)
+        ? object.signatures.map((e: any) => SignInfo.fromJSON(e))
+        : [],
     };
   },
 
@@ -348,8 +354,8 @@ export const SignInfo = {
 
   fromJSON(object: any): SignInfo {
     return {
-      verificationMethodId: isSet(object.verificationMethodId) ? String(object.verificationMethodId) : "",
-      signature: isSet(object.signature) ? String(object.signature) : "",
+      verificationMethodId: isSet(object.verificationMethodId) ? globalThis.String(object.verificationMethodId) : "",
+      signature: isSet(object.signature) ? globalThis.String(object.signature) : "",
     };
   },
 
@@ -411,7 +417,7 @@ export const MsgDeactivateDidPayload = {
   },
 
   fromJSON(object: any): MsgDeactivateDidPayload {
-    return { id: isSet(object.id) ? String(object.id) : "" };
+    return { id: isSet(object.id) ? globalThis.String(object.id) : "" };
   },
 
   toJSON(message: MsgDeactivateDidPayload): unknown {
@@ -657,23 +663,35 @@ export const MsgCreateDidPayload = {
 
   fromJSON(object: any): MsgCreateDidPayload {
     return {
-      context: Array.isArray(object?.context) ? object.context.map((e: any) => String(e)) : [],
-      id: isSet(object.id) ? String(object.id) : "",
-      controller: Array.isArray(object?.controller) ? object.controller.map((e: any) => String(e)) : [],
-      verificationMethod: Array.isArray(object?.verificationMethod)
+      context: globalThis.Array.isArray(object?.context) ? object.context.map((e: any) => globalThis.String(e)) : [],
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      controller: globalThis.Array.isArray(object?.controller)
+        ? object.controller.map((e: any) => globalThis.String(e))
+        : [],
+      verificationMethod: globalThis.Array.isArray(object?.verificationMethod)
         ? object.verificationMethod.map((e: any) => VerificationMethod.fromJSON(e))
         : [],
-      authentication: Array.isArray(object?.authentication) ? object.authentication.map((e: any) => String(e)) : [],
-      assertionMethod: Array.isArray(object?.assertionMethod) ? object.assertionMethod.map((e: any) => String(e)) : [],
-      capabilityInvocation: Array.isArray(object?.capabilityInvocation)
-        ? object.capabilityInvocation.map((e: any) => String(e))
+      authentication: globalThis.Array.isArray(object?.authentication)
+        ? object.authentication.map((e: any) => globalThis.String(e))
         : [],
-      capabilityDelegation: Array.isArray(object?.capabilityDelegation)
-        ? object.capabilityDelegation.map((e: any) => String(e))
+      assertionMethod: globalThis.Array.isArray(object?.assertionMethod)
+        ? object.assertionMethod.map((e: any) => globalThis.String(e))
         : [],
-      keyAgreement: Array.isArray(object?.keyAgreement) ? object.keyAgreement.map((e: any) => String(e)) : [],
-      alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e: any) => String(e)) : [],
-      service: Array.isArray(object?.service) ? object.service.map((e: any) => Service.fromJSON(e)) : [],
+      capabilityInvocation: globalThis.Array.isArray(object?.capabilityInvocation)
+        ? object.capabilityInvocation.map((e: any) => globalThis.String(e))
+        : [],
+      capabilityDelegation: globalThis.Array.isArray(object?.capabilityDelegation)
+        ? object.capabilityDelegation.map((e: any) => globalThis.String(e))
+        : [],
+      keyAgreement: globalThis.Array.isArray(object?.keyAgreement)
+        ? object.keyAgreement.map((e: any) => globalThis.String(e))
+        : [],
+      alsoKnownAs: globalThis.Array.isArray(object?.alsoKnownAs)
+        ? object.alsoKnownAs.map((e: any) => globalThis.String(e))
+        : [],
+      service: globalThis.Array.isArray(object?.service)
+        ? object.service.map((e: any) => Service.fromJSON(e))
+        : [],
     };
   },
 
@@ -771,7 +789,7 @@ export const MsgCreateDidResponse = {
   },
 
   fromJSON(object: any): MsgCreateDidResponse {
-    return { id: isSet(object.id) ? String(object.id) : "" };
+    return { id: isSet(object.id) ? globalThis.String(object.id) : "" };
   },
 
   toJSON(message: MsgCreateDidResponse): unknown {
@@ -952,24 +970,36 @@ export const MsgUpdateDidPayload = {
 
   fromJSON(object: any): MsgUpdateDidPayload {
     return {
-      context: Array.isArray(object?.context) ? object.context.map((e: any) => String(e)) : [],
-      id: isSet(object.id) ? String(object.id) : "",
-      controller: Array.isArray(object?.controller) ? object.controller.map((e: any) => String(e)) : [],
-      verificationMethod: Array.isArray(object?.verificationMethod)
+      context: globalThis.Array.isArray(object?.context) ? object.context.map((e: any) => globalThis.String(e)) : [],
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      controller: globalThis.Array.isArray(object?.controller)
+        ? object.controller.map((e: any) => globalThis.String(e))
+        : [],
+      verificationMethod: globalThis.Array.isArray(object?.verificationMethod)
         ? object.verificationMethod.map((e: any) => VerificationMethod.fromJSON(e))
         : [],
-      authentication: Array.isArray(object?.authentication) ? object.authentication.map((e: any) => String(e)) : [],
-      assertionMethod: Array.isArray(object?.assertionMethod) ? object.assertionMethod.map((e: any) => String(e)) : [],
-      capabilityInvocation: Array.isArray(object?.capabilityInvocation)
-        ? object.capabilityInvocation.map((e: any) => String(e))
+      authentication: globalThis.Array.isArray(object?.authentication)
+        ? object.authentication.map((e: any) => globalThis.String(e))
         : [],
-      capabilityDelegation: Array.isArray(object?.capabilityDelegation)
-        ? object.capabilityDelegation.map((e: any) => String(e))
+      assertionMethod: globalThis.Array.isArray(object?.assertionMethod)
+        ? object.assertionMethod.map((e: any) => globalThis.String(e))
         : [],
-      keyAgreement: Array.isArray(object?.keyAgreement) ? object.keyAgreement.map((e: any) => String(e)) : [],
-      alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e: any) => String(e)) : [],
-      service: Array.isArray(object?.service) ? object.service.map((e: any) => Service.fromJSON(e)) : [],
-      versionId: isSet(object.versionId) ? String(object.versionId) : "",
+      capabilityInvocation: globalThis.Array.isArray(object?.capabilityInvocation)
+        ? object.capabilityInvocation.map((e: any) => globalThis.String(e))
+        : [],
+      capabilityDelegation: globalThis.Array.isArray(object?.capabilityDelegation)
+        ? object.capabilityDelegation.map((e: any) => globalThis.String(e))
+        : [],
+      keyAgreement: globalThis.Array.isArray(object?.keyAgreement)
+        ? object.keyAgreement.map((e: any) => globalThis.String(e))
+        : [],
+      alsoKnownAs: globalThis.Array.isArray(object?.alsoKnownAs)
+        ? object.alsoKnownAs.map((e: any) => globalThis.String(e))
+        : [],
+      service: globalThis.Array.isArray(object?.service)
+        ? object.service.map((e: any) => Service.fromJSON(e))
+        : [],
+      versionId: isSet(object.versionId) ? globalThis.String(object.versionId) : "",
     };
   },
 
@@ -1071,7 +1101,7 @@ export const MsgUpdateDidResponse = {
   },
 
   fromJSON(object: any): MsgUpdateDidResponse {
-    return { id: isSet(object.id) ? String(object.id) : "" };
+    return { id: isSet(object.id) ? globalThis.String(object.id) : "" };
   },
 
   toJSON(message: MsgUpdateDidResponse): unknown {
@@ -1136,7 +1166,7 @@ interface Rpc {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends Long ? string | number | Long : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;

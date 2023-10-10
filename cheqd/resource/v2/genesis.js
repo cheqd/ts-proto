@@ -45,7 +45,7 @@ export const GenesisState = {
     },
     fromJSON(object) {
         return {
-            resources: Array.isArray(object?.resources)
+            resources: globalThis.Array.isArray(object?.resources)
                 ? object.resources.map((e) => ResourceWithMetadata.fromJSON(e))
                 : [],
             feeParams: isSet(object.feeParams) ? FeeParams.fromJSON(object.feeParams) : undefined,

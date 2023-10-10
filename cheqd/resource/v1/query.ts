@@ -77,8 +77,8 @@ export const QueryGetResourceRequest = {
 
   fromJSON(object: any): QueryGetResourceRequest {
     return {
-      collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
-      id: isSet(object.id) ? String(object.id) : "",
+      collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
     };
   },
 
@@ -199,7 +199,7 @@ export const QueryGetCollectionResourcesRequest = {
   },
 
   fromJSON(object: any): QueryGetCollectionResourcesRequest {
-    return { collectionId: isSet(object.collectionId) ? String(object.collectionId) : "" };
+    return { collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "" };
   },
 
   toJSON(message: QueryGetCollectionResourcesRequest): unknown {
@@ -261,7 +261,9 @@ export const QueryCollectionResourcesResponse = {
 
   fromJSON(object: any): QueryCollectionResourcesResponse {
     return {
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceHeader.fromJSON(e)) : [],
+      resources: globalThis.Array.isArray(object?.resources)
+        ? object.resources.map((e: any) => ResourceHeader.fromJSON(e))
+        : [],
     };
   },
 
@@ -344,9 +346,9 @@ export const QueryGetAllResourceVersionsRequest = {
 
   fromJSON(object: any): QueryGetAllResourceVersionsRequest {
     return {
-      collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
-      name: isSet(object.name) ? String(object.name) : "",
-      resourceType: isSet(object.resourceType) ? String(object.resourceType) : "",
+      collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      resourceType: isSet(object.resourceType) ? globalThis.String(object.resourceType) : "",
     };
   },
 
@@ -417,7 +419,9 @@ export const QueryGetAllResourceVersionsResponse = {
 
   fromJSON(object: any): QueryGetAllResourceVersionsResponse {
     return {
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceHeader.fromJSON(e)) : [],
+      resources: globalThis.Array.isArray(object?.resources)
+        ? object.resources.map((e: any) => ResourceHeader.fromJSON(e))
+        : [],
     };
   },
 
@@ -487,7 +491,7 @@ interface Rpc {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends Long ? string | number | Long : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;

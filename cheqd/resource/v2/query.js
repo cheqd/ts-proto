@@ -45,8 +45,8 @@ export const QueryResourceRequest = {
     },
     fromJSON(object) {
         return {
-            collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
-            id: isSet(object.id) ? String(object.id) : "",
+            collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+            id: isSet(object.id) ? globalThis.String(object.id) : "",
         };
     },
     toJSON(message) {
@@ -163,8 +163,8 @@ export const QueryResourceMetadataRequest = {
     },
     fromJSON(object) {
         return {
-            collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
-            id: isSet(object.id) ? String(object.id) : "",
+            collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+            id: isSet(object.id) ? globalThis.String(object.id) : "",
         };
     },
     toJSON(message) {
@@ -281,7 +281,7 @@ export const QueryCollectionResourcesRequest = {
     },
     fromJSON(object) {
         return {
-            collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
+            collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
             pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
         };
     },
@@ -349,7 +349,9 @@ export const QueryCollectionResourcesResponse = {
     },
     fromJSON(object) {
         return {
-            resources: Array.isArray(object?.resources) ? object.resources.map((e) => Metadata.fromJSON(e)) : [],
+            resources: globalThis.Array.isArray(object?.resources)
+                ? object.resources.map((e) => Metadata.fromJSON(e))
+                : [],
             pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
         };
     },

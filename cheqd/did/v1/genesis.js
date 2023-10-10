@@ -44,8 +44,8 @@ export const GenesisState = {
     },
     fromJSON(object) {
         return {
-            didNamespace: isSet(object.didNamespace) ? String(object.didNamespace) : "",
-            didList: Array.isArray(object?.didList) ? object.didList.map((e) => StateValue.fromJSON(e)) : [],
+            didNamespace: isSet(object.didNamespace) ? globalThis.String(object.didNamespace) : "",
+            didList: globalThis.Array.isArray(object?.didList) ? object.didList.map((e) => StateValue.fromJSON(e)) : [],
         };
     },
     toJSON(message) {

@@ -46,7 +46,9 @@ export const MsgCreateResource = {
     fromJSON(object) {
         return {
             payload: isSet(object.payload) ? MsgCreateResourcePayload.fromJSON(object.payload) : undefined,
-            signatures: Array.isArray(object?.signatures) ? object.signatures.map((e) => SignInfo.fromJSON(e)) : [],
+            signatures: globalThis.Array.isArray(object?.signatures)
+                ? object.signatures.map((e) => SignInfo.fromJSON(e))
+                : [],
         };
     },
     toJSON(message) {
@@ -140,10 +142,10 @@ export const MsgCreateResourcePayload = {
     },
     fromJSON(object) {
         return {
-            collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
-            id: isSet(object.id) ? String(object.id) : "",
-            name: isSet(object.name) ? String(object.name) : "",
-            resourceType: isSet(object.resourceType) ? String(object.resourceType) : "",
+            collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+            id: isSet(object.id) ? globalThis.String(object.id) : "",
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            resourceType: isSet(object.resourceType) ? globalThis.String(object.resourceType) : "",
             data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
         };
     },
@@ -246,27 +248,12 @@ export class MsgClientImpl {
         return promise.then((data) => MsgCreateResourceResponse.decode(_m0.Reader.create(data)));
     }
 }
-const tsProtoGlobalThis = (() => {
-    if (typeof globalThis !== "undefined") {
-        return globalThis;
-    }
-    if (typeof self !== "undefined") {
-        return self;
-    }
-    if (typeof window !== "undefined") {
-        return window;
-    }
-    if (typeof global !== "undefined") {
-        return global;
-    }
-    throw "Unable to locate global object";
-})();
 function bytesFromBase64(b64) {
-    if (tsProtoGlobalThis.Buffer) {
-        return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+    if (globalThis.Buffer) {
+        return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
     }
     else {
-        const bin = tsProtoGlobalThis.atob(b64);
+        const bin = globalThis.atob(b64);
         const arr = new Uint8Array(bin.length);
         for (let i = 0; i < bin.length; ++i) {
             arr[i] = bin.charCodeAt(i);
@@ -275,15 +262,15 @@ function bytesFromBase64(b64) {
     }
 }
 function base64FromBytes(arr) {
-    if (tsProtoGlobalThis.Buffer) {
-        return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+    if (globalThis.Buffer) {
+        return globalThis.Buffer.from(arr).toString("base64");
     }
     else {
         const bin = [];
         arr.forEach((byte) => {
-            bin.push(String.fromCharCode(byte));
+            bin.push(globalThis.String.fromCharCode(byte));
         });
-        return tsProtoGlobalThis.btoa(bin.join(""));
+        return globalThis.btoa(bin.join(""));
     }
 }
 if (_m0.util.Long !== Long) {

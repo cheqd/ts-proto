@@ -44,8 +44,8 @@ export const QueryGetResourceRequest = {
     },
     fromJSON(object) {
         return {
-            collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
-            id: isSet(object.id) ? String(object.id) : "",
+            collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+            id: isSet(object.id) ? globalThis.String(object.id) : "",
         };
     },
     toJSON(message) {
@@ -152,7 +152,7 @@ export const QueryGetCollectionResourcesRequest = {
         return message;
     },
     fromJSON(object) {
-        return { collectionId: isSet(object.collectionId) ? String(object.collectionId) : "" };
+        return { collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "" };
     },
     toJSON(message) {
         const obj = {};
@@ -203,7 +203,9 @@ export const QueryCollectionResourcesResponse = {
     },
     fromJSON(object) {
         return {
-            resources: Array.isArray(object?.resources) ? object.resources.map((e) => ResourceHeader.fromJSON(e)) : [],
+            resources: globalThis.Array.isArray(object?.resources)
+                ? object.resources.map((e) => ResourceHeader.fromJSON(e))
+                : [],
         };
     },
     toJSON(message) {
@@ -273,9 +275,9 @@ export const QueryGetAllResourceVersionsRequest = {
     },
     fromJSON(object) {
         return {
-            collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
-            name: isSet(object.name) ? String(object.name) : "",
-            resourceType: isSet(object.resourceType) ? String(object.resourceType) : "",
+            collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            resourceType: isSet(object.resourceType) ? globalThis.String(object.resourceType) : "",
         };
     },
     toJSON(message) {
@@ -335,7 +337,9 @@ export const QueryGetAllResourceVersionsResponse = {
     },
     fromJSON(object) {
         return {
-            resources: Array.isArray(object?.resources) ? object.resources.map((e) => ResourceHeader.fromJSON(e)) : [],
+            resources: globalThis.Array.isArray(object?.resources)
+                ? object.resources.map((e) => ResourceHeader.fromJSON(e))
+                : [],
         };
     },
     toJSON(message) {
