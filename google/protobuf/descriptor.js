@@ -1,6 +1,39 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal.js";
+/** The verification state of the extension range. */
+export var ExtensionRangeOptions_VerificationState;
+(function (ExtensionRangeOptions_VerificationState) {
+    /** DECLARATION - All the extensions of the range must be declared. */
+    ExtensionRangeOptions_VerificationState[ExtensionRangeOptions_VerificationState["DECLARATION"] = 0] = "DECLARATION";
+    ExtensionRangeOptions_VerificationState[ExtensionRangeOptions_VerificationState["UNVERIFIED"] = 1] = "UNVERIFIED";
+    ExtensionRangeOptions_VerificationState[ExtensionRangeOptions_VerificationState["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(ExtensionRangeOptions_VerificationState || (ExtensionRangeOptions_VerificationState = {}));
+export function extensionRangeOptions_VerificationStateFromJSON(object) {
+    switch (object) {
+        case 0:
+        case "DECLARATION":
+            return ExtensionRangeOptions_VerificationState.DECLARATION;
+        case 1:
+        case "UNVERIFIED":
+            return ExtensionRangeOptions_VerificationState.UNVERIFIED;
+        case -1:
+        case "UNRECOGNIZED":
+        default:
+            return ExtensionRangeOptions_VerificationState.UNRECOGNIZED;
+    }
+}
+export function extensionRangeOptions_VerificationStateToJSON(object) {
+    switch (object) {
+        case ExtensionRangeOptions_VerificationState.DECLARATION:
+            return "DECLARATION";
+        case ExtensionRangeOptions_VerificationState.UNVERIFIED:
+            return "UNVERIFIED";
+        case ExtensionRangeOptions_VerificationState.UNRECOGNIZED:
+        default:
+            return "UNRECOGNIZED";
+    }
+}
 export var FieldDescriptorProto_Type;
 (function (FieldDescriptorProto_Type) {
     /**
@@ -233,6 +266,14 @@ export var FieldOptions_CType;
 (function (FieldOptions_CType) {
     /** STRING - Default mode. */
     FieldOptions_CType[FieldOptions_CType["STRING"] = 0] = "STRING";
+    /**
+     * CORD - The option [ctype=CORD] may be applied to a non-repeated field of type
+     * "bytes". It indicates that in C++, the data should be stored in a Cord
+     * instead of a string.  For very large strings, this may reduce memory
+     * fragmentation. It may also allow better performance when parsing from a
+     * Cord, or when parsing with aliasing enabled, as the parsed Cord may then
+     * alias the original buffer.
+     */
     FieldOptions_CType[FieldOptions_CType["CORD"] = 1] = "CORD";
     FieldOptions_CType[FieldOptions_CType["STRING_PIECE"] = 2] = "STRING_PIECE";
     FieldOptions_CType[FieldOptions_CType["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
@@ -1200,12 +1241,18 @@ export const DescriptorProto_ReservedRange = {
     },
 };
 function createBaseExtensionRangeOptions() {
-    return { uninterpretedOption: [] };
+    return { uninterpretedOption: [], declaration: [], verification: 0 };
 }
 export const ExtensionRangeOptions = {
     encode(message, writer = _m0.Writer.create()) {
         for (const v of message.uninterpretedOption) {
             UninterpretedOption.encode(v, writer.uint32(7994).fork()).ldelim();
+        }
+        for (const v of message.declaration) {
+            ExtensionRangeOptions_Declaration.encode(v, writer.uint32(18).fork()).ldelim();
+        }
+        if (message.verification !== 0) {
+            writer.uint32(24).int32(message.verification);
         }
         return writer;
     },
@@ -1222,6 +1269,18 @@ export const ExtensionRangeOptions = {
                     }
                     message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
                     continue;
+                case 2:
+                    if (tag !== 18) {
+                        break;
+                    }
+                    message.declaration.push(ExtensionRangeOptions_Declaration.decode(reader, reader.uint32()));
+                    continue;
+                case 3:
+                    if (tag !== 24) {
+                        break;
+                    }
+                    message.verification = reader.int32();
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -1235,12 +1294,24 @@ export const ExtensionRangeOptions = {
             uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
                 ? object.uninterpretedOption.map((e) => UninterpretedOption.fromJSON(e))
                 : [],
+            declaration: globalThis.Array.isArray(object?.declaration)
+                ? object.declaration.map((e) => ExtensionRangeOptions_Declaration.fromJSON(e))
+                : [],
+            verification: isSet(object.verification)
+                ? extensionRangeOptions_VerificationStateFromJSON(object.verification)
+                : 0,
         };
     },
     toJSON(message) {
         const obj = {};
         if (message.uninterpretedOption?.length) {
             obj.uninterpretedOption = message.uninterpretedOption.map((e) => UninterpretedOption.toJSON(e));
+        }
+        if (message.declaration?.length) {
+            obj.declaration = message.declaration.map((e) => ExtensionRangeOptions_Declaration.toJSON(e));
+        }
+        if (message.verification !== 0) {
+            obj.verification = extensionRangeOptions_VerificationStateToJSON(message.verification);
         }
         return obj;
     },
@@ -1250,6 +1321,130 @@ export const ExtensionRangeOptions = {
     fromPartial(object) {
         const message = createBaseExtensionRangeOptions();
         message.uninterpretedOption = object.uninterpretedOption?.map((e) => UninterpretedOption.fromPartial(e)) || [];
+        message.declaration = object.declaration?.map((e) => ExtensionRangeOptions_Declaration.fromPartial(e)) || [];
+        message.verification = object.verification ?? 0;
+        return message;
+    },
+};
+function createBaseExtensionRangeOptions_Declaration() {
+    return { number: 0, fullName: "", type: "", isRepeated: false, reserved: false, repeated: false };
+}
+export const ExtensionRangeOptions_Declaration = {
+    encode(message, writer = _m0.Writer.create()) {
+        if (message.number !== 0) {
+            writer.uint32(8).int32(message.number);
+        }
+        if (message.fullName !== "") {
+            writer.uint32(18).string(message.fullName);
+        }
+        if (message.type !== "") {
+            writer.uint32(26).string(message.type);
+        }
+        if (message.isRepeated === true) {
+            writer.uint32(32).bool(message.isRepeated);
+        }
+        if (message.reserved === true) {
+            writer.uint32(40).bool(message.reserved);
+        }
+        if (message.repeated === true) {
+            writer.uint32(48).bool(message.repeated);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseExtensionRangeOptions_Declaration();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    if (tag !== 8) {
+                        break;
+                    }
+                    message.number = reader.int32();
+                    continue;
+                case 2:
+                    if (tag !== 18) {
+                        break;
+                    }
+                    message.fullName = reader.string();
+                    continue;
+                case 3:
+                    if (tag !== 26) {
+                        break;
+                    }
+                    message.type = reader.string();
+                    continue;
+                case 4:
+                    if (tag !== 32) {
+                        break;
+                    }
+                    message.isRepeated = reader.bool();
+                    continue;
+                case 5:
+                    if (tag !== 40) {
+                        break;
+                    }
+                    message.reserved = reader.bool();
+                    continue;
+                case 6:
+                    if (tag !== 48) {
+                        break;
+                    }
+                    message.repeated = reader.bool();
+                    continue;
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            number: isSet(object.number) ? globalThis.Number(object.number) : 0,
+            fullName: isSet(object.fullName) ? globalThis.String(object.fullName) : "",
+            type: isSet(object.type) ? globalThis.String(object.type) : "",
+            isRepeated: isSet(object.isRepeated) ? globalThis.Boolean(object.isRepeated) : false,
+            reserved: isSet(object.reserved) ? globalThis.Boolean(object.reserved) : false,
+            repeated: isSet(object.repeated) ? globalThis.Boolean(object.repeated) : false,
+        };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.number !== 0) {
+            obj.number = Math.round(message.number);
+        }
+        if (message.fullName !== "") {
+            obj.fullName = message.fullName;
+        }
+        if (message.type !== "") {
+            obj.type = message.type;
+        }
+        if (message.isRepeated === true) {
+            obj.isRepeated = message.isRepeated;
+        }
+        if (message.reserved === true) {
+            obj.reserved = message.reserved;
+        }
+        if (message.repeated === true) {
+            obj.repeated = message.repeated;
+        }
+        return obj;
+    },
+    create(base) {
+        return ExtensionRangeOptions_Declaration.fromPartial(base ?? {});
+    },
+    fromPartial(object) {
+        const message = createBaseExtensionRangeOptions_Declaration();
+        message.number = object.number ?? 0;
+        message.fullName = object.fullName ?? "";
+        message.type = object.type ?? "";
+        message.isRepeated = object.isRepeated ?? false;
+        message.reserved = object.reserved ?? false;
+        message.repeated = object.repeated ?? false;
         return message;
     },
 };
@@ -2514,6 +2709,7 @@ function createBaseFieldOptions() {
         debugRedact: false,
         retention: 0,
         target: 0,
+        targets: [],
         uninterpretedOption: [],
     };
 }
@@ -2549,6 +2745,11 @@ export const FieldOptions = {
         if (message.target !== 0) {
             writer.uint32(144).int32(message.target);
         }
+        writer.uint32(154).fork();
+        for (const v of message.targets) {
+            writer.int32(v);
+        }
+        writer.ldelim();
         for (const v of message.uninterpretedOption) {
             UninterpretedOption.encode(v, writer.uint32(7994).fork()).ldelim();
         }
@@ -2621,6 +2822,19 @@ export const FieldOptions = {
                     }
                     message.target = reader.int32();
                     continue;
+                case 19:
+                    if (tag === 152) {
+                        message.targets.push(reader.int32());
+                        continue;
+                    }
+                    if (tag === 154) {
+                        const end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2) {
+                            message.targets.push(reader.int32());
+                        }
+                        continue;
+                    }
+                    break;
                 case 999:
                     if (tag !== 7994) {
                         break;
@@ -2647,6 +2861,9 @@ export const FieldOptions = {
             debugRedact: isSet(object.debugRedact) ? globalThis.Boolean(object.debugRedact) : false,
             retention: isSet(object.retention) ? fieldOptions_OptionRetentionFromJSON(object.retention) : 0,
             target: isSet(object.target) ? fieldOptions_OptionTargetTypeFromJSON(object.target) : 0,
+            targets: globalThis.Array.isArray(object?.targets)
+                ? object.targets.map((e) => fieldOptions_OptionTargetTypeFromJSON(e))
+                : [],
             uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
                 ? object.uninterpretedOption.map((e) => UninterpretedOption.fromJSON(e))
                 : [],
@@ -2684,6 +2901,9 @@ export const FieldOptions = {
         if (message.target !== 0) {
             obj.target = fieldOptions_OptionTargetTypeToJSON(message.target);
         }
+        if (message.targets?.length) {
+            obj.targets = message.targets.map((e) => fieldOptions_OptionTargetTypeToJSON(e));
+        }
         if (message.uninterpretedOption?.length) {
             obj.uninterpretedOption = message.uninterpretedOption.map((e) => UninterpretedOption.toJSON(e));
         }
@@ -2704,6 +2924,7 @@ export const FieldOptions = {
         message.debugRedact = object.debugRedact ?? false;
         message.retention = object.retention ?? 0;
         message.target = object.target ?? 0;
+        message.targets = object.targets?.map((e) => e) || [];
         message.uninterpretedOption = object.uninterpretedOption?.map((e) => UninterpretedOption.fromPartial(e)) || [];
         return message;
     },
