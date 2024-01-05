@@ -5,12 +5,12 @@
   "main": "index.js",
   "type": "module",
   "files": [
-    "amino/**/*",
-    "cheqd/**/*",
-    "cosmos/**/*",
-    "cosmos_proto/**/*",
-    "gogoproto/**/*",
-    "google/**/*",
+    "amino/**/*.*",
+    "cheqd/**/*.*",
+    "cosmos/**/*.*",
+    "cosmos_proto/**/*.*",
+    "gogoproto/**/*.*",
+    "google/**/*.*",
     "LICENSE",
     "package.json",
     "README.md"
