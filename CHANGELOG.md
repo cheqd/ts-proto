@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.9-develop.4](https://github.com/cheqd/ts-proto/compare/3.3.9-develop.3...3.3.9-develop.4) (2024-01-05)
+
+
+### Reverts
+
+* Revert "build: Downgrade bufbuild/buf-setup-action to 1.27.2" ([616edf5](https://github.com/cheqd/ts-proto/commit/616edf59c0d9466bfa97d808412ef7b50ed8a761))
+
 ## [3.3.9-develop.3](https://github.com/cheqd/ts-proto/compare/3.3.9-develop.2...3.3.9-develop.3) (2024-01-05)
 
 ## [3.3.9-develop.2](https://github.com/cheqd/ts-proto/compare/3.3.9-develop.1...3.3.9-develop.2) (2024-01-05)
