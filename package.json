@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "files": [
+    "amino/**/*",
     "cheqd/**/*",
     "cosmos/**/*",
     "cosmos_proto/**/*",
