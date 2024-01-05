@@ -20,7 +20,6 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
       
       - name: "Obtain Github App token"
         id: app-token
@@ -32,6 +31,8 @@ jobs:
       - name: "Install buf CLI"
         uses: bufbuild/buf-setup-action@v1.28.1
         with:
+          buf_user: ${{ secrets.BUF_USER }}
+          buf_api_token: ${{ secrets.BUF_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
       
       - name: "Clean install dependencies"
