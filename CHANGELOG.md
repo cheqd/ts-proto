@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.9-develop.1](https://github.com/cheqd/ts-proto/compare/3.3.8...3.3.9-develop.1) (2024-01-05)
+
+
+### Bug Fixes
+
+* Breaking build on 3.3.8 ([72df27e](https://github.com/cheqd/ts-proto/commit/72df27ede8a20c31113767cf6fbd788727da7c6f))
+
 ## [3.3.8](https://github.com/cheqd/ts-proto/compare/3.3.7...3.3.8) (2024-01-05)
 
 ## [3.3.8-develop.1](https://github.com/cheqd/ts-proto/compare/3.3.7...3.3.8-develop.1) (2024-01-05)
