@@ -56,7 +56,7 @@
     "@types/node": "^20.10.6",
     "conventional-changelog-conventionalcommits": "^7.0.2",
     "loose-ts-check": "^2.0.0",
-    "semantic-release": "^22.0.12",
+    "semantic-release": "^23.0.0",
     "typescript": "^5.3.3"
   },
   "publishConfig": {
