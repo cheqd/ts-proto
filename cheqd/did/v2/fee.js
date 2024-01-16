@@ -1,5 +1,4 @@
 /* eslint-disable */
-import Long from "long";
 import _m0 from "protobufjs/minimal.js";
 import { Coin } from "../../../cosmos/base/v1beta1/coin.js";
 function createBaseFeeParams() {
@@ -102,10 +101,6 @@ export const FeeParams = {
         return message;
     },
 };
-if (_m0.util.Long !== Long) {
-    _m0.util.Long = Long;
-    _m0.configure();
-}
 function isSet(value) {
     return value !== null && value !== undefined;
 }

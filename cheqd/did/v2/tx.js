@@ -1,5 +1,4 @@
 /* eslint-disable */
-import Long from "long";
 import _m0 from "protobufjs/minimal.js";
 import { DidDocWithMetadata, Service, VerificationMethod } from "./diddoc.js";
 function createBaseMsgCreateDidDoc() {
@@ -1021,10 +1020,6 @@ function base64FromBytes(arr) {
         });
         return globalThis.btoa(bin.join(""));
     }
-}
-if (_m0.util.Long !== Long) {
-    _m0.util.Long = Long;
-    _m0.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

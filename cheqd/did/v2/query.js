@@ -1,5 +1,4 @@
 /* eslint-disable */
-import Long from "long";
 import _m0 from "protobufjs/minimal.js";
 import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination.js";
 import { DidDocWithMetadata, Metadata } from "./diddoc.js";
@@ -385,10 +384,6 @@ export class QueryClientImpl {
         const promise = this.rpc.request(this.service, "AllDidDocVersionsMetadata", data);
         return promise.then((data) => QueryAllDidDocVersionsMetadataResponse.decode(_m0.Reader.create(data)));
     }
-}
-if (_m0.util.Long !== Long) {
-    _m0.util.Long = Long;
-    _m0.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

@@ -3305,8 +3305,8 @@ function createBaseUninterpretedOption() {
     return {
         name: [],
         identifierValue: "",
-        positiveIntValue: Long.UZERO,
-        negativeIntValue: Long.ZERO,
+        positiveIntValue: BigInt("0"),
+        negativeIntValue: BigInt("0"),
         doubleValue: 0,
         stringValue: new Uint8Array(0),
         aggregateValue: "",
@@ -3320,11 +3320,17 @@ export const UninterpretedOption = {
         if (message.identifierValue !== "") {
             writer.uint32(26).string(message.identifierValue);
         }
-        if (!message.positiveIntValue.isZero()) {
-            writer.uint32(32).uint64(message.positiveIntValue);
+        if (message.positiveIntValue !== BigInt("0")) {
+            if (BigInt.asUintN(64, message.positiveIntValue) !== message.positiveIntValue) {
+                throw new Error("value provided for field message.positiveIntValue of type uint64 too large");
+            }
+            writer.uint32(32).uint64(message.positiveIntValue.toString());
         }
-        if (!message.negativeIntValue.isZero()) {
-            writer.uint32(40).int64(message.negativeIntValue);
+        if (message.negativeIntValue !== BigInt("0")) {
+            if (BigInt.asIntN(64, message.negativeIntValue) !== message.negativeIntValue) {
+                throw new Error("value provided for field message.negativeIntValue of type int64 too large");
+            }
+            writer.uint32(40).int64(message.negativeIntValue.toString());
         }
         if (message.doubleValue !== 0) {
             writer.uint32(49).double(message.doubleValue);
@@ -3360,13 +3366,13 @@ export const UninterpretedOption = {
                     if (tag !== 32) {
                         break;
                     }
-                    message.positiveIntValue = reader.uint64();
+                    message.positiveIntValue = longToBigint(reader.uint64());
                     continue;
                 case 5:
                     if (tag !== 40) {
                         break;
                     }
-                    message.negativeIntValue = reader.int64();
+                    message.negativeIntValue = longToBigint(reader.int64());
                     continue;
                 case 6:
                     if (tag !== 49) {
@@ -3400,8 +3406,8 @@ export const UninterpretedOption = {
                 ? object.name.map((e) => UninterpretedOption_NamePart.fromJSON(e))
                 : [],
             identifierValue: isSet(object.identifierValue) ? globalThis.String(object.identifierValue) : "",
-            positiveIntValue: isSet(object.positiveIntValue) ? Long.fromValue(object.positiveIntValue) : Long.UZERO,
-            negativeIntValue: isSet(object.negativeIntValue) ? Long.fromValue(object.negativeIntValue) : Long.ZERO,
+            positiveIntValue: isSet(object.positiveIntValue) ? BigInt(object.positiveIntValue) : BigInt("0"),
+            negativeIntValue: isSet(object.negativeIntValue) ? BigInt(object.negativeIntValue) : BigInt("0"),
             doubleValue: isSet(object.doubleValue) ? globalThis.Number(object.doubleValue) : 0,
             stringValue: isSet(object.stringValue) ? bytesFromBase64(object.stringValue) : new Uint8Array(0),
             aggregateValue: isSet(object.aggregateValue) ? globalThis.String(object.aggregateValue) : "",
@@ -3415,11 +3421,11 @@ export const UninterpretedOption = {
         if (message.identifierValue !== "") {
             obj.identifierValue = message.identifierValue;
         }
-        if (!message.positiveIntValue.isZero()) {
-            obj.positiveIntValue = (message.positiveIntValue || Long.UZERO).toString();
+        if (message.positiveIntValue !== BigInt("0")) {
+            obj.positiveIntValue = message.positiveIntValue.toString();
         }
-        if (!message.negativeIntValue.isZero()) {
-            obj.negativeIntValue = (message.negativeIntValue || Long.ZERO).toString();
+        if (message.negativeIntValue !== BigInt("0")) {
+            obj.negativeIntValue = message.negativeIntValue.toString();
         }
         if (message.doubleValue !== 0) {
             obj.doubleValue = message.doubleValue;
@@ -3439,12 +3445,8 @@ export const UninterpretedOption = {
         const message = createBaseUninterpretedOption();
         message.name = object.name?.map((e) => UninterpretedOption_NamePart.fromPartial(e)) || [];
         message.identifierValue = object.identifierValue ?? "";
-        message.positiveIntValue = (object.positiveIntValue !== undefined && object.positiveIntValue !== null)
-            ? Long.fromValue(object.positiveIntValue)
-            : Long.UZERO;
-        message.negativeIntValue = (object.negativeIntValue !== undefined && object.negativeIntValue !== null)
-            ? Long.fromValue(object.negativeIntValue)
-            : Long.ZERO;
+        message.positiveIntValue = object.positiveIntValue ?? BigInt("0");
+        message.negativeIntValue = object.negativeIntValue ?? BigInt("0");
         message.doubleValue = object.doubleValue ?? 0;
         message.stringValue = object.stringValue ?? new Uint8Array(0);
         message.aggregateValue = object.aggregateValue ?? "";
@@ -3894,6 +3896,9 @@ function base64FromBytes(arr) {
         });
         return globalThis.btoa(bin.join(""));
     }
+}
+function longToBigint(long) {
+    return BigInt(long.toString());
 }
 if (_m0.util.Long !== Long) {
     _m0.util.Long = Long;

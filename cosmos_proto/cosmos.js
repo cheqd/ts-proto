@@ -1,5 +1,4 @@
 /* eslint-disable */
-import Long from "long";
 import _m0 from "protobufjs/minimal.js";
 export var ScalarType;
 (function (ScalarType) {
@@ -195,10 +194,6 @@ export const ScalarDescriptor = {
         return message;
     },
 };
-if (_m0.util.Long !== Long) {
-    _m0.util.Long = Long;
-    _m0.configure();
-}
 function isSet(value) {
     return value !== null && value !== undefined;
 }
