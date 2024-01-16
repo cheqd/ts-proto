@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0-develop.1](https://github.com/cheqd/ts-proto/compare/3.3.9...3.4.0-develop.1) (2024-01-16)
+
+
+### Features
+
+* Move to bigint from Long ([#209](https://github.com/cheqd/ts-proto/issues/209)) ([3469c70](https://github.com/cheqd/ts-proto/commit/3469c70a0954117eeae68c78d275f83de2aa6c63))
+
 ## [3.3.9](https://github.com/cheqd/ts-proto/compare/3.3.8...3.3.9) (2024-01-05)
 
 
