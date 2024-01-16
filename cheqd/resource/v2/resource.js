@@ -420,7 +420,7 @@ function base64FromBytes(arr) {
     }
 }
 function toTimestamp(date) {
-    const seconds = numberToLong(date.getTime() / 1_000);
+    const seconds = numberToLong(Math.trunc(date.getTime() / 1_000));
     const nanos = (date.getTime() % 1_000) * 1_000_000;
     return { seconds, nanos };
 }
