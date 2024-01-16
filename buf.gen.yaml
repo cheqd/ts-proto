@@ -4,7 +4,7 @@ plugins:
   - plugin: buf.build/community/stephenh-ts-proto
     out: ./
     opt:
-      - forceLong=long
+      - forceLong=bigint
       - esModuleInterop=true
       - emitImportedFiles=true
       - exportCommonSymbols=false
