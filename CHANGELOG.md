@@ -1,5 +1,7 @@
 # Changelog
 
+## [3.4.0-develop.2](https://github.com/cheqd/ts-proto/compare/3.4.0-develop.1...3.4.0-develop.2) (2024-01-16)
+
 ## [3.4.0-develop.1](https://github.com/cheqd/ts-proto/compare/3.3.9...3.4.0-develop.1) (2024-01-16)
 
 
