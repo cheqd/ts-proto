@@ -1,5 +1,4 @@
 /* eslint-disable */
-import Long from "long";
 import _m0 from "protobufjs/minimal.js";
 import { Timestamp } from "../../../google/protobuf/timestamp.js";
 function createBaseResource() {
@@ -420,12 +419,12 @@ function base64FromBytes(arr) {
     }
 }
 function toTimestamp(date) {
-    const seconds = numberToLong(Math.trunc(date.getTime() / 1_000));
+    const seconds = BigInt(Math.trunc(date.getTime() / 1_000));
     const nanos = (date.getTime() % 1_000) * 1_000_000;
     return { seconds, nanos };
 }
 function fromTimestamp(t) {
-    let millis = (t.seconds.toNumber() || 0) * 1_000;
+    let millis = (globalThis.Number(t.seconds.toString()) || 0) * 1_000;
     millis += (t.nanos || 0) / 1_000_000;
     return new globalThis.Date(millis);
 }
@@ -439,13 +438,6 @@ function fromJsonTimestamp(o) {
     else {
         return fromTimestamp(Timestamp.fromJSON(o));
     }
-}
-function numberToLong(number) {
-    return Long.fromNumber(number);
-}
-if (_m0.util.Long !== Long) {
-    _m0.util.Long = Long;
-    _m0.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

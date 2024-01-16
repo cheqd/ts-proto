@@ -1,5 +1,4 @@
 /* eslint-disable */
-import Long from "long";
 import _m0 from "protobufjs/minimal.js";
 import { Resource, ResourceHeader } from "./resource.js";
 function createBaseQueryGetResourceRequest() {
@@ -384,10 +383,6 @@ export class QueryClientImpl {
         const promise = this.rpc.request(this.service, "AllResourceVersions", data);
         return promise.then((data) => QueryGetAllResourceVersionsResponse.decode(_m0.Reader.create(data)));
     }
-}
-if (_m0.util.Long !== Long) {
-    _m0.util.Long = Long;
-    _m0.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

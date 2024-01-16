@@ -1,5 +1,4 @@
 /* eslint-disable */
-import Long from "long";
 import _m0 from "protobufjs/minimal.js";
 import { StateValue } from "./stateValue.js";
 function createBaseGenesisState() {
@@ -68,10 +67,6 @@ export const GenesisState = {
         return message;
     },
 };
-if (_m0.util.Long !== Long) {
-    _m0.util.Long = Long;
-    _m0.configure();
-}
 function isSet(value) {
     return value !== null && value !== undefined;
 }

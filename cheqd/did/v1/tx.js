@@ -1,5 +1,4 @@
 /* eslint-disable */
-import Long from "long";
 import _m0 from "protobufjs/minimal.js";
 import { Did, Service, VerificationMethod } from "./did.js";
 import { Metadata } from "./stateValue.js";
@@ -982,10 +981,6 @@ export class MsgClientImpl {
         const promise = this.rpc.request(this.service, "DeactivateDid", data);
         return promise.then((data) => MsgDeactivateDidResponse.decode(_m0.Reader.create(data)));
     }
-}
-if (_m0.util.Long !== Long) {
-    _m0.util.Long = Long;
-    _m0.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

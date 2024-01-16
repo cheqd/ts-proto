@@ -1,5 +1,4 @@
 /* eslint-disable */
-import Long from "long";
 import _m0 from "protobufjs/minimal.js";
 import { SignInfo } from "../../did/v1/tx.js";
 import { Resource } from "./resource.js";
@@ -272,10 +271,6 @@ function base64FromBytes(arr) {
         });
         return globalThis.btoa(bin.join(""));
     }
-}
-if (_m0.util.Long !== Long) {
-    _m0.util.Long = Long;
-    _m0.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

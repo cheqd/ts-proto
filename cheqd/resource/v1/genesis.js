@@ -1,5 +1,4 @@
 /* eslint-disable */
-import Long from "long";
 import _m0 from "protobufjs/minimal.js";
 import { Resource } from "./resource.js";
 function createBaseGenesisState() {
@@ -56,8 +55,4 @@ export const GenesisState = {
         return message;
     },
 };
-if (_m0.util.Long !== Long) {
-    _m0.util.Long = Long;
-    _m0.configure();
-}
 //# sourceMappingURL=genesis.js.map
