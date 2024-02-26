@@ -4475,13 +4475,13 @@ export const UninterpretedOption = {
     }
     if (message.positiveIntValue !== BigInt("0")) {
       if (BigInt.asUintN(64, message.positiveIntValue) !== message.positiveIntValue) {
-        throw new Error("value provided for field message.positiveIntValue of type uint64 too large");
+        throw new globalThis.Error("value provided for field message.positiveIntValue of type uint64 too large");
       }
       writer.uint32(32).uint64(message.positiveIntValue.toString());
     }
     if (message.negativeIntValue !== BigInt("0")) {
       if (BigInt.asIntN(64, message.negativeIntValue) !== message.negativeIntValue) {
-        throw new Error("value provided for field message.negativeIntValue of type int64 too large");
+        throw new globalThis.Error("value provided for field message.negativeIntValue of type int64 too large");
       }
       writer.uint32(40).int64(message.negativeIntValue.toString());
     }

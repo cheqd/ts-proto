@@ -8,7 +8,7 @@ export const Timestamp = {
     encode(message, writer = _m0.Writer.create()) {
         if (message.seconds !== BigInt("0")) {
             if (BigInt.asIntN(64, message.seconds) !== message.seconds) {
-                throw new Error("value provided for field message.seconds of type int64 too large");
+                throw new globalThis.Error("value provided for field message.seconds of type int64 too large");
             }
             writer.uint32(8).int64(message.seconds.toString());
         }

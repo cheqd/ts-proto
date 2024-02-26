@@ -11,13 +11,13 @@ export const PageRequest = {
         }
         if (message.offset !== BigInt("0")) {
             if (BigInt.asUintN(64, message.offset) !== message.offset) {
-                throw new Error("value provided for field message.offset of type uint64 too large");
+                throw new globalThis.Error("value provided for field message.offset of type uint64 too large");
             }
             writer.uint32(16).uint64(message.offset.toString());
         }
         if (message.limit !== BigInt("0")) {
             if (BigInt.asUintN(64, message.limit) !== message.limit) {
-                throw new Error("value provided for field message.limit of type uint64 too large");
+                throw new globalThis.Error("value provided for field message.limit of type uint64 too large");
             }
             writer.uint32(24).uint64(message.limit.toString());
         }
@@ -125,7 +125,7 @@ export const PageResponse = {
         }
         if (message.total !== BigInt("0")) {
             if (BigInt.asUintN(64, message.total) !== message.total) {
-                throw new Error("value provided for field message.total of type uint64 too large");
+                throw new globalThis.Error("value provided for field message.total of type uint64 too large");
             }
             writer.uint32(16).uint64(message.total.toString());
         }

@@ -1,3 +1,3 @@
-"use strict";
 /* eslint-disable */
+export {};
 //# sourceMappingURL=gogo.js.map
