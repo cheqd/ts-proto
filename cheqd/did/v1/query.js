@@ -1,19 +1,25 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.QueryClientImpl = exports.QueryServiceName = exports.QueryGetDidResponse = exports.QueryGetDidRequest = void 0;
 /* eslint-disable */
-import _m0 from "protobufjs/minimal.js";
-import { Did } from "./did.js";
-import { Metadata } from "./stateValue.js";
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
+const did_js_1 = require("./did.js");
+const stateValue_js_1 = require("./stateValue.js");
 function createBaseQueryGetDidRequest() {
     return { id: "" };
 }
-export const QueryGetDidRequest = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.QueryGetDidRequest = {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryGetDidRequest();
         while (reader.pos < end) {
@@ -44,7 +50,7 @@ export const QueryGetDidRequest = {
         return obj;
     },
     create(base) {
-        return QueryGetDidRequest.fromPartial(base ?? {});
+        return exports.QueryGetDidRequest.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseQueryGetDidRequest();
@@ -55,18 +61,18 @@ export const QueryGetDidRequest = {
 function createBaseQueryGetDidResponse() {
     return { did: undefined, metadata: undefined };
 }
-export const QueryGetDidResponse = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.QueryGetDidResponse = {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.did !== undefined) {
-            Did.encode(message.did, writer.uint32(10).fork()).ldelim();
+            did_js_1.Did.encode(message.did, writer.uint32(10).fork()).ldelim();
         }
         if (message.metadata !== undefined) {
-            Metadata.encode(message.metadata, writer.uint32(18).fork()).ldelim();
+            stateValue_js_1.Metadata.encode(message.metadata, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseQueryGetDidResponse();
         while (reader.pos < end) {
@@ -76,13 +82,13 @@ export const QueryGetDidResponse = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.did = Did.decode(reader, reader.uint32());
+                    message.did = did_js_1.Did.decode(reader, reader.uint32());
                     continue;
                 case 2:
                     if (tag !== 18) {
                         break;
                     }
-                    message.metadata = Metadata.decode(reader, reader.uint32());
+                    message.metadata = stateValue_js_1.Metadata.decode(reader, reader.uint32());
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -94,47 +100,48 @@ export const QueryGetDidResponse = {
     },
     fromJSON(object) {
         return {
-            did: isSet(object.did) ? Did.fromJSON(object.did) : undefined,
-            metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined,
+            did: isSet(object.did) ? did_js_1.Did.fromJSON(object.did) : undefined,
+            metadata: isSet(object.metadata) ? stateValue_js_1.Metadata.fromJSON(object.metadata) : undefined,
         };
     },
     toJSON(message) {
         const obj = {};
         if (message.did !== undefined) {
-            obj.did = Did.toJSON(message.did);
+            obj.did = did_js_1.Did.toJSON(message.did);
         }
         if (message.metadata !== undefined) {
-            obj.metadata = Metadata.toJSON(message.metadata);
+            obj.metadata = stateValue_js_1.Metadata.toJSON(message.metadata);
         }
         return obj;
     },
     create(base) {
-        return QueryGetDidResponse.fromPartial(base ?? {});
+        return exports.QueryGetDidResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseQueryGetDidResponse();
-        message.did = (object.did !== undefined && object.did !== null) ? Did.fromPartial(object.did) : undefined;
+        message.did = (object.did !== undefined && object.did !== null) ? did_js_1.Did.fromPartial(object.did) : undefined;
         message.metadata = (object.metadata !== undefined && object.metadata !== null)
-            ? Metadata.fromPartial(object.metadata)
+            ? stateValue_js_1.Metadata.fromPartial(object.metadata)
             : undefined;
         return message;
     },
 };
-export const QueryServiceName = "cheqdid.cheqdnode.cheqd.v1.Query";
-export class QueryClientImpl {
+exports.QueryServiceName = "cheqdid.cheqdnode.cheqd.v1.Query";
+class QueryClientImpl {
     rpc;
     service;
     constructor(rpc, opts) {
-        this.service = opts?.service || QueryServiceName;
+        this.service = opts?.service || exports.QueryServiceName;
         this.rpc = rpc;
         this.Did = this.Did.bind(this);
     }
     Did(request) {
-        const data = QueryGetDidRequest.encode(request).finish();
+        const data = exports.QueryGetDidRequest.encode(request).finish();
         const promise = this.rpc.request(this.service, "Did", data);
-        return promise.then((data) => QueryGetDidResponse.decode(_m0.Reader.create(data)));
+        return promise.then((data) => exports.QueryGetDidResponse.decode(minimal_js_1.default.Reader.create(data)));
     }
 }
+exports.QueryClientImpl = QueryClientImpl;
 function isSet(value) {
     return value !== null && value !== undefined;
 }

@@ -1,11 +1,17 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PageResponse = exports.PageRequest = void 0;
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal.js";
+const long_1 = __importDefault(require("long"));
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
 function createBasePageRequest() {
     return { key: new Uint8Array(0), offset: BigInt("0"), limit: BigInt("0"), countTotal: false, reverse: false };
 }
-export const PageRequest = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.PageRequest = {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.key.length !== 0) {
             writer.uint32(10).bytes(message.key);
         }
@@ -30,7 +36,7 @@ export const PageRequest = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBasePageRequest();
         while (reader.pos < end) {
@@ -103,7 +109,7 @@ export const PageRequest = {
         return obj;
     },
     create(base) {
-        return PageRequest.fromPartial(base ?? {});
+        return exports.PageRequest.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBasePageRequest();
@@ -118,8 +124,8 @@ export const PageRequest = {
 function createBasePageResponse() {
     return { nextKey: new Uint8Array(0), total: BigInt("0") };
 }
-export const PageResponse = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.PageResponse = {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.nextKey.length !== 0) {
             writer.uint32(10).bytes(message.nextKey);
         }
@@ -132,7 +138,7 @@ export const PageResponse = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBasePageResponse();
         while (reader.pos < end) {
@@ -175,7 +181,7 @@ export const PageResponse = {
         return obj;
     },
     create(base) {
-        return PageResponse.fromPartial(base ?? {});
+        return exports.PageResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBasePageResponse();
@@ -212,9 +218,9 @@ function base64FromBytes(arr) {
 function longToBigint(long) {
     return BigInt(long.toString());
 }
-if (_m0.util.Long !== Long) {
-    _m0.util.Long = Long;
-    _m0.configure();
+if (minimal_js_1.default.util.Long !== long_1.default) {
+    minimal_js_1.default.util.Long = long_1.default;
+    minimal_js_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

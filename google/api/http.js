@@ -1,12 +1,18 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CustomHttpPattern = exports.HttpRule = exports.Http = void 0;
 /* eslint-disable */
-import _m0 from "protobufjs/minimal.js";
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
 function createBaseHttp() {
     return { rules: [], fullyDecodeReservedExpansion: false };
 }
-export const Http = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.Http = {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         for (const v of message.rules) {
-            HttpRule.encode(v, writer.uint32(10).fork()).ldelim();
+            exports.HttpRule.encode(v, writer.uint32(10).fork()).ldelim();
         }
         if (message.fullyDecodeReservedExpansion === true) {
             writer.uint32(16).bool(message.fullyDecodeReservedExpansion);
@@ -14,7 +20,7 @@ export const Http = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseHttp();
         while (reader.pos < end) {
@@ -24,7 +30,7 @@ export const Http = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.rules.push(HttpRule.decode(reader, reader.uint32()));
+                    message.rules.push(exports.HttpRule.decode(reader, reader.uint32()));
                     continue;
                 case 2:
                     if (tag !== 16) {
@@ -42,7 +48,7 @@ export const Http = {
     },
     fromJSON(object) {
         return {
-            rules: globalThis.Array.isArray(object?.rules) ? object.rules.map((e) => HttpRule.fromJSON(e)) : [],
+            rules: globalThis.Array.isArray(object?.rules) ? object.rules.map((e) => exports.HttpRule.fromJSON(e)) : [],
             fullyDecodeReservedExpansion: isSet(object.fullyDecodeReservedExpansion)
                 ? globalThis.Boolean(object.fullyDecodeReservedExpansion)
                 : false,
@@ -51,7 +57,7 @@ export const Http = {
     toJSON(message) {
         const obj = {};
         if (message.rules?.length) {
-            obj.rules = message.rules.map((e) => HttpRule.toJSON(e));
+            obj.rules = message.rules.map((e) => exports.HttpRule.toJSON(e));
         }
         if (message.fullyDecodeReservedExpansion === true) {
             obj.fullyDecodeReservedExpansion = message.fullyDecodeReservedExpansion;
@@ -59,11 +65,11 @@ export const Http = {
         return obj;
     },
     create(base) {
-        return Http.fromPartial(base ?? {});
+        return exports.Http.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseHttp();
-        message.rules = object.rules?.map((e) => HttpRule.fromPartial(e)) || [];
+        message.rules = object.rules?.map((e) => exports.HttpRule.fromPartial(e)) || [];
         message.fullyDecodeReservedExpansion = object.fullyDecodeReservedExpansion ?? false;
         return message;
     },
@@ -82,8 +88,8 @@ function createBaseHttpRule() {
         additionalBindings: [],
     };
 }
-export const HttpRule = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.HttpRule = {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.selector !== "") {
             writer.uint32(10).string(message.selector);
         }
@@ -103,7 +109,7 @@ export const HttpRule = {
             writer.uint32(50).string(message.patch);
         }
         if (message.custom !== undefined) {
-            CustomHttpPattern.encode(message.custom, writer.uint32(66).fork()).ldelim();
+            exports.CustomHttpPattern.encode(message.custom, writer.uint32(66).fork()).ldelim();
         }
         if (message.body !== "") {
             writer.uint32(58).string(message.body);
@@ -112,12 +118,12 @@ export const HttpRule = {
             writer.uint32(98).string(message.responseBody);
         }
         for (const v of message.additionalBindings) {
-            HttpRule.encode(v, writer.uint32(90).fork()).ldelim();
+            exports.HttpRule.encode(v, writer.uint32(90).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseHttpRule();
         while (reader.pos < end) {
@@ -163,7 +169,7 @@ export const HttpRule = {
                     if (tag !== 66) {
                         break;
                     }
-                    message.custom = CustomHttpPattern.decode(reader, reader.uint32());
+                    message.custom = exports.CustomHttpPattern.decode(reader, reader.uint32());
                     continue;
                 case 7:
                     if (tag !== 58) {
@@ -181,7 +187,7 @@ export const HttpRule = {
                     if (tag !== 90) {
                         break;
                     }
-                    message.additionalBindings.push(HttpRule.decode(reader, reader.uint32()));
+                    message.additionalBindings.push(exports.HttpRule.decode(reader, reader.uint32()));
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -199,11 +205,11 @@ export const HttpRule = {
             post: isSet(object.post) ? globalThis.String(object.post) : undefined,
             delete: isSet(object.delete) ? globalThis.String(object.delete) : undefined,
             patch: isSet(object.patch) ? globalThis.String(object.patch) : undefined,
-            custom: isSet(object.custom) ? CustomHttpPattern.fromJSON(object.custom) : undefined,
+            custom: isSet(object.custom) ? exports.CustomHttpPattern.fromJSON(object.custom) : undefined,
             body: isSet(object.body) ? globalThis.String(object.body) : "",
             responseBody: isSet(object.responseBody) ? globalThis.String(object.responseBody) : "",
             additionalBindings: globalThis.Array.isArray(object?.additionalBindings)
-                ? object.additionalBindings.map((e) => HttpRule.fromJSON(e))
+                ? object.additionalBindings.map((e) => exports.HttpRule.fromJSON(e))
                 : [],
         };
     },
@@ -228,7 +234,7 @@ export const HttpRule = {
             obj.patch = message.patch;
         }
         if (message.custom !== undefined) {
-            obj.custom = CustomHttpPattern.toJSON(message.custom);
+            obj.custom = exports.CustomHttpPattern.toJSON(message.custom);
         }
         if (message.body !== "") {
             obj.body = message.body;
@@ -237,12 +243,12 @@ export const HttpRule = {
             obj.responseBody = message.responseBody;
         }
         if (message.additionalBindings?.length) {
-            obj.additionalBindings = message.additionalBindings.map((e) => HttpRule.toJSON(e));
+            obj.additionalBindings = message.additionalBindings.map((e) => exports.HttpRule.toJSON(e));
         }
         return obj;
     },
     create(base) {
-        return HttpRule.fromPartial(base ?? {});
+        return exports.HttpRule.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseHttpRule();
@@ -253,19 +259,19 @@ export const HttpRule = {
         message.delete = object.delete ?? undefined;
         message.patch = object.patch ?? undefined;
         message.custom = (object.custom !== undefined && object.custom !== null)
-            ? CustomHttpPattern.fromPartial(object.custom)
+            ? exports.CustomHttpPattern.fromPartial(object.custom)
             : undefined;
         message.body = object.body ?? "";
         message.responseBody = object.responseBody ?? "";
-        message.additionalBindings = object.additionalBindings?.map((e) => HttpRule.fromPartial(e)) || [];
+        message.additionalBindings = object.additionalBindings?.map((e) => exports.HttpRule.fromPartial(e)) || [];
         return message;
     },
 };
 function createBaseCustomHttpPattern() {
     return { kind: "", path: "" };
 }
-export const CustomHttpPattern = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.CustomHttpPattern = {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.kind !== "") {
             writer.uint32(10).string(message.kind);
         }
@@ -275,7 +281,7 @@ export const CustomHttpPattern = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseCustomHttpPattern();
         while (reader.pos < end) {
@@ -318,7 +324,7 @@ export const CustomHttpPattern = {
         return obj;
     },
     create(base) {
-        return CustomHttpPattern.fromPartial(base ?? {});
+        return exports.CustomHttpPattern.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseCustomHttpPattern();

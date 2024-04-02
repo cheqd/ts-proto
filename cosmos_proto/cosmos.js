@@ -1,13 +1,19 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ScalarDescriptor = exports.InterfaceDescriptor = exports.scalarTypeToJSON = exports.scalarTypeFromJSON = exports.ScalarType = void 0;
 /* eslint-disable */
-import _m0 from "protobufjs/minimal.js";
-export var ScalarType;
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
+var ScalarType;
 (function (ScalarType) {
     ScalarType[ScalarType["SCALAR_TYPE_UNSPECIFIED"] = 0] = "SCALAR_TYPE_UNSPECIFIED";
     ScalarType[ScalarType["SCALAR_TYPE_STRING"] = 1] = "SCALAR_TYPE_STRING";
     ScalarType[ScalarType["SCALAR_TYPE_BYTES"] = 2] = "SCALAR_TYPE_BYTES";
     ScalarType[ScalarType["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
-})(ScalarType || (ScalarType = {}));
-export function scalarTypeFromJSON(object) {
+})(ScalarType || (exports.ScalarType = ScalarType = {}));
+function scalarTypeFromJSON(object) {
     switch (object) {
         case 0:
         case "SCALAR_TYPE_UNSPECIFIED":
@@ -24,7 +30,8 @@ export function scalarTypeFromJSON(object) {
             return ScalarType.UNRECOGNIZED;
     }
 }
-export function scalarTypeToJSON(object) {
+exports.scalarTypeFromJSON = scalarTypeFromJSON;
+function scalarTypeToJSON(object) {
     switch (object) {
         case ScalarType.SCALAR_TYPE_UNSPECIFIED:
             return "SCALAR_TYPE_UNSPECIFIED";
@@ -37,11 +44,12 @@ export function scalarTypeToJSON(object) {
             return "UNRECOGNIZED";
     }
 }
+exports.scalarTypeToJSON = scalarTypeToJSON;
 function createBaseInterfaceDescriptor() {
     return { name: "", description: "" };
 }
-export const InterfaceDescriptor = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.InterfaceDescriptor = {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.name !== "") {
             writer.uint32(10).string(message.name);
         }
@@ -51,7 +59,7 @@ export const InterfaceDescriptor = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseInterfaceDescriptor();
         while (reader.pos < end) {
@@ -94,7 +102,7 @@ export const InterfaceDescriptor = {
         return obj;
     },
     create(base) {
-        return InterfaceDescriptor.fromPartial(base ?? {});
+        return exports.InterfaceDescriptor.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseInterfaceDescriptor();
@@ -106,8 +114,8 @@ export const InterfaceDescriptor = {
 function createBaseScalarDescriptor() {
     return { name: "", description: "", fieldType: [] };
 }
-export const ScalarDescriptor = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.ScalarDescriptor = {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.name !== "") {
             writer.uint32(10).string(message.name);
         }
@@ -122,7 +130,7 @@ export const ScalarDescriptor = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseScalarDescriptor();
         while (reader.pos < end) {
@@ -184,7 +192,7 @@ export const ScalarDescriptor = {
         return obj;
     },
     create(base) {
-        return ScalarDescriptor.fromPartial(base ?? {});
+        return exports.ScalarDescriptor.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseScalarDescriptor();

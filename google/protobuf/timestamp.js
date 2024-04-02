@@ -1,11 +1,17 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Timestamp = void 0;
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal.js";
+const long_1 = __importDefault(require("long"));
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
 function createBaseTimestamp() {
     return { seconds: BigInt("0"), nanos: 0 };
 }
-export const Timestamp = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.Timestamp = {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.seconds !== BigInt("0")) {
             if (BigInt.asIntN(64, message.seconds) !== message.seconds) {
                 throw new globalThis.Error("value provided for field message.seconds of type int64 too large");
@@ -18,7 +24,7 @@ export const Timestamp = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseTimestamp();
         while (reader.pos < end) {
@@ -61,7 +67,7 @@ export const Timestamp = {
         return obj;
     },
     create(base) {
-        return Timestamp.fromPartial(base ?? {});
+        return exports.Timestamp.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseTimestamp();
@@ -73,9 +79,9 @@ export const Timestamp = {
 function longToBigint(long) {
     return BigInt(long.toString());
 }
-if (_m0.util.Long !== Long) {
-    _m0.util.Long = Long;
-    _m0.configure();
+if (minimal_js_1.default.util.Long !== long_1.default) {
+    minimal_js_1.default.util.Long = long_1.default;
+    minimal_js_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

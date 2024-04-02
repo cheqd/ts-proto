@@ -1,12 +1,18 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ResourceHeader = exports.Resource = void 0;
 /* eslint-disable */
-import _m0 from "protobufjs/minimal.js";
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
 function createBaseResource() {
     return { header: undefined, data: new Uint8Array(0) };
 }
-export const Resource = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.Resource = {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.header !== undefined) {
-            ResourceHeader.encode(message.header, writer.uint32(10).fork()).ldelim();
+            exports.ResourceHeader.encode(message.header, writer.uint32(10).fork()).ldelim();
         }
         if (message.data.length !== 0) {
             writer.uint32(18).bytes(message.data);
@@ -14,7 +20,7 @@ export const Resource = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseResource();
         while (reader.pos < end) {
@@ -24,7 +30,7 @@ export const Resource = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.header = ResourceHeader.decode(reader, reader.uint32());
+                    message.header = exports.ResourceHeader.decode(reader, reader.uint32());
                     continue;
                 case 2:
                     if (tag !== 18) {
@@ -42,14 +48,14 @@ export const Resource = {
     },
     fromJSON(object) {
         return {
-            header: isSet(object.header) ? ResourceHeader.fromJSON(object.header) : undefined,
+            header: isSet(object.header) ? exports.ResourceHeader.fromJSON(object.header) : undefined,
             data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
         };
     },
     toJSON(message) {
         const obj = {};
         if (message.header !== undefined) {
-            obj.header = ResourceHeader.toJSON(message.header);
+            obj.header = exports.ResourceHeader.toJSON(message.header);
         }
         if (message.data.length !== 0) {
             obj.data = base64FromBytes(message.data);
@@ -57,12 +63,12 @@ export const Resource = {
         return obj;
     },
     create(base) {
-        return Resource.fromPartial(base ?? {});
+        return exports.Resource.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseResource();
         message.header = (object.header !== undefined && object.header !== null)
-            ? ResourceHeader.fromPartial(object.header)
+            ? exports.ResourceHeader.fromPartial(object.header)
             : undefined;
         message.data = object.data ?? new Uint8Array(0);
         return message;
@@ -81,8 +87,8 @@ function createBaseResourceHeader() {
         nextVersionId: "",
     };
 }
-export const ResourceHeader = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.ResourceHeader = {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.collectionId !== "") {
             writer.uint32(10).string(message.collectionId);
         }
@@ -113,7 +119,7 @@ export const ResourceHeader = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseResourceHeader();
         while (reader.pos < end) {
@@ -226,7 +232,7 @@ export const ResourceHeader = {
         return obj;
     },
     create(base) {
-        return ResourceHeader.fromPartial(base ?? {});
+        return exports.ResourceHeader.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseResourceHeader();

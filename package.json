@@ -3,7 +3,7 @@
   "version": "3.4.1",
   "description": "A TypeScript package for all transpiled cheqd ProtoBuf definitions.",
   "main": "index.js",
-  "type": "module",
+  "type": "commonjs",
   "files": [
     "amino/**/*.*",
     "cheqd/**/*.*",

@@ -1,10 +1,16 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DecCoin = exports.Coin = void 0;
 /* eslint-disable */
-import _m0 from "protobufjs/minimal.js";
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
 function createBaseCoin() {
     return { denom: "", amount: "" };
 }
-export const Coin = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.Coin = {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.denom !== "") {
             writer.uint32(10).string(message.denom);
         }
@@ -14,7 +20,7 @@ export const Coin = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseCoin();
         while (reader.pos < end) {
@@ -57,7 +63,7 @@ export const Coin = {
         return obj;
     },
     create(base) {
-        return Coin.fromPartial(base ?? {});
+        return exports.Coin.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseCoin();
@@ -69,8 +75,8 @@ export const Coin = {
 function createBaseDecCoin() {
     return { denom: "", amount: "" };
 }
-export const DecCoin = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.DecCoin = {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.denom !== "") {
             writer.uint32(10).string(message.denom);
         }
@@ -80,7 +86,7 @@ export const DecCoin = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseDecCoin();
         while (reader.pos < end) {
@@ -123,7 +129,7 @@ export const DecCoin = {
         return obj;
     },
     create(base) {
-        return DecCoin.fromPartial(base ?? {});
+        return exports.DecCoin.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseDecCoin();

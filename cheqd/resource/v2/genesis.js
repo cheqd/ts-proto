@@ -1,22 +1,28 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GenesisState = void 0;
 /* eslint-disable */
-import _m0 from "protobufjs/minimal.js";
-import { FeeParams } from "./fee.js";
-import { ResourceWithMetadata } from "./resource.js";
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
+const fee_js_1 = require("./fee.js");
+const resource_js_1 = require("./resource.js");
 function createBaseGenesisState() {
     return { resources: [], feeParams: undefined };
 }
-export const GenesisState = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.GenesisState = {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         for (const v of message.resources) {
-            ResourceWithMetadata.encode(v, writer.uint32(10).fork()).ldelim();
+            resource_js_1.ResourceWithMetadata.encode(v, writer.uint32(10).fork()).ldelim();
         }
         if (message.feeParams !== undefined) {
-            FeeParams.encode(message.feeParams, writer.uint32(18).fork()).ldelim();
+            fee_js_1.FeeParams.encode(message.feeParams, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseGenesisState();
         while (reader.pos < end) {
@@ -26,13 +32,13 @@ export const GenesisState = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.resources.push(ResourceWithMetadata.decode(reader, reader.uint32()));
+                    message.resources.push(resource_js_1.ResourceWithMetadata.decode(reader, reader.uint32()));
                     continue;
                 case 2:
                     if (tag !== 18) {
                         break;
                     }
-                    message.feeParams = FeeParams.decode(reader, reader.uint32());
+                    message.feeParams = fee_js_1.FeeParams.decode(reader, reader.uint32());
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -45,29 +51,29 @@ export const GenesisState = {
     fromJSON(object) {
         return {
             resources: globalThis.Array.isArray(object?.resources)
-                ? object.resources.map((e) => ResourceWithMetadata.fromJSON(e))
+                ? object.resources.map((e) => resource_js_1.ResourceWithMetadata.fromJSON(e))
                 : [],
-            feeParams: isSet(object.feeParams) ? FeeParams.fromJSON(object.feeParams) : undefined,
+            feeParams: isSet(object.feeParams) ? fee_js_1.FeeParams.fromJSON(object.feeParams) : undefined,
         };
     },
     toJSON(message) {
         const obj = {};
         if (message.resources?.length) {
-            obj.resources = message.resources.map((e) => ResourceWithMetadata.toJSON(e));
+            obj.resources = message.resources.map((e) => resource_js_1.ResourceWithMetadata.toJSON(e));
         }
         if (message.feeParams !== undefined) {
-            obj.feeParams = FeeParams.toJSON(message.feeParams);
+            obj.feeParams = fee_js_1.FeeParams.toJSON(message.feeParams);
         }
         return obj;
     },
     create(base) {
-        return GenesisState.fromPartial(base ?? {});
+        return exports.GenesisState.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseGenesisState();
-        message.resources = object.resources?.map((e) => ResourceWithMetadata.fromPartial(e)) || [];
+        message.resources = object.resources?.map((e) => resource_js_1.ResourceWithMetadata.fromPartial(e)) || [];
         message.feeParams = (object.feeParams !== undefined && object.feeParams !== null)
-            ? FeeParams.fromPartial(object.feeParams)
+            ? fee_js_1.FeeParams.fromPartial(object.feeParams)
             : undefined;
         return message;
     },

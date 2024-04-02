@@ -1,22 +1,28 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MsgClientImpl = exports.MsgServiceName = exports.MsgCreateResourceResponse = exports.MsgCreateResourcePayload = exports.MsgCreateResource = void 0;
 /* eslint-disable */
-import _m0 from "protobufjs/minimal.js";
-import { SignInfo } from "../../did/v1/tx.js";
-import { Resource } from "./resource.js";
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
+const tx_js_1 = require("../../did/v1/tx.js");
+const resource_js_1 = require("./resource.js");
 function createBaseMsgCreateResource() {
     return { payload: undefined, signatures: [] };
 }
-export const MsgCreateResource = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.MsgCreateResource = {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.payload !== undefined) {
-            MsgCreateResourcePayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
+            exports.MsgCreateResourcePayload.encode(message.payload, writer.uint32(10).fork()).ldelim();
         }
         for (const v of message.signatures) {
-            SignInfo.encode(v, writer.uint32(18).fork()).ldelim();
+            tx_js_1.SignInfo.encode(v, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgCreateResource();
         while (reader.pos < end) {
@@ -26,13 +32,13 @@ export const MsgCreateResource = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.payload = MsgCreateResourcePayload.decode(reader, reader.uint32());
+                    message.payload = exports.MsgCreateResourcePayload.decode(reader, reader.uint32());
                     continue;
                 case 2:
                     if (tag !== 18) {
                         break;
                     }
-                    message.signatures.push(SignInfo.decode(reader, reader.uint32()));
+                    message.signatures.push(tx_js_1.SignInfo.decode(reader, reader.uint32()));
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -44,39 +50,39 @@ export const MsgCreateResource = {
     },
     fromJSON(object) {
         return {
-            payload: isSet(object.payload) ? MsgCreateResourcePayload.fromJSON(object.payload) : undefined,
+            payload: isSet(object.payload) ? exports.MsgCreateResourcePayload.fromJSON(object.payload) : undefined,
             signatures: globalThis.Array.isArray(object?.signatures)
-                ? object.signatures.map((e) => SignInfo.fromJSON(e))
+                ? object.signatures.map((e) => tx_js_1.SignInfo.fromJSON(e))
                 : [],
         };
     },
     toJSON(message) {
         const obj = {};
         if (message.payload !== undefined) {
-            obj.payload = MsgCreateResourcePayload.toJSON(message.payload);
+            obj.payload = exports.MsgCreateResourcePayload.toJSON(message.payload);
         }
         if (message.signatures?.length) {
-            obj.signatures = message.signatures.map((e) => SignInfo.toJSON(e));
+            obj.signatures = message.signatures.map((e) => tx_js_1.SignInfo.toJSON(e));
         }
         return obj;
     },
     create(base) {
-        return MsgCreateResource.fromPartial(base ?? {});
+        return exports.MsgCreateResource.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgCreateResource();
         message.payload = (object.payload !== undefined && object.payload !== null)
-            ? MsgCreateResourcePayload.fromPartial(object.payload)
+            ? exports.MsgCreateResourcePayload.fromPartial(object.payload)
             : undefined;
-        message.signatures = object.signatures?.map((e) => SignInfo.fromPartial(e)) || [];
+        message.signatures = object.signatures?.map((e) => tx_js_1.SignInfo.fromPartial(e)) || [];
         return message;
     },
 };
 function createBaseMsgCreateResourcePayload() {
     return { collectionId: "", id: "", name: "", resourceType: "", data: new Uint8Array(0) };
 }
-export const MsgCreateResourcePayload = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.MsgCreateResourcePayload = {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.collectionId !== "") {
             writer.uint32(10).string(message.collectionId);
         }
@@ -95,7 +101,7 @@ export const MsgCreateResourcePayload = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgCreateResourcePayload();
         while (reader.pos < end) {
@@ -168,7 +174,7 @@ export const MsgCreateResourcePayload = {
         return obj;
     },
     create(base) {
-        return MsgCreateResourcePayload.fromPartial(base ?? {});
+        return exports.MsgCreateResourcePayload.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgCreateResourcePayload();
@@ -183,15 +189,15 @@ export const MsgCreateResourcePayload = {
 function createBaseMsgCreateResourceResponse() {
     return { resource: undefined };
 }
-export const MsgCreateResourceResponse = {
-    encode(message, writer = _m0.Writer.create()) {
+exports.MsgCreateResourceResponse = {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.resource !== undefined) {
-            Resource.encode(message.resource, writer.uint32(10).fork()).ldelim();
+            resource_js_1.Resource.encode(message.resource, writer.uint32(10).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMsgCreateResourceResponse();
         while (reader.pos < end) {
@@ -201,7 +207,7 @@ export const MsgCreateResourceResponse = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.resource = Resource.decode(reader, reader.uint32());
+                    message.resource = resource_js_1.Resource.decode(reader, reader.uint32());
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -212,41 +218,42 @@ export const MsgCreateResourceResponse = {
         return message;
     },
     fromJSON(object) {
-        return { resource: isSet(object.resource) ? Resource.fromJSON(object.resource) : undefined };
+        return { resource: isSet(object.resource) ? resource_js_1.Resource.fromJSON(object.resource) : undefined };
     },
     toJSON(message) {
         const obj = {};
         if (message.resource !== undefined) {
-            obj.resource = Resource.toJSON(message.resource);
+            obj.resource = resource_js_1.Resource.toJSON(message.resource);
         }
         return obj;
     },
     create(base) {
-        return MsgCreateResourceResponse.fromPartial(base ?? {});
+        return exports.MsgCreateResourceResponse.fromPartial(base ?? {});
     },
     fromPartial(object) {
         const message = createBaseMsgCreateResourceResponse();
         message.resource = (object.resource !== undefined && object.resource !== null)
-            ? Resource.fromPartial(object.resource)
+            ? resource_js_1.Resource.fromPartial(object.resource)
             : undefined;
         return message;
     },
 };
-export const MsgServiceName = "cheqdid.cheqdnode.resource.v1.Msg";
-export class MsgClientImpl {
+exports.MsgServiceName = "cheqdid.cheqdnode.resource.v1.Msg";
+class MsgClientImpl {
     rpc;
     service;
     constructor(rpc, opts) {
-        this.service = opts?.service || MsgServiceName;
+        this.service = opts?.service || exports.MsgServiceName;
         this.rpc = rpc;
         this.CreateResource = this.CreateResource.bind(this);
     }
     CreateResource(request) {
-        const data = MsgCreateResource.encode(request).finish();
+        const data = exports.MsgCreateResource.encode(request).finish();
         const promise = this.rpc.request(this.service, "CreateResource", data);
-        return promise.then((data) => MsgCreateResourceResponse.decode(_m0.Reader.create(data)));
+        return promise.then((data) => exports.MsgCreateResourceResponse.decode(minimal_js_1.default.Reader.create(data)));
     }
 }
+exports.MsgClientImpl = MsgClientImpl;
 function bytesFromBase64(b64) {
     if (globalThis.Buffer) {
         return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
