@@ -1,7 +1,6 @@
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal";
-import { Resource, ResourceHeader } from "./resource";
+import _m0 from "protobufjs/minimal.js";
+import { Resource, ResourceHeader } from "./resource.js";
 
 export interface QueryGetResourceRequest {
   collectionId: string;
@@ -77,22 +76,25 @@ export const QueryGetResourceRequest = {
 
   fromJSON(object: any): QueryGetResourceRequest {
     return {
-      collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
-      id: isSet(object.id) ? String(object.id) : "",
+      collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
     };
   },
 
   toJSON(message: QueryGetResourceRequest): unknown {
     const obj: any = {};
-    message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-    message.id !== undefined && (obj.id = message.id);
+    if (message.collectionId !== "") {
+      obj.collectionId = message.collectionId;
+    }
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<QueryGetResourceRequest>, I>>(base?: I): QueryGetResourceRequest {
-    return QueryGetResourceRequest.fromPartial(base ?? {});
+    return QueryGetResourceRequest.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryGetResourceRequest>, I>>(object: I): QueryGetResourceRequest {
     const message = createBaseQueryGetResourceRequest();
     message.collectionId = object.collectionId ?? "";
@@ -142,14 +144,15 @@ export const QueryResourceResponse = {
 
   toJSON(message: QueryResourceResponse): unknown {
     const obj: any = {};
-    message.resource !== undefined && (obj.resource = message.resource ? Resource.toJSON(message.resource) : undefined);
+    if (message.resource !== undefined) {
+      obj.resource = Resource.toJSON(message.resource);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<QueryResourceResponse>, I>>(base?: I): QueryResourceResponse {
-    return QueryResourceResponse.fromPartial(base ?? {});
+    return QueryResourceResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryResourceResponse>, I>>(object: I): QueryResourceResponse {
     const message = createBaseQueryResourceResponse();
     message.resource = (object.resource !== undefined && object.resource !== null)
@@ -195,21 +198,22 @@ export const QueryGetCollectionResourcesRequest = {
   },
 
   fromJSON(object: any): QueryGetCollectionResourcesRequest {
-    return { collectionId: isSet(object.collectionId) ? String(object.collectionId) : "" };
+    return { collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "" };
   },
 
   toJSON(message: QueryGetCollectionResourcesRequest): unknown {
     const obj: any = {};
-    message.collectionId !== undefined && (obj.collectionId = message.collectionId);
+    if (message.collectionId !== "") {
+      obj.collectionId = message.collectionId;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<QueryGetCollectionResourcesRequest>, I>>(
     base?: I,
   ): QueryGetCollectionResourcesRequest {
-    return QueryGetCollectionResourcesRequest.fromPartial(base ?? {});
+    return QueryGetCollectionResourcesRequest.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryGetCollectionResourcesRequest>, I>>(
     object: I,
   ): QueryGetCollectionResourcesRequest {
@@ -256,16 +260,16 @@ export const QueryCollectionResourcesResponse = {
 
   fromJSON(object: any): QueryCollectionResourcesResponse {
     return {
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceHeader.fromJSON(e)) : [],
+      resources: globalThis.Array.isArray(object?.resources)
+        ? object.resources.map((e: any) => ResourceHeader.fromJSON(e))
+        : [],
     };
   },
 
   toJSON(message: QueryCollectionResourcesResponse): unknown {
     const obj: any = {};
-    if (message.resources) {
-      obj.resources = message.resources.map((e) => e ? ResourceHeader.toJSON(e) : undefined);
-    } else {
-      obj.resources = [];
+    if (message.resources?.length) {
+      obj.resources = message.resources.map((e) => ResourceHeader.toJSON(e));
     }
     return obj;
   },
@@ -273,9 +277,8 @@ export const QueryCollectionResourcesResponse = {
   create<I extends Exact<DeepPartial<QueryCollectionResourcesResponse>, I>>(
     base?: I,
   ): QueryCollectionResourcesResponse {
-    return QueryCollectionResourcesResponse.fromPartial(base ?? {});
+    return QueryCollectionResourcesResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryCollectionResourcesResponse>, I>>(
     object: I,
   ): QueryCollectionResourcesResponse {
@@ -342,26 +345,31 @@ export const QueryGetAllResourceVersionsRequest = {
 
   fromJSON(object: any): QueryGetAllResourceVersionsRequest {
     return {
-      collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
-      name: isSet(object.name) ? String(object.name) : "",
-      resourceType: isSet(object.resourceType) ? String(object.resourceType) : "",
+      collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      resourceType: isSet(object.resourceType) ? globalThis.String(object.resourceType) : "",
     };
   },
 
   toJSON(message: QueryGetAllResourceVersionsRequest): unknown {
     const obj: any = {};
-    message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-    message.name !== undefined && (obj.name = message.name);
-    message.resourceType !== undefined && (obj.resourceType = message.resourceType);
+    if (message.collectionId !== "") {
+      obj.collectionId = message.collectionId;
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.resourceType !== "") {
+      obj.resourceType = message.resourceType;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<QueryGetAllResourceVersionsRequest>, I>>(
     base?: I,
   ): QueryGetAllResourceVersionsRequest {
-    return QueryGetAllResourceVersionsRequest.fromPartial(base ?? {});
+    return QueryGetAllResourceVersionsRequest.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryGetAllResourceVersionsRequest>, I>>(
     object: I,
   ): QueryGetAllResourceVersionsRequest {
@@ -410,16 +418,16 @@ export const QueryGetAllResourceVersionsResponse = {
 
   fromJSON(object: any): QueryGetAllResourceVersionsResponse {
     return {
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceHeader.fromJSON(e)) : [],
+      resources: globalThis.Array.isArray(object?.resources)
+        ? object.resources.map((e: any) => ResourceHeader.fromJSON(e))
+        : [],
     };
   },
 
   toJSON(message: QueryGetAllResourceVersionsResponse): unknown {
     const obj: any = {};
-    if (message.resources) {
-      obj.resources = message.resources.map((e) => e ? ResourceHeader.toJSON(e) : undefined);
-    } else {
-      obj.resources = [];
+    if (message.resources?.length) {
+      obj.resources = message.resources.map((e) => ResourceHeader.toJSON(e));
     }
     return obj;
   },
@@ -427,9 +435,8 @@ export const QueryGetAllResourceVersionsResponse = {
   create<I extends Exact<DeepPartial<QueryGetAllResourceVersionsResponse>, I>>(
     base?: I,
   ): QueryGetAllResourceVersionsResponse {
-    return QueryGetAllResourceVersionsResponse.fromPartial(base ?? {});
+    return QueryGetAllResourceVersionsResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryGetAllResourceVersionsResponse>, I>>(
     object: I,
   ): QueryGetAllResourceVersionsResponse {
@@ -480,10 +487,10 @@ interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
@@ -491,11 +498,6 @@ type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

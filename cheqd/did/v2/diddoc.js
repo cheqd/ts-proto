@@ -5,9 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Metadata = exports.DidDocWithMetadata = exports.Service = exports.VerificationMethod = exports.DidDoc = void 0;
 /* eslint-disable */
-const long_1 = __importDefault(require("long"));
-const minimal_1 = __importDefault(require("protobufjs/minimal"));
-const timestamp_1 = require("../../../google/protobuf/timestamp");
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
+const timestamp_js_1 = require("../../../google/protobuf/timestamp.js");
 function createBaseDidDoc() {
     return {
         context: [],
@@ -24,7 +23,7 @@ function createBaseDidDoc() {
     };
 }
 exports.DidDoc = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         for (const v of message.context) {
             writer.uint32(10).string(v);
         }
@@ -61,7 +60,7 @@ exports.DidDoc = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseDidDoc();
         while (reader.pos < end) {
@@ -143,87 +142,71 @@ exports.DidDoc = {
     },
     fromJSON(object) {
         return {
-            context: Array.isArray(object?.context) ? object.context.map((e) => String(e)) : [],
-            id: isSet(object.id) ? String(object.id) : "",
-            controller: Array.isArray(object?.controller) ? object.controller.map((e) => String(e)) : [],
-            verificationMethod: Array.isArray(object?.verificationMethod)
+            context: globalThis.Array.isArray(object?.context) ? object.context.map((e) => globalThis.String(e)) : [],
+            id: isSet(object.id) ? globalThis.String(object.id) : "",
+            controller: globalThis.Array.isArray(object?.controller)
+                ? object.controller.map((e) => globalThis.String(e))
+                : [],
+            verificationMethod: globalThis.Array.isArray(object?.verificationMethod)
                 ? object.verificationMethod.map((e) => exports.VerificationMethod.fromJSON(e))
                 : [],
-            authentication: Array.isArray(object?.authentication) ? object.authentication.map((e) => String(e)) : [],
-            assertionMethod: Array.isArray(object?.assertionMethod) ? object.assertionMethod.map((e) => String(e)) : [],
-            capabilityInvocation: Array.isArray(object?.capabilityInvocation)
-                ? object.capabilityInvocation.map((e) => String(e))
+            authentication: globalThis.Array.isArray(object?.authentication)
+                ? object.authentication.map((e) => globalThis.String(e))
                 : [],
-            capabilityDelegation: Array.isArray(object?.capabilityDelegation)
-                ? object.capabilityDelegation.map((e) => String(e))
+            assertionMethod: globalThis.Array.isArray(object?.assertionMethod)
+                ? object.assertionMethod.map((e) => globalThis.String(e))
                 : [],
-            keyAgreement: Array.isArray(object?.keyAgreement) ? object.keyAgreement.map((e) => String(e)) : [],
-            service: Array.isArray(object?.service) ? object.service.map((e) => exports.Service.fromJSON(e)) : [],
-            alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e) => String(e)) : [],
+            capabilityInvocation: globalThis.Array.isArray(object?.capabilityInvocation)
+                ? object.capabilityInvocation.map((e) => globalThis.String(e))
+                : [],
+            capabilityDelegation: globalThis.Array.isArray(object?.capabilityDelegation)
+                ? object.capabilityDelegation.map((e) => globalThis.String(e))
+                : [],
+            keyAgreement: globalThis.Array.isArray(object?.keyAgreement)
+                ? object.keyAgreement.map((e) => globalThis.String(e))
+                : [],
+            service: globalThis.Array.isArray(object?.service)
+                ? object.service.map((e) => exports.Service.fromJSON(e))
+                : [],
+            alsoKnownAs: globalThis.Array.isArray(object?.alsoKnownAs)
+                ? object.alsoKnownAs.map((e) => globalThis.String(e))
+                : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.context) {
-            obj.context = message.context.map((e) => e);
+        if (message.context?.length) {
+            obj.context = message.context;
         }
-        else {
-            obj.context = [];
+        if (message.id !== "") {
+            obj.id = message.id;
         }
-        message.id !== undefined && (obj.id = message.id);
-        if (message.controller) {
-            obj.controller = message.controller.map((e) => e);
+        if (message.controller?.length) {
+            obj.controller = message.controller;
         }
-        else {
-            obj.controller = [];
+        if (message.verificationMethod?.length) {
+            obj.verificationMethod = message.verificationMethod.map((e) => exports.VerificationMethod.toJSON(e));
         }
-        if (message.verificationMethod) {
-            obj.verificationMethod = message.verificationMethod.map((e) => e ? exports.VerificationMethod.toJSON(e) : undefined);
+        if (message.authentication?.length) {
+            obj.authentication = message.authentication;
         }
-        else {
-            obj.verificationMethod = [];
+        if (message.assertionMethod?.length) {
+            obj.assertionMethod = message.assertionMethod;
         }
-        if (message.authentication) {
-            obj.authentication = message.authentication.map((e) => e);
+        if (message.capabilityInvocation?.length) {
+            obj.capabilityInvocation = message.capabilityInvocation;
         }
-        else {
-            obj.authentication = [];
+        if (message.capabilityDelegation?.length) {
+            obj.capabilityDelegation = message.capabilityDelegation;
         }
-        if (message.assertionMethod) {
-            obj.assertionMethod = message.assertionMethod.map((e) => e);
+        if (message.keyAgreement?.length) {
+            obj.keyAgreement = message.keyAgreement;
         }
-        else {
-            obj.assertionMethod = [];
+        if (message.service?.length) {
+            obj.service = message.service.map((e) => exports.Service.toJSON(e));
         }
-        if (message.capabilityInvocation) {
-            obj.capabilityInvocation = message.capabilityInvocation.map((e) => e);
-        }
-        else {
-            obj.capabilityInvocation = [];
-        }
-        if (message.capabilityDelegation) {
-            obj.capabilityDelegation = message.capabilityDelegation.map((e) => e);
-        }
-        else {
-            obj.capabilityDelegation = [];
-        }
-        if (message.keyAgreement) {
-            obj.keyAgreement = message.keyAgreement.map((e) => e);
-        }
-        else {
-            obj.keyAgreement = [];
-        }
-        if (message.service) {
-            obj.service = message.service.map((e) => e ? exports.Service.toJSON(e) : undefined);
-        }
-        else {
-            obj.service = [];
-        }
-        if (message.alsoKnownAs) {
-            obj.alsoKnownAs = message.alsoKnownAs.map((e) => e);
-        }
-        else {
-            obj.alsoKnownAs = [];
+        if (message.alsoKnownAs?.length) {
+            obj.alsoKnownAs = message.alsoKnownAs;
         }
         return obj;
     },
@@ -250,7 +233,7 @@ function createBaseVerificationMethod() {
     return { id: "", verificationMethodType: "", controller: "", verificationMaterial: "" };
 }
 exports.VerificationMethod = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
@@ -266,7 +249,7 @@ exports.VerificationMethod = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseVerificationMethod();
         while (reader.pos < end) {
@@ -306,18 +289,28 @@ exports.VerificationMethod = {
     },
     fromJSON(object) {
         return {
-            id: isSet(object.id) ? String(object.id) : "",
-            verificationMethodType: isSet(object.verificationMethodType) ? String(object.verificationMethodType) : "",
-            controller: isSet(object.controller) ? String(object.controller) : "",
-            verificationMaterial: isSet(object.verificationMaterial) ? String(object.verificationMaterial) : "",
+            id: isSet(object.id) ? globalThis.String(object.id) : "",
+            verificationMethodType: isSet(object.verificationMethodType)
+                ? globalThis.String(object.verificationMethodType)
+                : "",
+            controller: isSet(object.controller) ? globalThis.String(object.controller) : "",
+            verificationMaterial: isSet(object.verificationMaterial) ? globalThis.String(object.verificationMaterial) : "",
         };
     },
     toJSON(message) {
         const obj = {};
-        message.id !== undefined && (obj.id = message.id);
-        message.verificationMethodType !== undefined && (obj.verificationMethodType = message.verificationMethodType);
-        message.controller !== undefined && (obj.controller = message.controller);
-        message.verificationMaterial !== undefined && (obj.verificationMaterial = message.verificationMaterial);
+        if (message.id !== "") {
+            obj.id = message.id;
+        }
+        if (message.verificationMethodType !== "") {
+            obj.verificationMethodType = message.verificationMethodType;
+        }
+        if (message.controller !== "") {
+            obj.controller = message.controller;
+        }
+        if (message.verificationMaterial !== "") {
+            obj.verificationMaterial = message.verificationMaterial;
+        }
         return obj;
     },
     create(base) {
@@ -336,7 +329,7 @@ function createBaseService() {
     return { id: "", serviceType: "", serviceEndpoint: [] };
 }
 exports.Service = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
@@ -349,7 +342,7 @@ exports.Service = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseService();
         while (reader.pos < end) {
@@ -383,20 +376,23 @@ exports.Service = {
     },
     fromJSON(object) {
         return {
-            id: isSet(object.id) ? String(object.id) : "",
-            serviceType: isSet(object.serviceType) ? String(object.serviceType) : "",
-            serviceEndpoint: Array.isArray(object?.serviceEndpoint) ? object.serviceEndpoint.map((e) => String(e)) : [],
+            id: isSet(object.id) ? globalThis.String(object.id) : "",
+            serviceType: isSet(object.serviceType) ? globalThis.String(object.serviceType) : "",
+            serviceEndpoint: globalThis.Array.isArray(object?.serviceEndpoint)
+                ? object.serviceEndpoint.map((e) => globalThis.String(e))
+                : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        message.id !== undefined && (obj.id = message.id);
-        message.serviceType !== undefined && (obj.serviceType = message.serviceType);
-        if (message.serviceEndpoint) {
-            obj.serviceEndpoint = message.serviceEndpoint.map((e) => e);
+        if (message.id !== "") {
+            obj.id = message.id;
         }
-        else {
-            obj.serviceEndpoint = [];
+        if (message.serviceType !== "") {
+            obj.serviceType = message.serviceType;
+        }
+        if (message.serviceEndpoint?.length) {
+            obj.serviceEndpoint = message.serviceEndpoint;
         }
         return obj;
     },
@@ -415,7 +411,7 @@ function createBaseDidDocWithMetadata() {
     return { didDoc: undefined, metadata: undefined };
 }
 exports.DidDocWithMetadata = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.didDoc !== undefined) {
             exports.DidDoc.encode(message.didDoc, writer.uint32(10).fork()).ldelim();
         }
@@ -425,7 +421,7 @@ exports.DidDocWithMetadata = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseDidDocWithMetadata();
         while (reader.pos < end) {
@@ -459,8 +455,12 @@ exports.DidDocWithMetadata = {
     },
     toJSON(message) {
         const obj = {};
-        message.didDoc !== undefined && (obj.didDoc = message.didDoc ? exports.DidDoc.toJSON(message.didDoc) : undefined);
-        message.metadata !== undefined && (obj.metadata = message.metadata ? exports.Metadata.toJSON(message.metadata) : undefined);
+        if (message.didDoc !== undefined) {
+            obj.didDoc = exports.DidDoc.toJSON(message.didDoc);
+        }
+        if (message.metadata !== undefined) {
+            obj.metadata = exports.Metadata.toJSON(message.metadata);
+        }
         return obj;
     },
     create(base) {
@@ -488,12 +488,12 @@ function createBaseMetadata() {
     };
 }
 exports.Metadata = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.created !== undefined) {
-            timestamp_1.Timestamp.encode(toTimestamp(message.created), writer.uint32(10).fork()).ldelim();
+            timestamp_js_1.Timestamp.encode(toTimestamp(message.created), writer.uint32(10).fork()).ldelim();
         }
         if (message.updated !== undefined) {
-            timestamp_1.Timestamp.encode(toTimestamp(message.updated), writer.uint32(18).fork()).ldelim();
+            timestamp_js_1.Timestamp.encode(toTimestamp(message.updated), writer.uint32(18).fork()).ldelim();
         }
         if (message.deactivated === true) {
             writer.uint32(24).bool(message.deactivated);
@@ -510,7 +510,7 @@ exports.Metadata = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMetadata();
         while (reader.pos < end) {
@@ -520,13 +520,13 @@ exports.Metadata = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.created = fromTimestamp(timestamp_1.Timestamp.decode(reader, reader.uint32()));
+                    message.created = fromTimestamp(timestamp_js_1.Timestamp.decode(reader, reader.uint32()));
                     continue;
                 case 2:
                     if (tag !== 18) {
                         break;
                     }
-                    message.updated = fromTimestamp(timestamp_1.Timestamp.decode(reader, reader.uint32()));
+                    message.updated = fromTimestamp(timestamp_js_1.Timestamp.decode(reader, reader.uint32()));
                     continue;
                 case 3:
                     if (tag !== 24) {
@@ -564,20 +564,32 @@ exports.Metadata = {
         return {
             created: isSet(object.created) ? fromJsonTimestamp(object.created) : undefined,
             updated: isSet(object.updated) ? fromJsonTimestamp(object.updated) : undefined,
-            deactivated: isSet(object.deactivated) ? Boolean(object.deactivated) : false,
-            versionId: isSet(object.versionId) ? String(object.versionId) : "",
-            nextVersionId: isSet(object.nextVersionId) ? String(object.nextVersionId) : "",
-            previousVersionId: isSet(object.previousVersionId) ? String(object.previousVersionId) : "",
+            deactivated: isSet(object.deactivated) ? globalThis.Boolean(object.deactivated) : false,
+            versionId: isSet(object.versionId) ? globalThis.String(object.versionId) : "",
+            nextVersionId: isSet(object.nextVersionId) ? globalThis.String(object.nextVersionId) : "",
+            previousVersionId: isSet(object.previousVersionId) ? globalThis.String(object.previousVersionId) : "",
         };
     },
     toJSON(message) {
         const obj = {};
-        message.created !== undefined && (obj.created = message.created.toISOString());
-        message.updated !== undefined && (obj.updated = message.updated.toISOString());
-        message.deactivated !== undefined && (obj.deactivated = message.deactivated);
-        message.versionId !== undefined && (obj.versionId = message.versionId);
-        message.nextVersionId !== undefined && (obj.nextVersionId = message.nextVersionId);
-        message.previousVersionId !== undefined && (obj.previousVersionId = message.previousVersionId);
+        if (message.created !== undefined) {
+            obj.created = message.created.toISOString();
+        }
+        if (message.updated !== undefined) {
+            obj.updated = message.updated.toISOString();
+        }
+        if (message.deactivated === true) {
+            obj.deactivated = message.deactivated;
+        }
+        if (message.versionId !== "") {
+            obj.versionId = message.versionId;
+        }
+        if (message.nextVersionId !== "") {
+            obj.nextVersionId = message.nextVersionId;
+        }
+        if (message.previousVersionId !== "") {
+            obj.previousVersionId = message.previousVersionId;
+        }
         return obj;
     },
     create(base) {
@@ -595,32 +607,25 @@ exports.Metadata = {
     },
 };
 function toTimestamp(date) {
-    const seconds = numberToLong(date.getTime() / 1000);
-    const nanos = (date.getTime() % 1000) * 1000000;
+    const seconds = BigInt(Math.trunc(date.getTime() / 1_000));
+    const nanos = (date.getTime() % 1_000) * 1_000_000;
     return { seconds, nanos };
 }
 function fromTimestamp(t) {
-    let millis = (t.seconds.toNumber() || 0) * 1000;
-    millis += (t.nanos || 0) / 1000000;
-    return new Date(millis);
+    let millis = (globalThis.Number(t.seconds.toString()) || 0) * 1_000;
+    millis += (t.nanos || 0) / 1_000_000;
+    return new globalThis.Date(millis);
 }
 function fromJsonTimestamp(o) {
-    if (o instanceof Date) {
+    if (o instanceof globalThis.Date) {
         return o;
     }
     else if (typeof o === "string") {
-        return new Date(o);
+        return new globalThis.Date(o);
     }
     else {
-        return fromTimestamp(timestamp_1.Timestamp.fromJSON(o));
+        return fromTimestamp(timestamp_js_1.Timestamp.fromJSON(o));
     }
-}
-function numberToLong(number) {
-    return long_1.default.fromNumber(number);
-}
-if (minimal_1.default.util.Long !== long_1.default) {
-    minimal_1.default.util.Long = long_1.default;
-    minimal_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

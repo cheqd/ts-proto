@@ -1,8 +1,7 @@
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal";
-import { Did } from "./did";
-import { Metadata } from "./stateValue";
+import _m0 from "protobufjs/minimal.js";
+import { Did } from "./did.js";
+import { Metadata } from "./stateValue.js";
 
 export interface QueryGetDidRequest {
   id: string;
@@ -49,19 +48,20 @@ export const QueryGetDidRequest = {
   },
 
   fromJSON(object: any): QueryGetDidRequest {
-    return { id: isSet(object.id) ? String(object.id) : "" };
+    return { id: isSet(object.id) ? globalThis.String(object.id) : "" };
   },
 
   toJSON(message: QueryGetDidRequest): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<QueryGetDidRequest>, I>>(base?: I): QueryGetDidRequest {
-    return QueryGetDidRequest.fromPartial(base ?? {});
+    return QueryGetDidRequest.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryGetDidRequest>, I>>(object: I): QueryGetDidRequest {
     const message = createBaseQueryGetDidRequest();
     message.id = object.id ?? "";
@@ -123,15 +123,18 @@ export const QueryGetDidResponse = {
 
   toJSON(message: QueryGetDidResponse): unknown {
     const obj: any = {};
-    message.did !== undefined && (obj.did = message.did ? Did.toJSON(message.did) : undefined);
-    message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
+    if (message.did !== undefined) {
+      obj.did = Did.toJSON(message.did);
+    }
+    if (message.metadata !== undefined) {
+      obj.metadata = Metadata.toJSON(message.metadata);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<QueryGetDidResponse>, I>>(base?: I): QueryGetDidResponse {
-    return QueryGetDidResponse.fromPartial(base ?? {});
+    return QueryGetDidResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryGetDidResponse>, I>>(object: I): QueryGetDidResponse {
     const message = createBaseQueryGetDidResponse();
     message.did = (object.did !== undefined && object.did !== null) ? Did.fromPartial(object.did) : undefined;
@@ -167,10 +170,10 @@ interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
@@ -178,11 +181,6 @@ type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

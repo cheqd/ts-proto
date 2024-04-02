@@ -1,7 +1,6 @@
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal";
-import { Timestamp } from "../../../google/protobuf/timestamp";
+import _m0 from "protobufjs/minimal.js";
+import { Timestamp } from "../../../google/protobuf/timestamp.js";
 
 /** Resource stores the contents of a DID-Linked Resource */
 export interface Resource {
@@ -151,15 +150,15 @@ export const Resource = {
 
   toJSON(message: Resource): unknown {
     const obj: any = {};
-    message.data !== undefined &&
-      (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array(0)));
+    if (message.data.length !== 0) {
+      obj.data = base64FromBytes(message.data);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Resource>, I>>(base?: I): Resource {
-    return Resource.fromPartial(base ?? {});
+    return Resource.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Resource>, I>>(object: I): Resource {
     const message = createBaseResource();
     message.data = object.data ?? new Uint8Array(0);
@@ -316,46 +315,63 @@ export const Metadata = {
 
   fromJSON(object: any): Metadata {
     return {
-      collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      name: isSet(object.name) ? String(object.name) : "",
-      version: isSet(object.version) ? String(object.version) : "",
-      resourceType: isSet(object.resourceType) ? String(object.resourceType) : "",
-      alsoKnownAs: Array.isArray(object?.alsoKnownAs)
+      collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      version: isSet(object.version) ? globalThis.String(object.version) : "",
+      resourceType: isSet(object.resourceType) ? globalThis.String(object.resourceType) : "",
+      alsoKnownAs: globalThis.Array.isArray(object?.alsoKnownAs)
         ? object.alsoKnownAs.map((e: any) => AlternativeUri.fromJSON(e))
         : [],
-      mediaType: isSet(object.mediaType) ? String(object.mediaType) : "",
+      mediaType: isSet(object.mediaType) ? globalThis.String(object.mediaType) : "",
       created: isSet(object.created) ? fromJsonTimestamp(object.created) : undefined,
-      checksum: isSet(object.checksum) ? String(object.checksum) : "",
-      previousVersionId: isSet(object.previousVersionId) ? String(object.previousVersionId) : "",
-      nextVersionId: isSet(object.nextVersionId) ? String(object.nextVersionId) : "",
+      checksum: isSet(object.checksum) ? globalThis.String(object.checksum) : "",
+      previousVersionId: isSet(object.previousVersionId) ? globalThis.String(object.previousVersionId) : "",
+      nextVersionId: isSet(object.nextVersionId) ? globalThis.String(object.nextVersionId) : "",
     };
   },
 
   toJSON(message: Metadata): unknown {
     const obj: any = {};
-    message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-    message.id !== undefined && (obj.id = message.id);
-    message.name !== undefined && (obj.name = message.name);
-    message.version !== undefined && (obj.version = message.version);
-    message.resourceType !== undefined && (obj.resourceType = message.resourceType);
-    if (message.alsoKnownAs) {
-      obj.alsoKnownAs = message.alsoKnownAs.map((e) => e ? AlternativeUri.toJSON(e) : undefined);
-    } else {
-      obj.alsoKnownAs = [];
+    if (message.collectionId !== "") {
+      obj.collectionId = message.collectionId;
     }
-    message.mediaType !== undefined && (obj.mediaType = message.mediaType);
-    message.created !== undefined && (obj.created = message.created.toISOString());
-    message.checksum !== undefined && (obj.checksum = message.checksum);
-    message.previousVersionId !== undefined && (obj.previousVersionId = message.previousVersionId);
-    message.nextVersionId !== undefined && (obj.nextVersionId = message.nextVersionId);
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.version !== "") {
+      obj.version = message.version;
+    }
+    if (message.resourceType !== "") {
+      obj.resourceType = message.resourceType;
+    }
+    if (message.alsoKnownAs?.length) {
+      obj.alsoKnownAs = message.alsoKnownAs.map((e) => AlternativeUri.toJSON(e));
+    }
+    if (message.mediaType !== "") {
+      obj.mediaType = message.mediaType;
+    }
+    if (message.created !== undefined) {
+      obj.created = message.created.toISOString();
+    }
+    if (message.checksum !== "") {
+      obj.checksum = message.checksum;
+    }
+    if (message.previousVersionId !== "") {
+      obj.previousVersionId = message.previousVersionId;
+    }
+    if (message.nextVersionId !== "") {
+      obj.nextVersionId = message.nextVersionId;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Metadata>, I>>(base?: I): Metadata {
-    return Metadata.fromPartial(base ?? {});
+    return Metadata.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Metadata>, I>>(object: I): Metadata {
     const message = createBaseMetadata();
     message.collectionId = object.collectionId ?? "";
@@ -420,22 +436,25 @@ export const AlternativeUri = {
 
   fromJSON(object: any): AlternativeUri {
     return {
-      uri: isSet(object.uri) ? String(object.uri) : "",
-      description: isSet(object.description) ? String(object.description) : "",
+      uri: isSet(object.uri) ? globalThis.String(object.uri) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
     };
   },
 
   toJSON(message: AlternativeUri): unknown {
     const obj: any = {};
-    message.uri !== undefined && (obj.uri = message.uri);
-    message.description !== undefined && (obj.description = message.description);
+    if (message.uri !== "") {
+      obj.uri = message.uri;
+    }
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<AlternativeUri>, I>>(base?: I): AlternativeUri {
-    return AlternativeUri.fromPartial(base ?? {});
+    return AlternativeUri.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<AlternativeUri>, I>>(object: I): AlternativeUri {
     const message = createBaseAlternativeUri();
     message.uri = object.uri ?? "";
@@ -498,15 +517,18 @@ export const ResourceWithMetadata = {
 
   toJSON(message: ResourceWithMetadata): unknown {
     const obj: any = {};
-    message.resource !== undefined && (obj.resource = message.resource ? Resource.toJSON(message.resource) : undefined);
-    message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
+    if (message.resource !== undefined) {
+      obj.resource = Resource.toJSON(message.resource);
+    }
+    if (message.metadata !== undefined) {
+      obj.metadata = Metadata.toJSON(message.metadata);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ResourceWithMetadata>, I>>(base?: I): ResourceWithMetadata {
-    return ResourceWithMetadata.fromPartial(base ?? {});
+    return ResourceWithMetadata.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ResourceWithMetadata>, I>>(object: I): ResourceWithMetadata {
     const message = createBaseResourceWithMetadata();
     message.resource = (object.resource !== undefined && object.resource !== null)
@@ -519,30 +541,11 @@ export const ResourceWithMetadata = {
   },
 };
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if ((globalThis as any).Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -552,21 +555,21 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if ((globalThis as any).Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
@@ -576,34 +579,25 @@ type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = numberToLong(date.getTime() / 1_000);
+  const seconds = BigInt(Math.trunc(date.getTime() / 1_000));
   const nanos = (date.getTime() % 1_000) * 1_000_000;
   return { seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = (t.seconds.toNumber() || 0) * 1_000;
+  let millis = (globalThis.Number(t.seconds.toString()) || 0) * 1_000;
   millis += (t.nanos || 0) / 1_000_000;
-  return new Date(millis);
+  return new globalThis.Date(millis);
 }
 
 function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
+  if (o instanceof globalThis.Date) {
     return o;
   } else if (typeof o === "string") {
-    return new Date(o);
+    return new globalThis.Date(o);
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }
-}
-
-function numberToLong(number: number) {
-  return Long.fromNumber(number);
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
 }
 
 function isSet(value: any): boolean {

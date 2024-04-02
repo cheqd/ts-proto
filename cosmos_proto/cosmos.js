@@ -5,8 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ScalarDescriptor = exports.InterfaceDescriptor = exports.scalarTypeToJSON = exports.scalarTypeFromJSON = exports.ScalarType = void 0;
 /* eslint-disable */
-const long_1 = __importDefault(require("long"));
-const minimal_1 = __importDefault(require("protobufjs/minimal"));
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
 var ScalarType;
 (function (ScalarType) {
     ScalarType[ScalarType["SCALAR_TYPE_UNSPECIFIED"] = 0] = "SCALAR_TYPE_UNSPECIFIED";
@@ -50,7 +49,7 @@ function createBaseInterfaceDescriptor() {
     return { name: "", description: "" };
 }
 exports.InterfaceDescriptor = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.name !== "") {
             writer.uint32(10).string(message.name);
         }
@@ -60,7 +59,7 @@ exports.InterfaceDescriptor = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseInterfaceDescriptor();
         while (reader.pos < end) {
@@ -88,14 +87,18 @@ exports.InterfaceDescriptor = {
     },
     fromJSON(object) {
         return {
-            name: isSet(object.name) ? String(object.name) : "",
-            description: isSet(object.description) ? String(object.description) : "",
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            description: isSet(object.description) ? globalThis.String(object.description) : "",
         };
     },
     toJSON(message) {
         const obj = {};
-        message.name !== undefined && (obj.name = message.name);
-        message.description !== undefined && (obj.description = message.description);
+        if (message.name !== "") {
+            obj.name = message.name;
+        }
+        if (message.description !== "") {
+            obj.description = message.description;
+        }
         return obj;
     },
     create(base) {
@@ -112,7 +115,7 @@ function createBaseScalarDescriptor() {
     return { name: "", description: "", fieldType: [] };
 }
 exports.ScalarDescriptor = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.name !== "") {
             writer.uint32(10).string(message.name);
         }
@@ -127,7 +130,7 @@ exports.ScalarDescriptor = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseScalarDescriptor();
         while (reader.pos < end) {
@@ -168,20 +171,23 @@ exports.ScalarDescriptor = {
     },
     fromJSON(object) {
         return {
-            name: isSet(object.name) ? String(object.name) : "",
-            description: isSet(object.description) ? String(object.description) : "",
-            fieldType: Array.isArray(object?.fieldType) ? object.fieldType.map((e) => scalarTypeFromJSON(e)) : [],
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            description: isSet(object.description) ? globalThis.String(object.description) : "",
+            fieldType: globalThis.Array.isArray(object?.fieldType)
+                ? object.fieldType.map((e) => scalarTypeFromJSON(e))
+                : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        message.name !== undefined && (obj.name = message.name);
-        message.description !== undefined && (obj.description = message.description);
-        if (message.fieldType) {
-            obj.fieldType = message.fieldType.map((e) => scalarTypeToJSON(e));
+        if (message.name !== "") {
+            obj.name = message.name;
         }
-        else {
-            obj.fieldType = [];
+        if (message.description !== "") {
+            obj.description = message.description;
+        }
+        if (message.fieldType?.length) {
+            obj.fieldType = message.fieldType.map((e) => scalarTypeToJSON(e));
         }
         return obj;
     },
@@ -196,10 +202,6 @@ exports.ScalarDescriptor = {
         return message;
     },
 };
-if (minimal_1.default.util.Long !== long_1.default) {
-    minimal_1.default.util.Long = long_1.default;
-    minimal_1.default.configure();
-}
 function isSet(value) {
     return value !== null && value !== undefined;
 }

@@ -5,13 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CustomHttpPattern = exports.HttpRule = exports.Http = void 0;
 /* eslint-disable */
-const long_1 = __importDefault(require("long"));
-const minimal_1 = __importDefault(require("protobufjs/minimal"));
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
 function createBaseHttp() {
     return { rules: [], fullyDecodeReservedExpansion: false };
 }
 exports.Http = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         for (const v of message.rules) {
             exports.HttpRule.encode(v, writer.uint32(10).fork()).ldelim();
         }
@@ -21,7 +20,7 @@ exports.Http = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseHttp();
         while (reader.pos < end) {
@@ -49,22 +48,20 @@ exports.Http = {
     },
     fromJSON(object) {
         return {
-            rules: Array.isArray(object?.rules) ? object.rules.map((e) => exports.HttpRule.fromJSON(e)) : [],
+            rules: globalThis.Array.isArray(object?.rules) ? object.rules.map((e) => exports.HttpRule.fromJSON(e)) : [],
             fullyDecodeReservedExpansion: isSet(object.fullyDecodeReservedExpansion)
-                ? Boolean(object.fullyDecodeReservedExpansion)
+                ? globalThis.Boolean(object.fullyDecodeReservedExpansion)
                 : false,
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.rules) {
-            obj.rules = message.rules.map((e) => e ? exports.HttpRule.toJSON(e) : undefined);
+        if (message.rules?.length) {
+            obj.rules = message.rules.map((e) => exports.HttpRule.toJSON(e));
         }
-        else {
-            obj.rules = [];
+        if (message.fullyDecodeReservedExpansion === true) {
+            obj.fullyDecodeReservedExpansion = message.fullyDecodeReservedExpansion;
         }
-        message.fullyDecodeReservedExpansion !== undefined &&
-            (obj.fullyDecodeReservedExpansion = message.fullyDecodeReservedExpansion);
         return obj;
     },
     create(base) {
@@ -92,7 +89,7 @@ function createBaseHttpRule() {
     };
 }
 exports.HttpRule = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.selector !== "") {
             writer.uint32(10).string(message.selector);
         }
@@ -126,7 +123,7 @@ exports.HttpRule = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseHttpRule();
         while (reader.pos < end) {
@@ -202,37 +199,51 @@ exports.HttpRule = {
     },
     fromJSON(object) {
         return {
-            selector: isSet(object.selector) ? String(object.selector) : "",
-            get: isSet(object.get) ? String(object.get) : undefined,
-            put: isSet(object.put) ? String(object.put) : undefined,
-            post: isSet(object.post) ? String(object.post) : undefined,
-            delete: isSet(object.delete) ? String(object.delete) : undefined,
-            patch: isSet(object.patch) ? String(object.patch) : undefined,
+            selector: isSet(object.selector) ? globalThis.String(object.selector) : "",
+            get: isSet(object.get) ? globalThis.String(object.get) : undefined,
+            put: isSet(object.put) ? globalThis.String(object.put) : undefined,
+            post: isSet(object.post) ? globalThis.String(object.post) : undefined,
+            delete: isSet(object.delete) ? globalThis.String(object.delete) : undefined,
+            patch: isSet(object.patch) ? globalThis.String(object.patch) : undefined,
             custom: isSet(object.custom) ? exports.CustomHttpPattern.fromJSON(object.custom) : undefined,
-            body: isSet(object.body) ? String(object.body) : "",
-            responseBody: isSet(object.responseBody) ? String(object.responseBody) : "",
-            additionalBindings: Array.isArray(object?.additionalBindings)
+            body: isSet(object.body) ? globalThis.String(object.body) : "",
+            responseBody: isSet(object.responseBody) ? globalThis.String(object.responseBody) : "",
+            additionalBindings: globalThis.Array.isArray(object?.additionalBindings)
                 ? object.additionalBindings.map((e) => exports.HttpRule.fromJSON(e))
                 : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        message.selector !== undefined && (obj.selector = message.selector);
-        message.get !== undefined && (obj.get = message.get);
-        message.put !== undefined && (obj.put = message.put);
-        message.post !== undefined && (obj.post = message.post);
-        message.delete !== undefined && (obj.delete = message.delete);
-        message.patch !== undefined && (obj.patch = message.patch);
-        message.custom !== undefined &&
-            (obj.custom = message.custom ? exports.CustomHttpPattern.toJSON(message.custom) : undefined);
-        message.body !== undefined && (obj.body = message.body);
-        message.responseBody !== undefined && (obj.responseBody = message.responseBody);
-        if (message.additionalBindings) {
-            obj.additionalBindings = message.additionalBindings.map((e) => e ? exports.HttpRule.toJSON(e) : undefined);
+        if (message.selector !== "") {
+            obj.selector = message.selector;
         }
-        else {
-            obj.additionalBindings = [];
+        if (message.get !== undefined) {
+            obj.get = message.get;
+        }
+        if (message.put !== undefined) {
+            obj.put = message.put;
+        }
+        if (message.post !== undefined) {
+            obj.post = message.post;
+        }
+        if (message.delete !== undefined) {
+            obj.delete = message.delete;
+        }
+        if (message.patch !== undefined) {
+            obj.patch = message.patch;
+        }
+        if (message.custom !== undefined) {
+            obj.custom = exports.CustomHttpPattern.toJSON(message.custom);
+        }
+        if (message.body !== "") {
+            obj.body = message.body;
+        }
+        if (message.responseBody !== "") {
+            obj.responseBody = message.responseBody;
+        }
+        if (message.additionalBindings?.length) {
+            obj.additionalBindings = message.additionalBindings.map((e) => exports.HttpRule.toJSON(e));
         }
         return obj;
     },
@@ -260,7 +271,7 @@ function createBaseCustomHttpPattern() {
     return { kind: "", path: "" };
 }
 exports.CustomHttpPattern = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.kind !== "") {
             writer.uint32(10).string(message.kind);
         }
@@ -270,7 +281,7 @@ exports.CustomHttpPattern = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseCustomHttpPattern();
         while (reader.pos < end) {
@@ -297,12 +308,19 @@ exports.CustomHttpPattern = {
         return message;
     },
     fromJSON(object) {
-        return { kind: isSet(object.kind) ? String(object.kind) : "", path: isSet(object.path) ? String(object.path) : "" };
+        return {
+            kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
+            path: isSet(object.path) ? globalThis.String(object.path) : "",
+        };
     },
     toJSON(message) {
         const obj = {};
-        message.kind !== undefined && (obj.kind = message.kind);
-        message.path !== undefined && (obj.path = message.path);
+        if (message.kind !== "") {
+            obj.kind = message.kind;
+        }
+        if (message.path !== "") {
+            obj.path = message.path;
+        }
         return obj;
     },
     create(base) {
@@ -315,10 +333,6 @@ exports.CustomHttpPattern = {
         return message;
     },
 };
-if (minimal_1.default.util.Long !== long_1.default) {
-    minimal_1.default.util.Long = long_1.default;
-    minimal_1.default.configure();
-}
 function isSet(value) {
     return value !== null && value !== undefined;
 }

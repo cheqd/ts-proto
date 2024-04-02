@@ -5,16 +5,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Metadata = exports.StateValue = void 0;
 /* eslint-disable */
-const long_1 = __importDefault(require("long"));
-const minimal_1 = __importDefault(require("protobufjs/minimal"));
-const any_1 = require("../../../google/protobuf/any");
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
+const any_js_1 = require("../../../google/protobuf/any.js");
 function createBaseStateValue() {
     return { data: undefined, metadata: undefined };
 }
 exports.StateValue = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.data !== undefined) {
-            any_1.Any.encode(message.data, writer.uint32(10).fork()).ldelim();
+            any_js_1.Any.encode(message.data, writer.uint32(10).fork()).ldelim();
         }
         if (message.metadata !== undefined) {
             exports.Metadata.encode(message.metadata, writer.uint32(18).fork()).ldelim();
@@ -22,7 +21,7 @@ exports.StateValue = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseStateValue();
         while (reader.pos < end) {
@@ -32,7 +31,7 @@ exports.StateValue = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.data = any_1.Any.decode(reader, reader.uint32());
+                    message.data = any_js_1.Any.decode(reader, reader.uint32());
                     continue;
                 case 2:
                     if (tag !== 18) {
@@ -50,14 +49,18 @@ exports.StateValue = {
     },
     fromJSON(object) {
         return {
-            data: isSet(object.data) ? any_1.Any.fromJSON(object.data) : undefined,
+            data: isSet(object.data) ? any_js_1.Any.fromJSON(object.data) : undefined,
             metadata: isSet(object.metadata) ? exports.Metadata.fromJSON(object.metadata) : undefined,
         };
     },
     toJSON(message) {
         const obj = {};
-        message.data !== undefined && (obj.data = message.data ? any_1.Any.toJSON(message.data) : undefined);
-        message.metadata !== undefined && (obj.metadata = message.metadata ? exports.Metadata.toJSON(message.metadata) : undefined);
+        if (message.data !== undefined) {
+            obj.data = any_js_1.Any.toJSON(message.data);
+        }
+        if (message.metadata !== undefined) {
+            obj.metadata = exports.Metadata.toJSON(message.metadata);
+        }
         return obj;
     },
     create(base) {
@@ -65,7 +68,7 @@ exports.StateValue = {
     },
     fromPartial(object) {
         const message = createBaseStateValue();
-        message.data = (object.data !== undefined && object.data !== null) ? any_1.Any.fromPartial(object.data) : undefined;
+        message.data = (object.data !== undefined && object.data !== null) ? any_js_1.Any.fromPartial(object.data) : undefined;
         message.metadata = (object.metadata !== undefined && object.metadata !== null)
             ? exports.Metadata.fromPartial(object.metadata)
             : undefined;
@@ -76,7 +79,7 @@ function createBaseMetadata() {
     return { created: "", updated: "", deactivated: false, versionId: "", resources: [] };
 }
 exports.Metadata = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.created !== "") {
             writer.uint32(10).string(message.created);
         }
@@ -95,7 +98,7 @@ exports.Metadata = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMetadata();
         while (reader.pos < end) {
@@ -141,24 +144,31 @@ exports.Metadata = {
     },
     fromJSON(object) {
         return {
-            created: isSet(object.created) ? String(object.created) : "",
-            updated: isSet(object.updated) ? String(object.updated) : "",
-            deactivated: isSet(object.deactivated) ? Boolean(object.deactivated) : false,
-            versionId: isSet(object.versionId) ? String(object.versionId) : "",
-            resources: Array.isArray(object?.resources) ? object.resources.map((e) => String(e)) : [],
+            created: isSet(object.created) ? globalThis.String(object.created) : "",
+            updated: isSet(object.updated) ? globalThis.String(object.updated) : "",
+            deactivated: isSet(object.deactivated) ? globalThis.Boolean(object.deactivated) : false,
+            versionId: isSet(object.versionId) ? globalThis.String(object.versionId) : "",
+            resources: globalThis.Array.isArray(object?.resources)
+                ? object.resources.map((e) => globalThis.String(e))
+                : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        message.created !== undefined && (obj.created = message.created);
-        message.updated !== undefined && (obj.updated = message.updated);
-        message.deactivated !== undefined && (obj.deactivated = message.deactivated);
-        message.versionId !== undefined && (obj.versionId = message.versionId);
-        if (message.resources) {
-            obj.resources = message.resources.map((e) => e);
+        if (message.created !== "") {
+            obj.created = message.created;
         }
-        else {
-            obj.resources = [];
+        if (message.updated !== "") {
+            obj.updated = message.updated;
+        }
+        if (message.deactivated === true) {
+            obj.deactivated = message.deactivated;
+        }
+        if (message.versionId !== "") {
+            obj.versionId = message.versionId;
+        }
+        if (message.resources?.length) {
+            obj.resources = message.resources;
         }
         return obj;
     },
@@ -175,10 +185,6 @@ exports.Metadata = {
         return message;
     },
 };
-if (minimal_1.default.util.Long !== long_1.default) {
-    minimal_1.default.util.Long = long_1.default;
-    minimal_1.default.configure();
-}
 function isSet(value) {
     return value !== null && value !== undefined;
 }

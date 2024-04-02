@@ -1,7 +1,6 @@
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import _m0 from "protobufjs/minimal.js";
+import { Coin } from "../../../cosmos/base/v1beta1/coin.js";
 
 /** FeeParams defines the parameters for the cheqd DID module fixed fee */
 export interface FeeParams {
@@ -107,24 +106,30 @@ export const FeeParams = {
       createDid: isSet(object.createDid) ? Coin.fromJSON(object.createDid) : undefined,
       updateDid: isSet(object.updateDid) ? Coin.fromJSON(object.updateDid) : undefined,
       deactivateDid: isSet(object.deactivateDid) ? Coin.fromJSON(object.deactivateDid) : undefined,
-      burnFactor: isSet(object.burnFactor) ? String(object.burnFactor) : "",
+      burnFactor: isSet(object.burnFactor) ? globalThis.String(object.burnFactor) : "",
     };
   },
 
   toJSON(message: FeeParams): unknown {
     const obj: any = {};
-    message.createDid !== undefined && (obj.createDid = message.createDid ? Coin.toJSON(message.createDid) : undefined);
-    message.updateDid !== undefined && (obj.updateDid = message.updateDid ? Coin.toJSON(message.updateDid) : undefined);
-    message.deactivateDid !== undefined &&
-      (obj.deactivateDid = message.deactivateDid ? Coin.toJSON(message.deactivateDid) : undefined);
-    message.burnFactor !== undefined && (obj.burnFactor = message.burnFactor);
+    if (message.createDid !== undefined) {
+      obj.createDid = Coin.toJSON(message.createDid);
+    }
+    if (message.updateDid !== undefined) {
+      obj.updateDid = Coin.toJSON(message.updateDid);
+    }
+    if (message.deactivateDid !== undefined) {
+      obj.deactivateDid = Coin.toJSON(message.deactivateDid);
+    }
+    if (message.burnFactor !== "") {
+      obj.burnFactor = message.burnFactor;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<FeeParams>, I>>(base?: I): FeeParams {
-    return FeeParams.fromPartial(base ?? {});
+    return FeeParams.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<FeeParams>, I>>(object: I): FeeParams {
     const message = createBaseFeeParams();
     message.createDid = (object.createDid !== undefined && object.createDid !== null)
@@ -141,10 +146,10 @@ export const FeeParams = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
@@ -152,11 +157,6 @@ type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

@@ -3,11 +3,46 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UninterpretedOption_NamePart = exports.UninterpretedOption = exports.MethodOptions = exports.ServiceOptions = exports.EnumValueOptions = exports.EnumOptions = exports.OneofOptions = exports.FieldOptions = exports.MessageOptions = exports.FileOptions = exports.MethodDescriptorProto = exports.ServiceDescriptorProto = exports.EnumValueDescriptorProto = exports.EnumDescriptorProto_EnumReservedRange = exports.EnumDescriptorProto = exports.OneofDescriptorProto = exports.FieldDescriptorProto = exports.ExtensionRangeOptions = exports.DescriptorProto_ReservedRange = exports.DescriptorProto_ExtensionRange = exports.DescriptorProto = exports.FileDescriptorProto = exports.FileDescriptorSet = exports.generatedCodeInfo_Annotation_SemanticToJSON = exports.generatedCodeInfo_Annotation_SemanticFromJSON = exports.GeneratedCodeInfo_Annotation_Semantic = exports.methodOptions_IdempotencyLevelToJSON = exports.methodOptions_IdempotencyLevelFromJSON = exports.MethodOptions_IdempotencyLevel = exports.fieldOptions_OptionTargetTypeToJSON = exports.fieldOptions_OptionTargetTypeFromJSON = exports.FieldOptions_OptionTargetType = exports.fieldOptions_OptionRetentionToJSON = exports.fieldOptions_OptionRetentionFromJSON = exports.FieldOptions_OptionRetention = exports.fieldOptions_JSTypeToJSON = exports.fieldOptions_JSTypeFromJSON = exports.FieldOptions_JSType = exports.fieldOptions_CTypeToJSON = exports.fieldOptions_CTypeFromJSON = exports.FieldOptions_CType = exports.fileOptions_OptimizeModeToJSON = exports.fileOptions_OptimizeModeFromJSON = exports.FileOptions_OptimizeMode = exports.fieldDescriptorProto_LabelToJSON = exports.fieldDescriptorProto_LabelFromJSON = exports.FieldDescriptorProto_Label = exports.fieldDescriptorProto_TypeToJSON = exports.fieldDescriptorProto_TypeFromJSON = exports.FieldDescriptorProto_Type = void 0;
-exports.GeneratedCodeInfo_Annotation = exports.GeneratedCodeInfo = exports.SourceCodeInfo_Location = exports.SourceCodeInfo = void 0;
+exports.EnumValueOptions = exports.EnumOptions = exports.OneofOptions = exports.FieldOptions = exports.MessageOptions = exports.FileOptions = exports.MethodDescriptorProto = exports.ServiceDescriptorProto = exports.EnumValueDescriptorProto = exports.EnumDescriptorProto_EnumReservedRange = exports.EnumDescriptorProto = exports.OneofDescriptorProto = exports.FieldDescriptorProto = exports.ExtensionRangeOptions_Declaration = exports.ExtensionRangeOptions = exports.DescriptorProto_ReservedRange = exports.DescriptorProto_ExtensionRange = exports.DescriptorProto = exports.FileDescriptorProto = exports.FileDescriptorSet = exports.generatedCodeInfo_Annotation_SemanticToJSON = exports.generatedCodeInfo_Annotation_SemanticFromJSON = exports.GeneratedCodeInfo_Annotation_Semantic = exports.methodOptions_IdempotencyLevelToJSON = exports.methodOptions_IdempotencyLevelFromJSON = exports.MethodOptions_IdempotencyLevel = exports.fieldOptions_OptionTargetTypeToJSON = exports.fieldOptions_OptionTargetTypeFromJSON = exports.FieldOptions_OptionTargetType = exports.fieldOptions_OptionRetentionToJSON = exports.fieldOptions_OptionRetentionFromJSON = exports.FieldOptions_OptionRetention = exports.fieldOptions_JSTypeToJSON = exports.fieldOptions_JSTypeFromJSON = exports.FieldOptions_JSType = exports.fieldOptions_CTypeToJSON = exports.fieldOptions_CTypeFromJSON = exports.FieldOptions_CType = exports.fileOptions_OptimizeModeToJSON = exports.fileOptions_OptimizeModeFromJSON = exports.FileOptions_OptimizeMode = exports.fieldDescriptorProto_LabelToJSON = exports.fieldDescriptorProto_LabelFromJSON = exports.FieldDescriptorProto_Label = exports.fieldDescriptorProto_TypeToJSON = exports.fieldDescriptorProto_TypeFromJSON = exports.FieldDescriptorProto_Type = exports.extensionRangeOptions_VerificationStateToJSON = exports.extensionRangeOptions_VerificationStateFromJSON = exports.ExtensionRangeOptions_VerificationState = void 0;
+exports.GeneratedCodeInfo_Annotation = exports.GeneratedCodeInfo = exports.SourceCodeInfo_Location = exports.SourceCodeInfo = exports.UninterpretedOption_NamePart = exports.UninterpretedOption = exports.MethodOptions = exports.ServiceOptions = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
-const minimal_1 = __importDefault(require("protobufjs/minimal"));
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
+/** The verification state of the extension range. */
+var ExtensionRangeOptions_VerificationState;
+(function (ExtensionRangeOptions_VerificationState) {
+    /** DECLARATION - All the extensions of the range must be declared. */
+    ExtensionRangeOptions_VerificationState[ExtensionRangeOptions_VerificationState["DECLARATION"] = 0] = "DECLARATION";
+    ExtensionRangeOptions_VerificationState[ExtensionRangeOptions_VerificationState["UNVERIFIED"] = 1] = "UNVERIFIED";
+    ExtensionRangeOptions_VerificationState[ExtensionRangeOptions_VerificationState["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(ExtensionRangeOptions_VerificationState || (exports.ExtensionRangeOptions_VerificationState = ExtensionRangeOptions_VerificationState = {}));
+function extensionRangeOptions_VerificationStateFromJSON(object) {
+    switch (object) {
+        case 0:
+        case "DECLARATION":
+            return ExtensionRangeOptions_VerificationState.DECLARATION;
+        case 1:
+        case "UNVERIFIED":
+            return ExtensionRangeOptions_VerificationState.UNVERIFIED;
+        case -1:
+        case "UNRECOGNIZED":
+        default:
+            return ExtensionRangeOptions_VerificationState.UNRECOGNIZED;
+    }
+}
+exports.extensionRangeOptions_VerificationStateFromJSON = extensionRangeOptions_VerificationStateFromJSON;
+function extensionRangeOptions_VerificationStateToJSON(object) {
+    switch (object) {
+        case ExtensionRangeOptions_VerificationState.DECLARATION:
+            return "DECLARATION";
+        case ExtensionRangeOptions_VerificationState.UNVERIFIED:
+            return "UNVERIFIED";
+        case ExtensionRangeOptions_VerificationState.UNRECOGNIZED:
+        default:
+            return "UNRECOGNIZED";
+    }
+}
+exports.extensionRangeOptions_VerificationStateToJSON = extensionRangeOptions_VerificationStateToJSON;
 var FieldDescriptorProto_Type;
 (function (FieldDescriptorProto_Type) {
     /**
@@ -246,6 +281,14 @@ var FieldOptions_CType;
 (function (FieldOptions_CType) {
     /** STRING - Default mode. */
     FieldOptions_CType[FieldOptions_CType["STRING"] = 0] = "STRING";
+    /**
+     * CORD - The option [ctype=CORD] may be applied to a non-repeated field of type
+     * "bytes". It indicates that in C++, the data should be stored in a Cord
+     * instead of a string.  For very large strings, this may reduce memory
+     * fragmentation. It may also allow better performance when parsing from a
+     * Cord, or when parsing with aliasing enabled, as the parsed Cord may then
+     * alias the original buffer.
+     */
     FieldOptions_CType[FieldOptions_CType["CORD"] = 1] = "CORD";
     FieldOptions_CType[FieldOptions_CType["STRING_PIECE"] = 2] = "STRING_PIECE";
     FieldOptions_CType[FieldOptions_CType["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
@@ -551,14 +594,14 @@ function createBaseFileDescriptorSet() {
     return { file: [] };
 }
 exports.FileDescriptorSet = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         for (const v of message.file) {
             exports.FileDescriptorProto.encode(v, writer.uint32(10).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseFileDescriptorSet();
         while (reader.pos < end) {
@@ -579,15 +622,14 @@ exports.FileDescriptorSet = {
         return message;
     },
     fromJSON(object) {
-        return { file: Array.isArray(object?.file) ? object.file.map((e) => exports.FileDescriptorProto.fromJSON(e)) : [] };
+        return {
+            file: globalThis.Array.isArray(object?.file) ? object.file.map((e) => exports.FileDescriptorProto.fromJSON(e)) : [],
+        };
     },
     toJSON(message) {
         const obj = {};
-        if (message.file) {
-            obj.file = message.file.map((e) => e ? exports.FileDescriptorProto.toJSON(e) : undefined);
-        }
-        else {
-            obj.file = [];
+        if (message.file?.length) {
+            obj.file = message.file.map((e) => exports.FileDescriptorProto.toJSON(e));
         }
         return obj;
     },
@@ -618,7 +660,7 @@ function createBaseFileDescriptorProto() {
     };
 }
 exports.FileDescriptorProto = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.name !== "") {
             writer.uint32(10).string(message.name);
         }
@@ -665,7 +707,7 @@ exports.FileDescriptorProto = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseFileDescriptorProto();
         while (reader.pos < end) {
@@ -773,78 +815,76 @@ exports.FileDescriptorProto = {
     },
     fromJSON(object) {
         return {
-            name: isSet(object.name) ? String(object.name) : "",
-            package: isSet(object.package) ? String(object.package) : "",
-            dependency: Array.isArray(object?.dependency) ? object.dependency.map((e) => String(e)) : [],
-            publicDependency: Array.isArray(object?.publicDependency)
-                ? object.publicDependency.map((e) => Number(e))
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            package: isSet(object.package) ? globalThis.String(object.package) : "",
+            dependency: globalThis.Array.isArray(object?.dependency)
+                ? object.dependency.map((e) => globalThis.String(e))
                 : [],
-            weakDependency: Array.isArray(object?.weakDependency) ? object.weakDependency.map((e) => Number(e)) : [],
-            messageType: Array.isArray(object?.messageType)
+            publicDependency: globalThis.Array.isArray(object?.publicDependency)
+                ? object.publicDependency.map((e) => globalThis.Number(e))
+                : [],
+            weakDependency: globalThis.Array.isArray(object?.weakDependency)
+                ? object.weakDependency.map((e) => globalThis.Number(e))
+                : [],
+            messageType: globalThis.Array.isArray(object?.messageType)
                 ? object.messageType.map((e) => exports.DescriptorProto.fromJSON(e))
                 : [],
-            enumType: Array.isArray(object?.enumType) ? object.enumType.map((e) => exports.EnumDescriptorProto.fromJSON(e)) : [],
-            service: Array.isArray(object?.service) ? object.service.map((e) => exports.ServiceDescriptorProto.fromJSON(e)) : [],
-            extension: Array.isArray(object?.extension)
+            enumType: globalThis.Array.isArray(object?.enumType)
+                ? object.enumType.map((e) => exports.EnumDescriptorProto.fromJSON(e))
+                : [],
+            service: globalThis.Array.isArray(object?.service)
+                ? object.service.map((e) => exports.ServiceDescriptorProto.fromJSON(e))
+                : [],
+            extension: globalThis.Array.isArray(object?.extension)
                 ? object.extension.map((e) => exports.FieldDescriptorProto.fromJSON(e))
                 : [],
             options: isSet(object.options) ? exports.FileOptions.fromJSON(object.options) : undefined,
             sourceCodeInfo: isSet(object.sourceCodeInfo) ? exports.SourceCodeInfo.fromJSON(object.sourceCodeInfo) : undefined,
-            syntax: isSet(object.syntax) ? String(object.syntax) : "",
-            edition: isSet(object.edition) ? String(object.edition) : "",
+            syntax: isSet(object.syntax) ? globalThis.String(object.syntax) : "",
+            edition: isSet(object.edition) ? globalThis.String(object.edition) : "",
         };
     },
     toJSON(message) {
         const obj = {};
-        message.name !== undefined && (obj.name = message.name);
-        message.package !== undefined && (obj.package = message.package);
-        if (message.dependency) {
-            obj.dependency = message.dependency.map((e) => e);
+        if (message.name !== "") {
+            obj.name = message.name;
         }
-        else {
-            obj.dependency = [];
+        if (message.package !== "") {
+            obj.package = message.package;
         }
-        if (message.publicDependency) {
+        if (message.dependency?.length) {
+            obj.dependency = message.dependency;
+        }
+        if (message.publicDependency?.length) {
             obj.publicDependency = message.publicDependency.map((e) => Math.round(e));
         }
-        else {
-            obj.publicDependency = [];
-        }
-        if (message.weakDependency) {
+        if (message.weakDependency?.length) {
             obj.weakDependency = message.weakDependency.map((e) => Math.round(e));
         }
-        else {
-            obj.weakDependency = [];
+        if (message.messageType?.length) {
+            obj.messageType = message.messageType.map((e) => exports.DescriptorProto.toJSON(e));
         }
-        if (message.messageType) {
-            obj.messageType = message.messageType.map((e) => e ? exports.DescriptorProto.toJSON(e) : undefined);
+        if (message.enumType?.length) {
+            obj.enumType = message.enumType.map((e) => exports.EnumDescriptorProto.toJSON(e));
         }
-        else {
-            obj.messageType = [];
+        if (message.service?.length) {
+            obj.service = message.service.map((e) => exports.ServiceDescriptorProto.toJSON(e));
         }
-        if (message.enumType) {
-            obj.enumType = message.enumType.map((e) => e ? exports.EnumDescriptorProto.toJSON(e) : undefined);
+        if (message.extension?.length) {
+            obj.extension = message.extension.map((e) => exports.FieldDescriptorProto.toJSON(e));
         }
-        else {
-            obj.enumType = [];
+        if (message.options !== undefined) {
+            obj.options = exports.FileOptions.toJSON(message.options);
         }
-        if (message.service) {
-            obj.service = message.service.map((e) => e ? exports.ServiceDescriptorProto.toJSON(e) : undefined);
+        if (message.sourceCodeInfo !== undefined) {
+            obj.sourceCodeInfo = exports.SourceCodeInfo.toJSON(message.sourceCodeInfo);
         }
-        else {
-            obj.service = [];
+        if (message.syntax !== "") {
+            obj.syntax = message.syntax;
         }
-        if (message.extension) {
-            obj.extension = message.extension.map((e) => e ? exports.FieldDescriptorProto.toJSON(e) : undefined);
+        if (message.edition !== "") {
+            obj.edition = message.edition;
         }
-        else {
-            obj.extension = [];
-        }
-        message.options !== undefined && (obj.options = message.options ? exports.FileOptions.toJSON(message.options) : undefined);
-        message.sourceCodeInfo !== undefined &&
-            (obj.sourceCodeInfo = message.sourceCodeInfo ? exports.SourceCodeInfo.toJSON(message.sourceCodeInfo) : undefined);
-        message.syntax !== undefined && (obj.syntax = message.syntax);
-        message.edition !== undefined && (obj.edition = message.edition);
         return obj;
     },
     create(base) {
@@ -887,7 +927,7 @@ function createBaseDescriptorProto() {
     };
 }
 exports.DescriptorProto = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.name !== "") {
             writer.uint32(10).string(message.name);
         }
@@ -921,7 +961,7 @@ exports.DescriptorProto = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseDescriptorProto();
         while (reader.pos < end) {
@@ -997,80 +1037,65 @@ exports.DescriptorProto = {
     },
     fromJSON(object) {
         return {
-            name: isSet(object.name) ? String(object.name) : "",
-            field: Array.isArray(object?.field) ? object.field.map((e) => exports.FieldDescriptorProto.fromJSON(e)) : [],
-            extension: Array.isArray(object?.extension)
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            field: globalThis.Array.isArray(object?.field)
+                ? object.field.map((e) => exports.FieldDescriptorProto.fromJSON(e))
+                : [],
+            extension: globalThis.Array.isArray(object?.extension)
                 ? object.extension.map((e) => exports.FieldDescriptorProto.fromJSON(e))
                 : [],
-            nestedType: Array.isArray(object?.nestedType)
+            nestedType: globalThis.Array.isArray(object?.nestedType)
                 ? object.nestedType.map((e) => exports.DescriptorProto.fromJSON(e))
                 : [],
-            enumType: Array.isArray(object?.enumType) ? object.enumType.map((e) => exports.EnumDescriptorProto.fromJSON(e)) : [],
-            extensionRange: Array.isArray(object?.extensionRange)
+            enumType: globalThis.Array.isArray(object?.enumType)
+                ? object.enumType.map((e) => exports.EnumDescriptorProto.fromJSON(e))
+                : [],
+            extensionRange: globalThis.Array.isArray(object?.extensionRange)
                 ? object.extensionRange.map((e) => exports.DescriptorProto_ExtensionRange.fromJSON(e))
                 : [],
-            oneofDecl: Array.isArray(object?.oneofDecl)
+            oneofDecl: globalThis.Array.isArray(object?.oneofDecl)
                 ? object.oneofDecl.map((e) => exports.OneofDescriptorProto.fromJSON(e))
                 : [],
             options: isSet(object.options) ? exports.MessageOptions.fromJSON(object.options) : undefined,
-            reservedRange: Array.isArray(object?.reservedRange)
+            reservedRange: globalThis.Array.isArray(object?.reservedRange)
                 ? object.reservedRange.map((e) => exports.DescriptorProto_ReservedRange.fromJSON(e))
                 : [],
-            reservedName: Array.isArray(object?.reservedName) ? object.reservedName.map((e) => String(e)) : [],
+            reservedName: globalThis.Array.isArray(object?.reservedName)
+                ? object.reservedName.map((e) => globalThis.String(e))
+                : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        message.name !== undefined && (obj.name = message.name);
-        if (message.field) {
-            obj.field = message.field.map((e) => e ? exports.FieldDescriptorProto.toJSON(e) : undefined);
+        if (message.name !== "") {
+            obj.name = message.name;
         }
-        else {
-            obj.field = [];
+        if (message.field?.length) {
+            obj.field = message.field.map((e) => exports.FieldDescriptorProto.toJSON(e));
         }
-        if (message.extension) {
-            obj.extension = message.extension.map((e) => e ? exports.FieldDescriptorProto.toJSON(e) : undefined);
+        if (message.extension?.length) {
+            obj.extension = message.extension.map((e) => exports.FieldDescriptorProto.toJSON(e));
         }
-        else {
-            obj.extension = [];
+        if (message.nestedType?.length) {
+            obj.nestedType = message.nestedType.map((e) => exports.DescriptorProto.toJSON(e));
         }
-        if (message.nestedType) {
-            obj.nestedType = message.nestedType.map((e) => e ? exports.DescriptorProto.toJSON(e) : undefined);
+        if (message.enumType?.length) {
+            obj.enumType = message.enumType.map((e) => exports.EnumDescriptorProto.toJSON(e));
         }
-        else {
-            obj.nestedType = [];
+        if (message.extensionRange?.length) {
+            obj.extensionRange = message.extensionRange.map((e) => exports.DescriptorProto_ExtensionRange.toJSON(e));
         }
-        if (message.enumType) {
-            obj.enumType = message.enumType.map((e) => e ? exports.EnumDescriptorProto.toJSON(e) : undefined);
+        if (message.oneofDecl?.length) {
+            obj.oneofDecl = message.oneofDecl.map((e) => exports.OneofDescriptorProto.toJSON(e));
         }
-        else {
-            obj.enumType = [];
+        if (message.options !== undefined) {
+            obj.options = exports.MessageOptions.toJSON(message.options);
         }
-        if (message.extensionRange) {
-            obj.extensionRange = message.extensionRange.map((e) => e ? exports.DescriptorProto_ExtensionRange.toJSON(e) : undefined);
+        if (message.reservedRange?.length) {
+            obj.reservedRange = message.reservedRange.map((e) => exports.DescriptorProto_ReservedRange.toJSON(e));
         }
-        else {
-            obj.extensionRange = [];
-        }
-        if (message.oneofDecl) {
-            obj.oneofDecl = message.oneofDecl.map((e) => e ? exports.OneofDescriptorProto.toJSON(e) : undefined);
-        }
-        else {
-            obj.oneofDecl = [];
-        }
-        message.options !== undefined &&
-            (obj.options = message.options ? exports.MessageOptions.toJSON(message.options) : undefined);
-        if (message.reservedRange) {
-            obj.reservedRange = message.reservedRange.map((e) => e ? exports.DescriptorProto_ReservedRange.toJSON(e) : undefined);
-        }
-        else {
-            obj.reservedRange = [];
-        }
-        if (message.reservedName) {
-            obj.reservedName = message.reservedName.map((e) => e);
-        }
-        else {
-            obj.reservedName = [];
+        if (message.reservedName?.length) {
+            obj.reservedName = message.reservedName;
         }
         return obj;
     },
@@ -1098,7 +1123,7 @@ function createBaseDescriptorProto_ExtensionRange() {
     return { start: 0, end: 0, options: undefined };
 }
 exports.DescriptorProto_ExtensionRange = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.start !== 0) {
             writer.uint32(8).int32(message.start);
         }
@@ -1111,7 +1136,7 @@ exports.DescriptorProto_ExtensionRange = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseDescriptorProto_ExtensionRange();
         while (reader.pos < end) {
@@ -1145,17 +1170,22 @@ exports.DescriptorProto_ExtensionRange = {
     },
     fromJSON(object) {
         return {
-            start: isSet(object.start) ? Number(object.start) : 0,
-            end: isSet(object.end) ? Number(object.end) : 0,
+            start: isSet(object.start) ? globalThis.Number(object.start) : 0,
+            end: isSet(object.end) ? globalThis.Number(object.end) : 0,
             options: isSet(object.options) ? exports.ExtensionRangeOptions.fromJSON(object.options) : undefined,
         };
     },
     toJSON(message) {
         const obj = {};
-        message.start !== undefined && (obj.start = Math.round(message.start));
-        message.end !== undefined && (obj.end = Math.round(message.end));
-        message.options !== undefined &&
-            (obj.options = message.options ? exports.ExtensionRangeOptions.toJSON(message.options) : undefined);
+        if (message.start !== 0) {
+            obj.start = Math.round(message.start);
+        }
+        if (message.end !== 0) {
+            obj.end = Math.round(message.end);
+        }
+        if (message.options !== undefined) {
+            obj.options = exports.ExtensionRangeOptions.toJSON(message.options);
+        }
         return obj;
     },
     create(base) {
@@ -1175,7 +1205,7 @@ function createBaseDescriptorProto_ReservedRange() {
     return { start: 0, end: 0 };
 }
 exports.DescriptorProto_ReservedRange = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.start !== 0) {
             writer.uint32(8).int32(message.start);
         }
@@ -1185,7 +1215,7 @@ exports.DescriptorProto_ReservedRange = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseDescriptorProto_ReservedRange();
         while (reader.pos < end) {
@@ -1212,12 +1242,19 @@ exports.DescriptorProto_ReservedRange = {
         return message;
     },
     fromJSON(object) {
-        return { start: isSet(object.start) ? Number(object.start) : 0, end: isSet(object.end) ? Number(object.end) : 0 };
+        return {
+            start: isSet(object.start) ? globalThis.Number(object.start) : 0,
+            end: isSet(object.end) ? globalThis.Number(object.end) : 0,
+        };
     },
     toJSON(message) {
         const obj = {};
-        message.start !== undefined && (obj.start = Math.round(message.start));
-        message.end !== undefined && (obj.end = Math.round(message.end));
+        if (message.start !== 0) {
+            obj.start = Math.round(message.start);
+        }
+        if (message.end !== 0) {
+            obj.end = Math.round(message.end);
+        }
         return obj;
     },
     create(base) {
@@ -1231,17 +1268,23 @@ exports.DescriptorProto_ReservedRange = {
     },
 };
 function createBaseExtensionRangeOptions() {
-    return { uninterpretedOption: [] };
+    return { uninterpretedOption: [], declaration: [], verification: 0 };
 }
 exports.ExtensionRangeOptions = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         for (const v of message.uninterpretedOption) {
             exports.UninterpretedOption.encode(v, writer.uint32(7994).fork()).ldelim();
+        }
+        for (const v of message.declaration) {
+            exports.ExtensionRangeOptions_Declaration.encode(v, writer.uint32(18).fork()).ldelim();
+        }
+        if (message.verification !== 0) {
+            writer.uint32(24).int32(message.verification);
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseExtensionRangeOptions();
         while (reader.pos < end) {
@@ -1253,6 +1296,18 @@ exports.ExtensionRangeOptions = {
                     }
                     message.uninterpretedOption.push(exports.UninterpretedOption.decode(reader, reader.uint32()));
                     continue;
+                case 2:
+                    if (tag !== 18) {
+                        break;
+                    }
+                    message.declaration.push(exports.ExtensionRangeOptions_Declaration.decode(reader, reader.uint32()));
+                    continue;
+                case 3:
+                    if (tag !== 24) {
+                        break;
+                    }
+                    message.verification = reader.int32();
+                    continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -1263,18 +1318,27 @@ exports.ExtensionRangeOptions = {
     },
     fromJSON(object) {
         return {
-            uninterpretedOption: Array.isArray(object?.uninterpretedOption)
+            uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
                 ? object.uninterpretedOption.map((e) => exports.UninterpretedOption.fromJSON(e))
                 : [],
+            declaration: globalThis.Array.isArray(object?.declaration)
+                ? object.declaration.map((e) => exports.ExtensionRangeOptions_Declaration.fromJSON(e))
+                : [],
+            verification: isSet(object.verification)
+                ? extensionRangeOptions_VerificationStateFromJSON(object.verification)
+                : 0,
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? exports.UninterpretedOption.toJSON(e) : undefined);
+        if (message.uninterpretedOption?.length) {
+            obj.uninterpretedOption = message.uninterpretedOption.map((e) => exports.UninterpretedOption.toJSON(e));
         }
-        else {
-            obj.uninterpretedOption = [];
+        if (message.declaration?.length) {
+            obj.declaration = message.declaration.map((e) => exports.ExtensionRangeOptions_Declaration.toJSON(e));
+        }
+        if (message.verification !== 0) {
+            obj.verification = extensionRangeOptions_VerificationStateToJSON(message.verification);
         }
         return obj;
     },
@@ -1284,6 +1348,130 @@ exports.ExtensionRangeOptions = {
     fromPartial(object) {
         const message = createBaseExtensionRangeOptions();
         message.uninterpretedOption = object.uninterpretedOption?.map((e) => exports.UninterpretedOption.fromPartial(e)) || [];
+        message.declaration = object.declaration?.map((e) => exports.ExtensionRangeOptions_Declaration.fromPartial(e)) || [];
+        message.verification = object.verification ?? 0;
+        return message;
+    },
+};
+function createBaseExtensionRangeOptions_Declaration() {
+    return { number: 0, fullName: "", type: "", isRepeated: false, reserved: false, repeated: false };
+}
+exports.ExtensionRangeOptions_Declaration = {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
+        if (message.number !== 0) {
+            writer.uint32(8).int32(message.number);
+        }
+        if (message.fullName !== "") {
+            writer.uint32(18).string(message.fullName);
+        }
+        if (message.type !== "") {
+            writer.uint32(26).string(message.type);
+        }
+        if (message.isRepeated === true) {
+            writer.uint32(32).bool(message.isRepeated);
+        }
+        if (message.reserved === true) {
+            writer.uint32(40).bool(message.reserved);
+        }
+        if (message.repeated === true) {
+            writer.uint32(48).bool(message.repeated);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseExtensionRangeOptions_Declaration();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    if (tag !== 8) {
+                        break;
+                    }
+                    message.number = reader.int32();
+                    continue;
+                case 2:
+                    if (tag !== 18) {
+                        break;
+                    }
+                    message.fullName = reader.string();
+                    continue;
+                case 3:
+                    if (tag !== 26) {
+                        break;
+                    }
+                    message.type = reader.string();
+                    continue;
+                case 4:
+                    if (tag !== 32) {
+                        break;
+                    }
+                    message.isRepeated = reader.bool();
+                    continue;
+                case 5:
+                    if (tag !== 40) {
+                        break;
+                    }
+                    message.reserved = reader.bool();
+                    continue;
+                case 6:
+                    if (tag !== 48) {
+                        break;
+                    }
+                    message.repeated = reader.bool();
+                    continue;
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skipType(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            number: isSet(object.number) ? globalThis.Number(object.number) : 0,
+            fullName: isSet(object.fullName) ? globalThis.String(object.fullName) : "",
+            type: isSet(object.type) ? globalThis.String(object.type) : "",
+            isRepeated: isSet(object.isRepeated) ? globalThis.Boolean(object.isRepeated) : false,
+            reserved: isSet(object.reserved) ? globalThis.Boolean(object.reserved) : false,
+            repeated: isSet(object.repeated) ? globalThis.Boolean(object.repeated) : false,
+        };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.number !== 0) {
+            obj.number = Math.round(message.number);
+        }
+        if (message.fullName !== "") {
+            obj.fullName = message.fullName;
+        }
+        if (message.type !== "") {
+            obj.type = message.type;
+        }
+        if (message.isRepeated === true) {
+            obj.isRepeated = message.isRepeated;
+        }
+        if (message.reserved === true) {
+            obj.reserved = message.reserved;
+        }
+        if (message.repeated === true) {
+            obj.repeated = message.repeated;
+        }
+        return obj;
+    },
+    create(base) {
+        return exports.ExtensionRangeOptions_Declaration.fromPartial(base ?? {});
+    },
+    fromPartial(object) {
+        const message = createBaseExtensionRangeOptions_Declaration();
+        message.number = object.number ?? 0;
+        message.fullName = object.fullName ?? "";
+        message.type = object.type ?? "";
+        message.isRepeated = object.isRepeated ?? false;
+        message.reserved = object.reserved ?? false;
+        message.repeated = object.repeated ?? false;
         return message;
     },
 };
@@ -1303,7 +1491,7 @@ function createBaseFieldDescriptorProto() {
     };
 }
 exports.FieldDescriptorProto = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.name !== "") {
             writer.uint32(10).string(message.name);
         }
@@ -1340,7 +1528,7 @@ exports.FieldDescriptorProto = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseFieldDescriptorProto();
         while (reader.pos < end) {
@@ -1422,32 +1610,54 @@ exports.FieldDescriptorProto = {
     },
     fromJSON(object) {
         return {
-            name: isSet(object.name) ? String(object.name) : "",
-            number: isSet(object.number) ? Number(object.number) : 0,
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            number: isSet(object.number) ? globalThis.Number(object.number) : 0,
             label: isSet(object.label) ? fieldDescriptorProto_LabelFromJSON(object.label) : 1,
             type: isSet(object.type) ? fieldDescriptorProto_TypeFromJSON(object.type) : 1,
-            typeName: isSet(object.typeName) ? String(object.typeName) : "",
-            extendee: isSet(object.extendee) ? String(object.extendee) : "",
-            defaultValue: isSet(object.defaultValue) ? String(object.defaultValue) : "",
-            oneofIndex: isSet(object.oneofIndex) ? Number(object.oneofIndex) : 0,
-            jsonName: isSet(object.jsonName) ? String(object.jsonName) : "",
+            typeName: isSet(object.typeName) ? globalThis.String(object.typeName) : "",
+            extendee: isSet(object.extendee) ? globalThis.String(object.extendee) : "",
+            defaultValue: isSet(object.defaultValue) ? globalThis.String(object.defaultValue) : "",
+            oneofIndex: isSet(object.oneofIndex) ? globalThis.Number(object.oneofIndex) : 0,
+            jsonName: isSet(object.jsonName) ? globalThis.String(object.jsonName) : "",
             options: isSet(object.options) ? exports.FieldOptions.fromJSON(object.options) : undefined,
-            proto3Optional: isSet(object.proto3Optional) ? Boolean(object.proto3Optional) : false,
+            proto3Optional: isSet(object.proto3Optional) ? globalThis.Boolean(object.proto3Optional) : false,
         };
     },
     toJSON(message) {
         const obj = {};
-        message.name !== undefined && (obj.name = message.name);
-        message.number !== undefined && (obj.number = Math.round(message.number));
-        message.label !== undefined && (obj.label = fieldDescriptorProto_LabelToJSON(message.label));
-        message.type !== undefined && (obj.type = fieldDescriptorProto_TypeToJSON(message.type));
-        message.typeName !== undefined && (obj.typeName = message.typeName);
-        message.extendee !== undefined && (obj.extendee = message.extendee);
-        message.defaultValue !== undefined && (obj.defaultValue = message.defaultValue);
-        message.oneofIndex !== undefined && (obj.oneofIndex = Math.round(message.oneofIndex));
-        message.jsonName !== undefined && (obj.jsonName = message.jsonName);
-        message.options !== undefined && (obj.options = message.options ? exports.FieldOptions.toJSON(message.options) : undefined);
-        message.proto3Optional !== undefined && (obj.proto3Optional = message.proto3Optional);
+        if (message.name !== "") {
+            obj.name = message.name;
+        }
+        if (message.number !== 0) {
+            obj.number = Math.round(message.number);
+        }
+        if (message.label !== 1) {
+            obj.label = fieldDescriptorProto_LabelToJSON(message.label);
+        }
+        if (message.type !== 1) {
+            obj.type = fieldDescriptorProto_TypeToJSON(message.type);
+        }
+        if (message.typeName !== "") {
+            obj.typeName = message.typeName;
+        }
+        if (message.extendee !== "") {
+            obj.extendee = message.extendee;
+        }
+        if (message.defaultValue !== "") {
+            obj.defaultValue = message.defaultValue;
+        }
+        if (message.oneofIndex !== 0) {
+            obj.oneofIndex = Math.round(message.oneofIndex);
+        }
+        if (message.jsonName !== "") {
+            obj.jsonName = message.jsonName;
+        }
+        if (message.options !== undefined) {
+            obj.options = exports.FieldOptions.toJSON(message.options);
+        }
+        if (message.proto3Optional === true) {
+            obj.proto3Optional = message.proto3Optional;
+        }
         return obj;
     },
     create(base) {
@@ -1475,7 +1685,7 @@ function createBaseOneofDescriptorProto() {
     return { name: "", options: undefined };
 }
 exports.OneofDescriptorProto = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.name !== "") {
             writer.uint32(10).string(message.name);
         }
@@ -1485,7 +1695,7 @@ exports.OneofDescriptorProto = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseOneofDescriptorProto();
         while (reader.pos < end) {
@@ -1513,14 +1723,18 @@ exports.OneofDescriptorProto = {
     },
     fromJSON(object) {
         return {
-            name: isSet(object.name) ? String(object.name) : "",
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
             options: isSet(object.options) ? exports.OneofOptions.fromJSON(object.options) : undefined,
         };
     },
     toJSON(message) {
         const obj = {};
-        message.name !== undefined && (obj.name = message.name);
-        message.options !== undefined && (obj.options = message.options ? exports.OneofOptions.toJSON(message.options) : undefined);
+        if (message.name !== "") {
+            obj.name = message.name;
+        }
+        if (message.options !== undefined) {
+            obj.options = exports.OneofOptions.toJSON(message.options);
+        }
         return obj;
     },
     create(base) {
@@ -1539,7 +1753,7 @@ function createBaseEnumDescriptorProto() {
     return { name: "", value: [], options: undefined, reservedRange: [], reservedName: [] };
 }
 exports.EnumDescriptorProto = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.name !== "") {
             writer.uint32(10).string(message.name);
         }
@@ -1558,7 +1772,7 @@ exports.EnumDescriptorProto = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseEnumDescriptorProto();
         while (reader.pos < end) {
@@ -1604,36 +1818,35 @@ exports.EnumDescriptorProto = {
     },
     fromJSON(object) {
         return {
-            name: isSet(object.name) ? String(object.name) : "",
-            value: Array.isArray(object?.value) ? object.value.map((e) => exports.EnumValueDescriptorProto.fromJSON(e)) : [],
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            value: globalThis.Array.isArray(object?.value)
+                ? object.value.map((e) => exports.EnumValueDescriptorProto.fromJSON(e))
+                : [],
             options: isSet(object.options) ? exports.EnumOptions.fromJSON(object.options) : undefined,
-            reservedRange: Array.isArray(object?.reservedRange)
+            reservedRange: globalThis.Array.isArray(object?.reservedRange)
                 ? object.reservedRange.map((e) => exports.EnumDescriptorProto_EnumReservedRange.fromJSON(e))
                 : [],
-            reservedName: Array.isArray(object?.reservedName) ? object.reservedName.map((e) => String(e)) : [],
+            reservedName: globalThis.Array.isArray(object?.reservedName)
+                ? object.reservedName.map((e) => globalThis.String(e))
+                : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        message.name !== undefined && (obj.name = message.name);
-        if (message.value) {
-            obj.value = message.value.map((e) => e ? exports.EnumValueDescriptorProto.toJSON(e) : undefined);
+        if (message.name !== "") {
+            obj.name = message.name;
         }
-        else {
-            obj.value = [];
+        if (message.value?.length) {
+            obj.value = message.value.map((e) => exports.EnumValueDescriptorProto.toJSON(e));
         }
-        message.options !== undefined && (obj.options = message.options ? exports.EnumOptions.toJSON(message.options) : undefined);
-        if (message.reservedRange) {
-            obj.reservedRange = message.reservedRange.map((e) => e ? exports.EnumDescriptorProto_EnumReservedRange.toJSON(e) : undefined);
+        if (message.options !== undefined) {
+            obj.options = exports.EnumOptions.toJSON(message.options);
         }
-        else {
-            obj.reservedRange = [];
+        if (message.reservedRange?.length) {
+            obj.reservedRange = message.reservedRange.map((e) => exports.EnumDescriptorProto_EnumReservedRange.toJSON(e));
         }
-        if (message.reservedName) {
-            obj.reservedName = message.reservedName.map((e) => e);
-        }
-        else {
-            obj.reservedName = [];
+        if (message.reservedName?.length) {
+            obj.reservedName = message.reservedName;
         }
         return obj;
     },
@@ -1657,7 +1870,7 @@ function createBaseEnumDescriptorProto_EnumReservedRange() {
     return { start: 0, end: 0 };
 }
 exports.EnumDescriptorProto_EnumReservedRange = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.start !== 0) {
             writer.uint32(8).int32(message.start);
         }
@@ -1667,7 +1880,7 @@ exports.EnumDescriptorProto_EnumReservedRange = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseEnumDescriptorProto_EnumReservedRange();
         while (reader.pos < end) {
@@ -1694,12 +1907,19 @@ exports.EnumDescriptorProto_EnumReservedRange = {
         return message;
     },
     fromJSON(object) {
-        return { start: isSet(object.start) ? Number(object.start) : 0, end: isSet(object.end) ? Number(object.end) : 0 };
+        return {
+            start: isSet(object.start) ? globalThis.Number(object.start) : 0,
+            end: isSet(object.end) ? globalThis.Number(object.end) : 0,
+        };
     },
     toJSON(message) {
         const obj = {};
-        message.start !== undefined && (obj.start = Math.round(message.start));
-        message.end !== undefined && (obj.end = Math.round(message.end));
+        if (message.start !== 0) {
+            obj.start = Math.round(message.start);
+        }
+        if (message.end !== 0) {
+            obj.end = Math.round(message.end);
+        }
         return obj;
     },
     create(base) {
@@ -1716,7 +1936,7 @@ function createBaseEnumValueDescriptorProto() {
     return { name: "", number: 0, options: undefined };
 }
 exports.EnumValueDescriptorProto = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.name !== "") {
             writer.uint32(10).string(message.name);
         }
@@ -1729,7 +1949,7 @@ exports.EnumValueDescriptorProto = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseEnumValueDescriptorProto();
         while (reader.pos < end) {
@@ -1763,17 +1983,22 @@ exports.EnumValueDescriptorProto = {
     },
     fromJSON(object) {
         return {
-            name: isSet(object.name) ? String(object.name) : "",
-            number: isSet(object.number) ? Number(object.number) : 0,
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            number: isSet(object.number) ? globalThis.Number(object.number) : 0,
             options: isSet(object.options) ? exports.EnumValueOptions.fromJSON(object.options) : undefined,
         };
     },
     toJSON(message) {
         const obj = {};
-        message.name !== undefined && (obj.name = message.name);
-        message.number !== undefined && (obj.number = Math.round(message.number));
-        message.options !== undefined &&
-            (obj.options = message.options ? exports.EnumValueOptions.toJSON(message.options) : undefined);
+        if (message.name !== "") {
+            obj.name = message.name;
+        }
+        if (message.number !== 0) {
+            obj.number = Math.round(message.number);
+        }
+        if (message.options !== undefined) {
+            obj.options = exports.EnumValueOptions.toJSON(message.options);
+        }
         return obj;
     },
     create(base) {
@@ -1793,7 +2018,7 @@ function createBaseServiceDescriptorProto() {
     return { name: "", method: [], options: undefined };
 }
 exports.ServiceDescriptorProto = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.name !== "") {
             writer.uint32(10).string(message.name);
         }
@@ -1806,7 +2031,7 @@ exports.ServiceDescriptorProto = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseServiceDescriptorProto();
         while (reader.pos < end) {
@@ -1840,22 +2065,24 @@ exports.ServiceDescriptorProto = {
     },
     fromJSON(object) {
         return {
-            name: isSet(object.name) ? String(object.name) : "",
-            method: Array.isArray(object?.method) ? object.method.map((e) => exports.MethodDescriptorProto.fromJSON(e)) : [],
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            method: globalThis.Array.isArray(object?.method)
+                ? object.method.map((e) => exports.MethodDescriptorProto.fromJSON(e))
+                : [],
             options: isSet(object.options) ? exports.ServiceOptions.fromJSON(object.options) : undefined,
         };
     },
     toJSON(message) {
         const obj = {};
-        message.name !== undefined && (obj.name = message.name);
-        if (message.method) {
-            obj.method = message.method.map((e) => e ? exports.MethodDescriptorProto.toJSON(e) : undefined);
+        if (message.name !== "") {
+            obj.name = message.name;
         }
-        else {
-            obj.method = [];
+        if (message.method?.length) {
+            obj.method = message.method.map((e) => exports.MethodDescriptorProto.toJSON(e));
         }
-        message.options !== undefined &&
-            (obj.options = message.options ? exports.ServiceOptions.toJSON(message.options) : undefined);
+        if (message.options !== undefined) {
+            obj.options = exports.ServiceOptions.toJSON(message.options);
+        }
         return obj;
     },
     create(base) {
@@ -1882,7 +2109,7 @@ function createBaseMethodDescriptorProto() {
     };
 }
 exports.MethodDescriptorProto = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.name !== "") {
             writer.uint32(10).string(message.name);
         }
@@ -1904,7 +2131,7 @@ exports.MethodDescriptorProto = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMethodDescriptorProto();
         while (reader.pos < end) {
@@ -1956,23 +2183,34 @@ exports.MethodDescriptorProto = {
     },
     fromJSON(object) {
         return {
-            name: isSet(object.name) ? String(object.name) : "",
-            inputType: isSet(object.inputType) ? String(object.inputType) : "",
-            outputType: isSet(object.outputType) ? String(object.outputType) : "",
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            inputType: isSet(object.inputType) ? globalThis.String(object.inputType) : "",
+            outputType: isSet(object.outputType) ? globalThis.String(object.outputType) : "",
             options: isSet(object.options) ? exports.MethodOptions.fromJSON(object.options) : undefined,
-            clientStreaming: isSet(object.clientStreaming) ? Boolean(object.clientStreaming) : false,
-            serverStreaming: isSet(object.serverStreaming) ? Boolean(object.serverStreaming) : false,
+            clientStreaming: isSet(object.clientStreaming) ? globalThis.Boolean(object.clientStreaming) : false,
+            serverStreaming: isSet(object.serverStreaming) ? globalThis.Boolean(object.serverStreaming) : false,
         };
     },
     toJSON(message) {
         const obj = {};
-        message.name !== undefined && (obj.name = message.name);
-        message.inputType !== undefined && (obj.inputType = message.inputType);
-        message.outputType !== undefined && (obj.outputType = message.outputType);
-        message.options !== undefined &&
-            (obj.options = message.options ? exports.MethodOptions.toJSON(message.options) : undefined);
-        message.clientStreaming !== undefined && (obj.clientStreaming = message.clientStreaming);
-        message.serverStreaming !== undefined && (obj.serverStreaming = message.serverStreaming);
+        if (message.name !== "") {
+            obj.name = message.name;
+        }
+        if (message.inputType !== "") {
+            obj.inputType = message.inputType;
+        }
+        if (message.outputType !== "") {
+            obj.outputType = message.outputType;
+        }
+        if (message.options !== undefined) {
+            obj.options = exports.MethodOptions.toJSON(message.options);
+        }
+        if (message.clientStreaming === true) {
+            obj.clientStreaming = message.clientStreaming;
+        }
+        if (message.serverStreaming === true) {
+            obj.serverStreaming = message.serverStreaming;
+        }
         return obj;
     },
     create(base) {
@@ -2017,7 +2255,7 @@ function createBaseFileOptions() {
     };
 }
 exports.FileOptions = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.javaPackage !== "") {
             writer.uint32(10).string(message.javaPackage);
         }
@@ -2084,7 +2322,7 @@ exports.FileOptions = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseFileOptions();
         while (reader.pos < end) {
@@ -2226,61 +2464,97 @@ exports.FileOptions = {
     },
     fromJSON(object) {
         return {
-            javaPackage: isSet(object.javaPackage) ? String(object.javaPackage) : "",
-            javaOuterClassname: isSet(object.javaOuterClassname) ? String(object.javaOuterClassname) : "",
-            javaMultipleFiles: isSet(object.javaMultipleFiles) ? Boolean(object.javaMultipleFiles) : false,
+            javaPackage: isSet(object.javaPackage) ? globalThis.String(object.javaPackage) : "",
+            javaOuterClassname: isSet(object.javaOuterClassname) ? globalThis.String(object.javaOuterClassname) : "",
+            javaMultipleFiles: isSet(object.javaMultipleFiles) ? globalThis.Boolean(object.javaMultipleFiles) : false,
             javaGenerateEqualsAndHash: isSet(object.javaGenerateEqualsAndHash)
-                ? Boolean(object.javaGenerateEqualsAndHash)
+                ? globalThis.Boolean(object.javaGenerateEqualsAndHash)
                 : false,
-            javaStringCheckUtf8: isSet(object.javaStringCheckUtf8) ? Boolean(object.javaStringCheckUtf8) : false,
+            javaStringCheckUtf8: isSet(object.javaStringCheckUtf8) ? globalThis.Boolean(object.javaStringCheckUtf8) : false,
             optimizeFor: isSet(object.optimizeFor) ? fileOptions_OptimizeModeFromJSON(object.optimizeFor) : 1,
-            goPackage: isSet(object.goPackage) ? String(object.goPackage) : "",
-            ccGenericServices: isSet(object.ccGenericServices) ? Boolean(object.ccGenericServices) : false,
-            javaGenericServices: isSet(object.javaGenericServices) ? Boolean(object.javaGenericServices) : false,
-            pyGenericServices: isSet(object.pyGenericServices) ? Boolean(object.pyGenericServices) : false,
-            phpGenericServices: isSet(object.phpGenericServices) ? Boolean(object.phpGenericServices) : false,
-            deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-            ccEnableArenas: isSet(object.ccEnableArenas) ? Boolean(object.ccEnableArenas) : false,
-            objcClassPrefix: isSet(object.objcClassPrefix) ? String(object.objcClassPrefix) : "",
-            csharpNamespace: isSet(object.csharpNamespace) ? String(object.csharpNamespace) : "",
-            swiftPrefix: isSet(object.swiftPrefix) ? String(object.swiftPrefix) : "",
-            phpClassPrefix: isSet(object.phpClassPrefix) ? String(object.phpClassPrefix) : "",
-            phpNamespace: isSet(object.phpNamespace) ? String(object.phpNamespace) : "",
-            phpMetadataNamespace: isSet(object.phpMetadataNamespace) ? String(object.phpMetadataNamespace) : "",
-            rubyPackage: isSet(object.rubyPackage) ? String(object.rubyPackage) : "",
-            uninterpretedOption: Array.isArray(object?.uninterpretedOption)
+            goPackage: isSet(object.goPackage) ? globalThis.String(object.goPackage) : "",
+            ccGenericServices: isSet(object.ccGenericServices) ? globalThis.Boolean(object.ccGenericServices) : false,
+            javaGenericServices: isSet(object.javaGenericServices) ? globalThis.Boolean(object.javaGenericServices) : false,
+            pyGenericServices: isSet(object.pyGenericServices) ? globalThis.Boolean(object.pyGenericServices) : false,
+            phpGenericServices: isSet(object.phpGenericServices) ? globalThis.Boolean(object.phpGenericServices) : false,
+            deprecated: isSet(object.deprecated) ? globalThis.Boolean(object.deprecated) : false,
+            ccEnableArenas: isSet(object.ccEnableArenas) ? globalThis.Boolean(object.ccEnableArenas) : false,
+            objcClassPrefix: isSet(object.objcClassPrefix) ? globalThis.String(object.objcClassPrefix) : "",
+            csharpNamespace: isSet(object.csharpNamespace) ? globalThis.String(object.csharpNamespace) : "",
+            swiftPrefix: isSet(object.swiftPrefix) ? globalThis.String(object.swiftPrefix) : "",
+            phpClassPrefix: isSet(object.phpClassPrefix) ? globalThis.String(object.phpClassPrefix) : "",
+            phpNamespace: isSet(object.phpNamespace) ? globalThis.String(object.phpNamespace) : "",
+            phpMetadataNamespace: isSet(object.phpMetadataNamespace) ? globalThis.String(object.phpMetadataNamespace) : "",
+            rubyPackage: isSet(object.rubyPackage) ? globalThis.String(object.rubyPackage) : "",
+            uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
                 ? object.uninterpretedOption.map((e) => exports.UninterpretedOption.fromJSON(e))
                 : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        message.javaPackage !== undefined && (obj.javaPackage = message.javaPackage);
-        message.javaOuterClassname !== undefined && (obj.javaOuterClassname = message.javaOuterClassname);
-        message.javaMultipleFiles !== undefined && (obj.javaMultipleFiles = message.javaMultipleFiles);
-        message.javaGenerateEqualsAndHash !== undefined &&
-            (obj.javaGenerateEqualsAndHash = message.javaGenerateEqualsAndHash);
-        message.javaStringCheckUtf8 !== undefined && (obj.javaStringCheckUtf8 = message.javaStringCheckUtf8);
-        message.optimizeFor !== undefined && (obj.optimizeFor = fileOptions_OptimizeModeToJSON(message.optimizeFor));
-        message.goPackage !== undefined && (obj.goPackage = message.goPackage);
-        message.ccGenericServices !== undefined && (obj.ccGenericServices = message.ccGenericServices);
-        message.javaGenericServices !== undefined && (obj.javaGenericServices = message.javaGenericServices);
-        message.pyGenericServices !== undefined && (obj.pyGenericServices = message.pyGenericServices);
-        message.phpGenericServices !== undefined && (obj.phpGenericServices = message.phpGenericServices);
-        message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-        message.ccEnableArenas !== undefined && (obj.ccEnableArenas = message.ccEnableArenas);
-        message.objcClassPrefix !== undefined && (obj.objcClassPrefix = message.objcClassPrefix);
-        message.csharpNamespace !== undefined && (obj.csharpNamespace = message.csharpNamespace);
-        message.swiftPrefix !== undefined && (obj.swiftPrefix = message.swiftPrefix);
-        message.phpClassPrefix !== undefined && (obj.phpClassPrefix = message.phpClassPrefix);
-        message.phpNamespace !== undefined && (obj.phpNamespace = message.phpNamespace);
-        message.phpMetadataNamespace !== undefined && (obj.phpMetadataNamespace = message.phpMetadataNamespace);
-        message.rubyPackage !== undefined && (obj.rubyPackage = message.rubyPackage);
-        if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? exports.UninterpretedOption.toJSON(e) : undefined);
+        if (message.javaPackage !== "") {
+            obj.javaPackage = message.javaPackage;
         }
-        else {
-            obj.uninterpretedOption = [];
+        if (message.javaOuterClassname !== "") {
+            obj.javaOuterClassname = message.javaOuterClassname;
+        }
+        if (message.javaMultipleFiles === true) {
+            obj.javaMultipleFiles = message.javaMultipleFiles;
+        }
+        if (message.javaGenerateEqualsAndHash === true) {
+            obj.javaGenerateEqualsAndHash = message.javaGenerateEqualsAndHash;
+        }
+        if (message.javaStringCheckUtf8 === true) {
+            obj.javaStringCheckUtf8 = message.javaStringCheckUtf8;
+        }
+        if (message.optimizeFor !== 1) {
+            obj.optimizeFor = fileOptions_OptimizeModeToJSON(message.optimizeFor);
+        }
+        if (message.goPackage !== "") {
+            obj.goPackage = message.goPackage;
+        }
+        if (message.ccGenericServices === true) {
+            obj.ccGenericServices = message.ccGenericServices;
+        }
+        if (message.javaGenericServices === true) {
+            obj.javaGenericServices = message.javaGenericServices;
+        }
+        if (message.pyGenericServices === true) {
+            obj.pyGenericServices = message.pyGenericServices;
+        }
+        if (message.phpGenericServices === true) {
+            obj.phpGenericServices = message.phpGenericServices;
+        }
+        if (message.deprecated === true) {
+            obj.deprecated = message.deprecated;
+        }
+        if (message.ccEnableArenas === true) {
+            obj.ccEnableArenas = message.ccEnableArenas;
+        }
+        if (message.objcClassPrefix !== "") {
+            obj.objcClassPrefix = message.objcClassPrefix;
+        }
+        if (message.csharpNamespace !== "") {
+            obj.csharpNamespace = message.csharpNamespace;
+        }
+        if (message.swiftPrefix !== "") {
+            obj.swiftPrefix = message.swiftPrefix;
+        }
+        if (message.phpClassPrefix !== "") {
+            obj.phpClassPrefix = message.phpClassPrefix;
+        }
+        if (message.phpNamespace !== "") {
+            obj.phpNamespace = message.phpNamespace;
+        }
+        if (message.phpMetadataNamespace !== "") {
+            obj.phpMetadataNamespace = message.phpMetadataNamespace;
+        }
+        if (message.rubyPackage !== "") {
+            obj.rubyPackage = message.rubyPackage;
+        }
+        if (message.uninterpretedOption?.length) {
+            obj.uninterpretedOption = message.uninterpretedOption.map((e) => exports.UninterpretedOption.toJSON(e));
         }
         return obj;
     },
@@ -2324,7 +2598,7 @@ function createBaseMessageOptions() {
     };
 }
 exports.MessageOptions = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.messageSetWireFormat === true) {
             writer.uint32(8).bool(message.messageSetWireFormat);
         }
@@ -2346,7 +2620,7 @@ exports.MessageOptions = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMessageOptions();
         while (reader.pos < end) {
@@ -2398,34 +2672,41 @@ exports.MessageOptions = {
     },
     fromJSON(object) {
         return {
-            messageSetWireFormat: isSet(object.messageSetWireFormat) ? Boolean(object.messageSetWireFormat) : false,
+            messageSetWireFormat: isSet(object.messageSetWireFormat)
+                ? globalThis.Boolean(object.messageSetWireFormat)
+                : false,
             noStandardDescriptorAccessor: isSet(object.noStandardDescriptorAccessor)
-                ? Boolean(object.noStandardDescriptorAccessor)
+                ? globalThis.Boolean(object.noStandardDescriptorAccessor)
                 : false,
-            deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-            mapEntry: isSet(object.mapEntry) ? Boolean(object.mapEntry) : false,
+            deprecated: isSet(object.deprecated) ? globalThis.Boolean(object.deprecated) : false,
+            mapEntry: isSet(object.mapEntry) ? globalThis.Boolean(object.mapEntry) : false,
             deprecatedLegacyJsonFieldConflicts: isSet(object.deprecatedLegacyJsonFieldConflicts)
-                ? Boolean(object.deprecatedLegacyJsonFieldConflicts)
+                ? globalThis.Boolean(object.deprecatedLegacyJsonFieldConflicts)
                 : false,
-            uninterpretedOption: Array.isArray(object?.uninterpretedOption)
+            uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
                 ? object.uninterpretedOption.map((e) => exports.UninterpretedOption.fromJSON(e))
                 : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        message.messageSetWireFormat !== undefined && (obj.messageSetWireFormat = message.messageSetWireFormat);
-        message.noStandardDescriptorAccessor !== undefined &&
-            (obj.noStandardDescriptorAccessor = message.noStandardDescriptorAccessor);
-        message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-        message.mapEntry !== undefined && (obj.mapEntry = message.mapEntry);
-        message.deprecatedLegacyJsonFieldConflicts !== undefined &&
-            (obj.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts);
-        if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? exports.UninterpretedOption.toJSON(e) : undefined);
+        if (message.messageSetWireFormat === true) {
+            obj.messageSetWireFormat = message.messageSetWireFormat;
         }
-        else {
-            obj.uninterpretedOption = [];
+        if (message.noStandardDescriptorAccessor === true) {
+            obj.noStandardDescriptorAccessor = message.noStandardDescriptorAccessor;
+        }
+        if (message.deprecated === true) {
+            obj.deprecated = message.deprecated;
+        }
+        if (message.mapEntry === true) {
+            obj.mapEntry = message.mapEntry;
+        }
+        if (message.deprecatedLegacyJsonFieldConflicts === true) {
+            obj.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
+        }
+        if (message.uninterpretedOption?.length) {
+            obj.uninterpretedOption = message.uninterpretedOption.map((e) => exports.UninterpretedOption.toJSON(e));
         }
         return obj;
     },
@@ -2455,11 +2736,12 @@ function createBaseFieldOptions() {
         debugRedact: false,
         retention: 0,
         target: 0,
+        targets: [],
         uninterpretedOption: [],
     };
 }
 exports.FieldOptions = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.ctype !== 0) {
             writer.uint32(8).int32(message.ctype);
         }
@@ -2490,13 +2772,18 @@ exports.FieldOptions = {
         if (message.target !== 0) {
             writer.uint32(144).int32(message.target);
         }
+        writer.uint32(154).fork();
+        for (const v of message.targets) {
+            writer.int32(v);
+        }
+        writer.ldelim();
         for (const v of message.uninterpretedOption) {
             exports.UninterpretedOption.encode(v, writer.uint32(7994).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseFieldOptions();
         while (reader.pos < end) {
@@ -2562,6 +2849,19 @@ exports.FieldOptions = {
                     }
                     message.target = reader.int32();
                     continue;
+                case 19:
+                    if (tag === 152) {
+                        message.targets.push(reader.int32());
+                        continue;
+                    }
+                    if (tag === 154) {
+                        const end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2) {
+                            message.targets.push(reader.int32());
+                        }
+                        continue;
+                    }
+                    break;
                 case 999:
                     if (tag !== 7994) {
                         break;
@@ -2579,37 +2879,60 @@ exports.FieldOptions = {
     fromJSON(object) {
         return {
             ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : 0,
-            packed: isSet(object.packed) ? Boolean(object.packed) : false,
+            packed: isSet(object.packed) ? globalThis.Boolean(object.packed) : false,
             jstype: isSet(object.jstype) ? fieldOptions_JSTypeFromJSON(object.jstype) : 0,
-            lazy: isSet(object.lazy) ? Boolean(object.lazy) : false,
-            unverifiedLazy: isSet(object.unverifiedLazy) ? Boolean(object.unverifiedLazy) : false,
-            deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-            weak: isSet(object.weak) ? Boolean(object.weak) : false,
-            debugRedact: isSet(object.debugRedact) ? Boolean(object.debugRedact) : false,
+            lazy: isSet(object.lazy) ? globalThis.Boolean(object.lazy) : false,
+            unverifiedLazy: isSet(object.unverifiedLazy) ? globalThis.Boolean(object.unverifiedLazy) : false,
+            deprecated: isSet(object.deprecated) ? globalThis.Boolean(object.deprecated) : false,
+            weak: isSet(object.weak) ? globalThis.Boolean(object.weak) : false,
+            debugRedact: isSet(object.debugRedact) ? globalThis.Boolean(object.debugRedact) : false,
             retention: isSet(object.retention) ? fieldOptions_OptionRetentionFromJSON(object.retention) : 0,
             target: isSet(object.target) ? fieldOptions_OptionTargetTypeFromJSON(object.target) : 0,
-            uninterpretedOption: Array.isArray(object?.uninterpretedOption)
+            targets: globalThis.Array.isArray(object?.targets)
+                ? object.targets.map((e) => fieldOptions_OptionTargetTypeFromJSON(e))
+                : [],
+            uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
                 ? object.uninterpretedOption.map((e) => exports.UninterpretedOption.fromJSON(e))
                 : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        message.ctype !== undefined && (obj.ctype = fieldOptions_CTypeToJSON(message.ctype));
-        message.packed !== undefined && (obj.packed = message.packed);
-        message.jstype !== undefined && (obj.jstype = fieldOptions_JSTypeToJSON(message.jstype));
-        message.lazy !== undefined && (obj.lazy = message.lazy);
-        message.unverifiedLazy !== undefined && (obj.unverifiedLazy = message.unverifiedLazy);
-        message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-        message.weak !== undefined && (obj.weak = message.weak);
-        message.debugRedact !== undefined && (obj.debugRedact = message.debugRedact);
-        message.retention !== undefined && (obj.retention = fieldOptions_OptionRetentionToJSON(message.retention));
-        message.target !== undefined && (obj.target = fieldOptions_OptionTargetTypeToJSON(message.target));
-        if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? exports.UninterpretedOption.toJSON(e) : undefined);
+        if (message.ctype !== 0) {
+            obj.ctype = fieldOptions_CTypeToJSON(message.ctype);
         }
-        else {
-            obj.uninterpretedOption = [];
+        if (message.packed === true) {
+            obj.packed = message.packed;
+        }
+        if (message.jstype !== 0) {
+            obj.jstype = fieldOptions_JSTypeToJSON(message.jstype);
+        }
+        if (message.lazy === true) {
+            obj.lazy = message.lazy;
+        }
+        if (message.unverifiedLazy === true) {
+            obj.unverifiedLazy = message.unverifiedLazy;
+        }
+        if (message.deprecated === true) {
+            obj.deprecated = message.deprecated;
+        }
+        if (message.weak === true) {
+            obj.weak = message.weak;
+        }
+        if (message.debugRedact === true) {
+            obj.debugRedact = message.debugRedact;
+        }
+        if (message.retention !== 0) {
+            obj.retention = fieldOptions_OptionRetentionToJSON(message.retention);
+        }
+        if (message.target !== 0) {
+            obj.target = fieldOptions_OptionTargetTypeToJSON(message.target);
+        }
+        if (message.targets?.length) {
+            obj.targets = message.targets.map((e) => fieldOptions_OptionTargetTypeToJSON(e));
+        }
+        if (message.uninterpretedOption?.length) {
+            obj.uninterpretedOption = message.uninterpretedOption.map((e) => exports.UninterpretedOption.toJSON(e));
         }
         return obj;
     },
@@ -2628,6 +2951,7 @@ exports.FieldOptions = {
         message.debugRedact = object.debugRedact ?? false;
         message.retention = object.retention ?? 0;
         message.target = object.target ?? 0;
+        message.targets = object.targets?.map((e) => e) || [];
         message.uninterpretedOption = object.uninterpretedOption?.map((e) => exports.UninterpretedOption.fromPartial(e)) || [];
         return message;
     },
@@ -2636,14 +2960,14 @@ function createBaseOneofOptions() {
     return { uninterpretedOption: [] };
 }
 exports.OneofOptions = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         for (const v of message.uninterpretedOption) {
             exports.UninterpretedOption.encode(v, writer.uint32(7994).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseOneofOptions();
         while (reader.pos < end) {
@@ -2665,18 +2989,15 @@ exports.OneofOptions = {
     },
     fromJSON(object) {
         return {
-            uninterpretedOption: Array.isArray(object?.uninterpretedOption)
+            uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
                 ? object.uninterpretedOption.map((e) => exports.UninterpretedOption.fromJSON(e))
                 : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? exports.UninterpretedOption.toJSON(e) : undefined);
-        }
-        else {
-            obj.uninterpretedOption = [];
+        if (message.uninterpretedOption?.length) {
+            obj.uninterpretedOption = message.uninterpretedOption.map((e) => exports.UninterpretedOption.toJSON(e));
         }
         return obj;
     },
@@ -2693,7 +3014,7 @@ function createBaseEnumOptions() {
     return { allowAlias: false, deprecated: false, deprecatedLegacyJsonFieldConflicts: false, uninterpretedOption: [] };
 }
 exports.EnumOptions = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.allowAlias === true) {
             writer.uint32(16).bool(message.allowAlias);
         }
@@ -2709,7 +3030,7 @@ exports.EnumOptions = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseEnumOptions();
         while (reader.pos < end) {
@@ -2749,27 +3070,29 @@ exports.EnumOptions = {
     },
     fromJSON(object) {
         return {
-            allowAlias: isSet(object.allowAlias) ? Boolean(object.allowAlias) : false,
-            deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
+            allowAlias: isSet(object.allowAlias) ? globalThis.Boolean(object.allowAlias) : false,
+            deprecated: isSet(object.deprecated) ? globalThis.Boolean(object.deprecated) : false,
             deprecatedLegacyJsonFieldConflicts: isSet(object.deprecatedLegacyJsonFieldConflicts)
-                ? Boolean(object.deprecatedLegacyJsonFieldConflicts)
+                ? globalThis.Boolean(object.deprecatedLegacyJsonFieldConflicts)
                 : false,
-            uninterpretedOption: Array.isArray(object?.uninterpretedOption)
+            uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
                 ? object.uninterpretedOption.map((e) => exports.UninterpretedOption.fromJSON(e))
                 : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        message.allowAlias !== undefined && (obj.allowAlias = message.allowAlias);
-        message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-        message.deprecatedLegacyJsonFieldConflicts !== undefined &&
-            (obj.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts);
-        if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? exports.UninterpretedOption.toJSON(e) : undefined);
+        if (message.allowAlias === true) {
+            obj.allowAlias = message.allowAlias;
         }
-        else {
-            obj.uninterpretedOption = [];
+        if (message.deprecated === true) {
+            obj.deprecated = message.deprecated;
+        }
+        if (message.deprecatedLegacyJsonFieldConflicts === true) {
+            obj.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
+        }
+        if (message.uninterpretedOption?.length) {
+            obj.uninterpretedOption = message.uninterpretedOption.map((e) => exports.UninterpretedOption.toJSON(e));
         }
         return obj;
     },
@@ -2789,7 +3112,7 @@ function createBaseEnumValueOptions() {
     return { deprecated: false, uninterpretedOption: [] };
 }
 exports.EnumValueOptions = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.deprecated === true) {
             writer.uint32(8).bool(message.deprecated);
         }
@@ -2799,7 +3122,7 @@ exports.EnumValueOptions = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseEnumValueOptions();
         while (reader.pos < end) {
@@ -2827,20 +3150,19 @@ exports.EnumValueOptions = {
     },
     fromJSON(object) {
         return {
-            deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-            uninterpretedOption: Array.isArray(object?.uninterpretedOption)
+            deprecated: isSet(object.deprecated) ? globalThis.Boolean(object.deprecated) : false,
+            uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
                 ? object.uninterpretedOption.map((e) => exports.UninterpretedOption.fromJSON(e))
                 : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-        if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? exports.UninterpretedOption.toJSON(e) : undefined);
+        if (message.deprecated === true) {
+            obj.deprecated = message.deprecated;
         }
-        else {
-            obj.uninterpretedOption = [];
+        if (message.uninterpretedOption?.length) {
+            obj.uninterpretedOption = message.uninterpretedOption.map((e) => exports.UninterpretedOption.toJSON(e));
         }
         return obj;
     },
@@ -2858,7 +3180,7 @@ function createBaseServiceOptions() {
     return { deprecated: false, uninterpretedOption: [] };
 }
 exports.ServiceOptions = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.deprecated === true) {
             writer.uint32(264).bool(message.deprecated);
         }
@@ -2868,7 +3190,7 @@ exports.ServiceOptions = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseServiceOptions();
         while (reader.pos < end) {
@@ -2896,20 +3218,19 @@ exports.ServiceOptions = {
     },
     fromJSON(object) {
         return {
-            deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-            uninterpretedOption: Array.isArray(object?.uninterpretedOption)
+            deprecated: isSet(object.deprecated) ? globalThis.Boolean(object.deprecated) : false,
+            uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
                 ? object.uninterpretedOption.map((e) => exports.UninterpretedOption.fromJSON(e))
                 : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-        if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? exports.UninterpretedOption.toJSON(e) : undefined);
+        if (message.deprecated === true) {
+            obj.deprecated = message.deprecated;
         }
-        else {
-            obj.uninterpretedOption = [];
+        if (message.uninterpretedOption?.length) {
+            obj.uninterpretedOption = message.uninterpretedOption.map((e) => exports.UninterpretedOption.toJSON(e));
         }
         return obj;
     },
@@ -2927,7 +3248,7 @@ function createBaseMethodOptions() {
     return { deprecated: false, idempotencyLevel: 0, uninterpretedOption: [] };
 }
 exports.MethodOptions = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.deprecated === true) {
             writer.uint32(264).bool(message.deprecated);
         }
@@ -2940,7 +3261,7 @@ exports.MethodOptions = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMethodOptions();
         while (reader.pos < end) {
@@ -2974,25 +3295,25 @@ exports.MethodOptions = {
     },
     fromJSON(object) {
         return {
-            deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
+            deprecated: isSet(object.deprecated) ? globalThis.Boolean(object.deprecated) : false,
             idempotencyLevel: isSet(object.idempotencyLevel)
                 ? methodOptions_IdempotencyLevelFromJSON(object.idempotencyLevel)
                 : 0,
-            uninterpretedOption: Array.isArray(object?.uninterpretedOption)
+            uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
                 ? object.uninterpretedOption.map((e) => exports.UninterpretedOption.fromJSON(e))
                 : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-        message.idempotencyLevel !== undefined &&
-            (obj.idempotencyLevel = methodOptions_IdempotencyLevelToJSON(message.idempotencyLevel));
-        if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? exports.UninterpretedOption.toJSON(e) : undefined);
+        if (message.deprecated === true) {
+            obj.deprecated = message.deprecated;
         }
-        else {
-            obj.uninterpretedOption = [];
+        if (message.idempotencyLevel !== 0) {
+            obj.idempotencyLevel = methodOptions_IdempotencyLevelToJSON(message.idempotencyLevel);
+        }
+        if (message.uninterpretedOption?.length) {
+            obj.uninterpretedOption = message.uninterpretedOption.map((e) => exports.UninterpretedOption.toJSON(e));
         }
         return obj;
     },
@@ -3011,26 +3332,32 @@ function createBaseUninterpretedOption() {
     return {
         name: [],
         identifierValue: "",
-        positiveIntValue: long_1.default.UZERO,
-        negativeIntValue: long_1.default.ZERO,
+        positiveIntValue: BigInt("0"),
+        negativeIntValue: BigInt("0"),
         doubleValue: 0,
         stringValue: new Uint8Array(0),
         aggregateValue: "",
     };
 }
 exports.UninterpretedOption = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         for (const v of message.name) {
             exports.UninterpretedOption_NamePart.encode(v, writer.uint32(18).fork()).ldelim();
         }
         if (message.identifierValue !== "") {
             writer.uint32(26).string(message.identifierValue);
         }
-        if (!message.positiveIntValue.isZero()) {
-            writer.uint32(32).uint64(message.positiveIntValue);
+        if (message.positiveIntValue !== BigInt("0")) {
+            if (BigInt.asUintN(64, message.positiveIntValue) !== message.positiveIntValue) {
+                throw new globalThis.Error("value provided for field message.positiveIntValue of type uint64 too large");
+            }
+            writer.uint32(32).uint64(message.positiveIntValue.toString());
         }
-        if (!message.negativeIntValue.isZero()) {
-            writer.uint32(40).int64(message.negativeIntValue);
+        if (message.negativeIntValue !== BigInt("0")) {
+            if (BigInt.asIntN(64, message.negativeIntValue) !== message.negativeIntValue) {
+                throw new globalThis.Error("value provided for field message.negativeIntValue of type int64 too large");
+            }
+            writer.uint32(40).int64(message.negativeIntValue.toString());
         }
         if (message.doubleValue !== 0) {
             writer.uint32(49).double(message.doubleValue);
@@ -3044,7 +3371,7 @@ exports.UninterpretedOption = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseUninterpretedOption();
         while (reader.pos < end) {
@@ -3066,13 +3393,13 @@ exports.UninterpretedOption = {
                     if (tag !== 32) {
                         break;
                     }
-                    message.positiveIntValue = reader.uint64();
+                    message.positiveIntValue = longToBigint(reader.uint64());
                     continue;
                 case 5:
                     if (tag !== 40) {
                         break;
                     }
-                    message.negativeIntValue = reader.int64();
+                    message.negativeIntValue = longToBigint(reader.int64());
                     continue;
                 case 6:
                     if (tag !== 49) {
@@ -3102,32 +3429,40 @@ exports.UninterpretedOption = {
     },
     fromJSON(object) {
         return {
-            name: Array.isArray(object?.name) ? object.name.map((e) => exports.UninterpretedOption_NamePart.fromJSON(e)) : [],
-            identifierValue: isSet(object.identifierValue) ? String(object.identifierValue) : "",
-            positiveIntValue: isSet(object.positiveIntValue) ? long_1.default.fromValue(object.positiveIntValue) : long_1.default.UZERO,
-            negativeIntValue: isSet(object.negativeIntValue) ? long_1.default.fromValue(object.negativeIntValue) : long_1.default.ZERO,
-            doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : 0,
+            name: globalThis.Array.isArray(object?.name)
+                ? object.name.map((e) => exports.UninterpretedOption_NamePart.fromJSON(e))
+                : [],
+            identifierValue: isSet(object.identifierValue) ? globalThis.String(object.identifierValue) : "",
+            positiveIntValue: isSet(object.positiveIntValue) ? BigInt(object.positiveIntValue) : BigInt("0"),
+            negativeIntValue: isSet(object.negativeIntValue) ? BigInt(object.negativeIntValue) : BigInt("0"),
+            doubleValue: isSet(object.doubleValue) ? globalThis.Number(object.doubleValue) : 0,
             stringValue: isSet(object.stringValue) ? bytesFromBase64(object.stringValue) : new Uint8Array(0),
-            aggregateValue: isSet(object.aggregateValue) ? String(object.aggregateValue) : "",
+            aggregateValue: isSet(object.aggregateValue) ? globalThis.String(object.aggregateValue) : "",
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.name) {
-            obj.name = message.name.map((e) => e ? exports.UninterpretedOption_NamePart.toJSON(e) : undefined);
+        if (message.name?.length) {
+            obj.name = message.name.map((e) => exports.UninterpretedOption_NamePart.toJSON(e));
         }
-        else {
-            obj.name = [];
+        if (message.identifierValue !== "") {
+            obj.identifierValue = message.identifierValue;
         }
-        message.identifierValue !== undefined && (obj.identifierValue = message.identifierValue);
-        message.positiveIntValue !== undefined &&
-            (obj.positiveIntValue = (message.positiveIntValue || long_1.default.UZERO).toString());
-        message.negativeIntValue !== undefined &&
-            (obj.negativeIntValue = (message.negativeIntValue || long_1.default.ZERO).toString());
-        message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
-        message.stringValue !== undefined &&
-            (obj.stringValue = base64FromBytes(message.stringValue !== undefined ? message.stringValue : new Uint8Array(0)));
-        message.aggregateValue !== undefined && (obj.aggregateValue = message.aggregateValue);
+        if (message.positiveIntValue !== BigInt("0")) {
+            obj.positiveIntValue = message.positiveIntValue.toString();
+        }
+        if (message.negativeIntValue !== BigInt("0")) {
+            obj.negativeIntValue = message.negativeIntValue.toString();
+        }
+        if (message.doubleValue !== 0) {
+            obj.doubleValue = message.doubleValue;
+        }
+        if (message.stringValue.length !== 0) {
+            obj.stringValue = base64FromBytes(message.stringValue);
+        }
+        if (message.aggregateValue !== "") {
+            obj.aggregateValue = message.aggregateValue;
+        }
         return obj;
     },
     create(base) {
@@ -3137,12 +3472,8 @@ exports.UninterpretedOption = {
         const message = createBaseUninterpretedOption();
         message.name = object.name?.map((e) => exports.UninterpretedOption_NamePart.fromPartial(e)) || [];
         message.identifierValue = object.identifierValue ?? "";
-        message.positiveIntValue = (object.positiveIntValue !== undefined && object.positiveIntValue !== null)
-            ? long_1.default.fromValue(object.positiveIntValue)
-            : long_1.default.UZERO;
-        message.negativeIntValue = (object.negativeIntValue !== undefined && object.negativeIntValue !== null)
-            ? long_1.default.fromValue(object.negativeIntValue)
-            : long_1.default.ZERO;
+        message.positiveIntValue = object.positiveIntValue ?? BigInt("0");
+        message.negativeIntValue = object.negativeIntValue ?? BigInt("0");
         message.doubleValue = object.doubleValue ?? 0;
         message.stringValue = object.stringValue ?? new Uint8Array(0);
         message.aggregateValue = object.aggregateValue ?? "";
@@ -3153,7 +3484,7 @@ function createBaseUninterpretedOption_NamePart() {
     return { namePart: "", isExtension: false };
 }
 exports.UninterpretedOption_NamePart = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.namePart !== "") {
             writer.uint32(10).string(message.namePart);
         }
@@ -3163,7 +3494,7 @@ exports.UninterpretedOption_NamePart = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseUninterpretedOption_NamePart();
         while (reader.pos < end) {
@@ -3191,14 +3522,18 @@ exports.UninterpretedOption_NamePart = {
     },
     fromJSON(object) {
         return {
-            namePart: isSet(object.namePart) ? String(object.namePart) : "",
-            isExtension: isSet(object.isExtension) ? Boolean(object.isExtension) : false,
+            namePart: isSet(object.namePart) ? globalThis.String(object.namePart) : "",
+            isExtension: isSet(object.isExtension) ? globalThis.Boolean(object.isExtension) : false,
         };
     },
     toJSON(message) {
         const obj = {};
-        message.namePart !== undefined && (obj.namePart = message.namePart);
-        message.isExtension !== undefined && (obj.isExtension = message.isExtension);
+        if (message.namePart !== "") {
+            obj.namePart = message.namePart;
+        }
+        if (message.isExtension === true) {
+            obj.isExtension = message.isExtension;
+        }
         return obj;
     },
     create(base) {
@@ -3215,14 +3550,14 @@ function createBaseSourceCodeInfo() {
     return { location: [] };
 }
 exports.SourceCodeInfo = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         for (const v of message.location) {
             exports.SourceCodeInfo_Location.encode(v, writer.uint32(10).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseSourceCodeInfo();
         while (reader.pos < end) {
@@ -3244,18 +3579,15 @@ exports.SourceCodeInfo = {
     },
     fromJSON(object) {
         return {
-            location: Array.isArray(object?.location)
+            location: globalThis.Array.isArray(object?.location)
                 ? object.location.map((e) => exports.SourceCodeInfo_Location.fromJSON(e))
                 : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.location) {
-            obj.location = message.location.map((e) => e ? exports.SourceCodeInfo_Location.toJSON(e) : undefined);
-        }
-        else {
-            obj.location = [];
+        if (message.location?.length) {
+            obj.location = message.location.map((e) => exports.SourceCodeInfo_Location.toJSON(e));
         }
         return obj;
     },
@@ -3272,7 +3604,7 @@ function createBaseSourceCodeInfo_Location() {
     return { path: [], span: [], leadingComments: "", trailingComments: "", leadingDetachedComments: [] };
 }
 exports.SourceCodeInfo_Location = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         writer.uint32(10).fork();
         for (const v of message.path) {
             writer.int32(v);
@@ -3295,7 +3627,7 @@ exports.SourceCodeInfo_Location = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseSourceCodeInfo_Location();
         while (reader.pos < end) {
@@ -3355,36 +3687,31 @@ exports.SourceCodeInfo_Location = {
     },
     fromJSON(object) {
         return {
-            path: Array.isArray(object?.path) ? object.path.map((e) => Number(e)) : [],
-            span: Array.isArray(object?.span) ? object.span.map((e) => Number(e)) : [],
-            leadingComments: isSet(object.leadingComments) ? String(object.leadingComments) : "",
-            trailingComments: isSet(object.trailingComments) ? String(object.trailingComments) : "",
-            leadingDetachedComments: Array.isArray(object?.leadingDetachedComments)
-                ? object.leadingDetachedComments.map((e) => String(e))
+            path: globalThis.Array.isArray(object?.path) ? object.path.map((e) => globalThis.Number(e)) : [],
+            span: globalThis.Array.isArray(object?.span) ? object.span.map((e) => globalThis.Number(e)) : [],
+            leadingComments: isSet(object.leadingComments) ? globalThis.String(object.leadingComments) : "",
+            trailingComments: isSet(object.trailingComments) ? globalThis.String(object.trailingComments) : "",
+            leadingDetachedComments: globalThis.Array.isArray(object?.leadingDetachedComments)
+                ? object.leadingDetachedComments.map((e) => globalThis.String(e))
                 : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.path) {
+        if (message.path?.length) {
             obj.path = message.path.map((e) => Math.round(e));
         }
-        else {
-            obj.path = [];
-        }
-        if (message.span) {
+        if (message.span?.length) {
             obj.span = message.span.map((e) => Math.round(e));
         }
-        else {
-            obj.span = [];
+        if (message.leadingComments !== "") {
+            obj.leadingComments = message.leadingComments;
         }
-        message.leadingComments !== undefined && (obj.leadingComments = message.leadingComments);
-        message.trailingComments !== undefined && (obj.trailingComments = message.trailingComments);
-        if (message.leadingDetachedComments) {
-            obj.leadingDetachedComments = message.leadingDetachedComments.map((e) => e);
+        if (message.trailingComments !== "") {
+            obj.trailingComments = message.trailingComments;
         }
-        else {
-            obj.leadingDetachedComments = [];
+        if (message.leadingDetachedComments?.length) {
+            obj.leadingDetachedComments = message.leadingDetachedComments;
         }
         return obj;
     },
@@ -3405,14 +3732,14 @@ function createBaseGeneratedCodeInfo() {
     return { annotation: [] };
 }
 exports.GeneratedCodeInfo = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         for (const v of message.annotation) {
             exports.GeneratedCodeInfo_Annotation.encode(v, writer.uint32(10).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseGeneratedCodeInfo();
         while (reader.pos < end) {
@@ -3434,18 +3761,15 @@ exports.GeneratedCodeInfo = {
     },
     fromJSON(object) {
         return {
-            annotation: Array.isArray(object?.annotation)
+            annotation: globalThis.Array.isArray(object?.annotation)
                 ? object.annotation.map((e) => exports.GeneratedCodeInfo_Annotation.fromJSON(e))
                 : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.annotation) {
-            obj.annotation = message.annotation.map((e) => e ? exports.GeneratedCodeInfo_Annotation.toJSON(e) : undefined);
-        }
-        else {
-            obj.annotation = [];
+        if (message.annotation?.length) {
+            obj.annotation = message.annotation.map((e) => exports.GeneratedCodeInfo_Annotation.toJSON(e));
         }
         return obj;
     },
@@ -3462,7 +3786,7 @@ function createBaseGeneratedCodeInfo_Annotation() {
     return { path: [], sourceFile: "", begin: 0, end: 0, semantic: 0 };
 }
 exports.GeneratedCodeInfo_Annotation = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         writer.uint32(10).fork();
         for (const v of message.path) {
             writer.int32(v);
@@ -3483,7 +3807,7 @@ exports.GeneratedCodeInfo_Annotation = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseGeneratedCodeInfo_Annotation();
         while (reader.pos < end) {
@@ -3536,25 +3860,30 @@ exports.GeneratedCodeInfo_Annotation = {
     },
     fromJSON(object) {
         return {
-            path: Array.isArray(object?.path) ? object.path.map((e) => Number(e)) : [],
-            sourceFile: isSet(object.sourceFile) ? String(object.sourceFile) : "",
-            begin: isSet(object.begin) ? Number(object.begin) : 0,
-            end: isSet(object.end) ? Number(object.end) : 0,
+            path: globalThis.Array.isArray(object?.path) ? object.path.map((e) => globalThis.Number(e)) : [],
+            sourceFile: isSet(object.sourceFile) ? globalThis.String(object.sourceFile) : "",
+            begin: isSet(object.begin) ? globalThis.Number(object.begin) : 0,
+            end: isSet(object.end) ? globalThis.Number(object.end) : 0,
             semantic: isSet(object.semantic) ? generatedCodeInfo_Annotation_SemanticFromJSON(object.semantic) : 0,
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.path) {
+        if (message.path?.length) {
             obj.path = message.path.map((e) => Math.round(e));
         }
-        else {
-            obj.path = [];
+        if (message.sourceFile !== "") {
+            obj.sourceFile = message.sourceFile;
         }
-        message.sourceFile !== undefined && (obj.sourceFile = message.sourceFile);
-        message.begin !== undefined && (obj.begin = Math.round(message.begin));
-        message.end !== undefined && (obj.end = Math.round(message.end));
-        message.semantic !== undefined && (obj.semantic = generatedCodeInfo_Annotation_SemanticToJSON(message.semantic));
+        if (message.begin !== 0) {
+            obj.begin = Math.round(message.begin);
+        }
+        if (message.end !== 0) {
+            obj.end = Math.round(message.end);
+        }
+        if (message.semantic !== 0) {
+            obj.semantic = generatedCodeInfo_Annotation_SemanticToJSON(message.semantic);
+        }
         return obj;
     },
     create(base) {
@@ -3570,27 +3899,12 @@ exports.GeneratedCodeInfo_Annotation = {
         return message;
     },
 };
-const tsProtoGlobalThis = (() => {
-    if (typeof globalThis !== "undefined") {
-        return globalThis;
-    }
-    if (typeof self !== "undefined") {
-        return self;
-    }
-    if (typeof window !== "undefined") {
-        return window;
-    }
-    if (typeof global !== "undefined") {
-        return global;
-    }
-    throw "Unable to locate global object";
-})();
 function bytesFromBase64(b64) {
-    if (tsProtoGlobalThis.Buffer) {
-        return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+    if (globalThis.Buffer) {
+        return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
     }
     else {
-        const bin = tsProtoGlobalThis.atob(b64);
+        const bin = globalThis.atob(b64);
         const arr = new Uint8Array(bin.length);
         for (let i = 0; i < bin.length; ++i) {
             arr[i] = bin.charCodeAt(i);
@@ -3599,20 +3913,23 @@ function bytesFromBase64(b64) {
     }
 }
 function base64FromBytes(arr) {
-    if (tsProtoGlobalThis.Buffer) {
-        return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+    if (globalThis.Buffer) {
+        return globalThis.Buffer.from(arr).toString("base64");
     }
     else {
         const bin = [];
         arr.forEach((byte) => {
-            bin.push(String.fromCharCode(byte));
+            bin.push(globalThis.String.fromCharCode(byte));
         });
-        return tsProtoGlobalThis.btoa(bin.join(""));
+        return globalThis.btoa(bin.join(""));
     }
 }
-if (minimal_1.default.util.Long !== long_1.default) {
-    minimal_1.default.util.Long = long_1.default;
-    minimal_1.default.configure();
+function longToBigint(long) {
+    return BigInt(long.toString());
+}
+if (minimal_js_1.default.util.Long !== long_1.default) {
+    minimal_js_1.default.util.Long = long_1.default;
+    minimal_js_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

@@ -1,7 +1,6 @@
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal";
-import { Resource } from "./resource";
+import _m0 from "protobufjs/minimal.js";
+import { Resource } from "./resource.js";
 
 /** GenesisState defines the cheqd module's genesis state. */
 export interface GenesisState {
@@ -45,7 +44,7 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      resourceList: Array.isArray(object?.resourceList)
+      resourceList: globalThis.Array.isArray(object?.resourceList)
         ? object.resourceList.map((e: any) => Resource.fromJSON(e))
         : [],
     };
@@ -53,18 +52,15 @@ export const GenesisState = {
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    if (message.resourceList) {
-      obj.resourceList = message.resourceList.map((e) => e ? Resource.toJSON(e) : undefined);
-    } else {
-      obj.resourceList = [];
+    if (message.resourceList?.length) {
+      obj.resourceList = message.resourceList.map((e) => Resource.toJSON(e));
     }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<GenesisState>, I>>(base?: I): GenesisState {
-    return GenesisState.fromPartial(base ?? {});
+    return GenesisState.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
     const message = createBaseGenesisState();
     message.resourceList = object.resourceList?.map((e) => Resource.fromPartial(e)) || [];
@@ -72,10 +68,10 @@ export const GenesisState = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
@@ -83,8 +79,3 @@ type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
-}

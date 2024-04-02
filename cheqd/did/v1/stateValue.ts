@@ -1,7 +1,6 @@
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal";
-import { Any } from "../../../google/protobuf/any";
+import _m0 from "protobufjs/minimal.js";
+import { Any } from "../../../google/protobuf/any.js";
 
 export interface StateValue {
   data:
@@ -74,15 +73,18 @@ export const StateValue = {
 
   toJSON(message: StateValue): unknown {
     const obj: any = {};
-    message.data !== undefined && (obj.data = message.data ? Any.toJSON(message.data) : undefined);
-    message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
+    if (message.data !== undefined) {
+      obj.data = Any.toJSON(message.data);
+    }
+    if (message.metadata !== undefined) {
+      obj.metadata = Metadata.toJSON(message.metadata);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<StateValue>, I>>(base?: I): StateValue {
-    return StateValue.fromPartial(base ?? {});
+    return StateValue.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<StateValue>, I>>(object: I): StateValue {
     const message = createBaseStateValue();
     message.data = (object.data !== undefined && object.data !== null) ? Any.fromPartial(object.data) : undefined;
@@ -170,32 +172,39 @@ export const Metadata = {
 
   fromJSON(object: any): Metadata {
     return {
-      created: isSet(object.created) ? String(object.created) : "",
-      updated: isSet(object.updated) ? String(object.updated) : "",
-      deactivated: isSet(object.deactivated) ? Boolean(object.deactivated) : false,
-      versionId: isSet(object.versionId) ? String(object.versionId) : "",
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => String(e)) : [],
+      created: isSet(object.created) ? globalThis.String(object.created) : "",
+      updated: isSet(object.updated) ? globalThis.String(object.updated) : "",
+      deactivated: isSet(object.deactivated) ? globalThis.Boolean(object.deactivated) : false,
+      versionId: isSet(object.versionId) ? globalThis.String(object.versionId) : "",
+      resources: globalThis.Array.isArray(object?.resources)
+        ? object.resources.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
   toJSON(message: Metadata): unknown {
     const obj: any = {};
-    message.created !== undefined && (obj.created = message.created);
-    message.updated !== undefined && (obj.updated = message.updated);
-    message.deactivated !== undefined && (obj.deactivated = message.deactivated);
-    message.versionId !== undefined && (obj.versionId = message.versionId);
-    if (message.resources) {
-      obj.resources = message.resources.map((e) => e);
-    } else {
-      obj.resources = [];
+    if (message.created !== "") {
+      obj.created = message.created;
+    }
+    if (message.updated !== "") {
+      obj.updated = message.updated;
+    }
+    if (message.deactivated === true) {
+      obj.deactivated = message.deactivated;
+    }
+    if (message.versionId !== "") {
+      obj.versionId = message.versionId;
+    }
+    if (message.resources?.length) {
+      obj.resources = message.resources;
     }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Metadata>, I>>(base?: I): Metadata {
-    return Metadata.fromPartial(base ?? {});
+    return Metadata.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Metadata>, I>>(object: I): Metadata {
     const message = createBaseMetadata();
     message.created = object.created ?? "";
@@ -207,10 +216,10 @@ export const Metadata = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
@@ -218,11 +227,6 @@ type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

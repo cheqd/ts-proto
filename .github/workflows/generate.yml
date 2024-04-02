@@ -28,15 +28,17 @@ jobs:
       PR_BRANCH: "update-proto"
     
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           persist-credentials: false
           ref: ${{ env.BASE_BRANCH }}
 
       - name: "Install buf CLI"
-        uses: bufbuild/buf-setup-action@v1.23.1
+        uses: bufbuild/buf-setup-action@v1.29.0
         with:
+          buf_user: ${{ secrets.BUF_USER }}
+          buf_api_token: ${{ secrets.BUF_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Generate TypeScript code for Protobufs
@@ -49,7 +51,7 @@ jobs:
         run: npm run build
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5.0.2
+        uses: peter-evans/create-pull-request@v6.0.0
         with:
           base: ${{ env.BASE_BRANCH }}
           branch: ${{ env.PR_BRANCH }}

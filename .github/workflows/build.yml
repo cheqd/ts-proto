@@ -11,17 +11,18 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
 
       - name: "Install buf CLI"
-        uses: bufbuild/buf-setup-action@v1.23.1
+        uses: bufbuild/buf-setup-action@v1.29.0
         with:
+          buf_user: ${{ secrets.BUF_USER }}
+          buf_api_token: ${{ secrets.BUF_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
     
       - name: "Clean install dependencies"

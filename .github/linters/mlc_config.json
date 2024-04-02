@@ -9,5 +9,14 @@
             "pattern": "&quot; %}",
             "replacement": ""
         }
-    ]
+    ],
+    "ignorePatterns": [
+		{
+			"pattern": "^https://resolver.cheqd.net/"
+		},
+		{
+			"pattern": "^https://twitter.com/"
+		}
+	],
+	"retryOn429": true
 }

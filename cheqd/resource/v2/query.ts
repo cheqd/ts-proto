@@ -1,8 +1,7 @@
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal";
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Metadata, ResourceWithMetadata } from "./resource";
+import _m0 from "protobufjs/minimal.js";
+import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { Metadata, ResourceWithMetadata } from "./resource.js";
 
 /** QueryResourceRequest is the request type for the Query/Resource RPC method */
 export interface QueryResourceRequest {
@@ -126,22 +125,25 @@ export const QueryResourceRequest = {
 
   fromJSON(object: any): QueryResourceRequest {
     return {
-      collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
-      id: isSet(object.id) ? String(object.id) : "",
+      collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
     };
   },
 
   toJSON(message: QueryResourceRequest): unknown {
     const obj: any = {};
-    message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-    message.id !== undefined && (obj.id = message.id);
+    if (message.collectionId !== "") {
+      obj.collectionId = message.collectionId;
+    }
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<QueryResourceRequest>, I>>(base?: I): QueryResourceRequest {
-    return QueryResourceRequest.fromPartial(base ?? {});
+    return QueryResourceRequest.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryResourceRequest>, I>>(object: I): QueryResourceRequest {
     const message = createBaseQueryResourceRequest();
     message.collectionId = object.collectionId ?? "";
@@ -191,15 +193,15 @@ export const QueryResourceResponse = {
 
   toJSON(message: QueryResourceResponse): unknown {
     const obj: any = {};
-    message.resource !== undefined &&
-      (obj.resource = message.resource ? ResourceWithMetadata.toJSON(message.resource) : undefined);
+    if (message.resource !== undefined) {
+      obj.resource = ResourceWithMetadata.toJSON(message.resource);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<QueryResourceResponse>, I>>(base?: I): QueryResourceResponse {
-    return QueryResourceResponse.fromPartial(base ?? {});
+    return QueryResourceResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryResourceResponse>, I>>(object: I): QueryResourceResponse {
     const message = createBaseQueryResourceResponse();
     message.resource = (object.resource !== undefined && object.resource !== null)
@@ -256,22 +258,25 @@ export const QueryResourceMetadataRequest = {
 
   fromJSON(object: any): QueryResourceMetadataRequest {
     return {
-      collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
-      id: isSet(object.id) ? String(object.id) : "",
+      collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
     };
   },
 
   toJSON(message: QueryResourceMetadataRequest): unknown {
     const obj: any = {};
-    message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-    message.id !== undefined && (obj.id = message.id);
+    if (message.collectionId !== "") {
+      obj.collectionId = message.collectionId;
+    }
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<QueryResourceMetadataRequest>, I>>(base?: I): QueryResourceMetadataRequest {
-    return QueryResourceMetadataRequest.fromPartial(base ?? {});
+    return QueryResourceMetadataRequest.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryResourceMetadataRequest>, I>>(object: I): QueryResourceMetadataRequest {
     const message = createBaseQueryResourceMetadataRequest();
     message.collectionId = object.collectionId ?? "";
@@ -321,14 +326,15 @@ export const QueryResourceMetadataResponse = {
 
   toJSON(message: QueryResourceMetadataResponse): unknown {
     const obj: any = {};
-    message.resource !== undefined && (obj.resource = message.resource ? Metadata.toJSON(message.resource) : undefined);
+    if (message.resource !== undefined) {
+      obj.resource = Metadata.toJSON(message.resource);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<QueryResourceMetadataResponse>, I>>(base?: I): QueryResourceMetadataResponse {
-    return QueryResourceMetadataResponse.fromPartial(base ?? {});
+    return QueryResourceMetadataResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryResourceMetadataResponse>, I>>(
     object: I,
   ): QueryResourceMetadataResponse {
@@ -387,23 +393,25 @@ export const QueryCollectionResourcesRequest = {
 
   fromJSON(object: any): QueryCollectionResourcesRequest {
     return {
-      collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
+      collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryCollectionResourcesRequest): unknown {
     const obj: any = {};
-    message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-    message.pagination !== undefined &&
-      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    if (message.collectionId !== "") {
+      obj.collectionId = message.collectionId;
+    }
+    if (message.pagination !== undefined) {
+      obj.pagination = PageRequest.toJSON(message.pagination);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<QueryCollectionResourcesRequest>, I>>(base?: I): QueryCollectionResourcesRequest {
-    return QueryCollectionResourcesRequest.fromPartial(base ?? {});
+    return QueryCollectionResourcesRequest.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryCollectionResourcesRequest>, I>>(
     object: I,
   ): QueryCollectionResourcesRequest {
@@ -463,29 +471,29 @@ export const QueryCollectionResourcesResponse = {
 
   fromJSON(object: any): QueryCollectionResourcesResponse {
     return {
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Metadata.fromJSON(e)) : [],
+      resources: globalThis.Array.isArray(object?.resources)
+        ? object.resources.map((e: any) => Metadata.fromJSON(e))
+        : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryCollectionResourcesResponse): unknown {
     const obj: any = {};
-    if (message.resources) {
-      obj.resources = message.resources.map((e) => e ? Metadata.toJSON(e) : undefined);
-    } else {
-      obj.resources = [];
+    if (message.resources?.length) {
+      obj.resources = message.resources.map((e) => Metadata.toJSON(e));
     }
-    message.pagination !== undefined &&
-      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    if (message.pagination !== undefined) {
+      obj.pagination = PageResponse.toJSON(message.pagination);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<QueryCollectionResourcesResponse>, I>>(
     base?: I,
   ): QueryCollectionResourcesResponse {
-    return QueryCollectionResourcesResponse.fromPartial(base ?? {});
+    return QueryCollectionResourcesResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryCollectionResourcesResponse>, I>>(
     object: I,
   ): QueryCollectionResourcesResponse {
@@ -542,10 +550,10 @@ interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
@@ -553,11 +561,6 @@ type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

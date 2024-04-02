@@ -1,7 +1,6 @@
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal";
-import { StateValue } from "./stateValue";
+import _m0 from "protobufjs/minimal.js";
+import { StateValue } from "./stateValue.js";
 
 /** GenesisState defines the cheqd module's genesis state. */
 export interface GenesisState {
@@ -56,26 +55,25 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      didNamespace: isSet(object.didNamespace) ? String(object.didNamespace) : "",
-      didList: Array.isArray(object?.didList) ? object.didList.map((e: any) => StateValue.fromJSON(e)) : [],
+      didNamespace: isSet(object.didNamespace) ? globalThis.String(object.didNamespace) : "",
+      didList: globalThis.Array.isArray(object?.didList) ? object.didList.map((e: any) => StateValue.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    message.didNamespace !== undefined && (obj.didNamespace = message.didNamespace);
-    if (message.didList) {
-      obj.didList = message.didList.map((e) => e ? StateValue.toJSON(e) : undefined);
-    } else {
-      obj.didList = [];
+    if (message.didNamespace !== "") {
+      obj.didNamespace = message.didNamespace;
+    }
+    if (message.didList?.length) {
+      obj.didList = message.didList.map((e) => StateValue.toJSON(e));
     }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<GenesisState>, I>>(base?: I): GenesisState {
-    return GenesisState.fromPartial(base ?? {});
+    return GenesisState.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
     const message = createBaseGenesisState();
     message.didNamespace = object.didNamespace ?? "";
@@ -84,10 +82,10 @@ export const GenesisState = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
@@ -95,11 +93,6 @@ type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

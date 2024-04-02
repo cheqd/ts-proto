@@ -1,6 +1,5 @@
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal.js";
 
 export interface Resource {
   header: ResourceHeader | undefined;
@@ -73,16 +72,18 @@ export const Resource = {
 
   toJSON(message: Resource): unknown {
     const obj: any = {};
-    message.header !== undefined && (obj.header = message.header ? ResourceHeader.toJSON(message.header) : undefined);
-    message.data !== undefined &&
-      (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array(0)));
+    if (message.header !== undefined) {
+      obj.header = ResourceHeader.toJSON(message.header);
+    }
+    if (message.data.length !== 0) {
+      obj.data = base64FromBytes(message.data);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Resource>, I>>(base?: I): Resource {
-    return Resource.fromPartial(base ?? {});
+    return Resource.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Resource>, I>>(object: I): Resource {
     const message = createBaseResource();
     message.header = (object.header !== undefined && object.header !== null)
@@ -220,37 +221,53 @@ export const ResourceHeader = {
 
   fromJSON(object: any): ResourceHeader {
     return {
-      collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      name: isSet(object.name) ? String(object.name) : "",
-      resourceType: isSet(object.resourceType) ? String(object.resourceType) : "",
-      mediaType: isSet(object.mediaType) ? String(object.mediaType) : "",
-      created: isSet(object.created) ? String(object.created) : "",
+      collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      resourceType: isSet(object.resourceType) ? globalThis.String(object.resourceType) : "",
+      mediaType: isSet(object.mediaType) ? globalThis.String(object.mediaType) : "",
+      created: isSet(object.created) ? globalThis.String(object.created) : "",
       checksum: isSet(object.checksum) ? bytesFromBase64(object.checksum) : new Uint8Array(0),
-      previousVersionId: isSet(object.previousVersionId) ? String(object.previousVersionId) : "",
-      nextVersionId: isSet(object.nextVersionId) ? String(object.nextVersionId) : "",
+      previousVersionId: isSet(object.previousVersionId) ? globalThis.String(object.previousVersionId) : "",
+      nextVersionId: isSet(object.nextVersionId) ? globalThis.String(object.nextVersionId) : "",
     };
   },
 
   toJSON(message: ResourceHeader): unknown {
     const obj: any = {};
-    message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-    message.id !== undefined && (obj.id = message.id);
-    message.name !== undefined && (obj.name = message.name);
-    message.resourceType !== undefined && (obj.resourceType = message.resourceType);
-    message.mediaType !== undefined && (obj.mediaType = message.mediaType);
-    message.created !== undefined && (obj.created = message.created);
-    message.checksum !== undefined &&
-      (obj.checksum = base64FromBytes(message.checksum !== undefined ? message.checksum : new Uint8Array(0)));
-    message.previousVersionId !== undefined && (obj.previousVersionId = message.previousVersionId);
-    message.nextVersionId !== undefined && (obj.nextVersionId = message.nextVersionId);
+    if (message.collectionId !== "") {
+      obj.collectionId = message.collectionId;
+    }
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.resourceType !== "") {
+      obj.resourceType = message.resourceType;
+    }
+    if (message.mediaType !== "") {
+      obj.mediaType = message.mediaType;
+    }
+    if (message.created !== "") {
+      obj.created = message.created;
+    }
+    if (message.checksum.length !== 0) {
+      obj.checksum = base64FromBytes(message.checksum);
+    }
+    if (message.previousVersionId !== "") {
+      obj.previousVersionId = message.previousVersionId;
+    }
+    if (message.nextVersionId !== "") {
+      obj.nextVersionId = message.nextVersionId;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ResourceHeader>, I>>(base?: I): ResourceHeader {
-    return ResourceHeader.fromPartial(base ?? {});
+    return ResourceHeader.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ResourceHeader>, I>>(object: I): ResourceHeader {
     const message = createBaseResourceHeader();
     message.collectionId = object.collectionId ?? "";
@@ -266,30 +283,11 @@ export const ResourceHeader = {
   },
 };
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if ((globalThis as any).Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -299,21 +297,21 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if ((globalThis as any).Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
@@ -321,11 +319,6 @@ type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

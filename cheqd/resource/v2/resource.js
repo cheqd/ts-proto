@@ -5,21 +5,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ResourceWithMetadata = exports.AlternativeUri = exports.Metadata = exports.Resource = void 0;
 /* eslint-disable */
-const long_1 = __importDefault(require("long"));
-const minimal_1 = __importDefault(require("protobufjs/minimal"));
-const timestamp_1 = require("../../../google/protobuf/timestamp");
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
+const timestamp_js_1 = require("../../../google/protobuf/timestamp.js");
 function createBaseResource() {
     return { data: new Uint8Array(0) };
 }
 exports.Resource = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.data.length !== 0) {
             writer.uint32(10).bytes(message.data);
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseResource();
         while (reader.pos < end) {
@@ -44,8 +43,9 @@ exports.Resource = {
     },
     toJSON(message) {
         const obj = {};
-        message.data !== undefined &&
-            (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array(0)));
+        if (message.data.length !== 0) {
+            obj.data = base64FromBytes(message.data);
+        }
         return obj;
     },
     create(base) {
@@ -73,7 +73,7 @@ function createBaseMetadata() {
     };
 }
 exports.Metadata = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.collectionId !== "") {
             writer.uint32(10).string(message.collectionId);
         }
@@ -96,7 +96,7 @@ exports.Metadata = {
             writer.uint32(58).string(message.mediaType);
         }
         if (message.created !== undefined) {
-            timestamp_1.Timestamp.encode(toTimestamp(message.created), writer.uint32(66).fork()).ldelim();
+            timestamp_js_1.Timestamp.encode(toTimestamp(message.created), writer.uint32(66).fork()).ldelim();
         }
         if (message.checksum !== "") {
             writer.uint32(74).string(message.checksum);
@@ -110,7 +110,7 @@ exports.Metadata = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseMetadata();
         while (reader.pos < end) {
@@ -162,7 +162,7 @@ exports.Metadata = {
                     if (tag !== 66) {
                         break;
                     }
-                    message.created = fromTimestamp(timestamp_1.Timestamp.decode(reader, reader.uint32()));
+                    message.created = fromTimestamp(timestamp_js_1.Timestamp.decode(reader, reader.uint32()));
                     continue;
                 case 9:
                     if (tag !== 74) {
@@ -192,39 +192,56 @@ exports.Metadata = {
     },
     fromJSON(object) {
         return {
-            collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
-            id: isSet(object.id) ? String(object.id) : "",
-            name: isSet(object.name) ? String(object.name) : "",
-            version: isSet(object.version) ? String(object.version) : "",
-            resourceType: isSet(object.resourceType) ? String(object.resourceType) : "",
-            alsoKnownAs: Array.isArray(object?.alsoKnownAs)
+            collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+            id: isSet(object.id) ? globalThis.String(object.id) : "",
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            version: isSet(object.version) ? globalThis.String(object.version) : "",
+            resourceType: isSet(object.resourceType) ? globalThis.String(object.resourceType) : "",
+            alsoKnownAs: globalThis.Array.isArray(object?.alsoKnownAs)
                 ? object.alsoKnownAs.map((e) => exports.AlternativeUri.fromJSON(e))
                 : [],
-            mediaType: isSet(object.mediaType) ? String(object.mediaType) : "",
+            mediaType: isSet(object.mediaType) ? globalThis.String(object.mediaType) : "",
             created: isSet(object.created) ? fromJsonTimestamp(object.created) : undefined,
-            checksum: isSet(object.checksum) ? String(object.checksum) : "",
-            previousVersionId: isSet(object.previousVersionId) ? String(object.previousVersionId) : "",
-            nextVersionId: isSet(object.nextVersionId) ? String(object.nextVersionId) : "",
+            checksum: isSet(object.checksum) ? globalThis.String(object.checksum) : "",
+            previousVersionId: isSet(object.previousVersionId) ? globalThis.String(object.previousVersionId) : "",
+            nextVersionId: isSet(object.nextVersionId) ? globalThis.String(object.nextVersionId) : "",
         };
     },
     toJSON(message) {
         const obj = {};
-        message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-        message.id !== undefined && (obj.id = message.id);
-        message.name !== undefined && (obj.name = message.name);
-        message.version !== undefined && (obj.version = message.version);
-        message.resourceType !== undefined && (obj.resourceType = message.resourceType);
-        if (message.alsoKnownAs) {
-            obj.alsoKnownAs = message.alsoKnownAs.map((e) => e ? exports.AlternativeUri.toJSON(e) : undefined);
+        if (message.collectionId !== "") {
+            obj.collectionId = message.collectionId;
         }
-        else {
-            obj.alsoKnownAs = [];
+        if (message.id !== "") {
+            obj.id = message.id;
         }
-        message.mediaType !== undefined && (obj.mediaType = message.mediaType);
-        message.created !== undefined && (obj.created = message.created.toISOString());
-        message.checksum !== undefined && (obj.checksum = message.checksum);
-        message.previousVersionId !== undefined && (obj.previousVersionId = message.previousVersionId);
-        message.nextVersionId !== undefined && (obj.nextVersionId = message.nextVersionId);
+        if (message.name !== "") {
+            obj.name = message.name;
+        }
+        if (message.version !== "") {
+            obj.version = message.version;
+        }
+        if (message.resourceType !== "") {
+            obj.resourceType = message.resourceType;
+        }
+        if (message.alsoKnownAs?.length) {
+            obj.alsoKnownAs = message.alsoKnownAs.map((e) => exports.AlternativeUri.toJSON(e));
+        }
+        if (message.mediaType !== "") {
+            obj.mediaType = message.mediaType;
+        }
+        if (message.created !== undefined) {
+            obj.created = message.created.toISOString();
+        }
+        if (message.checksum !== "") {
+            obj.checksum = message.checksum;
+        }
+        if (message.previousVersionId !== "") {
+            obj.previousVersionId = message.previousVersionId;
+        }
+        if (message.nextVersionId !== "") {
+            obj.nextVersionId = message.nextVersionId;
+        }
         return obj;
     },
     create(base) {
@@ -250,7 +267,7 @@ function createBaseAlternativeUri() {
     return { uri: "", description: "" };
 }
 exports.AlternativeUri = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.uri !== "") {
             writer.uint32(10).string(message.uri);
         }
@@ -260,7 +277,7 @@ exports.AlternativeUri = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseAlternativeUri();
         while (reader.pos < end) {
@@ -288,14 +305,18 @@ exports.AlternativeUri = {
     },
     fromJSON(object) {
         return {
-            uri: isSet(object.uri) ? String(object.uri) : "",
-            description: isSet(object.description) ? String(object.description) : "",
+            uri: isSet(object.uri) ? globalThis.String(object.uri) : "",
+            description: isSet(object.description) ? globalThis.String(object.description) : "",
         };
     },
     toJSON(message) {
         const obj = {};
-        message.uri !== undefined && (obj.uri = message.uri);
-        message.description !== undefined && (obj.description = message.description);
+        if (message.uri !== "") {
+            obj.uri = message.uri;
+        }
+        if (message.description !== "") {
+            obj.description = message.description;
+        }
         return obj;
     },
     create(base) {
@@ -312,7 +333,7 @@ function createBaseResourceWithMetadata() {
     return { resource: undefined, metadata: undefined };
 }
 exports.ResourceWithMetadata = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.resource !== undefined) {
             exports.Resource.encode(message.resource, writer.uint32(10).fork()).ldelim();
         }
@@ -322,7 +343,7 @@ exports.ResourceWithMetadata = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseResourceWithMetadata();
         while (reader.pos < end) {
@@ -356,8 +377,12 @@ exports.ResourceWithMetadata = {
     },
     toJSON(message) {
         const obj = {};
-        message.resource !== undefined && (obj.resource = message.resource ? exports.Resource.toJSON(message.resource) : undefined);
-        message.metadata !== undefined && (obj.metadata = message.metadata ? exports.Metadata.toJSON(message.metadata) : undefined);
+        if (message.resource !== undefined) {
+            obj.resource = exports.Resource.toJSON(message.resource);
+        }
+        if (message.metadata !== undefined) {
+            obj.metadata = exports.Metadata.toJSON(message.metadata);
+        }
         return obj;
     },
     create(base) {
@@ -374,27 +399,12 @@ exports.ResourceWithMetadata = {
         return message;
     },
 };
-const tsProtoGlobalThis = (() => {
-    if (typeof globalThis !== "undefined") {
-        return globalThis;
-    }
-    if (typeof self !== "undefined") {
-        return self;
-    }
-    if (typeof window !== "undefined") {
-        return window;
-    }
-    if (typeof global !== "undefined") {
-        return global;
-    }
-    throw "Unable to locate global object";
-})();
 function bytesFromBase64(b64) {
-    if (tsProtoGlobalThis.Buffer) {
-        return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+    if (globalThis.Buffer) {
+        return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
     }
     else {
-        const bin = tsProtoGlobalThis.atob(b64);
+        const bin = globalThis.atob(b64);
         const arr = new Uint8Array(bin.length);
         for (let i = 0; i < bin.length; ++i) {
             arr[i] = bin.charCodeAt(i);
@@ -403,44 +413,37 @@ function bytesFromBase64(b64) {
     }
 }
 function base64FromBytes(arr) {
-    if (tsProtoGlobalThis.Buffer) {
-        return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+    if (globalThis.Buffer) {
+        return globalThis.Buffer.from(arr).toString("base64");
     }
     else {
         const bin = [];
         arr.forEach((byte) => {
-            bin.push(String.fromCharCode(byte));
+            bin.push(globalThis.String.fromCharCode(byte));
         });
-        return tsProtoGlobalThis.btoa(bin.join(""));
+        return globalThis.btoa(bin.join(""));
     }
 }
 function toTimestamp(date) {
-    const seconds = numberToLong(date.getTime() / 1000);
-    const nanos = (date.getTime() % 1000) * 1000000;
+    const seconds = BigInt(Math.trunc(date.getTime() / 1_000));
+    const nanos = (date.getTime() % 1_000) * 1_000_000;
     return { seconds, nanos };
 }
 function fromTimestamp(t) {
-    let millis = (t.seconds.toNumber() || 0) * 1000;
-    millis += (t.nanos || 0) / 1000000;
-    return new Date(millis);
+    let millis = (globalThis.Number(t.seconds.toString()) || 0) * 1_000;
+    millis += (t.nanos || 0) / 1_000_000;
+    return new globalThis.Date(millis);
 }
 function fromJsonTimestamp(o) {
-    if (o instanceof Date) {
+    if (o instanceof globalThis.Date) {
         return o;
     }
     else if (typeof o === "string") {
-        return new Date(o);
+        return new globalThis.Date(o);
     }
     else {
-        return fromTimestamp(timestamp_1.Timestamp.fromJSON(o));
+        return fromTimestamp(timestamp_js_1.Timestamp.fromJSON(o));
     }
-}
-function numberToLong(number) {
-    return long_1.default.fromNumber(number);
-}
-if (minimal_1.default.util.Long !== long_1.default) {
-    minimal_1.default.util.Long = long_1.default;
-    minimal_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

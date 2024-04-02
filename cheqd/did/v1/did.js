@@ -5,9 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Service = exports.VerificationMethod = exports.Did = void 0;
 /* eslint-disable */
-const long_1 = __importDefault(require("long"));
-const minimal_1 = __importDefault(require("protobufjs/minimal"));
-const common_1 = require("./common");
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
+const common_js_1 = require("./common.js");
 function createBaseDid() {
     return {
         context: [],
@@ -24,7 +23,7 @@ function createBaseDid() {
     };
 }
 exports.Did = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         for (const v of message.context) {
             writer.uint32(10).string(v);
         }
@@ -61,7 +60,7 @@ exports.Did = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseDid();
         while (reader.pos < end) {
@@ -143,87 +142,71 @@ exports.Did = {
     },
     fromJSON(object) {
         return {
-            context: Array.isArray(object?.context) ? object.context.map((e) => String(e)) : [],
-            id: isSet(object.id) ? String(object.id) : "",
-            controller: Array.isArray(object?.controller) ? object.controller.map((e) => String(e)) : [],
-            verificationMethod: Array.isArray(object?.verificationMethod)
+            context: globalThis.Array.isArray(object?.context) ? object.context.map((e) => globalThis.String(e)) : [],
+            id: isSet(object.id) ? globalThis.String(object.id) : "",
+            controller: globalThis.Array.isArray(object?.controller)
+                ? object.controller.map((e) => globalThis.String(e))
+                : [],
+            verificationMethod: globalThis.Array.isArray(object?.verificationMethod)
                 ? object.verificationMethod.map((e) => exports.VerificationMethod.fromJSON(e))
                 : [],
-            authentication: Array.isArray(object?.authentication) ? object.authentication.map((e) => String(e)) : [],
-            assertionMethod: Array.isArray(object?.assertionMethod) ? object.assertionMethod.map((e) => String(e)) : [],
-            capabilityInvocation: Array.isArray(object?.capabilityInvocation)
-                ? object.capabilityInvocation.map((e) => String(e))
+            authentication: globalThis.Array.isArray(object?.authentication)
+                ? object.authentication.map((e) => globalThis.String(e))
                 : [],
-            capabilityDelegation: Array.isArray(object?.capabilityDelegation)
-                ? object.capabilityDelegation.map((e) => String(e))
+            assertionMethod: globalThis.Array.isArray(object?.assertionMethod)
+                ? object.assertionMethod.map((e) => globalThis.String(e))
                 : [],
-            keyAgreement: Array.isArray(object?.keyAgreement) ? object.keyAgreement.map((e) => String(e)) : [],
-            service: Array.isArray(object?.service) ? object.service.map((e) => exports.Service.fromJSON(e)) : [],
-            alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e) => String(e)) : [],
+            capabilityInvocation: globalThis.Array.isArray(object?.capabilityInvocation)
+                ? object.capabilityInvocation.map((e) => globalThis.String(e))
+                : [],
+            capabilityDelegation: globalThis.Array.isArray(object?.capabilityDelegation)
+                ? object.capabilityDelegation.map((e) => globalThis.String(e))
+                : [],
+            keyAgreement: globalThis.Array.isArray(object?.keyAgreement)
+                ? object.keyAgreement.map((e) => globalThis.String(e))
+                : [],
+            service: globalThis.Array.isArray(object?.service)
+                ? object.service.map((e) => exports.Service.fromJSON(e))
+                : [],
+            alsoKnownAs: globalThis.Array.isArray(object?.alsoKnownAs)
+                ? object.alsoKnownAs.map((e) => globalThis.String(e))
+                : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.context) {
-            obj.context = message.context.map((e) => e);
+        if (message.context?.length) {
+            obj.context = message.context;
         }
-        else {
-            obj.context = [];
+        if (message.id !== "") {
+            obj.id = message.id;
         }
-        message.id !== undefined && (obj.id = message.id);
-        if (message.controller) {
-            obj.controller = message.controller.map((e) => e);
+        if (message.controller?.length) {
+            obj.controller = message.controller;
         }
-        else {
-            obj.controller = [];
+        if (message.verificationMethod?.length) {
+            obj.verificationMethod = message.verificationMethod.map((e) => exports.VerificationMethod.toJSON(e));
         }
-        if (message.verificationMethod) {
-            obj.verificationMethod = message.verificationMethod.map((e) => e ? exports.VerificationMethod.toJSON(e) : undefined);
+        if (message.authentication?.length) {
+            obj.authentication = message.authentication;
         }
-        else {
-            obj.verificationMethod = [];
+        if (message.assertionMethod?.length) {
+            obj.assertionMethod = message.assertionMethod;
         }
-        if (message.authentication) {
-            obj.authentication = message.authentication.map((e) => e);
+        if (message.capabilityInvocation?.length) {
+            obj.capabilityInvocation = message.capabilityInvocation;
         }
-        else {
-            obj.authentication = [];
+        if (message.capabilityDelegation?.length) {
+            obj.capabilityDelegation = message.capabilityDelegation;
         }
-        if (message.assertionMethod) {
-            obj.assertionMethod = message.assertionMethod.map((e) => e);
+        if (message.keyAgreement?.length) {
+            obj.keyAgreement = message.keyAgreement;
         }
-        else {
-            obj.assertionMethod = [];
+        if (message.service?.length) {
+            obj.service = message.service.map((e) => exports.Service.toJSON(e));
         }
-        if (message.capabilityInvocation) {
-            obj.capabilityInvocation = message.capabilityInvocation.map((e) => e);
-        }
-        else {
-            obj.capabilityInvocation = [];
-        }
-        if (message.capabilityDelegation) {
-            obj.capabilityDelegation = message.capabilityDelegation.map((e) => e);
-        }
-        else {
-            obj.capabilityDelegation = [];
-        }
-        if (message.keyAgreement) {
-            obj.keyAgreement = message.keyAgreement.map((e) => e);
-        }
-        else {
-            obj.keyAgreement = [];
-        }
-        if (message.service) {
-            obj.service = message.service.map((e) => e ? exports.Service.toJSON(e) : undefined);
-        }
-        else {
-            obj.service = [];
-        }
-        if (message.alsoKnownAs) {
-            obj.alsoKnownAs = message.alsoKnownAs.map((e) => e);
-        }
-        else {
-            obj.alsoKnownAs = [];
+        if (message.alsoKnownAs?.length) {
+            obj.alsoKnownAs = message.alsoKnownAs;
         }
         return obj;
     },
@@ -250,7 +233,7 @@ function createBaseVerificationMethod() {
     return { id: "", type: "", controller: "", publicKeyJwk: [], publicKeyMultibase: "" };
 }
 exports.VerificationMethod = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
@@ -261,7 +244,7 @@ exports.VerificationMethod = {
             writer.uint32(26).string(message.controller);
         }
         for (const v of message.publicKeyJwk) {
-            common_1.KeyValuePair.encode(v, writer.uint32(34).fork()).ldelim();
+            common_js_1.KeyValuePair.encode(v, writer.uint32(34).fork()).ldelim();
         }
         if (message.publicKeyMultibase !== "") {
             writer.uint32(42).string(message.publicKeyMultibase);
@@ -269,7 +252,7 @@ exports.VerificationMethod = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseVerificationMethod();
         while (reader.pos < end) {
@@ -297,7 +280,7 @@ exports.VerificationMethod = {
                     if (tag !== 34) {
                         break;
                     }
-                    message.publicKeyJwk.push(common_1.KeyValuePair.decode(reader, reader.uint32()));
+                    message.publicKeyJwk.push(common_js_1.KeyValuePair.decode(reader, reader.uint32()));
                     continue;
                 case 5:
                     if (tag !== 42) {
@@ -315,27 +298,32 @@ exports.VerificationMethod = {
     },
     fromJSON(object) {
         return {
-            id: isSet(object.id) ? String(object.id) : "",
-            type: isSet(object.type) ? String(object.type) : "",
-            controller: isSet(object.controller) ? String(object.controller) : "",
-            publicKeyJwk: Array.isArray(object?.publicKeyJwk)
-                ? object.publicKeyJwk.map((e) => common_1.KeyValuePair.fromJSON(e))
+            id: isSet(object.id) ? globalThis.String(object.id) : "",
+            type: isSet(object.type) ? globalThis.String(object.type) : "",
+            controller: isSet(object.controller) ? globalThis.String(object.controller) : "",
+            publicKeyJwk: globalThis.Array.isArray(object?.publicKeyJwk)
+                ? object.publicKeyJwk.map((e) => common_js_1.KeyValuePair.fromJSON(e))
                 : [],
-            publicKeyMultibase: isSet(object.publicKeyMultibase) ? String(object.publicKeyMultibase) : "",
+            publicKeyMultibase: isSet(object.publicKeyMultibase) ? globalThis.String(object.publicKeyMultibase) : "",
         };
     },
     toJSON(message) {
         const obj = {};
-        message.id !== undefined && (obj.id = message.id);
-        message.type !== undefined && (obj.type = message.type);
-        message.controller !== undefined && (obj.controller = message.controller);
-        if (message.publicKeyJwk) {
-            obj.publicKeyJwk = message.publicKeyJwk.map((e) => e ? common_1.KeyValuePair.toJSON(e) : undefined);
+        if (message.id !== "") {
+            obj.id = message.id;
         }
-        else {
-            obj.publicKeyJwk = [];
+        if (message.type !== "") {
+            obj.type = message.type;
         }
-        message.publicKeyMultibase !== undefined && (obj.publicKeyMultibase = message.publicKeyMultibase);
+        if (message.controller !== "") {
+            obj.controller = message.controller;
+        }
+        if (message.publicKeyJwk?.length) {
+            obj.publicKeyJwk = message.publicKeyJwk.map((e) => common_js_1.KeyValuePair.toJSON(e));
+        }
+        if (message.publicKeyMultibase !== "") {
+            obj.publicKeyMultibase = message.publicKeyMultibase;
+        }
         return obj;
     },
     create(base) {
@@ -346,7 +334,7 @@ exports.VerificationMethod = {
         message.id = object.id ?? "";
         message.type = object.type ?? "";
         message.controller = object.controller ?? "";
-        message.publicKeyJwk = object.publicKeyJwk?.map((e) => common_1.KeyValuePair.fromPartial(e)) || [];
+        message.publicKeyJwk = object.publicKeyJwk?.map((e) => common_js_1.KeyValuePair.fromPartial(e)) || [];
         message.publicKeyMultibase = object.publicKeyMultibase ?? "";
         return message;
     },
@@ -355,7 +343,7 @@ function createBaseService() {
     return { id: "", type: "", serviceEndpoint: "" };
 }
 exports.Service = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.id !== "") {
             writer.uint32(10).string(message.id);
         }
@@ -368,7 +356,7 @@ exports.Service = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseService();
         while (reader.pos < end) {
@@ -402,16 +390,22 @@ exports.Service = {
     },
     fromJSON(object) {
         return {
-            id: isSet(object.id) ? String(object.id) : "",
-            type: isSet(object.type) ? String(object.type) : "",
-            serviceEndpoint: isSet(object.serviceEndpoint) ? String(object.serviceEndpoint) : "",
+            id: isSet(object.id) ? globalThis.String(object.id) : "",
+            type: isSet(object.type) ? globalThis.String(object.type) : "",
+            serviceEndpoint: isSet(object.serviceEndpoint) ? globalThis.String(object.serviceEndpoint) : "",
         };
     },
     toJSON(message) {
         const obj = {};
-        message.id !== undefined && (obj.id = message.id);
-        message.type !== undefined && (obj.type = message.type);
-        message.serviceEndpoint !== undefined && (obj.serviceEndpoint = message.serviceEndpoint);
+        if (message.id !== "") {
+            obj.id = message.id;
+        }
+        if (message.type !== "") {
+            obj.type = message.type;
+        }
+        if (message.serviceEndpoint !== "") {
+            obj.serviceEndpoint = message.serviceEndpoint;
+        }
         return obj;
     },
     create(base) {
@@ -425,10 +419,6 @@ exports.Service = {
         return message;
     },
 };
-if (minimal_1.default.util.Long !== long_1.default) {
-    minimal_1.default.util.Long = long_1.default;
-    minimal_1.default.configure();
-}
 function isSet(value) {
     return value !== null && value !== undefined;
 }

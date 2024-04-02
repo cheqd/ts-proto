@@ -1,8 +1,7 @@
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal";
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-import { DidDocWithMetadata, Metadata } from "./diddoc";
+import _m0 from "protobufjs/minimal.js";
+import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { DidDocWithMetadata, Metadata } from "./diddoc.js";
 
 /** QueryDidDocRequest is the request type for the Query/DidDoc method */
 export interface QueryDidDocRequest {
@@ -124,19 +123,20 @@ export const QueryDidDocRequest = {
   },
 
   fromJSON(object: any): QueryDidDocRequest {
-    return { id: isSet(object.id) ? String(object.id) : "" };
+    return { id: isSet(object.id) ? globalThis.String(object.id) : "" };
   },
 
   toJSON(message: QueryDidDocRequest): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<QueryDidDocRequest>, I>>(base?: I): QueryDidDocRequest {
-    return QueryDidDocRequest.fromPartial(base ?? {});
+    return QueryDidDocRequest.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryDidDocRequest>, I>>(object: I): QueryDidDocRequest {
     const message = createBaseQueryDidDocRequest();
     message.id = object.id ?? "";
@@ -185,14 +185,15 @@ export const QueryDidDocResponse = {
 
   toJSON(message: QueryDidDocResponse): unknown {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value ? DidDocWithMetadata.toJSON(message.value) : undefined);
+    if (message.value !== undefined) {
+      obj.value = DidDocWithMetadata.toJSON(message.value);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<QueryDidDocResponse>, I>>(base?: I): QueryDidDocResponse {
-    return QueryDidDocResponse.fromPartial(base ?? {});
+    return QueryDidDocResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryDidDocResponse>, I>>(object: I): QueryDidDocResponse {
     const message = createBaseQueryDidDocResponse();
     message.value = (object.value !== undefined && object.value !== null)
@@ -249,22 +250,25 @@ export const QueryDidDocVersionRequest = {
 
   fromJSON(object: any): QueryDidDocVersionRequest {
     return {
-      id: isSet(object.id) ? String(object.id) : "",
-      version: isSet(object.version) ? String(object.version) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      version: isSet(object.version) ? globalThis.String(object.version) : "",
     };
   },
 
   toJSON(message: QueryDidDocVersionRequest): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.version !== undefined && (obj.version = message.version);
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.version !== "") {
+      obj.version = message.version;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<QueryDidDocVersionRequest>, I>>(base?: I): QueryDidDocVersionRequest {
-    return QueryDidDocVersionRequest.fromPartial(base ?? {});
+    return QueryDidDocVersionRequest.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryDidDocVersionRequest>, I>>(object: I): QueryDidDocVersionRequest {
     const message = createBaseQueryDidDocVersionRequest();
     message.id = object.id ?? "";
@@ -314,14 +318,15 @@ export const QueryDidDocVersionResponse = {
 
   toJSON(message: QueryDidDocVersionResponse): unknown {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value ? DidDocWithMetadata.toJSON(message.value) : undefined);
+    if (message.value !== undefined) {
+      obj.value = DidDocWithMetadata.toJSON(message.value);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<QueryDidDocVersionResponse>, I>>(base?: I): QueryDidDocVersionResponse {
-    return QueryDidDocVersionResponse.fromPartial(base ?? {});
+    return QueryDidDocVersionResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryDidDocVersionResponse>, I>>(object: I): QueryDidDocVersionResponse {
     const message = createBaseQueryDidDocVersionResponse();
     message.value = (object.value !== undefined && object.value !== null)
@@ -378,25 +383,27 @@ export const QueryAllDidDocVersionsMetadataRequest = {
 
   fromJSON(object: any): QueryAllDidDocVersionsMetadataRequest {
     return {
-      id: isSet(object.id) ? String(object.id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryAllDidDocVersionsMetadataRequest): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.pagination !== undefined &&
-      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.pagination !== undefined) {
+      obj.pagination = PageRequest.toJSON(message.pagination);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<QueryAllDidDocVersionsMetadataRequest>, I>>(
     base?: I,
   ): QueryAllDidDocVersionsMetadataRequest {
-    return QueryAllDidDocVersionsMetadataRequest.fromPartial(base ?? {});
+    return QueryAllDidDocVersionsMetadataRequest.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryAllDidDocVersionsMetadataRequest>, I>>(
     object: I,
   ): QueryAllDidDocVersionsMetadataRequest {
@@ -456,29 +463,27 @@ export const QueryAllDidDocVersionsMetadataResponse = {
 
   fromJSON(object: any): QueryAllDidDocVersionsMetadataResponse {
     return {
-      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Metadata.fromJSON(e)) : [],
+      versions: globalThis.Array.isArray(object?.versions) ? object.versions.map((e: any) => Metadata.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryAllDidDocVersionsMetadataResponse): unknown {
     const obj: any = {};
-    if (message.versions) {
-      obj.versions = message.versions.map((e) => e ? Metadata.toJSON(e) : undefined);
-    } else {
-      obj.versions = [];
+    if (message.versions?.length) {
+      obj.versions = message.versions.map((e) => Metadata.toJSON(e));
     }
-    message.pagination !== undefined &&
-      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    if (message.pagination !== undefined) {
+      obj.pagination = PageResponse.toJSON(message.pagination);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<QueryAllDidDocVersionsMetadataResponse>, I>>(
     base?: I,
   ): QueryAllDidDocVersionsMetadataResponse {
-    return QueryAllDidDocVersionsMetadataResponse.fromPartial(base ?? {});
+    return QueryAllDidDocVersionsMetadataResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryAllDidDocVersionsMetadataResponse>, I>>(
     object: I,
   ): QueryAllDidDocVersionsMetadataResponse {
@@ -539,10 +544,10 @@ interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
@@ -550,11 +555,6 @@ type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

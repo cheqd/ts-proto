@@ -5,13 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ResourceHeader = exports.Resource = void 0;
 /* eslint-disable */
-const long_1 = __importDefault(require("long"));
-const minimal_1 = __importDefault(require("protobufjs/minimal"));
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
 function createBaseResource() {
     return { header: undefined, data: new Uint8Array(0) };
 }
 exports.Resource = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.header !== undefined) {
             exports.ResourceHeader.encode(message.header, writer.uint32(10).fork()).ldelim();
         }
@@ -21,7 +20,7 @@ exports.Resource = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseResource();
         while (reader.pos < end) {
@@ -55,9 +54,12 @@ exports.Resource = {
     },
     toJSON(message) {
         const obj = {};
-        message.header !== undefined && (obj.header = message.header ? exports.ResourceHeader.toJSON(message.header) : undefined);
-        message.data !== undefined &&
-            (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array(0)));
+        if (message.header !== undefined) {
+            obj.header = exports.ResourceHeader.toJSON(message.header);
+        }
+        if (message.data.length !== 0) {
+            obj.data = base64FromBytes(message.data);
+        }
         return obj;
     },
     create(base) {
@@ -86,7 +88,7 @@ function createBaseResourceHeader() {
     };
 }
 exports.ResourceHeader = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.collectionId !== "") {
             writer.uint32(10).string(message.collectionId);
         }
@@ -117,7 +119,7 @@ exports.ResourceHeader = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseResourceHeader();
         while (reader.pos < end) {
@@ -187,29 +189,46 @@ exports.ResourceHeader = {
     },
     fromJSON(object) {
         return {
-            collectionId: isSet(object.collectionId) ? String(object.collectionId) : "",
-            id: isSet(object.id) ? String(object.id) : "",
-            name: isSet(object.name) ? String(object.name) : "",
-            resourceType: isSet(object.resourceType) ? String(object.resourceType) : "",
-            mediaType: isSet(object.mediaType) ? String(object.mediaType) : "",
-            created: isSet(object.created) ? String(object.created) : "",
+            collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+            id: isSet(object.id) ? globalThis.String(object.id) : "",
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            resourceType: isSet(object.resourceType) ? globalThis.String(object.resourceType) : "",
+            mediaType: isSet(object.mediaType) ? globalThis.String(object.mediaType) : "",
+            created: isSet(object.created) ? globalThis.String(object.created) : "",
             checksum: isSet(object.checksum) ? bytesFromBase64(object.checksum) : new Uint8Array(0),
-            previousVersionId: isSet(object.previousVersionId) ? String(object.previousVersionId) : "",
-            nextVersionId: isSet(object.nextVersionId) ? String(object.nextVersionId) : "",
+            previousVersionId: isSet(object.previousVersionId) ? globalThis.String(object.previousVersionId) : "",
+            nextVersionId: isSet(object.nextVersionId) ? globalThis.String(object.nextVersionId) : "",
         };
     },
     toJSON(message) {
         const obj = {};
-        message.collectionId !== undefined && (obj.collectionId = message.collectionId);
-        message.id !== undefined && (obj.id = message.id);
-        message.name !== undefined && (obj.name = message.name);
-        message.resourceType !== undefined && (obj.resourceType = message.resourceType);
-        message.mediaType !== undefined && (obj.mediaType = message.mediaType);
-        message.created !== undefined && (obj.created = message.created);
-        message.checksum !== undefined &&
-            (obj.checksum = base64FromBytes(message.checksum !== undefined ? message.checksum : new Uint8Array(0)));
-        message.previousVersionId !== undefined && (obj.previousVersionId = message.previousVersionId);
-        message.nextVersionId !== undefined && (obj.nextVersionId = message.nextVersionId);
+        if (message.collectionId !== "") {
+            obj.collectionId = message.collectionId;
+        }
+        if (message.id !== "") {
+            obj.id = message.id;
+        }
+        if (message.name !== "") {
+            obj.name = message.name;
+        }
+        if (message.resourceType !== "") {
+            obj.resourceType = message.resourceType;
+        }
+        if (message.mediaType !== "") {
+            obj.mediaType = message.mediaType;
+        }
+        if (message.created !== "") {
+            obj.created = message.created;
+        }
+        if (message.checksum.length !== 0) {
+            obj.checksum = base64FromBytes(message.checksum);
+        }
+        if (message.previousVersionId !== "") {
+            obj.previousVersionId = message.previousVersionId;
+        }
+        if (message.nextVersionId !== "") {
+            obj.nextVersionId = message.nextVersionId;
+        }
         return obj;
     },
     create(base) {
@@ -229,27 +248,12 @@ exports.ResourceHeader = {
         return message;
     },
 };
-const tsProtoGlobalThis = (() => {
-    if (typeof globalThis !== "undefined") {
-        return globalThis;
-    }
-    if (typeof self !== "undefined") {
-        return self;
-    }
-    if (typeof window !== "undefined") {
-        return window;
-    }
-    if (typeof global !== "undefined") {
-        return global;
-    }
-    throw "Unable to locate global object";
-})();
 function bytesFromBase64(b64) {
-    if (tsProtoGlobalThis.Buffer) {
-        return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+    if (globalThis.Buffer) {
+        return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
     }
     else {
-        const bin = tsProtoGlobalThis.atob(b64);
+        const bin = globalThis.atob(b64);
         const arr = new Uint8Array(bin.length);
         for (let i = 0; i < bin.length; ++i) {
             arr[i] = bin.charCodeAt(i);
@@ -258,20 +262,16 @@ function bytesFromBase64(b64) {
     }
 }
 function base64FromBytes(arr) {
-    if (tsProtoGlobalThis.Buffer) {
-        return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+    if (globalThis.Buffer) {
+        return globalThis.Buffer.from(arr).toString("base64");
     }
     else {
         const bin = [];
         arr.forEach((byte) => {
-            bin.push(String.fromCharCode(byte));
+            bin.push(globalThis.String.fromCharCode(byte));
         });
-        return tsProtoGlobalThis.btoa(bin.join(""));
+        return globalThis.btoa(bin.join(""));
     }
-}
-if (minimal_1.default.util.Long !== long_1.default) {
-    minimal_1.default.util.Long = long_1.default;
-    minimal_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

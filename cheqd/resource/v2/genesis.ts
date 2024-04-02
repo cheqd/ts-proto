@@ -1,8 +1,7 @@
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal";
-import { FeeParams } from "./fee";
-import { ResourceWithMetadata } from "./resource";
+import _m0 from "protobufjs/minimal.js";
+import { FeeParams } from "./fee.js";
+import { ResourceWithMetadata } from "./resource.js";
 
 /** GenesisState defines the chqed Resource module's genesis state */
 export interface GenesisState {
@@ -62,7 +61,7 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      resources: Array.isArray(object?.resources)
+      resources: globalThis.Array.isArray(object?.resources)
         ? object.resources.map((e: any) => ResourceWithMetadata.fromJSON(e))
         : [],
       feeParams: isSet(object.feeParams) ? FeeParams.fromJSON(object.feeParams) : undefined,
@@ -71,20 +70,18 @@ export const GenesisState = {
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    if (message.resources) {
-      obj.resources = message.resources.map((e) => e ? ResourceWithMetadata.toJSON(e) : undefined);
-    } else {
-      obj.resources = [];
+    if (message.resources?.length) {
+      obj.resources = message.resources.map((e) => ResourceWithMetadata.toJSON(e));
     }
-    message.feeParams !== undefined &&
-      (obj.feeParams = message.feeParams ? FeeParams.toJSON(message.feeParams) : undefined);
+    if (message.feeParams !== undefined) {
+      obj.feeParams = FeeParams.toJSON(message.feeParams);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<GenesisState>, I>>(base?: I): GenesisState {
-    return GenesisState.fromPartial(base ?? {});
+    return GenesisState.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
     const message = createBaseGenesisState();
     message.resources = object.resources?.map((e) => ResourceWithMetadata.fromPartial(e)) || [];
@@ -95,10 +92,10 @@ export const GenesisState = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
@@ -106,11 +103,6 @@ type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

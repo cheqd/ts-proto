@@ -6,14 +6,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Timestamp = void 0;
 /* eslint-disable */
 const long_1 = __importDefault(require("long"));
-const minimal_1 = __importDefault(require("protobufjs/minimal"));
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
 function createBaseTimestamp() {
-    return { seconds: long_1.default.ZERO, nanos: 0 };
+    return { seconds: BigInt("0"), nanos: 0 };
 }
 exports.Timestamp = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
-        if (!message.seconds.isZero()) {
-            writer.uint32(8).int64(message.seconds);
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
+        if (message.seconds !== BigInt("0")) {
+            if (BigInt.asIntN(64, message.seconds) !== message.seconds) {
+                throw new globalThis.Error("value provided for field message.seconds of type int64 too large");
+            }
+            writer.uint32(8).int64(message.seconds.toString());
         }
         if (message.nanos !== 0) {
             writer.uint32(16).int32(message.nanos);
@@ -21,7 +24,7 @@ exports.Timestamp = {
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseTimestamp();
         while (reader.pos < end) {
@@ -31,7 +34,7 @@ exports.Timestamp = {
                     if (tag !== 8) {
                         break;
                     }
-                    message.seconds = reader.int64();
+                    message.seconds = longToBigint(reader.int64());
                     continue;
                 case 2:
                     if (tag !== 16) {
@@ -49,14 +52,18 @@ exports.Timestamp = {
     },
     fromJSON(object) {
         return {
-            seconds: isSet(object.seconds) ? long_1.default.fromValue(object.seconds) : long_1.default.ZERO,
-            nanos: isSet(object.nanos) ? Number(object.nanos) : 0,
+            seconds: isSet(object.seconds) ? BigInt(object.seconds) : BigInt("0"),
+            nanos: isSet(object.nanos) ? globalThis.Number(object.nanos) : 0,
         };
     },
     toJSON(message) {
         const obj = {};
-        message.seconds !== undefined && (obj.seconds = (message.seconds || long_1.default.ZERO).toString());
-        message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
+        if (message.seconds !== BigInt("0")) {
+            obj.seconds = message.seconds.toString();
+        }
+        if (message.nanos !== 0) {
+            obj.nanos = Math.round(message.nanos);
+        }
         return obj;
     },
     create(base) {
@@ -64,16 +71,17 @@ exports.Timestamp = {
     },
     fromPartial(object) {
         const message = createBaseTimestamp();
-        message.seconds = (object.seconds !== undefined && object.seconds !== null)
-            ? long_1.default.fromValue(object.seconds)
-            : long_1.default.ZERO;
+        message.seconds = object.seconds ?? BigInt("0");
         message.nanos = object.nanos ?? 0;
         return message;
     },
 };
-if (minimal_1.default.util.Long !== long_1.default) {
-    minimal_1.default.util.Long = long_1.default;
-    minimal_1.default.configure();
+function longToBigint(long) {
+    return BigInt(long.toString());
+}
+if (minimal_js_1.default.util.Long !== long_1.default) {
+    minimal_js_1.default.util.Long = long_1.default;
+    minimal_js_1.default.configure();
 }
 function isSet(value) {
     return value !== null && value !== undefined;

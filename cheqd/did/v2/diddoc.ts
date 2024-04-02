@@ -1,7 +1,6 @@
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal";
-import { Timestamp } from "../../../google/protobuf/timestamp";
+import _m0 from "protobufjs/minimal.js";
+import { Timestamp } from "../../../google/protobuf/timestamp.js";
 
 /**
  * DidDoc defines a DID Document, as defined in the DID Core specification.
@@ -313,86 +312,79 @@ export const DidDoc = {
 
   fromJSON(object: any): DidDoc {
     return {
-      context: Array.isArray(object?.context) ? object.context.map((e: any) => String(e)) : [],
-      id: isSet(object.id) ? String(object.id) : "",
-      controller: Array.isArray(object?.controller) ? object.controller.map((e: any) => String(e)) : [],
-      verificationMethod: Array.isArray(object?.verificationMethod)
+      context: globalThis.Array.isArray(object?.context) ? object.context.map((e: any) => globalThis.String(e)) : [],
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      controller: globalThis.Array.isArray(object?.controller)
+        ? object.controller.map((e: any) => globalThis.String(e))
+        : [],
+      verificationMethod: globalThis.Array.isArray(object?.verificationMethod)
         ? object.verificationMethod.map((e: any) => VerificationMethod.fromJSON(e))
         : [],
-      authentication: Array.isArray(object?.authentication) ? object.authentication.map((e: any) => String(e)) : [],
-      assertionMethod: Array.isArray(object?.assertionMethod) ? object.assertionMethod.map((e: any) => String(e)) : [],
-      capabilityInvocation: Array.isArray(object?.capabilityInvocation)
-        ? object.capabilityInvocation.map((e: any) => String(e))
+      authentication: globalThis.Array.isArray(object?.authentication)
+        ? object.authentication.map((e: any) => globalThis.String(e))
         : [],
-      capabilityDelegation: Array.isArray(object?.capabilityDelegation)
-        ? object.capabilityDelegation.map((e: any) => String(e))
+      assertionMethod: globalThis.Array.isArray(object?.assertionMethod)
+        ? object.assertionMethod.map((e: any) => globalThis.String(e))
         : [],
-      keyAgreement: Array.isArray(object?.keyAgreement) ? object.keyAgreement.map((e: any) => String(e)) : [],
-      service: Array.isArray(object?.service) ? object.service.map((e: any) => Service.fromJSON(e)) : [],
-      alsoKnownAs: Array.isArray(object?.alsoKnownAs) ? object.alsoKnownAs.map((e: any) => String(e)) : [],
+      capabilityInvocation: globalThis.Array.isArray(object?.capabilityInvocation)
+        ? object.capabilityInvocation.map((e: any) => globalThis.String(e))
+        : [],
+      capabilityDelegation: globalThis.Array.isArray(object?.capabilityDelegation)
+        ? object.capabilityDelegation.map((e: any) => globalThis.String(e))
+        : [],
+      keyAgreement: globalThis.Array.isArray(object?.keyAgreement)
+        ? object.keyAgreement.map((e: any) => globalThis.String(e))
+        : [],
+      service: globalThis.Array.isArray(object?.service)
+        ? object.service.map((e: any) => Service.fromJSON(e))
+        : [],
+      alsoKnownAs: globalThis.Array.isArray(object?.alsoKnownAs)
+        ? object.alsoKnownAs.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
   toJSON(message: DidDoc): unknown {
     const obj: any = {};
-    if (message.context) {
-      obj.context = message.context.map((e) => e);
-    } else {
-      obj.context = [];
+    if (message.context?.length) {
+      obj.context = message.context;
     }
-    message.id !== undefined && (obj.id = message.id);
-    if (message.controller) {
-      obj.controller = message.controller.map((e) => e);
-    } else {
-      obj.controller = [];
+    if (message.id !== "") {
+      obj.id = message.id;
     }
-    if (message.verificationMethod) {
-      obj.verificationMethod = message.verificationMethod.map((e) => e ? VerificationMethod.toJSON(e) : undefined);
-    } else {
-      obj.verificationMethod = [];
+    if (message.controller?.length) {
+      obj.controller = message.controller;
     }
-    if (message.authentication) {
-      obj.authentication = message.authentication.map((e) => e);
-    } else {
-      obj.authentication = [];
+    if (message.verificationMethod?.length) {
+      obj.verificationMethod = message.verificationMethod.map((e) => VerificationMethod.toJSON(e));
     }
-    if (message.assertionMethod) {
-      obj.assertionMethod = message.assertionMethod.map((e) => e);
-    } else {
-      obj.assertionMethod = [];
+    if (message.authentication?.length) {
+      obj.authentication = message.authentication;
     }
-    if (message.capabilityInvocation) {
-      obj.capabilityInvocation = message.capabilityInvocation.map((e) => e);
-    } else {
-      obj.capabilityInvocation = [];
+    if (message.assertionMethod?.length) {
+      obj.assertionMethod = message.assertionMethod;
     }
-    if (message.capabilityDelegation) {
-      obj.capabilityDelegation = message.capabilityDelegation.map((e) => e);
-    } else {
-      obj.capabilityDelegation = [];
+    if (message.capabilityInvocation?.length) {
+      obj.capabilityInvocation = message.capabilityInvocation;
     }
-    if (message.keyAgreement) {
-      obj.keyAgreement = message.keyAgreement.map((e) => e);
-    } else {
-      obj.keyAgreement = [];
+    if (message.capabilityDelegation?.length) {
+      obj.capabilityDelegation = message.capabilityDelegation;
     }
-    if (message.service) {
-      obj.service = message.service.map((e) => e ? Service.toJSON(e) : undefined);
-    } else {
-      obj.service = [];
+    if (message.keyAgreement?.length) {
+      obj.keyAgreement = message.keyAgreement;
     }
-    if (message.alsoKnownAs) {
-      obj.alsoKnownAs = message.alsoKnownAs.map((e) => e);
-    } else {
-      obj.alsoKnownAs = [];
+    if (message.service?.length) {
+      obj.service = message.service.map((e) => Service.toJSON(e));
+    }
+    if (message.alsoKnownAs?.length) {
+      obj.alsoKnownAs = message.alsoKnownAs;
     }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<DidDoc>, I>>(base?: I): DidDoc {
-    return DidDoc.fromPartial(base ?? {});
+    return DidDoc.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<DidDoc>, I>>(object: I): DidDoc {
     const message = createBaseDidDoc();
     message.context = object.context?.map((e) => e) || [];
@@ -477,26 +469,35 @@ export const VerificationMethod = {
 
   fromJSON(object: any): VerificationMethod {
     return {
-      id: isSet(object.id) ? String(object.id) : "",
-      verificationMethodType: isSet(object.verificationMethodType) ? String(object.verificationMethodType) : "",
-      controller: isSet(object.controller) ? String(object.controller) : "",
-      verificationMaterial: isSet(object.verificationMaterial) ? String(object.verificationMaterial) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      verificationMethodType: isSet(object.verificationMethodType)
+        ? globalThis.String(object.verificationMethodType)
+        : "",
+      controller: isSet(object.controller) ? globalThis.String(object.controller) : "",
+      verificationMaterial: isSet(object.verificationMaterial) ? globalThis.String(object.verificationMaterial) : "",
     };
   },
 
   toJSON(message: VerificationMethod): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.verificationMethodType !== undefined && (obj.verificationMethodType = message.verificationMethodType);
-    message.controller !== undefined && (obj.controller = message.controller);
-    message.verificationMaterial !== undefined && (obj.verificationMaterial = message.verificationMaterial);
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.verificationMethodType !== "") {
+      obj.verificationMethodType = message.verificationMethodType;
+    }
+    if (message.controller !== "") {
+      obj.controller = message.controller;
+    }
+    if (message.verificationMaterial !== "") {
+      obj.verificationMaterial = message.verificationMaterial;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<VerificationMethod>, I>>(base?: I): VerificationMethod {
-    return VerificationMethod.fromPartial(base ?? {});
+    return VerificationMethod.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<VerificationMethod>, I>>(object: I): VerificationMethod {
     const message = createBaseVerificationMethod();
     message.id = object.id ?? "";
@@ -564,28 +565,31 @@ export const Service = {
 
   fromJSON(object: any): Service {
     return {
-      id: isSet(object.id) ? String(object.id) : "",
-      serviceType: isSet(object.serviceType) ? String(object.serviceType) : "",
-      serviceEndpoint: Array.isArray(object?.serviceEndpoint) ? object.serviceEndpoint.map((e: any) => String(e)) : [],
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      serviceType: isSet(object.serviceType) ? globalThis.String(object.serviceType) : "",
+      serviceEndpoint: globalThis.Array.isArray(object?.serviceEndpoint)
+        ? object.serviceEndpoint.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
   toJSON(message: Service): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.serviceType !== undefined && (obj.serviceType = message.serviceType);
-    if (message.serviceEndpoint) {
-      obj.serviceEndpoint = message.serviceEndpoint.map((e) => e);
-    } else {
-      obj.serviceEndpoint = [];
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.serviceType !== "") {
+      obj.serviceType = message.serviceType;
+    }
+    if (message.serviceEndpoint?.length) {
+      obj.serviceEndpoint = message.serviceEndpoint;
     }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Service>, I>>(base?: I): Service {
-    return Service.fromPartial(base ?? {});
+    return Service.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Service>, I>>(object: I): Service {
     const message = createBaseService();
     message.id = object.id ?? "";
@@ -649,15 +653,18 @@ export const DidDocWithMetadata = {
 
   toJSON(message: DidDocWithMetadata): unknown {
     const obj: any = {};
-    message.didDoc !== undefined && (obj.didDoc = message.didDoc ? DidDoc.toJSON(message.didDoc) : undefined);
-    message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
+    if (message.didDoc !== undefined) {
+      obj.didDoc = DidDoc.toJSON(message.didDoc);
+    }
+    if (message.metadata !== undefined) {
+      obj.metadata = Metadata.toJSON(message.metadata);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<DidDocWithMetadata>, I>>(base?: I): DidDocWithMetadata {
-    return DidDocWithMetadata.fromPartial(base ?? {});
+    return DidDocWithMetadata.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<DidDocWithMetadata>, I>>(object: I): DidDocWithMetadata {
     const message = createBaseDidDocWithMetadata();
     message.didDoc = (object.didDoc !== undefined && object.didDoc !== null)
@@ -766,28 +773,39 @@ export const Metadata = {
     return {
       created: isSet(object.created) ? fromJsonTimestamp(object.created) : undefined,
       updated: isSet(object.updated) ? fromJsonTimestamp(object.updated) : undefined,
-      deactivated: isSet(object.deactivated) ? Boolean(object.deactivated) : false,
-      versionId: isSet(object.versionId) ? String(object.versionId) : "",
-      nextVersionId: isSet(object.nextVersionId) ? String(object.nextVersionId) : "",
-      previousVersionId: isSet(object.previousVersionId) ? String(object.previousVersionId) : "",
+      deactivated: isSet(object.deactivated) ? globalThis.Boolean(object.deactivated) : false,
+      versionId: isSet(object.versionId) ? globalThis.String(object.versionId) : "",
+      nextVersionId: isSet(object.nextVersionId) ? globalThis.String(object.nextVersionId) : "",
+      previousVersionId: isSet(object.previousVersionId) ? globalThis.String(object.previousVersionId) : "",
     };
   },
 
   toJSON(message: Metadata): unknown {
     const obj: any = {};
-    message.created !== undefined && (obj.created = message.created.toISOString());
-    message.updated !== undefined && (obj.updated = message.updated.toISOString());
-    message.deactivated !== undefined && (obj.deactivated = message.deactivated);
-    message.versionId !== undefined && (obj.versionId = message.versionId);
-    message.nextVersionId !== undefined && (obj.nextVersionId = message.nextVersionId);
-    message.previousVersionId !== undefined && (obj.previousVersionId = message.previousVersionId);
+    if (message.created !== undefined) {
+      obj.created = message.created.toISOString();
+    }
+    if (message.updated !== undefined) {
+      obj.updated = message.updated.toISOString();
+    }
+    if (message.deactivated === true) {
+      obj.deactivated = message.deactivated;
+    }
+    if (message.versionId !== "") {
+      obj.versionId = message.versionId;
+    }
+    if (message.nextVersionId !== "") {
+      obj.nextVersionId = message.nextVersionId;
+    }
+    if (message.previousVersionId !== "") {
+      obj.previousVersionId = message.previousVersionId;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Metadata>, I>>(base?: I): Metadata {
-    return Metadata.fromPartial(base ?? {});
+    return Metadata.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Metadata>, I>>(object: I): Metadata {
     const message = createBaseMetadata();
     message.created = object.created ?? undefined;
@@ -800,10 +818,10 @@ export const Metadata = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
@@ -813,34 +831,25 @@ type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = numberToLong(date.getTime() / 1_000);
+  const seconds = BigInt(Math.trunc(date.getTime() / 1_000));
   const nanos = (date.getTime() % 1_000) * 1_000_000;
   return { seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = (t.seconds.toNumber() || 0) * 1_000;
+  let millis = (globalThis.Number(t.seconds.toString()) || 0) * 1_000;
   millis += (t.nanos || 0) / 1_000_000;
-  return new Date(millis);
+  return new globalThis.Date(millis);
 }
 
 function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
+  if (o instanceof globalThis.Date) {
     return o;
   } else if (typeof o === "string") {
-    return new Date(o);
+    return new globalThis.Date(o);
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }
-}
-
-function numberToLong(number: number) {
-  return Long.fromNumber(number);
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
 }
 
 function isSet(value: any): boolean {

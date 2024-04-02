@@ -1,7 +1,6 @@
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import _m0 from "protobufjs/minimal.js";
+import { Coin } from "../../../cosmos/base/v1beta1/coin.js";
 
 /**
  * FeeParams defines the parameters for the cheqd Resource module fixed fee.
@@ -110,23 +109,30 @@ export const FeeParams = {
       image: isSet(object.image) ? Coin.fromJSON(object.image) : undefined,
       json: isSet(object.json) ? Coin.fromJSON(object.json) : undefined,
       default: isSet(object.default) ? Coin.fromJSON(object.default) : undefined,
-      burnFactor: isSet(object.burnFactor) ? String(object.burnFactor) : "",
+      burnFactor: isSet(object.burnFactor) ? globalThis.String(object.burnFactor) : "",
     };
   },
 
   toJSON(message: FeeParams): unknown {
     const obj: any = {};
-    message.image !== undefined && (obj.image = message.image ? Coin.toJSON(message.image) : undefined);
-    message.json !== undefined && (obj.json = message.json ? Coin.toJSON(message.json) : undefined);
-    message.default !== undefined && (obj.default = message.default ? Coin.toJSON(message.default) : undefined);
-    message.burnFactor !== undefined && (obj.burnFactor = message.burnFactor);
+    if (message.image !== undefined) {
+      obj.image = Coin.toJSON(message.image);
+    }
+    if (message.json !== undefined) {
+      obj.json = Coin.toJSON(message.json);
+    }
+    if (message.default !== undefined) {
+      obj.default = Coin.toJSON(message.default);
+    }
+    if (message.burnFactor !== "") {
+      obj.burnFactor = message.burnFactor;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<FeeParams>, I>>(base?: I): FeeParams {
-    return FeeParams.fromPartial(base ?? {});
+    return FeeParams.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<FeeParams>, I>>(object: I): FeeParams {
     const message = createBaseFeeParams();
     message.image = (object.image !== undefined && object.image !== null) ? Coin.fromPartial(object.image) : undefined;
@@ -139,10 +145,10 @@ export const FeeParams = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
@@ -150,11 +156,6 @@ type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

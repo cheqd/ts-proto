@@ -5,25 +5,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GenesisState = exports.DidDocVersionSet = void 0;
 /* eslint-disable */
-const long_1 = __importDefault(require("long"));
-const minimal_1 = __importDefault(require("protobufjs/minimal"));
-const diddoc_1 = require("./diddoc");
-const fee_1 = require("./fee");
+const minimal_js_1 = __importDefault(require("protobufjs/minimal.js"));
+const diddoc_js_1 = require("./diddoc.js");
+const fee_js_1 = require("./fee.js");
 function createBaseDidDocVersionSet() {
     return { latestVersion: "", didDocs: [] };
 }
 exports.DidDocVersionSet = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.latestVersion !== "") {
             writer.uint32(10).string(message.latestVersion);
         }
         for (const v of message.didDocs) {
-            diddoc_1.DidDocWithMetadata.encode(v, writer.uint32(18).fork()).ldelim();
+            diddoc_js_1.DidDocWithMetadata.encode(v, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseDidDocVersionSet();
         while (reader.pos < end) {
@@ -39,7 +38,7 @@ exports.DidDocVersionSet = {
                     if (tag !== 18) {
                         break;
                     }
-                    message.didDocs.push(diddoc_1.DidDocWithMetadata.decode(reader, reader.uint32()));
+                    message.didDocs.push(diddoc_js_1.DidDocWithMetadata.decode(reader, reader.uint32()));
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -51,18 +50,19 @@ exports.DidDocVersionSet = {
     },
     fromJSON(object) {
         return {
-            latestVersion: isSet(object.latestVersion) ? String(object.latestVersion) : "",
-            didDocs: Array.isArray(object?.didDocs) ? object.didDocs.map((e) => diddoc_1.DidDocWithMetadata.fromJSON(e)) : [],
+            latestVersion: isSet(object.latestVersion) ? globalThis.String(object.latestVersion) : "",
+            didDocs: globalThis.Array.isArray(object?.didDocs)
+                ? object.didDocs.map((e) => diddoc_js_1.DidDocWithMetadata.fromJSON(e))
+                : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        message.latestVersion !== undefined && (obj.latestVersion = message.latestVersion);
-        if (message.didDocs) {
-            obj.didDocs = message.didDocs.map((e) => e ? diddoc_1.DidDocWithMetadata.toJSON(e) : undefined);
+        if (message.latestVersion !== "") {
+            obj.latestVersion = message.latestVersion;
         }
-        else {
-            obj.didDocs = [];
+        if (message.didDocs?.length) {
+            obj.didDocs = message.didDocs.map((e) => diddoc_js_1.DidDocWithMetadata.toJSON(e));
         }
         return obj;
     },
@@ -72,7 +72,7 @@ exports.DidDocVersionSet = {
     fromPartial(object) {
         const message = createBaseDidDocVersionSet();
         message.latestVersion = object.latestVersion ?? "";
-        message.didDocs = object.didDocs?.map((e) => diddoc_1.DidDocWithMetadata.fromPartial(e)) || [];
+        message.didDocs = object.didDocs?.map((e) => diddoc_js_1.DidDocWithMetadata.fromPartial(e)) || [];
         return message;
     },
 };
@@ -80,7 +80,7 @@ function createBaseGenesisState() {
     return { didNamespace: "", versionSets: [], feeParams: undefined };
 }
 exports.GenesisState = {
-    encode(message, writer = minimal_1.default.Writer.create()) {
+    encode(message, writer = minimal_js_1.default.Writer.create()) {
         if (message.didNamespace !== "") {
             writer.uint32(10).string(message.didNamespace);
         }
@@ -88,12 +88,12 @@ exports.GenesisState = {
             exports.DidDocVersionSet.encode(v, writer.uint32(18).fork()).ldelim();
         }
         if (message.feeParams !== undefined) {
-            fee_1.FeeParams.encode(message.feeParams, writer.uint32(26).fork()).ldelim();
+            fee_js_1.FeeParams.encode(message.feeParams, writer.uint32(26).fork()).ldelim();
         }
         return writer;
     },
     decode(input, length) {
-        const reader = input instanceof minimal_1.default.Reader ? input : minimal_1.default.Reader.create(input);
+        const reader = input instanceof minimal_js_1.default.Reader ? input : minimal_js_1.default.Reader.create(input);
         let end = length === undefined ? reader.len : reader.pos + length;
         const message = createBaseGenesisState();
         while (reader.pos < end) {
@@ -115,7 +115,7 @@ exports.GenesisState = {
                     if (tag !== 26) {
                         break;
                     }
-                    message.feeParams = fee_1.FeeParams.decode(reader, reader.uint32());
+                    message.feeParams = fee_js_1.FeeParams.decode(reader, reader.uint32());
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -127,24 +127,24 @@ exports.GenesisState = {
     },
     fromJSON(object) {
         return {
-            didNamespace: isSet(object.didNamespace) ? String(object.didNamespace) : "",
-            versionSets: Array.isArray(object?.versionSets)
+            didNamespace: isSet(object.didNamespace) ? globalThis.String(object.didNamespace) : "",
+            versionSets: globalThis.Array.isArray(object?.versionSets)
                 ? object.versionSets.map((e) => exports.DidDocVersionSet.fromJSON(e))
                 : [],
-            feeParams: isSet(object.feeParams) ? fee_1.FeeParams.fromJSON(object.feeParams) : undefined,
+            feeParams: isSet(object.feeParams) ? fee_js_1.FeeParams.fromJSON(object.feeParams) : undefined,
         };
     },
     toJSON(message) {
         const obj = {};
-        message.didNamespace !== undefined && (obj.didNamespace = message.didNamespace);
-        if (message.versionSets) {
-            obj.versionSets = message.versionSets.map((e) => e ? exports.DidDocVersionSet.toJSON(e) : undefined);
+        if (message.didNamespace !== "") {
+            obj.didNamespace = message.didNamespace;
         }
-        else {
-            obj.versionSets = [];
+        if (message.versionSets?.length) {
+            obj.versionSets = message.versionSets.map((e) => exports.DidDocVersionSet.toJSON(e));
         }
-        message.feeParams !== undefined &&
-            (obj.feeParams = message.feeParams ? fee_1.FeeParams.toJSON(message.feeParams) : undefined);
+        if (message.feeParams !== undefined) {
+            obj.feeParams = fee_js_1.FeeParams.toJSON(message.feeParams);
+        }
         return obj;
     },
     create(base) {
@@ -155,15 +155,11 @@ exports.GenesisState = {
         message.didNamespace = object.didNamespace ?? "";
         message.versionSets = object.versionSets?.map((e) => exports.DidDocVersionSet.fromPartial(e)) || [];
         message.feeParams = (object.feeParams !== undefined && object.feeParams !== null)
-            ? fee_1.FeeParams.fromPartial(object.feeParams)
+            ? fee_js_1.FeeParams.fromPartial(object.feeParams)
             : undefined;
         return message;
     },
 };
-if (minimal_1.default.util.Long !== long_1.default) {
-    minimal_1.default.util.Long = long_1.default;
-    minimal_1.default.configure();
-}
 function isSet(value) {
     return value !== null && value !== undefined;
 }

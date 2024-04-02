@@ -1,8 +1,7 @@
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal";
-import { DidDocWithMetadata } from "./diddoc";
-import { FeeParams } from "./fee";
+import _m0 from "protobufjs/minimal.js";
+import { DidDocWithMetadata } from "./diddoc.js";
+import { FeeParams } from "./fee.js";
 
 /**
  * DidDocVersionSet contains all versions of DID Documents and their metadata for a given DID.
@@ -78,26 +77,27 @@ export const DidDocVersionSet = {
 
   fromJSON(object: any): DidDocVersionSet {
     return {
-      latestVersion: isSet(object.latestVersion) ? String(object.latestVersion) : "",
-      didDocs: Array.isArray(object?.didDocs) ? object.didDocs.map((e: any) => DidDocWithMetadata.fromJSON(e)) : [],
+      latestVersion: isSet(object.latestVersion) ? globalThis.String(object.latestVersion) : "",
+      didDocs: globalThis.Array.isArray(object?.didDocs)
+        ? object.didDocs.map((e: any) => DidDocWithMetadata.fromJSON(e))
+        : [],
     };
   },
 
   toJSON(message: DidDocVersionSet): unknown {
     const obj: any = {};
-    message.latestVersion !== undefined && (obj.latestVersion = message.latestVersion);
-    if (message.didDocs) {
-      obj.didDocs = message.didDocs.map((e) => e ? DidDocWithMetadata.toJSON(e) : undefined);
-    } else {
-      obj.didDocs = [];
+    if (message.latestVersion !== "") {
+      obj.latestVersion = message.latestVersion;
+    }
+    if (message.didDocs?.length) {
+      obj.didDocs = message.didDocs.map((e) => DidDocWithMetadata.toJSON(e));
     }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<DidDocVersionSet>, I>>(base?: I): DidDocVersionSet {
-    return DidDocVersionSet.fromPartial(base ?? {});
+    return DidDocVersionSet.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<DidDocVersionSet>, I>>(object: I): DidDocVersionSet {
     const message = createBaseDidDocVersionSet();
     message.latestVersion = object.latestVersion ?? "";
@@ -163,8 +163,8 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      didNamespace: isSet(object.didNamespace) ? String(object.didNamespace) : "",
-      versionSets: Array.isArray(object?.versionSets)
+      didNamespace: isSet(object.didNamespace) ? globalThis.String(object.didNamespace) : "",
+      versionSets: globalThis.Array.isArray(object?.versionSets)
         ? object.versionSets.map((e: any) => DidDocVersionSet.fromJSON(e))
         : [],
       feeParams: isSet(object.feeParams) ? FeeParams.fromJSON(object.feeParams) : undefined,
@@ -173,21 +173,21 @@ export const GenesisState = {
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    message.didNamespace !== undefined && (obj.didNamespace = message.didNamespace);
-    if (message.versionSets) {
-      obj.versionSets = message.versionSets.map((e) => e ? DidDocVersionSet.toJSON(e) : undefined);
-    } else {
-      obj.versionSets = [];
+    if (message.didNamespace !== "") {
+      obj.didNamespace = message.didNamespace;
     }
-    message.feeParams !== undefined &&
-      (obj.feeParams = message.feeParams ? FeeParams.toJSON(message.feeParams) : undefined);
+    if (message.versionSets?.length) {
+      obj.versionSets = message.versionSets.map((e) => DidDocVersionSet.toJSON(e));
+    }
+    if (message.feeParams !== undefined) {
+      obj.feeParams = FeeParams.toJSON(message.feeParams);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<GenesisState>, I>>(base?: I): GenesisState {
-    return GenesisState.fromPartial(base ?? {});
+    return GenesisState.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
     const message = createBaseGenesisState();
     message.didNamespace = object.didNamespace ?? "";
@@ -199,10 +199,10 @@ export const GenesisState = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | bigint | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
@@ -210,11 +210,6 @@ type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
