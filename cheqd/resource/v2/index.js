@@ -15,10 +15,10 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.protobufPackage = void 0;
-__exportStar(require("./genesis.js"), exports);
-__exportStar(require("./query.js"), exports);
-__exportStar(require("./resource.js"), exports);
-__exportStar(require("./tx.js"), exports);
-__exportStar(require("./fee.js"), exports);
+__exportStar(require("./genesis"), exports);
+__exportStar(require("./query"), exports);
+__exportStar(require("./resource"), exports);
+__exportStar(require("./tx"), exports);
+__exportStar(require("./fee"), exports);
 exports.protobufPackage = "cheqd.resource.v2";
 //# sourceMappingURL=index.js.map
