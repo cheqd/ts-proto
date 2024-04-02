@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/cheqd/ts-proto/compare/2.2.2...2.3.0) (2024-04-02)
+
+
+### Features
+
+* Added full-on backwards compatible CJS output ([#219](https://github.com/cheqd/ts-proto/issues/219)) ([2904952](https://github.com/cheqd/ts-proto/commit/2904952fba4007aea4387077ff94152ce475019d)), closes [#79](https://github.com/cheqd/ts-proto/issues/79) [#79](https://github.com/cheqd/ts-proto/issues/79) [#79](https://github.com/cheqd/ts-proto/issues/79) [#79](https://github.com/cheqd/ts-proto/issues/79) [#79](https://github.com/cheqd/ts-proto/issues/79) [#81](https://github.com/cheqd/ts-proto/issues/81) [#81](https://github.com/cheqd/ts-proto/issues/81) [#81](https://github.com/cheqd/ts-proto/issues/81) [#83](https://github.com/cheqd/ts-proto/issues/83) [#85](https://github.com/cheqd/ts-proto/issues/85)
+
 ## [3.4.1](https://github.com/cheqd/ts-proto/compare/3.4.0...3.4.1) (2024-02-26)
 
 ## [3.4.1-develop.1](https://github.com/cheqd/ts-proto/compare/3.4.0...3.4.1-develop.1) (2024-02-26)
