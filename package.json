@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "long": "^5.2.3",
-    "protobufjs": "^7.2.6"
+    "protobufjs": "^7.3.2"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
@@ -53,10 +53,10 @@
     "@semantic-release/npm": "^12.0.0",
     "@semantic-release/release-notes-generator": "^13.0.0",
     "@types/long": "^5.0.0",
-    "@types/node": "^20.12.7",
-    "conventional-changelog-conventionalcommits": "^7.0.2",
+    "@types/node": "^20.14.11",
+    "conventional-changelog-conventionalcommits": "^8.0.0",
     "loose-ts-check": "^2.0.0",
-    "semantic-release": "^23.0.8",
+    "semantic-release": "^24.0.0",
     "typescript": "^5.4.5"
   },
   "publishConfig": {
