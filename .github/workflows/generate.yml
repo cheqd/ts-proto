@@ -15,18 +15,16 @@ defaults:
     shell: bash
 permissions:
   contents: write
-  pull-requests: write 
+  pull-requests: write
 
-    
 jobs:
-
   generate-proto:
     name: "Update with upstream Protobufs"
     runs-on: ubuntu-latest
     env:
       BASE_BRANCH: ${{ github.event.inputs.base-branch }}
       PR_BRANCH: "update-proto"
-    
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -43,10 +41,10 @@ jobs:
 
       - name: Generate TypeScript code for Protobufs
         run: buf generate buf.build/cheqd/proto
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Build
         run: npm run build
 
@@ -60,4 +58,3 @@ jobs:
           title: "feat(protobufs): Update with upstream Protobufs $(date +'%Y-%m-%d')"
           body: "Updated protobufs from cheqd-node ledger protos"
           token: ${{ secrets.GITHUB_TOKEN }}
-
