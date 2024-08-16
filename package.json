@@ -1,6 +1,6 @@
 {
   "name": "@cheqd/ts-proto",
-  "version": "3.4.2",
+  "version": "3.4.3-develop.1",
   "description": "A TypeScript package for all transpiled cheqd ProtoBuf definitions.",
   "main": "index.js",
   "type": "module",
@@ -47,11 +47,11 @@
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/commit-analyzer": "^12.0.0",
+    "@semantic-release/commit-analyzer": "^13.0.0",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^10.0.3",
     "@semantic-release/npm": "^12.0.0",
-    "@semantic-release/release-notes-generator": "^13.0.0",
+    "@semantic-release/release-notes-generator": "^14.0.0",
     "@types/long": "^5.0.0",
     "@types/node": "^20.14.11",
     "conventional-changelog-conventionalcommits": "^8.0.0",
