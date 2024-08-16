@@ -1,6 +1,6 @@
 {
   "name": "@cheqd/ts-proto",
-  "version": "3.4.2",
+  "version": "3.4.3-develop.1",
   "description": "A TypeScript package for all transpiled cheqd ProtoBuf definitions.",
   "main": "index.js",
   "type": "module",
@@ -56,7 +56,7 @@
     "@types/node": "^20.12.7",
     "conventional-changelog-conventionalcommits": "^8.0.0",
     "loose-ts-check": "^2.0.0",
-    "semantic-release": "^23.0.8",
+    "semantic-release": "^24.0.0",
     "typescript": "^5.4.5"
   },
   "publishConfig": {
