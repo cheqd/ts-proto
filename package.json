@@ -53,10 +53,10 @@
     "@semantic-release/npm": "^12.0.1",
     "@semantic-release/release-notes-generator": "^14.0.1",
     "@types/long": "^5.0.0",
-    "@types/node": "^22.3.0",
+    "@types/node": "^20.16.1",
     "conventional-changelog-conventionalcommits": "^8.0.0",
     "loose-ts-check": "^2.0.0",
-    "semantic-release": "^24.0.0",
+    "semantic-release": "^24.1.0",
     "typescript": "^5.5.4"
   },
   "publishConfig": {
