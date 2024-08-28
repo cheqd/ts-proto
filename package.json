@@ -43,17 +43,17 @@
   },
   "dependencies": {
     "long": "^5.2.3",
-    "protobufjs": "^7.3.2"
+    "protobufjs": "^7.4.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.0",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^10.1.6",
+    "@semantic-release/github": "^10.1.7",
     "@semantic-release/npm": "^12.0.1",
     "@semantic-release/release-notes-generator": "^14.0.1",
     "@types/long": "^5.0.0",
-    "@types/node": "^20.16.1",
+    "@types/node": "^20.16.2",
     "conventional-changelog-conventionalcommits": "^8.0.0",
     "loose-ts-check": "^2.0.0",
     "semantic-release": "^24.1.0",
