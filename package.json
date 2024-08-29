@@ -53,17 +53,17 @@
     "@semantic-release/npm": "^11.0.0",
     "@semantic-release/release-notes-generator": "^12.1.0",
     "@types/long": "^5.0.0",
-    "@types/node": "^20.16.2",
-    "conventional-changelog-conventionalcommits": "^8.0.0",
+    "@types/node": "^18.11.9",
+    "conventional-changelog-conventionalcommits": "^7.0.2",
     "loose-ts-check": "^2.0.0",
-    "semantic-release": "^21.1.1",
-    "typescript": "^5.5.4"
+    "semantic-release": "^23.0.2",
+    "typescript": "^5.3.3"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18"
   }
 }
