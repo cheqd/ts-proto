@@ -43,27 +43,27 @@
   },
   "dependencies": {
     "long": "^5.2.3",
-    "protobufjs": "^7.2.6"
+    "protobufjs": "^7.4.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^11.1.0",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^9.2.6",
-    "@semantic-release/npm": "^11.0.2",
+    "@semantic-release/npm": "^11.0.3",
     "@semantic-release/release-notes-generator": "^12.1.0",
     "@types/long": "^5.0.0",
-    "@types/node": "^20.11.20",
+    "@types/node": "^18.19.47",
     "conventional-changelog-conventionalcommits": "^7.0.2",
     "loose-ts-check": "^2.0.0",
-    "semantic-release": "^23.0.2",
-    "typescript": "^5.3.3"
+    "semantic-release": "^22.0.12",
+    "typescript": "^5.5.4"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18"
   }
 }
