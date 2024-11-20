@@ -2,35 +2,34 @@
 // versions:
 //   protoc-gen-ts_proto  v2.3.0
 //   protoc               unknown
-// source: cheqd/resource/v2/genesis.proto
+// source: feeabstraction/feeabs/v1beta1/genesis.proto
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
-import { FeeParams } from "./fee.js";
-import { ResourceWithMetadata } from "./resource.js";
+import { EpochInfo } from "./epoch.js";
+import { Params } from "./params.js";
 
-/** GenesisState defines the chqed Resource module's genesis state */
+/** GenesisState defines the feeabs module's genesis state. */
 export interface GenesisState {
-  /** All Resources with metadata */
-  resources: ResourceWithMetadata[];
-  /**
-   * Fee parameters for the Resource module
-   * Defines fixed fees and burn percentage for resources
-   */
-  feeParams: FeeParams | undefined;
+  params: Params | undefined;
+  epochs: EpochInfo[];
+  portId: string;
 }
 
 function createBaseGenesisState(): GenesisState {
-  return { resources: [], feeParams: undefined };
+  return { params: undefined, epochs: [], portId: "" };
 }
 
 export const GenesisState: MessageFns<GenesisState> = {
   encode(message: GenesisState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.resources) {
-      ResourceWithMetadata.encode(v!, writer.uint32(10).fork()).join();
+    if (message.params !== undefined) {
+      Params.encode(message.params, writer.uint32(10).fork()).join();
     }
-    if (message.feeParams !== undefined) {
-      FeeParams.encode(message.feeParams, writer.uint32(18).fork()).join();
+    for (const v of message.epochs) {
+      EpochInfo.encode(v!, writer.uint32(18).fork()).join();
+    }
+    if (message.portId !== "") {
+      writer.uint32(26).string(message.portId);
     }
     return writer;
   },
@@ -47,7 +46,7 @@ export const GenesisState: MessageFns<GenesisState> = {
             break;
           }
 
-          message.resources.push(ResourceWithMetadata.decode(reader, reader.uint32()));
+          message.params = Params.decode(reader, reader.uint32());
           continue;
         }
         case 2: {
@@ -55,7 +54,15 @@ export const GenesisState: MessageFns<GenesisState> = {
             break;
           }
 
-          message.feeParams = FeeParams.decode(reader, reader.uint32());
+          message.epochs.push(EpochInfo.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.portId = reader.string();
           continue;
         }
       }
@@ -69,20 +76,22 @@ export const GenesisState: MessageFns<GenesisState> = {
 
   fromJSON(object: any): GenesisState {
     return {
-      resources: globalThis.Array.isArray(object?.resources)
-        ? object.resources.map((e: any) => ResourceWithMetadata.fromJSON(e))
-        : [],
-      feeParams: isSet(object.feeParams) ? FeeParams.fromJSON(object.feeParams) : undefined,
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      epochs: globalThis.Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromJSON(e)) : [],
+      portId: isSet(object.portId) ? globalThis.String(object.portId) : "",
     };
   },
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    if (message.resources?.length) {
-      obj.resources = message.resources.map((e) => ResourceWithMetadata.toJSON(e));
+    if (message.params !== undefined) {
+      obj.params = Params.toJSON(message.params);
     }
-    if (message.feeParams !== undefined) {
-      obj.feeParams = FeeParams.toJSON(message.feeParams);
+    if (message.epochs?.length) {
+      obj.epochs = message.epochs.map((e) => EpochInfo.toJSON(e));
+    }
+    if (message.portId !== "") {
+      obj.portId = message.portId;
     }
     return obj;
   },
@@ -92,10 +101,11 @@ export const GenesisState: MessageFns<GenesisState> = {
   },
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
     const message = createBaseGenesisState();
-    message.resources = object.resources?.map((e) => ResourceWithMetadata.fromPartial(e)) || [];
-    message.feeParams = (object.feeParams !== undefined && object.feeParams !== null)
-      ? FeeParams.fromPartial(object.feeParams)
+    message.params = (object.params !== undefined && object.params !== null)
+      ? Params.fromPartial(object.params)
       : undefined;
+    message.epochs = object.epochs?.map((e) => EpochInfo.fromPartial(e)) || [];
+    message.portId = object.portId ?? "";
     return message;
   },
 };

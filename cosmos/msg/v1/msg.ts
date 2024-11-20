@@ -2,7 +2,7 @@
 // versions:
 //   protoc-gen-ts_proto  v2.3.0
 //   protoc               unknown
-// source: google/api/annotations.proto
+// source: cosmos/msg/v1/msg.proto
 
 /* eslint-disable */
 
