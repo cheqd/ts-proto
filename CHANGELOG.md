@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.0.0-develop.2](https://github.com/cheqd/ts-proto/compare/4.0.0-develop.1...4.0.0-develop.2) (2024-11-21)
+
+### Bug Fixes
+
+* Added relevant directories ([b140b1d](https://github.com/cheqd/ts-proto/commit/b140b1de064a0a5cbfbdf2d29de9b97ead384d3c))
+
 ## [4.0.0-develop.1](https://github.com/cheqd/ts-proto/compare/3.4.4...4.0.0-develop.1) (2024-11-20)
 
 ### ⚠ BREAKING CHANGES
