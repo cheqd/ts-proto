@@ -9,8 +9,11 @@
     "cheqd/**/*.*",
     "cosmos/**/*.*",
     "cosmos_proto/**/*.*",
+    "feeabstraction/**/*.*",
+    "feemarket/**/*.*",
     "gogoproto/**/*.*",
     "google/**/*.*",
+    "tendermint/**/*.*",
     "LICENSE",
     "package.json",
     "README.md"
