@@ -1,5 +1,20 @@
 # Changelog
 
+## [4.0.0](https://github.com/cheqd/ts-proto/compare/3.4.4...4.0.0) (2024-11-21)
+
+### ⚠ BREAKING CHANGES
+
+* v3.x typings
+
+### Bug Fixes
+
+* Added deep exports + conventional namings ([92858b3](https://github.com/cheqd/ts-proto/commit/92858b3e27f8cb445529f43dbf3a15a745f5aee9))
+* Added relevant directories ([b140b1d](https://github.com/cheqd/ts-proto/commit/b140b1de064a0a5cbfbdf2d29de9b97ead384d3c))
+
+### Build System
+
+* v3.x typings ([11aa4dc](https://github.com/cheqd/ts-proto/commit/11aa4dc36ef0abdd63656d27361d5d0cd03844e1))
+
 ## [4.0.0-develop.3](https://github.com/cheqd/ts-proto/compare/4.0.0-develop.2...4.0.0-develop.3) (2024-11-21)
 
 ### Bug Fixes
