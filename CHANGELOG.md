@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.0.0-develop.3](https://github.com/cheqd/ts-proto/compare/4.0.0-develop.2...4.0.0-develop.3) (2024-11-21)
+
+### Bug Fixes
+
+* Added deep exports + conventional namings ([92858b3](https://github.com/cheqd/ts-proto/commit/92858b3e27f8cb445529f43dbf3a15a745f5aee9))
+
 ## [4.0.0-develop.2](https://github.com/cheqd/ts-proto/compare/4.0.0-develop.1...4.0.0-develop.2) (2024-11-21)
 
 ### Bug Fixes
