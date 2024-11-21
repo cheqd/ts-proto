@@ -5,6 +5,39 @@
 // source: google/protobuf/descriptor.proto
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+/** The verification state of the extension range. */
+export var ExtensionRangeOptions_VerificationState;
+(function (ExtensionRangeOptions_VerificationState) {
+    /** DECLARATION - All the extensions of the range must be declared. */
+    ExtensionRangeOptions_VerificationState[ExtensionRangeOptions_VerificationState["DECLARATION"] = 0] = "DECLARATION";
+    ExtensionRangeOptions_VerificationState[ExtensionRangeOptions_VerificationState["UNVERIFIED"] = 1] = "UNVERIFIED";
+    ExtensionRangeOptions_VerificationState[ExtensionRangeOptions_VerificationState["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(ExtensionRangeOptions_VerificationState || (ExtensionRangeOptions_VerificationState = {}));
+export function extensionRangeOptions_VerificationStateFromJSON(object) {
+    switch (object) {
+        case 0:
+        case "DECLARATION":
+            return ExtensionRangeOptions_VerificationState.DECLARATION;
+        case 1:
+        case "UNVERIFIED":
+            return ExtensionRangeOptions_VerificationState.UNVERIFIED;
+        case -1:
+        case "UNRECOGNIZED":
+        default:
+            return ExtensionRangeOptions_VerificationState.UNRECOGNIZED;
+    }
+}
+export function extensionRangeOptions_VerificationStateToJSON(object) {
+    switch (object) {
+        case ExtensionRangeOptions_VerificationState.DECLARATION:
+            return "DECLARATION";
+        case ExtensionRangeOptions_VerificationState.UNVERIFIED:
+            return "UNVERIFIED";
+        case ExtensionRangeOptions_VerificationState.UNRECOGNIZED:
+        default:
+            return "UNRECOGNIZED";
+    }
+}
 export var FieldDescriptorProto_Type;
 (function (FieldDescriptorProto_Type) {
     /**
@@ -237,6 +270,14 @@ export var FieldOptions_CType;
 (function (FieldOptions_CType) {
     /** STRING - Default mode. */
     FieldOptions_CType[FieldOptions_CType["STRING"] = 0] = "STRING";
+    /**
+     * CORD - The option [ctype=CORD] may be applied to a non-repeated field of type
+     * "bytes". It indicates that in C++, the data should be stored in a Cord
+     * instead of a string.  For very large strings, this may reduce memory
+     * fragmentation. It may also allow better performance when parsing from a
+     * Cord, or when parsing with aliasing enabled, as the parsed Cord may then
+     * alias the original buffer.
+     */
     FieldOptions_CType[FieldOptions_CType["CORD"] = 1] = "CORD";
     FieldOptions_CType[FieldOptions_CType["STRING_PIECE"] = 2] = "STRING_PIECE";
     FieldOptions_CType[FieldOptions_CType["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
@@ -312,6 +353,133 @@ export function fieldOptions_JSTypeToJSON(object) {
     }
 }
 /**
+ * If set to RETENTION_SOURCE, the option will be omitted from the binary.
+ * Note: as of January 2023, support for this is in progress and does not yet
+ * have an effect (b/264593489).
+ */
+export var FieldOptions_OptionRetention;
+(function (FieldOptions_OptionRetention) {
+    FieldOptions_OptionRetention[FieldOptions_OptionRetention["RETENTION_UNKNOWN"] = 0] = "RETENTION_UNKNOWN";
+    FieldOptions_OptionRetention[FieldOptions_OptionRetention["RETENTION_RUNTIME"] = 1] = "RETENTION_RUNTIME";
+    FieldOptions_OptionRetention[FieldOptions_OptionRetention["RETENTION_SOURCE"] = 2] = "RETENTION_SOURCE";
+    FieldOptions_OptionRetention[FieldOptions_OptionRetention["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(FieldOptions_OptionRetention || (FieldOptions_OptionRetention = {}));
+export function fieldOptions_OptionRetentionFromJSON(object) {
+    switch (object) {
+        case 0:
+        case "RETENTION_UNKNOWN":
+            return FieldOptions_OptionRetention.RETENTION_UNKNOWN;
+        case 1:
+        case "RETENTION_RUNTIME":
+            return FieldOptions_OptionRetention.RETENTION_RUNTIME;
+        case 2:
+        case "RETENTION_SOURCE":
+            return FieldOptions_OptionRetention.RETENTION_SOURCE;
+        case -1:
+        case "UNRECOGNIZED":
+        default:
+            return FieldOptions_OptionRetention.UNRECOGNIZED;
+    }
+}
+export function fieldOptions_OptionRetentionToJSON(object) {
+    switch (object) {
+        case FieldOptions_OptionRetention.RETENTION_UNKNOWN:
+            return "RETENTION_UNKNOWN";
+        case FieldOptions_OptionRetention.RETENTION_RUNTIME:
+            return "RETENTION_RUNTIME";
+        case FieldOptions_OptionRetention.RETENTION_SOURCE:
+            return "RETENTION_SOURCE";
+        case FieldOptions_OptionRetention.UNRECOGNIZED:
+        default:
+            return "UNRECOGNIZED";
+    }
+}
+/**
+ * This indicates the types of entities that the field may apply to when used
+ * as an option. If it is unset, then the field may be freely used as an
+ * option on any kind of entity. Note: as of January 2023, support for this is
+ * in progress and does not yet have an effect (b/264593489).
+ */
+export var FieldOptions_OptionTargetType;
+(function (FieldOptions_OptionTargetType) {
+    FieldOptions_OptionTargetType[FieldOptions_OptionTargetType["TARGET_TYPE_UNKNOWN"] = 0] = "TARGET_TYPE_UNKNOWN";
+    FieldOptions_OptionTargetType[FieldOptions_OptionTargetType["TARGET_TYPE_FILE"] = 1] = "TARGET_TYPE_FILE";
+    FieldOptions_OptionTargetType[FieldOptions_OptionTargetType["TARGET_TYPE_EXTENSION_RANGE"] = 2] = "TARGET_TYPE_EXTENSION_RANGE";
+    FieldOptions_OptionTargetType[FieldOptions_OptionTargetType["TARGET_TYPE_MESSAGE"] = 3] = "TARGET_TYPE_MESSAGE";
+    FieldOptions_OptionTargetType[FieldOptions_OptionTargetType["TARGET_TYPE_FIELD"] = 4] = "TARGET_TYPE_FIELD";
+    FieldOptions_OptionTargetType[FieldOptions_OptionTargetType["TARGET_TYPE_ONEOF"] = 5] = "TARGET_TYPE_ONEOF";
+    FieldOptions_OptionTargetType[FieldOptions_OptionTargetType["TARGET_TYPE_ENUM"] = 6] = "TARGET_TYPE_ENUM";
+    FieldOptions_OptionTargetType[FieldOptions_OptionTargetType["TARGET_TYPE_ENUM_ENTRY"] = 7] = "TARGET_TYPE_ENUM_ENTRY";
+    FieldOptions_OptionTargetType[FieldOptions_OptionTargetType["TARGET_TYPE_SERVICE"] = 8] = "TARGET_TYPE_SERVICE";
+    FieldOptions_OptionTargetType[FieldOptions_OptionTargetType["TARGET_TYPE_METHOD"] = 9] = "TARGET_TYPE_METHOD";
+    FieldOptions_OptionTargetType[FieldOptions_OptionTargetType["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(FieldOptions_OptionTargetType || (FieldOptions_OptionTargetType = {}));
+export function fieldOptions_OptionTargetTypeFromJSON(object) {
+    switch (object) {
+        case 0:
+        case "TARGET_TYPE_UNKNOWN":
+            return FieldOptions_OptionTargetType.TARGET_TYPE_UNKNOWN;
+        case 1:
+        case "TARGET_TYPE_FILE":
+            return FieldOptions_OptionTargetType.TARGET_TYPE_FILE;
+        case 2:
+        case "TARGET_TYPE_EXTENSION_RANGE":
+            return FieldOptions_OptionTargetType.TARGET_TYPE_EXTENSION_RANGE;
+        case 3:
+        case "TARGET_TYPE_MESSAGE":
+            return FieldOptions_OptionTargetType.TARGET_TYPE_MESSAGE;
+        case 4:
+        case "TARGET_TYPE_FIELD":
+            return FieldOptions_OptionTargetType.TARGET_TYPE_FIELD;
+        case 5:
+        case "TARGET_TYPE_ONEOF":
+            return FieldOptions_OptionTargetType.TARGET_TYPE_ONEOF;
+        case 6:
+        case "TARGET_TYPE_ENUM":
+            return FieldOptions_OptionTargetType.TARGET_TYPE_ENUM;
+        case 7:
+        case "TARGET_TYPE_ENUM_ENTRY":
+            return FieldOptions_OptionTargetType.TARGET_TYPE_ENUM_ENTRY;
+        case 8:
+        case "TARGET_TYPE_SERVICE":
+            return FieldOptions_OptionTargetType.TARGET_TYPE_SERVICE;
+        case 9:
+        case "TARGET_TYPE_METHOD":
+            return FieldOptions_OptionTargetType.TARGET_TYPE_METHOD;
+        case -1:
+        case "UNRECOGNIZED":
+        default:
+            return FieldOptions_OptionTargetType.UNRECOGNIZED;
+    }
+}
+export function fieldOptions_OptionTargetTypeToJSON(object) {
+    switch (object) {
+        case FieldOptions_OptionTargetType.TARGET_TYPE_UNKNOWN:
+            return "TARGET_TYPE_UNKNOWN";
+        case FieldOptions_OptionTargetType.TARGET_TYPE_FILE:
+            return "TARGET_TYPE_FILE";
+        case FieldOptions_OptionTargetType.TARGET_TYPE_EXTENSION_RANGE:
+            return "TARGET_TYPE_EXTENSION_RANGE";
+        case FieldOptions_OptionTargetType.TARGET_TYPE_MESSAGE:
+            return "TARGET_TYPE_MESSAGE";
+        case FieldOptions_OptionTargetType.TARGET_TYPE_FIELD:
+            return "TARGET_TYPE_FIELD";
+        case FieldOptions_OptionTargetType.TARGET_TYPE_ONEOF:
+            return "TARGET_TYPE_ONEOF";
+        case FieldOptions_OptionTargetType.TARGET_TYPE_ENUM:
+            return "TARGET_TYPE_ENUM";
+        case FieldOptions_OptionTargetType.TARGET_TYPE_ENUM_ENTRY:
+            return "TARGET_TYPE_ENUM_ENTRY";
+        case FieldOptions_OptionTargetType.TARGET_TYPE_SERVICE:
+            return "TARGET_TYPE_SERVICE";
+        case FieldOptions_OptionTargetType.TARGET_TYPE_METHOD:
+            return "TARGET_TYPE_METHOD";
+        case FieldOptions_OptionTargetType.UNRECOGNIZED:
+        default:
+            return "UNRECOGNIZED";
+    }
+}
+/**
  * Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
  * or neither? HTTP based RPC implementation may choose GET verb for safe
  * methods, and PUT verb for idempotent methods instead of the default POST.
@@ -351,6 +519,50 @@ export function methodOptions_IdempotencyLevelToJSON(object) {
         case MethodOptions_IdempotencyLevel.IDEMPOTENT:
             return "IDEMPOTENT";
         case MethodOptions_IdempotencyLevel.UNRECOGNIZED:
+        default:
+            return "UNRECOGNIZED";
+    }
+}
+/**
+ * Represents the identified object's effect on the element in the original
+ * .proto file.
+ */
+export var GeneratedCodeInfo_Annotation_Semantic;
+(function (GeneratedCodeInfo_Annotation_Semantic) {
+    /** NONE - There is no effect or the effect is indescribable. */
+    GeneratedCodeInfo_Annotation_Semantic[GeneratedCodeInfo_Annotation_Semantic["NONE"] = 0] = "NONE";
+    /** SET - The element is set or otherwise mutated. */
+    GeneratedCodeInfo_Annotation_Semantic[GeneratedCodeInfo_Annotation_Semantic["SET"] = 1] = "SET";
+    /** ALIAS - An alias to the element is returned. */
+    GeneratedCodeInfo_Annotation_Semantic[GeneratedCodeInfo_Annotation_Semantic["ALIAS"] = 2] = "ALIAS";
+    GeneratedCodeInfo_Annotation_Semantic[GeneratedCodeInfo_Annotation_Semantic["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(GeneratedCodeInfo_Annotation_Semantic || (GeneratedCodeInfo_Annotation_Semantic = {}));
+export function generatedCodeInfo_Annotation_SemanticFromJSON(object) {
+    switch (object) {
+        case 0:
+        case "NONE":
+            return GeneratedCodeInfo_Annotation_Semantic.NONE;
+        case 1:
+        case "SET":
+            return GeneratedCodeInfo_Annotation_Semantic.SET;
+        case 2:
+        case "ALIAS":
+            return GeneratedCodeInfo_Annotation_Semantic.ALIAS;
+        case -1:
+        case "UNRECOGNIZED":
+        default:
+            return GeneratedCodeInfo_Annotation_Semantic.UNRECOGNIZED;
+    }
+}
+export function generatedCodeInfo_Annotation_SemanticToJSON(object) {
+    switch (object) {
+        case GeneratedCodeInfo_Annotation_Semantic.NONE:
+            return "NONE";
+        case GeneratedCodeInfo_Annotation_Semantic.SET:
+            return "SET";
+        case GeneratedCodeInfo_Annotation_Semantic.ALIAS:
+            return "ALIAS";
+        case GeneratedCodeInfo_Annotation_Semantic.UNRECOGNIZED:
         default:
             return "UNRECOGNIZED";
     }
@@ -422,6 +634,7 @@ function createBaseFileDescriptorProto() {
         options: undefined,
         sourceCodeInfo: undefined,
         syntax: "",
+        edition: "",
     };
 }
 export const FileDescriptorProto = {
@@ -465,6 +678,9 @@ export const FileDescriptorProto = {
         }
         if (message.syntax !== undefined && message.syntax !== "") {
             writer.uint32(98).string(message.syntax);
+        }
+        if (message.edition !== undefined && message.edition !== "") {
+            writer.uint32(106).string(message.edition);
         }
         return writer;
     },
@@ -573,6 +789,13 @@ export const FileDescriptorProto = {
                     message.syntax = reader.string();
                     continue;
                 }
+                case 13: {
+                    if (tag !== 106) {
+                        break;
+                    }
+                    message.edition = reader.string();
+                    continue;
+                }
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -609,6 +832,7 @@ export const FileDescriptorProto = {
             options: isSet(object.options) ? FileOptions.fromJSON(object.options) : undefined,
             sourceCodeInfo: isSet(object.sourceCodeInfo) ? SourceCodeInfo.fromJSON(object.sourceCodeInfo) : undefined,
             syntax: isSet(object.syntax) ? globalThis.String(object.syntax) : "",
+            edition: isSet(object.edition) ? globalThis.String(object.edition) : "",
         };
     },
     toJSON(message) {
@@ -649,6 +873,9 @@ export const FileDescriptorProto = {
         if (message.syntax !== undefined && message.syntax !== "") {
             obj.syntax = message.syntax;
         }
+        if (message.edition !== undefined && message.edition !== "") {
+            obj.edition = message.edition;
+        }
         return obj;
     },
     create(base) {
@@ -672,6 +899,7 @@ export const FileDescriptorProto = {
             ? SourceCodeInfo.fromPartial(object.sourceCodeInfo)
             : undefined;
         message.syntax = object.syntax ?? "";
+        message.edition = object.edition ?? "";
         return message;
     },
 };
@@ -1046,12 +1274,18 @@ export const DescriptorProto_ReservedRange = {
     },
 };
 function createBaseExtensionRangeOptions() {
-    return { uninterpretedOption: [] };
+    return { uninterpretedOption: [], declaration: [], verification: 1 };
 }
 export const ExtensionRangeOptions = {
     encode(message, writer = new BinaryWriter()) {
         for (const v of message.uninterpretedOption) {
             UninterpretedOption.encode(v, writer.uint32(7994).fork()).join();
+        }
+        for (const v of message.declaration) {
+            ExtensionRangeOptions_Declaration.encode(v, writer.uint32(18).fork()).join();
+        }
+        if (message.verification !== undefined && message.verification !== 1) {
+            writer.uint32(24).int32(message.verification);
         }
         return writer;
     },
@@ -1069,6 +1303,20 @@ export const ExtensionRangeOptions = {
                     message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
                     continue;
                 }
+                case 2: {
+                    if (tag !== 18) {
+                        break;
+                    }
+                    message.declaration.push(ExtensionRangeOptions_Declaration.decode(reader, reader.uint32()));
+                    continue;
+                }
+                case 3: {
+                    if (tag !== 24) {
+                        break;
+                    }
+                    message.verification = reader.int32();
+                    continue;
+                }
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -1082,12 +1330,24 @@ export const ExtensionRangeOptions = {
             uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
                 ? object.uninterpretedOption.map((e) => UninterpretedOption.fromJSON(e))
                 : [],
+            declaration: globalThis.Array.isArray(object?.declaration)
+                ? object.declaration.map((e) => ExtensionRangeOptions_Declaration.fromJSON(e))
+                : [],
+            verification: isSet(object.verification)
+                ? extensionRangeOptions_VerificationStateFromJSON(object.verification)
+                : 1,
         };
     },
     toJSON(message) {
         const obj = {};
         if (message.uninterpretedOption?.length) {
             obj.uninterpretedOption = message.uninterpretedOption.map((e) => UninterpretedOption.toJSON(e));
+        }
+        if (message.declaration?.length) {
+            obj.declaration = message.declaration.map((e) => ExtensionRangeOptions_Declaration.toJSON(e));
+        }
+        if (message.verification !== undefined && message.verification !== 1) {
+            obj.verification = extensionRangeOptions_VerificationStateToJSON(message.verification);
         }
         return obj;
     },
@@ -1097,6 +1357,136 @@ export const ExtensionRangeOptions = {
     fromPartial(object) {
         const message = createBaseExtensionRangeOptions();
         message.uninterpretedOption = object.uninterpretedOption?.map((e) => UninterpretedOption.fromPartial(e)) || [];
+        message.declaration = object.declaration?.map((e) => ExtensionRangeOptions_Declaration.fromPartial(e)) || [];
+        message.verification = object.verification ?? 1;
+        return message;
+    },
+};
+function createBaseExtensionRangeOptions_Declaration() {
+    return { number: 0, fullName: "", type: "", isRepeated: false, reserved: false, repeated: false };
+}
+export const ExtensionRangeOptions_Declaration = {
+    encode(message, writer = new BinaryWriter()) {
+        if (message.number !== undefined && message.number !== 0) {
+            writer.uint32(8).int32(message.number);
+        }
+        if (message.fullName !== undefined && message.fullName !== "") {
+            writer.uint32(18).string(message.fullName);
+        }
+        if (message.type !== undefined && message.type !== "") {
+            writer.uint32(26).string(message.type);
+        }
+        if (message.isRepeated !== undefined && message.isRepeated !== false) {
+            writer.uint32(32).bool(message.isRepeated);
+        }
+        if (message.reserved !== undefined && message.reserved !== false) {
+            writer.uint32(40).bool(message.reserved);
+        }
+        if (message.repeated !== undefined && message.repeated !== false) {
+            writer.uint32(48).bool(message.repeated);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseExtensionRangeOptions_Declaration();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1: {
+                    if (tag !== 8) {
+                        break;
+                    }
+                    message.number = reader.int32();
+                    continue;
+                }
+                case 2: {
+                    if (tag !== 18) {
+                        break;
+                    }
+                    message.fullName = reader.string();
+                    continue;
+                }
+                case 3: {
+                    if (tag !== 26) {
+                        break;
+                    }
+                    message.type = reader.string();
+                    continue;
+                }
+                case 4: {
+                    if (tag !== 32) {
+                        break;
+                    }
+                    message.isRepeated = reader.bool();
+                    continue;
+                }
+                case 5: {
+                    if (tag !== 40) {
+                        break;
+                    }
+                    message.reserved = reader.bool();
+                    continue;
+                }
+                case 6: {
+                    if (tag !== 48) {
+                        break;
+                    }
+                    message.repeated = reader.bool();
+                    continue;
+                }
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skip(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            number: isSet(object.number) ? globalThis.Number(object.number) : 0,
+            fullName: isSet(object.fullName) ? globalThis.String(object.fullName) : "",
+            type: isSet(object.type) ? globalThis.String(object.type) : "",
+            isRepeated: isSet(object.isRepeated) ? globalThis.Boolean(object.isRepeated) : false,
+            reserved: isSet(object.reserved) ? globalThis.Boolean(object.reserved) : false,
+            repeated: isSet(object.repeated) ? globalThis.Boolean(object.repeated) : false,
+        };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.number !== undefined && message.number !== 0) {
+            obj.number = Math.round(message.number);
+        }
+        if (message.fullName !== undefined && message.fullName !== "") {
+            obj.fullName = message.fullName;
+        }
+        if (message.type !== undefined && message.type !== "") {
+            obj.type = message.type;
+        }
+        if (message.isRepeated !== undefined && message.isRepeated !== false) {
+            obj.isRepeated = message.isRepeated;
+        }
+        if (message.reserved !== undefined && message.reserved !== false) {
+            obj.reserved = message.reserved;
+        }
+        if (message.repeated !== undefined && message.repeated !== false) {
+            obj.repeated = message.repeated;
+        }
+        return obj;
+    },
+    create(base) {
+        return ExtensionRangeOptions_Declaration.fromPartial(base ?? {});
+    },
+    fromPartial(object) {
+        const message = createBaseExtensionRangeOptions_Declaration();
+        message.number = object.number ?? 0;
+        message.fullName = object.fullName ?? "";
+        message.type = object.type ?? "";
+        message.isRepeated = object.isRepeated ?? false;
+        message.reserved = object.reserved ?? false;
+        message.repeated = object.repeated ?? false;
         return message;
     },
 };
@@ -2271,6 +2661,7 @@ function createBaseMessageOptions() {
         noStandardDescriptorAccessor: false,
         deprecated: false,
         mapEntry: false,
+        deprecatedLegacyJsonFieldConflicts: false,
         uninterpretedOption: [],
     };
 }
@@ -2287,6 +2678,9 @@ export const MessageOptions = {
         }
         if (message.mapEntry !== undefined && message.mapEntry !== false) {
             writer.uint32(56).bool(message.mapEntry);
+        }
+        if (message.deprecatedLegacyJsonFieldConflicts !== undefined && message.deprecatedLegacyJsonFieldConflicts !== false) {
+            writer.uint32(88).bool(message.deprecatedLegacyJsonFieldConflicts);
         }
         for (const v of message.uninterpretedOption) {
             UninterpretedOption.encode(v, writer.uint32(7994).fork()).join();
@@ -2328,6 +2722,13 @@ export const MessageOptions = {
                     message.mapEntry = reader.bool();
                     continue;
                 }
+                case 11: {
+                    if (tag !== 88) {
+                        break;
+                    }
+                    message.deprecatedLegacyJsonFieldConflicts = reader.bool();
+                    continue;
+                }
                 case 999: {
                     if (tag !== 7994) {
                         break;
@@ -2353,6 +2754,9 @@ export const MessageOptions = {
                 : false,
             deprecated: isSet(object.deprecated) ? globalThis.Boolean(object.deprecated) : false,
             mapEntry: isSet(object.mapEntry) ? globalThis.Boolean(object.mapEntry) : false,
+            deprecatedLegacyJsonFieldConflicts: isSet(object.deprecatedLegacyJsonFieldConflicts)
+                ? globalThis.Boolean(object.deprecatedLegacyJsonFieldConflicts)
+                : false,
             uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
                 ? object.uninterpretedOption.map((e) => UninterpretedOption.fromJSON(e))
                 : [],
@@ -2372,6 +2776,9 @@ export const MessageOptions = {
         if (message.mapEntry !== undefined && message.mapEntry !== false) {
             obj.mapEntry = message.mapEntry;
         }
+        if (message.deprecatedLegacyJsonFieldConflicts !== undefined && message.deprecatedLegacyJsonFieldConflicts !== false) {
+            obj.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
+        }
         if (message.uninterpretedOption?.length) {
             obj.uninterpretedOption = message.uninterpretedOption.map((e) => UninterpretedOption.toJSON(e));
         }
@@ -2386,6 +2793,7 @@ export const MessageOptions = {
         message.noStandardDescriptorAccessor = object.noStandardDescriptorAccessor ?? false;
         message.deprecated = object.deprecated ?? false;
         message.mapEntry = object.mapEntry ?? false;
+        message.deprecatedLegacyJsonFieldConflicts = object.deprecatedLegacyJsonFieldConflicts ?? false;
         message.uninterpretedOption = object.uninterpretedOption?.map((e) => UninterpretedOption.fromPartial(e)) || [];
         return message;
     },
@@ -2399,6 +2807,10 @@ function createBaseFieldOptions() {
         unverifiedLazy: false,
         deprecated: false,
         weak: false,
+        debugRedact: false,
+        retention: 0,
+        target: 0,
+        targets: [],
         uninterpretedOption: [],
     };
 }
@@ -2425,6 +2837,20 @@ export const FieldOptions = {
         if (message.weak !== undefined && message.weak !== false) {
             writer.uint32(80).bool(message.weak);
         }
+        if (message.debugRedact !== undefined && message.debugRedact !== false) {
+            writer.uint32(128).bool(message.debugRedact);
+        }
+        if (message.retention !== undefined && message.retention !== 0) {
+            writer.uint32(136).int32(message.retention);
+        }
+        if (message.target !== undefined && message.target !== 0) {
+            writer.uint32(144).int32(message.target);
+        }
+        writer.uint32(154).fork();
+        for (const v of message.targets) {
+            writer.int32(v);
+        }
+        writer.join();
         for (const v of message.uninterpretedOption) {
             UninterpretedOption.encode(v, writer.uint32(7994).fork()).join();
         }
@@ -2486,6 +2912,41 @@ export const FieldOptions = {
                     message.weak = reader.bool();
                     continue;
                 }
+                case 16: {
+                    if (tag !== 128) {
+                        break;
+                    }
+                    message.debugRedact = reader.bool();
+                    continue;
+                }
+                case 17: {
+                    if (tag !== 136) {
+                        break;
+                    }
+                    message.retention = reader.int32();
+                    continue;
+                }
+                case 18: {
+                    if (tag !== 144) {
+                        break;
+                    }
+                    message.target = reader.int32();
+                    continue;
+                }
+                case 19: {
+                    if (tag === 152) {
+                        message.targets.push(reader.int32());
+                        continue;
+                    }
+                    if (tag === 154) {
+                        const end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2) {
+                            message.targets.push(reader.int32());
+                        }
+                        continue;
+                    }
+                    break;
+                }
                 case 999: {
                     if (tag !== 7994) {
                         break;
@@ -2510,6 +2971,12 @@ export const FieldOptions = {
             unverifiedLazy: isSet(object.unverifiedLazy) ? globalThis.Boolean(object.unverifiedLazy) : false,
             deprecated: isSet(object.deprecated) ? globalThis.Boolean(object.deprecated) : false,
             weak: isSet(object.weak) ? globalThis.Boolean(object.weak) : false,
+            debugRedact: isSet(object.debugRedact) ? globalThis.Boolean(object.debugRedact) : false,
+            retention: isSet(object.retention) ? fieldOptions_OptionRetentionFromJSON(object.retention) : 0,
+            target: isSet(object.target) ? fieldOptions_OptionTargetTypeFromJSON(object.target) : 0,
+            targets: globalThis.Array.isArray(object?.targets)
+                ? object.targets.map((e) => fieldOptions_OptionTargetTypeFromJSON(e))
+                : [],
             uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
                 ? object.uninterpretedOption.map((e) => UninterpretedOption.fromJSON(e))
                 : [],
@@ -2538,6 +3005,18 @@ export const FieldOptions = {
         if (message.weak !== undefined && message.weak !== false) {
             obj.weak = message.weak;
         }
+        if (message.debugRedact !== undefined && message.debugRedact !== false) {
+            obj.debugRedact = message.debugRedact;
+        }
+        if (message.retention !== undefined && message.retention !== 0) {
+            obj.retention = fieldOptions_OptionRetentionToJSON(message.retention);
+        }
+        if (message.target !== undefined && message.target !== 0) {
+            obj.target = fieldOptions_OptionTargetTypeToJSON(message.target);
+        }
+        if (message.targets?.length) {
+            obj.targets = message.targets.map((e) => fieldOptions_OptionTargetTypeToJSON(e));
+        }
         if (message.uninterpretedOption?.length) {
             obj.uninterpretedOption = message.uninterpretedOption.map((e) => UninterpretedOption.toJSON(e));
         }
@@ -2555,6 +3034,10 @@ export const FieldOptions = {
         message.unverifiedLazy = object.unverifiedLazy ?? false;
         message.deprecated = object.deprecated ?? false;
         message.weak = object.weak ?? false;
+        message.debugRedact = object.debugRedact ?? false;
+        message.retention = object.retention ?? 0;
+        message.target = object.target ?? 0;
+        message.targets = object.targets?.map((e) => e) || [];
         message.uninterpretedOption = object.uninterpretedOption?.map((e) => UninterpretedOption.fromPartial(e)) || [];
         return message;
     },
@@ -2615,7 +3098,7 @@ export const OneofOptions = {
     },
 };
 function createBaseEnumOptions() {
-    return { allowAlias: false, deprecated: false, uninterpretedOption: [] };
+    return { allowAlias: false, deprecated: false, deprecatedLegacyJsonFieldConflicts: false, uninterpretedOption: [] };
 }
 export const EnumOptions = {
     encode(message, writer = new BinaryWriter()) {
@@ -2624,6 +3107,9 @@ export const EnumOptions = {
         }
         if (message.deprecated !== undefined && message.deprecated !== false) {
             writer.uint32(24).bool(message.deprecated);
+        }
+        if (message.deprecatedLegacyJsonFieldConflicts !== undefined && message.deprecatedLegacyJsonFieldConflicts !== false) {
+            writer.uint32(48).bool(message.deprecatedLegacyJsonFieldConflicts);
         }
         for (const v of message.uninterpretedOption) {
             UninterpretedOption.encode(v, writer.uint32(7994).fork()).join();
@@ -2651,6 +3137,13 @@ export const EnumOptions = {
                     message.deprecated = reader.bool();
                     continue;
                 }
+                case 6: {
+                    if (tag !== 48) {
+                        break;
+                    }
+                    message.deprecatedLegacyJsonFieldConflicts = reader.bool();
+                    continue;
+                }
                 case 999: {
                     if (tag !== 7994) {
                         break;
@@ -2670,6 +3163,9 @@ export const EnumOptions = {
         return {
             allowAlias: isSet(object.allowAlias) ? globalThis.Boolean(object.allowAlias) : false,
             deprecated: isSet(object.deprecated) ? globalThis.Boolean(object.deprecated) : false,
+            deprecatedLegacyJsonFieldConflicts: isSet(object.deprecatedLegacyJsonFieldConflicts)
+                ? globalThis.Boolean(object.deprecatedLegacyJsonFieldConflicts)
+                : false,
             uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
                 ? object.uninterpretedOption.map((e) => UninterpretedOption.fromJSON(e))
                 : [],
@@ -2683,6 +3179,9 @@ export const EnumOptions = {
         if (message.deprecated !== undefined && message.deprecated !== false) {
             obj.deprecated = message.deprecated;
         }
+        if (message.deprecatedLegacyJsonFieldConflicts !== undefined && message.deprecatedLegacyJsonFieldConflicts !== false) {
+            obj.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
+        }
         if (message.uninterpretedOption?.length) {
             obj.uninterpretedOption = message.uninterpretedOption.map((e) => UninterpretedOption.toJSON(e));
         }
@@ -2695,6 +3194,7 @@ export const EnumOptions = {
         const message = createBaseEnumOptions();
         message.allowAlias = object.allowAlias ?? false;
         message.deprecated = object.deprecated ?? false;
+        message.deprecatedLegacyJsonFieldConflicts = object.deprecatedLegacyJsonFieldConflicts ?? false;
         message.uninterpretedOption = object.uninterpretedOption?.map((e) => UninterpretedOption.fromPartial(e)) || [];
         return message;
     },
@@ -3397,7 +3897,7 @@ export const GeneratedCodeInfo = {
     },
 };
 function createBaseGeneratedCodeInfo_Annotation() {
-    return { path: [], sourceFile: "", begin: 0, end: 0 };
+    return { path: [], sourceFile: "", begin: 0, end: 0, semantic: 0 };
 }
 export const GeneratedCodeInfo_Annotation = {
     encode(message, writer = new BinaryWriter()) {
@@ -3414,6 +3914,9 @@ export const GeneratedCodeInfo_Annotation = {
         }
         if (message.end !== undefined && message.end !== 0) {
             writer.uint32(32).int32(message.end);
+        }
+        if (message.semantic !== undefined && message.semantic !== 0) {
+            writer.uint32(40).int32(message.semantic);
         }
         return writer;
     },
@@ -3459,6 +3962,13 @@ export const GeneratedCodeInfo_Annotation = {
                     message.end = reader.int32();
                     continue;
                 }
+                case 5: {
+                    if (tag !== 40) {
+                        break;
+                    }
+                    message.semantic = reader.int32();
+                    continue;
+                }
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -3473,6 +3983,7 @@ export const GeneratedCodeInfo_Annotation = {
             sourceFile: isSet(object.sourceFile) ? globalThis.String(object.sourceFile) : "",
             begin: isSet(object.begin) ? globalThis.Number(object.begin) : 0,
             end: isSet(object.end) ? globalThis.Number(object.end) : 0,
+            semantic: isSet(object.semantic) ? generatedCodeInfo_Annotation_SemanticFromJSON(object.semantic) : 0,
         };
     },
     toJSON(message) {
@@ -3489,6 +4000,9 @@ export const GeneratedCodeInfo_Annotation = {
         if (message.end !== undefined && message.end !== 0) {
             obj.end = Math.round(message.end);
         }
+        if (message.semantic !== undefined && message.semantic !== 0) {
+            obj.semantic = generatedCodeInfo_Annotation_SemanticToJSON(message.semantic);
+        }
         return obj;
     },
     create(base) {
@@ -3500,6 +4014,7 @@ export const GeneratedCodeInfo_Annotation = {
         message.sourceFile = object.sourceFile ?? "";
         message.begin = object.begin ?? 0;
         message.end = object.end ?? 0;
+        message.semantic = object.semantic ?? 0;
         return message;
     },
 };

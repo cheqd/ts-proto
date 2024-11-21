@@ -53,9 +53,15 @@ export interface FileDescriptorProto {
     | undefined;
   /**
    * The syntax of the proto file.
-   * The supported values are "proto2" and "proto3".
+   * The supported values are "proto2", "proto3", and "editions".
+   *
+   * If `edition` is present, this value must be "editions".
    */
-  syntax?: string | undefined;
+  syntax?:
+    | string
+    | undefined;
+  /** The edition of the proto file, which is an opaque string. */
+  edition?: string | undefined;
 }
 
 /** Describes a message type. */
@@ -103,6 +109,97 @@ export interface DescriptorProto_ReservedRange {
 export interface ExtensionRangeOptions {
   /** The parser stores options it doesn't recognize here. See above. */
   uninterpretedOption: UninterpretedOption[];
+  /**
+   * go/protobuf-stripping-extension-declarations
+   * Like Metadata, but we use a repeated field to hold all extension
+   * declarations. This should avoid the size increases of transforming a large
+   * extension range into small ranges in generated binaries.
+   */
+  declaration: ExtensionRangeOptions_Declaration[];
+  /**
+   * The verification state of the range.
+   * TODO(b/278783756): flip the default to DECLARATION once all empty ranges
+   * are marked as UNVERIFIED.
+   */
+  verification?: ExtensionRangeOptions_VerificationState | undefined;
+}
+
+/** The verification state of the extension range. */
+export enum ExtensionRangeOptions_VerificationState {
+  /** DECLARATION - All the extensions of the range must be declared. */
+  DECLARATION = 0,
+  UNVERIFIED = 1,
+  UNRECOGNIZED = -1,
+}
+
+export function extensionRangeOptions_VerificationStateFromJSON(object: any): ExtensionRangeOptions_VerificationState {
+  switch (object) {
+    case 0:
+    case "DECLARATION":
+      return ExtensionRangeOptions_VerificationState.DECLARATION;
+    case 1:
+    case "UNVERIFIED":
+      return ExtensionRangeOptions_VerificationState.UNVERIFIED;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ExtensionRangeOptions_VerificationState.UNRECOGNIZED;
+  }
+}
+
+export function extensionRangeOptions_VerificationStateToJSON(object: ExtensionRangeOptions_VerificationState): string {
+  switch (object) {
+    case ExtensionRangeOptions_VerificationState.DECLARATION:
+      return "DECLARATION";
+    case ExtensionRangeOptions_VerificationState.UNVERIFIED:
+      return "UNVERIFIED";
+    case ExtensionRangeOptions_VerificationState.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export interface ExtensionRangeOptions_Declaration {
+  /** The extension number declared within the extension range. */
+  number?:
+    | number
+    | undefined;
+  /**
+   * The fully-qualified name of the extension field. There must be a leading
+   * dot in front of the full name.
+   */
+  fullName?:
+    | string
+    | undefined;
+  /**
+   * The fully-qualified type name of the extension field. Unlike
+   * Metadata.type, Declaration.type must have a leading dot for messages
+   * and enums.
+   */
+  type?:
+    | string
+    | undefined;
+  /**
+   * Deprecated. Please use "repeated".
+   *
+   * @deprecated
+   */
+  isRepeated?:
+    | boolean
+    | undefined;
+  /**
+   * If true, indicates that the number is reserved in the extension range,
+   * and any extension field with the number will fail to compile. Set this
+   * when a declared extension field is deleted.
+   */
+  reserved?:
+    | boolean
+    | undefined;
+  /**
+   * If true, indicates that the extension must be defined as repeated.
+   * Otherwise the extension must be defined as optional.
+   */
+  repeated?: boolean | undefined;
 }
 
 /** Describes a field within a message. */
@@ -696,6 +793,10 @@ export interface MessageOptions {
     | boolean
     | undefined;
   /**
+   * NOTE: Do not set the option in .proto files. Always use the maps syntax
+   * instead. The option should only be implicitly set by the proto compiler
+   * parser.
+   *
    * Whether the message is an automatically generated map entry type for the
    * maps field.
    *
@@ -713,12 +814,25 @@ export interface MessageOptions {
    * use a native map in the target language to hold the keys and values.
    * The reflection APIs in such implementations still need to work as
    * if the field is a repeated message field.
-   *
-   * NOTE: Do not set the option in .proto files. Always use the maps syntax
-   * instead. The option should only be implicitly set by the proto compiler
-   * parser.
    */
   mapEntry?:
+    | boolean
+    | undefined;
+  /**
+   * Enable the legacy handling of JSON field name conflicts.  This lowercases
+   * and strips underscored from the fields before comparison in proto3 only.
+   * The new behavior takes `json_name` into account and applies to proto2 as
+   * well.
+   *
+   * This should only be used as a temporary measure against broken builds due
+   * to the change in behavior for JSON field name conflicts.
+   *
+   * TODO(b/261750190) This is legacy behavior we plan to remove once downstream
+   * teams have had time to migrate.
+   *
+   * @deprecated
+   */
+  deprecatedLegacyJsonFieldConflicts?:
     | boolean
     | undefined;
   /** The parser stores options it doesn't recognize here. See above. */
@@ -729,8 +843,10 @@ export interface FieldOptions {
   /**
    * The ctype option instructs the C++ code generator to use a different
    * representation of the field than it normally would.  See the specific
-   * options below.  This option is not yet implemented in the open source
-   * release -- sorry, we'll try to include it in a future version!
+   * options below.  This option is only implemented to support use of
+   * [ctype=CORD] and [ctype=STRING] (the default) on non-repeated fields of
+   * type "bytes" in the open source release -- sorry, we'll try to include
+   * other types in a future version!
    */
   ctype?:
     | FieldOptions_CType
@@ -790,11 +906,8 @@ export interface FieldOptions {
    * check its required fields, regardless of whether or not the message has
    * been parsed.
    *
-   * As of 2021, lazy does no correctness checks on the byte stream during
-   * parsing.  This may lead to crashes if and when an invalid byte stream is
-   * finally parsed upon access.
-   *
-   * TODO(b/211906113):  Enable validation on lazy fields.
+   * As of May 2022, lazy verifies the contents of the byte stream during
+   * parsing.  An invalid byte stream will cause the overall parsing to fail.
    */
   lazy?:
     | boolean
@@ -820,6 +933,17 @@ export interface FieldOptions {
   weak?:
     | boolean
     | undefined;
+  /**
+   * Indicate that the field value should not be printed out when using debug
+   * formats, e.g. when the field contains sensitive credentials.
+   */
+  debugRedact?: boolean | undefined;
+  retention?:
+    | FieldOptions_OptionRetention
+    | undefined;
+  /** @deprecated */
+  target?: FieldOptions_OptionTargetType | undefined;
+  targets: FieldOptions_OptionTargetType[];
   /** The parser stores options it doesn't recognize here. See above. */
   uninterpretedOption: UninterpretedOption[];
 }
@@ -827,6 +951,14 @@ export interface FieldOptions {
 export enum FieldOptions_CType {
   /** STRING - Default mode. */
   STRING = 0,
+  /**
+   * CORD - The option [ctype=CORD] may be applied to a non-repeated field of type
+   * "bytes". It indicates that in C++, the data should be stored in a Cord
+   * instead of a string.  For very large strings, this may reduce memory
+   * fragmentation. It may also allow better performance when parsing from a
+   * Cord, or when parsing with aliasing enabled, as the parsed Cord may then
+   * alias the original buffer.
+   */
   CORD = 1,
   STRING_PIECE = 2,
   UNRECOGNIZED = -1,
@@ -906,6 +1038,137 @@ export function fieldOptions_JSTypeToJSON(object: FieldOptions_JSType): string {
   }
 }
 
+/**
+ * If set to RETENTION_SOURCE, the option will be omitted from the binary.
+ * Note: as of January 2023, support for this is in progress and does not yet
+ * have an effect (b/264593489).
+ */
+export enum FieldOptions_OptionRetention {
+  RETENTION_UNKNOWN = 0,
+  RETENTION_RUNTIME = 1,
+  RETENTION_SOURCE = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function fieldOptions_OptionRetentionFromJSON(object: any): FieldOptions_OptionRetention {
+  switch (object) {
+    case 0:
+    case "RETENTION_UNKNOWN":
+      return FieldOptions_OptionRetention.RETENTION_UNKNOWN;
+    case 1:
+    case "RETENTION_RUNTIME":
+      return FieldOptions_OptionRetention.RETENTION_RUNTIME;
+    case 2:
+    case "RETENTION_SOURCE":
+      return FieldOptions_OptionRetention.RETENTION_SOURCE;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return FieldOptions_OptionRetention.UNRECOGNIZED;
+  }
+}
+
+export function fieldOptions_OptionRetentionToJSON(object: FieldOptions_OptionRetention): string {
+  switch (object) {
+    case FieldOptions_OptionRetention.RETENTION_UNKNOWN:
+      return "RETENTION_UNKNOWN";
+    case FieldOptions_OptionRetention.RETENTION_RUNTIME:
+      return "RETENTION_RUNTIME";
+    case FieldOptions_OptionRetention.RETENTION_SOURCE:
+      return "RETENTION_SOURCE";
+    case FieldOptions_OptionRetention.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/**
+ * This indicates the types of entities that the field may apply to when used
+ * as an option. If it is unset, then the field may be freely used as an
+ * option on any kind of entity. Note: as of January 2023, support for this is
+ * in progress and does not yet have an effect (b/264593489).
+ */
+export enum FieldOptions_OptionTargetType {
+  TARGET_TYPE_UNKNOWN = 0,
+  TARGET_TYPE_FILE = 1,
+  TARGET_TYPE_EXTENSION_RANGE = 2,
+  TARGET_TYPE_MESSAGE = 3,
+  TARGET_TYPE_FIELD = 4,
+  TARGET_TYPE_ONEOF = 5,
+  TARGET_TYPE_ENUM = 6,
+  TARGET_TYPE_ENUM_ENTRY = 7,
+  TARGET_TYPE_SERVICE = 8,
+  TARGET_TYPE_METHOD = 9,
+  UNRECOGNIZED = -1,
+}
+
+export function fieldOptions_OptionTargetTypeFromJSON(object: any): FieldOptions_OptionTargetType {
+  switch (object) {
+    case 0:
+    case "TARGET_TYPE_UNKNOWN":
+      return FieldOptions_OptionTargetType.TARGET_TYPE_UNKNOWN;
+    case 1:
+    case "TARGET_TYPE_FILE":
+      return FieldOptions_OptionTargetType.TARGET_TYPE_FILE;
+    case 2:
+    case "TARGET_TYPE_EXTENSION_RANGE":
+      return FieldOptions_OptionTargetType.TARGET_TYPE_EXTENSION_RANGE;
+    case 3:
+    case "TARGET_TYPE_MESSAGE":
+      return FieldOptions_OptionTargetType.TARGET_TYPE_MESSAGE;
+    case 4:
+    case "TARGET_TYPE_FIELD":
+      return FieldOptions_OptionTargetType.TARGET_TYPE_FIELD;
+    case 5:
+    case "TARGET_TYPE_ONEOF":
+      return FieldOptions_OptionTargetType.TARGET_TYPE_ONEOF;
+    case 6:
+    case "TARGET_TYPE_ENUM":
+      return FieldOptions_OptionTargetType.TARGET_TYPE_ENUM;
+    case 7:
+    case "TARGET_TYPE_ENUM_ENTRY":
+      return FieldOptions_OptionTargetType.TARGET_TYPE_ENUM_ENTRY;
+    case 8:
+    case "TARGET_TYPE_SERVICE":
+      return FieldOptions_OptionTargetType.TARGET_TYPE_SERVICE;
+    case 9:
+    case "TARGET_TYPE_METHOD":
+      return FieldOptions_OptionTargetType.TARGET_TYPE_METHOD;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return FieldOptions_OptionTargetType.UNRECOGNIZED;
+  }
+}
+
+export function fieldOptions_OptionTargetTypeToJSON(object: FieldOptions_OptionTargetType): string {
+  switch (object) {
+    case FieldOptions_OptionTargetType.TARGET_TYPE_UNKNOWN:
+      return "TARGET_TYPE_UNKNOWN";
+    case FieldOptions_OptionTargetType.TARGET_TYPE_FILE:
+      return "TARGET_TYPE_FILE";
+    case FieldOptions_OptionTargetType.TARGET_TYPE_EXTENSION_RANGE:
+      return "TARGET_TYPE_EXTENSION_RANGE";
+    case FieldOptions_OptionTargetType.TARGET_TYPE_MESSAGE:
+      return "TARGET_TYPE_MESSAGE";
+    case FieldOptions_OptionTargetType.TARGET_TYPE_FIELD:
+      return "TARGET_TYPE_FIELD";
+    case FieldOptions_OptionTargetType.TARGET_TYPE_ONEOF:
+      return "TARGET_TYPE_ONEOF";
+    case FieldOptions_OptionTargetType.TARGET_TYPE_ENUM:
+      return "TARGET_TYPE_ENUM";
+    case FieldOptions_OptionTargetType.TARGET_TYPE_ENUM_ENTRY:
+      return "TARGET_TYPE_ENUM_ENTRY";
+    case FieldOptions_OptionTargetType.TARGET_TYPE_SERVICE:
+      return "TARGET_TYPE_SERVICE";
+    case FieldOptions_OptionTargetType.TARGET_TYPE_METHOD:
+      return "TARGET_TYPE_METHOD";
+    case FieldOptions_OptionTargetType.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export interface OneofOptions {
   /** The parser stores options it doesn't recognize here. See above. */
   uninterpretedOption: UninterpretedOption[];
@@ -926,6 +1189,19 @@ export interface EnumOptions {
    * is a formalization for deprecating enums.
    */
   deprecated?:
+    | boolean
+    | undefined;
+  /**
+   * Enable the legacy handling of JSON field name conflicts.  This lowercases
+   * and strips underscored from the fields before comparison in proto3 only.
+   * The new behavior takes `json_name` into account and applies to proto2 as
+   * well.
+   * TODO(b/261750190) Remove this legacy behavior once downstream teams have
+   * had time to migrate.
+   *
+   * @deprecated
+   */
+  deprecatedLegacyJsonFieldConflicts?:
     | boolean
     | undefined;
   /** The parser stores options it doesn't recognize here. See above. */
@@ -1229,10 +1505,57 @@ export interface GeneratedCodeInfo_Annotation {
     | undefined;
   /**
    * Identifies the ending offset in bytes in the generated code that
-   * relates to the identified offset. The end offset should be one past
+   * relates to the identified object. The end offset should be one past
    * the last relevant byte (so the length of the text = end - begin).
    */
   end?: number | undefined;
+  semantic?: GeneratedCodeInfo_Annotation_Semantic | undefined;
+}
+
+/**
+ * Represents the identified object's effect on the element in the original
+ * .proto file.
+ */
+export enum GeneratedCodeInfo_Annotation_Semantic {
+  /** NONE - There is no effect or the effect is indescribable. */
+  NONE = 0,
+  /** SET - The element is set or otherwise mutated. */
+  SET = 1,
+  /** ALIAS - An alias to the element is returned. */
+  ALIAS = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function generatedCodeInfo_Annotation_SemanticFromJSON(object: any): GeneratedCodeInfo_Annotation_Semantic {
+  switch (object) {
+    case 0:
+    case "NONE":
+      return GeneratedCodeInfo_Annotation_Semantic.NONE;
+    case 1:
+    case "SET":
+      return GeneratedCodeInfo_Annotation_Semantic.SET;
+    case 2:
+    case "ALIAS":
+      return GeneratedCodeInfo_Annotation_Semantic.ALIAS;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return GeneratedCodeInfo_Annotation_Semantic.UNRECOGNIZED;
+  }
+}
+
+export function generatedCodeInfo_Annotation_SemanticToJSON(object: GeneratedCodeInfo_Annotation_Semantic): string {
+  switch (object) {
+    case GeneratedCodeInfo_Annotation_Semantic.NONE:
+      return "NONE";
+    case GeneratedCodeInfo_Annotation_Semantic.SET:
+      return "SET";
+    case GeneratedCodeInfo_Annotation_Semantic.ALIAS:
+      return "ALIAS";
+    case GeneratedCodeInfo_Annotation_Semantic.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
 }
 
 function createBaseFileDescriptorSet(): FileDescriptorSet {
@@ -1309,6 +1632,7 @@ function createBaseFileDescriptorProto(): FileDescriptorProto {
     options: undefined,
     sourceCodeInfo: undefined,
     syntax: "",
+    edition: "",
   };
 }
 
@@ -1353,6 +1677,9 @@ export const FileDescriptorProto: MessageFns<FileDescriptorProto> = {
     }
     if (message.syntax !== undefined && message.syntax !== "") {
       writer.uint32(98).string(message.syntax);
+    }
+    if (message.edition !== undefined && message.edition !== "") {
+      writer.uint32(106).string(message.edition);
     }
     return writer;
   },
@@ -1480,6 +1807,14 @@ export const FileDescriptorProto: MessageFns<FileDescriptorProto> = {
           message.syntax = reader.string();
           continue;
         }
+        case 13: {
+          if (tag !== 106) {
+            break;
+          }
+
+          message.edition = reader.string();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1517,6 +1852,7 @@ export const FileDescriptorProto: MessageFns<FileDescriptorProto> = {
       options: isSet(object.options) ? FileOptions.fromJSON(object.options) : undefined,
       sourceCodeInfo: isSet(object.sourceCodeInfo) ? SourceCodeInfo.fromJSON(object.sourceCodeInfo) : undefined,
       syntax: isSet(object.syntax) ? globalThis.String(object.syntax) : "",
+      edition: isSet(object.edition) ? globalThis.String(object.edition) : "",
     };
   },
 
@@ -1558,6 +1894,9 @@ export const FileDescriptorProto: MessageFns<FileDescriptorProto> = {
     if (message.syntax !== undefined && message.syntax !== "") {
       obj.syntax = message.syntax;
     }
+    if (message.edition !== undefined && message.edition !== "") {
+      obj.edition = message.edition;
+    }
     return obj;
   },
 
@@ -1582,6 +1921,7 @@ export const FileDescriptorProto: MessageFns<FileDescriptorProto> = {
       ? SourceCodeInfo.fromPartial(object.sourceCodeInfo)
       : undefined;
     message.syntax = object.syntax ?? "";
+    message.edition = object.edition ?? "";
     return message;
   },
 };
@@ -1994,13 +2334,19 @@ export const DescriptorProto_ReservedRange: MessageFns<DescriptorProto_ReservedR
 };
 
 function createBaseExtensionRangeOptions(): ExtensionRangeOptions {
-  return { uninterpretedOption: [] };
+  return { uninterpretedOption: [], declaration: [], verification: 1 };
 }
 
 export const ExtensionRangeOptions: MessageFns<ExtensionRangeOptions> = {
   encode(message: ExtensionRangeOptions, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     for (const v of message.uninterpretedOption) {
       UninterpretedOption.encode(v!, writer.uint32(7994).fork()).join();
+    }
+    for (const v of message.declaration) {
+      ExtensionRangeOptions_Declaration.encode(v!, writer.uint32(18).fork()).join();
+    }
+    if (message.verification !== undefined && message.verification !== 1) {
+      writer.uint32(24).int32(message.verification);
     }
     return writer;
   },
@@ -2020,6 +2366,22 @@ export const ExtensionRangeOptions: MessageFns<ExtensionRangeOptions> = {
           message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
           continue;
         }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.declaration.push(ExtensionRangeOptions_Declaration.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.verification = reader.int32() as any;
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2034,6 +2396,12 @@ export const ExtensionRangeOptions: MessageFns<ExtensionRangeOptions> = {
       uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
         ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e))
         : [],
+      declaration: globalThis.Array.isArray(object?.declaration)
+        ? object.declaration.map((e: any) => ExtensionRangeOptions_Declaration.fromJSON(e))
+        : [],
+      verification: isSet(object.verification)
+        ? extensionRangeOptions_VerificationStateFromJSON(object.verification)
+        : 1,
     };
   },
 
@@ -2041,6 +2409,12 @@ export const ExtensionRangeOptions: MessageFns<ExtensionRangeOptions> = {
     const obj: any = {};
     if (message.uninterpretedOption?.length) {
       obj.uninterpretedOption = message.uninterpretedOption.map((e) => UninterpretedOption.toJSON(e));
+    }
+    if (message.declaration?.length) {
+      obj.declaration = message.declaration.map((e) => ExtensionRangeOptions_Declaration.toJSON(e));
+    }
+    if (message.verification !== undefined && message.verification !== 1) {
+      obj.verification = extensionRangeOptions_VerificationStateToJSON(message.verification);
     }
     return obj;
   },
@@ -2051,6 +2425,152 @@ export const ExtensionRangeOptions: MessageFns<ExtensionRangeOptions> = {
   fromPartial<I extends Exact<DeepPartial<ExtensionRangeOptions>, I>>(object: I): ExtensionRangeOptions {
     const message = createBaseExtensionRangeOptions();
     message.uninterpretedOption = object.uninterpretedOption?.map((e) => UninterpretedOption.fromPartial(e)) || [];
+    message.declaration = object.declaration?.map((e) => ExtensionRangeOptions_Declaration.fromPartial(e)) || [];
+    message.verification = object.verification ?? 1;
+    return message;
+  },
+};
+
+function createBaseExtensionRangeOptions_Declaration(): ExtensionRangeOptions_Declaration {
+  return { number: 0, fullName: "", type: "", isRepeated: false, reserved: false, repeated: false };
+}
+
+export const ExtensionRangeOptions_Declaration: MessageFns<ExtensionRangeOptions_Declaration> = {
+  encode(message: ExtensionRangeOptions_Declaration, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.number !== undefined && message.number !== 0) {
+      writer.uint32(8).int32(message.number);
+    }
+    if (message.fullName !== undefined && message.fullName !== "") {
+      writer.uint32(18).string(message.fullName);
+    }
+    if (message.type !== undefined && message.type !== "") {
+      writer.uint32(26).string(message.type);
+    }
+    if (message.isRepeated !== undefined && message.isRepeated !== false) {
+      writer.uint32(32).bool(message.isRepeated);
+    }
+    if (message.reserved !== undefined && message.reserved !== false) {
+      writer.uint32(40).bool(message.reserved);
+    }
+    if (message.repeated !== undefined && message.repeated !== false) {
+      writer.uint32(48).bool(message.repeated);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ExtensionRangeOptions_Declaration {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseExtensionRangeOptions_Declaration();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.number = reader.int32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.fullName = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.type = reader.string();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.isRepeated = reader.bool();
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.reserved = reader.bool();
+          continue;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.repeated = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ExtensionRangeOptions_Declaration {
+    return {
+      number: isSet(object.number) ? globalThis.Number(object.number) : 0,
+      fullName: isSet(object.fullName) ? globalThis.String(object.fullName) : "",
+      type: isSet(object.type) ? globalThis.String(object.type) : "",
+      isRepeated: isSet(object.isRepeated) ? globalThis.Boolean(object.isRepeated) : false,
+      reserved: isSet(object.reserved) ? globalThis.Boolean(object.reserved) : false,
+      repeated: isSet(object.repeated) ? globalThis.Boolean(object.repeated) : false,
+    };
+  },
+
+  toJSON(message: ExtensionRangeOptions_Declaration): unknown {
+    const obj: any = {};
+    if (message.number !== undefined && message.number !== 0) {
+      obj.number = Math.round(message.number);
+    }
+    if (message.fullName !== undefined && message.fullName !== "") {
+      obj.fullName = message.fullName;
+    }
+    if (message.type !== undefined && message.type !== "") {
+      obj.type = message.type;
+    }
+    if (message.isRepeated !== undefined && message.isRepeated !== false) {
+      obj.isRepeated = message.isRepeated;
+    }
+    if (message.reserved !== undefined && message.reserved !== false) {
+      obj.reserved = message.reserved;
+    }
+    if (message.repeated !== undefined && message.repeated !== false) {
+      obj.repeated = message.repeated;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ExtensionRangeOptions_Declaration>, I>>(
+    base?: I,
+  ): ExtensionRangeOptions_Declaration {
+    return ExtensionRangeOptions_Declaration.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ExtensionRangeOptions_Declaration>, I>>(
+    object: I,
+  ): ExtensionRangeOptions_Declaration {
+    const message = createBaseExtensionRangeOptions_Declaration();
+    message.number = object.number ?? 0;
+    message.fullName = object.fullName ?? "";
+    message.type = object.type ?? "";
+    message.isRepeated = object.isRepeated ?? false;
+    message.reserved = object.reserved ?? false;
+    message.repeated = object.repeated ?? false;
     return message;
   },
 };
@@ -3331,6 +3851,7 @@ function createBaseMessageOptions(): MessageOptions {
     noStandardDescriptorAccessor: false,
     deprecated: false,
     mapEntry: false,
+    deprecatedLegacyJsonFieldConflicts: false,
     uninterpretedOption: [],
   };
 }
@@ -3348,6 +3869,11 @@ export const MessageOptions: MessageFns<MessageOptions> = {
     }
     if (message.mapEntry !== undefined && message.mapEntry !== false) {
       writer.uint32(56).bool(message.mapEntry);
+    }
+    if (
+      message.deprecatedLegacyJsonFieldConflicts !== undefined && message.deprecatedLegacyJsonFieldConflicts !== false
+    ) {
+      writer.uint32(88).bool(message.deprecatedLegacyJsonFieldConflicts);
     }
     for (const v of message.uninterpretedOption) {
       UninterpretedOption.encode(v!, writer.uint32(7994).fork()).join();
@@ -3394,6 +3920,14 @@ export const MessageOptions: MessageFns<MessageOptions> = {
           message.mapEntry = reader.bool();
           continue;
         }
+        case 11: {
+          if (tag !== 88) {
+            break;
+          }
+
+          message.deprecatedLegacyJsonFieldConflicts = reader.bool();
+          continue;
+        }
         case 999: {
           if (tag !== 7994) {
             break;
@@ -3421,6 +3955,9 @@ export const MessageOptions: MessageFns<MessageOptions> = {
         : false,
       deprecated: isSet(object.deprecated) ? globalThis.Boolean(object.deprecated) : false,
       mapEntry: isSet(object.mapEntry) ? globalThis.Boolean(object.mapEntry) : false,
+      deprecatedLegacyJsonFieldConflicts: isSet(object.deprecatedLegacyJsonFieldConflicts)
+        ? globalThis.Boolean(object.deprecatedLegacyJsonFieldConflicts)
+        : false,
       uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
         ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e))
         : [],
@@ -3441,6 +3978,11 @@ export const MessageOptions: MessageFns<MessageOptions> = {
     if (message.mapEntry !== undefined && message.mapEntry !== false) {
       obj.mapEntry = message.mapEntry;
     }
+    if (
+      message.deprecatedLegacyJsonFieldConflicts !== undefined && message.deprecatedLegacyJsonFieldConflicts !== false
+    ) {
+      obj.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
+    }
     if (message.uninterpretedOption?.length) {
       obj.uninterpretedOption = message.uninterpretedOption.map((e) => UninterpretedOption.toJSON(e));
     }
@@ -3456,6 +3998,7 @@ export const MessageOptions: MessageFns<MessageOptions> = {
     message.noStandardDescriptorAccessor = object.noStandardDescriptorAccessor ?? false;
     message.deprecated = object.deprecated ?? false;
     message.mapEntry = object.mapEntry ?? false;
+    message.deprecatedLegacyJsonFieldConflicts = object.deprecatedLegacyJsonFieldConflicts ?? false;
     message.uninterpretedOption = object.uninterpretedOption?.map((e) => UninterpretedOption.fromPartial(e)) || [];
     return message;
   },
@@ -3470,6 +4013,10 @@ function createBaseFieldOptions(): FieldOptions {
     unverifiedLazy: false,
     deprecated: false,
     weak: false,
+    debugRedact: false,
+    retention: 0,
+    target: 0,
+    targets: [],
     uninterpretedOption: [],
   };
 }
@@ -3497,6 +4044,20 @@ export const FieldOptions: MessageFns<FieldOptions> = {
     if (message.weak !== undefined && message.weak !== false) {
       writer.uint32(80).bool(message.weak);
     }
+    if (message.debugRedact !== undefined && message.debugRedact !== false) {
+      writer.uint32(128).bool(message.debugRedact);
+    }
+    if (message.retention !== undefined && message.retention !== 0) {
+      writer.uint32(136).int32(message.retention);
+    }
+    if (message.target !== undefined && message.target !== 0) {
+      writer.uint32(144).int32(message.target);
+    }
+    writer.uint32(154).fork();
+    for (const v of message.targets) {
+      writer.int32(v);
+    }
+    writer.join();
     for (const v of message.uninterpretedOption) {
       UninterpretedOption.encode(v!, writer.uint32(7994).fork()).join();
     }
@@ -3566,6 +4127,48 @@ export const FieldOptions: MessageFns<FieldOptions> = {
           message.weak = reader.bool();
           continue;
         }
+        case 16: {
+          if (tag !== 128) {
+            break;
+          }
+
+          message.debugRedact = reader.bool();
+          continue;
+        }
+        case 17: {
+          if (tag !== 136) {
+            break;
+          }
+
+          message.retention = reader.int32() as any;
+          continue;
+        }
+        case 18: {
+          if (tag !== 144) {
+            break;
+          }
+
+          message.target = reader.int32() as any;
+          continue;
+        }
+        case 19: {
+          if (tag === 152) {
+            message.targets.push(reader.int32() as any);
+
+            continue;
+          }
+
+          if (tag === 154) {
+            const end2 = reader.uint32() + reader.pos;
+            while (reader.pos < end2) {
+              message.targets.push(reader.int32() as any);
+            }
+
+            continue;
+          }
+
+          break;
+        }
         case 999: {
           if (tag !== 7994) {
             break;
@@ -3592,6 +4195,12 @@ export const FieldOptions: MessageFns<FieldOptions> = {
       unverifiedLazy: isSet(object.unverifiedLazy) ? globalThis.Boolean(object.unverifiedLazy) : false,
       deprecated: isSet(object.deprecated) ? globalThis.Boolean(object.deprecated) : false,
       weak: isSet(object.weak) ? globalThis.Boolean(object.weak) : false,
+      debugRedact: isSet(object.debugRedact) ? globalThis.Boolean(object.debugRedact) : false,
+      retention: isSet(object.retention) ? fieldOptions_OptionRetentionFromJSON(object.retention) : 0,
+      target: isSet(object.target) ? fieldOptions_OptionTargetTypeFromJSON(object.target) : 0,
+      targets: globalThis.Array.isArray(object?.targets)
+        ? object.targets.map((e: any) => fieldOptions_OptionTargetTypeFromJSON(e))
+        : [],
       uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
         ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e))
         : [],
@@ -3621,6 +4230,18 @@ export const FieldOptions: MessageFns<FieldOptions> = {
     if (message.weak !== undefined && message.weak !== false) {
       obj.weak = message.weak;
     }
+    if (message.debugRedact !== undefined && message.debugRedact !== false) {
+      obj.debugRedact = message.debugRedact;
+    }
+    if (message.retention !== undefined && message.retention !== 0) {
+      obj.retention = fieldOptions_OptionRetentionToJSON(message.retention);
+    }
+    if (message.target !== undefined && message.target !== 0) {
+      obj.target = fieldOptions_OptionTargetTypeToJSON(message.target);
+    }
+    if (message.targets?.length) {
+      obj.targets = message.targets.map((e) => fieldOptions_OptionTargetTypeToJSON(e));
+    }
     if (message.uninterpretedOption?.length) {
       obj.uninterpretedOption = message.uninterpretedOption.map((e) => UninterpretedOption.toJSON(e));
     }
@@ -3639,6 +4260,10 @@ export const FieldOptions: MessageFns<FieldOptions> = {
     message.unverifiedLazy = object.unverifiedLazy ?? false;
     message.deprecated = object.deprecated ?? false;
     message.weak = object.weak ?? false;
+    message.debugRedact = object.debugRedact ?? false;
+    message.retention = object.retention ?? 0;
+    message.target = object.target ?? 0;
+    message.targets = object.targets?.map((e) => e) || [];
     message.uninterpretedOption = object.uninterpretedOption?.map((e) => UninterpretedOption.fromPartial(e)) || [];
     return message;
   },
@@ -3707,7 +4332,7 @@ export const OneofOptions: MessageFns<OneofOptions> = {
 };
 
 function createBaseEnumOptions(): EnumOptions {
-  return { allowAlias: false, deprecated: false, uninterpretedOption: [] };
+  return { allowAlias: false, deprecated: false, deprecatedLegacyJsonFieldConflicts: false, uninterpretedOption: [] };
 }
 
 export const EnumOptions: MessageFns<EnumOptions> = {
@@ -3717,6 +4342,11 @@ export const EnumOptions: MessageFns<EnumOptions> = {
     }
     if (message.deprecated !== undefined && message.deprecated !== false) {
       writer.uint32(24).bool(message.deprecated);
+    }
+    if (
+      message.deprecatedLegacyJsonFieldConflicts !== undefined && message.deprecatedLegacyJsonFieldConflicts !== false
+    ) {
+      writer.uint32(48).bool(message.deprecatedLegacyJsonFieldConflicts);
     }
     for (const v of message.uninterpretedOption) {
       UninterpretedOption.encode(v!, writer.uint32(7994).fork()).join();
@@ -3747,6 +4377,14 @@ export const EnumOptions: MessageFns<EnumOptions> = {
           message.deprecated = reader.bool();
           continue;
         }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.deprecatedLegacyJsonFieldConflicts = reader.bool();
+          continue;
+        }
         case 999: {
           if (tag !== 7994) {
             break;
@@ -3768,6 +4406,9 @@ export const EnumOptions: MessageFns<EnumOptions> = {
     return {
       allowAlias: isSet(object.allowAlias) ? globalThis.Boolean(object.allowAlias) : false,
       deprecated: isSet(object.deprecated) ? globalThis.Boolean(object.deprecated) : false,
+      deprecatedLegacyJsonFieldConflicts: isSet(object.deprecatedLegacyJsonFieldConflicts)
+        ? globalThis.Boolean(object.deprecatedLegacyJsonFieldConflicts)
+        : false,
       uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
         ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e))
         : [],
@@ -3782,6 +4423,11 @@ export const EnumOptions: MessageFns<EnumOptions> = {
     if (message.deprecated !== undefined && message.deprecated !== false) {
       obj.deprecated = message.deprecated;
     }
+    if (
+      message.deprecatedLegacyJsonFieldConflicts !== undefined && message.deprecatedLegacyJsonFieldConflicts !== false
+    ) {
+      obj.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
+    }
     if (message.uninterpretedOption?.length) {
       obj.uninterpretedOption = message.uninterpretedOption.map((e) => UninterpretedOption.toJSON(e));
     }
@@ -3795,6 +4441,7 @@ export const EnumOptions: MessageFns<EnumOptions> = {
     const message = createBaseEnumOptions();
     message.allowAlias = object.allowAlias ?? false;
     message.deprecated = object.deprecated ?? false;
+    message.deprecatedLegacyJsonFieldConflicts = object.deprecatedLegacyJsonFieldConflicts ?? false;
     message.uninterpretedOption = object.uninterpretedOption?.map((e) => UninterpretedOption.fromPartial(e)) || [];
     return message;
   },
@@ -4575,7 +5222,7 @@ export const GeneratedCodeInfo: MessageFns<GeneratedCodeInfo> = {
 };
 
 function createBaseGeneratedCodeInfo_Annotation(): GeneratedCodeInfo_Annotation {
-  return { path: [], sourceFile: "", begin: 0, end: 0 };
+  return { path: [], sourceFile: "", begin: 0, end: 0, semantic: 0 };
 }
 
 export const GeneratedCodeInfo_Annotation: MessageFns<GeneratedCodeInfo_Annotation> = {
@@ -4593,6 +5240,9 @@ export const GeneratedCodeInfo_Annotation: MessageFns<GeneratedCodeInfo_Annotati
     }
     if (message.end !== undefined && message.end !== 0) {
       writer.uint32(32).int32(message.end);
+    }
+    if (message.semantic !== undefined && message.semantic !== 0) {
+      writer.uint32(40).int32(message.semantic);
     }
     return writer;
   },
@@ -4646,6 +5296,14 @@ export const GeneratedCodeInfo_Annotation: MessageFns<GeneratedCodeInfo_Annotati
           message.end = reader.int32();
           continue;
         }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.semantic = reader.int32() as any;
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -4661,6 +5319,7 @@ export const GeneratedCodeInfo_Annotation: MessageFns<GeneratedCodeInfo_Annotati
       sourceFile: isSet(object.sourceFile) ? globalThis.String(object.sourceFile) : "",
       begin: isSet(object.begin) ? globalThis.Number(object.begin) : 0,
       end: isSet(object.end) ? globalThis.Number(object.end) : 0,
+      semantic: isSet(object.semantic) ? generatedCodeInfo_Annotation_SemanticFromJSON(object.semantic) : 0,
     };
   },
 
@@ -4678,6 +5337,9 @@ export const GeneratedCodeInfo_Annotation: MessageFns<GeneratedCodeInfo_Annotati
     if (message.end !== undefined && message.end !== 0) {
       obj.end = Math.round(message.end);
     }
+    if (message.semantic !== undefined && message.semantic !== 0) {
+      obj.semantic = generatedCodeInfo_Annotation_SemanticToJSON(message.semantic);
+    }
     return obj;
   },
 
@@ -4690,6 +5352,7 @@ export const GeneratedCodeInfo_Annotation: MessageFns<GeneratedCodeInfo_Annotati
     message.sourceFile = object.sourceFile ?? "";
     message.begin = object.begin ?? 0;
     message.end = object.end ?? 0;
+    message.semantic = object.semantic ?? 0;
     return message;
   },
 };
