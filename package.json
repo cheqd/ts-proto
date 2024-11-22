@@ -1,6 +1,6 @@
 {
   "name": "@cheqd/ts-proto",
-  "version": "3.4.4",
+  "version": "4.0.0",
   "description": "A TypeScript package for all transpiled cheqd ProtoBuf definitions.",
   "main": "index.js",
   "type": "module",
@@ -9,8 +9,11 @@
     "cheqd/**/*.*",
     "cosmos/**/*.*",
     "cosmos_proto/**/*.*",
+    "feeabstraction/**/*.*",
+    "feemarket/**/*.*",
     "gogoproto/**/*.*",
     "google/**/*.*",
+    "tendermint/**/*.*",
     "LICENSE",
     "package.json",
     "README.md"
@@ -42,6 +45,7 @@
     "url": "https://github.com/cheqd/ts-proto/issues"
   },
   "dependencies": {
+    "@bufbuild/protobuf": "^2.2.2",
     "long": "^5.2.3",
     "protobufjs": "^7.4.0"
   },
