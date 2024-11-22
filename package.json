@@ -53,15 +53,15 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.0",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^10.3.3",
+    "@semantic-release/github": "^11.0.1",
     "@semantic-release/npm": "^12.0.1",
     "@semantic-release/release-notes-generator": "^14.0.1",
     "@types/long": "^5.0.0",
-    "@types/node": "^20.16.5",
+    "@types/node": "^20.17.6",
     "conventional-changelog-conventionalcommits": "^8.0.0",
     "loose-ts-check": "^2.0.0",
-    "semantic-release": "^24.1.0",
-    "typescript": "^5.6.2"
+    "semantic-release": "^24.2.0",
+    "typescript": "^5.6.3"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
