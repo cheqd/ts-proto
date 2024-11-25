@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.4.0](https://github.com/cheqd/ts-proto/compare/2.3.2...2.4.0) (2024-11-25)
+
+### Features
+
+* Backport v3 protocol release proto API ([0924d3d](https://github.com/cheqd/ts-proto/commit/0924d3db7f0f31792b7fb4def5d101924f048cb5))
+
 ## [2.3.2](https://github.com/cheqd/ts-proto/compare/2.3.1...2.3.2) (2024-08-29)
 
 ## [2.3.1](https://github.com/cheqd/ts-proto/compare/2.3.0...2.3.1) (2024-04-03)
