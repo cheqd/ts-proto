@@ -13,6 +13,7 @@
     "feemarket/**/*.*",
     "gogoproto/**/*.*",
     "google/**/*.*",
+    "tendermint/**/*.*",
     "LICENSE",
     "package.json",
     "README.md"
