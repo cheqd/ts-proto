@@ -45,23 +45,23 @@
     "url": "https://github.com/cheqd/ts-proto/issues"
   },
   "dependencies": {
-    "@bufbuild/protobuf": "^2.2.2",
-    "long": "^5.2.3",
+    "@bufbuild/protobuf": "^2.2.3",
+    "long": "^5.3.1",
     "protobufjs": "^7.4.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/commit-analyzer": "^13.0.0",
+    "@semantic-release/commit-analyzer": "^13.0.1",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^11.0.1",
     "@semantic-release/npm": "^12.0.1",
-    "@semantic-release/release-notes-generator": "^14.0.1",
+    "@semantic-release/release-notes-generator": "^14.0.3",
     "@types/long": "^5.0.0",
-    "@types/node": "^20.17.6",
+    "@types/node": "^20.17.19",
     "conventional-changelog-conventionalcommits": "^8.0.0",
     "loose-ts-check": "^2.0.0",
-    "semantic-release": "^24.2.0",
-    "typescript": "^5.6.3"
+    "semantic-release": "^24.2.3",
+    "typescript": "^5.7.3"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
