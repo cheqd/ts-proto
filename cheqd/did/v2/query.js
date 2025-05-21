@@ -7,6 +7,7 @@
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination.js";
 import { DidDocWithMetadata, Metadata } from "./diddoc.js";
+import { FeeParams } from "./fee.js";
 function createBaseQueryDidDocRequest() {
     return { id: "" };
 }
@@ -372,6 +373,96 @@ export const QueryAllDidDocVersionsMetadataResponse = {
         return message;
     },
 };
+function createBaseQueryParamsRequest() {
+    return {};
+}
+export const QueryParamsRequest = {
+    encode(_, writer = new BinaryWriter()) {
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseQueryParamsRequest();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skip(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(_) {
+        return {};
+    },
+    toJSON(_) {
+        const obj = {};
+        return obj;
+    },
+    create(base) {
+        return QueryParamsRequest.fromPartial(base ?? {});
+    },
+    fromPartial(_) {
+        const message = createBaseQueryParamsRequest();
+        return message;
+    },
+};
+function createBaseQueryParamsResponse() {
+    return { params: undefined };
+}
+export const QueryParamsResponse = {
+    encode(message, writer = new BinaryWriter()) {
+        if (message.params !== undefined) {
+            FeeParams.encode(message.params, writer.uint32(10).fork()).join();
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseQueryParamsResponse();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1: {
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.params = FeeParams.decode(reader, reader.uint32());
+                    continue;
+                }
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skip(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return { params: isSet(object.params) ? FeeParams.fromJSON(object.params) : undefined };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.params !== undefined) {
+            obj.params = FeeParams.toJSON(message.params);
+        }
+        return obj;
+    },
+    create(base) {
+        return QueryParamsResponse.fromPartial(base ?? {});
+    },
+    fromPartial(object) {
+        const message = createBaseQueryParamsResponse();
+        message.params = (object.params !== undefined && object.params !== null)
+            ? FeeParams.fromPartial(object.params)
+            : undefined;
+        return message;
+    },
+};
 export const QueryServiceName = "cheqd.did.v2.Query";
 export class QueryClientImpl {
     rpc;
@@ -382,6 +473,7 @@ export class QueryClientImpl {
         this.DidDoc = this.DidDoc.bind(this);
         this.DidDocVersion = this.DidDocVersion.bind(this);
         this.AllDidDocVersionsMetadata = this.AllDidDocVersionsMetadata.bind(this);
+        this.Params = this.Params.bind(this);
     }
     DidDoc(request) {
         const data = QueryDidDocRequest.encode(request).finish();
@@ -397,6 +489,11 @@ export class QueryClientImpl {
         const data = QueryAllDidDocVersionsMetadataRequest.encode(request).finish();
         const promise = this.rpc.request(this.service, "AllDidDocVersionsMetadata", data);
         return promise.then((data) => QueryAllDidDocVersionsMetadataResponse.decode(new BinaryReader(data)));
+    }
+    Params(request) {
+        const data = QueryParamsRequest.encode(request).finish();
+        const promise = this.rpc.request(this.service, "Params", data);
+        return promise.then((data) => QueryParamsResponse.decode(new BinaryReader(data)));
     }
 }
 function isSet(value) {

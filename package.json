@@ -23,7 +23,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run build:proto-gen && npm run build:ts",
-    "build:proto-gen": "buf generate buf.build/cheqd/proto",
+    "build:proto-gen": "buf generate buf.build/cheqd/proto:develop",
     "build:ts": "tsc",
     "loosely-check": "npx loose-ts-check --auto-update",
     "loosely-check-fix": "npx loose-ts-check --auto-fix",
