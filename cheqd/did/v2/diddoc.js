@@ -338,7 +338,7 @@ export const VerificationMethod = {
     },
 };
 function createBaseService() {
-    return { id: "", serviceType: "", serviceEndpoint: [] };
+    return { id: "", serviceType: "", serviceEndpoint: [], recipientKeys: [], routingKeys: [], accept: [], priority: 0 };
 }
 export const Service = {
     encode(message, writer = new BinaryWriter()) {
@@ -350,6 +350,18 @@ export const Service = {
         }
         for (const v of message.serviceEndpoint) {
             writer.uint32(26).string(v);
+        }
+        for (const v of message.recipientKeys) {
+            writer.uint32(34).string(v);
+        }
+        for (const v of message.routingKeys) {
+            writer.uint32(42).string(v);
+        }
+        for (const v of message.accept) {
+            writer.uint32(50).string(v);
+        }
+        if (message.priority !== 0) {
+            writer.uint32(56).uint32(message.priority);
         }
         return writer;
     },
@@ -381,6 +393,34 @@ export const Service = {
                     message.serviceEndpoint.push(reader.string());
                     continue;
                 }
+                case 4: {
+                    if (tag !== 34) {
+                        break;
+                    }
+                    message.recipientKeys.push(reader.string());
+                    continue;
+                }
+                case 5: {
+                    if (tag !== 42) {
+                        break;
+                    }
+                    message.routingKeys.push(reader.string());
+                    continue;
+                }
+                case 6: {
+                    if (tag !== 50) {
+                        break;
+                    }
+                    message.accept.push(reader.string());
+                    continue;
+                }
+                case 7: {
+                    if (tag !== 56) {
+                        break;
+                    }
+                    message.priority = reader.uint32();
+                    continue;
+                }
             }
             if ((tag & 7) === 4 || tag === 0) {
                 break;
@@ -396,6 +436,14 @@ export const Service = {
             serviceEndpoint: globalThis.Array.isArray(object?.serviceEndpoint)
                 ? object.serviceEndpoint.map((e) => globalThis.String(e))
                 : [],
+            recipientKeys: globalThis.Array.isArray(object?.recipientKeys)
+                ? object.recipientKeys.map((e) => globalThis.String(e))
+                : [],
+            routingKeys: globalThis.Array.isArray(object?.routingKeys)
+                ? object.routingKeys.map((e) => globalThis.String(e))
+                : [],
+            accept: globalThis.Array.isArray(object?.accept) ? object.accept.map((e) => globalThis.String(e)) : [],
+            priority: isSet(object.priority) ? globalThis.Number(object.priority) : 0,
         };
     },
     toJSON(message) {
@@ -409,6 +457,18 @@ export const Service = {
         if (message.serviceEndpoint?.length) {
             obj.serviceEndpoint = message.serviceEndpoint;
         }
+        if (message.recipientKeys?.length) {
+            obj.recipientKeys = message.recipientKeys;
+        }
+        if (message.routingKeys?.length) {
+            obj.routingKeys = message.routingKeys;
+        }
+        if (message.accept?.length) {
+            obj.accept = message.accept;
+        }
+        if (message.priority !== 0) {
+            obj.priority = Math.round(message.priority);
+        }
         return obj;
     },
     create(base) {
@@ -419,6 +479,10 @@ export const Service = {
         message.id = object.id ?? "";
         message.serviceType = object.serviceType ?? "";
         message.serviceEndpoint = object.serviceEndpoint?.map((e) => e) || [];
+        message.recipientKeys = object.recipientKeys?.map((e) => e) || [];
+        message.routingKeys = object.routingKeys?.map((e) => e) || [];
+        message.accept = object.accept?.map((e) => e) || [];
+        message.priority = object.priority ?? 0;
         return message;
     },
 };

@@ -6,6 +6,7 @@
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { SignInfo } from "../../did/v2/tx.js";
+import { FeeParams } from "./fee.js";
 import { AlternativeUri, Metadata } from "./resource.js";
 function createBaseMsgCreateResource() {
     return { payload: undefined, signatures: [] };
@@ -285,6 +286,113 @@ export const MsgCreateResourceResponse = {
         return message;
     },
 };
+function createBaseMsgUpdateParams() {
+    return { authority: "", params: undefined };
+}
+export const MsgUpdateParams = {
+    encode(message, writer = new BinaryWriter()) {
+        if (message.authority !== "") {
+            writer.uint32(10).string(message.authority);
+        }
+        if (message.params !== undefined) {
+            FeeParams.encode(message.params, writer.uint32(18).fork()).join();
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseMsgUpdateParams();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1: {
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.authority = reader.string();
+                    continue;
+                }
+                case 2: {
+                    if (tag !== 18) {
+                        break;
+                    }
+                    message.params = FeeParams.decode(reader, reader.uint32());
+                    continue;
+                }
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skip(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            authority: isSet(object.authority) ? globalThis.String(object.authority) : "",
+            params: isSet(object.params) ? FeeParams.fromJSON(object.params) : undefined,
+        };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.authority !== "") {
+            obj.authority = message.authority;
+        }
+        if (message.params !== undefined) {
+            obj.params = FeeParams.toJSON(message.params);
+        }
+        return obj;
+    },
+    create(base) {
+        return MsgUpdateParams.fromPartial(base ?? {});
+    },
+    fromPartial(object) {
+        const message = createBaseMsgUpdateParams();
+        message.authority = object.authority ?? "";
+        message.params = (object.params !== undefined && object.params !== null)
+            ? FeeParams.fromPartial(object.params)
+            : undefined;
+        return message;
+    },
+};
+function createBaseMsgUpdateParamsResponse() {
+    return {};
+}
+export const MsgUpdateParamsResponse = {
+    encode(_, writer = new BinaryWriter()) {
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseMsgUpdateParamsResponse();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skip(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(_) {
+        return {};
+    },
+    toJSON(_) {
+        const obj = {};
+        return obj;
+    },
+    create(base) {
+        return MsgUpdateParamsResponse.fromPartial(base ?? {});
+    },
+    fromPartial(_) {
+        const message = createBaseMsgUpdateParamsResponse();
+        return message;
+    },
+};
 export const MsgServiceName = "cheqd.resource.v2.Msg";
 export class MsgClientImpl {
     rpc;
@@ -293,11 +401,17 @@ export class MsgClientImpl {
         this.service = opts?.service || MsgServiceName;
         this.rpc = rpc;
         this.CreateResource = this.CreateResource.bind(this);
+        this.UpdateParams = this.UpdateParams.bind(this);
     }
     CreateResource(request) {
         const data = MsgCreateResource.encode(request).finish();
         const promise = this.rpc.request(this.service, "CreateResource", data);
         return promise.then((data) => MsgCreateResourceResponse.decode(new BinaryReader(data)));
+    }
+    UpdateParams(request) {
+        const data = MsgUpdateParams.encode(request).finish();
+        const promise = this.rpc.request(this.service, "UpdateParams", data);
+        return promise.then((data) => MsgUpdateParamsResponse.decode(new BinaryReader(data)));
     }
 }
 function bytesFromBase64(b64) {
