@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.5.0](https://github.com/cheqd/ts-proto/compare/2.4.1...2.5.0) (2025-05-21)
+
+### Features
+
+* Upgrade protobuf definitions for cheqd-node v4 release ([#262](https://github.com/cheqd/ts-proto/issues/262)) ([8b3d64e](https://github.com/cheqd/ts-proto/commit/8b3d64e17501095799300719942007bf1b883538))
+
 ## [2.4.1](https://github.com/cheqd/ts-proto/compare/2.4.0...2.4.1) (2025-02-19)
 
 ### Bug Fixes
