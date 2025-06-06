@@ -1,5 +1,7 @@
 # Changelog
 
+## [4.1.1-develop.1](https://github.com/cheqd/ts-proto/compare/4.1.0...4.1.1-develop.1) (2025-06-06)
+
 ## [4.1.0](https://github.com/cheqd/ts-proto/compare/4.0.2...4.1.0) (2025-05-27)
 
 ### Features
