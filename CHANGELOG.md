@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.2.0-develop.1](https://github.com/cheqd/ts-proto/compare/4.1.1...4.2.0-develop.1) (2025-11-10)
+
+### Features
+
+* Feature release (Oracle) proto scaffolding ([4f3e797](https://github.com/cheqd/ts-proto/commit/4f3e7976c3934b964b16633a15ddda7fcf49878f))
+
 ## [4.1.1](https://github.com/cheqd/ts-proto/compare/4.1.0...4.1.1) (2025-06-06)
 
 ## [4.1.1-develop.1](https://github.com/cheqd/ts-proto/compare/4.1.0...4.1.1-develop.1) (2025-06-06)
