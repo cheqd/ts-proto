@@ -250,6 +250,278 @@ export const QueryResourceMetadataResponse = {
         return message;
     },
 };
+function createBaseQueryLatestResourceVersionRequest() {
+    return { collectionId: "", name: "", resourceType: "" };
+}
+export const QueryLatestResourceVersionRequest = {
+    encode(message, writer = new BinaryWriter()) {
+        if (message.collectionId !== "") {
+            writer.uint32(10).string(message.collectionId);
+        }
+        if (message.name !== "") {
+            writer.uint32(18).string(message.name);
+        }
+        if (message.resourceType !== "") {
+            writer.uint32(26).string(message.resourceType);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseQueryLatestResourceVersionRequest();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1: {
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.collectionId = reader.string();
+                    continue;
+                }
+                case 2: {
+                    if (tag !== 18) {
+                        break;
+                    }
+                    message.name = reader.string();
+                    continue;
+                }
+                case 3: {
+                    if (tag !== 26) {
+                        break;
+                    }
+                    message.resourceType = reader.string();
+                    continue;
+                }
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skip(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            resourceType: isSet(object.resourceType) ? globalThis.String(object.resourceType) : "",
+        };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.collectionId !== "") {
+            obj.collectionId = message.collectionId;
+        }
+        if (message.name !== "") {
+            obj.name = message.name;
+        }
+        if (message.resourceType !== "") {
+            obj.resourceType = message.resourceType;
+        }
+        return obj;
+    },
+    create(base) {
+        return QueryLatestResourceVersionRequest.fromPartial(base ?? {});
+    },
+    fromPartial(object) {
+        const message = createBaseQueryLatestResourceVersionRequest();
+        message.collectionId = object.collectionId ?? "";
+        message.name = object.name ?? "";
+        message.resourceType = object.resourceType ?? "";
+        return message;
+    },
+};
+function createBaseQueryLatestResourceVersionResponse() {
+    return { resource: undefined };
+}
+export const QueryLatestResourceVersionResponse = {
+    encode(message, writer = new BinaryWriter()) {
+        if (message.resource !== undefined) {
+            ResourceWithMetadata.encode(message.resource, writer.uint32(10).fork()).join();
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseQueryLatestResourceVersionResponse();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1: {
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.resource = ResourceWithMetadata.decode(reader, reader.uint32());
+                    continue;
+                }
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skip(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return { resource: isSet(object.resource) ? ResourceWithMetadata.fromJSON(object.resource) : undefined };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.resource !== undefined) {
+            obj.resource = ResourceWithMetadata.toJSON(message.resource);
+        }
+        return obj;
+    },
+    create(base) {
+        return QueryLatestResourceVersionResponse.fromPartial(base ?? {});
+    },
+    fromPartial(object) {
+        const message = createBaseQueryLatestResourceVersionResponse();
+        message.resource = (object.resource !== undefined && object.resource !== null)
+            ? ResourceWithMetadata.fromPartial(object.resource)
+            : undefined;
+        return message;
+    },
+};
+function createBaseQueryLatestResourceVersionMetadataRequest() {
+    return { collectionId: "", name: "", resourceType: "" };
+}
+export const QueryLatestResourceVersionMetadataRequest = {
+    encode(message, writer = new BinaryWriter()) {
+        if (message.collectionId !== "") {
+            writer.uint32(10).string(message.collectionId);
+        }
+        if (message.name !== "") {
+            writer.uint32(18).string(message.name);
+        }
+        if (message.resourceType !== "") {
+            writer.uint32(26).string(message.resourceType);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseQueryLatestResourceVersionMetadataRequest();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1: {
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.collectionId = reader.string();
+                    continue;
+                }
+                case 2: {
+                    if (tag !== 18) {
+                        break;
+                    }
+                    message.name = reader.string();
+                    continue;
+                }
+                case 3: {
+                    if (tag !== 26) {
+                        break;
+                    }
+                    message.resourceType = reader.string();
+                    continue;
+                }
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skip(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            resourceType: isSet(object.resourceType) ? globalThis.String(object.resourceType) : "",
+        };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.collectionId !== "") {
+            obj.collectionId = message.collectionId;
+        }
+        if (message.name !== "") {
+            obj.name = message.name;
+        }
+        if (message.resourceType !== "") {
+            obj.resourceType = message.resourceType;
+        }
+        return obj;
+    },
+    create(base) {
+        return QueryLatestResourceVersionMetadataRequest.fromPartial(base ?? {});
+    },
+    fromPartial(object) {
+        const message = createBaseQueryLatestResourceVersionMetadataRequest();
+        message.collectionId = object.collectionId ?? "";
+        message.name = object.name ?? "";
+        message.resourceType = object.resourceType ?? "";
+        return message;
+    },
+};
+function createBaseQueryLatestResourceVersionMetadataResponse() {
+    return { resource: undefined };
+}
+export const QueryLatestResourceVersionMetadataResponse = {
+    encode(message, writer = new BinaryWriter()) {
+        if (message.resource !== undefined) {
+            Metadata.encode(message.resource, writer.uint32(10).fork()).join();
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseQueryLatestResourceVersionMetadataResponse();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1: {
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.resource = Metadata.decode(reader, reader.uint32());
+                    continue;
+                }
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skip(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return { resource: isSet(object.resource) ? Metadata.fromJSON(object.resource) : undefined };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.resource !== undefined) {
+            obj.resource = Metadata.toJSON(message.resource);
+        }
+        return obj;
+    },
+    create(base) {
+        return QueryLatestResourceVersionMetadataResponse.fromPartial(base ?? {});
+    },
+    fromPartial(object) {
+        const message = createBaseQueryLatestResourceVersionMetadataResponse();
+        message.resource = (object.resource !== undefined && object.resource !== null)
+            ? Metadata.fromPartial(object.resource)
+            : undefined;
+        return message;
+    },
+};
 function createBaseQueryCollectionResourcesRequest() {
     return { collectionId: "", pagination: undefined };
 }
@@ -491,6 +763,8 @@ export class QueryClientImpl {
         this.rpc = rpc;
         this.Resource = this.Resource.bind(this);
         this.ResourceMetadata = this.ResourceMetadata.bind(this);
+        this.LatestResourceVersion = this.LatestResourceVersion.bind(this);
+        this.LatestResourceVersionMetadata = this.LatestResourceVersionMetadata.bind(this);
         this.CollectionResources = this.CollectionResources.bind(this);
         this.Params = this.Params.bind(this);
     }
@@ -503,6 +777,16 @@ export class QueryClientImpl {
         const data = QueryResourceMetadataRequest.encode(request).finish();
         const promise = this.rpc.request(this.service, "ResourceMetadata", data);
         return promise.then((data) => QueryResourceMetadataResponse.decode(new BinaryReader(data)));
+    }
+    LatestResourceVersion(request) {
+        const data = QueryLatestResourceVersionRequest.encode(request).finish();
+        const promise = this.rpc.request(this.service, "LatestResourceVersion", data);
+        return promise.then((data) => QueryLatestResourceVersionResponse.decode(new BinaryReader(data)));
+    }
+    LatestResourceVersionMetadata(request) {
+        const data = QueryLatestResourceVersionMetadataRequest.encode(request).finish();
+        const promise = this.rpc.request(this.service, "LatestResourceVersionMetadata", data);
+        return promise.then((data) => QueryLatestResourceVersionMetadataResponse.decode(new BinaryReader(data)));
     }
     CollectionResources(request) {
         const data = QueryCollectionResourcesRequest.encode(request).finish();

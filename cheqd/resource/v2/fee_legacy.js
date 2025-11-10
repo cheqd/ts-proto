@@ -2,23 +2,23 @@
 // versions:
 //   protoc-gen-ts_proto  v2.6.1
 //   protoc               unknown
-// source: cheqd/resource/v2/fee.proto
+// source: cheqd/resource/v2/fee_legacy.proto
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
-import { FeeRange } from "../../did/v2/fee.js";
-function createBaseFeeParams() {
-    return { image: [], json: [], default: [], burnFactor: "" };
+import { Coin } from "../../../cosmos/base/v1beta1/coin.js";
+function createBaseLegacyFeeParams() {
+    return { image: undefined, json: undefined, default: undefined, burnFactor: "" };
 }
-export const FeeParams = {
+export const LegacyFeeParams = {
     encode(message, writer = new BinaryWriter()) {
-        for (const v of message.image) {
-            FeeRange.encode(v, writer.uint32(10).fork()).join();
+        if (message.image !== undefined) {
+            Coin.encode(message.image, writer.uint32(10).fork()).join();
         }
-        for (const v of message.json) {
-            FeeRange.encode(v, writer.uint32(18).fork()).join();
+        if (message.json !== undefined) {
+            Coin.encode(message.json, writer.uint32(18).fork()).join();
         }
-        for (const v of message.default) {
-            FeeRange.encode(v, writer.uint32(26).fork()).join();
+        if (message.default !== undefined) {
+            Coin.encode(message.default, writer.uint32(26).fork()).join();
         }
         if (message.burnFactor !== "") {
             writer.uint32(34).string(message.burnFactor);
@@ -28,7 +28,7 @@ export const FeeParams = {
     decode(input, length) {
         const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
-        const message = createBaseFeeParams();
+        const message = createBaseLegacyFeeParams();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
@@ -36,21 +36,21 @@ export const FeeParams = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.image.push(FeeRange.decode(reader, reader.uint32()));
+                    message.image = Coin.decode(reader, reader.uint32());
                     continue;
                 }
                 case 2: {
                     if (tag !== 18) {
                         break;
                     }
-                    message.json.push(FeeRange.decode(reader, reader.uint32()));
+                    message.json = Coin.decode(reader, reader.uint32());
                     continue;
                 }
                 case 3: {
                     if (tag !== 26) {
                         break;
                     }
-                    message.default.push(FeeRange.decode(reader, reader.uint32()));
+                    message.default = Coin.decode(reader, reader.uint32());
                     continue;
                 }
                 case 4: {
@@ -70,22 +70,22 @@ export const FeeParams = {
     },
     fromJSON(object) {
         return {
-            image: globalThis.Array.isArray(object?.image) ? object.image.map((e) => FeeRange.fromJSON(e)) : [],
-            json: globalThis.Array.isArray(object?.json) ? object.json.map((e) => FeeRange.fromJSON(e)) : [],
-            default: globalThis.Array.isArray(object?.default) ? object.default.map((e) => FeeRange.fromJSON(e)) : [],
+            image: isSet(object.image) ? Coin.fromJSON(object.image) : undefined,
+            json: isSet(object.json) ? Coin.fromJSON(object.json) : undefined,
+            default: isSet(object.default) ? Coin.fromJSON(object.default) : undefined,
             burnFactor: isSet(object.burnFactor) ? globalThis.String(object.burnFactor) : "",
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.image?.length) {
-            obj.image = message.image.map((e) => FeeRange.toJSON(e));
+        if (message.image !== undefined) {
+            obj.image = Coin.toJSON(message.image);
         }
-        if (message.json?.length) {
-            obj.json = message.json.map((e) => FeeRange.toJSON(e));
+        if (message.json !== undefined) {
+            obj.json = Coin.toJSON(message.json);
         }
-        if (message.default?.length) {
-            obj.default = message.default.map((e) => FeeRange.toJSON(e));
+        if (message.default !== undefined) {
+            obj.default = Coin.toJSON(message.default);
         }
         if (message.burnFactor !== "") {
             obj.burnFactor = message.burnFactor;
@@ -93,13 +93,15 @@ export const FeeParams = {
         return obj;
     },
     create(base) {
-        return FeeParams.fromPartial(base ?? {});
+        return LegacyFeeParams.fromPartial(base ?? {});
     },
     fromPartial(object) {
-        const message = createBaseFeeParams();
-        message.image = object.image?.map((e) => FeeRange.fromPartial(e)) || [];
-        message.json = object.json?.map((e) => FeeRange.fromPartial(e)) || [];
-        message.default = object.default?.map((e) => FeeRange.fromPartial(e)) || [];
+        const message = createBaseLegacyFeeParams();
+        message.image = (object.image !== undefined && object.image !== null) ? Coin.fromPartial(object.image) : undefined;
+        message.json = (object.json !== undefined && object.json !== null) ? Coin.fromPartial(object.json) : undefined;
+        message.default = (object.default !== undefined && object.default !== null)
+            ? Coin.fromPartial(object.default)
+            : undefined;
         message.burnFactor = object.burnFactor ?? "";
         return message;
     },
@@ -107,4 +109,4 @@ export const FeeParams = {
 function isSet(value) {
     return value !== null && value !== undefined;
 }
-//# sourceMappingURL=fee.js.map
+//# sourceMappingURL=fee_legacy.js.map

@@ -5,20 +5,102 @@
 // source: cheqd/did/v2/fee.proto
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
-import { Coin } from "../../../cosmos/base/v1beta1/coin.js";
+function createBaseFeeRange() {
+    return { denom: "", minAmount: "", maxAmount: "" };
+}
+export const FeeRange = {
+    encode(message, writer = new BinaryWriter()) {
+        if (message.denom !== "") {
+            writer.uint32(10).string(message.denom);
+        }
+        if (message.minAmount !== "") {
+            writer.uint32(18).string(message.minAmount);
+        }
+        if (message.maxAmount !== "") {
+            writer.uint32(26).string(message.maxAmount);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseFeeRange();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1: {
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.denom = reader.string();
+                    continue;
+                }
+                case 2: {
+                    if (tag !== 18) {
+                        break;
+                    }
+                    message.minAmount = reader.string();
+                    continue;
+                }
+                case 3: {
+                    if (tag !== 26) {
+                        break;
+                    }
+                    message.maxAmount = reader.string();
+                    continue;
+                }
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skip(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
+            minAmount: isSet(object.minAmount) ? globalThis.String(object.minAmount) : "",
+            maxAmount: isSet(object.maxAmount) ? globalThis.String(object.maxAmount) : "",
+        };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.denom !== "") {
+            obj.denom = message.denom;
+        }
+        if (message.minAmount !== "") {
+            obj.minAmount = message.minAmount;
+        }
+        if (message.maxAmount !== "") {
+            obj.maxAmount = message.maxAmount;
+        }
+        return obj;
+    },
+    create(base) {
+        return FeeRange.fromPartial(base ?? {});
+    },
+    fromPartial(object) {
+        const message = createBaseFeeRange();
+        message.denom = object.denom ?? "";
+        message.minAmount = object.minAmount ?? "";
+        message.maxAmount = object.maxAmount ?? "";
+        return message;
+    },
+};
 function createBaseFeeParams() {
-    return { createDid: undefined, updateDid: undefined, deactivateDid: undefined, burnFactor: "" };
+    return { createDid: [], updateDid: [], deactivateDid: [], burnFactor: "" };
 }
 export const FeeParams = {
     encode(message, writer = new BinaryWriter()) {
-        if (message.createDid !== undefined) {
-            Coin.encode(message.createDid, writer.uint32(10).fork()).join();
+        for (const v of message.createDid) {
+            FeeRange.encode(v, writer.uint32(10).fork()).join();
         }
-        if (message.updateDid !== undefined) {
-            Coin.encode(message.updateDid, writer.uint32(18).fork()).join();
+        for (const v of message.updateDid) {
+            FeeRange.encode(v, writer.uint32(18).fork()).join();
         }
-        if (message.deactivateDid !== undefined) {
-            Coin.encode(message.deactivateDid, writer.uint32(26).fork()).join();
+        for (const v of message.deactivateDid) {
+            FeeRange.encode(v, writer.uint32(26).fork()).join();
         }
         if (message.burnFactor !== "") {
             writer.uint32(34).string(message.burnFactor);
@@ -36,21 +118,21 @@ export const FeeParams = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.createDid = Coin.decode(reader, reader.uint32());
+                    message.createDid.push(FeeRange.decode(reader, reader.uint32()));
                     continue;
                 }
                 case 2: {
                     if (tag !== 18) {
                         break;
                     }
-                    message.updateDid = Coin.decode(reader, reader.uint32());
+                    message.updateDid.push(FeeRange.decode(reader, reader.uint32()));
                     continue;
                 }
                 case 3: {
                     if (tag !== 26) {
                         break;
                     }
-                    message.deactivateDid = Coin.decode(reader, reader.uint32());
+                    message.deactivateDid.push(FeeRange.decode(reader, reader.uint32()));
                     continue;
                 }
                 case 4: {
@@ -70,22 +152,28 @@ export const FeeParams = {
     },
     fromJSON(object) {
         return {
-            createDid: isSet(object.createDid) ? Coin.fromJSON(object.createDid) : undefined,
-            updateDid: isSet(object.updateDid) ? Coin.fromJSON(object.updateDid) : undefined,
-            deactivateDid: isSet(object.deactivateDid) ? Coin.fromJSON(object.deactivateDid) : undefined,
+            createDid: globalThis.Array.isArray(object?.createDid)
+                ? object.createDid.map((e) => FeeRange.fromJSON(e))
+                : [],
+            updateDid: globalThis.Array.isArray(object?.updateDid)
+                ? object.updateDid.map((e) => FeeRange.fromJSON(e))
+                : [],
+            deactivateDid: globalThis.Array.isArray(object?.deactivateDid)
+                ? object.deactivateDid.map((e) => FeeRange.fromJSON(e))
+                : [],
             burnFactor: isSet(object.burnFactor) ? globalThis.String(object.burnFactor) : "",
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.createDid !== undefined) {
-            obj.createDid = Coin.toJSON(message.createDid);
+        if (message.createDid?.length) {
+            obj.createDid = message.createDid.map((e) => FeeRange.toJSON(e));
         }
-        if (message.updateDid !== undefined) {
-            obj.updateDid = Coin.toJSON(message.updateDid);
+        if (message.updateDid?.length) {
+            obj.updateDid = message.updateDid.map((e) => FeeRange.toJSON(e));
         }
-        if (message.deactivateDid !== undefined) {
-            obj.deactivateDid = Coin.toJSON(message.deactivateDid);
+        if (message.deactivateDid?.length) {
+            obj.deactivateDid = message.deactivateDid.map((e) => FeeRange.toJSON(e));
         }
         if (message.burnFactor !== "") {
             obj.burnFactor = message.burnFactor;
@@ -97,15 +185,9 @@ export const FeeParams = {
     },
     fromPartial(object) {
         const message = createBaseFeeParams();
-        message.createDid = (object.createDid !== undefined && object.createDid !== null)
-            ? Coin.fromPartial(object.createDid)
-            : undefined;
-        message.updateDid = (object.updateDid !== undefined && object.updateDid !== null)
-            ? Coin.fromPartial(object.updateDid)
-            : undefined;
-        message.deactivateDid = (object.deactivateDid !== undefined && object.deactivateDid !== null)
-            ? Coin.fromPartial(object.deactivateDid)
-            : undefined;
+        message.createDid = object.createDid?.map((e) => FeeRange.fromPartial(e)) || [];
+        message.updateDid = object.updateDid?.map((e) => FeeRange.fromPartial(e)) || [];
+        message.deactivateDid = object.deactivateDid?.map((e) => FeeRange.fromPartial(e)) || [];
         message.burnFactor = object.burnFactor ?? "";
         return message;
     },
