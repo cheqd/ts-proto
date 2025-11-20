@@ -2,35 +2,41 @@
 // versions:
 //   protoc-gen-ts_proto  v2.6.1
 //   protoc               unknown
-// source: cheqd/resource/v2/fee.proto
+// source: cheqd/resource/v2/fee_legacy.proto
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
-import { FeeRange } from "../../did/v2/fee.js";
+import { Coin } from "../../../cosmos/base/v1beta1/coin.js";
 
 /**
  * FeeParams defines the parameters for the cheqd Resource module fixed fee.
  * Creation requests for different IANA media types are charged different fees.
  */
-export interface FeeParams {
+export interface LegacyFeeParams {
   /**
    * Fixed fee for creating a resource with media type 'image/*'
    *
    * Default: 10 CHEQ or 10000000000ncheq
    */
-  image: FeeRange[];
+  image:
+    | Coin
+    | undefined;
   /**
    * Fixed fee for creating a resource with media type 'application/json'
    *
    * Default: 2.5 CHEQ or 2500000000ncheq
    */
-  json: FeeRange[];
+  json:
+    | Coin
+    | undefined;
   /**
    * Fixed fee for creating a resource with all other media types
    *
    * Default: 5 CHEQ or 5000000000ncheq
    */
-  default: FeeRange[];
+  default:
+    | Coin
+    | undefined;
   /**
    * Percentage of the fixed fee that will be burned
    *
@@ -39,20 +45,20 @@ export interface FeeParams {
   burnFactor: string;
 }
 
-function createBaseFeeParams(): FeeParams {
-  return { image: [], json: [], default: [], burnFactor: "" };
+function createBaseLegacyFeeParams(): LegacyFeeParams {
+  return { image: undefined, json: undefined, default: undefined, burnFactor: "" };
 }
 
-export const FeeParams: MessageFns<FeeParams> = {
-  encode(message: FeeParams, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.image) {
-      FeeRange.encode(v!, writer.uint32(10).fork()).join();
+export const LegacyFeeParams: MessageFns<LegacyFeeParams> = {
+  encode(message: LegacyFeeParams, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.image !== undefined) {
+      Coin.encode(message.image, writer.uint32(10).fork()).join();
     }
-    for (const v of message.json) {
-      FeeRange.encode(v!, writer.uint32(18).fork()).join();
+    if (message.json !== undefined) {
+      Coin.encode(message.json, writer.uint32(18).fork()).join();
     }
-    for (const v of message.default) {
-      FeeRange.encode(v!, writer.uint32(26).fork()).join();
+    if (message.default !== undefined) {
+      Coin.encode(message.default, writer.uint32(26).fork()).join();
     }
     if (message.burnFactor !== "") {
       writer.uint32(34).string(message.burnFactor);
@@ -60,10 +66,10 @@ export const FeeParams: MessageFns<FeeParams> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): FeeParams {
+  decode(input: BinaryReader | Uint8Array, length?: number): LegacyFeeParams {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseFeeParams();
+    const message = createBaseLegacyFeeParams();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -72,7 +78,7 @@ export const FeeParams: MessageFns<FeeParams> = {
             break;
           }
 
-          message.image.push(FeeRange.decode(reader, reader.uint32()));
+          message.image = Coin.decode(reader, reader.uint32());
           continue;
         }
         case 2: {
@@ -80,7 +86,7 @@ export const FeeParams: MessageFns<FeeParams> = {
             break;
           }
 
-          message.json.push(FeeRange.decode(reader, reader.uint32()));
+          message.json = Coin.decode(reader, reader.uint32());
           continue;
         }
         case 3: {
@@ -88,7 +94,7 @@ export const FeeParams: MessageFns<FeeParams> = {
             break;
           }
 
-          message.default.push(FeeRange.decode(reader, reader.uint32()));
+          message.default = Coin.decode(reader, reader.uint32());
           continue;
         }
         case 4: {
@@ -108,25 +114,25 @@ export const FeeParams: MessageFns<FeeParams> = {
     return message;
   },
 
-  fromJSON(object: any): FeeParams {
+  fromJSON(object: any): LegacyFeeParams {
     return {
-      image: globalThis.Array.isArray(object?.image) ? object.image.map((e: any) => FeeRange.fromJSON(e)) : [],
-      json: globalThis.Array.isArray(object?.json) ? object.json.map((e: any) => FeeRange.fromJSON(e)) : [],
-      default: globalThis.Array.isArray(object?.default) ? object.default.map((e: any) => FeeRange.fromJSON(e)) : [],
+      image: isSet(object.image) ? Coin.fromJSON(object.image) : undefined,
+      json: isSet(object.json) ? Coin.fromJSON(object.json) : undefined,
+      default: isSet(object.default) ? Coin.fromJSON(object.default) : undefined,
       burnFactor: isSet(object.burnFactor) ? globalThis.String(object.burnFactor) : "",
     };
   },
 
-  toJSON(message: FeeParams): unknown {
+  toJSON(message: LegacyFeeParams): unknown {
     const obj: any = {};
-    if (message.image?.length) {
-      obj.image = message.image.map((e) => FeeRange.toJSON(e));
+    if (message.image !== undefined) {
+      obj.image = Coin.toJSON(message.image);
     }
-    if (message.json?.length) {
-      obj.json = message.json.map((e) => FeeRange.toJSON(e));
+    if (message.json !== undefined) {
+      obj.json = Coin.toJSON(message.json);
     }
-    if (message.default?.length) {
-      obj.default = message.default.map((e) => FeeRange.toJSON(e));
+    if (message.default !== undefined) {
+      obj.default = Coin.toJSON(message.default);
     }
     if (message.burnFactor !== "") {
       obj.burnFactor = message.burnFactor;
@@ -134,14 +140,16 @@ export const FeeParams: MessageFns<FeeParams> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<FeeParams>, I>>(base?: I): FeeParams {
-    return FeeParams.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<LegacyFeeParams>, I>>(base?: I): LegacyFeeParams {
+    return LegacyFeeParams.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<FeeParams>, I>>(object: I): FeeParams {
-    const message = createBaseFeeParams();
-    message.image = object.image?.map((e) => FeeRange.fromPartial(e)) || [];
-    message.json = object.json?.map((e) => FeeRange.fromPartial(e)) || [];
-    message.default = object.default?.map((e) => FeeRange.fromPartial(e)) || [];
+  fromPartial<I extends Exact<DeepPartial<LegacyFeeParams>, I>>(object: I): LegacyFeeParams {
+    const message = createBaseLegacyFeeParams();
+    message.image = (object.image !== undefined && object.image !== null) ? Coin.fromPartial(object.image) : undefined;
+    message.json = (object.json !== undefined && object.json !== null) ? Coin.fromPartial(object.json) : undefined;
+    message.default = (object.default !== undefined && object.default !== null)
+      ? Coin.fromPartial(object.default)
+      : undefined;
     message.burnFactor = object.burnFactor ?? "";
     return message;
   },

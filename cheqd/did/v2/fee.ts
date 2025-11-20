@@ -6,34 +6,23 @@
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
-import { Coin } from "../../../cosmos/base/v1beta1/coin.js";
 
-/** FeeParams defines the parameters for the cheqd DID module fixed fee */
+export interface FeeRange {
+  /** Denomination of the token (e.g., "ncheq") */
+  denom: string;
+  /** Minimum fee amount allowed (stored as string for large values) */
+  minAmount: string;
+  /** Maximum fee amount allowed (stored as string for large values) */
+  maxAmount: string;
+}
+
 export interface FeeParams {
-  /**
-   * Fixed fee for creating a DID
-   *
-   * Default: 50 CHEQ or 50000000000ncheq
-   */
-  createDid:
-    | Coin
-    | undefined;
-  /**
-   * Fixed fee for updating a DID
-   *
-   * Default: 25 CHEQ or 25000000000ncheq
-   */
-  updateDid:
-    | Coin
-    | undefined;
-  /**
-   * Fixed fee for deactivating a DID
-   *
-   * Default: 10 CHEQ or 10000000000ncheq
-   */
-  deactivateDid:
-    | Coin
-    | undefined;
+  /** Range-based fee for creating a DID */
+  createDid: FeeRange[];
+  /** Range-based fee for updating a DID */
+  updateDid: FeeRange[];
+  /** Range-based fee for deactivating a DID */
+  deactivateDid: FeeRange[];
   /**
    * Percentage of the fixed fee that will be burned
    *
@@ -42,20 +31,112 @@ export interface FeeParams {
   burnFactor: string;
 }
 
+function createBaseFeeRange(): FeeRange {
+  return { denom: "", minAmount: "", maxAmount: "" };
+}
+
+export const FeeRange: MessageFns<FeeRange> = {
+  encode(message: FeeRange, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.denom !== "") {
+      writer.uint32(10).string(message.denom);
+    }
+    if (message.minAmount !== "") {
+      writer.uint32(18).string(message.minAmount);
+    }
+    if (message.maxAmount !== "") {
+      writer.uint32(26).string(message.maxAmount);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): FeeRange {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFeeRange();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.denom = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.minAmount = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.maxAmount = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): FeeRange {
+    return {
+      denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
+      minAmount: isSet(object.minAmount) ? globalThis.String(object.minAmount) : "",
+      maxAmount: isSet(object.maxAmount) ? globalThis.String(object.maxAmount) : "",
+    };
+  },
+
+  toJSON(message: FeeRange): unknown {
+    const obj: any = {};
+    if (message.denom !== "") {
+      obj.denom = message.denom;
+    }
+    if (message.minAmount !== "") {
+      obj.minAmount = message.minAmount;
+    }
+    if (message.maxAmount !== "") {
+      obj.maxAmount = message.maxAmount;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<FeeRange>, I>>(base?: I): FeeRange {
+    return FeeRange.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<FeeRange>, I>>(object: I): FeeRange {
+    const message = createBaseFeeRange();
+    message.denom = object.denom ?? "";
+    message.minAmount = object.minAmount ?? "";
+    message.maxAmount = object.maxAmount ?? "";
+    return message;
+  },
+};
+
 function createBaseFeeParams(): FeeParams {
-  return { createDid: undefined, updateDid: undefined, deactivateDid: undefined, burnFactor: "" };
+  return { createDid: [], updateDid: [], deactivateDid: [], burnFactor: "" };
 }
 
 export const FeeParams: MessageFns<FeeParams> = {
   encode(message: FeeParams, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.createDid !== undefined) {
-      Coin.encode(message.createDid, writer.uint32(10).fork()).join();
+    for (const v of message.createDid) {
+      FeeRange.encode(v!, writer.uint32(10).fork()).join();
     }
-    if (message.updateDid !== undefined) {
-      Coin.encode(message.updateDid, writer.uint32(18).fork()).join();
+    for (const v of message.updateDid) {
+      FeeRange.encode(v!, writer.uint32(18).fork()).join();
     }
-    if (message.deactivateDid !== undefined) {
-      Coin.encode(message.deactivateDid, writer.uint32(26).fork()).join();
+    for (const v of message.deactivateDid) {
+      FeeRange.encode(v!, writer.uint32(26).fork()).join();
     }
     if (message.burnFactor !== "") {
       writer.uint32(34).string(message.burnFactor);
@@ -75,7 +156,7 @@ export const FeeParams: MessageFns<FeeParams> = {
             break;
           }
 
-          message.createDid = Coin.decode(reader, reader.uint32());
+          message.createDid.push(FeeRange.decode(reader, reader.uint32()));
           continue;
         }
         case 2: {
@@ -83,7 +164,7 @@ export const FeeParams: MessageFns<FeeParams> = {
             break;
           }
 
-          message.updateDid = Coin.decode(reader, reader.uint32());
+          message.updateDid.push(FeeRange.decode(reader, reader.uint32()));
           continue;
         }
         case 3: {
@@ -91,7 +172,7 @@ export const FeeParams: MessageFns<FeeParams> = {
             break;
           }
 
-          message.deactivateDid = Coin.decode(reader, reader.uint32());
+          message.deactivateDid.push(FeeRange.decode(reader, reader.uint32()));
           continue;
         }
         case 4: {
@@ -113,23 +194,29 @@ export const FeeParams: MessageFns<FeeParams> = {
 
   fromJSON(object: any): FeeParams {
     return {
-      createDid: isSet(object.createDid) ? Coin.fromJSON(object.createDid) : undefined,
-      updateDid: isSet(object.updateDid) ? Coin.fromJSON(object.updateDid) : undefined,
-      deactivateDid: isSet(object.deactivateDid) ? Coin.fromJSON(object.deactivateDid) : undefined,
+      createDid: globalThis.Array.isArray(object?.createDid)
+        ? object.createDid.map((e: any) => FeeRange.fromJSON(e))
+        : [],
+      updateDid: globalThis.Array.isArray(object?.updateDid)
+        ? object.updateDid.map((e: any) => FeeRange.fromJSON(e))
+        : [],
+      deactivateDid: globalThis.Array.isArray(object?.deactivateDid)
+        ? object.deactivateDid.map((e: any) => FeeRange.fromJSON(e))
+        : [],
       burnFactor: isSet(object.burnFactor) ? globalThis.String(object.burnFactor) : "",
     };
   },
 
   toJSON(message: FeeParams): unknown {
     const obj: any = {};
-    if (message.createDid !== undefined) {
-      obj.createDid = Coin.toJSON(message.createDid);
+    if (message.createDid?.length) {
+      obj.createDid = message.createDid.map((e) => FeeRange.toJSON(e));
     }
-    if (message.updateDid !== undefined) {
-      obj.updateDid = Coin.toJSON(message.updateDid);
+    if (message.updateDid?.length) {
+      obj.updateDid = message.updateDid.map((e) => FeeRange.toJSON(e));
     }
-    if (message.deactivateDid !== undefined) {
-      obj.deactivateDid = Coin.toJSON(message.deactivateDid);
+    if (message.deactivateDid?.length) {
+      obj.deactivateDid = message.deactivateDid.map((e) => FeeRange.toJSON(e));
     }
     if (message.burnFactor !== "") {
       obj.burnFactor = message.burnFactor;
@@ -142,15 +229,9 @@ export const FeeParams: MessageFns<FeeParams> = {
   },
   fromPartial<I extends Exact<DeepPartial<FeeParams>, I>>(object: I): FeeParams {
     const message = createBaseFeeParams();
-    message.createDid = (object.createDid !== undefined && object.createDid !== null)
-      ? Coin.fromPartial(object.createDid)
-      : undefined;
-    message.updateDid = (object.updateDid !== undefined && object.updateDid !== null)
-      ? Coin.fromPartial(object.updateDid)
-      : undefined;
-    message.deactivateDid = (object.deactivateDid !== undefined && object.deactivateDid !== null)
-      ? Coin.fromPartial(object.deactivateDid)
-      : undefined;
+    message.createDid = object.createDid?.map((e) => FeeRange.fromPartial(e)) || [];
+    message.updateDid = object.updateDid?.map((e) => FeeRange.fromPartial(e)) || [];
+    message.deactivateDid = object.deactivateDid?.map((e) => FeeRange.fromPartial(e)) || [];
     message.burnFactor = object.burnFactor ?? "";
     return message;
   },

@@ -5,23 +5,105 @@
 //   protoc               unknown
 // source: cheqd/did/v2/fee.proto
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FeeParams = void 0;
+exports.FeeParams = exports.FeeRange = void 0;
 /* eslint-disable */
 const wire_1 = require("@bufbuild/protobuf/wire");
-const coin_js_1 = require("../../../cosmos/base/v1beta1/coin.js");
+function createBaseFeeRange() {
+    return { denom: "", minAmount: "", maxAmount: "" };
+}
+exports.FeeRange = {
+    encode(message, writer = new wire_1.BinaryWriter()) {
+        if (message.denom !== "") {
+            writer.uint32(10).string(message.denom);
+        }
+        if (message.minAmount !== "") {
+            writer.uint32(18).string(message.minAmount);
+        }
+        if (message.maxAmount !== "") {
+            writer.uint32(26).string(message.maxAmount);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof wire_1.BinaryReader ? input : new wire_1.BinaryReader(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseFeeRange();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1: {
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.denom = reader.string();
+                    continue;
+                }
+                case 2: {
+                    if (tag !== 18) {
+                        break;
+                    }
+                    message.minAmount = reader.string();
+                    continue;
+                }
+                case 3: {
+                    if (tag !== 26) {
+                        break;
+                    }
+                    message.maxAmount = reader.string();
+                    continue;
+                }
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skip(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
+            minAmount: isSet(object.minAmount) ? globalThis.String(object.minAmount) : "",
+            maxAmount: isSet(object.maxAmount) ? globalThis.String(object.maxAmount) : "",
+        };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.denom !== "") {
+            obj.denom = message.denom;
+        }
+        if (message.minAmount !== "") {
+            obj.minAmount = message.minAmount;
+        }
+        if (message.maxAmount !== "") {
+            obj.maxAmount = message.maxAmount;
+        }
+        return obj;
+    },
+    create(base) {
+        return exports.FeeRange.fromPartial(base ?? {});
+    },
+    fromPartial(object) {
+        const message = createBaseFeeRange();
+        message.denom = object.denom ?? "";
+        message.minAmount = object.minAmount ?? "";
+        message.maxAmount = object.maxAmount ?? "";
+        return message;
+    },
+};
 function createBaseFeeParams() {
-    return { createDid: undefined, updateDid: undefined, deactivateDid: undefined, burnFactor: "" };
+    return { createDid: [], updateDid: [], deactivateDid: [], burnFactor: "" };
 }
 exports.FeeParams = {
     encode(message, writer = new wire_1.BinaryWriter()) {
-        if (message.createDid !== undefined) {
-            coin_js_1.Coin.encode(message.createDid, writer.uint32(10).fork()).join();
+        for (const v of message.createDid) {
+            exports.FeeRange.encode(v, writer.uint32(10).fork()).join();
         }
-        if (message.updateDid !== undefined) {
-            coin_js_1.Coin.encode(message.updateDid, writer.uint32(18).fork()).join();
+        for (const v of message.updateDid) {
+            exports.FeeRange.encode(v, writer.uint32(18).fork()).join();
         }
-        if (message.deactivateDid !== undefined) {
-            coin_js_1.Coin.encode(message.deactivateDid, writer.uint32(26).fork()).join();
+        for (const v of message.deactivateDid) {
+            exports.FeeRange.encode(v, writer.uint32(26).fork()).join();
         }
         if (message.burnFactor !== "") {
             writer.uint32(34).string(message.burnFactor);
@@ -39,21 +121,21 @@ exports.FeeParams = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.createDid = coin_js_1.Coin.decode(reader, reader.uint32());
+                    message.createDid.push(exports.FeeRange.decode(reader, reader.uint32()));
                     continue;
                 }
                 case 2: {
                     if (tag !== 18) {
                         break;
                     }
-                    message.updateDid = coin_js_1.Coin.decode(reader, reader.uint32());
+                    message.updateDid.push(exports.FeeRange.decode(reader, reader.uint32()));
                     continue;
                 }
                 case 3: {
                     if (tag !== 26) {
                         break;
                     }
-                    message.deactivateDid = coin_js_1.Coin.decode(reader, reader.uint32());
+                    message.deactivateDid.push(exports.FeeRange.decode(reader, reader.uint32()));
                     continue;
                 }
                 case 4: {
@@ -73,22 +155,28 @@ exports.FeeParams = {
     },
     fromJSON(object) {
         return {
-            createDid: isSet(object.createDid) ? coin_js_1.Coin.fromJSON(object.createDid) : undefined,
-            updateDid: isSet(object.updateDid) ? coin_js_1.Coin.fromJSON(object.updateDid) : undefined,
-            deactivateDid: isSet(object.deactivateDid) ? coin_js_1.Coin.fromJSON(object.deactivateDid) : undefined,
+            createDid: globalThis.Array.isArray(object?.createDid)
+                ? object.createDid.map((e) => exports.FeeRange.fromJSON(e))
+                : [],
+            updateDid: globalThis.Array.isArray(object?.updateDid)
+                ? object.updateDid.map((e) => exports.FeeRange.fromJSON(e))
+                : [],
+            deactivateDid: globalThis.Array.isArray(object?.deactivateDid)
+                ? object.deactivateDid.map((e) => exports.FeeRange.fromJSON(e))
+                : [],
             burnFactor: isSet(object.burnFactor) ? globalThis.String(object.burnFactor) : "",
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.createDid !== undefined) {
-            obj.createDid = coin_js_1.Coin.toJSON(message.createDid);
+        if (message.createDid?.length) {
+            obj.createDid = message.createDid.map((e) => exports.FeeRange.toJSON(e));
         }
-        if (message.updateDid !== undefined) {
-            obj.updateDid = coin_js_1.Coin.toJSON(message.updateDid);
+        if (message.updateDid?.length) {
+            obj.updateDid = message.updateDid.map((e) => exports.FeeRange.toJSON(e));
         }
-        if (message.deactivateDid !== undefined) {
-            obj.deactivateDid = coin_js_1.Coin.toJSON(message.deactivateDid);
+        if (message.deactivateDid?.length) {
+            obj.deactivateDid = message.deactivateDid.map((e) => exports.FeeRange.toJSON(e));
         }
         if (message.burnFactor !== "") {
             obj.burnFactor = message.burnFactor;
@@ -100,15 +188,9 @@ exports.FeeParams = {
     },
     fromPartial(object) {
         const message = createBaseFeeParams();
-        message.createDid = (object.createDid !== undefined && object.createDid !== null)
-            ? coin_js_1.Coin.fromPartial(object.createDid)
-            : undefined;
-        message.updateDid = (object.updateDid !== undefined && object.updateDid !== null)
-            ? coin_js_1.Coin.fromPartial(object.updateDid)
-            : undefined;
-        message.deactivateDid = (object.deactivateDid !== undefined && object.deactivateDid !== null)
-            ? coin_js_1.Coin.fromPartial(object.deactivateDid)
-            : undefined;
+        message.createDid = object.createDid?.map((e) => exports.FeeRange.fromPartial(e)) || [];
+        message.updateDid = object.updateDid?.map((e) => exports.FeeRange.fromPartial(e)) || [];
+        message.deactivateDid = object.deactivateDid?.map((e) => exports.FeeRange.fromPartial(e)) || [];
         message.burnFactor = object.burnFactor ?? "";
         return message;
     },

@@ -62,6 +62,72 @@ export interface QueryResourceMetadataResponse {
   resource: Metadata | undefined;
 }
 
+/** QueryLatestResourceVersionRequest is the request type for the Query/Resource RPC method */
+export interface QueryLatestResourceVersionRequest {
+  /**
+   * collection_id is an identifier of the DidDocument the resource belongs to.
+   * Format: <unique-identifier>
+   *
+   * Examples:
+   * - c82f2b02-bdab-4dd7-b833-3e143745d612
+   * - wGHEXrZvJxR8vw5P3UWH1j
+   */
+  collectionId: string;
+  /**
+   * name is a human-readable name for the Resource. Defined client-side.
+   * Does not change between different versions.
+   * Example: PassportSchema, EducationTrustRegistry
+   */
+  name: string;
+  /**
+   * resource_type is a Resource type that identifies what the Resource is. Defined client-side.
+   * This is NOT the same as the resource's media type.
+   * Example: AnonCredsSchema, StatusList2021
+   */
+  resourceType: string;
+}
+
+/** QueryLatestResourceVersionResponse is the response type for the Query/Resource RPC method */
+export interface QueryLatestResourceVersionResponse {
+  /**
+   * Successful resolution of the resource returns the following:
+   * - resource is the requested resource
+   * - metadata is the resource metadata associated with the requested resource
+   */
+  resource: ResourceWithMetadata | undefined;
+}
+
+/** QueryLatestResourceVersionMetadataRequest is the request type for the Query/ResourceMetadata RPC method */
+export interface QueryLatestResourceVersionMetadataRequest {
+  /**
+   * collection_id is an identifier of the DidDocument the resource belongs to.
+   * Format: <unique-identifier>
+   *
+   * Examples:
+   * - c82f2b02-bdab-4dd7-b833-3e143745d612
+   * - wGHEXrZvJxR8vw5P3UWH1j
+   */
+  collectionId: string;
+  /**
+   * name is a human-readable name for the Resource. Defined client-side.
+   * Does not change between different versions.
+   * Example: PassportSchema, EducationTrustRegistry
+   */
+  name: string;
+  /**
+   * resource_type is a Resource type that identifies what the Resource is. Defined client-side.
+   * This is NOT the same as the resource's media type.
+   * Example: AnonCredsSchema, StatusList2021
+   */
+  resourceType: string;
+}
+
+/** QueryLatestResourceVersionMetadataResponse is the response type for the Query/ResourceMetadata RPC method */
+export interface QueryLatestResourceVersionMetadataResponse {
+  /** resource is the requested resource metadata */
+  resource: Metadata | undefined;
+}
+
 /** QueryCollectionResourcesRequest is the request type for the Query/CollectionResources RPC method */
 export interface QueryCollectionResourcesRequest {
   /**
@@ -369,6 +435,326 @@ export const QueryResourceMetadataResponse: MessageFns<QueryResourceMetadataResp
   },
 };
 
+function createBaseQueryLatestResourceVersionRequest(): QueryLatestResourceVersionRequest {
+  return { collectionId: "", name: "", resourceType: "" };
+}
+
+export const QueryLatestResourceVersionRequest: MessageFns<QueryLatestResourceVersionRequest> = {
+  encode(message: QueryLatestResourceVersionRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.collectionId !== "") {
+      writer.uint32(10).string(message.collectionId);
+    }
+    if (message.name !== "") {
+      writer.uint32(18).string(message.name);
+    }
+    if (message.resourceType !== "") {
+      writer.uint32(26).string(message.resourceType);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryLatestResourceVersionRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryLatestResourceVersionRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.collectionId = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.resourceType = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryLatestResourceVersionRequest {
+    return {
+      collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      resourceType: isSet(object.resourceType) ? globalThis.String(object.resourceType) : "",
+    };
+  },
+
+  toJSON(message: QueryLatestResourceVersionRequest): unknown {
+    const obj: any = {};
+    if (message.collectionId !== "") {
+      obj.collectionId = message.collectionId;
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.resourceType !== "") {
+      obj.resourceType = message.resourceType;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<QueryLatestResourceVersionRequest>, I>>(
+    base?: I,
+  ): QueryLatestResourceVersionRequest {
+    return QueryLatestResourceVersionRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryLatestResourceVersionRequest>, I>>(
+    object: I,
+  ): QueryLatestResourceVersionRequest {
+    const message = createBaseQueryLatestResourceVersionRequest();
+    message.collectionId = object.collectionId ?? "";
+    message.name = object.name ?? "";
+    message.resourceType = object.resourceType ?? "";
+    return message;
+  },
+};
+
+function createBaseQueryLatestResourceVersionResponse(): QueryLatestResourceVersionResponse {
+  return { resource: undefined };
+}
+
+export const QueryLatestResourceVersionResponse: MessageFns<QueryLatestResourceVersionResponse> = {
+  encode(message: QueryLatestResourceVersionResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.resource !== undefined) {
+      ResourceWithMetadata.encode(message.resource, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryLatestResourceVersionResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryLatestResourceVersionResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.resource = ResourceWithMetadata.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryLatestResourceVersionResponse {
+    return { resource: isSet(object.resource) ? ResourceWithMetadata.fromJSON(object.resource) : undefined };
+  },
+
+  toJSON(message: QueryLatestResourceVersionResponse): unknown {
+    const obj: any = {};
+    if (message.resource !== undefined) {
+      obj.resource = ResourceWithMetadata.toJSON(message.resource);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<QueryLatestResourceVersionResponse>, I>>(
+    base?: I,
+  ): QueryLatestResourceVersionResponse {
+    return QueryLatestResourceVersionResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryLatestResourceVersionResponse>, I>>(
+    object: I,
+  ): QueryLatestResourceVersionResponse {
+    const message = createBaseQueryLatestResourceVersionResponse();
+    message.resource = (object.resource !== undefined && object.resource !== null)
+      ? ResourceWithMetadata.fromPartial(object.resource)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseQueryLatestResourceVersionMetadataRequest(): QueryLatestResourceVersionMetadataRequest {
+  return { collectionId: "", name: "", resourceType: "" };
+}
+
+export const QueryLatestResourceVersionMetadataRequest: MessageFns<QueryLatestResourceVersionMetadataRequest> = {
+  encode(message: QueryLatestResourceVersionMetadataRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.collectionId !== "") {
+      writer.uint32(10).string(message.collectionId);
+    }
+    if (message.name !== "") {
+      writer.uint32(18).string(message.name);
+    }
+    if (message.resourceType !== "") {
+      writer.uint32(26).string(message.resourceType);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryLatestResourceVersionMetadataRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryLatestResourceVersionMetadataRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.collectionId = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.resourceType = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryLatestResourceVersionMetadataRequest {
+    return {
+      collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      resourceType: isSet(object.resourceType) ? globalThis.String(object.resourceType) : "",
+    };
+  },
+
+  toJSON(message: QueryLatestResourceVersionMetadataRequest): unknown {
+    const obj: any = {};
+    if (message.collectionId !== "") {
+      obj.collectionId = message.collectionId;
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.resourceType !== "") {
+      obj.resourceType = message.resourceType;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<QueryLatestResourceVersionMetadataRequest>, I>>(
+    base?: I,
+  ): QueryLatestResourceVersionMetadataRequest {
+    return QueryLatestResourceVersionMetadataRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryLatestResourceVersionMetadataRequest>, I>>(
+    object: I,
+  ): QueryLatestResourceVersionMetadataRequest {
+    const message = createBaseQueryLatestResourceVersionMetadataRequest();
+    message.collectionId = object.collectionId ?? "";
+    message.name = object.name ?? "";
+    message.resourceType = object.resourceType ?? "";
+    return message;
+  },
+};
+
+function createBaseQueryLatestResourceVersionMetadataResponse(): QueryLatestResourceVersionMetadataResponse {
+  return { resource: undefined };
+}
+
+export const QueryLatestResourceVersionMetadataResponse: MessageFns<QueryLatestResourceVersionMetadataResponse> = {
+  encode(message: QueryLatestResourceVersionMetadataResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.resource !== undefined) {
+      Metadata.encode(message.resource, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryLatestResourceVersionMetadataResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryLatestResourceVersionMetadataResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.resource = Metadata.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryLatestResourceVersionMetadataResponse {
+    return { resource: isSet(object.resource) ? Metadata.fromJSON(object.resource) : undefined };
+  },
+
+  toJSON(message: QueryLatestResourceVersionMetadataResponse): unknown {
+    const obj: any = {};
+    if (message.resource !== undefined) {
+      obj.resource = Metadata.toJSON(message.resource);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<QueryLatestResourceVersionMetadataResponse>, I>>(
+    base?: I,
+  ): QueryLatestResourceVersionMetadataResponse {
+    return QueryLatestResourceVersionMetadataResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryLatestResourceVersionMetadataResponse>, I>>(
+    object: I,
+  ): QueryLatestResourceVersionMetadataResponse {
+    const message = createBaseQueryLatestResourceVersionMetadataResponse();
+    message.resource = (object.resource !== undefined && object.resource !== null)
+      ? Metadata.fromPartial(object.resource)
+      : undefined;
+    return message;
+  },
+};
+
 function createBaseQueryCollectionResourcesRequest(): QueryCollectionResourcesRequest {
   return { collectionId: "", pagination: undefined };
 }
@@ -642,6 +1028,12 @@ export interface Query {
   Resource(request: QueryResourceRequest): Promise<QueryResourceResponse>;
   /** Fetch only metadata for a specific resource */
   ResourceMetadata(request: QueryResourceMetadataRequest): Promise<QueryResourceMetadataResponse>;
+  /** Fetch latest version for a specific resource (without metadata) */
+  LatestResourceVersion(request: QueryLatestResourceVersionRequest): Promise<QueryLatestResourceVersionResponse>;
+  /** Fetch metadata of the latest version for a specific resource */
+  LatestResourceVersionMetadata(
+    request: QueryLatestResourceVersionMetadataRequest,
+  ): Promise<QueryLatestResourceVersionMetadataResponse>;
   /** Fetch metadata for all resources in a collection */
   CollectionResources(request: QueryCollectionResourcesRequest): Promise<QueryCollectionResourcesResponse>;
   /** Params queries params of the resource module. */
@@ -657,6 +1049,8 @@ export class QueryClientImpl implements Query {
     this.rpc = rpc;
     this.Resource = this.Resource.bind(this);
     this.ResourceMetadata = this.ResourceMetadata.bind(this);
+    this.LatestResourceVersion = this.LatestResourceVersion.bind(this);
+    this.LatestResourceVersionMetadata = this.LatestResourceVersionMetadata.bind(this);
     this.CollectionResources = this.CollectionResources.bind(this);
     this.Params = this.Params.bind(this);
   }
@@ -670,6 +1064,20 @@ export class QueryClientImpl implements Query {
     const data = QueryResourceMetadataRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "ResourceMetadata", data);
     return promise.then((data) => QueryResourceMetadataResponse.decode(new BinaryReader(data)));
+  }
+
+  LatestResourceVersion(request: QueryLatestResourceVersionRequest): Promise<QueryLatestResourceVersionResponse> {
+    const data = QueryLatestResourceVersionRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "LatestResourceVersion", data);
+    return promise.then((data) => QueryLatestResourceVersionResponse.decode(new BinaryReader(data)));
+  }
+
+  LatestResourceVersionMetadata(
+    request: QueryLatestResourceVersionMetadataRequest,
+  ): Promise<QueryLatestResourceVersionMetadataResponse> {
+    const data = QueryLatestResourceVersionMetadataRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "LatestResourceVersionMetadata", data);
+    return promise.then((data) => QueryLatestResourceVersionMetadataResponse.decode(new BinaryReader(data)));
   }
 
   CollectionResources(request: QueryCollectionResourcesRequest): Promise<QueryCollectionResourcesResponse> {

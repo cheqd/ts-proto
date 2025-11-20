@@ -3,25 +3,25 @@
 // versions:
 //   protoc-gen-ts_proto  v2.6.1
 //   protoc               unknown
-// source: cheqd/resource/v2/fee.proto
+// source: cheqd/resource/v2/fee_legacy.proto
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FeeParams = void 0;
+exports.LegacyFeeParams = void 0;
 /* eslint-disable */
 const wire_1 = require("@bufbuild/protobuf/wire");
-const fee_js_1 = require("../../did/v2/fee.js");
-function createBaseFeeParams() {
-    return { image: [], json: [], default: [], burnFactor: "" };
+const coin_js_1 = require("../../../cosmos/base/v1beta1/coin.js");
+function createBaseLegacyFeeParams() {
+    return { image: undefined, json: undefined, default: undefined, burnFactor: "" };
 }
-exports.FeeParams = {
+exports.LegacyFeeParams = {
     encode(message, writer = new wire_1.BinaryWriter()) {
-        for (const v of message.image) {
-            fee_js_1.FeeRange.encode(v, writer.uint32(10).fork()).join();
+        if (message.image !== undefined) {
+            coin_js_1.Coin.encode(message.image, writer.uint32(10).fork()).join();
         }
-        for (const v of message.json) {
-            fee_js_1.FeeRange.encode(v, writer.uint32(18).fork()).join();
+        if (message.json !== undefined) {
+            coin_js_1.Coin.encode(message.json, writer.uint32(18).fork()).join();
         }
-        for (const v of message.default) {
-            fee_js_1.FeeRange.encode(v, writer.uint32(26).fork()).join();
+        if (message.default !== undefined) {
+            coin_js_1.Coin.encode(message.default, writer.uint32(26).fork()).join();
         }
         if (message.burnFactor !== "") {
             writer.uint32(34).string(message.burnFactor);
@@ -31,7 +31,7 @@ exports.FeeParams = {
     decode(input, length) {
         const reader = input instanceof wire_1.BinaryReader ? input : new wire_1.BinaryReader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
-        const message = createBaseFeeParams();
+        const message = createBaseLegacyFeeParams();
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
@@ -39,21 +39,21 @@ exports.FeeParams = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.image.push(fee_js_1.FeeRange.decode(reader, reader.uint32()));
+                    message.image = coin_js_1.Coin.decode(reader, reader.uint32());
                     continue;
                 }
                 case 2: {
                     if (tag !== 18) {
                         break;
                     }
-                    message.json.push(fee_js_1.FeeRange.decode(reader, reader.uint32()));
+                    message.json = coin_js_1.Coin.decode(reader, reader.uint32());
                     continue;
                 }
                 case 3: {
                     if (tag !== 26) {
                         break;
                     }
-                    message.default.push(fee_js_1.FeeRange.decode(reader, reader.uint32()));
+                    message.default = coin_js_1.Coin.decode(reader, reader.uint32());
                     continue;
                 }
                 case 4: {
@@ -73,22 +73,22 @@ exports.FeeParams = {
     },
     fromJSON(object) {
         return {
-            image: globalThis.Array.isArray(object?.image) ? object.image.map((e) => fee_js_1.FeeRange.fromJSON(e)) : [],
-            json: globalThis.Array.isArray(object?.json) ? object.json.map((e) => fee_js_1.FeeRange.fromJSON(e)) : [],
-            default: globalThis.Array.isArray(object?.default) ? object.default.map((e) => fee_js_1.FeeRange.fromJSON(e)) : [],
+            image: isSet(object.image) ? coin_js_1.Coin.fromJSON(object.image) : undefined,
+            json: isSet(object.json) ? coin_js_1.Coin.fromJSON(object.json) : undefined,
+            default: isSet(object.default) ? coin_js_1.Coin.fromJSON(object.default) : undefined,
             burnFactor: isSet(object.burnFactor) ? globalThis.String(object.burnFactor) : "",
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.image?.length) {
-            obj.image = message.image.map((e) => fee_js_1.FeeRange.toJSON(e));
+        if (message.image !== undefined) {
+            obj.image = coin_js_1.Coin.toJSON(message.image);
         }
-        if (message.json?.length) {
-            obj.json = message.json.map((e) => fee_js_1.FeeRange.toJSON(e));
+        if (message.json !== undefined) {
+            obj.json = coin_js_1.Coin.toJSON(message.json);
         }
-        if (message.default?.length) {
-            obj.default = message.default.map((e) => fee_js_1.FeeRange.toJSON(e));
+        if (message.default !== undefined) {
+            obj.default = coin_js_1.Coin.toJSON(message.default);
         }
         if (message.burnFactor !== "") {
             obj.burnFactor = message.burnFactor;
@@ -96,13 +96,15 @@ exports.FeeParams = {
         return obj;
     },
     create(base) {
-        return exports.FeeParams.fromPartial(base ?? {});
+        return exports.LegacyFeeParams.fromPartial(base ?? {});
     },
     fromPartial(object) {
-        const message = createBaseFeeParams();
-        message.image = object.image?.map((e) => fee_js_1.FeeRange.fromPartial(e)) || [];
-        message.json = object.json?.map((e) => fee_js_1.FeeRange.fromPartial(e)) || [];
-        message.default = object.default?.map((e) => fee_js_1.FeeRange.fromPartial(e)) || [];
+        const message = createBaseLegacyFeeParams();
+        message.image = (object.image !== undefined && object.image !== null) ? coin_js_1.Coin.fromPartial(object.image) : undefined;
+        message.json = (object.json !== undefined && object.json !== null) ? coin_js_1.Coin.fromPartial(object.json) : undefined;
+        message.default = (object.default !== undefined && object.default !== null)
+            ? coin_js_1.Coin.fromPartial(object.default)
+            : undefined;
         message.burnFactor = object.burnFactor ?? "";
         return message;
     },
@@ -110,4 +112,4 @@ exports.FeeParams = {
 function isSet(value) {
     return value !== null && value !== undefined;
 }
-//# sourceMappingURL=fee.js.map
+//# sourceMappingURL=fee_legacy.js.map

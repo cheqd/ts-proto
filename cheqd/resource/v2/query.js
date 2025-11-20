@@ -5,7 +5,7 @@
 //   protoc               unknown
 // source: cheqd/resource/v2/query.proto
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.QueryClientImpl = exports.QueryServiceName = exports.QueryParamsResponse = exports.QueryParamsRequest = exports.QueryCollectionResourcesResponse = exports.QueryCollectionResourcesRequest = exports.QueryResourceMetadataResponse = exports.QueryResourceMetadataRequest = exports.QueryResourceResponse = exports.QueryResourceRequest = void 0;
+exports.QueryClientImpl = exports.QueryServiceName = exports.QueryParamsResponse = exports.QueryParamsRequest = exports.QueryCollectionResourcesResponse = exports.QueryCollectionResourcesRequest = exports.QueryLatestResourceVersionMetadataResponse = exports.QueryLatestResourceVersionMetadataRequest = exports.QueryLatestResourceVersionResponse = exports.QueryLatestResourceVersionRequest = exports.QueryResourceMetadataResponse = exports.QueryResourceMetadataRequest = exports.QueryResourceResponse = exports.QueryResourceRequest = void 0;
 /* eslint-disable */
 const wire_1 = require("@bufbuild/protobuf/wire");
 const pagination_js_1 = require("../../../cosmos/base/query/v1beta1/pagination.js");
@@ -253,6 +253,278 @@ exports.QueryResourceMetadataResponse = {
         return message;
     },
 };
+function createBaseQueryLatestResourceVersionRequest() {
+    return { collectionId: "", name: "", resourceType: "" };
+}
+exports.QueryLatestResourceVersionRequest = {
+    encode(message, writer = new wire_1.BinaryWriter()) {
+        if (message.collectionId !== "") {
+            writer.uint32(10).string(message.collectionId);
+        }
+        if (message.name !== "") {
+            writer.uint32(18).string(message.name);
+        }
+        if (message.resourceType !== "") {
+            writer.uint32(26).string(message.resourceType);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof wire_1.BinaryReader ? input : new wire_1.BinaryReader(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseQueryLatestResourceVersionRequest();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1: {
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.collectionId = reader.string();
+                    continue;
+                }
+                case 2: {
+                    if (tag !== 18) {
+                        break;
+                    }
+                    message.name = reader.string();
+                    continue;
+                }
+                case 3: {
+                    if (tag !== 26) {
+                        break;
+                    }
+                    message.resourceType = reader.string();
+                    continue;
+                }
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skip(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            resourceType: isSet(object.resourceType) ? globalThis.String(object.resourceType) : "",
+        };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.collectionId !== "") {
+            obj.collectionId = message.collectionId;
+        }
+        if (message.name !== "") {
+            obj.name = message.name;
+        }
+        if (message.resourceType !== "") {
+            obj.resourceType = message.resourceType;
+        }
+        return obj;
+    },
+    create(base) {
+        return exports.QueryLatestResourceVersionRequest.fromPartial(base ?? {});
+    },
+    fromPartial(object) {
+        const message = createBaseQueryLatestResourceVersionRequest();
+        message.collectionId = object.collectionId ?? "";
+        message.name = object.name ?? "";
+        message.resourceType = object.resourceType ?? "";
+        return message;
+    },
+};
+function createBaseQueryLatestResourceVersionResponse() {
+    return { resource: undefined };
+}
+exports.QueryLatestResourceVersionResponse = {
+    encode(message, writer = new wire_1.BinaryWriter()) {
+        if (message.resource !== undefined) {
+            resource_js_1.ResourceWithMetadata.encode(message.resource, writer.uint32(10).fork()).join();
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof wire_1.BinaryReader ? input : new wire_1.BinaryReader(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseQueryLatestResourceVersionResponse();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1: {
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.resource = resource_js_1.ResourceWithMetadata.decode(reader, reader.uint32());
+                    continue;
+                }
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skip(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return { resource: isSet(object.resource) ? resource_js_1.ResourceWithMetadata.fromJSON(object.resource) : undefined };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.resource !== undefined) {
+            obj.resource = resource_js_1.ResourceWithMetadata.toJSON(message.resource);
+        }
+        return obj;
+    },
+    create(base) {
+        return exports.QueryLatestResourceVersionResponse.fromPartial(base ?? {});
+    },
+    fromPartial(object) {
+        const message = createBaseQueryLatestResourceVersionResponse();
+        message.resource = (object.resource !== undefined && object.resource !== null)
+            ? resource_js_1.ResourceWithMetadata.fromPartial(object.resource)
+            : undefined;
+        return message;
+    },
+};
+function createBaseQueryLatestResourceVersionMetadataRequest() {
+    return { collectionId: "", name: "", resourceType: "" };
+}
+exports.QueryLatestResourceVersionMetadataRequest = {
+    encode(message, writer = new wire_1.BinaryWriter()) {
+        if (message.collectionId !== "") {
+            writer.uint32(10).string(message.collectionId);
+        }
+        if (message.name !== "") {
+            writer.uint32(18).string(message.name);
+        }
+        if (message.resourceType !== "") {
+            writer.uint32(26).string(message.resourceType);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof wire_1.BinaryReader ? input : new wire_1.BinaryReader(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseQueryLatestResourceVersionMetadataRequest();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1: {
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.collectionId = reader.string();
+                    continue;
+                }
+                case 2: {
+                    if (tag !== 18) {
+                        break;
+                    }
+                    message.name = reader.string();
+                    continue;
+                }
+                case 3: {
+                    if (tag !== 26) {
+                        break;
+                    }
+                    message.resourceType = reader.string();
+                    continue;
+                }
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skip(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return {
+            collectionId: isSet(object.collectionId) ? globalThis.String(object.collectionId) : "",
+            name: isSet(object.name) ? globalThis.String(object.name) : "",
+            resourceType: isSet(object.resourceType) ? globalThis.String(object.resourceType) : "",
+        };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.collectionId !== "") {
+            obj.collectionId = message.collectionId;
+        }
+        if (message.name !== "") {
+            obj.name = message.name;
+        }
+        if (message.resourceType !== "") {
+            obj.resourceType = message.resourceType;
+        }
+        return obj;
+    },
+    create(base) {
+        return exports.QueryLatestResourceVersionMetadataRequest.fromPartial(base ?? {});
+    },
+    fromPartial(object) {
+        const message = createBaseQueryLatestResourceVersionMetadataRequest();
+        message.collectionId = object.collectionId ?? "";
+        message.name = object.name ?? "";
+        message.resourceType = object.resourceType ?? "";
+        return message;
+    },
+};
+function createBaseQueryLatestResourceVersionMetadataResponse() {
+    return { resource: undefined };
+}
+exports.QueryLatestResourceVersionMetadataResponse = {
+    encode(message, writer = new wire_1.BinaryWriter()) {
+        if (message.resource !== undefined) {
+            resource_js_1.Metadata.encode(message.resource, writer.uint32(10).fork()).join();
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof wire_1.BinaryReader ? input : new wire_1.BinaryReader(input);
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseQueryLatestResourceVersionMetadataResponse();
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1: {
+                    if (tag !== 10) {
+                        break;
+                    }
+                    message.resource = resource_js_1.Metadata.decode(reader, reader.uint32());
+                    continue;
+                }
+            }
+            if ((tag & 7) === 4 || tag === 0) {
+                break;
+            }
+            reader.skip(tag & 7);
+        }
+        return message;
+    },
+    fromJSON(object) {
+        return { resource: isSet(object.resource) ? resource_js_1.Metadata.fromJSON(object.resource) : undefined };
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.resource !== undefined) {
+            obj.resource = resource_js_1.Metadata.toJSON(message.resource);
+        }
+        return obj;
+    },
+    create(base) {
+        return exports.QueryLatestResourceVersionMetadataResponse.fromPartial(base ?? {});
+    },
+    fromPartial(object) {
+        const message = createBaseQueryLatestResourceVersionMetadataResponse();
+        message.resource = (object.resource !== undefined && object.resource !== null)
+            ? resource_js_1.Metadata.fromPartial(object.resource)
+            : undefined;
+        return message;
+    },
+};
 function createBaseQueryCollectionResourcesRequest() {
     return { collectionId: "", pagination: undefined };
 }
@@ -494,6 +766,8 @@ class QueryClientImpl {
         this.rpc = rpc;
         this.Resource = this.Resource.bind(this);
         this.ResourceMetadata = this.ResourceMetadata.bind(this);
+        this.LatestResourceVersion = this.LatestResourceVersion.bind(this);
+        this.LatestResourceVersionMetadata = this.LatestResourceVersionMetadata.bind(this);
         this.CollectionResources = this.CollectionResources.bind(this);
         this.Params = this.Params.bind(this);
     }
@@ -506,6 +780,16 @@ class QueryClientImpl {
         const data = exports.QueryResourceMetadataRequest.encode(request).finish();
         const promise = this.rpc.request(this.service, "ResourceMetadata", data);
         return promise.then((data) => exports.QueryResourceMetadataResponse.decode(new wire_1.BinaryReader(data)));
+    }
+    LatestResourceVersion(request) {
+        const data = exports.QueryLatestResourceVersionRequest.encode(request).finish();
+        const promise = this.rpc.request(this.service, "LatestResourceVersion", data);
+        return promise.then((data) => exports.QueryLatestResourceVersionResponse.decode(new wire_1.BinaryReader(data)));
+    }
+    LatestResourceVersionMetadata(request) {
+        const data = exports.QueryLatestResourceVersionMetadataRequest.encode(request).finish();
+        const promise = this.rpc.request(this.service, "LatestResourceVersionMetadata", data);
+        return promise.then((data) => exports.QueryLatestResourceVersionMetadataResponse.decode(new wire_1.BinaryReader(data)));
     }
     CollectionResources(request) {
         const data = exports.QueryCollectionResourcesRequest.encode(request).finish();
