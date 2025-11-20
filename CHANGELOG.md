@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.6.0](https://github.com/cheqd/ts-proto/compare/2.5.0...2.6.0) (2025-11-20)
+
+### Features
+
+* Feature release (Oracle) proto scaffolding ([b470dc1](https://github.com/cheqd/ts-proto/commit/b470dc11a5cc545fc533465aee26ec4f4af86aff))
+
 ## [2.5.0](https://github.com/cheqd/ts-proto/compare/2.4.1...2.5.0) (2025-05-21)
 
 ### Features
