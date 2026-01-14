@@ -3,7 +3,7 @@ module github.com/cheqd/did-resolver
 go 1.24.0
 
 require (
-	github.com/cheqd/cheqd-node/api/v2 v2.4.1
+	github.com/cheqd/cheqd-node/api/v2 v2.4.2
 	github.com/go-resty/resty/v2 v2.16.5
 	github.com/google/uuid v1.6.0
 	github.com/labstack/echo/v4 v4.13.4
